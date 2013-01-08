@@ -1,6 +1,10 @@
 package com.dimoshka.ua.classes;
 
 import java.util.List;
+
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.util.Log;
 
 public class class_jwp_rss {
@@ -20,25 +24,55 @@ public class class_jwp_rss {
 
 	List<class_rssitem> rss_list = null;
 	class_functions funct = new class_functions();
-	class_rssfeedprovider rssfeedprovider = new class_rssfeedprovider();
+	class_rssfeedprovider rssfeedprovider;
 
-	public void get_all() {
+	private rssfeed_parse rp;
 
-	}
-
-	public List<class_rssitem> get_all_feeds() {
+	public List<class_rssitem> get_all_feeds(Activity activity) {
 		try {
 			rss_list = null;
-			Log.e("RSS", "3");
-			//if (funct.isNetworkAvailable() == true) {
-				Log.e("RSS", "1");
-				rss_list = rssfeedprovider.parse(String.format(URL_FEED, rln,
-						w, pdf));
-			//} else Log.e("RSS", "0");
+			rp = new rssfeed_parse(activity);
+			rp.execute(String.format(URL_FEED, rln, w, pdf));
+			rss_list = rp.get();
+
 			return rss_list;
 		} catch (Exception e) {
-			Log.e("RSS", e.toString());
+			Log.e("JWP", e.toString());
 			return rss_list;
 		}
 	}
+
+	public class rssfeed_parse extends
+			AsyncTask<String, Void, List<class_rssitem>> {
+
+		private ProgressDialog dialog;
+		Activity activity;
+
+		protected rssfeed_parse(Activity activity) {
+			this.activity = activity;
+		}
+
+		protected void onPreExecute() {
+			dialog = new ProgressDialog(activity);
+			dialog.setMessage("Processing...");
+			dialog.show();
+		}
+
+		protected void onPostExecute(Void result) {
+			if (dialog.isShowing()) {
+				dialog.dismiss();
+			}
+		};
+
+		protected List<class_rssitem> doInBackground(String... url) {
+			// if (funct.isNetworkAvailable() == true) {
+			Log.e("JWP", "Online");
+			rssfeedprovider = new class_rssfeedprovider();
+			rss_list = rssfeedprovider.parse(url[0]);
+			// } else
+			Log.e("JWP", "Offline");
+			return rss_list;
+		}
+	}
+
 }

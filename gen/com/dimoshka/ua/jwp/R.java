@@ -55,6 +55,7 @@ public final class R {
         public static final int db_name=0x7f040002;
         public static final int db_version=0x7f040003;
         public static final int debug_tag=0x7f040005;
+        public static final int dialog_loaing=0x7f040007;
         public static final int ga_appVersion=0x7f040001;
         public static final int ga_trackingId=0x7f040000;
         public static final int toast_no_internet=0x7f040006;

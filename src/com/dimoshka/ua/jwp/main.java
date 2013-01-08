@@ -23,8 +23,6 @@ public class main extends Activity {
 	ListView list;
 	class_rss_adapter adapter;
 	List<class_rssitem> rss_list = null;
-
-	// private class_functions funct = new class_functions();
 	class_jwp_rss jwp_rss = new class_jwp_rss();
 
 	@Override
@@ -62,11 +60,11 @@ public class main extends Activity {
 
 	public void onClickStart(View v) {
 		try {
-			rss_list = jwp_rss.get_all_feeds();
+			rss_list = jwp_rss.get_all_feeds(this);
 			adapter = new class_rss_adapter(this, rss_list);
 			list.setAdapter(adapter);
 		} catch (Exception e) {
-			Log.e("RSS", e.toString());
+			Log.e("JWP", e.toString());
 		}
 	}
 
