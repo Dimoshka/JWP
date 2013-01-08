@@ -9,13 +9,7 @@ import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-import com.dimoshka.ua.jwp.R;
-import com.dimoshka.ua.jwp.main;
-import com.dimoshka.ua.jwp.R.drawable;
-import com.dimoshka.ua.jwp.R.id;
-import com.dimoshka.ua.jwp.R.layout;
-import com.dimoshka.ua.jwp.R.string;
-
+import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -26,6 +20,9 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
 import android.widget.RemoteViews;
+
+import com.dimoshka.ua.jwp.R;
+import com.dimoshka.ua.jwp.main;
 
 public class class_downloads_files extends Service {
 
@@ -232,6 +229,7 @@ public class class_downloads_files extends Service {
 		 * 
 		 * @see android.os.AsyncTask#doInBackground(Params[])
 		 */
+		@SuppressLint("DefaultLocale")
 		@Override
 		protected Void doInBackground(Void... params) {
 			String remoteFilepath, localFilepath;
@@ -326,6 +324,7 @@ public class class_downloads_files extends Service {
 					"Download Progress", "Cancelled");
 		}
 
+		@SuppressLint("DefaultLocale")
 		@Override
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(result);
@@ -350,6 +349,7 @@ public class class_downloads_files extends Service {
 	 * @param size
 	 * @return
 	 */
+	@SuppressLint("DefaultLocale")
 	protected String getStringByteSize(int size) {
 		if (size > 1024 * 1024) // mega
 		{

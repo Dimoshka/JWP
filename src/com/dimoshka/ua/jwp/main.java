@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.List;
 
 import com.dimoshka.ua.classes.class_downloads_files;
+import com.dimoshka.ua.classes.class_jwp_rss;
 import com.dimoshka.ua.classes.class_rss_adapter;
 import com.dimoshka.ua.classes.class_rssitem;
 
@@ -11,6 +12,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -18,12 +20,12 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class main extends Activity {
 
-
 	ListView list;
 	class_rss_adapter adapter;
 	List<class_rssitem> rss_list = null;
 
 	// private class_functions funct = new class_functions();
+	class_jwp_rss jwp_rss = new class_jwp_rss();
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -59,13 +61,13 @@ public class main extends Activity {
 	}
 
 	public void onClickStart(View v) {
-		// if (class_functions.isNetworkAvailable()==true) {
-
-	//	rss_list = class_rssfeedprovider.parse(URL_FEED);
-
-	//	adapter = new class_rss_adapter(this, rss_list);
-	//	list.setAdapter(adapter);
-
+		try {
+			rss_list = jwp_rss.get_all_feeds();
+			adapter = new class_rss_adapter(this, rss_list);
+			list.setAdapter(adapter);
+		} catch (Exception e) {
+			Log.e("RSS", e.toString());
+		}
 	}
 
 	public void onDestroy() {

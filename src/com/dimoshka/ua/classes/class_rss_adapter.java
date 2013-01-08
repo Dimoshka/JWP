@@ -4,11 +4,6 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.List;
 
-import com.dimoshka.ua.jwp.R;
-import com.dimoshka.ua.jwp.R.drawable;
-import com.dimoshka.ua.jwp.R.id;
-import com.dimoshka.ua.jwp.R.layout;
-
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -20,6 +15,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.dimoshka.ua.jwp.R;
 
 public class class_rss_adapter extends BaseAdapter {
 	private Activity activity;

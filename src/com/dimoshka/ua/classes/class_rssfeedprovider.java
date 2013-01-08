@@ -20,7 +20,7 @@ public class class_rssfeedprovider {
 	static final String GUID = "guid";
 	static final String CHANNEL = "channel";
 
-	public static List<class_rssitem> parse(String rssFeed) {
+	public List<class_rssitem> parse(String rssFeed) {
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e1) {
