@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="db_name">jwp.sqlite</string>
+    <string name="db_version">1</string>
+    <string name="app_name">JWP</string>
+    <string name="debug_tag">JPW</string>
+    <string name="toast_no_internet">Нету подключения к интернету!</string>
+</resources>
