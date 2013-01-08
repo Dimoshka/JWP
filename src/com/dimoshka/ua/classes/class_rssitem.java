@@ -1,4 +1,4 @@
-package com.dimoshka.ua.jwp;
+package com.dimoshka.ua.classes;
 
 public class class_rssitem {
 	private String pubDate;

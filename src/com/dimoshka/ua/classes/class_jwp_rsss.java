@@ -1,6 +1,9 @@
-package com.dimoshka.ua.jwp;
+package com.dimoshka.ua.classes;
 
 import java.util.List;
+
+import com.dimoshka.ua.jwp.R;
+import com.dimoshka.ua.jwp.R.string;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

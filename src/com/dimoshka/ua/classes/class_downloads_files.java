@@ -1,4 +1,4 @@
-package com.dimoshka.ua.jwp;
+package com.dimoshka.ua.classes;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -8,6 +8,13 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.Map.Entry;
+
+import com.dimoshka.ua.jwp.R;
+import com.dimoshka.ua.jwp.main;
+import com.dimoshka.ua.jwp.R.drawable;
+import com.dimoshka.ua.jwp.R.id;
+import com.dimoshka.ua.jwp.R.layout;
+import com.dimoshka.ua.jwp.R.string;
 
 import android.app.Notification;
 import android.app.NotificationManager;

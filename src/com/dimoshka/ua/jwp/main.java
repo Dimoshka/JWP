@@ -3,6 +3,10 @@ package com.dimoshka.ua.jwp;
 import java.io.File;
 import java.util.List;
 
+import com.dimoshka.ua.classes.class_downloads_files;
+import com.dimoshka.ua.classes.class_rss_adapter;
+import com.dimoshka.ua.classes.class_rssitem;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

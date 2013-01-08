@@ -1,8 +1,13 @@
-package com.dimoshka.ua.jwp;
+package com.dimoshka.ua.classes;
 
 import java.io.InputStream;
 import java.net.URL;
 import java.util.List;
+
+import com.dimoshka.ua.jwp.R;
+import com.dimoshka.ua.jwp.R.drawable;
+import com.dimoshka.ua.jwp.R.id;
+import com.dimoshka.ua.jwp.R.layout;
 
 import android.app.Activity;
 import android.content.Context;

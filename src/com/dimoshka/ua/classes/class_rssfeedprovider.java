@@ -1,4 +1,4 @@
-package com.dimoshka.ua.jwp;
+package com.dimoshka.ua.classes;
 
 import java.io.IOException;
 import java.io.InputStream;

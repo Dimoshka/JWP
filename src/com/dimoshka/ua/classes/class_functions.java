@@ -1,4 +1,4 @@
-package com.dimoshka.ua.jwp;
+package com.dimoshka.ua.classes;
 
 import android.app.Activity;
 import android.content.Context;
