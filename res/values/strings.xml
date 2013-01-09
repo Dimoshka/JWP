@@ -5,5 +5,5 @@
     <string name="app_name">JWP</string>
     <string name="debug_tag">JPW</string>
     <string name="toast_no_internet">Нету подключения к интернету!</string>
-    <string name="dialog_loaing">Загрузка. Пожалуйста подождите...</string>
+    <string name="dialog_loaing">Загрузка RSS. Пожалуйста подождите&#8230;</string>
 </resources>

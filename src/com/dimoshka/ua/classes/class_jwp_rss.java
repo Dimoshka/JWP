@@ -6,6 +6,8 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.ListView;
+import com.dimoshka.ua.jwp.R;
 
 public class class_jwp_rss {
 	static final String URL_FEED = "http://www.jw.org/apps/index.xjp?option=sFFZRQVNZNT&rln=%s&rmn=%s&rfm=%s&rpf=&rpe=";
@@ -22,56 +24,60 @@ public class class_jwp_rss {
 	static final String wp = "wp";
 	static final String g = "g";
 
-	List<class_rssitem> rss_list = null;
-	class_functions funct = new class_functions();
+	class_functions funct;
 	class_rssfeedprovider rssfeedprovider;
+	class_rss_adapter adapter;
+	ListView list;
 
-	private rssfeed_parse rp;
-
-	public List<class_rssitem> get_all_feeds(Activity activity) {
+	public void get_all_feeds(Activity activity, ListView list) {
 		try {
-			rss_list = null;
-			rp = new rssfeed_parse(activity);
-			rp.execute(String.format(URL_FEED, rln, w, pdf));
-			rss_list = rp.get();
-
-			return rss_list;
+			this.list = list;
+			new ReadFeedTask(activity).execute();
 		} catch (Exception e) {
 			Log.e("JWP", e.toString());
-			return rss_list;
 		}
 	}
 
-	public class rssfeed_parse extends
-			AsyncTask<String, Void, List<class_rssitem>> {
+	public void refresh(Activity activity, List<class_rssitem> rss_list) {
+		adapter = new class_rss_adapter(activity, rss_list);
+		list.setAdapter(adapter);
+	}
 
+	class ReadFeedTask extends AsyncTask<Void, Integer, List<class_rssitem>> {
 		private ProgressDialog dialog;
 		Activity activity;
+		List<class_rssitem> rss_list = null;
 
-		protected rssfeed_parse(Activity activity) {
+		public ReadFeedTask(Activity activity) {
 			this.activity = activity;
+			Log.e("JWP", "0");
+		}
+
+		protected List<class_rssitem> doInBackground(Void... paramArrayOfVoid) {
+			try {
+				Log.e("JWP", "2");
+				// funct = new class_functions();
+				// if (funct.isNetworkAvailable() == true) {
+				rssfeedprovider = new class_rssfeedprovider();
+				this.rss_list = rssfeedprovider.parse(String.format(URL_FEED,
+						rln, w, mp3));
+				// }
+			} catch (Exception e) {
+				Log.e("JWP", e.toString());
+			}
+			return rss_list;
+		}
+
+		protected void onPostExecute(List<class_rssitem> result) {
+			this.dialog.hide();
+			refresh(activity, result);
+			Log.e("JWP", "3");
 		}
 
 		protected void onPreExecute() {
-			dialog = new ProgressDialog(activity);
-			dialog.setMessage("Processing...");
-			dialog.show();
-		}
-
-		protected void onPostExecute(Void result) {
-			if (dialog.isShowing()) {
-				dialog.dismiss();
-			}
-		};
-
-		protected List<class_rssitem> doInBackground(String... url) {
-			// if (funct.isNetworkAvailable() == true) {
-			Log.e("JWP", "Online");
-			rssfeedprovider = new class_rssfeedprovider();
-			rss_list = rssfeedprovider.parse(url[0]);
-			// } else
-			Log.e("JWP", "Offline");
-			return rss_list;
+			Log.e("JWP", "1");
+			this.dialog = ProgressDialog.show(activity, null, activity
+					.getResources().getString(R.string.dialog_loaing), true);
 		}
 	}
 

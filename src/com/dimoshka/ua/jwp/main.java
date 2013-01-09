@@ -3,11 +3,6 @@ package com.dimoshka.ua.jwp;
 import java.io.File;
 import java.util.List;
 
-import com.dimoshka.ua.classes.class_downloads_files;
-import com.dimoshka.ua.classes.class_jwp_rss;
-import com.dimoshka.ua.classes.class_rss_adapter;
-import com.dimoshka.ua.classes.class_rssitem;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,13 +10,16 @@ import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
+
+import com.dimoshka.ua.classes.class_downloads_files;
+import com.dimoshka.ua.classes.class_jwp_rss;
+import com.dimoshka.ua.classes.class_rssitem;
 
 public class main extends Activity {
 
 	ListView list;
-	class_rss_adapter adapter;
 	List<class_rssitem> rss_list = null;
 	class_jwp_rss jwp_rss = new class_jwp_rss();
 
@@ -60,9 +58,7 @@ public class main extends Activity {
 
 	public void onClickStart(View v) {
 		try {
-			rss_list = jwp_rss.get_all_feeds(this);
-			adapter = new class_rss_adapter(this, rss_list);
-			list.setAdapter(adapter);
+			jwp_rss.get_all_feeds(this, list);
 		} catch (Exception e) {
 			Log.e("JWP", e.toString());
 		}
