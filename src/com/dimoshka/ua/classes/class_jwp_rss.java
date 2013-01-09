@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.ListView;
@@ -24,21 +25,33 @@ public class class_jwp_rss {
 	static final String wp = "wp";
 	static final String g = "g";
 
-	class_functions funct;
-	class_rssfeedprovider rssfeedprovider;
-	class_rss_adapter adapter;
-	ListView list;
+	private class_functions funct;
+	private class_rssfeedprovider rssfeedprovider;
+	private class_rss_adapter adapter;
+	private ListView list;
+	private SQLiteDatabase database;
 
 	public void get_all_feeds(Activity activity, ListView list) {
 		try {
 			this.list = list;
 			new ReadFeedTask(activity).execute();
 		} catch (Exception e) {
-			Log.e("JWP", e.toString());
+			Log.e("JWP_" + getClass().getName(), e.toString());
 		}
 	}
 
 	public void refresh(Activity activity, List<class_rssitem> rss_list) {
+
+		class_sqlite dbOpenHelper = new class_sqlite(activity,
+				activity.getString(R.string.db_name), Integer.valueOf(activity
+						.getString(R.string.db_version)));
+		database = dbOpenHelper.openDataBase();
+		for (int i = 0; i < rss_list.size() - 1; i++) {
+			class_rssitem rss_item = rss_list.get(i);
+			database.execSQL("INSERT OR IGNORE INTO magazine (name, img) VALUES ('"
+					+ rss_item.getTitle() + "', '0');");
+		}
+
 		adapter = new class_rss_adapter(activity, rss_list);
 		list.setAdapter(adapter);
 	}
@@ -50,20 +63,18 @@ public class class_jwp_rss {
 
 		public ReadFeedTask(Activity activity) {
 			this.activity = activity;
-			Log.e("JWP", "0");
 		}
 
 		protected List<class_rssitem> doInBackground(Void... paramArrayOfVoid) {
 			try {
-				Log.e("JWP", "2");
 				// funct = new class_functions();
 				// if (funct.isNetworkAvailable() == true) {
 				rssfeedprovider = new class_rssfeedprovider();
 				this.rss_list = rssfeedprovider.parse(String.format(URL_FEED,
-						rln, w, mp3));
+						rln, g, pdf));
 				// }
 			} catch (Exception e) {
-				Log.e("JWP", e.toString());
+				Log.e("JWP_" + getClass().getName(), e.toString());
 			}
 			return rss_list;
 		}
@@ -71,11 +82,9 @@ public class class_jwp_rss {
 		protected void onPostExecute(List<class_rssitem> result) {
 			this.dialog.hide();
 			refresh(activity, result);
-			Log.e("JWP", "3");
 		}
 
 		protected void onPreExecute() {
-			Log.e("JWP", "1");
 			this.dialog = ProgressDialog.show(activity, null, activity
 					.getResources().getString(R.string.dialog_loaing), true);
 		}

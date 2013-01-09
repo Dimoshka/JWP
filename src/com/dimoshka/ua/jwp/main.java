@@ -3,21 +3,22 @@ package com.dimoshka.ua.jwp;
 import java.io.File;
 import java.util.List;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-
+import com.dimoshka.ua.classes.class_activity_extends;
 import com.dimoshka.ua.classes.class_downloads_files;
 import com.dimoshka.ua.classes.class_jwp_rss;
 import com.dimoshka.ua.classes.class_rssitem;
 
-public class main extends Activity {
+public class main extends class_activity_extends {
 
 	ListView list;
 	List<class_rssitem> rss_list = null;
@@ -60,8 +61,36 @@ public class main extends Activity {
 		try {
 			jwp_rss.get_all_feeds(this, list);
 		} catch (Exception e) {
-			Log.e("JWP", e.toString());
+			Log.e("JWP_" + getClass().getName(), e.toString());
 		}
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+
+		menu.add(Menu.NONE, 1, Menu.NONE, R.string.m_preference).setIcon(
+				android.R.drawable.ic_menu_preferences);
+		menu.add(Menu.NONE, 0, Menu.NONE, R.string.m_exit).setIcon(
+				android.R.drawable.ic_lock_power_off);
+
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case 0:
+			System.exit(0);
+			break;
+		case 1:
+			Intent i = new Intent(this, preferences.class);
+			startActivity(i);
+			break;
+		default:
+			break;
+		}
+
+		return false;
 	}
 
 	public void onDestroy() {

@@ -21,11 +21,6 @@ public class class_rssfeedprovider {
 	static final String CHANNEL = "channel";
 
 	public List<class_rssitem> parse(String rssFeed) {
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e1) {
-			e1.printStackTrace();
-		}
 		List<class_rssitem> list = new ArrayList<class_rssitem>();
 		XmlPullParser parser = Xml.newPullParser();
 		InputStream stream = null;
@@ -79,7 +74,7 @@ public class class_rssfeedprovider {
 				eventType = parser.next();
 			}
 		} catch (Exception e) {
-			throw new RuntimeException(e);
+			Log.e("JWP_" + getClass().getName(),e.getMessage());
 		} finally {
 			if (stream != null) {
 				try {
