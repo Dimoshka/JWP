@@ -5,26 +5,31 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Environment;
+import android.util.Log;
 
-public class class_functions extends Activity {
+public class class_functions {
 
-	public boolean isNetworkAvailable() {
-		ConnectivityManager connectivityManager = (ConnectivityManager) getApplicationContext()
-				.getSystemService(Context.CONNECTIVITY_SERVICE);
-		NetworkInfo activeNetworkInfo = connectivityManager
-				.getActiveNetworkInfo();
-		return activeNetworkInfo != null;
+	public boolean isNetworkAvailable(Activity activity) {
+		try {
+			ConnectivityManager cm = (ConnectivityManager) activity
+					.getSystemService(Context.CONNECTIVITY_SERVICE);
+			NetworkInfo netInfo = cm.getActiveNetworkInfo();
+			if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+				return true;
+			}
+
+		} catch (Exception e) {
+			Log.e("JWP_" + getClass().getName(), e.toString());
+		}
+		return false;
 	}
 
 	public boolean ExternalStorageState() {
 		String state = Environment.getExternalStorageState();
 		if (Environment.MEDIA_MOUNTED.equals(state)) {
 			return true;
-		} else if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
+		} else
 			return false;
-		} else {
-			return false;
-		}
 	}
 
 }

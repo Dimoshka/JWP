@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="2dp" >
+    android:layout_height="101dp" >
 
     <ImageView
         android:id="@+id/img"
-        android:layout_width="70dp"
+        android:layout_width="54dp"
         android:layout_height="91dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
@@ -18,53 +17,12 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
         android:layout_toRightOf="@+id/img"
-        android:text="text" />
-
-    <ImageView
-        android:id="@+id/pdf"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginBottom="1dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="5dp"
-        android:src="@drawable/pdf_0" />
-
-    <ImageView
-        android:id="@+id/epub"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/pdf"
-        android:layout_marginBottom="1dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="1dp"
-        android:src="@drawable/epub_0" />
-
-    <ImageView
-        android:id="@+id/aac"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/epub"
-        android:layout_marginBottom="1dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="1dp"
-        android:src="@drawable/aac_0" />
-
-    <ImageView
-        android:id="@+id/mp3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/aac"
-        android:layout_marginBottom="1dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="1dp"
-        android:src="@drawable/mp3_0" />
+        android:text="text"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/text"
@@ -72,6 +30,80 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/img"
         android:layout_alignLeft="@+id/title"
+        android:layout_marginBottom="25dp"
+        android:layout_toLeftOf="@+id/imageView2"
         android:text="text" />
+
+    <ImageView
+        android:id="@+id/digitalpub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginTop="2dp"
+        android:layout_toRightOf="@+id/img"
+        android:src="@drawable/icon_digitalpub" />
+
+    <ImageView
+        android:id="@+id/pdf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginTop="2dp"
+        android:layout_toRightOf="@+id/digitalpub"
+        android:src="@drawable/pdf_0" />
+
+    <ImageView
+        android:id="@+id/epub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginTop="2dp"
+        android:layout_toRightOf="@+id/pdf"
+        android:src="@drawable/epub_0" />
+
+    <ImageView
+        android:id="@+id/audio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginTop="2dp"
+        android:layout_toRightOf="@+id/epub"
+        android:src="@drawable/icon_audio" />
+
+    <ImageView
+        android:id="@+id/mp3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginTop="2dp"
+        android:layout_toRightOf="@+id/audio"
+        android:src="@drawable/mp3_0" />
+
+    <ImageView
+        android:id="@+id/aac"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginTop="2dp"
+        android:layout_toRightOf="@+id/mp3"
+        android:src="@drawable/aac_0" />
 
 </RelativeLayout>

@@ -3,6 +3,7 @@ package com.dimoshka.ua.jwp;
 import java.io.File;
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
@@ -13,24 +14,27 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.Toast;
+
 import com.dimoshka.ua.classes.class_activity_extends;
 import com.dimoshka.ua.classes.class_downloads_files;
+import com.dimoshka.ua.classes.class_functions;
 import com.dimoshka.ua.classes.class_rss_jwp;
 import com.dimoshka.ua.classes.class_rss_item;
 
 public class main extends class_activity_extends {
 
-	ListView list;
-	List<class_rss_item> rss_list = null;
-	class_rss_jwp jwp_rss;
-
+	private ListView list;
+	private List<class_rss_item> rss_list = null;
+	private class_rss_jwp jwp_rss;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		list = (ListView) findViewById(R.id.list);
 		jwp_rss = new class_rss_jwp(this);
-		
+
 		list.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
@@ -57,9 +61,14 @@ public class main extends class_activity_extends {
 		});
 	}
 
+	@SuppressLint("ShowToast")
 	public void onClickStart(View v) {
 		try {
-			jwp_rss.get_all_feeds(list);
+			if (funct.isNetworkAvailable(this) == true) {
+				jwp_rss.get_all_feeds(list);
+			} else
+				Toast.makeText(this, R.string.toast_no_internet,
+						Toast.LENGTH_SHORT);
 		} catch (Exception e) {
 			Log.e("JWP_" + getClass().getName(), e.toString());
 		}

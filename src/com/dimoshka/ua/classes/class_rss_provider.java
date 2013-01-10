@@ -11,7 +11,7 @@ import org.xmlpull.v1.XmlPullParser;
 import android.util.Log;
 import android.util.Xml;
 
-public class class_rss_feed_provider {
+public class class_rss_provider {
 	static final String ITEM = "item";
 	static final String TITLE = "title";
 	static final String DESCRIPTION = "description";
