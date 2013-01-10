@@ -59,12 +59,12 @@ public class class_downloads_files extends Service {
 		notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
 		targetFiles = new HashMap<String, String>();
-		Log.d(getString(R.string.debug_tag), "START SERVICE");
+		Log.d("JWP" + getClass().getName(), "START SERVICE");
 	}
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
-		Log.d(getString(R.string.debug_tag), "onStartCommand");
+		Log.d("JWP" + getClass().getName(), "onStartCommand");
 		targetFiles.put(intent.getStringExtra("file_url"),
 				intent.getStringExtra("file_putch"));
 		task = new AsyncDownloadTask();
@@ -207,7 +207,7 @@ public class class_downloads_files extends Service {
 			NEXT_NOTIFICATION_ID = 1 + NEXT_NOTIFICATION_ID;
 			this.notificationId = NEXT_NOTIFICATION_ID;
 
-			Log.d(getString(R.string.debug_tag), "AsyncDownloadTask");
+			Log.d("JWP" + getClass().getName(), "AsyncDownloadTask");
 
 		}
 
@@ -237,7 +237,7 @@ public class class_downloads_files extends Service {
 				remoteFilepath = entry.getKey();
 				localFilepath = entry.getValue();
 
-				Log.d(getString(R.string.debug_tag), "downloading: '"
+				Log.d("JWP" + getClass().getName(), "downloading: '"
 						+ remoteFilepath + "' => '" + localFilepath + "'");
 
 				try {
@@ -299,13 +299,13 @@ public class class_downloads_files extends Service {
 
 						successCount++;
 					} else {
-						Log.i(getString(R.string.debug_tag),
+						Log.i("JWP" + getClass().getName(),
 								"file size unknown for remote file: "
 										+ remoteFilepath);
 						failedFiles.put(remoteFilepath, localFilepath);
 					}
 				} catch (Exception e) {
-					Log.e(getString(R.string.debug_tag), e.toString());
+					Log.e("JWP" + getClass().getName(), e.toString());
 
 					showNotification(notificationId, "Download Failed",
 							"Download Progress", "Failed: "

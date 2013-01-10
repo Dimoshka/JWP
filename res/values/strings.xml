@@ -4,11 +4,11 @@
     <string name="db_name">jwp.sqlite</string>
     <string name="db_version">1</string>
     <string name="app_name">JWP</string>
-    <string name="debug_tag">JPW</string>
     <string name="toast_no_internet">Нету подключения к интернету!</string>
     <string name="dialog_loaing">Загрузка RSS. Пожалуйста подождите&#8230;</string>
     <string name="l_preferences">Настройки</string>
     <string name="pref_cat_management">Управление</string>
+    <string name="b_reload">Загрузить</string>
     <string name="c_mn_analytics">Отправка отчетов</string>
     <string name="c_mn_analytics_summary">Разрешать автоматически отправлять отчеты о работе приложения?</string>
     <string name="m_exit">Выход</string>

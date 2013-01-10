@@ -22,16 +22,16 @@ public class main extends class_activity_extends {
 
 	ListView list;
 	List<class_rssitem> rss_list = null;
-	class_jwp_rss jwp_rss = new class_jwp_rss();
+	class_jwp_rss jwp_rss;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		list = (ListView) findViewById(R.id.list);
-
+		jwp_rss = new class_jwp_rss(this);
+		
 		list.setOnItemClickListener(new OnItemClickListener() {
-
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
@@ -59,7 +59,7 @@ public class main extends class_activity_extends {
 
 	public void onClickStart(View v) {
 		try {
-			jwp_rss.get_all_feeds(this, list);
+			jwp_rss.get_all_feeds(list);
 		} catch (Exception e) {
 			Log.e("JWP_" + getClass().getName(), e.toString());
 		}
