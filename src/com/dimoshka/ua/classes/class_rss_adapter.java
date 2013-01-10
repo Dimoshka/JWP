@@ -20,12 +20,12 @@ import com.dimoshka.ua.jwp.R;
 
 public class class_rss_adapter extends BaseAdapter {
 	private Activity activity;
-	private List<class_rssitem> data;
+	private List<class_rss_item> data;
 	private static LayoutInflater inflater = null;
 	static final String img_src = "http://download.jw.org/files/media_magazines/";
 	final int stub_id = R.drawable.noimages;
 
-	public class_rss_adapter(Activity a, List<class_rssitem> d) {
+	public class_rss_adapter(Activity a, List<class_rss_item> d) {
 		activity = a;
 		data = d;
 		inflater = (LayoutInflater) activity
@@ -53,7 +53,7 @@ public class class_rss_adapter extends BaseAdapter {
 		//TextView text = (TextView) vi.findViewById(R.id.text);
 		ImageView thumb_image = (ImageView) vi.findViewById(R.id.img);
 
-		class_rssitem rss_item = data.get(position);
+		class_rss_item rss_item = data.get(position);
 		title.setText(rss_item.getTitle());
 		//text.setText(rss_item.getDescription());
 

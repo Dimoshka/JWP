@@ -13,12 +13,12 @@ import android.view.ViewDebug.IntToString;
 import android.widget.ListView;
 import com.dimoshka.ua.jwp.R;
 
-public class class_jwp_rss {
+public class class_rss_jwp {
 	static final String URL_FEED = "http://www.jw.org/apps/index.xjp?option=sFFZRQVNZNT&rln=%s&rmn=%s&rfm=%s&rpf=&rpe=";
 	// http://www.jw.org/apps/index.xjp?option=sFFZRQVNZNT&rln=U&rmn=w&rfm=m4b
 
 	private class_functions funct;
-	private class_rssfeedprovider rssfeedprovider;
+	private class_rss_feed_provider rssfeedprovider;
 	private class_rss_adapter adapter;
 	private ListView list;
 	private SQLiteDatabase database;
@@ -29,16 +29,18 @@ public class class_jwp_rss {
 
 	private ArrayList<Integer> id_pub = new ArrayList<Integer>();
 	private ArrayList<String> code_pub = new ArrayList<String>();
+	private Integer cur_pub = 0;
 	private ArrayList<Integer> id_type = new ArrayList<Integer>();
 	private ArrayList<String> code_type = new ArrayList<String>();
+	private Integer cur_type = 0;
 
-	public class_jwp_rss(Activity activity) {
+	public class_rss_jwp(Activity activity) {
 		this.activity = activity;
 		class_sqlite dbOpenHelper = new class_sqlite(activity,
 				activity.getString(R.string.db_name), Integer.valueOf(activity
 						.getString(R.string.db_version)));
 		database = dbOpenHelper.openDataBase();
-		get_language("en_EN");
+		get_language("uk_UA");
 		get_publication();
 	}
 
@@ -50,8 +52,11 @@ public class class_jwp_rss {
 		if (cursor.getCount() > 0) {
 			id_ln = cursor.getInt(cursor.getColumnIndex("_id"));
 			code_ln = cursor.getString(cursor.getColumnIndex("code"));
-		} else
+		} else {
+			id_ln = 1;
 			code_ln = "E";
+		}
+
 		cursor.close();
 	}
 
@@ -89,10 +94,14 @@ public class class_jwp_rss {
 		}
 	}
 
-	public void refresh(List<class_rssitem> rss_list) {
+	public void refresh(List<class_rss_item> rss_list) {
 		for (int i = 0; i < rss_list.size(); i++) {
-			class_rssitem rss_item = rss_list.get(i);
-			// database.execSQL("INSERT OR IGNORE INTO magazine (name, img) VALUES ('"
+			class_rss_item rss_item = rss_list.get(i);
+
+			String name = rss_item.getguid();
+			name = name.replace("." + code_type.get(cur_type), "");
+			Log.e("---", name + "-" + id_ln + "-" + id_pub.get(cur_pub));
+			// database.execSQL("INSERT OR IGNORE INTO magazine (name, id_pub, id_lang, img) VALUES ('"
 			// + rss_item.getTitle() + "', '0');");
 		}
 
@@ -100,17 +109,19 @@ public class class_jwp_rss {
 		list.setAdapter(adapter);
 	}
 
-	class ReadFeedTask extends AsyncTask<Void, Integer, List<class_rssitem>> {
+	class ReadFeedTask extends AsyncTask<Void, Integer, List<class_rss_item>> {
 		private ProgressDialog dialog;
-		List<class_rssitem> rss_list = null;
+		List<class_rss_item> rss_list = null;
 
-		protected List<class_rssitem> doInBackground(Void... paramArrayOfVoid) {
+		protected List<class_rss_item> doInBackground(Void... paramArrayOfVoid) {
 			try {
+				cur_type = 1;
+				cur_pub = 1;
 				// funct = new class_functions();
 				// if (funct.isNetworkAvailable() == true) {
-				rssfeedprovider = new class_rssfeedprovider();
-				String feed = String.format(URL_FEED, code_ln, code_pub.get(0),
-						code_type.get(0));
+				rssfeedprovider = new class_rss_feed_provider();
+				String feed = String.format(URL_FEED, code_ln,
+						code_pub.get(cur_pub), code_type.get(cur_type));
 				this.rss_list = rssfeedprovider.parse(feed);
 				Log.e("JWP_feed", feed);
 				// }
@@ -120,7 +131,7 @@ public class class_jwp_rss {
 			return rss_list;
 		}
 
-		protected void onPostExecute(List<class_rssitem> result) {
+		protected void onPostExecute(List<class_rss_item> result) {
 			this.dialog.hide();
 			refresh(result);
 		}

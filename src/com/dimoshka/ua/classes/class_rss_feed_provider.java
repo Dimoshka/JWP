@@ -11,7 +11,7 @@ import org.xmlpull.v1.XmlPullParser;
 import android.util.Log;
 import android.util.Xml;
 
-public class class_rssfeedprovider {
+public class class_rss_feed_provider {
 	static final String ITEM = "item";
 	static final String TITLE = "title";
 	static final String DESCRIPTION = "description";
@@ -20,8 +20,8 @@ public class class_rssfeedprovider {
 	static final String GUID = "guid";
 	static final String CHANNEL = "channel";
 
-	public List<class_rssitem> parse(String rssFeed) {
-		List<class_rssitem> list = new ArrayList<class_rssitem>();
+	public List<class_rss_item> parse(String rssFeed) {
+		List<class_rss_item> list = new ArrayList<class_rss_item>();
 		XmlPullParser parser = Xml.newPullParser();
 		InputStream stream = null;
 		try {
@@ -30,7 +30,7 @@ public class class_rssfeedprovider {
 			parser.setInput(stream, null);
 			int eventType = parser.getEventType();
 			boolean done = false;
-			class_rssitem item = null;
+			class_rss_item item = null;
 			while (eventType != XmlPullParser.END_DOCUMENT && !done) {
 				String name = null;
 				switch (eventType) {
@@ -40,7 +40,7 @@ public class class_rssfeedprovider {
 					name = parser.getName();
 					if (name.equalsIgnoreCase(ITEM)) {
 						Log.i("new item", "Create new item");
-						item = new class_rssitem();
+						item = new class_rss_item();
 					} else if (item != null) {
 						if (name.equalsIgnoreCase(LINK)) {
 							Log.i("Attribute", "setLink");

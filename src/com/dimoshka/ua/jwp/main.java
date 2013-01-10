@@ -15,21 +15,21 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import com.dimoshka.ua.classes.class_activity_extends;
 import com.dimoshka.ua.classes.class_downloads_files;
-import com.dimoshka.ua.classes.class_jwp_rss;
-import com.dimoshka.ua.classes.class_rssitem;
+import com.dimoshka.ua.classes.class_rss_jwp;
+import com.dimoshka.ua.classes.class_rss_item;
 
 public class main extends class_activity_extends {
 
 	ListView list;
-	List<class_rssitem> rss_list = null;
-	class_jwp_rss jwp_rss;
+	List<class_rss_item> rss_list = null;
+	class_rss_jwp jwp_rss;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		list = (ListView) findViewById(R.id.list);
-		jwp_rss = new class_jwp_rss(this);
+		jwp_rss = new class_rss_jwp(this);
 		
 		list.setOnItemClickListener(new OnItemClickListener() {
 			@Override
@@ -47,7 +47,7 @@ public class main extends class_activity_extends {
 				Intent i = new Intent(getBaseContext(),
 						class_downloads_files.class);
 
-				class_rssitem rss_item = rss_list.get(position);
+				class_rss_item rss_item = rss_list.get(position);
 
 				i.putExtra("file_url", rss_item.getLink());
 				i.putExtra("file_putch", dir + rss_item.getguid());

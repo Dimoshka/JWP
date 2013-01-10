@@ -1,16 +1,16 @@
 package com.dimoshka.ua.classes;
 
-public class class_rssitem {
+public class class_rss_item {
 	private String pubDate;
 	private String description;
 	private String link;
 	private String title;	
 	private String guid;
 
-	public class_rssitem() {
+	public class_rss_item() {
 	}
 
-	public class_rssitem(String title, String link) {
+	public class_rss_item(String title, String link) {
 		this.title = title;
 		this.link = link;
 	}
