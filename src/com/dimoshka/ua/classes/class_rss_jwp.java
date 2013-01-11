@@ -10,6 +10,7 @@ import android.app.ProgressDialog;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.util.Log;
 import android.widget.ListView;
 
@@ -24,6 +25,7 @@ public class class_rss_jwp {
 	private SQLiteDatabase database;
 	public class_functions funct = new class_functions();
 	private Activity activity;
+	private Handler handler;
 
 	private Integer id_ln = 0;
 	private String code_lng = "E";
@@ -35,8 +37,9 @@ public class class_rss_jwp {
 	private ArrayList<String> code_type = new ArrayList<String>();
 	private Integer cur_type = 0;
 
-	public class_rss_jwp(Activity activity, String code_lng_an) {
+	public class_rss_jwp(Activity activity, String code_lng_an, Handler handler) {
 		this.activity = activity;
+		this.handler = handler;
 		class_sqlite dbOpenHelper = new class_sqlite(activity,
 				activity.getString(R.string.db_name), Integer.valueOf(activity
 						.getString(R.string.db_version)));
@@ -135,12 +138,13 @@ public class class_rss_jwp {
 			} catch (Exception e) {
 				Log.e("JWP_" + getClass().getName(), e.toString());
 			}
-			database.close();
 			return null;
 		}
 
 		protected void onPostExecute(Void result) {
 			this.dialog.hide();
+			//onDestroy();
+			handler.sendEmptyMessage(1);
 		}
 
 		protected void onPreExecute() {

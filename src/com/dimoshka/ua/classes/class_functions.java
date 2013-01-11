@@ -3,6 +3,8 @@ package com.dimoshka.ua.classes;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.dimoshka.ua.jwp.R;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -52,6 +54,12 @@ public class class_functions {
 			return null;
 		}
 		return date;
+	}
+
+	public String get_dir_app(Context context) {
+		String dir = Environment.getExternalStorageDirectory() + "/"
+				+ context.getResources().getString(R.string.app_dir);
+		return dir;
 	}
 
 }

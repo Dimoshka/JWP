@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,13 +35,30 @@ public class main extends class_activity_extends {
 	private class_rss_jwp jwp_rss;
 	private class_rss_jwp_img jwp_rss_img;
 
+	@SuppressLint("HandlerLeak")
+	private final Handler handler = new Handler() {
+		@Override
+		public void handleMessage(Message msg) {
+			switch (msg.what) {
+			case 1:
+				Log.e("JWP", "start load image");
+				jwp_rss_img();
+				break;
+			case 2:
+				Log.e("JWP", "refrashe afte load");
+				refresh();
+				break;
+			}
+		}
+	};
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		list = (ListView) findViewById(R.id.list);
-		jwp_rss = new class_rss_jwp(this, "ru_RU");
-		jwp_rss_img = new class_rss_jwp_img(this);
+		jwp_rss = new class_rss_jwp(this, "ru_RU", handler);
+		jwp_rss_img = new class_rss_jwp_img(this, handler);
 
 		class_sqlite dbOpenHelper = new class_sqlite(this,
 				getString(R.string.db_name),
@@ -53,22 +72,22 @@ public class main extends class_activity_extends {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 
-				String dir = Environment.getExternalStorageDirectory()
-						+ "/JWP/Downloads/";
+				String dir = funct.get_dir_app(getBaseContext())
+						+ "/downloads/";
 
 				File Directory = new File(dir);
 				if (!Directory.isDirectory()) {
 					Directory.mkdirs();
 				}
 
-				Intent i = new Intent(getBaseContext(),
-						class_downloads_files.class);
+				// Intent i = new Intent(getBaseContext(),
+				// class_downloads_files.class);
 
-				class_rss_item rss_item = rss_list.get(position);
+				// class_rss_item rss_item = rss_list.get(position);
 
-				i.putExtra("file_url", rss_item.getLink());
-				i.putExtra("file_putch", dir + rss_item.getguid());
-				startService(i);
+				// i.putExtra("file_url", rss_item.getLink());
+				// i.putExtra("file_putch", dir + rss_item.getguid());
+				// startService(i);
 
 			}
 		});
@@ -102,6 +121,14 @@ public class main extends class_activity_extends {
 
 	}
 
+	public void jwp_rss() {
+		jwp_rss.get_all_feeds(list);
+	}
+
+	public void jwp_rss_img() {
+		jwp_rss_img.verify_all_img();
+	}
+
 	@SuppressLint("ShowToast")
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -116,9 +143,7 @@ public class main extends class_activity_extends {
 		case 2:
 			try {
 				if (funct.isNetworkAvailable(this) == true) {
-					jwp_rss.get_all_feeds(list);
-					jwp_rss_img.verify_all_img();
-					refresh();
+					jwp_rss();
 				} else
 					Toast.makeText(this, R.string.toast_no_internet,
 							Toast.LENGTH_SHORT);
