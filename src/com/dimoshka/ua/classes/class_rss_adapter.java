@@ -1,77 +1,62 @@
 package com.dimoshka.ua.classes;
 
-import java.util.List;
-import android.app.Activity;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
+
 import com.dimoshka.ua.jwp.R;
 
-public class class_rss_adapter extends BaseAdapter {
-	private Activity activity;
-	private static LayoutInflater inflater = null;
-	final int stub_id = R.drawable.noimages;
-	private SQLiteDatabase database;
+public class class_rss_adapter extends SimpleCursorAdapter {
 	private Cursor cursor;
+	private Context context;
+	public class_functions funct = new class_functions();
 
-	public class_rss_adapter(Activity a) {
-		activity = a;
-		inflater = (LayoutInflater) activity
-				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		class_sqlite dbOpenHelper = new class_sqlite(a,
-				a.getString(R.string.db_name), Integer.valueOf(a
-						.getString(R.string.db_version)));
-		database = dbOpenHelper.openDataBase();
-
-		cursor = database.query("magazine", new String[] { "_id", "name",
-				"img", "id_lang" }, null, null, null, null, "_id");
-
+	public class_rss_adapter(Context context, int layout, Cursor cursor,
+			String[] from, int[] to) {
+		super(context, layout, cursor, from, to);
+		this.cursor = cursor;
+		this.context = context;
 	}
 
-	public int getCount() {
-		return cursor.getCount();
-	}
-
-	public Object getItem(int position) {
-		return position;
-	}
-
-	public long getItemId(int position) {
-		return position;
-	}
-
-	public View getView(int position, View convertView, ViewGroup parent) {
-		View vi = convertView;
-		if (convertView == null)
-			vi = inflater.inflate(R.layout.list_items, null);
-
-		TextView title = (TextView) vi.findViewById(R.id.title);
-		// TextView text = (TextView) vi.findViewById(R.id.text);
-		ImageView thumb_image = (ImageView) vi.findViewById(R.id.img);
-
-		cursor.moveToPosition(position);
-
-		title.setText(cursor.getString(cursor.getColumnIndex("name")));
-		// text.setText(rss_item.getDescription());
-
-		// Log.i("IMG", img_src + rss_item.getguid().replace(".pdf", ".jpg"));
-
-		try {
-			// Bitmap bitmap = BitmapFactory.decodeStream((InputStream) new URL(
-			// img_src + rss_item.getguid().replace(".pdf", ".jpg"))
-			// .getContent());
-			// thumb_image.setImageBitmap(bitmap);
-		} catch (Exception e) {
-			e.printStackTrace();
-			thumb_image.setImageResource(stub_id);
+	@SuppressLint("SimpleDateFormat")
+	public View getView(int pos, View inView, ViewGroup parent) {
+		View v = inView;
+		if (v == null) {
+			LayoutInflater inflater = (LayoutInflater) context
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			v = inflater.inflate(R.layout.list_items, null);
 		}
+		this.cursor.moveToPosition(pos);
 
-		return vi;
+		String name = this.cursor.getString(this.cursor.getColumnIndex("name"));
+		String code_lng = this.cursor.getString(this.cursor
+				.getColumnIndex("code_lng"));
+		String code_pub = this.cursor.getString(this.cursor
+				.getColumnIndex("code_pub"));
+		Integer cur_pub = cursor.getInt(cursor.getColumnIndex("cur_pub"));
+
+		SimpleDateFormat format = new SimpleDateFormat("d MMMM yyyy");
+		if (cur_pub == 3)
+			format.applyPattern("MMMM yyyy");
+		Date date = funct.get_jwp_rss_date(name, code_pub, code_lng);
+		TextView title = (TextView) v.findViewById(R.id.title);
+		title.setText(format.format(date));
+
+		TextView text = (TextView) v.findViewById(R.id.text);
+		text.setText(this.cursor.getString(this.cursor.getColumnIndex("name")));
+
+		ImageView iv = (ImageView) v.findViewById(R.id.img);
+
+		return (v);
 	}
+
 }
