@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -12,7 +13,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.util.Log;
-import android.widget.ListView;
 
 import com.dimoshka.ua.jwp.R;
 
@@ -48,7 +48,7 @@ public class class_rss_jwp {
 		get_publication();
 	}
 
-	public void get_all_feeds(ListView list) {
+	public void get_all_feeds() {
 		try {
 			new ReadFeedTask().execute();
 		} catch (Exception e) {

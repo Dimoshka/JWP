@@ -1,13 +1,15 @@
 package com.dimoshka.ua.jwp;
 
 import java.io.File;
-import java.util.List;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
@@ -16,24 +18,34 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.BaseAdapter;
-import android.widget.ListView;
+import android.widget.ExpandableListView;
 import android.widget.Toast;
 
 import com.dimoshka.ua.classes.class_activity_extends;
 import com.dimoshka.ua.classes.class_downloads_files;
 import com.dimoshka.ua.classes.class_rss_adapter;
-import com.dimoshka.ua.classes.class_rss_item;
 import com.dimoshka.ua.classes.class_rss_jwp;
 import com.dimoshka.ua.classes.class_rss_jwp_img;
 import com.dimoshka.ua.classes.class_sqlite;
 
 public class main extends class_activity_extends {
 
-	private ListView list;
-	private List<class_rss_item> rss_list = null;
+	private ExpandableListView list;
 	private class_rss_jwp jwp_rss;
 	private class_rss_jwp_img jwp_rss_img;
+
+	ArrayList<Map<String, String>> groupData;
+	ArrayList<Map<String, String>> childDataItem;
+	ArrayList<ArrayList<Map<String, String>>> childData;
+	Map<String, String> m;
+	String groupFrom[] = new String[] { "groupName" };
+	int groupTo[] = new int[] { android.R.id.text1 };
+	String childFrom[] = new String[] { "name", "code_pub", "code_lng", "_id",
+			"img" };
+	int childTo[] = new int[] { R.id.title, R.id.text, R.id.title, R.id.title };
+
+	int yer = 0;
+	int mon = 0;
 
 	@SuppressLint("HandlerLeak")
 	private final Handler handler = new Handler() {
@@ -56,7 +68,7 @@ public class main extends class_activity_extends {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		list = (ListView) findViewById(R.id.list);
+		list = (ExpandableListView) findViewById(R.id.list);
 		jwp_rss = new class_rss_jwp(this, "ru_RU", handler);
 		jwp_rss_img = new class_rss_jwp_img(this, handler);
 
@@ -113,16 +125,61 @@ public class main extends class_activity_extends {
 						null);
 		startManagingCursor(cursor);
 
-		BaseAdapter adapter = new class_rss_adapter(this, R.layout.list_items,
-				cursor, new String[] { "name", "img" }, new int[] { R.id.title,
-						R.id.text });
+		groupData = new ArrayList<Map<String, String>>();
 
+		childData = new ArrayList<ArrayList<Map<String, String>>>();
+		childDataItem = new ArrayList<Map<String, String>>();
+
+		cursor.moveToFirst();
+		for (int i = 0; i < cursor.getCount(); i++) {
+			String name = cursor.getString(cursor.getColumnIndex("name"));
+			String code_lng = cursor.getString(cursor
+					.getColumnIndex("code_lng"));
+			String code_pub = cursor.getString(cursor
+					.getColumnIndex("code_pub"));
+			Integer img = cursor.getInt(cursor.getColumnIndex("img"));
+			Integer _id = cursor.getInt(cursor.getColumnIndex("_id"));
+			Date date = funct.get_jwp_rss_date(name, code_pub, code_lng);
+
+			if (date.getYear() != yer || date.getMonth() != mon) {
+				yer = date.getYear();
+				mon = date.getMonth();
+				m = new HashMap<String, String>();
+				m.put("groupName", funct.getMonth(mon));
+				groupData.add(m);
+
+				if (i > 0) {
+					childData.add(childDataItem);
+					childDataItem = new ArrayList<Map<String, String>>();
+				}
+
+				m = new HashMap<String, String>();
+				m.put("name", name);
+				m.put("code_pub", code_pub);
+				m.put("code_lng", code_lng);
+				m.put("_id", _id.toString());
+				m.put("img", img.toString());
+				childDataItem.add(m);
+			} else {
+				m = new HashMap<String, String>();
+				m.put("name", name);
+				m.put("code_pub", code_pub);
+				m.put("code_lng", code_lng);
+				m.put("_id", _id.toString());
+				m.put("img", img.toString());
+				childDataItem.add(m);
+			}
+			cursor.moveToNext();
+		}
+		childData.add(childDataItem);
+
+		class_rss_adapter adapter = new class_rss_adapter(this, groupData,
+				childData);
 		list.setAdapter(adapter);
-
 	}
 
 	public void jwp_rss() {
-		jwp_rss.get_all_feeds(list);
+		jwp_rss.get_all_feeds();
 	}
 
 	public void jwp_rss_img() {

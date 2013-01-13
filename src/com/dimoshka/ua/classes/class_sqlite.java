@@ -34,9 +34,9 @@ public class class_sqlite extends SQLiteOpenHelper {
 			database.execSQL("INSERT INTO [publication] ([_id], [name], [code]) VALUES (2, 'THE WATCHTOWER', 'wp');");
 			database.execSQL("INSERT INTO [publication] ([_id], [name], [code]) VALUES (3, 'AWAKE!', 'g');");
 			// -- Table: magazine
-			database.execSQL("CREATE TABLE magazine (_id INTEGER PRIMARY KEY ASC AUTOINCREMENT UNIQUE, name VARCHAR(128) UNIQUE, id_pub INTEGER NOT NULL, id_lang INTEGER NOT NULL, img BOOLEAN DEFAULT (0), date VARCHAR(6) NOT NULL);");
+			database.execSQL("CREATE TABLE magazine (_id INTEGER PRIMARY KEY ASC AUTOINCREMENT UNIQUE, name VARCHAR(128) UNIQUE, id_pub INTEGER NOT NULL, id_lang INTEGER NOT NULL, img BOOLEAN DEFAULT (0), date DATE NOT NULL);");
 			// -- Table: files
-			database.execSQL("CREATE TABLE files (_id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, id_magazine INTEGER NOT NULL, id_type INTEGER NOT NULL, name VARCHAR(32) NOT NULL UNIQUE, link VARCHAR(256) NOT NULL, pubdate DATETIME NOT NULL, title VARCHAR(256) NOT NULL, file BOOLEAN DEFAULT (0));");
+			database.execSQL("CREATE TABLE files (_id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, id_magazine INTEGER NOT NULL, id_type INTEGER NOT NULL, name VARCHAR(32) NOT NULL UNIQUE, link VARCHAR(256) NOT NULL, pubdate DATE NOT NULL, title VARCHAR(256) NOT NULL, file BOOLEAN DEFAULT (0));");
 			// -- Table: language
 			database.execSQL("CREATE TABLE language (_id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(64) NOT NULL UNIQUE, code VARCHAR(4) NOT NULL UNIQUE, code_an VARCHAR(6) NOT NULL UNIQUE);");
 			database.execSQL("INSERT INTO [language] ([_id], [name], [code], [code_an]) VALUES (1, 'English', 'E', 'en_US');");

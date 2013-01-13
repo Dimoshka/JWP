@@ -5,6 +5,7 @@
 
     <include
         android:id="@+id/list_items_section_text"
+        android:layout_margin="5dp"
         layout="@android:layout/preference_category" />
 
 </LinearLayout>

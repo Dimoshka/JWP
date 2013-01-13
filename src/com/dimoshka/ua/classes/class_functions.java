@@ -1,7 +1,11 @@
 package com.dimoshka.ua.classes;
 
+import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Locale;
 
 import com.dimoshka.ua.jwp.R;
 
@@ -11,6 +15,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Environment;
+import android.text.format.DateFormat;
 import android.util.Log;
 
 public class class_functions {
@@ -56,10 +61,27 @@ public class class_functions {
 		return date;
 	}
 
+	@SuppressLint("SimpleDateFormat")
+	public Date get_string_to_date(String date_str, String format_str) {
+		SimpleDateFormat format = new SimpleDateFormat(format_str);
+		Date date = null;
+		try {
+			date = (Date) format.parse(date_str);
+		} catch (java.text.ParseException e) {
+			Log.e("JWP", e.toString() + " - " + date_str);
+			return null;
+		}
+		return date;
+	}
+
 	public String get_dir_app(Context context) {
 		String dir = Environment.getExternalStorageDirectory() + "/"
 				+ context.getResources().getString(R.string.app_dir);
 		return dir;
+	}
+
+	public String getMonth(int month) {
+		return new DateFormatSymbols().getMonths()[month];
 	}
 
 }

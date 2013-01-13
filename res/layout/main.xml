@@ -4,10 +4,10 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <ListView
+    <ExpandableListView
         android:id="@+id/list"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" >
-    </ListView>
+    </ExpandableListView>
 
 </LinearLayout>
