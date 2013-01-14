@@ -47,6 +47,8 @@ public class main extends class_activity_extends {
 	int yer = 0;
 	int mon = 0;
 
+	Cursor cursor;
+
 	@SuppressLint("HandlerLeak")
 	private final Handler handler = new Handler() {
 		@Override
@@ -119,7 +121,8 @@ public class main extends class_activity_extends {
 	}
 
 	public void refresh() {
-		Cursor cursor = database
+		stopManagingCursor(cursor);
+		cursor = database
 				.rawQuery(
 						"select magazine._id as _id, magazine.name as name, magazine.img as img, language.code as code_lng, publication.code as code_pub, publication._id as cur_pub, date from magazine left join language on magazine.id_lang=language._id left join publication on magazine.id_pub=publication._id order by date desc, magazine.id_pub asc",
 						null);
@@ -172,7 +175,7 @@ public class main extends class_activity_extends {
 			cursor.moveToNext();
 		}
 		childData.add(childDataItem);
-
+		cursor.close();
 		class_rss_adapter adapter = new class_rss_adapter(this, groupData,
 				childData);
 		list.setAdapter(adapter);
@@ -217,6 +220,8 @@ public class main extends class_activity_extends {
 
 	public void onDestroy() {
 		super.onDestroy();
+		cursor.close();
+		database.close();
 		stopService(new Intent(this, class_downloads_files.class));
 	}
 

@@ -34,11 +34,12 @@ public class class_rss_jwp_img {
 	private Activity activity;
 	private Cursor cursor;
 	private Handler handler;
+	private class_sqlite dbOpenHelper;
 
 	public class_rss_jwp_img(Activity activity, Handler handler) {
 		this.activity = activity;
 		this.handler = handler;
-		class_sqlite dbOpenHelper = new class_sqlite(activity,
+		dbOpenHelper = new class_sqlite(activity,
 				activity.getString(R.string.db_name), Integer.valueOf(activity
 						.getString(R.string.db_version)));
 		database = dbOpenHelper.openDataBase();
@@ -81,7 +82,7 @@ public class class_rss_jwp_img {
 
 						File imgFile = new File(dir + "/img/" + name + ".jpg");
 						if (!imgFile.exists()) {
-							Log.i("JWP_image", name + "no found!");
+							Log.i("JWP_image", name + " - no found!");
 							SimpleDateFormat format = new SimpleDateFormat(
 									"yyyyMMdd");
 							Date date = funct.get_jwp_rss_date(name, code_pub,
@@ -127,7 +128,7 @@ public class class_rss_jwp_img {
 								fos.close();
 
 								Log.i("JWP_image", name
-										+ " file download complete!");
+										+ " - file download complete!");
 								initialValues.put("img", "1");
 								String[] args = { String
 										.valueOf(cursor.getString(cursor
@@ -149,7 +150,6 @@ public class class_rss_jwp_img {
 						}
 						cursor.moveToNext();
 					}
-					cursor.close();
 				}
 			} catch (Exception e) {
 				Log.e("JWP_" + getClass().getName(), e.toString());
@@ -159,7 +159,8 @@ public class class_rss_jwp_img {
 
 		protected void onPostExecute(Void result) {
 			this.dialog.hide();
-			//onDestroy();
+			cursor.close();
+			database.close();
 			handler.sendEmptyMessage(2);
 		}
 
@@ -170,11 +171,6 @@ public class class_rss_jwp_img {
 							activity.getResources().getString(
 									R.string.dialog_loaing_img), true);
 		}
-	}
-
-	protected void onDestroy() {
-		cursor.close();
-		database.close();
 	}
 
 }

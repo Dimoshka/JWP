@@ -2,12 +2,7 @@ package com.dimoshka.ua.classes;
 
 import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Locale;
-
-import com.dimoshka.ua.jwp.R;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -15,8 +10,9 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Environment;
-import android.text.format.DateFormat;
 import android.util.Log;
+
+import com.dimoshka.ua.jwp.R;
 
 public class class_functions {
 

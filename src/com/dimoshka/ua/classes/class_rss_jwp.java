@@ -8,6 +8,7 @@ import java.util.List;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
@@ -36,16 +37,18 @@ public class class_rss_jwp {
 	private ArrayList<Integer> id_type = new ArrayList<Integer>();
 	private ArrayList<String> code_type = new ArrayList<String>();
 	private Integer cur_type = 0;
+	private class_sqlite dbOpenHelper;
 
 	public class_rss_jwp(Activity activity, String code_lng_an, Handler handler) {
 		this.activity = activity;
 		this.handler = handler;
-		class_sqlite dbOpenHelper = new class_sqlite(activity,
+		dbOpenHelper = new class_sqlite(activity,
 				activity.getString(R.string.db_name), Integer.valueOf(activity
 						.getString(R.string.db_version)));
 		database = dbOpenHelper.openDataBase();
 		get_language(code_lng_an);
 		get_publication();
+		database.close();
 	}
 
 	public void get_all_feeds() {
@@ -100,39 +103,82 @@ public class class_rss_jwp {
 		private ProgressDialog dialog;
 		List<class_rss_item> rss_list = null;
 
-		@SuppressLint("SimpleDateFormat")
+		@SuppressLint({ "SimpleDateFormat", "NewApi" })
 		protected Void doInBackground(Void... paramArrayOfVoid) {
 			try {
-				cur_type = 1;
+
 				for (int a = 0; a < id_pub.size(); a++) {
-					cur_pub = a;
-					rssfeedprovider = new class_rss_provider();
-					String feed = String.format(URL_FEED, code_lng,
-							code_pub.get(cur_pub), code_type.get(cur_type));
-					this.rss_list = rssfeedprovider.parse(feed);
+					for (int b = 0; b < id_type.size(); b++) {
+						cur_type = b;
+						cur_pub = a;
+						rssfeedprovider = new class_rss_provider();
+						String feed = String.format(URL_FEED, code_lng,
+								code_pub.get(cur_pub), code_type.get(cur_type));
+						this.rss_list = rssfeedprovider.parse(feed);
 
-					for (int i = 0; i < rss_list.size(); i++) {
-						class_rss_item rss_item = rss_list.get(i);
+						for (int i = 0; i < rss_list.size(); i++) {
 
-						String name = rss_item.getguid();
-						name = name.replace("." + code_type.get(cur_type), "");
+							class_rss_item rss_item = rss_list.get(i);
 
-						SimpleDateFormat format = new SimpleDateFormat(
-								"yyyyMMdd");
-						Date date = funct.get_jwp_rss_date(name,
-								code_pub.get(cur_pub), code_lng);
+							String name = rss_item.getguid();
+							name = name.replace("." + code_type.get(cur_type),
+									"");
 
-						database.execSQL("INSERT OR IGNORE INTO magazine (name, id_pub, id_lang, img, date) VALUES ('"
-								+ name
-								+ "', '"
-								+ id_pub.get(cur_pub)
-								+ "', '"
-								+ id_ln
-								+ "', '0', '"
-								+ format.format(date)
-								+ "');");
+							String date_str = name.replace(
+									code_pub.get(cur_pub), "");
+							date_str = date_str.replace(code_lng, "");
+							date_str = date_str.replace("_", "");
+
+							if (date_str.length() > 8
+									|| (cur_pub == 2 && date_str.length() > 6))
+								name = name.substring(0, name.length() - 3);
+
+							SimpleDateFormat format = new SimpleDateFormat(
+									"yyyyMMdd");
+							Date date = funct.get_jwp_rss_date(name,
+									code_pub.get(cur_pub), code_lng);
+
+							Cursor cur = database.rawQuery(
+									"select _id from magazine where `name` = '"
+											+ name + "'", null);
+							long id_magazine = 0;
+							if (cur.getCount() > 0) {
+								cur.moveToFirst();
+								id_magazine = cur.getLong(cur
+										.getColumnIndex("_id"));
+								Log.e("JWP_INSERT MAG + ", rss_item.getguid()
+										+ " - " + id_magazine);
+							} else {
+								ContentValues init1 = new ContentValues();
+								init1.put("name", name);
+								init1.put("id_pub", id_pub.get(cur_pub));
+								init1.put("id_lang", id_ln);
+								init1.put("img", 0);
+								init1.put("date", format.format(date));
+
+								id_magazine = database.insert("magazine", null,
+										init1);
+
+								Log.e("JWP_INSERT MAG - ", rss_item.getguid()
+										+ " - " + id_magazine);
+							}
+
+							cur.close();
+							ContentValues init2 = new ContentValues();
+							init2.put("id_magazine", id_magazine);
+							init2.put("id_type", id_type.get(cur_type));
+							init2.put("name", rss_item.getguid());
+							init2.put("link", rss_item.getLink());
+							init2.put("pubdate", rss_item.getPubDate());
+							init2.put("title", rss_item.getTitle());
+							init2.put("file", 0);
+
+							database.insertWithOnConflict("files", null, init2,
+									SQLiteDatabase.CONFLICT_IGNORE);
+
+						}
+
 					}
-
 				}
 
 			} catch (Exception e) {
@@ -143,18 +189,15 @@ public class class_rss_jwp {
 
 		protected void onPostExecute(Void result) {
 			this.dialog.hide();
-			//onDestroy();
+			database.close();
 			handler.sendEmptyMessage(1);
 		}
 
 		protected void onPreExecute() {
+			database = dbOpenHelper.openDataBase();
 			this.dialog = ProgressDialog.show(activity, null, activity
 					.getResources().getString(R.string.dialog_loaing), true);
 		}
-	}
-
-	protected void onDestroy() {
-		database.close();
 	}
 
 }
