@@ -59,6 +59,8 @@ public class class_rss_adapter extends BaseExpandableListAdapter {
 		Integer img = Integer.parseInt(m.get("img"));
 		Integer _id = Integer.parseInt(m.get("_id"));
 		SimpleDateFormat format = new SimpleDateFormat("d MMMM yyyy");
+		String files = m.get("id_type");
+		String[] id_types = files.split(",");
 
 		TextView title = (TextView) v.findViewById(R.id.title);
 		title.setText(format.format(date));
@@ -75,14 +77,55 @@ public class class_rss_adapter extends BaseExpandableListAdapter {
 						.getAbsolutePath());
 				myImage.setImageBitmap(myBitmap);
 			} else {
-				myImage.setBackgroundResource(R.drawable.noimages);
+				myImage.setImageResource(R.drawable.noimages);
 				ContentValues initialValues = new ContentValues();
 				initialValues.put("img", "0");
 				String[] args = { _id.toString() };
 				database.update("magazine", initialValues, "_id=?", args);
 			}
 		} else {
-			myImage.setBackgroundResource(R.drawable.noimages);
+			myImage.setImageResource(R.drawable.noimages);
+		}
+
+		for (int i = 0; i < id_types.length; i++) {
+
+			String[] f = id_types[i].split("=");
+			int file_isn = Integer.parseInt(f[1]);
+
+			switch (Integer.parseInt(f[0])) {
+			case 1:
+				ImageView epub = (ImageView) v.findViewById(R.id.epub);
+				if (file_isn == 1)
+					epub.setImageResource(R.drawable.epub_1);
+				else
+					epub.setImageResource(R.drawable.epub_0);
+				break;
+			case 2:
+
+				ImageView pdf = (ImageView) v.findViewById(R.id.pdf);
+				if (file_isn == 1)
+					pdf.setImageResource(R.drawable.pdf_1);
+				else
+					pdf.setImageResource(R.drawable.pdf_0);
+				break;
+			case 3:
+				ImageView mp3 = (ImageView) v.findViewById(R.id.mp3);
+				if (file_isn == 1)
+					mp3.setImageResource(R.drawable.mp3_1);
+				else
+					mp3.setImageResource(R.drawable.mp3_0);
+				break;
+			case 4:
+				ImageView aac = (ImageView) v.findViewById(R.id.aac);
+				if (file_isn == 1)
+					aac.setImageResource(R.drawable.aac_0);
+				else
+					aac.setImageResource(R.drawable.aac_0);
+				break;
+			default:
+				break;
+			}
+
 		}
 
 		return v;

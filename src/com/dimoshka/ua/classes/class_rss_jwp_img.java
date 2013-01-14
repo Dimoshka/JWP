@@ -50,6 +50,7 @@ public class class_rss_jwp_img {
 				.rawQuery(
 						"select magazine._id, magazine.name, magazine.img, language.code as code_lng, publication.code as code_pub, publication._id as cur_pub from magazine left join language on magazine.id_lang=language._id left join publication on magazine.id_pub=publication._id where img=0",
 						null);
+		activity.startManagingCursor(cursor);
 		new verify_img().execute();
 	}
 
@@ -159,7 +160,7 @@ public class class_rss_jwp_img {
 
 		protected void onPostExecute(Void result) {
 			this.dialog.hide();
-			cursor.close();
+			activity.stopManagingCursor(cursor);
 			database.close();
 			handler.sendEmptyMessage(2);
 		}

@@ -48,7 +48,6 @@ public class class_rss_jwp {
 		database = dbOpenHelper.openDataBase();
 		get_language(code_lng_an);
 		get_publication();
-		database.close();
 	}
 
 	public void get_all_feeds() {
@@ -63,6 +62,7 @@ public class class_rss_jwp {
 		Cursor cursor = database.rawQuery(
 				"SELECT _id, code from language where code_an='" + code + "'",
 				null);
+		activity.startManagingCursor(cursor);
 		cursor.moveToFirst();
 		if (cursor.getCount() > 0) {
 			id_ln = cursor.getInt(cursor.getColumnIndex("_id"));
@@ -71,7 +71,7 @@ public class class_rss_jwp {
 			id_ln = 1;
 			code_lng = "E";
 		}
-		cursor.close();
+		activity.stopManagingCursor(cursor);
 	}
 
 	private void get_publication() {
@@ -79,6 +79,8 @@ public class class_rss_jwp {
 				"code" }, null, null, null, null, "_id");
 		Cursor cursor_pub = database.query("publication", new String[] { "_id",
 				"code" }, null, null, null, null, "_id");
+		activity.startManagingCursor(cursor_type);
+		activity.startManagingCursor(cursor_pub);
 		cursor_type.moveToFirst();
 		cursor_pub.moveToFirst();
 
@@ -95,8 +97,8 @@ public class class_rss_jwp {
 			cursor_pub.moveToNext();
 		}
 
-		cursor_type.close();
-		cursor_pub.close();
+		activity.stopManagingCursor(cursor_type);
+		activity.stopManagingCursor(cursor_pub);
 	}
 
 	class ReadFeedTask extends AsyncTask<Void, Integer, Void> {
@@ -141,13 +143,12 @@ public class class_rss_jwp {
 							Cursor cur = database.rawQuery(
 									"select _id from magazine where `name` = '"
 											+ name + "'", null);
+							activity.startManagingCursor(cur);
 							long id_magazine = 0;
 							if (cur.getCount() > 0) {
 								cur.moveToFirst();
 								id_magazine = cur.getLong(cur
 										.getColumnIndex("_id"));
-								Log.e("JWP_INSERT MAG + ", rss_item.getguid()
-										+ " - " + id_magazine);
 							} else {
 								ContentValues init1 = new ContentValues();
 								init1.put("name", name);
@@ -155,15 +156,11 @@ public class class_rss_jwp {
 								init1.put("id_lang", id_ln);
 								init1.put("img", 0);
 								init1.put("date", format.format(date));
-
 								id_magazine = database.insert("magazine", null,
 										init1);
-
-								Log.e("JWP_INSERT MAG - ", rss_item.getguid()
-										+ " - " + id_magazine);
 							}
 
-							cur.close();
+							activity.stopManagingCursor(cur);
 							ContentValues init2 = new ContentValues();
 							init2.put("id_magazine", id_magazine);
 							init2.put("id_type", id_type.get(cur_type));
@@ -194,7 +191,6 @@ public class class_rss_jwp {
 		}
 
 		protected void onPreExecute() {
-			database = dbOpenHelper.openDataBase();
 			this.dialog = ProgressDialog.show(activity, null, activity
 					.getResources().getString(R.string.dialog_loaing), true);
 		}

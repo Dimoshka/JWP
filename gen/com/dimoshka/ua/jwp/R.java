@@ -26,8 +26,9 @@ public final class R {
         public static final int mp3_0=0x7f020007;
         public static final int mp3_1=0x7f020008;
         public static final int noimages=0x7f020009;
-        public static final int pdf_0=0x7f02000a;
-        public static final int pdf_1=0x7f02000b;
+        public static final int none_type=0x7f02000a;
+        public static final int pdf_0=0x7f02000b;
+        public static final int pdf_1=0x7f02000c;
     }
     public static final class id {
         public static final int aac=0x7f080009;

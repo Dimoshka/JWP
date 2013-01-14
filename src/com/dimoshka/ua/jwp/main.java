@@ -28,6 +28,7 @@ import com.dimoshka.ua.classes.class_rss_jwp;
 import com.dimoshka.ua.classes.class_rss_jwp_img;
 import com.dimoshka.ua.classes.class_sqlite;
 
+@SuppressLint("HandlerLeak")
 public class main extends class_activity_extends {
 
 	private ExpandableListView list;
@@ -38,11 +39,6 @@ public class main extends class_activity_extends {
 	ArrayList<Map<String, String>> childDataItem;
 	ArrayList<ArrayList<Map<String, String>>> childData;
 	Map<String, String> m;
-	String groupFrom[] = new String[] { "groupName" };
-	int groupTo[] = new int[] { android.R.id.text1 };
-	String childFrom[] = new String[] { "name", "code_pub", "code_lng", "_id",
-			"img" };
-	int childTo[] = new int[] { R.id.title, R.id.text, R.id.title, R.id.title };
 
 	int yer = 0;
 	int mon = 0;
@@ -135,6 +131,7 @@ public class main extends class_activity_extends {
 
 		cursor.moveToFirst();
 		for (int i = 0; i < cursor.getCount(); i++) {
+
 			String name = cursor.getString(cursor.getColumnIndex("name"));
 			String code_lng = cursor.getString(cursor
 					.getColumnIndex("code_lng"));
@@ -143,6 +140,24 @@ public class main extends class_activity_extends {
 			Integer img = cursor.getInt(cursor.getColumnIndex("img"));
 			Integer _id = cursor.getInt(cursor.getColumnIndex("_id"));
 			Date date = funct.get_jwp_rss_date(name, code_pub, code_lng);
+
+			Cursor cur = database.rawQuery(
+					"select id_type, file from files where `id_magazine`='"
+							+ _id + "' group by id_type", null);
+			startManagingCursor(cur);
+			String files = "";
+			if (cur.getCount() > 0) {
+				cur.moveToFirst();
+				for (int a = 0; a < cur.getCount(); a++) {
+					if (files.length() > 0)
+						files = files + ",";
+					files = files
+							+ cur.getString(cur.getColumnIndex("id_type"))
+							+ "=" + cur.getString(cur.getColumnIndex("file"));
+					cur.moveToNext();
+				}
+			}
+			stopManagingCursor(cur);
 
 			if (date.getYear() != yer || date.getMonth() != mon) {
 				yer = date.getYear();
@@ -162,6 +177,7 @@ public class main extends class_activity_extends {
 				m.put("code_lng", code_lng);
 				m.put("_id", _id.toString());
 				m.put("img", img.toString());
+				m.put("id_type", files);
 				childDataItem.add(m);
 			} else {
 				m = new HashMap<String, String>();
@@ -170,12 +186,13 @@ public class main extends class_activity_extends {
 				m.put("code_lng", code_lng);
 				m.put("_id", _id.toString());
 				m.put("img", img.toString());
+				m.put("id_type", files);
 				childDataItem.add(m);
 			}
 			cursor.moveToNext();
 		}
 		childData.add(childDataItem);
-		cursor.close();
+		stopManagingCursor(cursor);
 		class_rss_adapter adapter = new class_rss_adapter(this, groupData,
 				childData);
 		list.setAdapter(adapter);
@@ -220,7 +237,7 @@ public class main extends class_activity_extends {
 
 	public void onDestroy() {
 		super.onDestroy();
-		cursor.close();
+		stopManagingCursor(cursor);
 		database.close();
 		stopService(new Intent(this, class_downloads_files.class));
 	}
