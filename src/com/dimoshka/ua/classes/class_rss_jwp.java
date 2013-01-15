@@ -58,6 +58,7 @@ public class class_rss_jwp {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	private void get_language(String code) {
 		Cursor cursor = database.rawQuery(
 				"SELECT _id, code from language where code_an='" + code + "'",
@@ -74,6 +75,7 @@ public class class_rss_jwp {
 		activity.stopManagingCursor(cursor);
 	}
 
+	@SuppressWarnings("deprecation")
 	private void get_publication() {
 		Cursor cursor_type = database.query("type", new String[] { "_id",
 				"code" }, null, null, null, null, "_id");
@@ -105,6 +107,7 @@ public class class_rss_jwp {
 		private ProgressDialog dialog;
 		List<class_rss_item> rss_list = null;
 
+		@SuppressWarnings("deprecation")
 		@SuppressLint({ "SimpleDateFormat", "NewApi" })
 		protected Void doInBackground(Void... paramArrayOfVoid) {
 			try {

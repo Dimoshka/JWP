@@ -24,86 +24,66 @@
         android:text="text"
         android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/img"
-        android:layout_alignLeft="@+id/title"
-        android:layout_marginBottom="25dp"
-        android:layout_toLeftOf="@+id/imageView2"
-        android:text="text" />
-
     <ImageView
-        android:id="@+id/digitalpub"
+        android:id="@+id/aac"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="5dp"
-        android:layout_marginLeft="2dp"
-        android:layout_marginRight="2dp"
-        android:layout_marginTop="2dp"
-        android:layout_toRightOf="@+id/img"
-        android:src="@drawable/icon_digitalpub" />
-
-    <ImageView
-        android:id="@+id/pdf"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="5dp"
-        android:layout_marginLeft="2dp"
-        android:layout_marginRight="2dp"
-        android:layout_marginTop="2dp"
-        android:layout_toRightOf="@+id/digitalpub"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/mp3"
+        android:layout_marginRight="5dp"
         android:src="@drawable/none_type" />
 
     <ImageView
-        android:id="@+id/epub"
+        android:id="@+id/mp3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="5dp"
-        android:layout_marginLeft="2dp"
+        android:layout_alignTop="@+id/audio"
         android:layout_marginRight="2dp"
-        android:layout_marginTop="2dp"
-        android:layout_toRightOf="@+id/pdf"
+        android:layout_toLeftOf="@+id/aac"
         android:src="@drawable/none_type" />
 
     <ImageView
         android:id="@+id/audio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="5dp"
-        android:layout_marginLeft="2dp"
+        android:layout_alignTop="@+id/epub"
         android:layout_marginRight="2dp"
-        android:layout_marginTop="2dp"
-        android:layout_toRightOf="@+id/epub"
+        android:layout_toLeftOf="@+id/mp3"
         android:src="@drawable/icon_audio" />
 
     <ImageView
-        android:id="@+id/mp3"
+        android:id="@+id/epub"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="5dp"
-        android:layout_marginLeft="2dp"
+        android:layout_alignTop="@+id/pdf"
         android:layout_marginRight="2dp"
-        android:layout_marginTop="2dp"
-        android:layout_toRightOf="@+id/audio"
+        android:layout_toLeftOf="@+id/audio"
         android:src="@drawable/none_type" />
 
     <ImageView
-        android:id="@+id/aac"
+        android:id="@+id/pdf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="5dp"
-        android:layout_marginLeft="2dp"
+        android:layout_alignTop="@+id/digitalpub"
         android:layout_marginRight="2dp"
-        android:layout_marginTop="2dp"
-        android:layout_toRightOf="@+id/mp3"
+        android:layout_toLeftOf="@+id/epub"
         android:src="@drawable/none_type" />
+
+    <ImageView
+        android:id="@+id/digitalpub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/img"
+        android:layout_marginRight="2dp"
+        android:layout_toLeftOf="@+id/pdf"
+        android:src="@drawable/icon_digitalpub" />
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/digitalpub"
+        android:layout_alignLeft="@+id/title"
+        android:text="text" />
 
 </RelativeLayout>

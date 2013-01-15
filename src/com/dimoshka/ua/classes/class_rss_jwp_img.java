@@ -45,6 +45,7 @@ public class class_rss_jwp_img {
 		database = dbOpenHelper.openDataBase();
 	}
 
+	@SuppressWarnings("deprecation")
 	public void verify_all_img() {
 		cursor = database
 				.rawQuery(
@@ -158,6 +159,7 @@ public class class_rss_jwp_img {
 			return null;
 		}
 
+		@SuppressWarnings("deprecation")
 		protected void onPostExecute(Void result) {
 			this.dialog.hide();
 			activity.stopManagingCursor(cursor);

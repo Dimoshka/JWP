@@ -13,6 +13,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -76,6 +78,7 @@ public class main extends class_activity_extends {
 		database = dbOpenHelper.openDataBase();
 
 		refresh();
+		registerForContextMenu(list);
 
 		list.setOnItemClickListener(new OnItemClickListener() {
 			@Override
@@ -90,6 +93,8 @@ public class main extends class_activity_extends {
 					Directory.mkdirs();
 				}
 
+				Log.e("JWP click", position + "");
+
 				// Intent i = new Intent(getBaseContext(),
 				// class_downloads_files.class);
 
@@ -99,23 +104,24 @@ public class main extends class_activity_extends {
 				// i.putExtra("file_putch", dir + rss_item.getguid());
 				// startService(i);
 
+				/*
+				 * Intent intent = new Intent();
+				 * intent.setAction(android.content.Intent.ACTION_VIEW);
+				 * intent.setDataAndType(android.net.Uri.fromFile(new
+				 * File("/sdcard/folder/file.htm")),"text/html");
+				 * //startActivity(intent); //сразу открыть в дефолтовой
+				 * программе, может спросить если деволтовой нет //либо Intent
+				 * ch = Intent.createChooser(intent, "Выбор");//создать интент
+				 * для диалога со списком программ которые могут это открывать
+				 * startActivity(ch);//показать диалог
+				 */
+
 			}
 		});
 
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		menu.add(Menu.NONE, 2, Menu.NONE, R.string.m_reload).setIcon(
-				android.R.drawable.ic_menu_revert);
-		menu.add(Menu.NONE, 1, Menu.NONE, R.string.m_preference).setIcon(
-				android.R.drawable.ic_menu_preferences);
-		menu.add(Menu.NONE, 0, Menu.NONE, R.string.m_exit).setIcon(
-				android.R.drawable.ic_lock_power_off);
-
-		return true;
-	}
-
+	@SuppressWarnings("deprecation")
 	public void refresh() {
 		stopManagingCursor(cursor);
 		cursor = database
@@ -206,6 +212,43 @@ public class main extends class_activity_extends {
 		jwp_rss_img.verify_all_img();
 	}
 
+	public void onCreateContextMenu(ContextMenu menu, View v,
+			ContextMenuInfo menuInfo) {
+		if (v.getId() == R.id.list) {
+			// menu.setHeaderTitle(R.string.menu_management);
+			// android.view.MenuInflater inflater = getMenuInflater();
+			// inflater.inflate(R.menu.menu_edit_delete, menu);
+		}
+	}
+
+	public boolean onContextItemSelected(android.view.MenuItem item) {
+		// AdapterContextMenuInfo info = (AdapterContextMenuInfo) item
+		// .getMenuInfo();
+
+		switch (item.getItemId()) {
+		case R.id.image:
+
+			break;
+
+		default:
+			break;
+		}
+
+		return true;
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		menu.add(Menu.NONE, 2, Menu.NONE, R.string.m_reload).setIcon(
+				android.R.drawable.ic_menu_revert);
+		menu.add(Menu.NONE, 1, Menu.NONE, R.string.m_preference).setIcon(
+				android.R.drawable.ic_menu_preferences);
+		menu.add(Menu.NONE, 0, Menu.NONE, R.string.m_exit).setIcon(
+				android.R.drawable.ic_lock_power_off);
+
+		return true;
+	}
+
 	@SuppressLint("ShowToast")
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -235,6 +278,7 @@ public class main extends class_activity_extends {
 		return false;
 	}
 
+	@SuppressWarnings("deprecation")
 	public void onDestroy() {
 		super.onDestroy();
 		stopManagingCursor(cursor);

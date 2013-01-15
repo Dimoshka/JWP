@@ -32,11 +32,8 @@ public class class_downloads_files extends Service {
 	private NotificationManager notificationManager;
 	private final IBinder binder = new FileDownloadBinder();
 	private AsyncDownloadTask task = null;
-
 	protected static boolean isRunning = false;
-
 	private HashMap<String, String> targetFiles = null;
-
 	public static int NEXT_NOTIFICATION_ID = 0;
 
 	public class FileDownloadBinder extends Binder {
@@ -120,8 +117,8 @@ public class class_downloads_files extends Service {
 				R.layout.notification);
 		contentView.setImageViewResource(R.id.image, R.drawable.ic_launcher);
 
-		//contentView
-		//		.setImageViewBitmap(R.id.image, BitmapFactory.decodeFile(""));
+		// contentView
+		// .setImageViewBitmap(R.id.image, BitmapFactory.decodeFile(""));
 
 		contentView.setTextViewText(R.id.text1, String.format(
 				"Progress (%d / %d)", currentNumFile, totalNumFiles));
@@ -138,6 +135,7 @@ public class class_downloads_files extends Service {
 	 * @param title
 	 * @param content
 	 */
+	@SuppressWarnings("deprecation")
 	protected void showNotification(int id, String ticker, String title,
 			String content) {
 		Notification notification = new Notification(getNotificationIcon(),
@@ -160,6 +158,7 @@ public class class_downloads_files extends Service {
 
 	protected void showNotification(int id, RemoteViews remoteView,
 			String ticker) {
+		@SuppressWarnings("deprecation")
 		Notification notification = new Notification(getNotificationIcon(),
 				ticker, System.currentTimeMillis());
 		notification.contentView = remoteView;
@@ -340,15 +339,9 @@ public class class_downloads_files extends Service {
 			showNotification(notificationId, "Download Finished",
 					"Download Progress", finished);
 
-			// Logger.v("download task finished");
 		}
 	}
 
-	/**
-	 * 
-	 * @param size
-	 * @return
-	 */
 	@SuppressLint("DefaultLocale")
 	protected String getStringByteSize(int size) {
 		if (size > 1024 * 1024) // mega

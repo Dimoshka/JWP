@@ -1,5 +1,6 @@
 package com.dimoshka.ua.classes;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
@@ -8,6 +9,7 @@ import android.preference.PreferenceManager;
 
 import com.google.analytics.tracking.android.EasyTracker;
 
+@SuppressLint("Registered")
 public class class_activity_extends extends Activity {
 
 	public SharedPreferences prefs;
