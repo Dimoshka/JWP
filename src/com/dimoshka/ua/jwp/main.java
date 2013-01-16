@@ -4,22 +4,21 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
 
@@ -45,7 +44,8 @@ public class main extends class_activity_extends {
 	int yer = 0;
 	int mon = 0;
 
-	Cursor cursor;
+	private Cursor cursor;
+	private Cursor cur_files;
 
 	@SuppressLint("HandlerLeak")
 	private final Handler handler = new Handler() {
@@ -78,51 +78,103 @@ public class main extends class_activity_extends {
 		database = dbOpenHelper.openDataBase();
 
 		refresh();
-		registerForContextMenu(list);
 
-		list.setOnItemClickListener(new OnItemClickListener() {
+		list.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+
 			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
+			public boolean onChildClick(ExpandableListView arg0, View arg1,
+					int arg2, int arg3, long arg4) {
 
-				String dir = funct.get_dir_app(getBaseContext())
-						+ "/downloads/";
+				Map<String, String> hash = new HashMap<String, String>();
+				hash = childData.get(arg2).get(arg3);
 
-				File Directory = new File(dir);
-				if (!Directory.isDirectory()) {
-					Directory.mkdirs();
-				}
-
-				Log.e("JWP click", position + "");
-
-				// Intent i = new Intent(getBaseContext(),
-				// class_downloads_files.class);
-
-				// class_rss_item rss_item = rss_list.get(position);
-
-				// i.putExtra("file_url", rss_item.getLink());
-				// i.putExtra("file_putch", dir + rss_item.getguid());
-				// startService(i);
-
-				/*
-				 * Intent intent = new Intent();
-				 * intent.setAction(android.content.Intent.ACTION_VIEW);
-				 * intent.setDataAndType(android.net.Uri.fromFile(new
-				 * File("/sdcard/folder/file.htm")),"text/html");
-				 * //startActivity(intent); //сразу открыть в дефолтовой
-				 * программе, может спросить если деволтовой нет //либо Intent
-				 * ch = Intent.createChooser(intent, "Выбор");//создать интент
-				 * для диалога со списком программ которые могут это открывать
-				 * startActivity(ch);//показать диалог
-				 */
-
+				dialog_show(hash.get("_id"));
+				return false;
 			}
 		});
 
 	}
 
 	@SuppressWarnings("deprecation")
-	public void refresh() {
+	private void dialog_show(String _id) {
+
+		List<String> listItems = new ArrayList<String>();
+		CharSequence[] items = null;
+
+		cur_files = database
+				.rawQuery(
+						"select id_type, file, type.name as name_type, files.name, link from files left join magazine on files.id_magazine=magazine._id left join type on files.id_type=type._id where files.id_magazine='"
+								+ _id + "'  group by id_type", null);
+		startManagingCursor(cur_files);
+		if (cur_files.getCount() > 0) {
+			cur_files.moveToFirst();
+			for (int i = 0; i < cur_files.getCount(); i++) {
+				String name = null;
+				if (cur_files.getInt(cur_files.getColumnIndex("file")) == 1) {
+					name = getString(R.string.open)
+							+ " "
+							+ cur_files.getString(cur_files
+									.getColumnIndex("name_type"));
+				} else {
+					name = getString(R.string.download)
+							+ " "
+							+ cur_files.getString(cur_files
+									.getColumnIndex("name_type"));
+				}
+
+				listItems.add(name);
+				cur_files.moveToNext();
+			}
+
+			items = listItems.toArray(new CharSequence[listItems.size()]);
+
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setTitle(getString(R.string.select_the_action));
+			builder.setItems(items, new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int item) {
+					start_download(item);
+				}
+			});
+			AlertDialog alert = builder.create();
+			alert.show();
+		}
+
+	}
+
+	@SuppressWarnings("deprecation")
+	private void start_download(int id) {
+		if (cur_files.getCount() > 0) {
+			cur_files.moveToPosition(id);
+			if (cur_files.getInt(cur_files.getColumnIndex("file")) == 1) {
+				Intent intent = new Intent();
+				intent.setAction(android.content.Intent.ACTION_VIEW);
+				intent.setDataAndType(
+						android.net.Uri.fromFile(new File(funct
+								.get_dir_app(this)
+								+ "/downloads/"
+								+ cur_files.getString(cur_files
+										.getColumnIndex("name")))), "text/html");
+				Intent ch = Intent.createChooser(intent, "Выбор");
+				startActivity(ch);
+			} else {
+				Intent i = new Intent(getBaseContext(),
+						class_downloads_files.class);
+				i.putExtra("file_url",
+						cur_files.getString(cur_files.getColumnIndex("link")));
+				i.putExtra(
+						"file_putch",
+						funct.get_dir_app(this)
+								+ "/downloads/"
+								+ cur_files.getString(cur_files
+										.getColumnIndex("name")));
+				startService(i);
+			}
+		}
+		stopManagingCursor(cur_files);
+	}
+
+	@SuppressWarnings("deprecation")
+	private void refresh() {
 		stopManagingCursor(cursor);
 		cursor = database
 				.rawQuery(
@@ -212,31 +264,6 @@ public class main extends class_activity_extends {
 		jwp_rss_img.verify_all_img();
 	}
 
-	public void onCreateContextMenu(ContextMenu menu, View v,
-			ContextMenuInfo menuInfo) {
-		if (v.getId() == R.id.list) {
-			// menu.setHeaderTitle(R.string.menu_management);
-			// android.view.MenuInflater inflater = getMenuInflater();
-			// inflater.inflate(R.menu.menu_edit_delete, menu);
-		}
-	}
-
-	public boolean onContextItemSelected(android.view.MenuItem item) {
-		// AdapterContextMenuInfo info = (AdapterContextMenuInfo) item
-		// .getMenuInfo();
-
-		switch (item.getItemId()) {
-		case R.id.image:
-
-			break;
-
-		default:
-			break;
-		}
-
-		return true;
-	}
-
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		menu.add(Menu.NONE, 2, Menu.NONE, R.string.m_reload).setIcon(
@@ -282,6 +309,7 @@ public class main extends class_activity_extends {
 	public void onDestroy() {
 		super.onDestroy();
 		stopManagingCursor(cursor);
+		stopManagingCursor(cur_files);
 		database.close();
 		stopService(new Intent(this, class_downloads_files.class));
 	}

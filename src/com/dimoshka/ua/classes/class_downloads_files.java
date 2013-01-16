@@ -28,7 +28,7 @@ public class class_downloads_files extends Service {
 
 	// public static final int SERVICE_ID = 0x101104;
 	public static final int BYTES_BUFFER_SIZE = 2 * 1024;
-
+	public class_functions funct = new class_functions();
 	private NotificationManager notificationManager;
 	private final IBinder binder = new FileDownloadBinder();
 	private AsyncDownloadTask task = null;
@@ -62,6 +62,12 @@ public class class_downloads_files extends Service {
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		Log.d("JWP" + getClass().getName(), "onStartCommand");
+		String dir = funct.get_dir_app(getBaseContext()) + "/downloads/";
+		File Directory = new File(dir);
+		if (!Directory.isDirectory()) {
+			Directory.mkdirs();
+		}
+
 		targetFiles.put(intent.getStringExtra("file_url"),
 				intent.getStringExtra("file_putch"));
 		task = new AsyncDownloadTask();
@@ -89,8 +95,8 @@ public class class_downloads_files extends Service {
 	}
 
 	protected Class<?> getIntentForLatestInfo() {
-		return main.class;
-		// return null;
+		 return main.class;
+		//return null;
 	}
 
 	protected int getNotificationFlag() {
@@ -98,7 +104,13 @@ public class class_downloads_files extends Service {
 	}
 
 	protected void onFinishDownload(int successCount,
-			HashMap<String, String> failedFiles) {
+			HashMap<String, String> failedFiles,
+			HashMap<String, String> finishFiles) {
+
+		for (Entry<String, String> entry : finishFiles.entrySet()) {
+
+			Log.e("Finish downloading", entry.getValue());
+		}
 
 	}
 
@@ -140,11 +152,11 @@ public class class_downloads_files extends Service {
 			String content) {
 		Notification notification = new Notification(getNotificationIcon(),
 				ticker, System.currentTimeMillis());
-		PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
-				new Intent(this, getIntentForLatestInfo()),
-				Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		notification.setLatestEventInfo(getApplicationContext(), title,
-				content, contentIntent);
+		//PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
+		//		new Intent(this, getIntentForLatestInfo()),
+		//		Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		//notification.setLatestEventInfo(getApplicationContext(), title,
+		//		content, contentIntent);
 		notification.flags = getNotificationFlag();
 
 		notificationManager.notify(id, notification);
@@ -193,6 +205,7 @@ public class class_downloads_files extends Service {
 		private int numTotalFiles;
 		private HashMap<String, String> targetFiles = null;
 		private HashMap<String, String> failedFiles = null;
+		private HashMap<String, String> finishFiles = null;
 		private int notificationId = 1;
 
 		@Override
@@ -202,6 +215,7 @@ public class class_downloads_files extends Service {
 			targetFiles = getTargetFiles();
 			numTotalFiles = targetFiles.size();
 			failedFiles = new HashMap<String, String>();
+			finishFiles = new HashMap<String, String>();
 
 			NEXT_NOTIFICATION_ID = 1 + NEXT_NOTIFICATION_ID;
 			this.notificationId = NEXT_NOTIFICATION_ID;
@@ -297,6 +311,8 @@ public class class_downloads_files extends Service {
 							return null;
 
 						successCount++;
+						finishFiles.put(remoteFilepath, localFilepath);
+
 					} else {
 						Log.i("JWP" + getClass().getName(),
 								"file size unknown for remote file: "
@@ -319,6 +335,7 @@ public class class_downloads_files extends Service {
 		@Override
 		protected void onCancelled() {
 			super.onCancelled();
+			Log.e("JWP" + getClass().getName(), "SERVICE Cancelled");
 			showNotification(notificationId, "Download Cancelled",
 					"Download Progress", "Cancelled");
 		}
@@ -328,7 +345,7 @@ public class class_downloads_files extends Service {
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(result);
 
-			onFinishDownload(successCount, failedFiles);
+			onFinishDownload(successCount, failedFiles, finishFiles);
 
 			String finished;
 			if (successCount != numTotalFiles)
