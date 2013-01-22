@@ -43,8 +43,8 @@ public final class R {
         public static final int pdf=0x7f070006;
         public static final int progress=0x7f07000c;
         public static final int text=0x7f070008;
-        public static final int text1=0x7f07000d;
-        public static final int text2=0x7f07000e;
+        public static final int text1=0x7f07000e;
+        public static final int text2=0x7f07000d;
         public static final int title=0x7f070001;
     }
     public static final class layout {
@@ -75,6 +75,12 @@ public final class R {
         public static final int dialog_loaing=0x7f050007;
         public static final int dialog_loaing_img=0x7f050008;
         public static final int download=0x7f05001c;
+        public static final int download_cancelled=0x7f050023;
+        public static final int download_failed=0x7f050020;
+        public static final int download_finished=0x7f050021;
+        public static final int download_finished_failed=0x7f050022;
+        public static final int download_progress=0x7f050024;
+        public static final int download_title=0x7f05001f;
         public static final int ga_appVersion=0x7f050001;
         public static final int ga_trackingId=0x7f050000;
         public static final int l_preferences=0x7f050009;
