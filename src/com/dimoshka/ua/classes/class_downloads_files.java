@@ -121,7 +121,7 @@ public class class_downloads_files extends Service {
 			if (localFile.exists()) {
 
 				Log.d("JWP" + getClass().getName(),
-						"Update " + localFile.getName());
+						"Update to 1 - " + localFile.getName());
 
 				SQLiteDatabase database;
 				class_sqlite dbOpenHelper = new class_sqlite(this,

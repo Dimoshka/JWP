@@ -9,6 +9,7 @@ import java.util.Map;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -222,9 +223,26 @@ public class main extends class_activity_extends {
 				for (int a = 0; a < cur.getCount(); a++) {
 					if (files.length() > 0)
 						files = files + ",";
+					int file_isn = 0;
+					if (cur.getInt(cur.getColumnIndex("file")) == 1) {
+						File file = new File(
+								funct.get_dir_app(getBaseContext())
+										+ "/downloads/" + name);
+						if (file.exists()) {
+							file_isn = 1;
+						} else {
+							Log.d("JWP" + getClass().getName(),
+									"Update to 0 - " + name);
+							ContentValues initialValues = new ContentValues();
+							initialValues.put("file", "0");
+							database.update("files", initialValues, "name=?",
+									new String[] { name });
+						}
+					}
+
 					files = files
 							+ cur.getString(cur.getColumnIndex("id_type"))
-							+ "=" + cur.getString(cur.getColumnIndex("file"));
+							+ "=" + file_isn;
 					cur.moveToNext();
 				}
 			}
@@ -285,7 +303,6 @@ public class main extends class_activity_extends {
 				android.R.drawable.ic_menu_preferences);
 		menu.add(Menu.NONE, 0, Menu.NONE, R.string.exit).setIcon(
 				android.R.drawable.ic_lock_power_off);
-
 		return true;
 	}
 
