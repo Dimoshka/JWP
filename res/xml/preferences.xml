@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
-     <PreferenceCategory android:title="@string/pref_cat_management" >
+     <PreferenceCategory android:title="@string/management" >
         <CheckBoxPreference
             android:defaultValue="true"
-            android:key="c_mn_analytics"
-            android:summary="@string/c_mn_analytics_summary"
-            android:title="@string/c_mn_analytics" />
+            android:key="analytics"
+            android:summary="@string/analytics_summary"
+            android:title="@string/analytics" />
+
+    </PreferenceCategory>
+    
+      <PreferenceCategory android:title="@string/downloads" >
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="downloads_img"
+            android:summary="@string/downloads_img"
+            android:title="@string/downloads_img_summary" />
 
     </PreferenceCategory>
 

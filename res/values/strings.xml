@@ -6,15 +6,16 @@
     <string name="app_name">JWP</string>
     <string name="app_dir">JWP</string>
     <string name="toast_no_internet">Нету подключения к интернету!</string>
-    <string name="dialog_loaing">Загрузка RSS. Пожалуйста подождите&#8230;</string>
+    <string name="dialog_loaing_rss">Загрузка RSS. Пожалуйста подождите&#8230;</string>
     <string name="dialog_loaing_img">Обновление изображений публикаций. Пожалуйста подождите&#8230;</string>
-    <string name="l_preferences">Настройки</string>
-    <string name="pref_cat_management">Управление</string>
-    <string name="c_mn_analytics">Отправка отчетов</string>
-    <string name="c_mn_analytics_summary">Разрешать автоматически отправлять отчеты о работе приложения?</string>
-    <string name="m_exit">Выход</string>
-    <string name="m_preference">Настройки</string>
-    <string name="m_reload">Загрузить</string>
+    <string name="management">Управление</string>
+    <string name="analytics">Отправка отчетов</string>
+    <string name="analytics_summary">Разрешать автоматически отправлять отчеты о работе приложения?</string>
+    <string name="downloads_img">Загружать картинки</string>
+    <string name="downloads_img_summary">Автоматически загружать картинки после обновления?</string>
+    <string name="exit">Выход</string>
+    <string name="preference">Настройки</string>
+    <string name="reload">Обновить</string>
     <string name="January">Январь</string>
     <string name="February">Февраль</string>
     <string name="March">Март</string>
@@ -28,13 +29,16 @@
     <string name="November">Ноябрь</string>
     <string name="December">Декабрь</string>
     <string name="download">Загрузить</string>
+    <string name="downloads">Загрузки</string>
     <string name="open">Открыть</string>
     <string name="select_the_action">Выберите действие</string>
     <string name="download_title">Загрузка файлов</string>
     <string name="download_failed">Ошибка загрузки</string>
     <string name="download_finished">Загрузка завершена!</string>
-    <string name="download_finished_failed">Загрузка завершена (%d не загрузок).</string>
+    <string name="download_finished_failed">Загрузка завершена (%d с ошибками).</string>
     <string name="download_cancelled">Загрузка отменена!</string>
     <string name="download_progress">Загрузка </string>
+    <string name="download_task_addeded">Файл добавлен в очередь загрузки.</string>
+    <string name="select">Выберите</string>
 
 </resources>

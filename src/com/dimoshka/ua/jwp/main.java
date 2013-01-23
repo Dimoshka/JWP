@@ -12,6 +12,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -19,6 +20,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
 
@@ -53,8 +55,12 @@ public class main extends class_activity_extends {
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
 			case 1:
-				Log.e("JWP", "start load image");
-				jwp_rss_img();
+				if (prefs.getBoolean("downloads_img", true)) {
+					Log.e("JWP", "start load image");
+					jwp_rss_img();
+				} else {
+					refresh();
+				}
 				break;
 			case 2:
 				Log.e("JWP", "refrashe afte load");
@@ -145,28 +151,35 @@ public class main extends class_activity_extends {
 	private void start_download(int id) {
 		if (cur_files.getCount() > 0) {
 			cur_files.moveToPosition(id);
+
+			File file = new File(funct.get_dir_app(this) + "/downloads/"
+					+ cur_files.getString(cur_files.getColumnIndex("name")));
+
 			if (cur_files.getInt(cur_files.getColumnIndex("file")) == 1) {
 				Intent intent = new Intent();
 				intent.setAction(android.content.Intent.ACTION_VIEW);
-				intent.setDataAndType(
-						android.net.Uri.fromFile(new File(funct
-								.get_dir_app(this)
-								+ "/downloads/"
-								+ cur_files.getString(cur_files
-										.getColumnIndex("name")))), "text/html");
-				Intent ch = Intent.createChooser(intent, "Выбор");
+
+				MimeTypeMap map = MimeTypeMap.getSingleton();
+				String ext = MimeTypeMap
+						.getFileExtensionFromUrl(file.getName());
+				String type = map.getMimeTypeFromExtension(ext);
+
+				if (type == null)
+					type = "*/*";
+				Uri data = Uri.fromFile(file);
+				intent.setDataAndType(data, type);
+				Intent ch = Intent.createChooser(intent,
+						getString(R.string.select));
 				startActivity(ch);
+
 			} else {
 				Intent i = new Intent(getBaseContext(),
 						class_downloads_files.class);
 				i.putExtra("file_url",
 						cur_files.getString(cur_files.getColumnIndex("link")));
-				i.putExtra(
-						"file_putch",
-						funct.get_dir_app(this)
-								+ "/downloads/"
-								+ cur_files.getString(cur_files
-										.getColumnIndex("name")));
+				i.putExtra("file_putch", file.getAbsolutePath());
+				Toast.makeText(this, getString(R.string.download_task_addeded),
+						Toast.LENGTH_SHORT).show();
 				startService(i);
 			}
 		}
@@ -266,11 +279,11 @@ public class main extends class_activity_extends {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		menu.add(Menu.NONE, 2, Menu.NONE, R.string.m_reload).setIcon(
+		menu.add(Menu.NONE, 2, Menu.NONE, R.string.reload).setIcon(
 				android.R.drawable.ic_menu_revert);
-		menu.add(Menu.NONE, 1, Menu.NONE, R.string.m_preference).setIcon(
+		menu.add(Menu.NONE, 1, Menu.NONE, R.string.preference).setIcon(
 				android.R.drawable.ic_menu_preferences);
-		menu.add(Menu.NONE, 0, Menu.NONE, R.string.m_exit).setIcon(
+		menu.add(Menu.NONE, 0, Menu.NONE, R.string.exit).setIcon(
 				android.R.drawable.ic_lock_power_off);
 
 		return true;

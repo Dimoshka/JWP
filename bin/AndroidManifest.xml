@@ -27,7 +27,7 @@
         </activity>
         <activity
             android:name="com.dimoshka.ua.jwp.preferences"
-            android:label="@string/l_preferences" >
+            android:label="@string/preference" >
         </activity>
 
         <service android:name="com.dimoshka.ua.classes.class_downloads_files" >

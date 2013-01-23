@@ -80,8 +80,8 @@ public class class_rss_adapter extends BaseExpandableListAdapter {
 				myImage.setImageResource(R.drawable.noimages);
 				ContentValues initialValues = new ContentValues();
 				initialValues.put("img", "0");
-				String[] args = { _id.toString() };
-				database.update("magazine", initialValues, "_id=?", args);
+				database.update("magazine", initialValues, "_id=?",
+						new String[] { _id.toString() });
 			}
 		} else {
 			myImage.setImageResource(R.drawable.noimages);

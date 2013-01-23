@@ -27,7 +27,7 @@ public class class_activity_extends extends Activity {
 	@Override
 	public void onStart() {
 		super.onStart();
-		if (prefs.getBoolean("c_mn_analytics", true)) {
+		if (prefs.getBoolean("analytics", true)) {
 			EasyTracker.getInstance().activityStart(this);
 		}
 
@@ -36,7 +36,7 @@ public class class_activity_extends extends Activity {
 	@Override
 	public void onStop() {
 		super.onStop();
-		if (prefs.getBoolean("c_mn_analytics", true)) {
+		if (prefs.getBoolean("analytics", true)) {
 			EasyTracker.getInstance().activityStop(this);
 		}
 

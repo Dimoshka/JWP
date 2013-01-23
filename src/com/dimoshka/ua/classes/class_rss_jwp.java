@@ -195,7 +195,7 @@ public class class_rss_jwp {
 
 		protected void onPreExecute() {
 			this.dialog = ProgressDialog.show(activity, null, activity
-					.getResources().getString(R.string.dialog_loaing), true);
+					.getResources().getString(R.string.dialog_loaing_rss), true);
 		}
 	}
 
