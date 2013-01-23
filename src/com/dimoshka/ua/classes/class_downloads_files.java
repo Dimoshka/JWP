@@ -120,8 +120,8 @@ public class class_downloads_files extends Service {
 			File localFile = new File(targetFile.get("putch"));
 			if (localFile.exists()) {
 
-				Log.d("JWP" + getClass().getName(),
-						"Update to 1 - " + localFile.getName());
+				Log.d("JWP" + getClass().getName(), "Update to 1 - "
+						+ localFile.getName());
 
 				SQLiteDatabase database;
 				class_sqlite dbOpenHelper = new class_sqlite(this,
@@ -270,8 +270,9 @@ public class class_downloads_files extends Service {
 													localFilepath).getName());
 
 									if (!isCancelled())
-										showNotification(progressView,
-												"Downloading File(s)");
+										showNotification(
+												progressView,
+												getString(R.string.download_title));
 								}
 							}
 							fos.close();

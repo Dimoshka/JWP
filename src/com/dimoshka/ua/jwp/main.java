@@ -84,8 +84,6 @@ public class main extends class_activity_extends {
 				Integer.valueOf(getString(R.string.db_version)));
 		database = dbOpenHelper.openDataBase();
 
-		refresh();
-
 		list.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 
 			@Override
@@ -99,6 +97,14 @@ public class main extends class_activity_extends {
 				return false;
 			}
 		});
+
+		if (prefs.getBoolean("downloads_on_start", false)) {
+			load_rss();
+		} else {
+			refresh();
+		}
+
+		refresh();
 
 	}
 
@@ -297,7 +303,9 @@ public class main extends class_activity_extends {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		menu.add(Menu.NONE, 2, Menu.NONE, R.string.reload).setIcon(
+		menu.add(Menu.NONE, 3, Menu.NONE, R.string.refrashe).setIcon(
+				android.R.drawable.ic_menu_rotate);
+		menu.add(Menu.NONE, 2, Menu.NONE, R.string.download).setIcon(
 				android.R.drawable.ic_menu_revert);
 		menu.add(Menu.NONE, 1, Menu.NONE, R.string.preference).setIcon(
 				android.R.drawable.ic_menu_preferences);
@@ -307,6 +315,17 @@ public class main extends class_activity_extends {
 	}
 
 	@SuppressLint("ShowToast")
+	private void load_rss() {
+		try {
+			if (funct.isNetworkAvailable(this) == true) {
+				jwp_rss();
+			} else
+				Toast.makeText(this, R.string.no_internet, Toast.LENGTH_SHORT);
+		} catch (Exception e) {
+			Log.e("JWP_" + getClass().getName(), e.toString());
+		}
+	}
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -318,15 +337,10 @@ public class main extends class_activity_extends {
 			startActivity(i);
 			break;
 		case 2:
-			try {
-				if (funct.isNetworkAvailable(this) == true) {
-					jwp_rss();
-				} else
-					Toast.makeText(this, R.string.toast_no_internet,
-							Toast.LENGTH_SHORT);
-			} catch (Exception e) {
-				Log.e("JWP_" + getClass().getName(), e.toString());
-			}
+			load_rss();
+			break;
+		case 3:
+			refresh();
 			break;
 		default:
 			break;

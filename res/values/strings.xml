@@ -5,7 +5,7 @@
     <string name="db_version">1</string>
     <string name="app_name">JWP</string>
     <string name="app_dir">JWP</string>
-    <string name="toast_no_internet">Нету подключения к интернету!</string>
+    <string name="no_internet">Нету подключения к интернету!</string>
     <string name="dialog_loaing_rss">Загрузка RSS. Пожалуйста подождите&#8230;</string>
     <string name="dialog_loaing_img">Обновление изображений публикаций. Пожалуйста подождите&#8230;</string>
     <string name="management">Управление</string>
@@ -13,9 +13,12 @@
     <string name="analytics_summary">Разрешать автоматически отправлять отчеты о работе приложения?</string>
     <string name="downloads_img">Загружать картинки</string>
     <string name="downloads_img_summary">Автоматически загружать картинки после обновления?</string>
+    <string name="downloads_on_start">Загружать автоматически</string>
+    <string name="downloads_on_start_summary">Автоматически загружать RSS при старте?</string>
     <string name="exit">Выход</string>
     <string name="preference">Настройки</string>
-    <string name="reload">Обновить</string>
+    <string name="refrashe">Обновить</string>
+    <string name="open">Открыть</string>
     <string name="January">Январь</string>
     <string name="February">Февраль</string>
     <string name="March">Март</string>
@@ -28,10 +31,9 @@
     <string name="October">Октябрь</string>
     <string name="November">Ноябрь</string>
     <string name="December">Декабрь</string>
+    <string name="select_the_action">Выберите действие</string>
     <string name="download">Загрузить</string>
     <string name="downloads">Загрузки</string>
-    <string name="open">Открыть</string>
-    <string name="select_the_action">Выберите действие</string>
     <string name="download_title">Загрузка файлов</string>
     <string name="download_failed">Ошибка загрузки</string>
     <string name="download_finished">Загрузка завершена!</string>
