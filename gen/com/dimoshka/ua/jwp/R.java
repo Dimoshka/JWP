@@ -95,6 +95,15 @@ public final class R {
         public static final int open=0x7f050013;
         public static final int preference=0x7f050011;
         public static final int refrashe=0x7f050012;
+        public static final int rss_aac=0x7f050031;
+        public static final int rss_aac_summary=0x7f050032;
+        public static final int rss_chanel=0x7f050033;
+        public static final int rss_epub=0x7f05002d;
+        public static final int rss_epub_summary=0x7f05002e;
+        public static final int rss_mp3=0x7f05002f;
+        public static final int rss_mp3_summary=0x7f050030;
+        public static final int rss_pdf=0x7f05002b;
+        public static final int rss_pdf_summary=0x7f05002c;
         public static final int select=0x7f05002a;
         public static final int select_the_action=0x7f050020;
     }

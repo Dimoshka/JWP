@@ -42,5 +42,14 @@
     <string name="download_progress">Загрузка </string>
     <string name="download_task_addeded">Файл добавлен в очередь загрузки.</string>
     <string name="select">Выберите</string>
+    <string name="rss_pdf">RSS - PDF</string>
+    <string name="rss_pdf_summary">Загружать RSS ленту PDF формата</string>
+    <string name="rss_epub">RSS - EPUB</string>
+    <string name="rss_epub_summary">Загружать RSS ленту EPUB формата</string>
+    <string name="rss_mp3">RSS - MP3</string>
+    <string name="rss_mp3_summary">Загружать RSS ленту MP3 формата</string>
+    <string name="rss_aac">RSS - AAC</string>
+    <string name="rss_aac_summary">Загружать RSS ленту AAC формата</string>
+    <string name="rss_chanel">RSS каналы</string>
 
 </resources>
