@@ -6,6 +6,7 @@
     <string name="app_name">JWP</string>
     <string name="app_dir">JWP</string>
     <string name="no_internet">Нету подключения к интернету!</string>
+    <string name="no_sdcard">SDCARD не подключена!</string>
     <string name="dialog_loaing_rss">Загрузка RSS. Пожалуйста подождите&#8230;</string>
     <string name="dialog_loaing_img">Обновление изображений публикаций. Пожалуйста подождите&#8230;</string>
     <string name="management">Управление</string>

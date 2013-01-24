@@ -42,10 +42,4 @@ public class class_activity_extends extends Activity {
 
 	}
 
-	/*
-	 * public boolean onMenuItemSelected(int featureId, MenuItem item) {
-	 * 
-	 * int itemId = item.getItemId(); switch (itemId) { case android.R.id.home:
-	 * onBackPressed(); break; } return true; }
-	 */
 }

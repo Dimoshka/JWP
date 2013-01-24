@@ -32,11 +32,18 @@ public class class_functions {
 	}
 
 	public boolean ExternalStorageState() {
-		String state = Environment.getExternalStorageState();
-		if (Environment.MEDIA_MOUNTED.equals(state)) {
-			return true;
-		} else
+		try {
+			String state = Environment.getExternalStorageState();
+			if (Environment.MEDIA_MOUNTED.equals(state)) {
+				return true;
+			} else if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
+				return false;
+			} else {
+				return false;
+			}
+		} catch (Exception e) {
 			return false;
+		}
 	}
 
 	@SuppressLint("SimpleDateFormat")

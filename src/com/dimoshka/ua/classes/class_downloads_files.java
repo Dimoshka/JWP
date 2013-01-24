@@ -290,7 +290,6 @@ public class class_downloads_files extends Service {
 					success = now_targetFile + 1;
 				} catch (Exception e) {
 					Log.e("JWP" + getClass().getName(), e.toString());
-
 					showNotification_popup(getString(R.string.download_failed),
 							getString(R.string.download_title), "Failed: "
 									+ (new File(remoteFilepath)).getName());

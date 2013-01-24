@@ -108,89 +108,99 @@ public class main extends class_activity_extends {
 
 	}
 
+	@SuppressLint("ShowToast")
 	@SuppressWarnings("deprecation")
 	private void dialog_show(String _id) {
+		if (funct.ExternalStorageState() == true) {
+			List<String> listItems = new ArrayList<String>();
+			CharSequence[] items = null;
 
-		List<String> listItems = new ArrayList<String>();
-		CharSequence[] items = null;
+			cur_files = database
+					.rawQuery(
+							"select id_type, file, type.name as name_type, files.name, link from files left join magazine on files.id_magazine=magazine._id left join type on files.id_type=type._id where files.id_magazine='"
+									+ _id + "'  group by id_type", null);
+			startManagingCursor(cur_files);
+			if (cur_files.getCount() > 0) {
+				cur_files.moveToFirst();
+				for (int i = 0; i < cur_files.getCount(); i++) {
+					String name = null;
+					if (cur_files.getInt(cur_files.getColumnIndex("file")) == 1) {
+						name = getString(R.string.open)
+								+ " "
+								+ cur_files.getString(cur_files
+										.getColumnIndex("name_type"));
+					} else {
+						name = getString(R.string.download)
+								+ " "
+								+ cur_files.getString(cur_files
+										.getColumnIndex("name_type"));
+					}
 
-		cur_files = database
-				.rawQuery(
-						"select id_type, file, type.name as name_type, files.name, link from files left join magazine on files.id_magazine=magazine._id left join type on files.id_type=type._id where files.id_magazine='"
-								+ _id + "'  group by id_type", null);
-		startManagingCursor(cur_files);
-		if (cur_files.getCount() > 0) {
-			cur_files.moveToFirst();
-			for (int i = 0; i < cur_files.getCount(); i++) {
-				String name = null;
-				if (cur_files.getInt(cur_files.getColumnIndex("file")) == 1) {
-					name = getString(R.string.open)
-							+ " "
-							+ cur_files.getString(cur_files
-									.getColumnIndex("name_type"));
-				} else {
-					name = getString(R.string.download)
-							+ " "
-							+ cur_files.getString(cur_files
-									.getColumnIndex("name_type"));
+					listItems.add(name);
+					cur_files.moveToNext();
 				}
 
-				listItems.add(name);
-				cur_files.moveToNext();
+				items = listItems.toArray(new CharSequence[listItems.size()]);
+
+				AlertDialog.Builder builder = new AlertDialog.Builder(this);
+				builder.setTitle(getString(R.string.select_the_action));
+				builder.setItems(items, new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int item) {
+						start_download(item);
+					}
+				});
+				AlertDialog alert = builder.create();
+				alert.show();
 			}
-
-			items = listItems.toArray(new CharSequence[listItems.size()]);
-
-			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setTitle(getString(R.string.select_the_action));
-			builder.setItems(items, new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface dialog, int item) {
-					start_download(item);
-				}
-			});
-			AlertDialog alert = builder.create();
-			alert.show();
-		}
-
+		} else
+			Toast.makeText(this, R.string.no_sdcard, Toast.LENGTH_SHORT);
 	}
 
+	@SuppressLint("ShowToast")
 	@SuppressWarnings("deprecation")
 	private void start_download(int id) {
-		if (cur_files.getCount() > 0) {
-			cur_files.moveToPosition(id);
 
-			File file = new File(funct.get_dir_app(this) + "/downloads/"
-					+ cur_files.getString(cur_files.getColumnIndex("name")));
+		if (funct.ExternalStorageState() == true) {
 
-			if (cur_files.getInt(cur_files.getColumnIndex("file")) == 1) {
-				Intent intent = new Intent();
-				intent.setAction(android.content.Intent.ACTION_VIEW);
+			if (cur_files.getCount() > 0) {
+				cur_files.moveToPosition(id);
 
-				MimeTypeMap map = MimeTypeMap.getSingleton();
-				String ext = MimeTypeMap
-						.getFileExtensionFromUrl(file.getName());
-				String type = map.getMimeTypeFromExtension(ext);
+				File file = new File(funct.get_dir_app(this) + "/downloads/"
+						+ cur_files.getString(cur_files.getColumnIndex("name")));
 
-				if (type == null)
-					type = "*/*";
-				Uri data = Uri.fromFile(file);
-				intent.setDataAndType(data, type);
-				Intent ch = Intent.createChooser(intent,
-						getString(R.string.select));
-				startActivity(ch);
+				if (cur_files.getInt(cur_files.getColumnIndex("file")) == 1) {
+					Intent intent = new Intent();
+					intent.setAction(android.content.Intent.ACTION_VIEW);
 
-			} else {
-				Intent i = new Intent(getBaseContext(),
-						class_downloads_files.class);
-				i.putExtra("file_url",
-						cur_files.getString(cur_files.getColumnIndex("link")));
-				i.putExtra("file_putch", file.getAbsolutePath());
-				Toast.makeText(this, getString(R.string.download_task_addeded),
-						Toast.LENGTH_SHORT).show();
-				startService(i);
+					MimeTypeMap map = MimeTypeMap.getSingleton();
+					String ext = MimeTypeMap.getFileExtensionFromUrl(file
+							.getName());
+					String type = map.getMimeTypeFromExtension(ext);
+
+					if (type == null)
+						type = "*/*";
+					Uri data = Uri.fromFile(file);
+					intent.setDataAndType(data, type);
+					Intent ch = Intent.createChooser(intent,
+							getString(R.string.select));
+					startActivity(ch);
+
+				} else {
+					Intent i = new Intent(getBaseContext(),
+							class_downloads_files.class);
+					i.putExtra("file_url", cur_files.getString(cur_files
+							.getColumnIndex("link")));
+					i.putExtra("file_putch", file.getAbsolutePath());
+					Toast.makeText(this,
+							getString(R.string.download_task_addeded),
+							Toast.LENGTH_SHORT).show();
+					startService(i);
+				}
 			}
-		}
+		} else
+			Toast.makeText(this, R.string.no_sdcard, Toast.LENGTH_SHORT);
 		stopManagingCursor(cur_files);
+
 	}
 
 	@SuppressWarnings("deprecation")
@@ -220,7 +230,7 @@ public class main extends class_activity_extends {
 			Date date = funct.get_jwp_rss_date(name, code_pub, code_lng);
 
 			Cursor cur = database.rawQuery(
-					"select id_type, file from files where `id_magazine`='"
+					"select id_type, file, name from files where `id_magazine`='"
 							+ _id + "' group by id_type", null);
 			startManagingCursor(cur);
 			String files = "";
@@ -233,16 +243,25 @@ public class main extends class_activity_extends {
 					if (cur.getInt(cur.getColumnIndex("file")) == 1) {
 						File file = new File(
 								funct.get_dir_app(getBaseContext())
-										+ "/downloads/" + name);
+										+ "/downloads/"
+										+ cur.getString(cur
+												.getColumnIndex("name")));
+
+						Log.d("JWP" + getClass().getName(),
+								cur.getString(cur.getColumnIndex("name")));
+
 						if (file.exists()) {
 							file_isn = 1;
 						} else {
 							Log.d("JWP" + getClass().getName(),
-									"Update to 0 - " + name);
+									"Update to 0 - "
+											+ cur.getString(cur
+													.getColumnIndex("name")));
 							ContentValues initialValues = new ContentValues();
 							initialValues.put("file", "0");
 							database.update("files", initialValues, "name=?",
-									new String[] { name });
+									new String[] { cur.getString(cur
+											.getColumnIndex("name")) });
 						}
 					}
 
