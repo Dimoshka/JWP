@@ -12,6 +12,7 @@ import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -39,10 +40,10 @@ public class main extends class_activity_extends {
 	private class_rss_jwp jwp_rss;
 	private class_rss_jwp_img jwp_rss_img;
 
-	ArrayList<Map<String, String>> groupData;
-	ArrayList<Map<String, String>> childDataItem;
-	ArrayList<ArrayList<Map<String, String>>> childData;
-	Map<String, String> m;
+	private ArrayList<Map<String, String>> groupData;
+	private ArrayList<Map<String, String>> childDataItem;
+	private ArrayList<ArrayList<Map<String, String>>> childData;
+	private Map<String, String> m;
 
 	int yer = 0;
 	int mon = 0;
@@ -89,14 +90,21 @@ public class main extends class_activity_extends {
 			@Override
 			public boolean onChildClick(ExpandableListView arg0, View arg1,
 					int arg2, int arg3, long arg4) {
-
 				Map<String, String> hash = new HashMap<String, String>();
 				hash = childData.get(arg2).get(arg3);
-
 				dialog_show(hash.get("_id"));
 				return false;
 			}
 		});
+		
+		listener_pref = new SharedPreferences.OnSharedPreferenceChangeListener() {
+			public void onSharedPreferenceChanged(SharedPreferences prefs,
+					String key) {
+				id_lang = Integer.parseInt(prefs.getString("language", "1"));
+				refresh();
+			}
+		};
+		prefs.registerOnSharedPreferenceChangeListener(listener_pref);
 
 		if (prefs.getBoolean("downloads_on_start", false)) {
 			load_rss();
@@ -208,7 +216,9 @@ public class main extends class_activity_extends {
 		stopManagingCursor(cursor);
 		cursor = database
 				.rawQuery(
-						"select magazine._id as _id, magazine.name as name, magazine.img as img, language.code as code_lng, publication.code as code_pub, publication._id as cur_pub, date from magazine left join language on magazine.id_lang=language._id left join publication on magazine.id_pub=publication._id where magazine.id_lang='" + id_lang + "' order by date desc, magazine.id_pub asc",
+						"select magazine._id as _id, magazine.name as name, magazine.img as img, language.code as code_lng, publication.code as code_pub, publication._id as cur_pub, date from magazine left join language on magazine.id_lang=language._id left join publication on magazine.id_pub=publication._id where magazine.id_lang='"
+								+ id_lang
+								+ "' order by date desc, magazine.id_pub asc",
 						null);
 		startManagingCursor(cursor);
 
@@ -228,7 +238,7 @@ public class main extends class_activity_extends {
 			Integer img = cursor.getInt(cursor.getColumnIndex("img"));
 			Integer _id = cursor.getInt(cursor.getColumnIndex("_id"));
 			Date date = funct.get_jwp_rss_date(name, code_pub, code_lng);
-
+		
 			Cursor cur = database.rawQuery(
 					"select id_type, file, name from files where `id_magazine`='"
 							+ _id + "' group by id_type", null);

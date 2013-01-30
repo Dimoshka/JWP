@@ -1,7 +1,7 @@
 package com.dimoshka.ua.classes;
 
-import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import android.annotation.SuppressLint;
@@ -83,8 +83,12 @@ public class class_functions {
 		return dir;
 	}
 
+	@SuppressLint("SimpleDateFormat")
 	public String getMonth(int month) {
-		return new DateFormatSymbols().getMonths()[month];
+		SimpleDateFormat sdf = new SimpleDateFormat("MMMM");
+		Calendar localCalendar = Calendar.getInstance();
+		localCalendar.set(Calendar.MONTH, month);
+		return sdf.format(localCalendar.getTime());
 	}
 
 }
