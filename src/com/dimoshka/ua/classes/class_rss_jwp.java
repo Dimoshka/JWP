@@ -42,7 +42,7 @@ public class class_rss_jwp {
 	private class_sqlite dbOpenHelper;
 	public SharedPreferences prefs;
 
-	public class_rss_jwp(Activity activity, String code_lng_an, Handler handler) {
+	public class_rss_jwp(Activity activity, int id_lang, Handler handler) {
 		this.activity = activity;
 		this.handler = handler;
 		dbOpenHelper = new class_sqlite(activity,
@@ -50,7 +50,7 @@ public class class_rss_jwp {
 						.getString(R.string.db_version)));
 		database = dbOpenHelper.openDataBase();
 		prefs = PreferenceManager.getDefaultSharedPreferences(activity);
-		get_language(code_lng_an);
+		get_language(id_lang);
 		get_publication();
 
 	}
@@ -64,14 +64,14 @@ public class class_rss_jwp {
 	}
 
 	@SuppressWarnings("deprecation")
-	private void get_language(String code) {
+	private void get_language(int id) {
 		Cursor cursor = database.rawQuery(
-				"SELECT _id, code from language where code_an='" + code + "'",
+				"SELECT _id, code from language where _id='" + id + "'",
 				null);
 		activity.startManagingCursor(cursor);
 		cursor.moveToFirst();
 		if (cursor.getCount() > 0) {
-			id_ln = cursor.getInt(cursor.getColumnIndex("_id"));
+			id_ln = id;
 			code_lng = cursor.getString(cursor.getColumnIndex("code"));
 		} else {
 			id_ln = 1;

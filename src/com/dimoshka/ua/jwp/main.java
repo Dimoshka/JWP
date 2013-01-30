@@ -76,7 +76,7 @@ public class main extends class_activity_extends {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		list = (ExpandableListView) findViewById(R.id.list);
-		jwp_rss = new class_rss_jwp(this, "ru_RU", handler);
+		jwp_rss = new class_rss_jwp(this, id_lang, handler);
 		jwp_rss_img = new class_rss_jwp_img(this, handler);
 
 		class_sqlite dbOpenHelper = new class_sqlite(this,
@@ -208,7 +208,7 @@ public class main extends class_activity_extends {
 		stopManagingCursor(cursor);
 		cursor = database
 				.rawQuery(
-						"select magazine._id as _id, magazine.name as name, magazine.img as img, language.code as code_lng, publication.code as code_pub, publication._id as cur_pub, date from magazine left join language on magazine.id_lang=language._id left join publication on magazine.id_pub=publication._id order by date desc, magazine.id_pub asc",
+						"select magazine._id as _id, magazine.name as name, magazine.img as img, language.code as code_lng, publication.code as code_pub, publication._id as cur_pub, date from magazine left join language on magazine.id_lang=language._id left join publication on magazine.id_pub=publication._id where magazine.id_lang='" + id_lang + "' order by date desc, magazine.id_pub asc",
 						null);
 		startManagingCursor(cursor);
 
@@ -310,6 +310,11 @@ public class main extends class_activity_extends {
 		class_rss_adapter adapter = new class_rss_adapter(this, groupData,
 				childData);
 		list.setAdapter(adapter);
+
+		int count = adapter.getGroupCount();
+		if (count > 0)
+			list.expandGroup(0);
+
 	}
 
 	public void jwp_rss() {

@@ -16,9 +16,12 @@
     <string name="downloads_img_summary">Автоматически загружать картинки после обновления?</string>
     <string name="downloads_on_start">Загружать автоматически</string>
     <string name="downloads_on_start_summary">Автоматически загружать RSS при старте?</string>
+    <string name="language">Язык</string>
+    <string name="language_summary">Выберите язык публикаций.</string>
     <string name="exit">Выход</string>
     <string name="preference">Настройки</string>
     <string name="refrashe">Обновить</string>
+    <string name="intetface">Интерфейс</string>
     <string name="open">Открыть</string>
     <string name="January">Январь</string>
     <string name="February">Февраль</string>
@@ -52,5 +55,26 @@
     <string name="rss_aac">RSS - AAC</string>
     <string name="rss_aac_summary">Загружать RSS ленту AAC формата</string>
     <string name="rss_chanel">RSS каналы</string>
+
+    <string-array name="language_arr">
+        <item>English</item>
+        <item>French</item>
+        <item>Русский</item>
+        <item>Українська</item>
+        <item>Deutsch</item>
+        <item>Spanish</item>
+        <item>漢語繁體字</item>
+        <item>汉语简化字</item>
+    </string-array>
+    <string-array name="language_arr_value">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+    </string-array>
 
 </resources>

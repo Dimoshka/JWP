@@ -92,7 +92,7 @@ public class class_downloads_files extends Service {
 	@Override
 	public void onDestroy() {
 		notificationManager.cancelAll();
-
+		Log.e("JWP" + getClass().getName(), "Service Cancelled");
 		if (task != null) {
 			if (!task.isCancelled())
 				task.cancel(true);
@@ -275,6 +275,9 @@ public class class_downloads_files extends Service {
 												getString(R.string.download_title));
 								}
 							}
+														
+							
+							
 							fos.close();
 							bis.close();
 
@@ -303,7 +306,8 @@ public class class_downloads_files extends Service {
 		@Override
 		protected void onCancelled() {
 			super.onCancelled();
-			Log.e("JWP" + getClass().getName(), "SERVICE Cancelled");
+							
+			Log.e("JWP" + getClass().getName(), "AsyncTask Cancelled");
 			showNotification_popup(getString(R.string.download_cancelled),
 					getString(R.string.download_title),
 					getString(R.string.download_cancelled));
