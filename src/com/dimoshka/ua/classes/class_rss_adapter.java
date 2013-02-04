@@ -32,16 +32,16 @@ public class class_rss_adapter extends BaseExpandableListAdapter {
 
 	public class_rss_adapter(Context context,
 			ArrayList<Map<String, String>> groupData,
-			ArrayList<ArrayList<Map<String, String>>> childData) {
+			ArrayList<ArrayList<Map<String, String>>> childData,
+			SQLiteDatabase database) {
 
 		this.childData = childData;
 		this.groupData = groupData;
 
 		this.context = context;
-		class_sqlite dbOpenHelper = new class_sqlite(context,
-				context.getString(R.string.db_name), Integer.valueOf(context
-						.getString(R.string.db_version)));
-		database = dbOpenHelper.openDataBase();
+		// class_sqlite dbOpenHelper = new class_sqlite(context);
+		// database = dbOpenHelper.openDataBase();
+		this.database = database;
 	}
 
 	@SuppressLint("SimpleDateFormat")

@@ -122,12 +122,9 @@ public class class_downloads_files extends Service {
 
 				Log.d("JWP" + getClass().getName(), "Update to 1 - "
 						+ localFile.getName());
-
-				SQLiteDatabase database;
-				class_sqlite dbOpenHelper = new class_sqlite(this,
-						getString(R.string.db_name),
-						Integer.valueOf(getString(R.string.db_version)));
-				database = dbOpenHelper.openDataBase();
+				
+				class_sqlite dbOpenHelper = new class_sqlite(this);
+				SQLiteDatabase database = dbOpenHelper.openDataBase();
 
 				ContentValues initialValues = new ContentValues();
 				initialValues.put("file", "1");
@@ -135,7 +132,8 @@ public class class_downloads_files extends Service {
 				database.update("files", initialValues, "name=?",
 						new String[] { localFile.getName() });
 
-				database.close();
+				//database.close();
+				dbOpenHelper.close();
 			}
 		}
 	}
@@ -269,15 +267,18 @@ public class class_downloads_files extends Service {
 											totalBytesRead, filesize, new File(
 													localFilepath).getName());
 
-									if (!isCancelled())
+									if (!isCancelled()) {
 										showNotification(
 												progressView,
 												getString(R.string.download_title));
+									} else {
+										showNotification(
+												progressView,
+												getString(R.string.download_cancelled));
+									}
 								}
 							}
-														
-							
-							
+
 							fos.close();
 							bis.close();
 
@@ -306,7 +307,7 @@ public class class_downloads_files extends Service {
 		@Override
 		protected void onCancelled() {
 			super.onCancelled();
-							
+
 			Log.e("JWP" + getClass().getName(), "AsyncTask Cancelled");
 			showNotification_popup(getString(R.string.download_cancelled),
 					getString(R.string.download_title),

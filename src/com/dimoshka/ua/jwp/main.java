@@ -44,6 +44,7 @@ public class main extends class_activity_extends {
 	private ArrayList<Map<String, String>> childDataItem;
 	private ArrayList<ArrayList<Map<String, String>>> childData;
 	private Map<String, String> m;
+	private class_sqlite dbOpenHelper;
 
 	int yer = 0;
 	int mon = 0;
@@ -77,13 +78,12 @@ public class main extends class_activity_extends {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		list = (ExpandableListView) findViewById(R.id.list);
-		jwp_rss = new class_rss_jwp(this, id_lang, handler);
-		jwp_rss_img = new class_rss_jwp_img(this, handler);
 
-		class_sqlite dbOpenHelper = new class_sqlite(this,
-				getString(R.string.db_name),
-				Integer.valueOf(getString(R.string.db_version)));
+		dbOpenHelper = new class_sqlite(this);
 		database = dbOpenHelper.openDataBase();
+
+		jwp_rss = new class_rss_jwp(this, id_lang, handler, database);
+		jwp_rss_img = new class_rss_jwp_img(this, handler, database);
 
 		list.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 
@@ -96,7 +96,7 @@ public class main extends class_activity_extends {
 				return false;
 			}
 		});
-		
+
 		listener_pref = new SharedPreferences.OnSharedPreferenceChangeListener() {
 			public void onSharedPreferenceChanged(SharedPreferences prefs,
 					String key) {
@@ -108,11 +108,18 @@ public class main extends class_activity_extends {
 
 		if (prefs.getBoolean("downloads_on_start", false)) {
 			load_rss();
+		}
+
+		boolean firstrun = prefs.getBoolean("first_run", true);
+		if (firstrun) {
+
+			new AlertDialog.Builder(this).setTitle("First Run")
+					.setMessage(getString(R.string.first_run))
+					.setNeutralButton("OK", null).show();
+			prefs.edit().putBoolean("first_run", false).commit();
 		} else {
 			refresh();
 		}
-
-		refresh();
 
 	}
 
@@ -238,7 +245,7 @@ public class main extends class_activity_extends {
 			Integer img = cursor.getInt(cursor.getColumnIndex("img"));
 			Integer _id = cursor.getInt(cursor.getColumnIndex("_id"));
 			Date date = funct.get_jwp_rss_date(name, code_pub, code_lng);
-		
+
 			Cursor cur = database.rawQuery(
 					"select id_type, file, name from files where `id_magazine`='"
 							+ _id + "' group by id_type", null);
@@ -318,7 +325,7 @@ public class main extends class_activity_extends {
 		childData.add(childDataItem);
 		stopManagingCursor(cursor);
 		class_rss_adapter adapter = new class_rss_adapter(this, groupData,
-				childData);
+				childData, database);
 		list.setAdapter(adapter);
 
 		int count = adapter.getGroupCount();
@@ -388,8 +395,9 @@ public class main extends class_activity_extends {
 		super.onDestroy();
 		stopManagingCursor(cursor);
 		stopManagingCursor(cur_files);
-		database.close();
+		dbOpenHelper.close();
 		stopService(new Intent(this, class_downloads_files.class));
+
 	}
 
 }

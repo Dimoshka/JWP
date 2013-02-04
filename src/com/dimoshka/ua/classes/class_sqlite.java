@@ -1,5 +1,7 @@
 package com.dimoshka.ua.classes;
 
+import com.dimoshka.ua.jwp.R;
+
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -9,8 +11,8 @@ public class class_sqlite extends SQLiteOpenHelper {
 
 	public SQLiteDatabase database;
 
-	public class_sqlite(Context context, String databaseName, int db_version) {
-		super(context, databaseName, null, db_version);
+	public class_sqlite(Context context) {
+		super(context, context.getString(R.string.db_name), null, Integer.valueOf(context.getString(R.string.db_version)));
 		database = this.getWritableDatabase();
 	}
 
@@ -48,7 +50,7 @@ public class class_sqlite extends SQLiteOpenHelper {
 			database.execSQL("INSERT INTO [language] ([_id], [name], [code], [code_an]) VALUES (7, '漢語繁體字', 'CH', 'zh_CN');");
 			database.execSQL("INSERT INTO [language] ([_id], [name], [code], [code_an]) VALUES (8, '汉语简化字', 'CHS', 'zh_TW');");
 			// -- Index: idx_files
-			database.execSQL("CREATE INDEX idx_files ON files (id_magazine COLLATE NOCASE ASC, id_type COLLATE NOCASE ASC, id_language COLLATE NOCASE ASC );");
+			database.execSQL("CREATE INDEX idx_files ON files (id_magazine COLLATE NOCASE ASC, id_type COLLATE NOCASE ASC);");
 		} catch (Exception ex) {
 			Log.e("JWP" + getClass().getName(), ex.toString());
 		}
@@ -63,5 +65,11 @@ public class class_sqlite extends SQLiteOpenHelper {
 		database.execSQL("DROP TABLE IF EXISTS publication");
 		database.execSQL("DROP TABLE IF EXISTS magazine");
 		onCreate(database);
+	}
+
+	public void close() {
+		if (database != null) {
+			database.close();
+		}
 	}
 }

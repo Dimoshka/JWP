@@ -39,16 +39,16 @@ public class class_rss_jwp {
 	private ArrayList<Integer> id_type = new ArrayList<Integer>();
 	private ArrayList<String> code_type = new ArrayList<String>();
 	private Integer cur_type = 0;
-	private class_sqlite dbOpenHelper;
+	// private class_sqlite dbOpenHelper;
 	public SharedPreferences prefs;
 
-	public class_rss_jwp(Activity activity, int id_lang, Handler handler) {
+	public class_rss_jwp(Activity activity, int id_lang, Handler handler,
+			SQLiteDatabase database) {
 		this.activity = activity;
 		this.handler = handler;
-		dbOpenHelper = new class_sqlite(activity,
-				activity.getString(R.string.db_name), Integer.valueOf(activity
-						.getString(R.string.db_version)));
-		database = dbOpenHelper.openDataBase();
+		// dbOpenHelper = new class_sqlite(activity);
+		// database = dbOpenHelper.openDataBase();
+		this.database = database;
 		prefs = PreferenceManager.getDefaultSharedPreferences(activity);
 		get_language(id_lang);
 		get_publication();
@@ -66,8 +66,7 @@ public class class_rss_jwp {
 	@SuppressWarnings("deprecation")
 	private void get_language(int id) {
 		Cursor cursor = database.rawQuery(
-				"SELECT _id, code from language where _id='" + id + "'",
-				null);
+				"SELECT _id, code from language where _id='" + id + "'", null);
 		activity.startManagingCursor(cursor);
 		cursor.moveToFirst();
 		if (cursor.getCount() > 0) {
@@ -199,7 +198,8 @@ public class class_rss_jwp {
 
 		protected void onPostExecute(Void result) {
 			this.dialog.hide();
-			database.close();
+			// database.close();
+			// dbOpenHelper.close();
 			handler.sendEmptyMessage(1);
 		}
 

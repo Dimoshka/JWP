@@ -34,15 +34,16 @@ public class class_rss_jwp_img {
 	private Activity activity;
 	private Cursor cursor;
 	private Handler handler;
-	private class_sqlite dbOpenHelper;
 
-	public class_rss_jwp_img(Activity activity, Handler handler) {
+	// private class_sqlite dbOpenHelper;
+
+	public class_rss_jwp_img(Activity activity, Handler handler,
+			SQLiteDatabase database) {
 		this.activity = activity;
 		this.handler = handler;
-		dbOpenHelper = new class_sqlite(activity,
-				activity.getString(R.string.db_name), Integer.valueOf(activity
-						.getString(R.string.db_version)));
-		database = dbOpenHelper.openDataBase();
+		// dbOpenHelper = new class_sqlite(activity);
+		// database = dbOpenHelper.openDataBase();
+		this.database = database;
 	}
 
 	@SuppressWarnings("deprecation")
@@ -163,7 +164,9 @@ public class class_rss_jwp_img {
 		protected void onPostExecute(Void result) {
 			this.dialog.hide();
 			activity.stopManagingCursor(cursor);
-			database.close();
+			cursor.close();
+			// database.close();
+			//dbOpenHelper.close();
 			handler.sendEmptyMessage(2);
 		}
 

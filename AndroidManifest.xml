@@ -25,7 +25,7 @@
         android:restoreAnyVersion="true"
         android:restoreNeedsApplication="false"
         android:supportsRtl="true"
-        android:theme="@android:style/Theme.Light"
+        android:theme="@style/AppTheme"
         android:uiOptions="none|splitActionBarWhenNarrow"
         android:vmSafeMode="true" >
         <activity

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="first_run">Это ваш первый запуск программы. Пожалуйста зайдите в настройки и выберите пдходящие для вас параметры.</string>
     <string name="db_name">jwp.sqlite</string>
     <string name="db_version">1</string>
     <string name="app_name">JWP</string>
