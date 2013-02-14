@@ -37,8 +37,8 @@ import com.dimoshka.ua.classes.class_sqlite;
 public class jornals extends class_activity_extends {
 
 	private ExpandableListView list;
-	private class_rss_jornals jwp_rss;
-	private class_rss_jornals_img jwp_rss_img;
+	private class_rss_jornals rss_jornals;
+	private class_rss_jornals_img rss_jornals_img;
 
 	private ArrayList<Map<String, String>> groupData;
 	private ArrayList<Map<String, String>> childDataItem;
@@ -82,8 +82,8 @@ public class jornals extends class_activity_extends {
 		dbOpenHelper = new class_sqlite(this);
 		database = dbOpenHelper.openDataBase();
 
-		jwp_rss = new class_rss_jornals(this, id_lang, handler, database);
-		jwp_rss_img = new class_rss_jornals_img(this, handler, database);
+		rss_jornals = new class_rss_jornals(this, id_lang, handler, database);
+		rss_jornals_img = new class_rss_jornals_img(this, handler, database);
 
 		list.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 
@@ -335,11 +335,11 @@ public class jornals extends class_activity_extends {
 	}
 
 	public void jwp_rss() {
-		jwp_rss.get_all_feeds();
+		rss_jornals.get_all_feeds();
 	}
 
 	public void jwp_rss_img() {
-		jwp_rss_img.verify_all_img();
+		rss_jornals_img.verify_all_img();
 	}
 
 	@Override
@@ -353,18 +353,6 @@ public class jornals extends class_activity_extends {
 		menu.add(Menu.NONE, 0, Menu.NONE, R.string.exit).setIcon(
 				android.R.drawable.ic_lock_power_off);
 		return true;
-	}
-
-	@SuppressLint("ShowToast")
-	private void load_rss() {
-		try {
-			if (funct.isNetworkAvailable(this) == true) {
-				jwp_rss();
-			} else
-				Toast.makeText(this, R.string.no_internet, Toast.LENGTH_SHORT);
-		} catch (Exception e) {
-			Log.e("JWP_" + getClass().getName(), e.toString());
-		}
 	}
 
 	@Override
@@ -389,7 +377,20 @@ public class jornals extends class_activity_extends {
 
 		return false;
 	}
+	
+	@SuppressLint("ShowToast")
+	private void load_rss() {
+		try {
+			if (funct.isNetworkAvailable(this) == true) {
+				jwp_rss();
+			} else
+				Toast.makeText(this, R.string.no_internet, Toast.LENGTH_SHORT);
+		} catch (Exception e) {
+			Log.e("JWP_" + getClass().getName(), e.toString());
+		}
+	}
 
+	
 	@SuppressWarnings("deprecation")
 	public void onDestroy() {
 		super.onDestroy();
