@@ -40,15 +40,19 @@ public class class_sqlite extends SQLiteOpenHelper {
 			// -- Table: files
 			database.execSQL("CREATE TABLE files (_id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, id_magazine INTEGER NOT NULL, id_type INTEGER NOT NULL, name VARCHAR(32) NOT NULL UNIQUE, link VARCHAR(256) NOT NULL, pubdate DATE NOT NULL, title VARCHAR(256) NOT NULL, file BOOLEAN DEFAULT (0));");
 			// -- Table: language
-			database.execSQL("CREATE TABLE language (_id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(64) NOT NULL UNIQUE, code VARCHAR(4) NOT NULL UNIQUE, code_an VARCHAR(6) NOT NULL UNIQUE);");
-			database.execSQL("INSERT INTO [language] ([_id], [name], [code], [code_an]) VALUES (1, 'English', 'E', 'en_US');");
-			database.execSQL("INSERT INTO [language] ([_id], [name], [code], [code_an]) VALUES (2, 'French', 'F', 'fr_FR');");
-			database.execSQL("INSERT INTO [language] ([_id], [name], [code], [code_an]) VALUES (3, 'Русский', 'U', 'ru_RU');");
-			database.execSQL("INSERT INTO [language] ([_id], [name], [code], [code_an]) VALUES (4, 'Українська', 'K', 'uk_UA');");
-			database.execSQL("INSERT INTO [language] ([_id], [name], [code], [code_an]) VALUES (5, 'Deutsch', 'X', 'de_DE');");
-			database.execSQL("INSERT INTO [language] ([_id], [name], [code], [code_an]) VALUES (6, 'Spanish', 'S', 'es_ES');");
-			database.execSQL("INSERT INTO [language] ([_id], [name], [code], [code_an]) VALUES (7, '漢語繁體字', 'CH', 'zh_CN');");
-			database.execSQL("INSERT INTO [language] ([_id], [name], [code], [code_an]) VALUES (8, '汉语简化字', 'CHS', 'zh_TW');");
+			database.execSQL("CREATE TABLE language (_id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(64) NOT NULL UNIQUE, code VARCHAR(4) NOT NULL UNIQUE, code_an VARCHAR(6) NOT NULL UNIQUE, news_rss VARCHAR(24) NOT NULL);");
+			database.execSQL("INSERT INTO [language] ([_id], [name], [code], [code_an], [news_rss]) VALUES (1, 'English', 'E', 'en_US', 'en/news');");
+			database.execSQL("INSERT INTO [language] ([_id], [name], [code], [code_an], [news_rss]) VALUES (2, 'French', 'F', 'fr_FR', 'fr/actualites');");
+			database.execSQL("INSERT INTO [language] ([_id], [name], [code], [code_an], [news_rss]) VALUES (3, 'Русский', 'U', 'ru_RU', 'ru/новости');");
+			database.execSQL("INSERT INTO [language] ([_id], [name], [code], [code_an], [news_rss]) VALUES (4, 'Українська', 'K', 'uk_UA', 'uk/новини');");
+			database.execSQL("INSERT INTO [language] ([_id], [name], [code], [code_an], [news_rss]) VALUES (5, 'Deutsch', 'X', 'de_DE', 'de/aktuelle-meldungen');");
+			database.execSQL("INSERT INTO [language] ([_id], [name], [code], [code_an], [news_rss]) VALUES (6, 'Spanish', 'S', 'es_ES', 'es/noticias');");
+			database.execSQL("INSERT INTO [language] ([_id], [name], [code], [code_an], [news_rss]) VALUES (7, '漢語繁體字', 'CH', 'zh_CN', 'zh-hant/新聞');");
+			database.execSQL("INSERT INTO [language] ([_id], [name], [code], [code_an], [news_rss]) VALUES (8, '汉语简化字', 'CHS', 'zh_TW', 'zh-hans/新闻');");
+			
+			
+			
+			
 			// -- Index: idx_files
 			database.execSQL("CREATE INDEX idx_files ON files (id_magazine COLLATE NOCASE ASC, id_type COLLATE NOCASE ASC);");
 		} catch (Exception ex) {

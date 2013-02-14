@@ -35,27 +35,28 @@ public final class R {
         public static final int pdf_1=0x7f02000c;
     }
     public static final class id {
-        public static final int aac=0x7f090002;
-        public static final int audio=0x7f090004;
-        public static final int digitalpub=0x7f090007;
-        public static final int epub=0x7f090005;
+        public static final int aac=0x7f090003;
+        public static final int audio=0x7f090005;
+        public static final int digitalpub=0x7f090008;
+        public static final int epub=0x7f090006;
         public static final int image=0x7f09000b;
-        public static final int img=0x7f090000;
-        public static final int list=0x7f09000a;
-        public static final int list_items_section_text=0x7f090009;
-        public static final int mp3=0x7f090003;
-        public static final int pdf=0x7f090006;
+        public static final int img=0x7f090001;
+        public static final int list=0x7f090000;
+        public static final int list_items_section_text=0x7f09000a;
+        public static final int mp3=0x7f090004;
+        public static final int pdf=0x7f090007;
         public static final int progress=0x7f09000c;
-        public static final int text=0x7f090008;
+        public static final int text=0x7f090009;
         public static final int text1=0x7f09000e;
         public static final int text2=0x7f09000d;
-        public static final int title=0x7f090001;
+        public static final int title=0x7f090002;
     }
     public static final class layout {
-        public static final int list_items=0x7f030000;
-        public static final int list_items_section=0x7f030001;
-        public static final int main=0x7f030002;
-        public static final int notification=0x7f030003;
+        public static final int list=0x7f030000;
+        public static final int list_items=0x7f030001;
+        public static final int list_items_section=0x7f030002;
+        public static final int main=0x7f030003;
+        public static final int notification=0x7f030004;
     }
     public static final class string {
         public static final int April=0x7f05001c;
@@ -78,15 +79,16 @@ public final class R {
         public static final int db_version=0x7f050004;
         public static final int dialog_loaing_img=0x7f05000a;
         public static final int dialog_loaing_rss=0x7f050009;
-        public static final int download=0x7f050026;
-        public static final int download_cancelled=0x7f05002c;
-        public static final int download_failed=0x7f050029;
-        public static final int download_finished=0x7f05002a;
-        public static final int download_finished_failed=0x7f05002b;
-        public static final int download_progress=0x7f05002d;
-        public static final int download_task_addeded=0x7f05002e;
-        public static final int download_title=0x7f050028;
-        public static final int downloads=0x7f050027;
+        public static final int download=0x7f050027;
+        public static final int download_cancelled=0x7f05002d;
+        public static final int download_failed=0x7f05002a;
+        public static final int download_finished=0x7f05002b;
+        public static final int download_finished_failed=0x7f05002c;
+        public static final int download_progress=0x7f05002e;
+        public static final int download_rss=0x7f050026;
+        public static final int download_task_addeded=0x7f05002f;
+        public static final int download_title=0x7f050029;
+        public static final int downloads=0x7f050028;
         public static final int downloads_img=0x7f05000e;
         public static final int downloads_img_summary=0x7f05000f;
         public static final int downloads_on_start=0x7f050010;
@@ -96,24 +98,26 @@ public final class R {
         public static final int ga_appVersion=0x7f050001;
         public static final int ga_trackingId=0x7f050000;
         public static final int intetface=0x7f050017;
+        public static final int jornals=0x7f05003a;
         public static final int language=0x7f050012;
         public static final int language_summary=0x7f050013;
         public static final int management=0x7f05000b;
+        public static final int news=0x7f05003b;
         public static final int no_internet=0x7f050007;
         public static final int no_sdcard=0x7f050008;
         public static final int open=0x7f050018;
         public static final int preference=0x7f050015;
         public static final int refrashe=0x7f050016;
-        public static final int rss_aac=0x7f050036;
-        public static final int rss_aac_summary=0x7f050037;
-        public static final int rss_chanel=0x7f050038;
-        public static final int rss_epub=0x7f050032;
-        public static final int rss_epub_summary=0x7f050033;
-        public static final int rss_mp3=0x7f050034;
-        public static final int rss_mp3_summary=0x7f050035;
-        public static final int rss_pdf=0x7f050030;
-        public static final int rss_pdf_summary=0x7f050031;
-        public static final int select=0x7f05002f;
+        public static final int rss_aac=0x7f050037;
+        public static final int rss_aac_summary=0x7f050038;
+        public static final int rss_chanel=0x7f050039;
+        public static final int rss_epub=0x7f050033;
+        public static final int rss_epub_summary=0x7f050034;
+        public static final int rss_mp3=0x7f050035;
+        public static final int rss_mp3_summary=0x7f050036;
+        public static final int rss_pdf=0x7f050031;
+        public static final int rss_pdf_summary=0x7f050032;
+        public static final int select=0x7f050030;
         public static final int select_the_action=0x7f050025;
     }
     public static final class style {
@@ -126,17 +130,6 @@ public final class R {
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
         
-
-        Base application theme for API 11+. This theme completely replaces
-        AppBaseTheme from res/values/styles.xml on API 11+ devices.
-    
- API 11 theme customizations can go here. 
-
-        Base application theme for API 14+. This theme completely replaces
-        AppBaseTheme from BOTH res/values/styles.xml and
-        res/values-v11/styles.xml on API 14+ devices.
-    
- API 14 theme customizations can go here. 
          */
         public static final int AppBaseTheme=0x7f080000;
         /**  Application theme. 

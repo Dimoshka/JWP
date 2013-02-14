@@ -24,7 +24,7 @@ import android.util.Log;
 
 import com.dimoshka.ua.jwp.R;
 
-public class class_rss_jwp_img {
+public class class_rss_jornals_img {
 
 	static final String URL_IMG = "http://www.jw.org/assets/a/{code_pub_shot}{YY}/{YYYYMMDD}/{code_pub_shot}{YY}_{YYYYMMDD}_{code_lng}/{code_pub}_{code_lng}_{YYYYMMDD}.prd_md.jpg";
 	// http://www.jw.org/assets/a/g13/201303/g13_201303_U/g_U_201303prd_md.jpg
@@ -37,7 +37,7 @@ public class class_rss_jwp_img {
 
 	// private class_sqlite dbOpenHelper;
 
-	public class_rss_jwp_img(Activity activity, Handler handler,
+	public class_rss_jornals_img(Activity activity, Handler handler,
 			SQLiteDatabase database) {
 		this.activity = activity;
 		this.handler = handler;

@@ -21,7 +21,7 @@ import android.widget.TextView;
 
 import com.dimoshka.ua.jwp.R;
 
-public class class_rss_adapter extends BaseExpandableListAdapter {
+public class class_rss_jornals_adapter extends BaseExpandableListAdapter {
 	private Context context;
 	public class_functions funct = new class_functions();
 	private SQLiteDatabase database;
@@ -30,7 +30,7 @@ public class class_rss_adapter extends BaseExpandableListAdapter {
 	ArrayList<Map<String, String>> groupData;
 	ArrayList<ArrayList<Map<String, String>>> childData;
 
-	public class_rss_adapter(Context context,
+	public class_rss_jornals_adapter(Context context,
 			ArrayList<Map<String, String>> groupData,
 			ArrayList<ArrayList<Map<String, String>>> childData,
 			SQLiteDatabase database) {

@@ -19,7 +19,7 @@ import android.util.Log;
 
 import com.dimoshka.ua.jwp.R;
 
-public class class_rss_jwp {
+public class class_rss_jornals {
 	static final String URL_FEED = "http://www.jw.org/apps/index.xjp?option=sFFZRQVNZNT&rln=%s&rmn=%s&rfm=%s&rpf=&rpe=";
 	// http://www.jw.org/apps/index.xjp?option=sFFZRQVNZNT&rln=U&rmn=w&rfm=m4b
 	// wp_U_20130301
@@ -42,7 +42,7 @@ public class class_rss_jwp {
 	// private class_sqlite dbOpenHelper;
 	public SharedPreferences prefs;
 
-	public class_rss_jwp(Activity activity, int id_lang, Handler handler,
+	public class_rss_jornals(Activity activity, int id_lang, Handler handler,
 			SQLiteDatabase database) {
 		this.activity = activity;
 		this.handler = handler;
