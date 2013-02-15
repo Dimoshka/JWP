@@ -64,7 +64,7 @@ public class class_rss_jornals {
 	}
 
 	@SuppressWarnings("deprecation")
-	private void get_language(int id) {
+	public void get_language(int id) {
 		Cursor cursor = database.rawQuery(
 				"SELECT _id, code from language where _id='" + id + "'", null);
 		activity.startManagingCursor(cursor);

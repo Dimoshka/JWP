@@ -23,11 +23,13 @@ public class class_rss_provider {
 	public List<class_rss_item> parse(String rssFeed) {
 		List<class_rss_item> list = new ArrayList<class_rss_item>();
 		XmlPullParser parser = Xml.newPullParser();
+
 		InputStream stream = null;
 		try {
 			// auto-detect the encoding from the stream
 			stream = new URL(rssFeed).openConnection().getInputStream();
 			parser.setInput(stream, null);
+
 			int eventType = parser.getEventType();
 			boolean done = false;
 			class_rss_item item = null;
@@ -39,42 +41,45 @@ public class class_rss_provider {
 				case XmlPullParser.START_TAG:
 					name = parser.getName();
 					if (name.equalsIgnoreCase(ITEM)) {
-						//Log.i("new item", "Create new item");
+						Log.i("new item", "Create new item");
 						item = new class_rss_item();
 					} else if (item != null) {
 						if (name.equalsIgnoreCase(LINK)) {
-							//Log.i("Attribute", "setLink");
+							Log.i("Attribute", "setLink");
 							item.setLink(parser.nextText());
 						} else if (name.equalsIgnoreCase(DESCRIPTION)) {
-							//Log.i("Attribute", "description");
+							Log.i("Attribute", "description");
 							item.setDescription(parser.nextText().trim());
 						} else if (name.equalsIgnoreCase(PUB_DATE)) {
-							//Log.i("Attribute", "date");
+							Log.i("Attribute", "date");
 							item.setPubDate(parser.nextText());
 						} else if (name.equalsIgnoreCase(TITLE)) {
-							//Log.i("Attribute", "title");
+							Log.i("Attribute", "title");
 							item.setTitle(parser.nextText().trim());
 						} else if (name.equalsIgnoreCase(GUID)) {
-							//Log.i("Attribute", "guid");
+							Log.i("Attribute", "guid");
 							item.setguid(parser.nextText().trim());
 						}
 					}
+
 					break;
 				case XmlPullParser.END_TAG:
 					name = parser.getName();
-					//Log.i("End tag", name);
+
+					Log.i("End tag", name);
 					if (name.equalsIgnoreCase(ITEM) && item != null) {
-						//Log.i("Added", item.toString());
+						Log.i("Added", item.toString());
 						list.add(item);
 					} else if (name.equalsIgnoreCase(CHANNEL)) {
 						done = true;
 					}
+
 					break;
 				}
 				eventType = parser.next();
 			}
 		} catch (Exception e) {
-			Log.e("JWP_" + getClass().getName(),e.getMessage());
+			Log.e("JWP_" + getClass().getName(), e.toString());
 		} finally {
 			if (stream != null) {
 				try {

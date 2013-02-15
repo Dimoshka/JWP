@@ -7,6 +7,7 @@ import java.util.Date;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Environment;
@@ -90,5 +91,5 @@ public class class_functions {
 		localCalendar.set(Calendar.MONTH, month);
 		return sdf.format(localCalendar.getTime());
 	}
-
+		
 }

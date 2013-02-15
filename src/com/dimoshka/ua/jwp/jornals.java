@@ -52,27 +52,7 @@ public class jornals extends class_activity_extends {
 	private Cursor cursor;
 	private Cursor cur_files;
 
-	@SuppressLint("HandlerLeak")
-	private final Handler handler = new Handler() {
-		@Override
-		public void handleMessage(Message msg) {
-			switch (msg.what) {
-			case 1:
-				if (prefs.getBoolean("downloads_img", true)) {
-					Log.e("JWP", "start load image");
-					jwp_rss_img();
-				} else {
-					refresh();
-				}
-				break;
-			case 2:
-				Log.e("JWP", "refrashe afte load");
-				refresh();
-				break;
-			}
-		}
-	};
-
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -101,6 +81,7 @@ public class jornals extends class_activity_extends {
 			public void onSharedPreferenceChanged(SharedPreferences prefs,
 					String key) {
 				id_lang = Integer.parseInt(prefs.getString("language", "1"));
+				rss_jornals.get_language(id_lang);
 				refresh();
 			}
 		};
@@ -122,6 +103,27 @@ public class jornals extends class_activity_extends {
 		}
 
 	}
+	
+	@SuppressLint("HandlerLeak")
+	private final Handler handler = new Handler() {
+		@Override
+		public void handleMessage(Message msg) {
+			switch (msg.what) {
+			case 1:
+				if (prefs.getBoolean("downloads_img", true)) {
+					Log.e("JWP", "start load image");
+					jwp_rss_img();
+				} else {
+					refresh();
+				}
+				break;
+			case 2:
+				Log.e("JWP", "refrashe afte load");
+				refresh();
+				break;
+			}
+		}
+	};
 
 	@SuppressLint("ShowToast")
 	@SuppressWarnings("deprecation")

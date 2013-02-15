@@ -2,9 +2,12 @@ package com.dimoshka.ua.classes;
 
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.ContentValues;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Handler;
@@ -23,6 +26,8 @@ public class class_rss_news {
 	private Handler handler;
 
 	private Integer id_ln = 0;
+	private String ln_prefix = "en/news";
+
 	private String code_lng = "E";
 	public SharedPreferences prefs;
 
@@ -32,7 +37,26 @@ public class class_rss_news {
 		this.handler = handler;
 		this.database = database;
 		prefs = PreferenceManager.getDefaultSharedPreferences(activity);
+		get_language(id_lang);
+	}
 
+	@SuppressWarnings("deprecation")
+	public void get_language(int id) {
+		Cursor cursor = database.rawQuery(
+				"SELECT _id, code, news_rss from language where _id='" + id
+						+ "'", null);
+		activity.startManagingCursor(cursor);
+		cursor.moveToFirst();
+		if (cursor.getCount() > 0) {
+			id_ln = id;
+			code_lng = cursor.getString(cursor.getColumnIndex("code"));
+			ln_prefix = cursor.getString(cursor.getColumnIndex("news_rss"));
+		} else {
+			id_ln = 1;
+			code_lng = "E";
+			ln_prefix = "en/news";
+		}
+		activity.stopManagingCursor(cursor);
 	}
 
 	public void get_all_feeds() {
@@ -47,18 +71,32 @@ public class class_rss_news {
 		private ProgressDialog dialog;
 		List<class_rss_item> rss_list = null;
 
+		@SuppressLint("NewApi")
 		protected Void doInBackground(Void... paramArrayOfVoid) {
 			try {
-
 				rssfeedprovider = new class_rss_provider();
-				String feed = String.format(URL_FEED, code_lng, "");
+				String feed = String.format(URL_FEED, ln_prefix);
+				Log.e("JWP_" + getClass().getName(), feed);
 				this.rss_list = rssfeedprovider.parse(feed);
 
 				for (int i = 0; i < rss_list.size(); i++) {
 
 					class_rss_item rss_item = rss_list.get(i);
 
-					String name = rss_item.getguid();
+					String title = rss_item.getTitle();
+					String link = rss_item.getLink();
+					String description = rss_item.getDescription();
+					String pubdate = rss_item.getPubDate();
+
+					ContentValues init = new ContentValues();
+					init.put("id_lang", id_ln);
+					init.put("title", title);
+					init.put("link", link);
+					init.put("description", description);
+					init.put("pubdate", pubdate);
+
+					database.insertWithOnConflict("news", null, init,
+							SQLiteDatabase.CONFLICT_IGNORE);
 
 				}
 

@@ -49,7 +49,7 @@ public class class_rss_jornals_adapter extends BaseExpandableListAdapter {
 			boolean isLastChild, View convertView, ViewGroup parent) {
 		inflater = (LayoutInflater) this.context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View v = inflater.inflate(R.layout.list_items, null);
+		View v = inflater.inflate(R.layout.list_items_jornals, null);
 
 		Map<String, String> m = getChild(groupPosition, childPosition);
 		String name = m.get("name");
