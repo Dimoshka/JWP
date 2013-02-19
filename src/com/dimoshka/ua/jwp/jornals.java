@@ -52,7 +52,6 @@ public class jornals extends class_activity_extends {
 	private Cursor cursor;
 	private Cursor cur_files;
 
-	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -103,7 +102,7 @@ public class jornals extends class_activity_extends {
 		}
 
 	}
-	
+
 	@SuppressLint("HandlerLeak")
 	private final Handler handler = new Handler() {
 		@Override
@@ -326,14 +325,9 @@ public class jornals extends class_activity_extends {
 		}
 		childData.add(childDataItem);
 		stopManagingCursor(cursor);
-		class_rss_jornals_adapter adapter = new class_rss_jornals_adapter(this, groupData,
-				childData, database);
+		class_rss_jornals_adapter adapter = new class_rss_jornals_adapter(this,
+				groupData, childData, database);
 		list.setAdapter(adapter);
-
-		int count = adapter.getGroupCount();
-		if (count > 0)
-			list.expandGroup(0);
-
 	}
 
 	public void jwp_rss() {
@@ -379,7 +373,7 @@ public class jornals extends class_activity_extends {
 
 		return false;
 	}
-	
+
 	@SuppressLint("ShowToast")
 	private void load_rss() {
 		try {
@@ -392,7 +386,6 @@ public class jornals extends class_activity_extends {
 		}
 	}
 
-	
 	@SuppressWarnings("deprecation")
 	public void onDestroy() {
 		super.onDestroy();

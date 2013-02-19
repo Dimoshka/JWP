@@ -37,19 +37,17 @@ public final class R {
     public static final class id {
         public static final int aac=0x7f090003;
         public static final int audio=0x7f090005;
-        public static final int date=0x7f09000a;
         public static final int digitalpub=0x7f090008;
         public static final int epub=0x7f090006;
-        public static final int image=0x7f09000c;
+        public static final int image=0x7f09000b;
         public static final int img=0x7f090001;
         public static final int list=0x7f090000;
-        public static final int list_items_section_text=0x7f09000b;
         public static final int mp3=0x7f090004;
         public static final int pdf=0x7f090007;
-        public static final int progress=0x7f09000d;
+        public static final int progress=0x7f09000c;
         public static final int text=0x7f090009;
-        public static final int text1=0x7f09000f;
-        public static final int text2=0x7f09000e;
+        public static final int text1=0x7f09000a;
+        public static final int text2=0x7f09000d;
         public static final int title=0x7f090002;
     }
     public static final class layout {

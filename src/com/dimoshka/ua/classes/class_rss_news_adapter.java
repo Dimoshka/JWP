@@ -37,18 +37,16 @@ public class class_rss_news_adapter extends BaseExpandableListAdapter {
 		inflater = (LayoutInflater) this.context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View v = inflater.inflate(R.layout.list_items_news, null);
-
 		Map<String, String> m = getChild(groupPosition, childPosition);
 
-		String title_t = m.get("title");
-		String link = m.get("link");
+		
 		String description = m.get("description");
 		String pubdate = m.get("pubdate");
 
-		TextView text = (TextView) v.findViewById(R.id.text);
+		TextView text = (TextView) v.findViewById(R.id.title);
 		text.setText(description);
 
-		TextView date = (TextView) v.findViewById(R.id.date);
+		TextView date = (TextView) v.findViewById(R.id.text);
 		date.setText(pubdate);
 
 		/*
@@ -105,10 +103,10 @@ public class class_rss_news_adapter extends BaseExpandableListAdapter {
 		LayoutInflater infalInflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		convertView = infalInflater.inflate(
-				android.R.layout.simple_expandable_list_item_2, null);
+				R.layout.list_items_section, null);
 
 		TextView grouptxt = (TextView) convertView
-				.findViewById(android.R.id.text1);
+				.findViewById(R.id.text1);
 		grouptxt.setText(m.get("groupName"));
 		return convertView;
 	}

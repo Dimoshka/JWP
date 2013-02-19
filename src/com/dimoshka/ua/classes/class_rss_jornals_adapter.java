@@ -168,10 +168,10 @@ public class class_rss_jornals_adapter extends BaseExpandableListAdapter {
 		LayoutInflater infalInflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		convertView = infalInflater.inflate(
-				android.R.layout.simple_expandable_list_item_2, null);
+				R.layout.list_items_section, null);
 
 		TextView grouptxt = (TextView) convertView
-				.findViewById(android.R.id.text1);
+				.findViewById(R.id.text1);
 		grouptxt.setText(m.get("groupName"));
 		return convertView;
 	}

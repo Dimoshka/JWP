@@ -1,6 +1,8 @@
 package com.dimoshka.ua.classes;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -88,10 +90,38 @@ public class class_rss_news {
 					String description = rss_item.getDescription();
 					String pubdate = rss_item.getPubDate();
 
+					String reg_text = "<![CDATA[(.*)]]>";
+					String reg_img = "<img(.*)/>";
+					String reg_img_url = "src=\"(.*\\s*.jpg)\"";
+					String link_img = "";
+
+					Pattern p = Pattern.compile(reg_text);
+					Matcher mat = p.matcher(description);
+
+					if (mat.find()) {
+						description = mat.group(1);
+					}
+
+					Pattern p2 = Pattern.compile(reg_img_url);
+					Matcher mat2 = p2.matcher(description);
+					if (mat2.find()) {
+						link_img = mat2.group(1);
+					}
+
+					Pattern p1 = Pattern.compile(reg_img);
+					Matcher mat1 = p1.matcher(description);
+					if (mat1.find()) {
+						description = description.replace(mat1.group(0), "");
+
+					}
+
+					description = description.trim();
+
 					ContentValues init = new ContentValues();
 					init.put("id_lang", id_ln);
 					init.put("title", title);
 					init.put("link", link);
+					init.put("link_img", link_img);
 					init.put("description", description);
 					init.put("pubdate", pubdate);
 

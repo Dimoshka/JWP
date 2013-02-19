@@ -41,7 +41,7 @@ public class class_sqlite extends SQLiteOpenHelper {
 			// -- Table: files
 			database.execSQL("CREATE TABLE files (_id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, id_magazine INTEGER NOT NULL, id_type INTEGER NOT NULL, name VARCHAR(32) NOT NULL UNIQUE, link VARCHAR(256) NOT NULL, pubdate DATE NOT NULL, title VARCHAR(256) NOT NULL, file BOOLEAN DEFAULT (0));");
 			// -- Table: news
-			database.execSQL("CREATE TABLE news (_id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, id_lang INTEGER NOT NULL, title VARCHAR(256) NOT NULL, link VARCHAR(256) NOT NULL UNIQUE, description VARCHAR(256) NOT NULL, pubdate DATE NOT NULL);");
+			database.execSQL("CREATE TABLE news (_id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, id_lang INTEGER NOT NULL, title VARCHAR(256) NOT NULL, link VARCHAR(256) NOT NULL UNIQUE, link_img VARCHAR(256), description VARCHAR(256) NOT NULL, pubdate DATE NOT NULL, img BOOLEAN DEFAULT (0));");
 			// -- Table: language
 			database.execSQL("CREATE TABLE language (_id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(64) NOT NULL UNIQUE, code VARCHAR(4) NOT NULL UNIQUE, code_an VARCHAR(6) NOT NULL UNIQUE, news_rss VARCHAR(24) NOT NULL);");
 			database.execSQL("INSERT INTO [language] ([_id], [name], [code], [code_an], [news_rss]) VALUES (1, 'English', 'E', 'en_US', 'en/news');");

@@ -1,11 +1,18 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical" >
+<?xml version="1.0" encoding="utf-8"?>
+<TwoLineListItem xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight"
+    android:mode="twoLine"
+    android:paddingBottom="3dip"
+    android:paddingStart="?android:attr/expandableListPreferredItemPaddingLeft"
+    android:paddingTop="3dip" >
 
-    <include
-        android:id="@+id/list_items_section_text"
-        android:layout_margin="5dp"
-        layout="@android:layout/preference_category" />
+    <TextView
+        android:id="@+id/text1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dip"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textSize="20sp" />
 
-</LinearLayout>
+</TwoLineListItem>
