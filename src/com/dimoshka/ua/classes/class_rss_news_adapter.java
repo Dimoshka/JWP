@@ -1,14 +1,20 @@
 package com.dimoshka.ua.classes;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Map;
 
 import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dimoshka.ua.jwp.R;
@@ -17,17 +23,19 @@ public class class_rss_news_adapter extends BaseExpandableListAdapter {
 	private Context context;
 	public class_functions funct = new class_functions();
 	private LayoutInflater inflater;
+	private SQLiteDatabase database;
 
 	ArrayList<Map<String, String>> groupData;
 	ArrayList<ArrayList<Map<String, String>>> childData;
 
 	public class_rss_news_adapter(Context context,
 			ArrayList<Map<String, String>> groupData,
-			ArrayList<ArrayList<Map<String, String>>> childData) {
+			ArrayList<ArrayList<Map<String, String>>> childData,
+			SQLiteDatabase database) {
 
 		this.childData = childData;
 		this.groupData = groupData;
-
+		this.database = database;
 		this.context = context;
 	}
 
@@ -39,9 +47,11 @@ public class class_rss_news_adapter extends BaseExpandableListAdapter {
 		View v = inflater.inflate(R.layout.list_items_news, null);
 		Map<String, String> m = getChild(groupPosition, childPosition);
 
-		
 		String description = m.get("description");
 		String pubdate = m.get("pubdate");
+		Integer img = Integer.parseInt(m.get("img"));
+		String name = m.get("name");
+		Integer _id = Integer.parseInt(m.get("_id"));
 
 		TextView text = (TextView) v.findViewById(R.id.title);
 		text.setText(description);
@@ -49,19 +59,24 @@ public class class_rss_news_adapter extends BaseExpandableListAdapter {
 		TextView date = (TextView) v.findViewById(R.id.text);
 		date.setText(pubdate);
 
-		/*
-		 * 
-		 * ImageView myImage = (ImageView) v.findViewById(R.id.img); if (img ==
-		 * 1) { File imgFile = new File(funct.get_dir_app(context) + "/img/" +
-		 * name + ".jpg"); if (imgFile.exists()) { Bitmap myBitmap =
-		 * BitmapFactory.decodeFile(imgFile .getAbsolutePath());
-		 * myImage.setImageBitmap(myBitmap); } else {
-		 * myImage.setImageResource(R.drawable.noimages); ContentValues
-		 * initialValues = new ContentValues(); initialValues.put("img", "0");
-		 * database.update("magazine", initialValues, "_id=?", new String[] {
-		 * _id.toString() }); } } else {
-		 * myImage.setImageResource(R.drawable.noimages); }
-		 */
+		ImageView myImage = (ImageView) v.findViewById(R.id.img);
+		if (img == 1) {
+			File imgFile = new File(funct.get_dir_app(context) + "/img/" + name
+					+ ".jpg");
+			if (imgFile.exists()) {
+				Bitmap myBitmap = BitmapFactory.decodeFile(imgFile
+						.getAbsolutePath());
+				myImage.setImageBitmap(myBitmap);
+			} else {
+				myImage.setImageResource(R.drawable.noimages);
+				ContentValues initialValues = new ContentValues();
+				initialValues.put("img", "0");
+				database.update("news", initialValues, "_id=?",
+						new String[] { _id.toString() });
+			}
+		} else {
+			myImage.setImageResource(R.drawable.noimages);
+		}
 
 		return v;
 	}
@@ -102,11 +117,9 @@ public class class_rss_news_adapter extends BaseExpandableListAdapter {
 		Map<String, String> m = getGroup(groupPosition);
 		LayoutInflater infalInflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		convertView = infalInflater.inflate(
-				R.layout.list_items_section, null);
+		convertView = infalInflater.inflate(R.layout.list_items_section, null);
 
-		TextView grouptxt = (TextView) convertView
-				.findViewById(R.id.text1);
+		TextView grouptxt = (TextView) convertView.findViewById(R.id.text1);
 		grouptxt.setText(m.get("groupName"));
 		return convertView;
 	}

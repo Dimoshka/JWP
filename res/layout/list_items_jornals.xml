@@ -84,6 +84,8 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/digitalpub"
         android:layout_alignLeft="@+id/title"
-        android:text="text" />
+        android:text="text"
+        android:textColor="@color/text_dark_gray"
+        android:textStyle="italic" />
 
 </RelativeLayout>

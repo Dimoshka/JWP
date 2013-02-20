@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="text_dark_gray">#aaaaaa</color>
+    <color name="text_blue">#0092FF</color>
+    <color name="text_green">#3CAF57</color>
+    <color name="text_dark_green">#0F4F1E</color>
+    <color name="text_yellowgreen">#20f62f</color>
+    <color name="text_dark_blue">#415884</color>
+    <color name="text_white">#ffff</color>
+    <color name="gr_2">#3ec6ff</color>
+    <color name="gr_1">#cceaff</color>
+    <color name="gr_3">#ffffff</color>
+    <color name="gr_4">#09a201</color>
+    <color name="gr_5">#eef6fc</color>
+
+</resources>

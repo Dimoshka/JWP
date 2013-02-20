@@ -23,8 +23,10 @@ import android.widget.ExpandableListView;
 import android.widget.Toast;
 
 import com.dimoshka.ua.classes.class_activity_extends;
+import com.dimoshka.ua.classes.class_rss_jornals_img;
 import com.dimoshka.ua.classes.class_rss_news;
 import com.dimoshka.ua.classes.class_rss_news_adapter;
+import com.dimoshka.ua.classes.class_rss_news_img;
 import com.dimoshka.ua.classes.class_sqlite;
 
 @SuppressLint("HandlerLeak")
@@ -32,6 +34,7 @@ public class news extends class_activity_extends {
 
 	private ExpandableListView list;
 	private class_rss_news rss_news;
+	private class_rss_news_img rss_news_img;
 	private Cursor cursor;
 	private ArrayList<Map<String, String>> groupData;
 	private ArrayList<Map<String, String>> childDataItem;
@@ -70,6 +73,7 @@ public class news extends class_activity_extends {
 		});
 
 		rss_news = new class_rss_news(this, id_lang, handler, database);
+		rss_news_img = new class_rss_news_img(this, handler, database);
 
 		listener_pref = new SharedPreferences.OnSharedPreferenceChangeListener() {
 			public void onSharedPreferenceChanged(SharedPreferences prefs,
@@ -96,6 +100,8 @@ public class news extends class_activity_extends {
 			refresh();
 		}
 
+		Log.i ("1111", funct.get_system_language());
+		
 	}
 
 	@SuppressLint("HandlerLeak")
@@ -104,11 +110,20 @@ public class news extends class_activity_extends {
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
 			case 1:
+				if (prefs.getBoolean("downloads_img", true)) {
+					Log.e("JWP", "start load image");
+					jwp_rss_img();
+				} else {
+					refresh();
+				}
+				break;
+			case 2:
 				Log.e("JWP", "refrashe afte load");
 				refresh();
 				break;
 			}
 		}
+
 	};
 
 	private void refresh() {
@@ -127,7 +142,7 @@ public class news extends class_activity_extends {
 
 			childDataItem = new ArrayList<Map<String, String>>();
 
-			int id = cursor.getInt(cursor.getColumnIndex("_id"));
+			Integer _id = cursor.getInt(cursor.getColumnIndex("_id"));
 			String title = cursor.getString(cursor.getColumnIndex("title"));
 			String link = cursor.getString(cursor.getColumnIndex("link"));
 			String description = cursor.getString(cursor
@@ -140,7 +155,9 @@ public class news extends class_activity_extends {
 			groupData.add(m);
 
 			m = new HashMap<String, String>();
-			m.put("id", getString(id));
+
+			m.put("_id", _id.toString());
+			m.put("name", "news_" + _id.toString());
 			m.put("title", title);
 			m.put("link", link);
 			m.put("description", description);
@@ -155,7 +172,7 @@ public class news extends class_activity_extends {
 		stopManagingCursor(cursor);
 
 		class_rss_news_adapter adapter = new class_rss_news_adapter(this,
-				groupData, childData);
+				groupData, childData, database);
 		list.setAdapter(adapter);
 	}
 
@@ -209,6 +226,10 @@ public class news extends class_activity_extends {
 
 	public void jwp_rss() {
 		rss_news.get_all_feeds();
+	}
+
+	public void jwp_rss_img() {
+		rss_news_img.verify_all_img();
 	}
 
 }

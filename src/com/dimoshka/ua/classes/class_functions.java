@@ -3,6 +3,7 @@ package com.dimoshka.ua.classes;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -91,5 +92,9 @@ public class class_functions {
 		localCalendar.set(Calendar.MONTH, month);
 		return sdf.format(localCalendar.getTime());
 	}
-		
+
+	public String get_system_language() {
+		return Locale.getDefault().getLanguage();
+	}
+
 }

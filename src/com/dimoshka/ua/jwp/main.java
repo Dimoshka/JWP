@@ -3,6 +3,7 @@ package com.dimoshka.ua.jwp;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TabHost;
 
 @SuppressWarnings("deprecation")
@@ -24,8 +25,7 @@ public class main extends TabActivity {
 		tabSpec = tabHost.newTabSpec("tag1");
 		tabSpec.setIndicator(getString(R.string.jornals));
 		tabSpec.setContent(new Intent(this, jornals.class));
-		tabHost.addTab(tabSpec);
-
+		tabHost.addTab(tabSpec);	
 		
 	}
 
