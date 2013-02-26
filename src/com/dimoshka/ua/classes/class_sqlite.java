@@ -41,7 +41,7 @@ public class class_sqlite extends SQLiteOpenHelper {
 			// -- Table: files
 			database.execSQL("CREATE TABLE files (_id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, id_magazine INTEGER NOT NULL, id_type INTEGER NOT NULL, name VARCHAR(32) NOT NULL UNIQUE, link VARCHAR(256) NOT NULL, pubdate DATE NOT NULL, title VARCHAR(256) NOT NULL, file BOOLEAN DEFAULT (0));");
 			// -- Table: news
-			database.execSQL("CREATE TABLE news (_id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, id_lang INTEGER NOT NULL, title VARCHAR(256) NOT NULL, link VARCHAR(256) NOT NULL UNIQUE, link_img VARCHAR(256), description VARCHAR(256) NOT NULL, pubdate DATE NOT NULL, img BOOLEAN DEFAULT (0));");
+			database.execSQL("CREATE TABLE news (_id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, id_lang INTEGER NOT NULL, title VARCHAR(256) NOT NULL, link VARCHAR(256) NOT NULL UNIQUE, link_img VARCHAR(256), description VARCHAR(256) NOT NULL, pubdate DATETIME NOT NULL, img BOOLEAN DEFAULT (0));");
 			// -- Table: language
 			database.execSQL("CREATE TABLE language (_id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(64) NOT NULL UNIQUE, code VARCHAR(4) NOT NULL UNIQUE, code_an VARCHAR(6) NOT NULL UNIQUE, news_rss VARCHAR(24) NOT NULL);");
 			database.execSQL("INSERT INTO [language] ([_id], [name], [code], [code_an], [news_rss]) VALUES (1, 'English', 'E', 'en', 'en/news');");
@@ -51,7 +51,7 @@ public class class_sqlite extends SQLiteOpenHelper {
 			database.execSQL("INSERT INTO [language] ([_id], [name], [code], [code_an], [news_rss]) VALUES (5, 'Deutsch', 'X', 'de', 'de/aktuelle-meldungen');");
 			database.execSQL("INSERT INTO [language] ([_id], [name], [code], [code_an], [news_rss]) VALUES (6, 'Spanish', 'S', 'es', 'es/noticias');");
 			database.execSQL("INSERT INTO [language] ([_id], [name], [code], [code_an], [news_rss]) VALUES (7, '漢語繁體字', 'CH', 'zh', 'zh-hant/%E6%96%B0%E8%81%9E');");
-			database.execSQL("INSERT INTO [language] ([_id], [name], [code], [code_an], [news_rss]) VALUES (8, '汉语简化字', 'CHS', 'zh', 'zh-hans/%E6%96%B0%E9%97%BB');");
+			database.execSQL("INSERT INTO [language] ([_id], [name], [code], [code_an], [news_rss]) VALUES (8, '汉语简化字', 'CHS', 'zhc', 'zh-hans/%E6%96%B0%E9%97%BB');");
 
 			// -- Index: idx_files
 			database.execSQL("CREATE INDEX idx_files ON files (id_magazine COLLATE NOCASE ASC, id_type COLLATE NOCASE ASC);");

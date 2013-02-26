@@ -27,7 +27,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:uiOptions="none|splitActionBarWhenNarrow"
-        android:vmSafeMode="true" >
+        android:vmSafeMode="true" android:debuggable="false">
         <activity
             android:name="com.dimoshka.ua.jwp.main"
             android:label="@string/app_name" >

@@ -148,8 +148,8 @@ public class class_rss_jornals {
 									name = name.substring(0, name.length() - 3);
 
 								SimpleDateFormat format = new SimpleDateFormat(
-										"yyyyMMdd");
-								Date date = funct.get_jwp_rss_date(name,
+										"yyyy-MM-dd");
+								Date date = funct.get_jwp_jornals_rss_date(name,
 										code_pub.get(cur_pub), code_lng);
 
 								Cursor cur = database.rawQuery(

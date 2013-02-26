@@ -55,7 +55,7 @@ public class class_rss_jornals_adapter extends BaseExpandableListAdapter {
 		String name = m.get("name");
 		String code_lng = m.get("code_lng");
 		String code_pub = m.get("code_pub");
-		Date date = funct.get_jwp_rss_date(name, code_pub, code_lng);
+		Date date = funct.get_jwp_jornals_rss_date(name, code_pub, code_lng);
 		Integer img = Integer.parseInt(m.get("img"));
 		Integer _id = Integer.parseInt(m.get("_id"));
 		SimpleDateFormat format = new SimpleDateFormat("d MMMM yyyy");

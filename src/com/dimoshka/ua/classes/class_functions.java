@@ -8,7 +8,6 @@ import java.util.Locale;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
-import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Environment;
@@ -49,31 +48,23 @@ public class class_functions {
 	}
 
 	@SuppressLint("SimpleDateFormat")
-	public Date get_jwp_rss_date(String name, String code_pub, String code_lng) {
+	public Date get_jwp_jornals_rss_date(String name, String code_pub,
+			String code_lng) {
 		String date_str = name.replace(code_pub, "");
 		date_str = date_str.replace(code_lng, "");
 		date_str = date_str.replace("_", "");
 		if (date_str.length() == 6)
 			date_str += "01";
-		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-		Date date = null;
-		try {
-			date = (Date) format.parse(date_str);
-		} catch (java.text.ParseException e) {
-			Log.e("JWP", e.toString() + " - " + date_str);
-			return null;
-		}
-		return date;
+		return get_string_to_date(date_str, "yyyyMMdd");
 	}
 
-	@SuppressLint("SimpleDateFormat")
 	public Date get_string_to_date(String date_str, String format_str) {
-		SimpleDateFormat format = new SimpleDateFormat(format_str);
+		SimpleDateFormat format = new SimpleDateFormat(format_str, Locale.ENGLISH);
 		Date date = null;
 		try {
 			date = (Date) format.parse(date_str);
 		} catch (java.text.ParseException e) {
-			Log.e("JWP", e.toString() + " - " + date_str);
+			Log.e("JWP", e.toString() + " - " + date_str + " - " + format_str);
 			return null;
 		}
 		return date;
@@ -85,9 +76,8 @@ public class class_functions {
 		return dir;
 	}
 
-	@SuppressLint("SimpleDateFormat")
 	public String getMonth(int month) {
-		SimpleDateFormat sdf = new SimpleDateFormat("MMMM");
+		SimpleDateFormat sdf = new SimpleDateFormat("MMMM", Locale.getDefault());
 		Calendar localCalendar = Calendar.getInstance();
 		localCalendar.set(Calendar.MONTH, month);
 		return sdf.format(localCalendar.getTime());

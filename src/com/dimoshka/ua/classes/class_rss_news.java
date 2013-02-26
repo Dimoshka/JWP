@@ -1,6 +1,9 @@
 package com.dimoshka.ua.classes;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,7 +33,7 @@ public class class_rss_news {
 	private Integer id_ln = 0;
 	private String ln_prefix = "en/news";
 
-	private String code_lng = "E";
+	// private String code_lng = "E";
 	public SharedPreferences prefs;
 
 	public class_rss_news(Activity activity, int id_lang, Handler handler,
@@ -51,11 +54,11 @@ public class class_rss_news {
 		cursor.moveToFirst();
 		if (cursor.getCount() > 0) {
 			id_ln = id;
-			code_lng = cursor.getString(cursor.getColumnIndex("code"));
+			// code_lng = cursor.getString(cursor.getColumnIndex("code"));
 			ln_prefix = cursor.getString(cursor.getColumnIndex("news_rss"));
 		} else {
 			id_ln = 1;
-			code_lng = "E";
+			// code_lng = "E";
 			ln_prefix = "en/news";
 		}
 		activity.stopManagingCursor(cursor);
@@ -73,7 +76,7 @@ public class class_rss_news {
 		private ProgressDialog dialog;
 		List<class_rss_item> rss_list = null;
 
-		@SuppressLint("NewApi")
+		@SuppressLint({ "NewApi", "SimpleDateFormat" })
 		protected Void doInBackground(Void... paramArrayOfVoid) {
 			try {
 				rssfeedprovider = new class_rss_provider();
@@ -89,6 +92,10 @@ public class class_rss_news {
 					String link = rss_item.getLink();
 					String description = rss_item.getDescription();
 					String pubdate = rss_item.getPubDate();
+
+					SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+					Date date = funct.get_string_to_date(pubdate,
+							"EEE, dd MMM yyyy HH:mm:ss Z");
 
 					String reg_text = "<![CDATA[(.*)]]>";
 					String reg_img = "<img(.*)/>";
@@ -123,7 +130,7 @@ public class class_rss_news {
 					init.put("link", link);
 					init.put("link_img", link_img);
 					init.put("description", description);
-					init.put("pubdate", pubdate);
+					init.put("pubdate", format.format(date));
 
 					database.insertWithOnConflict("news", null, init,
 							SQLiteDatabase.CONFLICT_IGNORE);

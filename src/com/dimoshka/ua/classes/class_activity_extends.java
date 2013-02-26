@@ -23,7 +23,7 @@ public class class_activity_extends extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		prefs = PreferenceManager.getDefaultSharedPreferences(this);
-		id_lang = Integer.parseInt(prefs.getString("language", "1"));
+		id_lang = Integer.parseInt(prefs.getString("language", "3"));
 	}
 
 	@Override

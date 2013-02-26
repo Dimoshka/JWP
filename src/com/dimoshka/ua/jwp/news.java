@@ -1,10 +1,10 @@
 package com.dimoshka.ua.jwp;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -23,7 +23,6 @@ import android.widget.ExpandableListView;
 import android.widget.Toast;
 
 import com.dimoshka.ua.classes.class_activity_extends;
-import com.dimoshka.ua.classes.class_rss_jornals_img;
 import com.dimoshka.ua.classes.class_rss_news;
 import com.dimoshka.ua.classes.class_rss_news_adapter;
 import com.dimoshka.ua.classes.class_rss_news_img;
@@ -91,8 +90,8 @@ public class news extends class_activity_extends {
 
 		boolean firstrun = prefs.getBoolean("first_run", true);
 		if (firstrun) {
-
-			new AlertDialog.Builder(this).setTitle("First Run")
+			new AlertDialog.Builder(this)
+					.setTitle(getString(R.string.first_run_title))
 					.setMessage(getString(R.string.first_run))
 					.setNeutralButton("OK", null).show();
 			prefs.edit().putBoolean("first_run", false).commit();
@@ -100,8 +99,8 @@ public class news extends class_activity_extends {
 			refresh();
 		}
 
-		Log.i ("1111", funct.get_system_language());
-		
+		Log.i("1111", funct.get_system_language());
+
 	}
 
 	@SuppressLint("HandlerLeak")
@@ -126,6 +125,7 @@ public class news extends class_activity_extends {
 
 	};
 
+	@SuppressLint("SimpleDateFormat")
 	private void refresh() {
 		stopManagingCursor(cursor);
 		cursor = database.rawQuery("select * from news where news.id_lang='"
@@ -148,6 +148,7 @@ public class news extends class_activity_extends {
 			String description = cursor.getString(cursor
 					.getColumnIndex("description"));
 			String pubdate = cursor.getString(cursor.getColumnIndex("pubdate"));
+
 			Integer img = cursor.getInt(cursor.getColumnIndex("img"));
 
 			m = new HashMap<String, String>();

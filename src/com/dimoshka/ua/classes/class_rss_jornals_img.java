@@ -88,7 +88,7 @@ public class class_rss_jornals_img {
 							Log.i("JWP_image", name + " - no found!");
 							SimpleDateFormat format = new SimpleDateFormat(
 									"yyyyMMdd");
-							Date date = funct.get_jwp_rss_date(name, code_pub,
+							Date date = funct.get_jwp_jornals_rss_date(name, code_pub,
 									code_lng);
 
 							String url_str = URL_IMG;

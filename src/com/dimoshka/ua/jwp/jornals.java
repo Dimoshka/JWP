@@ -79,7 +79,7 @@ public class jornals extends class_activity_extends {
 		listener_pref = new SharedPreferences.OnSharedPreferenceChangeListener() {
 			public void onSharedPreferenceChanged(SharedPreferences prefs,
 					String key) {
-				id_lang = Integer.parseInt(prefs.getString("language", "1"));
+				id_lang = Integer.parseInt(prefs.getString("language", "3"));
 				rss_jornals.get_language(id_lang);
 				refresh();
 			}
@@ -93,7 +93,7 @@ public class jornals extends class_activity_extends {
 		boolean firstrun = prefs.getBoolean("first_run", true);
 		if (firstrun) {
 
-			new AlertDialog.Builder(this).setTitle("First Run")
+			new AlertDialog.Builder(this).setTitle(getString(R.string.first_run_title))
 					.setMessage(getString(R.string.first_run))
 					.setNeutralButton("OK", null).show();
 			prefs.edit().putBoolean("first_run", false).commit();
@@ -245,7 +245,7 @@ public class jornals extends class_activity_extends {
 					.getColumnIndex("code_pub"));
 			Integer img = cursor.getInt(cursor.getColumnIndex("img"));
 			Integer _id = cursor.getInt(cursor.getColumnIndex("_id"));
-			Date date = funct.get_jwp_rss_date(name, code_pub, code_lng);
+			Date date = funct.get_jwp_jornals_rss_date(name, code_pub, code_lng);
 
 			Cursor cur = database.rawQuery(
 					"select id_type, file, name from files where `id_magazine`='"
