@@ -1,65 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="first_run_title">Первый запуск программы</string>
-    <string name="first_run">Это ваш первый запуск программы. Пожалуйста зайдите в настройки и выберите подходящие для вас параметры.</string>
     <string name="db_name">jwp.sqlite</string>
     <string name="db_version">1</string>
     <string name="app_name">JWP</string>
     <string name="app_dir">JWP</string>
-    <string name="no_internet">Нету подключения к интернету!</string>
-    <string name="no_sdcard">SDCARD не подключена!</string>
-    <string name="dialog_loaing_rss">Загрузка RSS. Пожалуйста подождите&#8230;</string>
-    <string name="dialog_loaing_img">Обновление изображений. Пожалуйста подождите&#8230;</string>
-    <string name="management">Управление</string>
-    <string name="analytics">Отправка отчетов</string>
-    <string name="analytics_summary">Разрешать автоматически отправлять отчеты о работе приложения?</string>
-    <string name="downloads_img">Загружать картинки</string>
-    <string name="downloads_img_summary">Автоматически загружать картинки после обновления?</string>
-    <string name="downloads_on_start">Загружать автоматически</string>
-    <string name="downloads_on_start_summary">Автоматически загружать RSS при старте?</string>
-    <string name="language">Язык</string>
-    <string name="language_summary">Выберите язык публикаций.</string>
-    <string name="exit">Выход</string>
-    <string name="preference">Настройки</string>
-    <string name="refrashe">Обновить</string>
-    <string name="intetface">Интерфейс</string>
-    <string name="open">Открыть</string>
-    <string name="January">Январь</string>
-    <string name="February">Февраль</string>
-    <string name="March">Март</string>
-    <string name="April">Апрель</string>
-    <string name="May">Май</string>
-    <string name="June">Июнь</string>
-    <string name="July">Июль</string>
-    <string name="August">Август</string>
-    <string name="September">Сентябрь</string>
-    <string name="October">Октябрь</string>
-    <string name="November">Ноябрь</string>
-    <string name="December">Декабрь</string>
-    <string name="select_the_action">Выберите действие</string>
-    <string name="download_rss">Загрузить RSS</string>
-    <string name="download">Загрузить</string>
-    <string name="downloads">Загрузки</string>
-    <string name="download_title">Загрузка файлов</string>
-    <string name="download_failed">Ошибка загрузки</string>
-    <string name="download_finished">Загрузка завершена!</string>
-    <string name="download_finished_failed">Загрузка завершена (%d с ошибками).</string>
-    <string name="download_cancelled">Загрузка отменена!</string>
-    <string name="download_progress">Загрузка </string>
-    <string name="download_task_addeded">Файл добавлен в очередь загрузки.</string>
-    <string name="select">Выберите</string>
-    <string name="rss_pdf">RSS - PDF</string>
-    <string name="rss_pdf_summary">Загружать RSS ленту PDF формата</string>
-    <string name="rss_epub">RSS - EPUB</string>
-    <string name="rss_epub_summary">Загружать RSS ленту EPUB формата</string>
-    <string name="rss_mp3">RSS - MP3</string>
-    <string name="rss_mp3_summary">Загружать RSS ленту MP3 формата</string>
-    <string name="rss_aac">RSS - AAC</string>
-    <string name="rss_aac_summary">Загружать RSS ленту AAC формата</string>
-    <string name="rss_chanel">RSS каналы</string>
-    <string name="jornals">Журналы</string>
-    <string name="news">Новости</string>
 
     <string-array name="language_arr">
         <item>English</item>
