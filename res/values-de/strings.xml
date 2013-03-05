@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="db_name">"jwp.sqlite"</string>
+    <string name="db_version">"1"</string>
+    <string name="app_name">"JWP"</string>
+    <string name="app_dir">"JWP"</string>
+    <string name="app_bug_report_mail">"dimoshka.ua@gmail.com"</string>
+
+    <string-array name="language_arr">
+        <item>English</item>
+        <item>French</item>
+        <item>Русский</item>
+        <item>Українська</item>
+        <item>Deutsch</item>
+        <item>Spanish</item>
+        <item>漢語繁體字</item>
+        <item>汉语简化字</item>
+    </string-array>
+    <string-array name="language_arr_value">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+    </string-array>
+
+    <string name="send_bug_report">"Senden Fehlerbericht&#8230;"</string>
+    <string name="not_email_client">"Sie haben noch eine E-Mail-Client."</string>
+    <string name="first_run_title">"Erstaufführung"</string>
+    <string name="first_run">"Dies ist das erste Mal das Programm läuft. Bitte gehen Sie auf Einstellungen und wählen Sie die entsprechenden Optionen für Sie."</string>
+    <string name="no_internet">"Keine Internet-Verbindung!"</string>
+    <string name="no_sdcard">"SDCARD ist nicht angeschlossen!"</string>
+    <string name="dialog_loaing_rss">"Herunterladen RSS. Bitte warten&#8230;"</string>
+    <string name="dialog_loaing_img">"Aktualisieren Bildern. Bitte warten&#8230;"</string>
+    <string name="management">"Management"</string>
+    <string name="analytics">"Berichterstattung"</string>
+    <string name="analytics_summary">"Lassen Sie automatisch per Berichte über die Anwendung?"</string>
+    <string name="downloads_img">"Bilder laden"</string>
+    <string name="downloads_img_summary">"Laden Sie Bilder automatisch nach dem Upgrade?"</string>
+    <string name="downloads_on_start">"Auto-Download"</string>
+    <string name="downloads_on_start_summary">"Automatisch herunterladen RSS Start?"</string>
+    <string name="language">"Sprachen"</string>
+    <string name="language_summary">"Wählen Sie eine Sprache Publikationen."</string>
+    <string name="exit">"Ausgang"</string>
+    <string name="preference">"Einstellungen"</string>
+    <string name="refrashe">"Aktualisieren"</string>
+    <string name="intetface">"Interface"</string>
+    <string name="open">"Öffnen"</string>
+    <string name="select_the_action">"Wählen Sie eine Aktion"</string>
+    <string name="download_rss">"Download RSS"</string>
+    <string name="download">"Herunterladen"</string>
+    <string name="downloads">"Downloads"</string>
+    <string name="download_title">"Herunterladen von Dateien"</string>
+    <string name="download_failed">"Fehler beim Laden"</string>
+    <string name="download_finished">"Download Complete!"</string>
+    <string name="download_finished_failed">"Download Complete ( %d mit Fehlern)."</string>
+    <string name="download_cancelled">"Laden abgesagt!"</string>
+    <string name="download_progress">"Herunterladen "</string>
+    <string name="download_task_addeded">"Datei hinzugefügt, um die Download-Warteschlange."</string>
+    <string name="select">"Wählen"</string>
+    <string name="rss_pdf">"RSS - PDF"</string>
+    <string name="rss_pdf_summary">"Legen Sie RSS-Feed PDF-Format"</string>
+    <string name="rss_epub">"RSS - EPUB"</string>
+    <string name="rss_epub_summary">"Legen Sie RSS-Feed EPUB-Format"</string>
+    <string name="rss_mp3">"RSS - MP3"</string>
+    <string name="rss_mp3_summary">"RSS-Feed Upload MP3-Format"</string>
+    <string name="rss_aac">"RSS - AAC"</string>
+    <string name="rss_aac_summary">"Legen Sie RSS-Feed AAC-Format"</string>
+    <string name="rss_chanel">"RSS-Feeds"</string>
+    <string name="jornals">"Zeitschriften"</string>
+    <string name="news">"Neuigkeiten"</string>
+
+</resources>
