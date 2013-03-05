@@ -10,10 +10,13 @@ import android.util.Log;
 public class class_sqlite extends SQLiteOpenHelper {
 
 	public SQLiteDatabase database;
+	public class_functions funct = new class_functions();
+	private Context context;
 
 	public class_sqlite(Context context) {
 		super(context, context.getString(R.string.db_name), null, Integer
 				.valueOf(context.getString(R.string.db_version)));
+		this.context = context;
 		database = this.getWritableDatabase();
 	}
 
@@ -56,7 +59,7 @@ public class class_sqlite extends SQLiteOpenHelper {
 			// -- Index: idx_files
 			database.execSQL("CREATE INDEX idx_files ON files (id_magazine COLLATE NOCASE ASC, id_type COLLATE NOCASE ASC);");
 		} catch (Exception ex) {
-			Log.e("JWP" + getClass().getName(), ex.toString());
+			funct.send_bug_report(context, ex, getClass().getName(), 63);
 		}
 	}
 

@@ -34,101 +34,102 @@ public class class_rss_jornals_adapter extends BaseExpandableListAdapter {
 			ArrayList<Map<String, String>> groupData,
 			ArrayList<ArrayList<Map<String, String>>> childData,
 			SQLiteDatabase database) {
-
 		this.childData = childData;
 		this.groupData = groupData;
-
 		this.context = context;
-		// class_sqlite dbOpenHelper = new class_sqlite(context);
-		// database = dbOpenHelper.openDataBase();
 		this.database = database;
 	}
 
 	@SuppressLint("SimpleDateFormat")
 	public View getChildView(int groupPosition, int childPosition,
 			boolean isLastChild, View convertView, ViewGroup parent) {
-		inflater = (LayoutInflater) this.context
-				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View v = inflater.inflate(R.layout.list_items_jornals, null);
+		try {
 
-		Map<String, String> m = getChild(groupPosition, childPosition);
-		String name = m.get("name");
-		String code_lng = m.get("code_lng");
-		String code_pub = m.get("code_pub");
-		Date date = funct.get_jwp_jornals_rss_date(name, code_pub, code_lng);
-		Integer img = Integer.parseInt(m.get("img"));
-		Integer _id = Integer.parseInt(m.get("_id"));
-		SimpleDateFormat format = new SimpleDateFormat("d MMMM yyyy");
-		String files = m.get("id_type");
-		String[] id_types = files.split(",");
+			inflater = (LayoutInflater) this.context
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			View v = inflater.inflate(R.layout.list_items_jornals, null);
 
-		TextView title = (TextView) v.findViewById(R.id.title);
-		title.setText(format.format(date));
+			Map<String, String> m = getChild(groupPosition, childPosition);
+			String name = m.get("name");
+			String code_lng = m.get("code_lng");
+			String code_pub = m.get("code_pub");
+			Date date = funct
+					.get_jwp_jornals_rss_date(name, code_pub, code_lng);
+			Integer img = Integer.parseInt(m.get("img"));
+			Integer _id = Integer.parseInt(m.get("_id"));
+			SimpleDateFormat format = new SimpleDateFormat("d MMMM yyyy");
+			String files = m.get("id_type");
+			String[] id_types = files.split(",");
 
-		TextView text = (TextView) v.findViewById(R.id.text);
-		text.setText(name);
+			TextView title = (TextView) v.findViewById(R.id.title);
+			title.setText(format.format(date));
 
-		ImageView myImage = (ImageView) v.findViewById(R.id.img);
-		if (img == 1) {
-			File imgFile = new File(funct.get_dir_app(context) + "/img/" + name
-					+ ".jpg");
-			if (imgFile.exists()) {
-				Bitmap myBitmap = BitmapFactory.decodeFile(imgFile
-						.getAbsolutePath());
-				myImage.setImageBitmap(myBitmap);
+			TextView text = (TextView) v.findViewById(R.id.text);
+			text.setText(name);
+
+			ImageView myImage = (ImageView) v.findViewById(R.id.img);
+			if (img == 1) {
+				File imgFile = new File(funct.get_dir_app(context) + "/img/"
+						+ name + ".jpg");
+				if (imgFile.exists()) {
+					Bitmap myBitmap = BitmapFactory.decodeFile(imgFile
+							.getAbsolutePath());
+					myImage.setImageBitmap(myBitmap);
+				} else {
+					myImage.setImageResource(R.drawable.noimages);
+					ContentValues initialValues = new ContentValues();
+					initialValues.put("img", "0");
+					database.update("magazine", initialValues, "_id=?",
+							new String[] { _id.toString() });
+				}
 			} else {
 				myImage.setImageResource(R.drawable.noimages);
-				ContentValues initialValues = new ContentValues();
-				initialValues.put("img", "0");
-				database.update("magazine", initialValues, "_id=?",
-						new String[] { _id.toString() });
-			}
-		} else {
-			myImage.setImageResource(R.drawable.noimages);
-		}
-
-		for (int i = 0; i < id_types.length; i++) {
-
-			String[] f = id_types[i].split("=");
-			int file_isn = Integer.parseInt(f[1]);
-
-			switch (Integer.parseInt(f[0])) {
-			case 1:
-				ImageView epub = (ImageView) v.findViewById(R.id.epub);
-				if (file_isn == 1)
-					epub.setImageResource(R.drawable.epub_1);
-				else
-					epub.setImageResource(R.drawable.epub_0);
-				break;
-			case 2:
-
-				ImageView pdf = (ImageView) v.findViewById(R.id.pdf);
-				if (file_isn == 1)
-					pdf.setImageResource(R.drawable.pdf_1);
-				else
-					pdf.setImageResource(R.drawable.pdf_0);
-				break;
-			case 3:
-				ImageView mp3 = (ImageView) v.findViewById(R.id.mp3);
-				if (file_isn == 1)
-					mp3.setImageResource(R.drawable.mp3_1);
-				else
-					mp3.setImageResource(R.drawable.mp3_0);
-				break;
-			case 4:
-				ImageView aac = (ImageView) v.findViewById(R.id.aac);
-				if (file_isn == 1)
-					aac.setImageResource(R.drawable.aac_0);
-				else
-					aac.setImageResource(R.drawable.aac_0);
-				break;
-			default:
-				break;
 			}
 
-		}
+			for (int i = 0; i < id_types.length; i++) {
 
-		return v;
+				String[] f = id_types[i].split("=");
+				int file_isn = Integer.parseInt(f[1]);
+
+				switch (Integer.parseInt(f[0])) {
+				case 1:
+					ImageView epub = (ImageView) v.findViewById(R.id.epub);
+					if (file_isn == 1)
+						epub.setImageResource(R.drawable.epub_1);
+					else
+						epub.setImageResource(R.drawable.epub_0);
+					break;
+				case 2:
+
+					ImageView pdf = (ImageView) v.findViewById(R.id.pdf);
+					if (file_isn == 1)
+						pdf.setImageResource(R.drawable.pdf_1);
+					else
+						pdf.setImageResource(R.drawable.pdf_0);
+					break;
+				case 3:
+					ImageView mp3 = (ImageView) v.findViewById(R.id.mp3);
+					if (file_isn == 1)
+						mp3.setImageResource(R.drawable.mp3_1);
+					else
+						mp3.setImageResource(R.drawable.mp3_0);
+					break;
+				case 4:
+					ImageView aac = (ImageView) v.findViewById(R.id.aac);
+					if (file_isn == 1)
+						aac.setImageResource(R.drawable.aac_0);
+					else
+						aac.setImageResource(R.drawable.aac_0);
+					break;
+				default:
+					break;
+				}
+			}
+			return v;
+		} catch (Exception e) {
+			funct.send_bug_report(context, e, getClass().getName(), 132);
+			return null;
+		}
 	}
 
 	@Override
@@ -167,11 +168,9 @@ public class class_rss_jornals_adapter extends BaseExpandableListAdapter {
 		Map<String, String> m = getGroup(groupPosition);
 		LayoutInflater infalInflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		convertView = infalInflater.inflate(
-				R.layout.list_items_section, null);
+		convertView = infalInflater.inflate(R.layout.list_items_section, null);
 
-		TextView grouptxt = (TextView) convertView
-				.findViewById(R.id.text1);
+		TextView grouptxt = (TextView) convertView.findViewById(R.id.text1);
 		grouptxt.setText(m.get("groupName"));
 		return convertView;
 	}

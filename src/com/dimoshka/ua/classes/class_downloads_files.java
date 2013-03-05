@@ -21,6 +21,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Binder;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.RemoteViews;
 
@@ -63,21 +64,24 @@ public class class_downloads_files extends Service {
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
-		Log.d("JWP" + getClass().getName(), "onStartCommand");
-		String dir = funct.get_dir_app(getBaseContext()) + "/downloads/";
-		File Directory = new File(dir);
-		if (!Directory.isDirectory()) {
-			Directory.mkdirs();
+		try {
+			Log.d("JWP" + getClass().getName(), "onStartCommand");
+			String dir = funct.get_dir_app(getBaseContext()) + "/downloads/";
+			File Directory = new File(dir);
+			if (!Directory.isDirectory()) {
+				Directory.mkdirs();
+			}
+
+			targetFile = new HashMap<String, String>();
+			targetFile.put("link", intent.getStringExtra("file_url"));
+			targetFile.put("putch", intent.getStringExtra("file_putch"));
+			targetFiles.add(targetFile);
+
+			task = new AsyncDownloadTask();
+			task.execute();
+		} catch (Exception e) {
+			funct.send_bug_report(getBaseContext(), e, getClass().getName(), 83);
 		}
-
-		targetFile = new HashMap<String, String>();
-		targetFile.put("link", intent.getStringExtra("file_url"));
-		targetFile.put("putch", intent.getStringExtra("file_putch"));
-		targetFiles.add(targetFile);
-
-		task = new AsyncDownloadTask();
-		task.execute();
-
 		return START_STICKY;
 	}
 
@@ -115,26 +119,31 @@ public class class_downloads_files extends Service {
 	}
 
 	protected void onFinishDownload(int success) {
-		if (success > 0) {
-			Map<String, String> targetFile = targetFiles.get(success - 1);
-			File localFile = new File(targetFile.get("putch"));
-			if (localFile.exists()) {
+		try {
+			if (success > 0) {
+				Map<String, String> targetFile = targetFiles.get(success - 1);
+				File localFile = new File(targetFile.get("putch"));
+				if (localFile.exists()) {
 
-				Log.d("JWP" + getClass().getName(), "Update to 1 - "
-						+ localFile.getName());
-				
-				class_sqlite dbOpenHelper = new class_sqlite(this);
-				SQLiteDatabase database = dbOpenHelper.openDataBase();
+					Log.d("JWP" + getClass().getName(), "Update to 1 - "
+							+ localFile.getName());
 
-				ContentValues initialValues = new ContentValues();
-				initialValues.put("file", "1");
+					class_sqlite dbOpenHelper = new class_sqlite(this);
+					SQLiteDatabase database = dbOpenHelper.openDataBase();
 
-				database.update("files", initialValues, "name=?",
-						new String[] { localFile.getName() });
+					ContentValues initialValues = new ContentValues();
+					initialValues.put("file", "1");
 
-				//database.close();
-				dbOpenHelper.close();
+					database.update("files", initialValues, "name=?",
+							new String[] { localFile.getName() });
+
+					// database.close();
+					dbOpenHelper.close();
+				}
 			}
+		} catch (Exception e) {
+			funct.send_bug_report(getBaseContext(), e, getClass().getName(),
+					145);
 		}
 	}
 
@@ -222,84 +231,92 @@ public class class_downloads_files extends Service {
 		@SuppressLint("DefaultLocale")
 		@Override
 		protected Void doInBackground(Void... params) {
-			String remoteFilepath, localFilepath;
+			try {
+				String remoteFilepath, localFilepath;
 
-			Log.i("JWP", "downloading: '" + total_file);
-			if (total_file > now_targetFile) {
-				// for (int i = 0; i < targetFiles.size(); i++) {
-				Map<String, String> targetFile = targetFiles
-						.get(now_targetFile);
+				Log.i("JWP", "downloading: '" + total_file);
+				if (total_file > now_targetFile) {
+					// for (int i = 0; i < targetFiles.size(); i++) {
+					Map<String, String> targetFile = targetFiles
+							.get(now_targetFile);
 
-				remoteFilepath = targetFile.get("link");
-				localFilepath = targetFile.get("putch");
-				Log.i("JWP" + getClass().getName(), "downloading: '"
-						+ remoteFilepath + "' => '" + localFilepath + "'");
+					remoteFilepath = targetFile.get("link");
+					localFilepath = targetFile.get("putch");
+					Log.i("JWP" + getClass().getName(), "downloading: '"
+							+ remoteFilepath + "' => '" + localFilepath + "'");
 
-				try {
-					File localFile = new File(localFilepath);
-					if (!localFile.exists()) {
-						if (isCancelled())
-							return null;
-						URL url = new URL(remoteFilepath);
-						int filesize = getFileSizeAtURL(url);
-						int loopCount = 0;
-						if (filesize > 0) {
-							URLConnection connection = url.openConnection();
-							connection.setConnectTimeout(getConnectTimeout());
-							connection.setReadTimeout(getReadTimeout());
-							BufferedInputStream bis = new BufferedInputStream(
-									connection.getInputStream());
-							FileOutputStream fos = new FileOutputStream(
-									new File(localFilepath));
-							int bytesRead, totalBytesRead = 0;
-							byte[] bytes = new byte[BYTES_BUFFER_SIZE];
-							// String progress, kbytes;
-							while (!isCancelled()
-									&& (bytesRead = bis.read(bytes)) != -1) {
-								totalBytesRead += bytesRead;
-								fos.write(bytes, 0, bytesRead);
-
-								total_file = get_targetFiles_num();
-
-								if (!isCancelled() && loopCount++ % 20 == 0) {
-									RemoteViews progressView = getProgressView(
-											now_targetFile + 1, total_file,
-											totalBytesRead, filesize, new File(
-													localFilepath).getName());
-
-									if (!isCancelled()) {
-										showNotification(
-												progressView,
-												getString(R.string.download_title));
-									} else {
-										showNotification(
-												progressView,
-												getString(R.string.download_cancelled));
-									}
-								}
-							}
-
-							fos.close();
-							bis.close();
-
+					try {
+						File localFile = new File(localFilepath);
+						if (!localFile.exists()) {
 							if (isCancelled())
 								return null;
-						} else {
-							Log.i("JWP" + getClass().getName(),
-									"file size unknown for remote file: "
-											+ remoteFilepath);
-							success = 0;
+							URL url = new URL(remoteFilepath);
+							int filesize = getFileSizeAtURL(url);
+							int loopCount = 0;
+							if (filesize > 0) {
+								URLConnection connection = url.openConnection();
+								connection
+										.setConnectTimeout(getConnectTimeout());
+								connection.setReadTimeout(getReadTimeout());
+								BufferedInputStream bis = new BufferedInputStream(
+										connection.getInputStream());
+								FileOutputStream fos = new FileOutputStream(
+										new File(localFilepath));
+								int bytesRead, totalBytesRead = 0;
+								byte[] bytes = new byte[BYTES_BUFFER_SIZE];
+								// String progress, kbytes;
+								while (!isCancelled()
+										&& (bytesRead = bis.read(bytes)) != -1) {
+									totalBytesRead += bytesRead;
+									fos.write(bytes, 0, bytesRead);
+
+									total_file = get_targetFiles_num();
+
+									if (!isCancelled() && loopCount++ % 20 == 0) {
+										RemoteViews progressView = getProgressView(
+												now_targetFile + 1, total_file,
+												totalBytesRead, filesize,
+												new File(localFilepath)
+														.getName());
+
+										if (!isCancelled()) {
+											showNotification(
+													progressView,
+													getString(R.string.download_title));
+										} else {
+											showNotification(
+													progressView,
+													getString(R.string.download_cancelled));
+										}
+									}
+								}
+
+								fos.close();
+								bis.close();
+
+								if (isCancelled())
+									return null;
+							} else {
+								Log.i("JWP" + getClass().getName(),
+										"file size unknown for remote file: "
+												+ remoteFilepath);
+								success = 0;
+							}
 						}
+						success = now_targetFile + 1;
+					} catch (Exception e) {
+						Log.e("JWP" + getClass().getName(), e.toString());
+						showNotification_popup(
+								getString(R.string.download_failed),
+								getString(R.string.download_title), "Failed: "
+										+ (new File(remoteFilepath)).getName());
+						success = 0;
 					}
-					success = now_targetFile + 1;
-				} catch (Exception e) {
-					Log.e("JWP" + getClass().getName(), e.toString());
-					showNotification_popup(getString(R.string.download_failed),
-							getString(R.string.download_title), "Failed: "
-									+ (new File(remoteFilepath)).getName());
-					success = 0;
+					now_targetFile++;
 				}
-				now_targetFile++;
+			} catch (Exception e) {
+				funct.send_bug_report(getBaseContext(), e,
+						getClass().getName(), 319);
 			}
 			return null;
 		}
@@ -323,9 +340,9 @@ public class class_downloads_files extends Service {
 				showNotification_popup(getString(R.string.download_finished),
 						getString(R.string.download_title),
 						getString(R.string.download_finished));
-
 			} catch (Exception e) {
-				Log.e("JWP" + getClass().getName(), e.toString());
+				funct.send_bug_report(getBaseContext(), e,
+						getClass().getName(), 346);
 			}
 		}
 	}

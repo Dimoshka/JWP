@@ -122,7 +122,7 @@ public class class_rss_news_img {
 					}
 				}
 			} catch (Exception e) {
-				Log.e("JWP_" + getClass().getName(), e.toString());
+				funct.send_bug_report(activity, e, getClass().getName(), 125);
 			}
 			return null;
 		}

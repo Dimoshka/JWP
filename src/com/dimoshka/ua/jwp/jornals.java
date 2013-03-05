@@ -55,52 +55,59 @@ public class jornals extends class_activity_extends {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.list);
-		list = (ExpandableListView) findViewById(R.id.list);
+		try {
+			setContentView(R.layout.list);
+			list = (ExpandableListView) findViewById(R.id.list);
 
-		dbOpenHelper = new class_sqlite(this);
-		database = dbOpenHelper.openDataBase();
+			dbOpenHelper = new class_sqlite(this);
+			database = dbOpenHelper.openDataBase();
 
-		rss_jornals = new class_rss_jornals(this, id_lang, handler, database);
-		rss_jornals_img = new class_rss_jornals_img(this, handler, database);
+			rss_jornals = new class_rss_jornals(this, id_lang, handler,
+					database);
+			rss_jornals_img = new class_rss_jornals_img(this, handler, database);
 
-		list.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+			list.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 
-			@Override
-			public boolean onChildClick(ExpandableListView arg0, View arg1,
-					int arg2, int arg3, long arg4) {
-				Map<String, String> hash = new HashMap<String, String>();
-				hash = childData.get(arg2).get(arg3);
-				dialog_show(hash.get("_id"));
-				return false;
+				@Override
+				public boolean onChildClick(ExpandableListView arg0, View arg1,
+						int arg2, int arg3, long arg4) {
+					Map<String, String> hash = new HashMap<String, String>();
+					hash = childData.get(arg2).get(arg3);
+					dialog_show(hash.get("_id"));
+					return false;
+				}
+			});
+
+			listener_pref = new SharedPreferences.OnSharedPreferenceChangeListener() {
+				public void onSharedPreferenceChanged(SharedPreferences prefs,
+						String key) {
+					id_lang = Integer
+							.parseInt(prefs.getString("language", "3"));
+					rss_jornals.get_language(id_lang);
+					refresh();
+				}
+			};
+			prefs.registerOnSharedPreferenceChangeListener(listener_pref);
+
+			if (prefs.getBoolean("downloads_on_start", false)) {
+				load_rss();
 			}
-		});
 
-		listener_pref = new SharedPreferences.OnSharedPreferenceChangeListener() {
-			public void onSharedPreferenceChanged(SharedPreferences prefs,
-					String key) {
-				id_lang = Integer.parseInt(prefs.getString("language", "3"));
-				rss_jornals.get_language(id_lang);
+			boolean firstrun = prefs.getBoolean("first_run", true);
+			if (firstrun) {
+
+				new AlertDialog.Builder(this)
+						.setTitle(getString(R.string.first_run_title))
+						.setMessage(getString(R.string.first_run))
+						.setNeutralButton("OK", null).show();
+				prefs.edit().putBoolean("first_run", false).commit();
+			} else {
 				refresh();
 			}
-		};
-		prefs.registerOnSharedPreferenceChangeListener(listener_pref);
-
-		if (prefs.getBoolean("downloads_on_start", false)) {
-			load_rss();
+		} catch (Exception e) {
+			funct.send_bug_report(getBaseContext(), e, getClass().getName(),
+					106);
 		}
-
-		boolean firstrun = prefs.getBoolean("first_run", true);
-		if (firstrun) {
-
-			new AlertDialog.Builder(this).setTitle(getString(R.string.first_run_title))
-					.setMessage(getString(R.string.first_run))
-					.setNeutralButton("OK", null).show();
-			prefs.edit().putBoolean("first_run", false).commit();
-		} else {
-			refresh();
-		}
-
 	}
 
 	@SuppressLint("HandlerLeak")
@@ -127,207 +134,264 @@ public class jornals extends class_activity_extends {
 	@SuppressLint("ShowToast")
 	@SuppressWarnings("deprecation")
 	private void dialog_show(String _id) {
-		if (funct.ExternalStorageState() == true) {
-			List<String> listItems = new ArrayList<String>();
-			CharSequence[] items = null;
+		try {
+			if (funct.ExternalStorageState() == true) {
+				List<String> listItems = new ArrayList<String>();
+				CharSequence[] items = null;
 
-			cur_files = database
-					.rawQuery(
-							"select id_type, file, type.name as name_type, files.name, link from files left join magazine on files.id_magazine=magazine._id left join type on files.id_type=type._id where files.id_magazine='"
-									+ _id + "'  group by id_type", null);
-			startManagingCursor(cur_files);
-			if (cur_files.getCount() > 0) {
-				cur_files.moveToFirst();
-				for (int i = 0; i < cur_files.getCount(); i++) {
-					String name = null;
-					if (cur_files.getInt(cur_files.getColumnIndex("file")) == 1) {
-						name = getString(R.string.open)
-								+ " "
-								+ cur_files.getString(cur_files
-										.getColumnIndex("name_type"));
-					} else {
-						name = getString(R.string.download)
-								+ " "
-								+ cur_files.getString(cur_files
-										.getColumnIndex("name_type"));
+				cur_files = database
+						.rawQuery(
+								"select id_type, file, type.name as name_type, files.name, link, files.id_magazine from files left join magazine on files.id_magazine=magazine._id left join type on files.id_type=type._id where files.id_magazine='"
+										+ _id + "' group by id_type", null);
+				startManagingCursor(cur_files);
+				if (cur_files.getCount() > 0) {
+					cur_files.moveToFirst();
+					for (int i = 0; i < cur_files.getCount(); i++) {
+						String name = null;
+						if (cur_files.getInt(cur_files.getColumnIndex("file")) == 1) {
+							name = getString(R.string.open)
+									+ " "
+									+ cur_files.getString(cur_files
+											.getColumnIndex("name_type"));
+						} else {
+							name = getString(R.string.download)
+									+ " "
+									+ cur_files.getString(cur_files
+											.getColumnIndex("name_type"));
+						}
+
+						listItems.add(name);
+						cur_files.moveToNext();
 					}
 
-					listItems.add(name);
-					cur_files.moveToNext();
+					items = listItems
+							.toArray(new CharSequence[listItems.size()]);
+
+					AlertDialog.Builder builder = new AlertDialog.Builder(this);
+					builder.setTitle(getString(R.string.select_the_action));
+					builder.setItems(items,
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int item) {
+									open_or_download(item);
+								}
+							});
+					AlertDialog alert = builder.create();
+					alert.show();
 				}
-
-				items = listItems.toArray(new CharSequence[listItems.size()]);
-
-				AlertDialog.Builder builder = new AlertDialog.Builder(this);
-				builder.setTitle(getString(R.string.select_the_action));
-				builder.setItems(items, new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int item) {
-						start_download(item);
-					}
-				});
-				AlertDialog alert = builder.create();
-				alert.show();
-			}
-		} else
-			Toast.makeText(this, R.string.no_sdcard, Toast.LENGTH_SHORT);
+			} else
+				Toast.makeText(this, R.string.no_sdcard, Toast.LENGTH_SHORT);
+		} catch (Exception e) {
+			funct.send_bug_report(getBaseContext(), e, getClass().getName(),
+					183);
+		}
 	}
 
 	@SuppressLint("ShowToast")
 	@SuppressWarnings("deprecation")
-	private void start_download(int id) {
+	private void open_or_download(int id) {
+		try {
+			if (funct.ExternalStorageState() == true) {
+				if (cur_files.getCount() > 0) {
+					cur_files.moveToPosition(id);
+					if (cur_files.getInt(cur_files.getColumnIndex("id_type")) == 3) {
+						Cursor cur = database
+								.rawQuery(
+										"select id_type, file, type.name as name_type, files.name, link from files left join magazine on files.id_magazine=magazine._id left join type on files.id_type=type._id where files.id_magazine='"
+												+ cur_files.getInt(cur_files
+														.getColumnIndex("id_magazine"))
+												+ "' and id_type='"
+												+ cur_files.getInt(cur_files
+														.getColumnIndex("id_type"))
+												+ "'", null);
 
-		if (funct.ExternalStorageState() == true) {
-
-			if (cur_files.getCount() > 0) {
-				cur_files.moveToPosition(id);
-
-				File file = new File(funct.get_dir_app(this) + "/downloads/"
-						+ cur_files.getString(cur_files.getColumnIndex("name")));
-
-				if (cur_files.getInt(cur_files.getColumnIndex("file")) == 1) {
-					Intent intent = new Intent();
-					intent.setAction(android.content.Intent.ACTION_VIEW);
-
-					MimeTypeMap map = MimeTypeMap.getSingleton();
-					String ext = MimeTypeMap.getFileExtensionFromUrl(file
-							.getName());
-					String type = map.getMimeTypeFromExtension(ext);
-
-					if (type == null)
-						type = "*/*";
-					Uri data = Uri.fromFile(file);
-					intent.setDataAndType(data, type);
-					Intent ch = Intent.createChooser(intent,
-							getString(R.string.select));
-					startActivity(ch);
-
-				} else {
-					Intent i = new Intent(getBaseContext(),
-							class_downloads_files.class);
-					i.putExtra("file_url", cur_files.getString(cur_files
-							.getColumnIndex("link")));
-					i.putExtra("file_putch", file.getAbsolutePath());
-					Toast.makeText(this,
-							getString(R.string.download_task_addeded),
-							Toast.LENGTH_SHORT).show();
-					startService(i);
+						startManagingCursor(cur);
+						cur.moveToFirst();
+						for (int i = 0; i < cur.getCount(); i++) {
+							start_open_or_download(
+									cur.getString(cur.getColumnIndex("name")),
+									cur.getInt(cur.getColumnIndex("file")),
+									cur.getString(cur.getColumnIndex("link")));
+							cur.moveToNext();
+						}
+						stopManagingCursor(cur);
+					} else {
+						start_open_or_download(cur_files.getString(cur_files
+								.getColumnIndex("name")),
+								cur_files.getInt(cur_files
+										.getColumnIndex("file")),
+								cur_files.getString(cur_files
+										.getColumnIndex("link")));
+					}
 				}
-			}
-		} else
-			Toast.makeText(this, R.string.no_sdcard, Toast.LENGTH_SHORT);
-		stopManagingCursor(cur_files);
+			} else
+				Toast.makeText(getBaseContext(), R.string.no_sdcard,
+						Toast.LENGTH_SHORT);
+			stopManagingCursor(cur_files);
+		} catch (Exception e) {
+			funct.send_bug_report(getBaseContext(), e, getClass().getName(),
+					232);
+		}
+	}
 
+	private void start_open_or_download(String name, int file_enable,
+			String link) {
+		try {
+			File file = new File(funct.get_dir_app(this) + "/downloads/" + name);
+			if (file.exists() != true) {
+				file_enable = 0;
+			} else {
+				file_enable = 1;
+			}
+
+			if (file_enable == 1) {
+				Intent intent = new Intent();
+				intent.setAction(android.content.Intent.ACTION_VIEW);
+
+				MimeTypeMap map = MimeTypeMap.getSingleton();
+				String ext = MimeTypeMap
+						.getFileExtensionFromUrl(file.getName());
+				String type = map.getMimeTypeFromExtension(ext);
+
+				if (type == null)
+					type = "*/*";
+				Uri data = Uri.fromFile(file);
+				intent.setDataAndType(data, type);
+				Intent ch = Intent.createChooser(intent,
+						getString(R.string.select));
+				startActivity(ch);
+
+			} else {
+				Intent i = new Intent(getBaseContext(),
+						class_downloads_files.class);
+				i.putExtra("file_url", link);
+				i.putExtra("file_putch", file.getAbsolutePath());
+				Toast.makeText(this, getString(R.string.download_task_addeded),
+						Toast.LENGTH_SHORT).show();
+				startService(i);
+			}
+		} catch (Exception e) {
+			funct.send_bug_report(getBaseContext(), e, getClass().getName(),
+					273);
+		}
 	}
 
 	@SuppressWarnings("deprecation")
 	private void refresh() {
-		stopManagingCursor(cursor);
-		cursor = database
-				.rawQuery(
-						"select magazine._id as _id, magazine.name as name, magazine.img as img, language.code as code_lng, publication.code as code_pub, publication._id as cur_pub, date from magazine left join language on magazine.id_lang=language._id left join publication on magazine.id_pub=publication._id where magazine.id_lang='"
-								+ id_lang
-								+ "' order by date desc, magazine.id_pub asc",
-						null);
-		startManagingCursor(cursor);
+		try {
+			stopManagingCursor(cursor);
+			cursor = database
+					.rawQuery(
+							"select magazine._id as _id, magazine.name as name, magazine.img as img, language.code as code_lng, publication.code as code_pub, publication._id as cur_pub, date from magazine left join language on magazine.id_lang=language._id left join publication on magazine.id_pub=publication._id where magazine.id_lang='"
+									+ id_lang
+									+ "' order by date desc, magazine.id_pub asc",
+							null);
+			startManagingCursor(cursor);
 
-		groupData = new ArrayList<Map<String, String>>();
+			groupData = new ArrayList<Map<String, String>>();
 
-		childData = new ArrayList<ArrayList<Map<String, String>>>();
-		childDataItem = new ArrayList<Map<String, String>>();
+			childData = new ArrayList<ArrayList<Map<String, String>>>();
+			childDataItem = new ArrayList<Map<String, String>>();
 
-		cursor.moveToFirst();
-		for (int i = 0; i < cursor.getCount(); i++) {
+			cursor.moveToFirst();
+			for (int i = 0; i < cursor.getCount(); i++) {
 
-			String name = cursor.getString(cursor.getColumnIndex("name"));
-			String code_lng = cursor.getString(cursor
-					.getColumnIndex("code_lng"));
-			String code_pub = cursor.getString(cursor
-					.getColumnIndex("code_pub"));
-			Integer img = cursor.getInt(cursor.getColumnIndex("img"));
-			Integer _id = cursor.getInt(cursor.getColumnIndex("_id"));
-			Date date = funct.get_jwp_jornals_rss_date(name, code_pub, code_lng);
+				String name = cursor.getString(cursor.getColumnIndex("name"));
+				String code_lng = cursor.getString(cursor
+						.getColumnIndex("code_lng"));
+				String code_pub = cursor.getString(cursor
+						.getColumnIndex("code_pub"));
+				Integer img = cursor.getInt(cursor.getColumnIndex("img"));
+				Integer _id = cursor.getInt(cursor.getColumnIndex("_id"));
+				Date date = funct.get_jwp_jornals_rss_date(name, code_pub,
+						code_lng);
 
-			Cursor cur = database.rawQuery(
-					"select id_type, file, name from files where `id_magazine`='"
-							+ _id + "' group by id_type", null);
-			startManagingCursor(cur);
-			String files = "";
-			if (cur.getCount() > 0) {
-				cur.moveToFirst();
-				for (int a = 0; a < cur.getCount(); a++) {
-					if (files.length() > 0)
-						files = files + ",";
-					int file_isn = 0;
-					if (cur.getInt(cur.getColumnIndex("file")) == 1) {
-						File file = new File(
-								funct.get_dir_app(getBaseContext())
-										+ "/downloads/"
-										+ cur.getString(cur
-												.getColumnIndex("name")));
-
-						Log.d("JWP" + getClass().getName(),
-								cur.getString(cur.getColumnIndex("name")));
-
-						if (file.exists()) {
-							file_isn = 1;
-						} else {
-							Log.d("JWP" + getClass().getName(),
-									"Update to 0 - "
+				Cursor cur = database.rawQuery(
+						"select id_type, file, name from files where `id_magazine`='"
+								+ _id + "' group by id_type", null);
+				startManagingCursor(cur);
+				String files = "";
+				if (cur.getCount() > 0) {
+					cur.moveToFirst();
+					for (int a = 0; a < cur.getCount(); a++) {
+						if (files.length() > 0)
+							files = files + ",";
+						int file_isn = 0;
+						if (cur.getInt(cur.getColumnIndex("file")) == 1) {
+							File file = new File(
+									funct.get_dir_app(getBaseContext())
+											+ "/downloads/"
 											+ cur.getString(cur
 													.getColumnIndex("name")));
-							ContentValues initialValues = new ContentValues();
-							initialValues.put("file", "0");
-							database.update("files", initialValues, "name=?",
-									new String[] { cur.getString(cur
-											.getColumnIndex("name")) });
+
+							Log.d("JWP" + getClass().getName(),
+									cur.getString(cur.getColumnIndex("name")));
+
+							if (file.exists()) {
+								file_isn = 1;
+							} else {
+								Log.d("JWP" + getClass().getName(),
+										"Update to 0 - "
+												+ cur.getString(cur
+														.getColumnIndex("name")));
+								ContentValues initialValues = new ContentValues();
+								initialValues.put("file", "0");
+								database.update("files", initialValues,
+										"name=?",
+										new String[] { cur.getString(cur
+												.getColumnIndex("name")) });
+							}
 						}
+
+						files = files
+								+ cur.getString(cur.getColumnIndex("id_type"))
+								+ "=" + file_isn;
+						cur.moveToNext();
+					}
+				}
+				stopManagingCursor(cur);
+
+				if (date.getYear() != yer || date.getMonth() != mon) {
+					yer = date.getYear();
+					mon = date.getMonth();
+					m = new HashMap<String, String>();
+					m.put("groupName", funct.getMonth(mon));
+					groupData.add(m);
+
+					if (i > 0) {
+						childData.add(childDataItem);
+						childDataItem = new ArrayList<Map<String, String>>();
 					}
 
-					files = files
-							+ cur.getString(cur.getColumnIndex("id_type"))
-							+ "=" + file_isn;
-					cur.moveToNext();
+					m = new HashMap<String, String>();
+					m.put("name", name);
+					m.put("code_pub", code_pub);
+					m.put("code_lng", code_lng);
+					m.put("_id", _id.toString());
+					m.put("img", img.toString());
+					m.put("id_type", files);
+					childDataItem.add(m);
+				} else {
+					m = new HashMap<String, String>();
+					m.put("name", name);
+					m.put("code_pub", code_pub);
+					m.put("code_lng", code_lng);
+					m.put("_id", _id.toString());
+					m.put("img", img.toString());
+					m.put("id_type", files);
+					childDataItem.add(m);
 				}
+				cursor.moveToNext();
 			}
-			stopManagingCursor(cur);
-
-			if (date.getYear() != yer || date.getMonth() != mon) {
-				yer = date.getYear();
-				mon = date.getMonth();
-				m = new HashMap<String, String>();
-				m.put("groupName", funct.getMonth(mon));
-				groupData.add(m);
-
-				if (i > 0) {
-					childData.add(childDataItem);
-					childDataItem = new ArrayList<Map<String, String>>();
-				}
-
-				m = new HashMap<String, String>();
-				m.put("name", name);
-				m.put("code_pub", code_pub);
-				m.put("code_lng", code_lng);
-				m.put("_id", _id.toString());
-				m.put("img", img.toString());
-				m.put("id_type", files);
-				childDataItem.add(m);
-			} else {
-				m = new HashMap<String, String>();
-				m.put("name", name);
-				m.put("code_pub", code_pub);
-				m.put("code_lng", code_lng);
-				m.put("_id", _id.toString());
-				m.put("img", img.toString());
-				m.put("id_type", files);
-				childDataItem.add(m);
-			}
-			cursor.moveToNext();
+			childData.add(childDataItem);
+			stopManagingCursor(cursor);
+			class_rss_jornals_adapter adapter = new class_rss_jornals_adapter(
+					this, groupData, childData, database);
+			list.setAdapter(adapter);
+		} catch (Exception e) {
+			funct.send_bug_report(getBaseContext(), e, getClass().getName(),
+					392);
 		}
-		childData.add(childDataItem);
-		stopManagingCursor(cursor);
-		class_rss_jornals_adapter adapter = new class_rss_jornals_adapter(this,
-				groupData, childData, database);
-		list.setAdapter(adapter);
 	}
 
 	public void jwp_rss() {

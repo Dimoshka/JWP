@@ -42,43 +42,48 @@ public class class_rss_news_adapter extends BaseExpandableListAdapter {
 	@SuppressLint("SimpleDateFormat")
 	public View getChildView(int groupPosition, int childPosition,
 			boolean isLastChild, View convertView, ViewGroup parent) {
-		inflater = (LayoutInflater) this.context
-				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View v = inflater.inflate(R.layout.list_items_news, null);
-		Map<String, String> m = getChild(groupPosition, childPosition);
+		try {
+			inflater = (LayoutInflater) this.context
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			View v = inflater.inflate(R.layout.list_items_news, null);
+			Map<String, String> m = getChild(groupPosition, childPosition);
 
-		String description = m.get("description");
-		String pubdate = m.get("pubdate");
-		Integer img = Integer.parseInt(m.get("img"));
-		String name = m.get("name");
-		Integer _id = Integer.parseInt(m.get("_id"));
+			String description = m.get("description");
+			String pubdate = m.get("pubdate");
+			Integer img = Integer.parseInt(m.get("img"));
+			String name = m.get("name");
+			Integer _id = Integer.parseInt(m.get("_id"));
 
-		TextView text = (TextView) v.findViewById(R.id.title);
-		text.setText(description);
+			TextView text = (TextView) v.findViewById(R.id.title);
+			text.setText(description);
 
-		TextView date = (TextView) v.findViewById(R.id.text);
-		date.setText(pubdate);
+			TextView date = (TextView) v.findViewById(R.id.text);
+			date.setText(pubdate);
 
-		ImageView myImage = (ImageView) v.findViewById(R.id.img);
-		if (img == 1) {
-			File imgFile = new File(funct.get_dir_app(context) + "/img/" + name
-					+ ".jpg");
-			if (imgFile.exists()) {
-				Bitmap myBitmap = BitmapFactory.decodeFile(imgFile
-						.getAbsolutePath());
-				myImage.setImageBitmap(myBitmap);
+			ImageView myImage = (ImageView) v.findViewById(R.id.img);
+			if (img == 1) {
+				File imgFile = new File(funct.get_dir_app(context) + "/img/"
+						+ name + ".jpg");
+				if (imgFile.exists()) {
+					Bitmap myBitmap = BitmapFactory.decodeFile(imgFile
+							.getAbsolutePath());
+					myImage.setImageBitmap(myBitmap);
+				} else {
+					myImage.setImageResource(R.drawable.noimages);
+					ContentValues initialValues = new ContentValues();
+					initialValues.put("img", "0");
+					database.update("news", initialValues, "_id=?",
+							new String[] { _id.toString() });
+				}
 			} else {
 				myImage.setImageResource(R.drawable.noimages);
-				ContentValues initialValues = new ContentValues();
-				initialValues.put("img", "0");
-				database.update("news", initialValues, "_id=?",
-						new String[] { _id.toString() });
 			}
-		} else {
-			myImage.setImageResource(R.drawable.noimages);
-		}
 
-		return v;
+			return v;
+		} catch (Exception e) {
+			funct.send_bug_report(context, e, getClass().getName(), 29);
+			return null;
+		}
 	}
 
 	@Override

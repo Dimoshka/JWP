@@ -35,14 +35,10 @@ public class class_rss_jornals_img {
 	private Cursor cursor;
 	private Handler handler;
 
-	// private class_sqlite dbOpenHelper;
-
 	public class_rss_jornals_img(Activity activity, Handler handler,
 			SQLiteDatabase database) {
 		this.activity = activity;
 		this.handler = handler;
-		// dbOpenHelper = new class_sqlite(activity);
-		// database = dbOpenHelper.openDataBase();
 		this.database = database;
 	}
 
@@ -88,8 +84,8 @@ public class class_rss_jornals_img {
 							Log.i("JWP_image", name + " - no found!");
 							SimpleDateFormat format = new SimpleDateFormat(
 									"yyyyMMdd");
-							Date date = funct.get_jwp_jornals_rss_date(name, code_pub,
-									code_lng);
+							Date date = funct.get_jwp_jornals_rss_date(name,
+									code_pub, code_lng);
 
 							String url_str = URL_IMG;
 
@@ -155,7 +151,7 @@ public class class_rss_jornals_img {
 					}
 				}
 			} catch (Exception e) {
-				Log.e("JWP_" + getClass().getName(), e.toString());
+				funct.send_bug_report(activity, e, getClass().getName(), 154);
 			}
 			return null;
 		}
@@ -165,8 +161,6 @@ public class class_rss_jornals_img {
 			this.dialog.hide();
 			activity.stopManagingCursor(cursor);
 			cursor.close();
-			// database.close();
-			//dbOpenHelper.close();
 			handler.sendEmptyMessage(2);
 		}
 

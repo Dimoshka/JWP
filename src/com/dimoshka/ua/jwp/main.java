@@ -3,7 +3,6 @@ package com.dimoshka.ua.jwp;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TabHost;
 
 @SuppressWarnings("deprecation")

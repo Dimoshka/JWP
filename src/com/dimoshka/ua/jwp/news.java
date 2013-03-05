@@ -1,8 +1,6 @@
 package com.dimoshka.ua.jwp;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -45,62 +43,65 @@ public class news extends class_activity_extends {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.list);
+		try {
+			list = (ExpandableListView) findViewById(R.id.list);
 
-		list = (ExpandableListView) findViewById(R.id.list);
+			dbOpenHelper = new class_sqlite(this);
+			database = dbOpenHelper.openDataBase();
 
-		dbOpenHelper = new class_sqlite(this);
-		database = dbOpenHelper.openDataBase();
+			list.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 
-		list.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+				@Override
+				public boolean onChildClick(ExpandableListView arg0, View arg1,
+						int arg2, int arg3, long arg4) {
+					Map<String, String> hash = new HashMap<String, String>();
+					hash = childData.get(arg2).get(arg3);
 
-			@Override
-			public boolean onChildClick(ExpandableListView arg0, View arg1,
-					int arg2, int arg3, long arg4) {
-				Map<String, String> hash = new HashMap<String, String>();
-				hash = childData.get(arg2).get(arg3);
+					Intent intent = new Intent();
+					intent.setAction(android.content.Intent.ACTION_VIEW);
 
-				Intent intent = new Intent();
-				intent.setAction(android.content.Intent.ACTION_VIEW);
+					Uri data = Uri.parse(hash.get("link"));
+					intent.setDataAndType(data, "text/html");
+					Intent ch = Intent.createChooser(intent,
+							getString(R.string.select));
+					startActivity(ch);
+					return false;
+				}
+			});
 
-				Uri data = Uri.parse(hash.get("link"));
-				intent.setDataAndType(data, "text/html");
-				Intent ch = Intent.createChooser(intent,
-						getString(R.string.select));
-				startActivity(ch);
-				return false;
+			rss_news = new class_rss_news(this, id_lang, handler, database);
+			rss_news_img = new class_rss_news_img(this, handler, database);
+
+			listener_pref = new SharedPreferences.OnSharedPreferenceChangeListener() {
+				public void onSharedPreferenceChanged(SharedPreferences prefs,
+						String key) {
+					id_lang = Integer
+							.parseInt(prefs.getString("language", "1"));
+					rss_news.get_language(id_lang);
+					refresh();
+				}
+			};
+			prefs.registerOnSharedPreferenceChangeListener(listener_pref);
+
+			if (prefs.getBoolean("downloads_on_start", false)) {
+				load_rss();
 			}
-		});
 
-		rss_news = new class_rss_news(this, id_lang, handler, database);
-		rss_news_img = new class_rss_news_img(this, handler, database);
-
-		listener_pref = new SharedPreferences.OnSharedPreferenceChangeListener() {
-			public void onSharedPreferenceChanged(SharedPreferences prefs,
-					String key) {
-				id_lang = Integer.parseInt(prefs.getString("language", "1"));
-				rss_news.get_language(id_lang);
+			boolean firstrun = prefs.getBoolean("first_run", true);
+			if (firstrun) {
+				new AlertDialog.Builder(this)
+						.setTitle(getString(R.string.first_run_title))
+						.setMessage(getString(R.string.first_run))
+						.setNeutralButton("OK", null).show();
+				prefs.edit().putBoolean("first_run", false).commit();
+			} else {
 				refresh();
 			}
-		};
-		prefs.registerOnSharedPreferenceChangeListener(listener_pref);
 
-		if (prefs.getBoolean("downloads_on_start", false)) {
-			load_rss();
+		} catch (Exception e) {
+			funct.send_bug_report(getBaseContext(), e, getClass().getName(),
+					102);
 		}
-
-		boolean firstrun = prefs.getBoolean("first_run", true);
-		if (firstrun) {
-			new AlertDialog.Builder(this)
-					.setTitle(getString(R.string.first_run_title))
-					.setMessage(getString(R.string.first_run))
-					.setNeutralButton("OK", null).show();
-			prefs.edit().putBoolean("first_run", false).commit();
-		} else {
-			refresh();
-		}
-
-		Log.i("1111", funct.get_system_language());
-
 	}
 
 	@SuppressLint("HandlerLeak")
@@ -127,54 +128,61 @@ public class news extends class_activity_extends {
 
 	@SuppressLint("SimpleDateFormat")
 	private void refresh() {
-		stopManagingCursor(cursor);
-		cursor = database.rawQuery("select * from news where news.id_lang='"
-				+ id_lang + "' order by pubdate desc, news._id asc", null);
-		startManagingCursor(cursor);
+		try {
+			stopManagingCursor(cursor);
+			cursor = database.rawQuery(
+					"select * from news where news.id_lang='" + id_lang
+							+ "' order by pubdate desc, news._id asc", null);
+			startManagingCursor(cursor);
 
-		groupData = new ArrayList<Map<String, String>>();
+			groupData = new ArrayList<Map<String, String>>();
 
-		childData = new ArrayList<ArrayList<Map<String, String>>>();
-		childDataItem = new ArrayList<Map<String, String>>();
-
-		cursor.moveToFirst();
-		for (int i = 0; i < cursor.getCount(); i++) {
-
+			childData = new ArrayList<ArrayList<Map<String, String>>>();
 			childDataItem = new ArrayList<Map<String, String>>();
 
-			Integer _id = cursor.getInt(cursor.getColumnIndex("_id"));
-			String title = cursor.getString(cursor.getColumnIndex("title"));
-			String link = cursor.getString(cursor.getColumnIndex("link"));
-			String description = cursor.getString(cursor
-					.getColumnIndex("description"));
-			String pubdate = cursor.getString(cursor.getColumnIndex("pubdate"));
+			cursor.moveToFirst();
+			for (int i = 0; i < cursor.getCount(); i++) {
 
-			Integer img = cursor.getInt(cursor.getColumnIndex("img"));
+				childDataItem = new ArrayList<Map<String, String>>();
 
-			m = new HashMap<String, String>();
-			m.put("groupName", title);
-			groupData.add(m);
+				Integer _id = cursor.getInt(cursor.getColumnIndex("_id"));
+				String title = cursor.getString(cursor.getColumnIndex("title"));
+				String link = cursor.getString(cursor.getColumnIndex("link"));
+				String description = cursor.getString(cursor
+						.getColumnIndex("description"));
+				String pubdate = cursor.getString(cursor
+						.getColumnIndex("pubdate"));
 
-			m = new HashMap<String, String>();
+				Integer img = cursor.getInt(cursor.getColumnIndex("img"));
 
-			m.put("_id", _id.toString());
-			m.put("name", "news_" + _id.toString());
-			m.put("title", title);
-			m.put("link", link);
-			m.put("description", description);
-			m.put("pubdate", pubdate);
-			m.put("img", img.toString());
+				m = new HashMap<String, String>();
+				m.put("groupName", title);
+				groupData.add(m);
 
-			childDataItem.add(m);
-			childData.add(childDataItem);
-			cursor.moveToNext();
+				m = new HashMap<String, String>();
+
+				m.put("_id", _id.toString());
+				m.put("name", "news_" + _id.toString());
+				m.put("title", title);
+				m.put("link", link);
+				m.put("description", description);
+				m.put("pubdate", pubdate);
+				m.put("img", img.toString());
+
+				childDataItem.add(m);
+				childData.add(childDataItem);
+				cursor.moveToNext();
+			}
+
+			stopManagingCursor(cursor);
+
+			class_rss_news_adapter adapter = new class_rss_news_adapter(this,
+					groupData, childData, database);
+			list.setAdapter(adapter);
+		} catch (Exception e) {
+			funct.send_bug_report(getBaseContext(), e, getClass().getName(),
+					182);
 		}
-
-		stopManagingCursor(cursor);
-
-		class_rss_news_adapter adapter = new class_rss_news_adapter(this,
-				groupData, childData, database);
-		list.setAdapter(adapter);
 	}
 
 	@Override

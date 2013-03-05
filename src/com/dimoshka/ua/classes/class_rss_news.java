@@ -29,11 +29,8 @@ public class class_rss_news {
 	public class_functions funct = new class_functions();
 	private Activity activity;
 	private Handler handler;
-
 	private Integer id_ln = 0;
 	private String ln_prefix = "en/news";
-
-	// private String code_lng = "E";
 	public SharedPreferences prefs;
 
 	public class_rss_news(Activity activity, int id_lang, Handler handler,
@@ -54,11 +51,9 @@ public class class_rss_news {
 		cursor.moveToFirst();
 		if (cursor.getCount() > 0) {
 			id_ln = id;
-			// code_lng = cursor.getString(cursor.getColumnIndex("code"));
 			ln_prefix = cursor.getString(cursor.getColumnIndex("news_rss"));
 		} else {
 			id_ln = 1;
-			// code_lng = "E";
 			ln_prefix = "en/news";
 		}
 		activity.stopManagingCursor(cursor);
@@ -82,18 +77,17 @@ public class class_rss_news {
 				rssfeedprovider = new class_rss_provider();
 				String feed = String.format(URL_FEED, ln_prefix);
 				Log.e("JWP_" + getClass().getName(), feed);
-				this.rss_list = rssfeedprovider.parse(feed);
+				this.rss_list = rssfeedprovider.parse(feed, activity);
 
 				for (int i = 0; i < rss_list.size(); i++) {
-
 					class_rss_item rss_item = rss_list.get(i);
-
 					String title = rss_item.getTitle();
 					String link = rss_item.getLink();
 					String description = rss_item.getDescription();
 					String pubdate = rss_item.getPubDate();
 
-					SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+					SimpleDateFormat format = new SimpleDateFormat(
+							"yyyy-MM-dd HH:mm:ss", Locale.getDefault());
 					Date date = funct.get_string_to_date(pubdate,
 							"EEE, dd MMM yyyy HH:mm:ss Z");
 
@@ -134,19 +128,16 @@ public class class_rss_news {
 
 					database.insertWithOnConflict("news", null, init,
 							SQLiteDatabase.CONFLICT_IGNORE);
-
 				}
 
 			} catch (Exception e) {
-				Log.e("JWP_" + getClass().getName(), e.toString());
+				funct.send_bug_report(activity, e, getClass().getName(), 134);
 			}
 			return null;
 		}
 
 		protected void onPostExecute(Void result) {
 			this.dialog.hide();
-			// database.close();
-			// dbOpenHelper.close();
 			handler.sendEmptyMessage(1);
 		}
 

@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.xmlpull.v1.XmlPullParser;
 
+import android.content.Context;
 import android.util.Log;
 import android.util.Xml;
 
@@ -19,14 +20,14 @@ public class class_rss_provider {
 	static final String PUB_DATE = "pubDate";
 	static final String GUID = "guid";
 	static final String CHANNEL = "channel";
+	private class_functions funct = new class_functions();
 
-	public List<class_rss_item> parse(String rssFeed) {
+	public List<class_rss_item> parse(String rssFeed, Context context) {
 		List<class_rss_item> list = new ArrayList<class_rss_item>();
 		XmlPullParser parser = Xml.newPullParser();
 
 		InputStream stream = null;
 		try {
-			// auto-detect the encoding from the stream
 			stream = new URL(rssFeed).openConnection().getInputStream();
 			parser.setInput(stream, null);
 
@@ -65,7 +66,6 @@ public class class_rss_provider {
 					break;
 				case XmlPullParser.END_TAG:
 					name = parser.getName();
-
 					Log.i("End tag", name);
 					if (name.equalsIgnoreCase(ITEM) && item != null) {
 						Log.i("Added", item.toString());
@@ -79,7 +79,7 @@ public class class_rss_provider {
 				eventType = parser.next();
 			}
 		} catch (Exception e) {
-			Log.e("JWP_" + getClass().getName(), e.toString());
+			funct.send_bug_report(context, e, getClass().getName(), 81);
 		} finally {
 			if (stream != null) {
 				try {

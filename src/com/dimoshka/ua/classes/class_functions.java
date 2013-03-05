@@ -5,13 +5,18 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import android.R.integer;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Environment;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.dimoshka.ua.jwp.R;
 
@@ -59,7 +64,8 @@ public class class_functions {
 	}
 
 	public Date get_string_to_date(String date_str, String format_str) {
-		SimpleDateFormat format = new SimpleDateFormat(format_str, Locale.ENGLISH);
+		SimpleDateFormat format = new SimpleDateFormat(format_str,
+				Locale.ENGLISH);
 		Date date = null;
 		try {
 			date = (Date) format.parse(date_str);
@@ -85,6 +91,42 @@ public class class_functions {
 
 	public String get_system_language() {
 		return Locale.getDefault().getLanguage();
+	}
+
+	public void send_bug_report(Context context, Exception ex,
+			String class_name, Integer num_row) {
+
+		Intent i = new Intent(Intent.ACTION_SEND);
+		i.setType("message/rfc822");
+		i.putExtra(
+				Intent.EXTRA_EMAIL,
+				new String[] { context.getString(R.string.app_bug_report_mail) });
+		PackageInfo pInfo = null;
+		try {
+			pInfo = context.getPackageManager().getPackageInfo(
+					context.getPackageName(), 0);
+		} catch (NameNotFoundException e1) {
+					e1.printStackTrace();
+		}
+
+		i.putExtra(Intent.EXTRA_SUBJECT,
+				"ERROR reporting - " + context.getString(R.string.app_name)
+						+ " " + pInfo.versionName);
+		i.putExtra(Intent.EXTRA_TEXT, ex.getMessage() + "  -  " + class_name
+				+ ":" + num_row.toString());
+
+		Log.e(context.getString(R.string.app_name) + " - error " + class_name,
+				ex.toString());
+
+		try {
+			context.startActivity(Intent.createChooser(i,
+					context.getString(R.string.send_bug_report)));
+		} catch (android.content.ActivityNotFoundException e) {
+			Toast.makeText(context,
+					context.getString(R.string.not_email_client),
+					Toast.LENGTH_SHORT).show();
+		}
+
 	}
 
 }

@@ -21,27 +21,37 @@ public class class_activity_extends extends Activity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		prefs = PreferenceManager.getDefaultSharedPreferences(this);
-		id_lang = Integer.parseInt(prefs.getString("language", "3"));
+		try {
+			super.onCreate(savedInstanceState);
+			prefs = PreferenceManager.getDefaultSharedPreferences(this);
+			id_lang = Integer.parseInt(prefs.getString("language", "3"));
+		} catch (Exception e) {
+			funct.send_bug_report(getBaseContext(), e, getClass().getName(), 29);
+		}
 	}
 
 	@Override
 	public void onStart() {
 		super.onStart();
-		if (prefs.getBoolean("analytics", true)) {
-			EasyTracker.getInstance().activityStart(this);
+		try {
+			if (prefs.getBoolean("analytics", true)) {
+				EasyTracker.getInstance().activityStart(this);
+			}
+		} catch (Exception e) {
+			funct.send_bug_report(getBaseContext(), e, getClass().getName(), 41);
 		}
-
 	}
 
 	@Override
 	public void onStop() {
 		super.onStop();
-		if (prefs.getBoolean("analytics", true)) {
-			EasyTracker.getInstance().activityStop(this);
+		try {
+			if (prefs.getBoolean("analytics", true)) {
+				EasyTracker.getInstance().activityStop(this);
+			}
+		} catch (Exception e) {
+			funct.send_bug_report(getBaseContext(), e, getClass().getName(), 53);
 		}
-
 	}
 
 }

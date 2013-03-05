@@ -39,15 +39,12 @@ public class class_rss_jornals {
 	private ArrayList<Integer> id_type = new ArrayList<Integer>();
 	private ArrayList<String> code_type = new ArrayList<String>();
 	private Integer cur_type = 0;
-	// private class_sqlite dbOpenHelper;
 	public SharedPreferences prefs;
 
 	public class_rss_jornals(Activity activity, int id_lang, Handler handler,
 			SQLiteDatabase database) {
 		this.activity = activity;
 		this.handler = handler;
-		// dbOpenHelper = new class_sqlite(activity);
-		// database = dbOpenHelper.openDataBase();
 		this.database = database;
 		prefs = PreferenceManager.getDefaultSharedPreferences(activity);
 		get_language(id_lang);
@@ -81,30 +78,36 @@ public class class_rss_jornals {
 
 	@SuppressWarnings("deprecation")
 	private void get_publication() {
-		Cursor cursor_type = database.query("type", new String[] { "_id",
-				"code" }, null, null, null, null, "_id");
-		Cursor cursor_pub = database.query("publication", new String[] { "_id",
-				"code" }, null, null, null, null, "_id");
-		activity.startManagingCursor(cursor_type);
-		activity.startManagingCursor(cursor_pub);
-		cursor_type.moveToFirst();
-		cursor_pub.moveToFirst();
+		try {
+			Cursor cursor_type = database.query("type", new String[] { "_id",
+					"code" }, null, null, null, null, "_id");
+			Cursor cursor_pub = database.query("publication", new String[] {
+					"_id", "code" }, null, null, null, null, "_id");
+			activity.startManagingCursor(cursor_type);
+			activity.startManagingCursor(cursor_pub);
+			cursor_type.moveToFirst();
+			cursor_pub.moveToFirst();
 
-		for (int i = 0; i < cursor_type.getCount(); i++) {
-			id_type.add(cursor_type.getInt(cursor_type.getColumnIndex("_id")));
-			code_type.add(cursor_type.getString(cursor_type
-					.getColumnIndex("code")));
-			cursor_type.moveToNext();
+			for (int i = 0; i < cursor_type.getCount(); i++) {
+				id_type.add(cursor_type.getInt(cursor_type
+						.getColumnIndex("_id")));
+				code_type.add(cursor_type.getString(cursor_type
+						.getColumnIndex("code")));
+				cursor_type.moveToNext();
+			}
+
+			for (int i = 0; i < cursor_pub.getCount(); i++) {
+				id_pub.add(cursor_pub.getInt(cursor_pub.getColumnIndex("_id")));
+				code_pub.add(cursor_pub.getString(cursor_pub
+						.getColumnIndex("code")));
+				cursor_pub.moveToNext();
+			}
+
+			activity.stopManagingCursor(cursor_type);
+			activity.stopManagingCursor(cursor_pub);
+		} catch (Exception e) {
+			funct.send_bug_report(activity, e, getClass().getName(), 107);
 		}
-
-		for (int i = 0; i < cursor_pub.getCount(); i++) {
-			id_pub.add(cursor_pub.getInt(cursor_pub.getColumnIndex("_id")));
-			code_pub.add(cursor_pub.getString(cursor_pub.getColumnIndex("code")));
-			cursor_pub.moveToNext();
-		}
-
-		activity.stopManagingCursor(cursor_type);
-		activity.stopManagingCursor(cursor_pub);
 	}
 
 	class ReadFeedTask extends AsyncTask<Void, Integer, Void> {
@@ -128,7 +131,7 @@ public class class_rss_jornals {
 							String feed = String.format(URL_FEED, code_lng,
 									code_pub.get(cur_pub),
 									code_type.get(cur_type));
-							this.rss_list = rssfeedprovider.parse(feed);
+							this.rss_list = rssfeedprovider.parse(feed, activity);
 
 							for (int i = 0; i < rss_list.size(); i++) {
 
@@ -149,8 +152,8 @@ public class class_rss_jornals {
 
 								SimpleDateFormat format = new SimpleDateFormat(
 										"yyyy-MM-dd");
-								Date date = funct.get_jwp_jornals_rss_date(name,
-										code_pub.get(cur_pub), code_lng);
+								Date date = funct.get_jwp_jornals_rss_date(
+										name, code_pub.get(cur_pub), code_lng);
 
 								Cursor cur = database.rawQuery(
 										"select _id from magazine where `name` = '"
@@ -191,15 +194,13 @@ public class class_rss_jornals {
 				}
 
 			} catch (Exception e) {
-				Log.e("JWP_" + getClass().getName(), e.toString());
+				funct.send_bug_report(activity, e, getClass().getName(), 197);
 			}
 			return null;
 		}
 
 		protected void onPostExecute(Void result) {
 			this.dialog.hide();
-			// database.close();
-			// dbOpenHelper.close();
 			handler.sendEmptyMessage(1);
 		}
 
