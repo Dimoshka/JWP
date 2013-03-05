@@ -16,7 +16,7 @@ public class class_activity_extends extends Activity {
 	public SharedPreferences prefs;
 	public SQLiteDatabase database;
 	public class_functions funct = new class_functions();
-	public int id_lang = 1;
+	public int id_lang = 0;
 	public OnSharedPreferenceChangeListener listener_pref;
 
 	@Override
@@ -24,7 +24,8 @@ public class class_activity_extends extends Activity {
 		try {
 			super.onCreate(savedInstanceState);
 			prefs = PreferenceManager.getDefaultSharedPreferences(this);
-			id_lang = Integer.parseInt(prefs.getString("language", "3"));
+			id_lang = Integer.parseInt(prefs.getString("language", "0"));
+
 		} catch (Exception e) {
 			funct.send_bug_report(getBaseContext(), e, getClass().getName(), 29);
 		}

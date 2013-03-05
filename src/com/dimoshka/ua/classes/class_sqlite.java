@@ -67,11 +67,20 @@ public class class_sqlite extends SQLiteOpenHelper {
 	public void onUpgrade(SQLiteDatabase database, int oldVersion,
 			int newVersion) {
 		Log.i("JWP" + getClass().getName(), "Start update SQLITE");
-		database.execSQL("DROP TABLE IF EXISTS type");
-		database.execSQL("DROP TABLE IF EXISTS language");
-		database.execSQL("DROP TABLE IF EXISTS publication");
-		database.execSQL("DROP TABLE IF EXISTS magazine");
-		onCreate(database);
+		switch (oldVersion) {
+		case 1:
+
+			
+			break;
+		default:
+			database.execSQL("DROP TABLE IF EXISTS type");
+			database.execSQL("DROP TABLE IF EXISTS language");
+			database.execSQL("DROP TABLE IF EXISTS publication");
+			database.execSQL("DROP TABLE IF EXISTS magazine");
+			onCreate(database);
+			break;
+		}
+
 	}
 
 	public void close() {

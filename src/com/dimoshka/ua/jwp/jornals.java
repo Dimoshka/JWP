@@ -64,6 +64,7 @@ public class jornals extends class_activity_extends {
 
 			rss_jornals = new class_rss_jornals(this, id_lang, handler,
 					database);
+			id_lang = rss_jornals.get_language(id_lang);
 			rss_jornals_img = new class_rss_jornals_img(this, handler, database);
 
 			list.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
@@ -82,8 +83,8 @@ public class jornals extends class_activity_extends {
 				public void onSharedPreferenceChanged(SharedPreferences prefs,
 						String key) {
 					id_lang = Integer
-							.parseInt(prefs.getString("language", "3"));
-					rss_jornals.get_language(id_lang);
+							.parseInt(prefs.getString("language", "0"));
+					id_lang = rss_jornals.get_language(id_lang);
 					refresh();
 				}
 			};
@@ -458,6 +459,6 @@ public class jornals extends class_activity_extends {
 		dbOpenHelper.close();
 		stopService(new Intent(this, class_downloads_files.class));
 
-	}
+	}	
 
 }

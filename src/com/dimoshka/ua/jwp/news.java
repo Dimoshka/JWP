@@ -21,6 +21,7 @@ import android.widget.ExpandableListView;
 import android.widget.Toast;
 
 import com.dimoshka.ua.classes.class_activity_extends;
+import com.dimoshka.ua.classes.class_downloads_files;
 import com.dimoshka.ua.classes.class_rss_news;
 import com.dimoshka.ua.classes.class_rss_news_adapter;
 import com.dimoshka.ua.classes.class_rss_news_img;
@@ -70,14 +71,15 @@ public class news extends class_activity_extends {
 			});
 
 			rss_news = new class_rss_news(this, id_lang, handler, database);
+			id_lang = rss_news.get_language(id_lang);
 			rss_news_img = new class_rss_news_img(this, handler, database);
 
 			listener_pref = new SharedPreferences.OnSharedPreferenceChangeListener() {
 				public void onSharedPreferenceChanged(SharedPreferences prefs,
 						String key) {
 					id_lang = Integer
-							.parseInt(prefs.getString("language", "1"));
-					rss_news.get_language(id_lang);
+							.parseInt(prefs.getString("language", "0"));
+					id_lang = rss_news.get_language(id_lang);
 					refresh();
 				}
 			};
@@ -239,6 +241,13 @@ public class news extends class_activity_extends {
 
 	public void jwp_rss_img() {
 		rss_news_img.verify_all_img();
+	}
+
+	@SuppressWarnings("deprecation")
+	public void onDestroy() {
+		super.onDestroy();
+		stopManagingCursor(cursor);
+		dbOpenHelper.close();
 	}
 
 }

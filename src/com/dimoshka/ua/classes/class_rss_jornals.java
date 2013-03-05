@@ -29,10 +29,8 @@ public class class_rss_jornals {
 	public class_functions funct = new class_functions();
 	private Activity activity;
 	private Handler handler;
-
 	private Integer id_ln = 0;
 	private String code_lng = "E";
-
 	private ArrayList<Integer> id_pub = new ArrayList<Integer>();
 	private ArrayList<String> code_pub = new ArrayList<String>();
 	private Integer cur_pub = 0;
@@ -61,19 +59,19 @@ public class class_rss_jornals {
 	}
 
 	@SuppressWarnings("deprecation")
-	public void get_language(int id) {
-		Cursor cursor = database.rawQuery(
-				"SELECT _id, code from language where _id='" + id + "'", null);
+	public Integer get_language(int id) {
+		Cursor cursor = funct.get_language(database, id, activity);
 		activity.startManagingCursor(cursor);
 		cursor.moveToFirst();
 		if (cursor.getCount() > 0) {
-			id_ln = id;
+			id_ln = cursor.getInt(cursor.getColumnIndex("_id"));
 			code_lng = cursor.getString(cursor.getColumnIndex("code"));
 		} else {
 			id_ln = 1;
 			code_lng = "E";
 		}
 		activity.stopManagingCursor(cursor);
+		return id_ln;
 	}
 
 	@SuppressWarnings("deprecation")
@@ -131,7 +129,8 @@ public class class_rss_jornals {
 							String feed = String.format(URL_FEED, code_lng,
 									code_pub.get(cur_pub),
 									code_type.get(cur_type));
-							this.rss_list = rssfeedprovider.parse(feed, activity);
+							this.rss_list = rssfeedprovider.parse(feed,
+									activity);
 
 							for (int i = 0; i < rss_list.size(); i++) {
 

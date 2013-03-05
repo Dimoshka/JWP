@@ -43,20 +43,19 @@ public class class_rss_news {
 	}
 
 	@SuppressWarnings("deprecation")
-	public void get_language(int id) {
-		Cursor cursor = database.rawQuery(
-				"SELECT _id, code, news_rss from language where _id='" + id
-						+ "'", null);
+	public Integer get_language(int id) {
+		Cursor cursor = funct.get_language(database, id, activity);
 		activity.startManagingCursor(cursor);
 		cursor.moveToFirst();
 		if (cursor.getCount() > 0) {
-			id_ln = id;
+			id_ln = cursor.getInt(cursor.getColumnIndex("_id"));
 			ln_prefix = cursor.getString(cursor.getColumnIndex("news_rss"));
 		} else {
 			id_ln = 1;
 			ln_prefix = "en/news";
 		}
 		activity.stopManagingCursor(cursor);
+		return id_ln;
 	}
 
 	public void get_all_feeds() {
