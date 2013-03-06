@@ -15,7 +15,6 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
-import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
@@ -129,14 +128,7 @@ public class class_downloads_files extends Service {
 
 					class_sqlite dbOpenHelper = new class_sqlite(this);
 					SQLiteDatabase database = dbOpenHelper.openDataBase();
-
-					ContentValues initialValues = new ContentValues();
-					initialValues.put("file", "1");
-
-					database.update("files", initialValues, "name=?",
-							new String[] { localFile.getName() });
-
-					// database.close();
+					funct.update_file_isn(database, localFile.getName(), 1);
 					dbOpenHelper.close();
 				}
 			}

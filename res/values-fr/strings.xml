@@ -3,7 +3,6 @@
 
     <string name="db_name">"jwp.sqlite"</string>
     <string name="db_version">"1"</string>
-    <string name="app_name">"JWP"</string>
     <string name="app_dir">"JWP"</string>
     <string name="app_bug_report_mail">"dimoshka.ua@gmail.com"</string>
 
@@ -28,6 +27,16 @@
         <item>8</item>
     </string-array>
 
+    <string name="app_name">"JWP - publications des Témoins de Jéhovah"</string>
+    <string name="description">"JWP - un programme pour les lecteurs des publications des Témoins de Jéhovah.
+En utilisant ce programme, vous aurez toujours accès aux enjeux actuels des revues "La Tour de Garde" et "Réveillez-vous."
+Vous devrez télécharger les publications en différentes langues et dans différents formats (pdf, epub, mp3, aac).
+Et aussi pour recevoir des nouvelles du www.jw.org site.
+Le programme fonctionne comme client RSS."</string>
+    <string name="player">"MP3 player"</string>
+    <string name="player_open">"Open in joueur"</string>
+    <string name="player_play">"Jouer"</string>
+    <string name="player_pause">"Pause"</string>
     <string name="send_bug_report">"Envoi du rapport d'erreur&#8230;"</string>
     <string name="not_email_client">"Vous n'avez pas de client de messagerie."</string>
     <string name="first_run_title">"Première manche"</string>

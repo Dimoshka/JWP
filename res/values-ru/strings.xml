@@ -3,7 +3,6 @@
 
     <string name="db_name">"jwp.sqlite"</string>
     <string name="db_version">"1"</string>
-    <string name="app_name">"JWP"</string>
     <string name="app_dir">"JWP"</string>
     <string name="app_bug_report_mail">"dimoshka.ua@gmail.com"</string>
 
@@ -28,6 +27,16 @@
         <item>8</item>
     </string-array>
 
+    <string name="app_name">"JWP - публикации Свидетелей Иеговы"</string>
+    <string name="description">"JWP - это программа для читателей публикаций Свидетелей Иеговы.
+Используя эту программу, вы всегда будете иметь доступ к актуальным выпускам журналов «Сторожевая Башня» и «Пробудитесь».
+У вас будет возможность скачивать публикации на различных языках и в различных форматах (pdf, epub, mp3, aac).
+А также возможность получать новости с сайта www.jw.org.
+Программа работает как RSS клиент."</string>
+    <string name="player">"MP3 player"</string>
+    <string name="player_open">"Открыть в плеере"</string>
+    <string name="player_play">"Воспроизвести"</string>
+    <string name="player_pause">"Пауза"</string>
     <string name="send_bug_report">"Отправка отчета об ошибке&#8230;"</string>
     <string name="not_email_client">"У вас не установлен почтовый клиент."</string>
     <string name="first_run_title">"Первый запуск программы"</string>

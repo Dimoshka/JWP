@@ -3,7 +3,6 @@
 
     <string name="db_name">"jwp.sqlite"</string>
     <string name="db_version">"1"</string>
-    <string name="app_name">"JWP"</string>
     <string name="app_dir">"JWP"</string>
     <string name="app_bug_report_mail">"dimoshka.ua@gmail.com"</string>
 
@@ -28,6 +27,16 @@
         <item>8</item>
     </string-array>
 
+    <string name="app_name">"JWP - publicaciones de los Testigos de Jehová"</string>
+    <string name="description">"JWP - un programa para los lectores de las publicaciones de los Testigos de Jehová.
+El uso de este programa, usted siempre tendrá acceso a temas de actualidad de las revistas "La Atalaya" y "Awake".
+Usted tendrá que descargar publicaciones en diferentes idiomas y en diferentes formatos (pdf, epub, mp3, aac).
+Y también para recibir noticias de la www.jw.org sitio.
+El programa funciona como cliente RSS."</string>
+    <string name="player">"MP3 player"</string>
+    <string name="player_open">"Open in reproductor"</string>
+    <string name="player_play">"Jugar"</string>
+    <string name="player_pause">"Pausa"</string>
     <string name="send_bug_report">"Envío de informe de errores&#8230;"</string>
     <string name="not_email_client">"Usted no tiene un cliente de correo electrónico."</string>
     <string name="first_run_title">"Primera ejecución"</string>

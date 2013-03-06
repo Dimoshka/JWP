@@ -21,7 +21,6 @@ import android.widget.ExpandableListView;
 import android.widget.Toast;
 
 import com.dimoshka.ua.classes.class_activity_extends;
-import com.dimoshka.ua.classes.class_downloads_files;
 import com.dimoshka.ua.classes.class_rss_news;
 import com.dimoshka.ua.classes.class_rss_news_adapter;
 import com.dimoshka.ua.classes.class_rss_news_img;
@@ -128,6 +127,7 @@ public class news extends class_activity_extends {
 
 	};
 
+	@SuppressWarnings("deprecation")
 	@SuppressLint("SimpleDateFormat")
 	private void refresh() {
 		try {

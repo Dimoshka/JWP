@@ -149,18 +149,27 @@ public class jornals extends class_activity_extends {
 					cur_files.moveToFirst();
 					for (int i = 0; i < cur_files.getCount(); i++) {
 						String name = null;
-						if (cur_files.getInt(cur_files.getColumnIndex("file")) == 1) {
-							name = getString(R.string.open)
-									+ " "
-									+ cur_files.getString(cur_files
-											.getColumnIndex("name_type"));
-						} else {
-							name = getString(R.string.download)
-									+ " "
-									+ cur_files.getString(cur_files
-											.getColumnIndex("name_type"));
-						}
 
+						if (cur_files.getInt(cur_files
+								.getColumnIndex("id_type")) != 3) {
+							if (cur_files.getInt(cur_files
+									.getColumnIndex("file")) == 1) {
+								name = getString(R.string.open)
+										+ " "
+										+ cur_files.getString(cur_files
+												.getColumnIndex("name_type"));
+							} else {
+								name = getString(R.string.download)
+										+ " "
+										+ cur_files.getString(cur_files
+												.getColumnIndex("name_type"));
+							}
+						} else {
+							name = getString(R.string.player_open)
+									+ " ("
+									+ cur_files.getString(cur_files
+											.getColumnIndex("name_type")) + ")";
+						}
 						listItems.add(name);
 						cur_files.moveToNext();
 					}
@@ -196,26 +205,10 @@ public class jornals extends class_activity_extends {
 				if (cur_files.getCount() > 0) {
 					cur_files.moveToPosition(id);
 					if (cur_files.getInt(cur_files.getColumnIndex("id_type")) == 3) {
-						Cursor cur = database
-								.rawQuery(
-										"select id_type, file, type.name as name_type, files.name, link from files left join magazine on files.id_magazine=magazine._id left join type on files.id_type=type._id where files.id_magazine='"
-												+ cur_files.getInt(cur_files
-														.getColumnIndex("id_magazine"))
-												+ "' and id_type='"
-												+ cur_files.getInt(cur_files
-														.getColumnIndex("id_type"))
-												+ "'", null);
-
-						startManagingCursor(cur);
-						cur.moveToFirst();
-						for (int i = 0; i < cur.getCount(); i++) {
-							start_open_or_download(
-									cur.getString(cur.getColumnIndex("name")),
-									cur.getInt(cur.getColumnIndex("file")),
-									cur.getString(cur.getColumnIndex("link")));
-							cur.moveToNext();
-						}
-						stopManagingCursor(cur);
+						Intent i = new Intent(this, player.class);
+						i.putExtra("id_magazine", cur_files.getInt(cur_files
+								.getColumnIndex("id_magazine")));
+						startActivity(i);
 					} else {
 						start_open_or_download(cur_files.getString(cur_files
 								.getColumnIndex("name")),
@@ -240,8 +233,12 @@ public class jornals extends class_activity_extends {
 		try {
 			File file = new File(funct.get_dir_app(this) + "/downloads/" + name);
 			if (file.exists() != true) {
+				if (file_enable == 1)
+					funct.update_file_isn(database, name, 0);
 				file_enable = 0;
 			} else {
+				if (file_enable == 0)
+					funct.update_file_isn(database, name, 1);
 				file_enable = 1;
 			}
 
@@ -459,6 +456,6 @@ public class jornals extends class_activity_extends {
 		dbOpenHelper.close();
 		stopService(new Intent(this, class_downloads_files.class));
 
-	}	
+	}
 
 }

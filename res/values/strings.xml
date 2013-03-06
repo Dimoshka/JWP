@@ -3,7 +3,6 @@
 
     <string name="db_name">"jwp.sqlite"</string>
     <string name="db_version">"1"</string>
-    <string name="app_name">"JWP"</string>
     <string name="app_dir">"JWP"</string>
     <string name="app_bug_report_mail">"dimoshka.ua@gmail.com"</string>
 
@@ -28,6 +27,16 @@
         <item>8</item>
     </string-array>
 
+    <string name="app_name">"JWP - publications of Jehovah's Witnesses"</string>
+    <string name="description">"JWP - a program for readers of the publications of Jehovah's Witnesses.
+Using this program, you will always have access to current issues of the journals "The Watchtower" and "Awake".
+You will have to download publications in different languages ​​and in different formats (pdf, epub, mp3, aac).
+And also to receive news from the site www.jw.org.
+The program works as RSS client."</string>
+    <string name="player">"MP3 player"</string>
+    <string name="player_open">"Open in player"</string>
+    <string name="player_play">"Play"</string>
+    <string name="player_pause">"Pause"</string>
     <string name="send_bug_report">"Send mail report of error&#8230;"</string>
     <string name="not_email_client">"There are no email clients installed."</string>
     <string name="first_run_title">"First run"</string>

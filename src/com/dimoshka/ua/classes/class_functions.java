@@ -7,6 +7,7 @@ import java.util.Locale;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -86,14 +87,18 @@ public class class_functions {
 		return dir;
 	}
 
+
+	@SuppressLint("DefaultLocale")
 	public String getMonth(int month) {
 		SimpleDateFormat sdf = new SimpleDateFormat("MMMM", Locale.getDefault());
 		Calendar localCalendar = Calendar.getInstance();
 		localCalendar.set(Calendar.MONTH, month);
-		return sdf.format(localCalendar.getTime());
+		String m = sdf.format(localCalendar.getTime());
+		m = m.replaceFirst(m.substring(0, 1), m.substring(0, 1).toUpperCase(Locale.getDefault()));
+		return m;
 	}
 
-	public Cursor get_language(SQLiteDatabase database, int id,
+	public Cursor get_language(SQLiteDatabase database, Integer id,
 			Activity activity) {
 		Cursor cursor;
 		if (id == 0) {
@@ -112,6 +117,13 @@ public class class_functions {
 					+ "'", null);
 		}
 		return cursor;
+	}
+
+	public void update_file_isn(SQLiteDatabase database, String name,
+			Integer file) {
+		ContentValues initialValues = new ContentValues();
+		initialValues.put("file", file.toString());
+		database.update("files", initialValues, "name=?", new String[] { name });
 	}
 
 	public void send_bug_report(Context context, Exception ex,
