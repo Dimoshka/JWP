@@ -15,6 +15,7 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
@@ -24,7 +25,6 @@ import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.dimoshka.ua.jwp.R;
-import com.dimoshka.ua.jwp.main;
 
 public class class_downloads_files extends Service {
 
@@ -69,7 +69,10 @@ public class class_downloads_files extends Service {
 			if (!Directory.isDirectory()) {
 				Directory.mkdirs();
 			}
-
+			 Directory = new File(dir + "temp/");
+			if (!Directory.isDirectory()) {
+				Directory.mkdirs();
+			}
 			targetFile = new HashMap<String, String>();
 			targetFile.put("link", intent.getStringExtra("file_url"));
 			targetFile.put("putch", intent.getStringExtra("file_putch"));
@@ -99,7 +102,6 @@ public class class_downloads_files extends Service {
 			if (!task.isCancelled())
 				task.cancel(true);
 		}
-
 		isRunning = false;
 	}
 
@@ -108,12 +110,14 @@ public class class_downloads_files extends Service {
 		return binder;
 	}
 
-	protected Class<?> getIntentForLatestInfo() {
-		return main.class;
-	}
+	// protected Class<?> getIntentForLatestInfo() {
+	// return main.class;
+	// }
 
 	protected int getNotificationFlag() {
-		return Notification.FLAG_AUTO_CANCEL | Notification.DEFAULT_LIGHTS;
+		return Notification.FLAG_AUTO_CANCEL | Notification.DEFAULT_LIGHTS
+				| Intent.FLAG_ACTIVITY_CLEAR_TOP
+				| Intent.FLAG_ACTIVITY_SINGLE_TOP;
 	}
 
 	protected void onFinishDownload(int success) {
@@ -138,10 +142,6 @@ public class class_downloads_files extends Service {
 		}
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
 	protected int getNotificationIcon() {
 		return R.drawable.ic_launcher;
 	}
@@ -160,30 +160,64 @@ public class class_downloads_files extends Service {
 		return contentView;
 	}
 
+	// @SuppressLint("NewApi")
 	@SuppressWarnings("deprecation")
 	protected void showNotification_popup(String ticker, String title,
-			String content) {
+			String content, Context context) {
 		Notification notification = new Notification(getNotificationIcon(),
 				ticker, System.currentTimeMillis());
+		// PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
+		// new Intent(this, getIntentForLatestInfo()),
+		// Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
-				new Intent(this, getIntentForLatestInfo()),
-				Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				new Intent(), Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		notification.setLatestEventInfo(getApplicationContext(), title,
 				content, contentIntent);
 		notification.flags = getNotificationFlag();
 		notificationManager.notify(SERVICE_ID, notification);
+
+		/*
+		 * Builder builder = new Notification.Builder(context)
+		 * .setContentTitle(title).setContentText(ticker)
+		 * .setSmallIcon(getNotificationIcon()).setLargeIcon(null)
+		 * .setContentIntent(contentIntent).setAutoCancel(true); Notification
+		 * notification = builder.build();
+		 * notificationManager.notify(SERVICE_ID, notification);
+		 */
 	}
 
-	protected void showNotification(RemoteViews remoteView, String ticker) {
-		@SuppressWarnings("deprecation")
+	// @SuppressLint("NewApi")
+	@SuppressWarnings("deprecation")
+	protected void showNotification(RemoteViews remoteView, String ticker,
+			Context context) {
 		Notification notification = new Notification(getNotificationIcon(),
 				ticker, System.currentTimeMillis());
 		notification.contentView = remoteView;
+		// notification.contentIntent = PendingIntent.getActivity(this, 0,
+		// new Intent(this, getIntentForLatestInfo()),
+		// Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
 		notification.contentIntent = PendingIntent.getActivity(this, 0,
-				new Intent(this, getIntentForLatestInfo()),
-				Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				new Intent(), Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
 		notification.flags = getNotificationFlag();
+		notification.flags |= Notification.FLAG_ONGOING_EVENT;
 		notificationManager.notify(SERVICE_ID, notification);
+
+		/*
+		 * PendingIntent contentIntent = PendingIntent.getActivity(this, 0, new
+		 * Intent(this, getIntentForLatestInfo()),
+		 * Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		 * 
+		 * Builder builder = new Notification.Builder(context)
+		 * .setContentTitle(ticker).setContentText(ticker)
+		 * .setSmallIcon(getNotificationIcon()).setLargeIcon(null)
+		 * .setContentIntent(contentIntent).setAutoCancel(true)
+		 * .setContent(remoteView);
+		 * 
+		 * Notification notification = builder.build();
+		 * notificationManager.notify(SERVICE_ID, notification);
+		 */
 	}
 
 	protected int getConnectTimeout() {
@@ -236,6 +270,10 @@ public class class_downloads_files extends Service {
 					Log.i("JWP" + getClass().getName(), "downloading: '"
 							+ remoteFilepath + "' => '" + localFilepath + "'");
 
+					File tempFile = File.createTempFile("jwp_", "_temp",
+							new File(funct.get_dir_app(getBaseContext())
+									+ "/downloads/temp/"));
+
 					try {
 						File localFile = new File(localFilepath);
 						if (!localFile.exists()) {
@@ -252,7 +290,7 @@ public class class_downloads_files extends Service {
 								BufferedInputStream bis = new BufferedInputStream(
 										connection.getInputStream());
 								FileOutputStream fos = new FileOutputStream(
-										new File(localFilepath));
+										tempFile);
 								int bytesRead, totalBytesRead = 0;
 								byte[] bytes = new byte[BYTES_BUFFER_SIZE];
 								// String progress, kbytes;
@@ -267,17 +305,18 @@ public class class_downloads_files extends Service {
 										RemoteViews progressView = getProgressView(
 												now_targetFile + 1, total_file,
 												totalBytesRead, filesize,
-												new File(localFilepath)
-														.getName());
+												localFile.getName());
 
 										if (!isCancelled()) {
 											showNotification(
 													progressView,
-													getString(R.string.download_title));
+													getString(R.string.download_title),
+													getApplicationContext());
 										} else {
 											showNotification(
 													progressView,
-													getString(R.string.download_cancelled));
+													getString(R.string.download_cancelled),
+													getApplicationContext());
 										}
 									}
 								}
@@ -285,22 +324,36 @@ public class class_downloads_files extends Service {
 								fos.close();
 								bis.close();
 
+								tempFile.renameTo(localFile);
+
 								if (isCancelled())
 									return null;
 							} else {
 								Log.i("JWP" + getClass().getName(),
 										"file size unknown for remote file: "
 												+ remoteFilepath);
+
+								showNotification_popup(
+										getString(R.string.download_failed),
+										getString(R.string.download_title),
+										"Failed: "
+												+ (new File(remoteFilepath))
+														.getName(),
+										getApplicationContext());
+
 								success = 0;
 							}
 						}
 						success = now_targetFile + 1;
 					} catch (Exception e) {
-						Log.e("JWP" + getClass().getName(), e.toString());
+						funct.send_bug_report(getBaseContext(), e, getClass()
+								.getName(), 300);
+
 						showNotification_popup(
 								getString(R.string.download_failed),
 								getString(R.string.download_title), "Failed: "
-										+ (new File(remoteFilepath)).getName());
+										+ (new File(remoteFilepath)).getName(),
+								getApplicationContext());
 						success = 0;
 					}
 					now_targetFile++;
@@ -315,11 +368,11 @@ public class class_downloads_files extends Service {
 		@Override
 		protected void onCancelled() {
 			super.onCancelled();
-
 			Log.e("JWP" + getClass().getName(), "AsyncTask Cancelled");
 			showNotification_popup(getString(R.string.download_cancelled),
 					getString(R.string.download_title),
-					getString(R.string.download_cancelled));
+					getString(R.string.download_cancelled),
+					getApplicationContext());
 		}
 
 		@SuppressLint("DefaultLocale")
@@ -330,7 +383,8 @@ public class class_downloads_files extends Service {
 				onFinishDownload(success);
 				showNotification_popup(getString(R.string.download_finished),
 						getString(R.string.download_title),
-						getString(R.string.download_finished));
+						getString(R.string.download_finished),
+						getApplicationContext());
 			} catch (Exception e) {
 				funct.send_bug_report(getBaseContext(), e,
 						getClass().getName(), 346);

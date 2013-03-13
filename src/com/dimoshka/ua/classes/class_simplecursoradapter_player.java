@@ -21,7 +21,7 @@ public class class_simplecursoradapter_player extends SimpleCursorAdapter {
 		super(context, layout, c, from, to);
 		this.layout = layout;
 		this.from = from;
-		this.to = to;		
+		this.to = to;
 	}
 
 	@Override
@@ -30,6 +30,7 @@ public class class_simplecursoradapter_player extends SimpleCursorAdapter {
 		for (int i = 0; i < from.length; i++) {
 			TextView t = (TextView) v.findViewById(to[i]);
 			t.setText(c.getString(c.getColumnIndex(from[i])));
+			t.setTextSize(12);
 
 			if (c.getInt(c.getColumnIndex("file")) == 1) {
 				t.setTextColor(context.getResources().getColor(

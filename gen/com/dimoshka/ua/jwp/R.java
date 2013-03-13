@@ -55,15 +55,15 @@ public final class R {
         public static final int audio=0x7f0a0005;
         public static final int digitalpub=0x7f0a0008;
         public static final int epub=0x7f0a0006;
-        public static final int image=0x7f0a000c;
+        public static final int image=0x7f0a000b;
         public static final int img=0x7f0a0001;
         public static final int list=0x7f0a0000;
         public static final int mp3=0x7f0a0004;
         public static final int pdf=0x7f0a0007;
-        public static final int progress=0x7f0a000d;
+        public static final int progress=0x7f0a000c;
         public static final int text=0x7f0a0009;
         public static final int text1=0x7f0a000a;
-        public static final int text2=0x7f0a000b;
+        public static final int text2=0x7f0a000d;
         public static final int title=0x7f0a0002;
         public static final int widget31=0x7f0a000e;
     }

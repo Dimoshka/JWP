@@ -206,6 +206,9 @@ public class jornals extends class_activity_extends {
 					cur_files.moveToPosition(id);
 					if (cur_files.getInt(cur_files.getColumnIndex("id_type")) == 3) {
 						Intent i = new Intent(this, player.class);
+						i.setFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+						i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+						i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 						i.putExtra("id_magazine", cur_files.getInt(cur_files
 								.getColumnIndex("id_magazine")));
 						startActivity(i);
