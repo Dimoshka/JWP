@@ -1,15 +1,12 @@
 package com.dimoshka.ua.jwp;
 
 import java.io.File;
-import java.io.FileInputStream;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -25,13 +22,14 @@ import android.widget.Toast;
 
 import com.dimoshka.ua.classes.class_activity_extends;
 import com.dimoshka.ua.classes.class_downloads_files;
+import com.dimoshka.ua.classes.class_mediaplayer;
 import com.dimoshka.ua.classes.class_simplecursoradapter_player;
 import com.dimoshka.ua.classes.class_sqlite;
 
 public class player extends class_activity_extends {
 
 	private Button buttonPlayStop;
-	private MediaPlayer mediaPlayer = null;
+	// private MediaPlayer mediaPlayer = new MediaPlayer();
 	private SeekBar seekBar;
 	private final Handler handler = new Handler();
 	private class_sqlite dbOpenHelper;
@@ -39,6 +37,7 @@ public class player extends class_activity_extends {
 	private Cursor cursor;
 	private Integer id_magazine;
 	private class_simplecursoradapter_player scAdapter;
+	private class_mediaplayer mediaplayer_class;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -56,6 +55,11 @@ public class player extends class_activity_extends {
 		try {
 			listView = (ListView) findViewById(R.id.list);
 			buttonPlayStop = (Button) findViewById(R.id.ButtonPlayStop);
+			seekBar = (SeekBar) findViewById(R.id.SeekBar01);
+
+			mediaplayer_class = new class_mediaplayer(getApplicationContext(),
+					buttonPlayStop, seekBar);
+
 			buttonPlayStop.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -65,7 +69,6 @@ public class player extends class_activity_extends {
 
 			buttonPlayStop.setEnabled(false);
 
-			seekBar = (SeekBar) findViewById(R.id.SeekBar01);
 			seekBar.setOnTouchListener(new OnTouchListener() {
 				@Override
 				public boolean onTouch(View v, MotionEvent event) {
@@ -125,53 +128,21 @@ public class player extends class_activity_extends {
 
 		startManagingCursor(cursor);
 		scAdapter = new class_simplecursoradapter_player(this,
-				R.layout.list_items_song, cursor, new String[] { "title" },
-				new int[] { R.id.text1 });
+				android.R.layout.simple_list_item_single_choice, cursor,
+				new String[] { "title" }, new int[] { android.R.id.text1 });
 		listView.setAdapter(scAdapter);
 	}
 
 	@SuppressLint("HandlerLeak")
 	private void madia_player(final File file) {
-		if (mediaPlayer != null) {
-			mediaPlayer.release();
+		if (mediaplayer_class.isPlaying()) {
+			mediaplayer_class.stop();
 		}
+		mediaplayer_class.reset();
+		mediaplayer_class.setDataSource(file.getAbsolutePath());
+		mediaplayer_class.prepareAsync();
 
-		mediaPlayer = new MediaPlayer();
-
-		try {
-			final MediaPlayer.OnPreparedListener onPreparedListener = new MediaPlayer.OnPreparedListener() {
-				@Override
-				public void onPrepared(MediaPlayer mediaPlayer) {
-					buttonPlayStop.setEnabled(true);
-					seekBar.setMax(mediaPlayer.getDuration());
-				}
-			};
-			final MediaPlayer.OnErrorListener onErrorListener = new MediaPlayer.OnErrorListener() {
-				@Override
-				public boolean onError(MediaPlayer mp, int what, int extra) {
-					Log.e(getPackageName(),
-							String.format("Error(%s%s)", what, extra));
-					return false;
-				}
-			};
-
-			FileInputStream subsetInputStream = null;
-			try {
-				subsetInputStream = new FileInputStream(file.getAbsolutePath());
-				mediaPlayer.setDataSource(subsetInputStream.getFD());
-			} catch (Exception e) {
-				funct.send_bug_report(getBaseContext(), e,
-						getClass().getName(), 197);
-			}
-			mediaPlayer.setOnErrorListener(onErrorListener);
-			// mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-			onPreparedListener.onPrepared(mediaPlayer);
-
-		} catch (Exception e) {
-			funct.send_bug_report(getBaseContext(), e, getClass().getName(),
-					201);
-		}
-
+		startPlayProgressUpdater();
 	}
 
 	private void start_download(String link, File file) {
@@ -183,47 +154,43 @@ public class player extends class_activity_extends {
 		startService(i);
 	}
 
-	public void onPrepared(MediaPlayer player) {
-		mediaPlayer.start();
-	}
-
 	public void startPlayProgressUpdater() {
-		seekBar.setProgress(mediaPlayer.getCurrentPosition());
+		try {
+			if (mediaplayer_class.isPlaying()) {
+				seekBar.setProgress(mediaplayer_class.getCurrentPosition());
+			} else {
+				// mediaplayer_class.pause();
+				buttonPlayStop.setText(getString(R.string.player_play));
+				seekBar.setProgress(0);
+			}
 
-		if (mediaPlayer.isPlaying()) {
 			Runnable notification = new Runnable() {
 				public void run() {
 					startPlayProgressUpdater();
 				}
 			};
 			handler.postDelayed(notification, 1000);
-		} else {
-			mediaPlayer.pause();
-			buttonPlayStop.setText(getString(R.string.player_play));
-			seekBar.setProgress(0);
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
+
 	}
 
 	private void seekChange(View v) {
-		if (mediaPlayer.isPlaying()) {
+		if (mediaplayer_class.isPlaying()) {
 			SeekBar sb = (SeekBar) v;
-			mediaPlayer.seekTo(sb.getProgress());
+			mediaplayer_class.seekTo(sb.getProgress());
 		}
 	}
 
 	private void buttonClick() {
-
 		if (buttonPlayStop.getText() == getString(R.string.player_play)) {
 			buttonPlayStop.setText(getString(R.string.player_pause));
-			try {
-				mediaPlayer.start();
-				startPlayProgressUpdater();
-			} catch (IllegalStateException e) {
-				mediaPlayer.pause();
-			}
+			mediaplayer_class.start();
+			startPlayProgressUpdater();
 		} else {
 			buttonPlayStop.setText(getString(R.string.player_play));
-			mediaPlayer.pause();
+			mediaplayer_class.pause();
 		}
 
 	}
@@ -262,9 +229,7 @@ public class player extends class_activity_extends {
 	@SuppressWarnings("deprecation")
 	protected void onDestroy() {
 		super.onDestroy();
-		if (mediaPlayer != null) {
-			mediaPlayer.release();
-		}
+		mediaplayer_class.release();
 		stopManagingCursor(cursor);
 		dbOpenHelper.close();
 	}

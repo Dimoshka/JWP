@@ -28,8 +28,8 @@ import android.widget.Toast;
 
 import com.dimoshka.ua.classes.class_activity_extends;
 import com.dimoshka.ua.classes.class_downloads_files;
-import com.dimoshka.ua.classes.class_rss_jornals_adapter;
 import com.dimoshka.ua.classes.class_rss_jornals;
+import com.dimoshka.ua.classes.class_rss_jornals_adapter;
 import com.dimoshka.ua.classes.class_rss_jornals_img;
 import com.dimoshka.ua.classes.class_sqlite;
 
@@ -68,7 +68,6 @@ public class jornals extends class_activity_extends {
 			rss_jornals_img = new class_rss_jornals_img(this, handler, database);
 
 			list.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-
 				@Override
 				public boolean onChildClick(ExpandableListView arg0, View arg1,
 						int arg2, int arg3, long arg4) {
@@ -76,7 +75,7 @@ public class jornals extends class_activity_extends {
 					hash = childData.get(arg2).get(arg3);
 					dialog_show(hash.get("_id"));
 					return false;
-				}
+				}			
 			});
 
 			listener_pref = new SharedPreferences.OnSharedPreferenceChangeListener() {

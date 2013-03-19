@@ -67,6 +67,7 @@ public class news extends class_activity_extends {
 					startActivity(ch);
 					return false;
 				}
+
 			});
 
 			rss_news = new class_rss_news(this, id_lang, handler, database);
