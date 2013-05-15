@@ -4,7 +4,6 @@
     android:layout_height="?android:attr/listPreferredItemHeight"
     android:mode="twoLine"
     android:paddingBottom="3dip"
-    android:paddingStart="?android:attr/expandableListPreferredItemPaddingLeft"
     android:paddingTop="3dip" >
 
     <TextView

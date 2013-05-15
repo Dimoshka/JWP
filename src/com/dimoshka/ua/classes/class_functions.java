@@ -87,14 +87,14 @@ public class class_functions {
 		return dir;
 	}
 
-
 	@SuppressLint("DefaultLocale")
 	public String getMonth(int month) {
 		SimpleDateFormat sdf = new SimpleDateFormat("MMMM", Locale.getDefault());
 		Calendar localCalendar = Calendar.getInstance();
 		localCalendar.set(Calendar.MONTH, month);
 		String m = sdf.format(localCalendar.getTime());
-		m = m.replaceFirst(m.substring(0, 1), m.substring(0, 1).toUpperCase(Locale.getDefault()));
+		m = m.replaceFirst(m.substring(0, 1),
+				m.substring(0, 1).toUpperCase(Locale.getDefault()));
 		return m;
 	}
 
@@ -131,9 +131,11 @@ public class class_functions {
 
 		Log.e(context.getString(R.string.app_name) + " - error " + class_name,
 				ex.toString());
-
+/*
 		prefs = PreferenceManager.getDefaultSharedPreferences(context);
 		if (prefs.getBoolean("analytics", true)) {
+
+			// ACRA.getErrorReporter().handleException(ex);
 
 			Intent i = new Intent(Intent.ACTION_SEND);
 			i.setType("message/rfc822");
@@ -161,8 +163,9 @@ public class class_functions {
 						context.getString(R.string.not_email_client),
 						Toast.LENGTH_SHORT).show();
 			}
-		}
 
+		}
+		*/
 	}
 
 }

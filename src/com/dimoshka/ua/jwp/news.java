@@ -5,29 +5,26 @@ import java.util.HashMap;
 import java.util.Map;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
 
-import com.dimoshka.ua.classes.class_activity_extends;
+import com.actionbarsherlock.app.SherlockFragment;
 import com.dimoshka.ua.classes.class_rss_news;
 import com.dimoshka.ua.classes.class_rss_news_adapter;
 import com.dimoshka.ua.classes.class_rss_news_img;
-import com.dimoshka.ua.classes.class_sqlite;
 
 @SuppressLint("HandlerLeak")
-public class news extends class_activity_extends {
+public class news extends SherlockFragment {
 
 	private ExpandableListView list;
 	private class_rss_news rss_news;
@@ -37,18 +34,18 @@ public class news extends class_activity_extends {
 	private ArrayList<Map<String, String>> childDataItem;
 	private ArrayList<ArrayList<Map<String, String>>> childData;
 	private Map<String, String> m;
-	private class_sqlite dbOpenHelper;
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.list);
+	public View onCreateView(LayoutInflater inflater, ViewGroup group,
+			Bundle saved) {
+		return inflater.inflate(R.layout.list, group, false);
+	}
+
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
 		try {
-			list = (ExpandableListView) findViewById(R.id.list);
-
-			dbOpenHelper = new class_sqlite(this);
-			database = dbOpenHelper.openDataBase();
-
+			list = (ExpandableListView) getActivity().findViewById(R.id.list);
 			list.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 
 				@Override
@@ -70,38 +67,14 @@ public class news extends class_activity_extends {
 
 			});
 
-			rss_news = new class_rss_news(this, id_lang, handler, database);
-			id_lang = rss_news.get_language(id_lang);
-			rss_news_img = new class_rss_news_img(this, handler, database);
-
-			listener_pref = new SharedPreferences.OnSharedPreferenceChangeListener() {
-				public void onSharedPreferenceChanged(SharedPreferences prefs,
-						String key) {
-					id_lang = Integer
-							.parseInt(prefs.getString("language", "0"));
-					id_lang = rss_news.get_language(id_lang);
-					refresh();
-				}
-			};
-			prefs.registerOnSharedPreferenceChangeListener(listener_pref);
-
-			if (prefs.getBoolean("downloads_on_start", false)) {
-				load_rss();
-			}
-
-			boolean firstrun = prefs.getBoolean("first_run", true);
-			if (firstrun) {
-				new AlertDialog.Builder(this)
-						.setTitle(getString(R.string.first_run_title))
-						.setMessage(getString(R.string.first_run))
-						.setNeutralButton("OK", null).show();
-				prefs.edit().putBoolean("first_run", false).commit();
-			} else {
-				refresh();
-			}
+			rss_news = new class_rss_news(getActivity(), main.id_lang, handler,
+					main.database);
+			main.id_lang = rss_news.get_language(main.id_lang);
+			rss_news_img = new class_rss_news_img(getActivity(), handler,
+					main.database);
 
 		} catch (Exception e) {
-			funct.send_bug_report(getBaseContext(), e, getClass().getName(),
+			main.funct.send_bug_report(getActivity(), e, getClass().getName(),
 					102);
 		}
 	}
@@ -112,7 +85,7 @@ public class news extends class_activity_extends {
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
 			case 1:
-				if (prefs.getBoolean("downloads_img", true)) {
+				if (main.prefs.getBoolean("downloads_img", true)) {
 					Log.e("JWP", "start load image");
 					jwp_rss_img();
 				} else {
@@ -128,15 +101,14 @@ public class news extends class_activity_extends {
 
 	};
 
-	@SuppressWarnings("deprecation")
 	@SuppressLint("SimpleDateFormat")
-	private void refresh() {
+	public void refresh() {
 		try {
-			stopManagingCursor(cursor);
-			cursor = database.rawQuery(
-					"select * from news where news.id_lang='" + id_lang
+			getActivity().stopManagingCursor(cursor);
+			cursor = main.database.rawQuery(
+					"select * from news where news.id_lang='" + main.id_lang
 							+ "' order by pubdate desc, news._id asc", null);
-			startManagingCursor(cursor);
+			getActivity().startManagingCursor(cursor);
 
 			groupData = new ArrayList<Map<String, String>>();
 
@@ -177,60 +149,25 @@ public class news extends class_activity_extends {
 				cursor.moveToNext();
 			}
 
-			stopManagingCursor(cursor);
+			getActivity().stopManagingCursor(cursor);
 
-			class_rss_news_adapter adapter = new class_rss_news_adapter(this,
-					groupData, childData, database);
+			class_rss_news_adapter adapter = new class_rss_news_adapter(
+					getActivity(), groupData, childData, main.database);
 			list.setAdapter(adapter);
 		} catch (Exception e) {
-			funct.send_bug_report(getBaseContext(), e, getClass().getName(),
+			main.funct.send_bug_report(getActivity(), e, getClass().getName(),
 					182);
 		}
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		menu.add(Menu.NONE, 3, Menu.NONE, R.string.refrashe).setIcon(
-				android.R.drawable.ic_menu_rotate);
-		menu.add(Menu.NONE, 2, Menu.NONE, R.string.download_rss).setIcon(
-				android.R.drawable.ic_menu_revert);
-		menu.add(Menu.NONE, 1, Menu.NONE, R.string.preference).setIcon(
-				android.R.drawable.ic_menu_preferences);
-		menu.add(Menu.NONE, 0, Menu.NONE, R.string.exit).setIcon(
-				android.R.drawable.ic_lock_power_off);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case 0:
-			System.exit(0);
-			break;
-		case 1:
-			Intent i = new Intent(this, preferences.class);
-			startActivity(i);
-			break;
-		case 2:
-			load_rss();
-			break;
-		case 3:
-			refresh();
-			break;
-		default:
-			break;
-		}
-
-		return false;
-	}
-
 	@SuppressLint("ShowToast")
-	private void load_rss() {
+	public void load_rss() {
 		try {
-			if (funct.isNetworkAvailable(this) == true) {
+			if (main.funct.isNetworkAvailable(getActivity()) == true) {
 				jwp_rss();
 			} else
-				Toast.makeText(this, R.string.no_internet, Toast.LENGTH_SHORT);
+				Toast.makeText(getActivity(), R.string.no_internet,
+						Toast.LENGTH_SHORT);
 		} catch (Exception e) {
 			Log.e("JWP_" + getClass().getName(), e.toString());
 		}
@@ -244,11 +181,11 @@ public class news extends class_activity_extends {
 		rss_news_img.verify_all_img();
 	}
 
-	@SuppressWarnings("deprecation")
+	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		stopManagingCursor(cursor);
-		dbOpenHelper.close();
+		getActivity().stopManagingCursor(cursor);
+		// dbOpenHelper.close();
 	}
 
 }

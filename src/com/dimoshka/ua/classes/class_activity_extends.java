@@ -8,8 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 
-import com.google.analytics.tracking.android.EasyTracker;
-
 @SuppressLint("Registered")
 public class class_activity_extends extends Activity {
 
@@ -36,7 +34,7 @@ public class class_activity_extends extends Activity {
 		super.onStart();
 		try {
 			if (prefs.getBoolean("analytics", true)) {
-				EasyTracker.getInstance().activityStart(this);
+				//EasyTracker.getInstance().activityStart(this);
 			}
 		} catch (Exception e) {
 			funct.send_bug_report(getBaseContext(), e, getClass().getName(), 41);
@@ -48,7 +46,7 @@ public class class_activity_extends extends Activity {
 		super.onStop();
 		try {
 			if (prefs.getBoolean("analytics", true)) {
-				EasyTracker.getInstance().activityStop(this);
+				//EasyTracker.getInstance().activityStop(this);
 			}
 		} catch (Exception e) {
 			funct.send_bug_report(getBaseContext(), e, getClass().getName(), 53);

@@ -12,29 +12,27 @@ import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
 
-import com.dimoshka.ua.classes.class_activity_extends;
+import com.actionbarsherlock.app.SherlockFragment;
 import com.dimoshka.ua.classes.class_downloads_files;
 import com.dimoshka.ua.classes.class_rss_jornals;
 import com.dimoshka.ua.classes.class_rss_jornals_adapter;
 import com.dimoshka.ua.classes.class_rss_jornals_img;
-import com.dimoshka.ua.classes.class_sqlite;
 
 @SuppressLint("HandlerLeak")
-public class jornals extends class_activity_extends {
+public class jornals extends SherlockFragment {
 
 	private ExpandableListView list;
 	private class_rss_jornals rss_jornals;
@@ -44,7 +42,6 @@ public class jornals extends class_activity_extends {
 	private ArrayList<Map<String, String>> childDataItem;
 	private ArrayList<ArrayList<Map<String, String>>> childData;
 	private Map<String, String> m;
-	private class_sqlite dbOpenHelper;
 
 	int yer = 0;
 	int mon = 0;
@@ -53,19 +50,27 @@ public class jornals extends class_activity_extends {
 	private Cursor cur_files;
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+	public View onCreateView(LayoutInflater inflater, ViewGroup group,
+			Bundle saved) {
+		return inflater.inflate(R.layout.list, group, false);
+	}
+
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+
 		try {
-			setContentView(R.layout.list);
-			list = (ExpandableListView) findViewById(R.id.list);
 
-			dbOpenHelper = new class_sqlite(this);
-			database = dbOpenHelper.openDataBase();
+			// prefs =
+			// PreferenceManager.getDefaultSharedPreferences(getActivity());
+			// id_lang = Integer.parseInt(prefs.getString("language", "0"));
 
-			rss_jornals = new class_rss_jornals(this, id_lang, handler,
-					database);
-			id_lang = rss_jornals.get_language(id_lang);
-			rss_jornals_img = new class_rss_jornals_img(this, handler, database);
+			list = (ExpandableListView) getActivity().findViewById(R.id.list);
+			rss_jornals = new class_rss_jornals(getActivity(), main.id_lang,
+					handler, main.database);
+			main.id_lang = rss_jornals.get_language(main.id_lang);
+			rss_jornals_img = new class_rss_jornals_img(getActivity(), handler,
+					main.database);
 
 			list.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 				@Override
@@ -75,39 +80,14 @@ public class jornals extends class_activity_extends {
 					hash = childData.get(arg2).get(arg3);
 					dialog_show(hash.get("_id"));
 					return false;
-				}			
+				}
 			});
 
-			listener_pref = new SharedPreferences.OnSharedPreferenceChangeListener() {
-				public void onSharedPreferenceChanged(SharedPreferences prefs,
-						String key) {
-					id_lang = Integer
-							.parseInt(prefs.getString("language", "0"));
-					id_lang = rss_jornals.get_language(id_lang);
-					refresh();
-				}
-			};
-			prefs.registerOnSharedPreferenceChangeListener(listener_pref);
-
-			if (prefs.getBoolean("downloads_on_start", false)) {
-				load_rss();
-			}
-
-			boolean firstrun = prefs.getBoolean("first_run", true);
-			if (firstrun) {
-
-				new AlertDialog.Builder(this)
-						.setTitle(getString(R.string.first_run_title))
-						.setMessage(getString(R.string.first_run))
-						.setNeutralButton("OK", null).show();
-				prefs.edit().putBoolean("first_run", false).commit();
-			} else {
-				refresh();
-			}
 		} catch (Exception e) {
-			funct.send_bug_report(getBaseContext(), e, getClass().getName(),
+			main.funct.send_bug_report(getActivity(), e, getClass().getName(),
 					106);
 		}
+
 	}
 
 	@SuppressLint("HandlerLeak")
@@ -116,7 +96,7 @@ public class jornals extends class_activity_extends {
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
 			case 1:
-				if (prefs.getBoolean("downloads_img", true)) {
+				if (main.prefs.getBoolean("downloads_img", true)) {
 					Log.e("JWP", "start load image");
 					jwp_rss_img();
 				} else {
@@ -132,18 +112,17 @@ public class jornals extends class_activity_extends {
 	};
 
 	@SuppressLint("ShowToast")
-	@SuppressWarnings("deprecation")
 	private void dialog_show(String _id) {
 		try {
-			if (funct.ExternalStorageState() == true) {
+			if (main.funct.ExternalStorageState() == true) {
 				List<String> listItems = new ArrayList<String>();
 				CharSequence[] items = null;
 
-				cur_files = database
+				cur_files = main.database
 						.rawQuery(
 								"select id_type, file, type.name as name_type, files.name, link, files.id_magazine from files left join magazine on files.id_magazine=magazine._id left join type on files.id_type=type._id where files.id_magazine='"
 										+ _id + "' group by id_type", null);
-				startManagingCursor(cur_files);
+				getActivity().startManagingCursor(cur_files);
 				if (cur_files.getCount() > 0) {
 					cur_files.moveToFirst();
 					for (int i = 0; i < cur_files.getCount(); i++) {
@@ -176,7 +155,8 @@ public class jornals extends class_activity_extends {
 					items = listItems
 							.toArray(new CharSequence[listItems.size()]);
 
-					AlertDialog.Builder builder = new AlertDialog.Builder(this);
+					AlertDialog.Builder builder = new AlertDialog.Builder(
+							getActivity());
 					builder.setTitle(getString(R.string.select_the_action));
 					builder.setItems(items,
 							new DialogInterface.OnClickListener() {
@@ -189,22 +169,22 @@ public class jornals extends class_activity_extends {
 					alert.show();
 				}
 			} else
-				Toast.makeText(this, R.string.no_sdcard, Toast.LENGTH_SHORT);
+				Toast.makeText(getActivity(), R.string.no_sdcard,
+						Toast.LENGTH_SHORT);
 		} catch (Exception e) {
-			funct.send_bug_report(getBaseContext(), e, getClass().getName(),
+			main.funct.send_bug_report(getActivity(), e, getClass().getName(),
 					183);
 		}
 	}
 
 	@SuppressLint("ShowToast")
-	@SuppressWarnings("deprecation")
 	private void open_or_download(int id) {
 		try {
-			if (funct.ExternalStorageState() == true) {
+			if (main.funct.ExternalStorageState() == true) {
 				if (cur_files.getCount() > 0) {
 					cur_files.moveToPosition(id);
 					if (cur_files.getInt(cur_files.getColumnIndex("id_type")) == 3) {
-						Intent i = new Intent(this, player.class);
+						Intent i = new Intent(getActivity(), player.class);
 						i.setFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
 						i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 						i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -221,11 +201,11 @@ public class jornals extends class_activity_extends {
 					}
 				}
 			} else
-				Toast.makeText(getBaseContext(), R.string.no_sdcard,
+				Toast.makeText(getActivity(), R.string.no_sdcard,
 						Toast.LENGTH_SHORT);
-			stopManagingCursor(cur_files);
+			getActivity().stopManagingCursor(cur_files);
 		} catch (Exception e) {
-			funct.send_bug_report(getBaseContext(), e, getClass().getName(),
+			main.funct.send_bug_report(getActivity(), e, getClass().getName(),
 					232);
 		}
 	}
@@ -233,14 +213,15 @@ public class jornals extends class_activity_extends {
 	private void start_open_or_download(String name, int file_enable,
 			String link) {
 		try {
-			File file = new File(funct.get_dir_app(this) + "/downloads/" + name);
+			File file = new File(main.funct.get_dir_app(getActivity())
+					+ "/downloads/" + name);
 			if (file.exists() != true) {
 				if (file_enable == 1)
-					funct.update_file_isn(database, name, 0);
+					main.funct.update_file_isn(main.database, name, 0);
 				file_enable = 0;
 			} else {
 				if (file_enable == 0)
-					funct.update_file_isn(database, name, 1);
+					main.funct.update_file_isn(main.database, name, 1);
 				file_enable = 1;
 			}
 
@@ -262,31 +243,31 @@ public class jornals extends class_activity_extends {
 				startActivity(ch);
 
 			} else {
-				Intent i = new Intent(getBaseContext(),
+				Intent i = new Intent(getActivity(),
 						class_downloads_files.class);
 				i.putExtra("file_url", link);
 				i.putExtra("file_putch", file.getAbsolutePath());
-				Toast.makeText(this, getString(R.string.download_task_addeded),
+				Toast.makeText(getActivity(),
+						getString(R.string.download_task_addeded),
 						Toast.LENGTH_SHORT).show();
-				startService(i);
+				getActivity().startService(i);
 			}
 		} catch (Exception e) {
-			funct.send_bug_report(getBaseContext(), e, getClass().getName(),
+			main.funct.send_bug_report(getActivity(), e, getClass().getName(),
 					273);
 		}
 	}
 
-	@SuppressWarnings("deprecation")
-	private void refresh() {
+	public void refresh() {
 		try {
-			stopManagingCursor(cursor);
-			cursor = database
+			getActivity().stopManagingCursor(cursor);
+			cursor = main.database
 					.rawQuery(
 							"select magazine._id as _id, magazine.name as name, magazine.img as img, language.code as code_lng, publication.code as code_pub, publication._id as cur_pub, date from magazine left join language on magazine.id_lang=language._id left join publication on magazine.id_pub=publication._id where magazine.id_lang='"
-									+ id_lang
+									+ main.id_lang
 									+ "' order by date desc, magazine.id_pub asc",
 							null);
-			startManagingCursor(cursor);
+			getActivity().startManagingCursor(cursor);
 
 			groupData = new ArrayList<Map<String, String>>();
 
@@ -303,13 +284,13 @@ public class jornals extends class_activity_extends {
 						.getColumnIndex("code_pub"));
 				Integer img = cursor.getInt(cursor.getColumnIndex("img"));
 				Integer _id = cursor.getInt(cursor.getColumnIndex("_id"));
-				Date date = funct.get_jwp_jornals_rss_date(name, code_pub,
+				Date date = main.funct.get_jwp_jornals_rss_date(name, code_pub,
 						code_lng);
 
-				Cursor cur = database.rawQuery(
+				Cursor cur = main.database.rawQuery(
 						"select id_type, file, name from files where `id_magazine`='"
 								+ _id + "' group by id_type", null);
-				startManagingCursor(cur);
+				getActivity().startManagingCursor(cur);
 				String files = "";
 				if (cur.getCount() > 0) {
 					cur.moveToFirst();
@@ -319,7 +300,7 @@ public class jornals extends class_activity_extends {
 						int file_isn = 0;
 						if (cur.getInt(cur.getColumnIndex("file")) == 1) {
 							File file = new File(
-									funct.get_dir_app(getBaseContext())
+									main.funct.get_dir_app(getActivity())
 											+ "/downloads/"
 											+ cur.getString(cur
 													.getColumnIndex("name")));
@@ -336,7 +317,7 @@ public class jornals extends class_activity_extends {
 														.getColumnIndex("name")));
 								ContentValues initialValues = new ContentValues();
 								initialValues.put("file", "0");
-								database.update("files", initialValues,
+								main.database.update("files", initialValues,
 										"name=?",
 										new String[] { cur.getString(cur
 												.getColumnIndex("name")) });
@@ -349,13 +330,13 @@ public class jornals extends class_activity_extends {
 						cur.moveToNext();
 					}
 				}
-				stopManagingCursor(cur);
+				getActivity().stopManagingCursor(cur);
 
 				if (date.getYear() != yer || date.getMonth() != mon) {
 					yer = date.getYear();
 					mon = date.getMonth();
 					m = new HashMap<String, String>();
-					m.put("groupName", funct.getMonth(mon));
+					m.put("groupName", main.funct.getMonth(mon));
 					groupData.add(m);
 
 					if (i > 0) {
@@ -384,12 +365,12 @@ public class jornals extends class_activity_extends {
 				cursor.moveToNext();
 			}
 			childData.add(childDataItem);
-			stopManagingCursor(cursor);
+			getActivity().stopManagingCursor(cursor);
 			class_rss_jornals_adapter adapter = new class_rss_jornals_adapter(
-					this, groupData, childData, database);
+					getActivity(), groupData, childData, main.database);
 			list.setAdapter(adapter);
 		} catch (Exception e) {
-			funct.send_bug_report(getBaseContext(), e, getClass().getName(),
+			main.funct.send_bug_report(getActivity(), e, getClass().getName(),
 					392);
 		}
 	}
@@ -402,61 +383,27 @@ public class jornals extends class_activity_extends {
 		rss_jornals_img.verify_all_img();
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		menu.add(Menu.NONE, 3, Menu.NONE, R.string.refrashe).setIcon(
-				android.R.drawable.ic_menu_rotate);
-		menu.add(Menu.NONE, 2, Menu.NONE, R.string.download_rss).setIcon(
-				android.R.drawable.ic_menu_revert);
-		menu.add(Menu.NONE, 1, Menu.NONE, R.string.preference).setIcon(
-				android.R.drawable.ic_menu_preferences);
-		menu.add(Menu.NONE, 0, Menu.NONE, R.string.exit).setIcon(
-				android.R.drawable.ic_lock_power_off);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case 0:
-			System.exit(0);
-			break;
-		case 1:
-			Intent i = new Intent(this, preferences.class);
-			startActivity(i);
-			break;
-		case 2:
-			load_rss();
-			break;
-		case 3:
-			refresh();
-			break;
-		default:
-			break;
-		}
-
-		return false;
-	}
-
 	@SuppressLint("ShowToast")
-	private void load_rss() {
+	public void load_rss() {
 		try {
-			if (funct.isNetworkAvailable(this) == true) {
+			if (main.funct.isNetworkAvailable(getActivity()) == true) {
 				jwp_rss();
 			} else
-				Toast.makeText(this, R.string.no_internet, Toast.LENGTH_SHORT);
+				Toast.makeText(getActivity(), R.string.no_internet,
+						Toast.LENGTH_SHORT);
 		} catch (Exception e) {
 			Log.e("JWP_" + getClass().getName(), e.toString());
 		}
 	}
 
-	@SuppressWarnings("deprecation")
+	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		stopManagingCursor(cursor);
-		stopManagingCursor(cur_files);
-		dbOpenHelper.close();
-		stopService(new Intent(this, class_downloads_files.class));
+		getActivity().stopManagingCursor(cursor);
+		getActivity().stopManagingCursor(cur_files);
+		//dbOpenHelper.close();
+		getActivity().stopService(
+				new Intent(getActivity(), class_downloads_files.class));
 
 	}
 

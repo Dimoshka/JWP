@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dimoshka.ua.jwp"
-    android:versionCode="5"
-    android:versionName="1.0.4.1" >
+    android:versionCode="6"
+    android:versionName="1.0.5.1" >
 
     <uses-sdk
         android:minSdkVersion="7"
-        android:targetSdkVersion="17" />
+        android:targetSdkVersion="16" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
 
     <application
         android:allowBackup="true"
@@ -25,8 +26,7 @@
         android:logo="@drawable/ic_launcher"
         android:restoreAnyVersion="true"
         android:restoreNeedsApplication="false"
-        android:supportsRtl="true"
-        android:theme="@style/AppBaseTheme"
+        android:theme="@style/AppTheme"
         android:uiOptions="none|splitActionBarWhenNarrow"
         android:vmSafeMode="true" >
         <activity
