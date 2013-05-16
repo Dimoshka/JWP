@@ -77,6 +77,8 @@ public class news extends SherlockFragment {
 			main.funct.send_bug_report(getActivity(), e, getClass().getName(),
 					102);
 		}
+		
+		refresh();
 	}
 
 	@SuppressLint("HandlerLeak")

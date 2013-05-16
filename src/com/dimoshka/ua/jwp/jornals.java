@@ -88,6 +88,7 @@ public class jornals extends SherlockFragment {
 					106);
 		}
 
+		refresh();
 	}
 
 	@SuppressLint("HandlerLeak")

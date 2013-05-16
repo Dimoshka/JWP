@@ -160,8 +160,7 @@ public class class_downloads_files extends Service {
 		return contentView;
 	}
 
-	// @SuppressLint("NewApi")
-	@SuppressWarnings("deprecation")
+
 	protected void showNotification_popup(String ticker, String title,
 			String content, Context context) {
 		Notification notification = new Notification(getNotificationIcon(),
@@ -186,8 +185,7 @@ public class class_downloads_files extends Service {
 		 */
 	}
 
-	// @SuppressLint("NewApi")
-	@SuppressWarnings("deprecation")
+
 	protected void showNotification(RemoteViews remoteView, String ticker,
 			Context context) {
 		Notification notification = new Notification(getNotificationIcon(),

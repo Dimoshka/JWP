@@ -4,11 +4,12 @@ import java.io.File;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,13 +21,16 @@ import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
-import com.dimoshka.ua.classes.class_activity_extends;
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 import com.dimoshka.ua.classes.class_downloads_files;
+import com.dimoshka.ua.classes.class_functions;
 import com.dimoshka.ua.classes.class_mediaplayer;
 import com.dimoshka.ua.classes.class_simplecursoradapter_player;
 import com.dimoshka.ua.classes.class_sqlite;
 
-public class player extends class_activity_extends {
+public class player extends SherlockActivity {
 
 	private Button buttonPlayStop;
 	// private MediaPlayer mediaPlayer = new MediaPlayer();
@@ -38,6 +42,12 @@ public class player extends class_activity_extends {
 	private Integer id_magazine;
 	private class_simplecursoradapter_player scAdapter;
 	private class_mediaplayer mediaplayer_class;
+
+	public SharedPreferences prefs;
+	public SQLiteDatabase database;
+	public class_functions funct = new class_functions();
+	public int id_lang = 0;
+	public OnSharedPreferenceChangeListener listener_pref;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -116,7 +126,6 @@ public class player extends class_activity_extends {
 		}
 	}
 
-	@SuppressWarnings("deprecation")
 	private void refresh() {
 		stopManagingCursor(cursor);
 		cursor = database
@@ -226,7 +235,6 @@ public class player extends class_activity_extends {
 		return false;
 	}
 
-	@SuppressWarnings("deprecation")
 	protected void onDestroy() {
 		super.onDestroy();
 		mediaplayer_class.release();

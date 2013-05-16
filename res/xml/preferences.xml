@@ -19,6 +19,7 @@
             android:title="@string/downloads_img" />
         <CheckBoxPreference
             android:defaultValue="false"
+            android:enabled="false"
             android:key="downloads_on_start"
             android:summary="@string/downloads_on_start_summary"
             android:title="@string/downloads_on_start" />

@@ -14,6 +14,7 @@
     <uses-permission android:name="android.permission.READ_LOGS" />
 
     <application
+        android:name="com.dimoshka.ua.classes.MyApplication"
         android:allowBackup="true"
         android:allowClearUserData="true"
         android:description="@string/description"

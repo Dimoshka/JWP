@@ -42,7 +42,6 @@ public class class_rss_news {
 		get_language(id_lang);
 	}
 
-	@SuppressWarnings("deprecation")
 	public Integer get_language(int id) {
 		Cursor cursor = funct.get_language(database, id, activity);
 		activity.startManagingCursor(cursor);
@@ -116,6 +115,7 @@ public class class_rss_news {
 					}
 
 					description = description.trim();
+					description = funct.stripHtml(description);
 
 					ContentValues init = new ContentValues();
 					init.put("id_lang", id_ln);

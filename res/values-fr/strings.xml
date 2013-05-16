@@ -28,6 +28,7 @@
     </string-array>
 
     <string name="app_name">"JWP - publications des Témoins de Jéhovah"</string>
+    <string name="app_name_shot">"JWP"</string>
     <string name="description">"JWP - un programme pour les lecteurs des publications des Témoins de Jéhovah.
 En utilisant ce programme, vous aurez toujours accès aux enjeux actuels des revues "La Tour de Garde" et "Réveillez-vous."
 Vous devrez télécharger les publications en différentes langues et dans différents formats (pdf, epub, mp3, aac).

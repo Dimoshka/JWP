@@ -44,6 +44,7 @@ public class main extends SherlockFragmentActivity {
 
 		final ActionBar actionBar = getSupportActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+		actionBar.setTitle(R.string.app_name_shot);
 
 		ActionBar.Tab jornals_Tab = actionBar.newTab()
 				.setText(R.string.jornals);
@@ -66,15 +67,18 @@ public class main extends SherlockFragmentActivity {
 					.setNeutralButton("OK", null).show();
 			prefs.edit().putBoolean("first_run", false).commit();
 		} else if (prefs.getBoolean("downloads_on_start", false)) {
-			load_rss();
+			//load_rss();
 		}
 
+		load_rss();
+		
+		
 		listener_pref = new SharedPreferences.OnSharedPreferenceChangeListener() {
 			public void onSharedPreferenceChanged(SharedPreferences prefs,
 					String key) {
 				id_lang = Integer.parseInt(prefs.getString("language", "0"));
 				// id_lang = rss_jornals.get_language(id_lang);
-				refresh();
+				//refresh();
 			}
 		};
 		prefs.registerOnSharedPreferenceChangeListener(listener_pref);
@@ -82,24 +86,27 @@ public class main extends SherlockFragmentActivity {
 
 	private class MyTabListener implements ActionBar.TabListener {
 		public void onTabSelected(Tab tab, FragmentTransaction ft) {
-
 			curent_tab = tab.getPosition();
 			if (curent_tab == 0) {
 				ft.replace(R.id.fragment_container, frag1);
 			} else {
 				ft.replace(R.id.fragment_container, frag2);
 			}
-			
-			refresh();
+			//refresh();
 		}
 
 		public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-			// TODO Auto-generated method stub
+			if (curent_tab == 0) {
+				ft.remove(frag1);
+			} else {
+				ft.remove(frag2);
+			}
 		}
 
 		public void onTabReselected(Tab tab, FragmentTransaction ft) {
 			// TODO Auto-generated method stub
 			refresh();
+			//ACRA.getErrorReporter().handleSilentException(null);
 		}
 	}
 
@@ -108,7 +115,7 @@ public class main extends SherlockFragmentActivity {
 		menu.add(Menu.NONE, 3, Menu.NONE, R.string.refrashe).setIcon(
 				android.R.drawable.ic_menu_rotate);
 		menu.add(Menu.NONE, 2, Menu.NONE, R.string.download_rss).setIcon(
-				android.R.drawable.ic_menu_revert);
+				android.R.drawable.ic_menu_revert).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
 		menu.add(Menu.NONE, 1, Menu.NONE, R.string.preference).setIcon(
 				android.R.drawable.ic_menu_preferences);
 		menu.add(Menu.NONE, 0, Menu.NONE, R.string.exit).setIcon(

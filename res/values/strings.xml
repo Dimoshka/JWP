@@ -28,6 +28,7 @@
     </string-array>
 
     <string name="app_name">"JWP - publications of Jehovah's Witnesses"</string>
+    <string name="app_name_shot">"JWP"</string>
     <string name="description">"JWP - a program for readers of the publications of Jehovah's Witnesses.
 Using this program, you will always have access to current issues of the journals "The Watchtower" and "Awake".
 You will have to download publications in different languages ​​and in different formats (pdf, epub, mp3, aac).

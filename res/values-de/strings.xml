@@ -28,6 +28,7 @@
     </string-array>
 
     <string name="app_name">"JWP - Veröffentlichungen der Zeugen Jehovas"</string>
+    <string name="app_name_shot">"JWP"</string>
     <string name="description">"JWP - ein Programm für die Leser der Publikationen der Zeugen Jehovas.
 Mit diesem Programm haben Sie immer Zugriff auf aktuelle Fragen der Zeitschriften "Der Wachtturm" und "Awake".
 Sie müssen Publikationen in verschiedenen Sprachen und in verschiedenen Formaten downloaden (pdf, epub, mp3, aac).

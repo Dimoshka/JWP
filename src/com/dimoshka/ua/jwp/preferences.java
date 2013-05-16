@@ -1,12 +1,12 @@
 package com.dimoshka.ua.jwp;
 
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 
-public class preferences extends PreferenceActivity {
+import com.actionbarsherlock.app.SherlockPreferenceActivity;
 
-	@SuppressWarnings("deprecation")
+public class preferences extends SherlockPreferenceActivity {
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

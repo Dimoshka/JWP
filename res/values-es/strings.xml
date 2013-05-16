@@ -28,6 +28,7 @@
     </string-array>
 
     <string name="app_name">"JWP - publicaciones de los Testigos de Jehová"</string>
+    <string name="app_name_shot">"JWP"</string>
     <string name="description">"JWP - un programa para los lectores de las publicaciones de los Testigos de Jehová.
 El uso de este programa, usted siempre tendrá acceso a temas de actualidad de las revistas "La Atalaya" y "Awake".
 Usted tendrá que descargar publicaciones en diferentes idiomas y en diferentes formatos (pdf, epub, mp3, aac).

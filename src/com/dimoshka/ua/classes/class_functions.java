@@ -5,22 +5,21 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import org.acra.ACRA;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Environment;
 import android.preference.PreferenceManager;
+import android.text.Html;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.dimoshka.ua.jwp.R;
 
@@ -126,46 +125,44 @@ public class class_functions {
 		database.update("files", initialValues, "name=?", new String[] { name });
 	}
 
+	public String stripHtml(String html) {
+		return Html.fromHtml(html).toString();
+	}
+
 	public void send_bug_report(Context context, Exception ex,
 			String class_name, Integer num_row) {
 
 		Log.e(context.getString(R.string.app_name) + " - error " + class_name,
-				ex.toString());
-/*
-		prefs = PreferenceManager.getDefaultSharedPreferences(context);
-		if (prefs.getBoolean("analytics", true)) {
+				ex.toString() + " - " + num_row);
 
-			// ACRA.getErrorReporter().handleException(ex);
+		ACRA.getErrorReporter().handleSilentException(ex);
 
-			Intent i = new Intent(Intent.ACTION_SEND);
-			i.setType("message/rfc822");
-			i.putExtra(Intent.EXTRA_EMAIL, new String[] { context
-					.getString(R.string.app_bug_report_mail) });
-			PackageInfo pInfo = null;
-			try {
-				pInfo = context.getPackageManager().getPackageInfo(
-						context.getPackageName(), 0);
-			} catch (NameNotFoundException e1) {
-				e1.printStackTrace();
-			}
-
-			i.putExtra(Intent.EXTRA_SUBJECT,
-					"ERROR reporting - " + context.getString(R.string.app_name)
-							+ " " + pInfo.versionName);
-			i.putExtra(Intent.EXTRA_TEXT, ex.getMessage() + "  -  "
-					+ class_name + ":" + num_row.toString());
-
-			try {
-				context.startActivity(Intent.createChooser(i,
-						context.getString(R.string.send_bug_report)));
-			} catch (android.content.ActivityNotFoundException e) {
-				Toast.makeText(context,
-						context.getString(R.string.not_email_client),
-						Toast.LENGTH_SHORT).show();
-			}
-
-		}
-		*/
+		/*
+		 * prefs = PreferenceManager.getDefaultSharedPreferences(context); if
+		 * (prefs.getBoolean("analytics", true)) {
+		 * 
+		 * // ACRA.getErrorReporter().handleException(ex);
+		 * 
+		 * Intent i = new Intent(Intent.ACTION_SEND);
+		 * i.setType("message/rfc822"); i.putExtra(Intent.EXTRA_EMAIL, new
+		 * String[] { context .getString(R.string.app_bug_report_mail) });
+		 * PackageInfo pInfo = null; try { pInfo =
+		 * context.getPackageManager().getPackageInfo( context.getPackageName(),
+		 * 0); } catch (NameNotFoundException e1) { e1.printStackTrace(); }
+		 * 
+		 * i.putExtra(Intent.EXTRA_SUBJECT, "ERROR reporting - " +
+		 * context.getString(R.string.app_name) + " " + pInfo.versionName);
+		 * i.putExtra(Intent.EXTRA_TEXT, ex.getMessage() + "  -  " + class_name
+		 * + ":" + num_row.toString());
+		 * 
+		 * try { context.startActivity(Intent.createChooser(i,
+		 * context.getString(R.string.send_bug_report))); } catch
+		 * (android.content.ActivityNotFoundException e) {
+		 * Toast.makeText(context, context.getString(R.string.not_email_client),
+		 * Toast.LENGTH_SHORT).show(); }
+		 * 
+		 * }
+		 */
 	}
 
 }
