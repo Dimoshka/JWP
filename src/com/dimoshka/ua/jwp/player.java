@@ -29,6 +29,7 @@ import com.dimoshka.ua.classes.class_functions;
 import com.dimoshka.ua.classes.class_mediaplayer;
 import com.dimoshka.ua.classes.class_simplecursoradapter_player;
 import com.dimoshka.ua.classes.class_sqlite;
+import com.google.analytics.tracking.android.EasyTracker;
 
 public class player extends SherlockActivity {
 
@@ -59,6 +60,22 @@ public class player extends SherlockActivity {
 		database = dbOpenHelper.openDataBase();
 		initViews();
 		refresh();
+	}
+	
+	@Override
+	public void onStart() {
+		super.onStart();
+		if (prefs.getBoolean("analytics", true)) {
+			EasyTracker.getInstance().activityStart(this);
+		}
+	}
+
+	@Override
+	public void onStop() {
+		super.onStop();
+		if (prefs.getBoolean("analytics", true)) {
+			EasyTracker.getInstance().activityStop(this);
+		}
 	}
 
 	private void initViews() {

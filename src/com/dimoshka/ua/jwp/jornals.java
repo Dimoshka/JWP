@@ -54,6 +54,7 @@ public class jornals extends SherlockFragment {
 			Bundle saved) {
 		return inflater.inflate(R.layout.list, group, false);
 	}
+	
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {

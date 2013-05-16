@@ -16,6 +16,7 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.dimoshka.ua.classes.class_functions;
 import com.dimoshka.ua.classes.class_sqlite;
+import com.google.analytics.tracking.android.EasyTracker;
 
 public class main extends SherlockFragmentActivity {
 
@@ -82,6 +83,22 @@ public class main extends SherlockFragmentActivity {
 			}
 		};
 		prefs.registerOnSharedPreferenceChangeListener(listener_pref);
+	}
+	
+	@Override
+	public void onStart() {
+		super.onStart();
+		if (prefs.getBoolean("analytics", true)) {
+			EasyTracker.getInstance().activityStart(this);
+		}
+	}
+
+	@Override
+	public void onStop() {
+		super.onStop();
+		if (prefs.getBoolean("analytics", true)) {
+			EasyTracker.getInstance().activityStop(this);
+		}
 	}
 
 	private class MyTabListener implements ActionBar.TabListener {
