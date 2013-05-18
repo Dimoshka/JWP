@@ -61,11 +61,6 @@ public class jornals extends SherlockFragment {
 		super.onActivityCreated(savedInstanceState);
 
 		try {
-
-			// prefs =
-			// PreferenceManager.getDefaultSharedPreferences(getActivity());
-			// id_lang = Integer.parseInt(prefs.getString("language", "0"));
-
 			list = (ExpandableListView) getActivity().findViewById(R.id.list);
 			rss_jornals = new class_rss_jornals(getActivity(), main.id_lang,
 					handler, main.database);
