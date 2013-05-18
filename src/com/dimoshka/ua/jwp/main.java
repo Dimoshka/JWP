@@ -200,7 +200,8 @@ public class main extends SherlockFragmentActivity {
 				frag2.load_rss();
 				break;
 			case 2:
-				frag3.load_rss();
+				//frag3.load_rss();
+                frag3.refresh();
 				break;
 			default:
 				break;

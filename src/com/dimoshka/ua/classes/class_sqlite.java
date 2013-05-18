@@ -39,14 +39,15 @@ public class class_sqlite extends SQLiteOpenHelper {
 			database.execSQL("INSERT INTO [publication] ([_id], [name], [code]) VALUES (1, 'THE WATCHTOWER (STUDY EDITION)', 'w');");
 			database.execSQL("INSERT INTO [publication] ([_id], [name], [code]) VALUES (2, 'THE WATCHTOWER', 'wp');");
 			database.execSQL("INSERT INTO [publication] ([_id], [name], [code]) VALUES (3, 'AWAKE!', 'g');");
-
-			//database.execSQL("INSERT INTO [publication] ([_id], [name], [code]) VALUES (4, 'Books', 'b');");
-			//database.execSQL("INSERT INTO [publication] ([_id], [name], [code]) VALUES (5, 'Brochures', 'br');");
-
+            database.execSQL("INSERT INTO [publication] ([_id], [name], [code]) VALUES (4, 'Books and brochures', 'b');");
 			// -- Table: magazine
-			database.execSQL("CREATE TABLE magazine (_id INTEGER PRIMARY KEY ASC AUTOINCREMENT UNIQUE, name VARCHAR(128) UNIQUE, id_pub INTEGER NOT NULL, id_lang INTEGER NOT NULL, img BOOLEAN DEFAULT (0), date DATE NOT NULL);");
+			database.execSQL("CREATE TABLE magazine (_id INTEGER PRIMARY KEY ASC AUTOINCREMENT UNIQUE, name VARCHAR(128) UNIQUE, id_pub INTEGER NOT NULL, id_lang INTEGER NOT NULL, img BOOLEAN DEFAULT (0), link_img VARCHAR(256), date DATE NOT NULL);");
+		    database.execSQL("INSERT INTO [magazine] ([_id], [name], [id_pub], [id_lang], [img], [link_img], [date]) VALUES (5334, 'Чему на самом деле учит Библия?', 4, 3, 0, 'http://www.jw.org/assets/a/bh/bh_U/bh_U.prd_md.jpg', '20130517');");
+			database.execSQL("INSERT INTO [magazine] ([_id], [name], [id_pub], [id_lang], [img], [link_img], [date]) VALUES (5913, 'Ежегодник Свидетелей Иеговы 2013', 4, 3, 0, 'http://www.jw.org/assets/a/yb13/yb13_U/yb13_U.prd_md.jpg', '20130517');");
 			// -- Table: files
 			database.execSQL("CREATE TABLE files (_id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, id_magazine INTEGER NOT NULL, id_type INTEGER NOT NULL, name VARCHAR(32) NOT NULL UNIQUE, link VARCHAR(256) NOT NULL, pubdate DATE NOT NULL, title VARCHAR(256) NOT NULL, file BOOLEAN DEFAULT (0));");
+			database.execSQL("INSERT INTO [files] ([_id], [id_magazine], [id_type], [name], [link], [pubdate], [title], [file]) VALUES (null, 5334, 2, 'bh_U', 'http://download.jw.org/files/media_books/5e/bh_U.pdf', '20130517', '', 0);");
+			database.execSQL("INSERT INTO [files] ([_id], [id_magazine], [id_type], [name], [link], [pubdate], [title], [file]) VALUES (null, 5913, 2, 'yb13_U', 'http://download.jw.org/files/media_books/0f/yb13_U.pdf', '20130517', '', 0);");
 			// -- Table: news
 			database.execSQL("CREATE TABLE news (_id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, id_lang INTEGER NOT NULL, title VARCHAR(256) NOT NULL, link VARCHAR(256) NOT NULL UNIQUE, link_img VARCHAR(256), description VARCHAR(256) NOT NULL, pubdate DATETIME NOT NULL, img BOOLEAN DEFAULT (0));");
 			// -- Table: language
@@ -73,16 +74,21 @@ public class class_sqlite extends SQLiteOpenHelper {
 		Log.i("JWP" + getClass().getName(), "Start update SQLITE");
 		switch (oldVersion) {
 		case 1:
+
+            // -- Table: magazine
+            database.execSQL("ALTER TABLE [magazine] ADD link_img VARCHAR(256);");
+
 			// -- Table: publication
-			//database.execSQL("INSERT INTO [publication] ([_id], [name], [code]) VALUES (4, 'Books', 'b');");
-			//database.execSQL("INSERT INTO [publication] ([_id], [name], [code]) VALUES (5, 'Brochures', 'br');");
+			database.execSQL("INSERT INTO [publication] ([_id], [name], [code]) VALUES (4, 'Books and brochures', 'b');");
+
 			// -- Table: magazine
-			//database.execSQL("INSERT INTO [magazine] ([_id], [name], [id_pub], [id_lang], [img], [date]) VALUES (null, 'Чему на самом деле учит Библия?', 4, 3, 0, '20130517');");
+			database.execSQL("INSERT INTO [magazine] ([_id], [name], [id_pub], [id_lang], [img], [link_img], [date]) VALUES (5334, 'Чему на самом деле учит Библия?', 4, 3, 0, 'http://www.jw.org/assets/a/bh/bh_U/bh_U.prd_md.jpg', '20130517');");
+            database.execSQL("INSERT INTO [magazine] ([_id], [name], [id_pub], [id_lang], [img], [link_img], [date]) VALUES (5913, 'Ежегодник Свидетелей Иеговы 2013', 4, 3, 0, 'http://www.jw.org/assets/a/yb13/yb13_U/yb13_U.prd_md.jpg', '20130517');");
 
 			// -- Table: files
-			//database.execSQL("INSERT INTO [files] ([_id], [id_magazine], [id_type], [name], [link], [pubdate], [title], [file]) VALUES (null, [id_magazine], 2, 'bh_U', 'http://download.jw.org/files/media_books/5e/bh_U.pdf', '20130517', '', 0);");
+			database.execSQL("INSERT INTO [files] ([_id], [id_magazine], [id_type], [name], [link], [pubdate], [title], [file]) VALUES (null, 5334, 2, 'bh_U', 'http://download.jw.org/files/media_books/5e/bh_U.pdf', '20130517', '', 0);");
+            database.execSQL("INSERT INTO [files] ([_id], [id_magazine], [id_type], [name], [link], [pubdate], [title], [file]) VALUES (null, 5913, 2, 'yb13_U', 'http://download.jw.org/files/media_books/0f/yb13_U.pdf', '20130517', '', 0);");
 
-					
 			break;
 		default:
 			database.execSQL("DROP TABLE IF EXISTS type");

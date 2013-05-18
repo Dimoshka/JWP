@@ -38,7 +38,7 @@ public class news extends SherlockFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup group,
 			Bundle saved) {
-		return inflater.inflate(R.layout.list, group, false);
+		return inflater.inflate(R.layout.expandable_list, group, false);
 	}	
 		
 	@Override

@@ -52,7 +52,7 @@ public class jornals extends SherlockFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup group,
 			Bundle saved) {
-		return inflater.inflate(R.layout.list, group, false);
+		return inflater.inflate(R.layout.expandable_list, group, false);
 	}
 	
 
@@ -262,7 +262,7 @@ public class jornals extends SherlockFragment {
 					.rawQuery(
 							"select magazine._id as _id, magazine.name as name, magazine.img as img, language.code as code_lng, publication.code as code_pub, publication._id as cur_pub, date from magazine left join language on magazine.id_lang=language._id left join publication on magazine.id_pub=publication._id where magazine.id_lang='"
 									+ main.id_lang
-									+ "' order by date desc, magazine.id_pub asc",
+									+ "' and magazine.id_pub BETWEEN '1' and '3' order by date desc, magazine.id_pub asc",
 							null);
 			getActivity().startManagingCursor(cursor);
 

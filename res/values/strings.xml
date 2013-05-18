@@ -2,7 +2,7 @@
 <resources>
 
     <string name="db_name">"jwp.sqlite"</string>
-    <string name="db_version">"1"</string>
+    <string name="db_version">"2"</string>
     <string name="app_dir">"JWP"</string>
     <string name="app_bug_report_mail">"dimoshka.ua@gmail.com"</string>
 
