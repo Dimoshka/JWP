@@ -1,39 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <string name="db_name">"jwp.sqlite"</string>
-    <string name="db_version">"1"</string>
-    <string name="app_dir">"JWP"</string>
-    <string name="app_bug_report_mail">"dimoshka.ua@gmail.com"</string>
-
-    <string-array name="language_arr">
-        <item>English</item>
-        <item>French</item>
-        <item>Русский</item>
-        <item>Українська</item>
-        <item>Deutsch</item>
-        <item>Spanish</item>
-        <item>漢語繁體字</item>
-        <item>汉语简化字</item>
-    </string-array>
-    <string-array name="language_arr_value">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-        <item>6</item>
-        <item>7</item>
-        <item>8</item>
-    </string-array>
-
-    <string name="app_name">"JWP - publications des Témoins de Jéhovah"</string>
+    <string name="app_name">"JWP - publications des Témoins de Jéhovah"</string>
     <string name="app_name_shot">"JWP"</string>
     <string name="description">"JWP - un programme pour les lecteurs des publications des Témoins de Jéhovah.
 En utilisant ce programme, vous aurez toujours accès aux enjeux actuels des revues "La Tour de Garde" et "Réveillez-vous."
 Vous devrez télécharger les publications en différentes langues et dans différents formats (pdf, epub, mp3, aac).
 Et aussi pour recevoir des nouvelles du www.jw.org site.
 Le programme fonctionne comme client RSS."</string>
+    <string name="books_brochures">"Livres et brochures"</string>
     <string name="player">"MP3 player"</string>
     <string name="player_open">"Open in joueur"</string>
     <string name="player_play">"Jouer"</string>

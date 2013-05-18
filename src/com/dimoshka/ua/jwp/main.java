@@ -31,6 +31,7 @@ public class main extends SherlockFragmentActivity {
 
 	jornals frag1;
 	news frag2;
+	books_brochures frag3;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -49,16 +50,21 @@ public class main extends SherlockFragmentActivity {
 
 		ActionBar.Tab jornals_Tab = actionBar.newTab()
 				.setText(R.string.jornals);
-		ActionBar.Tab newsTab = actionBar.newTab().setText(R.string.news);
+		ActionBar.Tab news_Tab = actionBar.newTab().setText(R.string.news);
+		ActionBar.Tab publication_Tab = actionBar.newTab().setText(
+				R.string.books_brochures);
 
 		jornals_Tab.setTabListener(new MyTabListener());
-		newsTab.setTabListener(new MyTabListener());
+		news_Tab.setTabListener(new MyTabListener());
+		publication_Tab.setTabListener(new MyTabListener());
 
 		frag1 = new jornals();
 		frag2 = new news();
+		frag3 = new books_brochures();
 
 		actionBar.addTab(jornals_Tab);
-		actionBar.addTab(newsTab);
+		actionBar.addTab(news_Tab);
+		actionBar.addTab(publication_Tab);
 
 		boolean firstrun = prefs.getBoolean("first_run", true);
 		if (firstrun) {
@@ -68,23 +74,22 @@ public class main extends SherlockFragmentActivity {
 					.setNeutralButton("OK", null).show();
 			prefs.edit().putBoolean("first_run", false).commit();
 		} else if (prefs.getBoolean("downloads_on_start", false)) {
-			//load_rss();
+			// load_rss();
 		}
 
 		load_rss();
-		
-		
+
 		listener_pref = new SharedPreferences.OnSharedPreferenceChangeListener() {
 			public void onSharedPreferenceChanged(SharedPreferences prefs,
 					String key) {
 				id_lang = Integer.parseInt(prefs.getString("language", "0"));
 				// id_lang = rss_jornals.get_language(id_lang);
-				//refresh();
+				// refresh();
 			}
 		};
 		prefs.registerOnSharedPreferenceChangeListener(listener_pref);
 	}
-	
+
 	@Override
 	public void onStart() {
 		super.onStart();
@@ -104,56 +109,78 @@ public class main extends SherlockFragmentActivity {
 	private class MyTabListener implements ActionBar.TabListener {
 		public void onTabSelected(Tab tab, FragmentTransaction ft) {
 			curent_tab = tab.getPosition();
-			if (curent_tab == 0) {
+
+			switch (curent_tab) {
+			case 0:
 				ft.replace(R.id.fragment_container, frag1);
-			} else {
+				break;
+			case 1:
 				ft.replace(R.id.fragment_container, frag2);
+				break;
+			case 2:
+				ft.replace(R.id.fragment_container, frag3);
+				break;
+			default:
+				break;
 			}
-			//refresh();
+
+			// refresh();
 		}
 
 		public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-			if (curent_tab == 0) {
+			switch (curent_tab) {
+			case 0:
 				ft.remove(frag1);
-			} else {
+				break;
+			case 1:
 				ft.remove(frag2);
+				break;
+			case 2:
+				ft.remove(frag3);
+				break;
+			default:
+				break;
 			}
 		}
 
 		public void onTabReselected(Tab tab, FragmentTransaction ft) {
 			// TODO Auto-generated method stub
 			refresh();
-			//ACRA.getErrorReporter().handleSilentException(null);
+			// ACRA.getErrorReporter().handleSilentException(null);
 		}
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		menu.add(Menu.NONE, 3, Menu.NONE, R.string.refrashe).setIcon(
-				android.R.drawable.ic_menu_rotate);
-		menu.add(Menu.NONE, 2, Menu.NONE, R.string.download_rss).setIcon(
-				android.R.drawable.ic_menu_revert).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-		menu.add(Menu.NONE, 1, Menu.NONE, R.string.preference).setIcon(
-				android.R.drawable.ic_menu_preferences);
-		menu.add(Menu.NONE, 0, Menu.NONE, R.string.exit).setIcon(
-				android.R.drawable.ic_lock_power_off);
+		/*
+		 * menu.add(Menu.NONE, 3, Menu.NONE, R.string.refrashe).setIcon(
+		 * android.R.drawable.ic_menu_rotate); menu.add(Menu.NONE, 2, Menu.NONE,
+		 * R.string.download_rss).setIcon(
+		 * android.R.drawable.ic_menu_revert).setShowAsAction
+		 * (MenuItem.SHOW_AS_ACTION_IF_ROOM); menu.add(Menu.NONE, 1, Menu.NONE,
+		 * R.string.preference).setIcon(
+		 * android.R.drawable.ic_menu_preferences); menu.add(Menu.NONE, 0,
+		 * Menu.NONE, R.string.exit).setIcon(
+		 * android.R.drawable.ic_lock_power_off);
+		 */
+		getSupportMenuInflater().inflate(R.menu.publication, menu);
 		return true;
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case 0:
+		case R.id.item0:
 			System.exit(0);
 			break;
-		case 1:
+		case R.id.item1:
 			Intent i = new Intent(this, preferences.class);
 			startActivity(i);
 			break;
-		case 2:
+		case R.id.item2:
 			load_rss();
 			break;
-		case 3:
+		case R.id.item3:
 			refresh();
 			break;
 		default:
@@ -165,10 +192,18 @@ public class main extends SherlockFragmentActivity {
 
 	private void load_rss() {
 		try {
-			if (curent_tab == 0) {
+			switch (curent_tab) {
+			case 0:
 				frag1.load_rss();
-			} else {
+				break;
+			case 1:
 				frag2.load_rss();
+				break;
+			case 2:
+				frag3.load_rss();
+				break;
+			default:
+				break;
 			}
 		} catch (Exception e) {
 			funct.send_bug_report(this, e, getClass().getName(), 148);
@@ -177,10 +212,18 @@ public class main extends SherlockFragmentActivity {
 
 	private void refresh() {
 		try {
-			if (curent_tab == 0) {
+			switch (curent_tab) {
+			case 0:
 				frag1.refresh();
-			} else {
+				break;
+			case 1:
 				frag2.refresh();
+				break;
+			case 2:
+				frag3.refresh();
+				break;
+			default:
+				break;
 			}
 		} catch (Exception e) {
 			funct.send_bug_report(this, e, getClass().getName(), 157);

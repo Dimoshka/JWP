@@ -20,7 +20,7 @@ public class class_rss_provider {
 	static final String PUB_DATE = "pubDate";
 	static final String GUID = "guid";
 	static final String CHANNEL = "channel";
-	private class_functions funct = new class_functions();
+	//private class_functions funct = new class_functions();
 
 	public List<class_rss_item> parse(String rssFeed, Context context) {
 		List<class_rss_item> list = new ArrayList<class_rss_item>();
@@ -79,7 +79,7 @@ public class class_rss_provider {
 				eventType = parser.next();
 			}
 		} catch (Exception e) {
-			funct.send_bug_report(context, e, getClass().getName(), 81);
+		//	funct.send_bug_report(context, e, getClass().getName(), 81);
 		} finally {
 			if (stream != null) {
 				try {

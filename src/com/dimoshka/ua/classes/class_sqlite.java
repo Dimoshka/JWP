@@ -39,6 +39,10 @@ public class class_sqlite extends SQLiteOpenHelper {
 			database.execSQL("INSERT INTO [publication] ([_id], [name], [code]) VALUES (1, 'THE WATCHTOWER (STUDY EDITION)', 'w');");
 			database.execSQL("INSERT INTO [publication] ([_id], [name], [code]) VALUES (2, 'THE WATCHTOWER', 'wp');");
 			database.execSQL("INSERT INTO [publication] ([_id], [name], [code]) VALUES (3, 'AWAKE!', 'g');");
+
+			database.execSQL("INSERT INTO [publication] ([_id], [name], [code]) VALUES (4, 'Books', 'b');");
+			database.execSQL("INSERT INTO [publication] ([_id], [name], [code]) VALUES (5, 'Brochures', 'br');");
+
 			// -- Table: magazine
 			database.execSQL("CREATE TABLE magazine (_id INTEGER PRIMARY KEY ASC AUTOINCREMENT UNIQUE, name VARCHAR(128) UNIQUE, id_pub INTEGER NOT NULL, id_lang INTEGER NOT NULL, img BOOLEAN DEFAULT (0), date DATE NOT NULL);");
 			// -- Table: files
@@ -69,8 +73,16 @@ public class class_sqlite extends SQLiteOpenHelper {
 		Log.i("JWP" + getClass().getName(), "Start update SQLITE");
 		switch (oldVersion) {
 		case 1:
+			// -- Table: publication
+			database.execSQL("INSERT INTO [publication] ([_id], [name], [code]) VALUES (4, 'Books', 'b');");
+			database.execSQL("INSERT INTO [publication] ([_id], [name], [code]) VALUES (5, 'Brochures', 'br');");
+			// -- Table: magazine
+			database.execSQL("INSERT INTO [magazine] ([_id], [name], [id_pub], [id_lang], [img], [date]) VALUES (null, 'Чему на самом деле учит Библия?', 4, 3, 0, '20130517');");
 
-			
+			// -- Table: files
+			database.execSQL("INSERT INTO [files] ([_id], [id_magazine], [id_type], [name], [link], [pubdate], [title], [file]) VALUES (null, [id_magazine], 2, 'bh_U', 'http://download.jw.org/files/media_books/5e/bh_U.pdf', '20130517', '', 0);");
+
+					
 			break;
 		default:
 			database.execSQL("DROP TABLE IF EXISTS type");

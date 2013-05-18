@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dimoshka.ua.jwp"
     android:versionCode="6"
-    android:versionName="1.0.5.1" >
+    android:versionName="1.0.5.2" >
 
     <uses-sdk
         android:minSdkVersion="7"
@@ -27,8 +27,7 @@
         android:logo="@drawable/ic_launcher"
         android:restoreAnyVersion="true"
         android:restoreNeedsApplication="false"
-        android:theme="@style/AppTheme"
-        android:uiOptions="none|splitActionBarWhenNarrow"
+        android:theme="@style/Theme.Sherlock.Light"
         android:vmSafeMode="true" >
         <activity
             android:name="com.dimoshka.ua.jwp.main"

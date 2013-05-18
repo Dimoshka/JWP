@@ -2,7 +2,7 @@
 <resources>
 
     <string name="db_name">"jwp.sqlite"</string>
-    <string name="db_version">"1"</string>
+    <string name="db_version">"2"</string>
     <string name="app_dir">"JWP"</string>
     <string name="app_bug_report_mail">"dimoshka.ua@gmail.com"</string>
 
@@ -34,6 +34,7 @@ Using this program, you will always have access to current issues of the journal
 You will have to download publications in different languages ​​and in different formats (pdf, epub, mp3, aac).
 And also to receive news from the site www.jw.org.
 The program works as RSS client."</string>
+    <string name="books_brochures">"Books and brochures"</string>
     <string name="player">"MP3 player"</string>
     <string name="player_open">"Open in player"</string>
     <string name="player_play">"Play"</string>

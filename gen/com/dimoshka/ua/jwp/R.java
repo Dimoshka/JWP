@@ -988,6 +988,10 @@ containing a value of this type.
         public static final int image=0x7f050041;
         public static final int imageView1=0x7f050033;
         public static final int img=0x7f05003c;
+        public static final int item0=0x7f05004a;
+        public static final int item1=0x7f050049;
+        public static final int item2=0x7f050048;
+        public static final int item3=0x7f050047;
         public static final int list=0x7f05003b;
         public static final int listMode=0x7f050002;
         public static final int mp3=0x7f050037;
@@ -1046,6 +1050,9 @@ containing a value of this type.
         public static final int sherlock_spinner_dropdown_item=0x7f03001f;
         public static final int sherlock_spinner_item=0x7f030020;
     }
+    public static final class menu {
+        public static final int publication=0x7f0d0000;
+    }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
          */
@@ -1086,83 +1093,68 @@ containing a value of this type.
         /**  Description of a share target (both in the list of such or the default share button) in a ShareActionProvider (share UI). [CHAR LIMIT=NONE] 
          */
         public static final int abs__shareactionprovider_share_with_application=0x7f0a0007;
-        public static final int analytics=0x7f0a0023;
-        public static final int analytics_summary=0x7f0a0024;
+        public static final int analytics=0x7f0a0024;
+        public static final int analytics_summary=0x7f0a0025;
         public static final int app_bug_report_mail=0x7f0a0012;
         public static final int app_dir=0x7f0a0011;
         public static final int app_name=0x7f0a0013;
         public static final int app_name_shot=0x7f0a0014;
+        public static final int books_brochures=0x7f0a0016;
         public static final int db_name=0x7f0a000f;
         public static final int db_version=0x7f0a0010;
         public static final int description=0x7f0a0015;
-        public static final int dialog_loaing_img=0x7f0a0021;
-        public static final int dialog_loaing_rss=0x7f0a0020;
-        public static final int download=0x7f0a0032;
-        public static final int download_cancelled=0x7f0a0038;
-        public static final int download_failed=0x7f0a0035;
-        public static final int download_finished=0x7f0a0036;
-        public static final int download_finished_failed=0x7f0a0037;
-        public static final int download_progress=0x7f0a0039;
-        public static final int download_rss=0x7f0a0031;
-        public static final int download_task_addeded=0x7f0a003a;
-        public static final int download_title=0x7f0a0034;
-        public static final int downloads=0x7f0a0033;
-        public static final int downloads_img=0x7f0a0025;
-        public static final int downloads_img_summary=0x7f0a0026;
-        public static final int downloads_on_start=0x7f0a0027;
-        public static final int downloads_on_start_summary=0x7f0a0028;
-        public static final int exit=0x7f0a002b;
-        public static final int first_run=0x7f0a001d;
-        public static final int first_run_title=0x7f0a001c;
+        public static final int dialog_loaing_img=0x7f0a0022;
+        public static final int dialog_loaing_rss=0x7f0a0021;
+        public static final int download=0x7f0a0033;
+        public static final int download_cancelled=0x7f0a0039;
+        public static final int download_failed=0x7f0a0036;
+        public static final int download_finished=0x7f0a0037;
+        public static final int download_finished_failed=0x7f0a0038;
+        public static final int download_progress=0x7f0a003a;
+        public static final int download_rss=0x7f0a0032;
+        public static final int download_task_addeded=0x7f0a003b;
+        public static final int download_title=0x7f0a0035;
+        public static final int downloads=0x7f0a0034;
+        public static final int downloads_img=0x7f0a0026;
+        public static final int downloads_img_summary=0x7f0a0027;
+        public static final int downloads_on_start=0x7f0a0028;
+        public static final int downloads_on_start_summary=0x7f0a0029;
+        public static final int exit=0x7f0a002c;
+        public static final int first_run=0x7f0a001e;
+        public static final int first_run_title=0x7f0a001d;
         public static final int ga_appVersion=0x7f0a000e;
         public static final int ga_trackingId=0x7f0a000d;
-        public static final int intetface=0x7f0a002e;
-        public static final int jornals=0x7f0a0045;
-        public static final int language=0x7f0a0029;
-        public static final int language_summary=0x7f0a002a;
-        public static final int management=0x7f0a0022;
-        public static final int news=0x7f0a0046;
-        public static final int no_internet=0x7f0a001e;
-        public static final int no_sdcard=0x7f0a001f;
-        public static final int not_email_client=0x7f0a001b;
-        public static final int open=0x7f0a002f;
-        public static final int player=0x7f0a0016;
-        public static final int player_open=0x7f0a0017;
-        public static final int player_pause=0x7f0a0019;
-        public static final int player_play=0x7f0a0018;
-        public static final int preference=0x7f0a002c;
-        public static final int refrashe=0x7f0a002d;
-        public static final int rss_aac=0x7f0a0042;
-        public static final int rss_aac_summary=0x7f0a0043;
-        public static final int rss_chanel=0x7f0a0044;
-        public static final int rss_epub=0x7f0a003e;
-        public static final int rss_epub_summary=0x7f0a003f;
-        public static final int rss_mp3=0x7f0a0040;
-        public static final int rss_mp3_summary=0x7f0a0041;
-        public static final int rss_pdf=0x7f0a003c;
-        public static final int rss_pdf_summary=0x7f0a003d;
-        public static final int select=0x7f0a003b;
-        public static final int select_the_action=0x7f0a0030;
-        public static final int send_bug_report=0x7f0a001a;
+        public static final int intetface=0x7f0a002f;
+        public static final int jornals=0x7f0a0046;
+        public static final int language=0x7f0a002a;
+        public static final int language_summary=0x7f0a002b;
+        public static final int management=0x7f0a0023;
+        public static final int news=0x7f0a0047;
+        public static final int no_internet=0x7f0a001f;
+        public static final int no_sdcard=0x7f0a0020;
+        public static final int not_email_client=0x7f0a001c;
+        public static final int open=0x7f0a0030;
+        public static final int player=0x7f0a0017;
+        public static final int player_open=0x7f0a0018;
+        public static final int player_pause=0x7f0a001a;
+        public static final int player_play=0x7f0a0019;
+        public static final int preference=0x7f0a002d;
+        public static final int refrashe=0x7f0a002e;
+        public static final int rss_aac=0x7f0a0043;
+        public static final int rss_aac_summary=0x7f0a0044;
+        public static final int rss_chanel=0x7f0a0045;
+        public static final int rss_epub=0x7f0a003f;
+        public static final int rss_epub_summary=0x7f0a0040;
+        public static final int rss_mp3=0x7f0a0041;
+        public static final int rss_mp3_summary=0x7f0a0042;
+        public static final int rss_pdf=0x7f0a003d;
+        public static final int rss_pdf_summary=0x7f0a003e;
+        public static final int select=0x7f0a003c;
+        public static final int select_the_action=0x7f0a0031;
+        public static final int send_bug_report=0x7f0a001b;
     }
     public static final class style {
-        /** 
-        Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
-
-    
-
-            Theme customizations available in newer API levels can go in
-            res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
-
-        
-         */
         public static final int AppBaseTheme=0x7f0b0059;
-        /**  Application theme. 
- All customizations that are NOT specific to a particular API-level can go here. 
-         */
-        public static final int AppTheme=0x7f0b005a;
         public static final int Sherlock___TextAppearance_Small=0x7f0b0046;
         public static final int Sherlock___Theme=0x7f0b0051;
         public static final int Sherlock___Theme_DarkActionBar=0x7f0b0053;
