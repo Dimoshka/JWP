@@ -1,15 +1,9 @@
 package com.dimoshka.ua.jwp;
 
-import java.io.File;
-import java.util.*;
-
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.content.ContentValues;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -17,12 +11,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.MimeTypeMap;
-import android.widget.ExpandableListView;
-import android.widget.Toast;
-
+import android.widget.AdapterView;
+import android.widget.ListView;
 import com.actionbarsherlock.app.SherlockFragment;
-import com.dimoshka.ua.classes.*;
+import com.dimoshka.ua.classes.class_downloads_files;
+import com.dimoshka.ua.classes.class_rss_books_brochures_adapter;
+import com.dimoshka.ua.classes.class_rss_books_brochures_img;
+
+import java.io.File;
+import java.util.ArrayList;
 
 @SuppressLint("HandlerLeak")
 public class books_brochures extends SherlockFragment {
@@ -46,218 +43,72 @@ public class books_brochures extends SherlockFragment {
             }
         }
     };
-    int yer = 0;
-    int mon = 0;
-    private ExpandableListView list;
-      private class_rss_jornals_img rss_jornals_img;
-    private ArrayList<Map<String, String>> groupData;
-    private ArrayList<Map<String, String>> childDataItem;
-    private ArrayList<ArrayList<Map<String, String>>> childData;
-    private Map<String, String> m;
+
+    private ListView list;
+    private class_rss_books_brochures_img rss_books_brochures_img;
     private Cursor cursor;
-    private Cursor cur_files;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup group,
                              Bundle saved) {
-        return inflater.inflate(R.layout.expandable_list, group, false);
+        return inflater.inflate(R.layout.list, group, false);
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        try {
-            list = (ExpandableListView) getActivity().findViewById(R.id.list);
-            rss_jornals_img = new class_rss_jornals_img(getActivity(), handler,
-                    main.database);
+        rss_books_brochures_img = new class_rss_books_brochures_img(getActivity(), handler,
+                main.database);
 
-            list.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-                @Override
-                public boolean onChildClick(ExpandableListView arg0, View arg1,
-                                            int arg2, int arg3, long arg4) {
-                    Map<String, String> hash = new HashMap<String, String>();
-                    hash = childData.get(arg2).get(arg3);
-                    dialog_show(hash.get("_id"));
-                    return false;
+        try {
+            list = (ListView) getActivity().findViewById(R.id.list);
+
+            list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                public void onItemClick(AdapterView<?> parent, View view,
+                                        int position, long id) {
+                    cursor.moveToPosition(position);
+                    main.open_or_download.dialog_show(cursor.getString(cursor.getColumnIndex("_id")));
                 }
             });
+
 
         } catch (Exception e) {
             main.funct.send_bug_report(getActivity(), e, getClass().getName(),
                     106);
         }
 
-        refresh();
-    }
-
-    @SuppressLint("ShowToast")
-    private void dialog_show(String _id) {
-        try {
-            if (main.funct.ExternalStorageState() == true) {
-                List<String> listItems = new ArrayList<String>();
-                CharSequence[] items = null;
-
-                cur_files = main.database
-                        .rawQuery(
-                                "select id_type, file, type.name as name_type, files.name, link, files.id_magazine from files left join magazine on files.id_magazine=magazine._id left join type on files.id_type=type._id where files.id_magazine='"
-                                        + _id + "' group by id_type", null);
-                getActivity().startManagingCursor(cur_files);
-                if (cur_files.getCount() > 0) {
-                    cur_files.moveToFirst();
-                    for (int i = 0; i < cur_files.getCount(); i++) {
-                        String name = null;
-
-                        if (cur_files.getInt(cur_files
-                                .getColumnIndex("id_type")) != 3) {
-                            if (cur_files.getInt(cur_files
-                                    .getColumnIndex("file")) == 1) {
-                                name = getString(R.string.open)
-                                        + " "
-                                        + cur_files.getString(cur_files
-                                        .getColumnIndex("name_type"));
-                            } else {
-                                name = getString(R.string.download)
-                                        + " "
-                                        + cur_files.getString(cur_files
-                                        .getColumnIndex("name_type"));
-                            }
-                        } else {
-                            name = getString(R.string.player_open)
-                                    + " ("
-                                    + cur_files.getString(cur_files
-                                    .getColumnIndex("name_type")) + ")";
-                        }
-                        listItems.add(name);
-                        cur_files.moveToNext();
-                    }
-
-                    items = listItems
-                            .toArray(new CharSequence[listItems.size()]);
-
-                    AlertDialog.Builder builder = new AlertDialog.Builder(
-                            getActivity());
-                    builder.setTitle(getString(R.string.select_the_action));
-                    builder.setItems(items,
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog,
-                                                    int item) {
-                                    open_or_download(item);
-                                }
-                            });
-                    AlertDialog alert = builder.create();
-                    alert.show();
-                }
-            } else
-                Toast.makeText(getActivity(), R.string.no_sdcard,
-                        Toast.LENGTH_SHORT);
-        } catch (Exception e) {
-            main.funct.send_bug_report(getActivity(), e, getClass().getName(),
-                    183);
+        if (main.prefs.getBoolean("downloads_img", true)) {
+            Log.e("JWP", "start load image");
+            jwp_rss_img();
+        } else {
+            refresh();
         }
     }
 
-    @SuppressLint("ShowToast")
-    private void open_or_download(int id) {
-        try {
-            if (main.funct.ExternalStorageState() == true) {
-                if (cur_files.getCount() > 0) {
-                    cur_files.moveToPosition(id);
-                    if (cur_files.getInt(cur_files.getColumnIndex("id_type")) == 3) {
-                        Intent i = new Intent(getActivity(), player.class);
-                        i.setFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
-                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        i.putExtra("id_magazine", cur_files.getInt(cur_files
-                                .getColumnIndex("id_magazine")));
-                        startActivity(i);
-                    } else {
-                        start_open_or_download(cur_files.getString(cur_files
-                                .getColumnIndex("name")),
-                                cur_files.getInt(cur_files
-                                        .getColumnIndex("file")),
-                                cur_files.getString(cur_files
-                                        .getColumnIndex("link")));
-                    }
-                }
-            } else
-                Toast.makeText(getActivity(), R.string.no_sdcard,
-                        Toast.LENGTH_SHORT);
-            getActivity().stopManagingCursor(cur_files);
-        } catch (Exception e) {
-            main.funct.send_bug_report(getActivity(), e, getClass().getName(),
-                    232);
-        }
-    }
-
-    private void start_open_or_download(String name, int file_enable,
-                                        String link) {
-        try {
-            File file = new File(main.funct.get_dir_app(getActivity())
-                    + "/downloads/" + name);
-            if (file.exists() != true) {
-                if (file_enable == 1)
-                    main.funct.update_file_isn(main.database, name, 0);
-                file_enable = 0;
-            } else {
-                if (file_enable == 0)
-                    main.funct.update_file_isn(main.database, name, 1);
-                file_enable = 1;
-            }
-
-            if (file_enable == 1) {
-                Intent intent = new Intent();
-                intent.setAction(android.content.Intent.ACTION_VIEW);
-
-                MimeTypeMap map = MimeTypeMap.getSingleton();
-                String ext = MimeTypeMap
-                        .getFileExtensionFromUrl(file.getName());
-                String type = map.getMimeTypeFromExtension(ext);
-
-                if (type == null)
-                    type = "*/*";
-                Uri data = Uri.fromFile(file);
-                intent.setDataAndType(data, type);
-                Intent ch = Intent.createChooser(intent,
-                        getString(R.string.select));
-                startActivity(ch);
-
-            } else {
-                Intent i = new Intent(getActivity(),
-                        class_downloads_files.class);
-                i.putExtra("file_url", link);
-                i.putExtra("file_putch", file.getAbsolutePath());
-                Toast.makeText(getActivity(),
-                        getString(R.string.download_task_addeded),
-                        Toast.LENGTH_SHORT).show();
-                getActivity().startService(i);
-            }
-        } catch (Exception e) {
-            main.funct.send_bug_report(getActivity(), e, getClass().getName(),
-                    273);
-        }
-    }
 
     public void refresh() {
         try {
             getActivity().stopManagingCursor(cursor);
             cursor = main.database
                     .rawQuery(
-                            "select magazine._id as _id, magazine.name as name, magazine.img as img, language.code as code_lng, publication.code as code_pub, publication._id as cur_pub, date from magazine left join language on magazine.id_lang=language._id left join publication on magazine.id_pub=publication._id where magazine.id_lang='"
+                            "select magazine._id as _id, magazine.name as name, magazine.title as title, magazine.img as img, language.code as code_lng, publication.code as code_pub, publication._id as cur_pub, date from magazine left join language on magazine.id_lang=language._id left join publication on magazine.id_pub=publication._id where magazine.id_lang='"
                                     + main.id_lang
                                     + "' and magazine.id_pub='4' order by date desc, magazine.id_pub asc",
                             null);
             getActivity().startManagingCursor(cursor);
-
+            ArrayList<String> files_arr = new ArrayList();
             cursor.moveToFirst();
+
             for (int i = 0; i < cursor.getCount(); i++) {
-
                 Integer _id = cursor.getInt(cursor.getColumnIndex("_id"));
-
                 Cursor cur = main.database.rawQuery(
                         "select id_type, file, name from files where `id_magazine`='"
                                 + _id + "' group by id_type", null);
+
                 getActivity().startManagingCursor(cur);
+
                 String files = "";
                 if (cur.getCount() > 0) {
                     cur.moveToFirst();
@@ -286,29 +137,28 @@ public class books_brochures extends SherlockFragment {
                                 initialValues.put("file", "0");
                                 main.database.update("files", initialValues,
                                         "name=?",
-                                        new String[] { cur.getString(cur
-                                                .getColumnIndex("name")) });
+                                        new String[]{cur.getString(cur
+                                                .getColumnIndex("name"))});
                             }
                         }
 
                         files = files
                                 + cur.getString(cur.getColumnIndex("id_type"))
                                 + "=" + file_isn;
+
                         cur.moveToNext();
                     }
                 }
                 getActivity().stopManagingCursor(cur);
-
+                files_arr.add(files);
                 cursor.moveToNext();
-
             }
 
 
-            class_rss_books_brochures_adapter  scAdapter = new class_rss_books_brochures_adapter(getActivity(),
-                    R.layout.list_items_books_brochures, cursor, null, null);
+            cursor.moveToFirst();
+            class_rss_books_brochures_adapter scAdapter = new class_rss_books_brochures_adapter(getActivity(),
+                    R.layout.list_items_books_brochures, cursor, new String[]{"_id"}, new int[]{R.id.title}, main.database, files_arr);
             list.setAdapter(scAdapter);
-
-
 
 
         } catch (Exception e) {
@@ -318,15 +168,13 @@ public class books_brochures extends SherlockFragment {
     }
 
     public void jwp_rss_img() {
-        rss_jornals_img.verify_all_img();
+        rss_books_brochures_img.verify_all_img();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         getActivity().stopManagingCursor(cursor);
-        getActivity().stopManagingCursor(cur_files);
-        //dbOpenHelper.close();
         getActivity().stopService(
                 new Intent(getActivity(), class_downloads_files.class));
 

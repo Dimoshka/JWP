@@ -42,7 +42,7 @@ The program works as RSS client."</string>
     <string name="send_bug_report">"Send mail report of error&#8230;"</string>
     <string name="not_email_client">"There are no email clients installed."</string>
     <string name="first_run_title">"First run"</string>
-    <string name="first_run">"This is your first time running the program. Please go to settings and select the appropriate options for you."</string>
+    <string name="first_run">"This is your first time running the program. Please go to settings and select the appropriate options for you. Then press the button - Download RSS."</string>
     <string name="no_internet">"No internet connection!"</string>
     <string name="no_sdcard">"SDCARD is not connected!"</string>
     <string name="dialog_loaing_rss">"Download RSS. Please wait&#8230;"</string>

@@ -1,11 +1,7 @@
 package com.dimoshka.ua.classes;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
@@ -13,11 +9,16 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
-
 import com.dimoshka.ua.jwp.R;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class class_rss_jornals {
 	static final String URL_FEED = "http://www.jw.org/apps/index.xjp?option=sFFZRQVNZNT&rln=%s&rmn=%s&rfm=%s&rpf=&rpe=";
@@ -110,7 +111,8 @@ public class class_rss_jornals {
 		private ProgressDialog dialog;
 		List<class_rss_item> rss_list = null;
 
-		@SuppressLint({ "SimpleDateFormat", "NewApi" })
+		@TargetApi(Build.VERSION_CODES.FROYO)
+        @SuppressLint({ "SimpleDateFormat", "NewApi" })
 		protected Void doInBackground(Void... paramArrayOfVoid) {
 			try {
 

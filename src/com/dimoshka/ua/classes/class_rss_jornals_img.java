@@ -1,5 +1,17 @@
 package com.dimoshka.ua.classes;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
+import android.os.Handler;
+import android.util.Log;
+import com.dimoshka.ua.jwp.R;
+import org.apache.http.util.ByteArrayBuffer;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -10,24 +22,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.http.util.ByteArrayBuffer;
-
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.app.ProgressDialog;
-import android.content.ContentValues;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.os.AsyncTask;
-import android.os.Handler;
-import android.util.Log;
-
-import com.dimoshka.ua.jwp.R;
-
 public class class_rss_jornals_img {
 
 	static final String URL_IMG = "http://www.jw.org/assets/a/{code_pub_shot}{YY}/{YYYYMMDD}/{code_pub_shot}{YY}_{YYYYMMDD}_{code_lng}/{code_pub}_{code_lng}_{YYYYMMDD}.prd_md.jpg";
 	// http://www.jw.org/assets/a/g13/201303/g13_201303_U/g_U_201303prd_md.jpg
+    // http://www.jw.org/assets/a/g13/201307/g13_201307_U/g_U_201307.prd_md.jpg
 
 	private SQLiteDatabase database;
 	public class_functions funct = new class_functions();
@@ -45,7 +44,7 @@ public class class_rss_jornals_img {
 	public void verify_all_img() {
 		cursor = database
 				.rawQuery(
-						"select magazine._id, magazine.name, magazine.img, language.code as code_lng, publication.code as code_pub, publication._id as cur_pub from magazine left join language on magazine.id_lang=language._id left join publication on magazine.id_pub=publication._id where img=0",
+						"select magazine._id, magazine.name, magazine.img, language.code as code_lng, publication.code as code_pub, publication._id as cur_pub from magazine left join language on magazine.id_lang=language._id left join publication on magazine.id_pub=publication._id where img=0 and magazine.id_pub BETWEEN '1' and '3'",
 						null);
 		activity.startManagingCursor(cursor);
 		new verify_img().execute();

@@ -1,11 +1,5 @@
 package com.dimoshka.ua.classes;
 
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Map;
-
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
@@ -18,8 +12,13 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.dimoshka.ua.jwp.R;
+
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Map;
 
 public class class_rss_jornals_adapter extends BaseExpandableListAdapter {
 	private Context context;
@@ -45,9 +44,9 @@ public class class_rss_jornals_adapter extends BaseExpandableListAdapter {
 			boolean isLastChild, View convertView, ViewGroup parent) {
 		try {
 
-			inflater = (LayoutInflater) this.context
-					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			View v = inflater.inflate(R.layout.list_items_jornals, null);
+            inflater = (LayoutInflater) this.context
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View v = inflater.inflate(R.layout.list_items_jornals, null);
 
 			Map<String, String> m = getChild(groupPosition, childPosition);
 			String name = m.get("name");

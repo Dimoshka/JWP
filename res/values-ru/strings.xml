@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">"JWP - публикации Свидетелей Иеговы"</string>
+
+    <string name="app_name">"JWP - публикации Свидетелей Иеговы"</string>
     <string name="app_name_shot">"JWP"</string>
     <string name="description">"JWP - это программа для читателей публикаций Свидетелей Иеговы.
 Используя эту программу, вы всегда будете иметь доступ к актуальным выпускам журналов «Сторожевая Башня» и «Пробудитесь».
@@ -15,7 +16,7 @@
     <string name="send_bug_report">"Отправка отчета об ошибке&#8230;"</string>
     <string name="not_email_client">"У вас не установлен почтовый клиент."</string>
     <string name="first_run_title">"Первый запуск программы"</string>
-    <string name="first_run">"Это ваш первый запуск программы. Пожалуйста зайдите в настройки и выберите подходящие для вас параметры."</string>
+    <string name="first_run">"Это ваш первый запуск программы. Пожалуйста зайдите в настройки и выберите подходящие для вас параметры. После этого нажмите на кнопку - Загрузить RSS."</string>
     <string name="no_internet">"Нету подключения к интернету!"</string>
     <string name="no_sdcard">"SDCARD не подключена!"</string>
     <string name="dialog_loaing_rss">"Загрузка RSS. Пожалуйста подождите &#8230;"</string>

@@ -16,7 +16,7 @@ Das Programm arbeitet als RSS-Client."</string>
     <string name="send_bug_report">"Senden Fehlerbericht&#8230;"</string>
     <string name="not_email_client">"Sie haben noch eine E-Mail-Client."</string>
     <string name="first_run_title">"Erstaufführung"</string>
-    <string name="first_run">"Dies ist das erste Mal das Programm läuft. Bitte gehen Sie auf Einstellungen und wählen Sie die entsprechenden Optionen für Sie."</string>
+    <string name="first_run">"Dies ist das erste Mal das Programm läuft. Bitte gehen Sie auf Einstellungen und wählen Sie die entsprechenden Optionen für Sie. Dann drücken Sie die Taste - Download RSS."</string>
     <string name="no_internet">"Keine Internet-Verbindung!"</string>
     <string name="no_sdcard">"SDCARD ist nicht angeschlossen!"</string>
     <string name="dialog_loaing_rss">"Herunterladen RSS. Bitte warten&#8230;"</string>
