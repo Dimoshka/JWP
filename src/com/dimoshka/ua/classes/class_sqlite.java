@@ -76,7 +76,8 @@ public class class_sqlite extends SQLiteOpenHelper {
             case 1:
 
                 // -- Table: magazine
-                database.execSQL("ALTER TABLE [magazine] ADD (link_img VARCHAR(256), title VARCHAR(128));");
+                database.execSQL("ALTER TABLE [magazine] ADD link_img VARCHAR(256);");
+                database.execSQL("ALTER TABLE [magazine] ADD title VARCHAR(128);");
 
                 // -- Table: publication
                 database.execSQL("INSERT INTO [publication] ([_id], [name], [code]) VALUES (4, 'Books and brochures', 'b');");
