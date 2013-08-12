@@ -1,11 +1,11 @@
 package com.dimoshka.ua.classes;
 
-import com.dimoshka.ua.jwp.R;
-
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+
+import com.dimoshka.ua.jwp.R;
 
 public class class_sqlite extends SQLiteOpenHelper {
 
@@ -44,12 +44,14 @@ public class class_sqlite extends SQLiteOpenHelper {
             database.execSQL("CREATE TABLE magazine (_id INTEGER PRIMARY KEY ASC AUTOINCREMENT UNIQUE, name VARCHAR(128) UNIQUE, title VARCHAR(128), id_pub INTEGER NOT NULL, id_lang INTEGER NOT NULL, img BOOLEAN DEFAULT (0), link_img VARCHAR(256), date DATE NOT NULL);");
             database.execSQL("INSERT INTO [magazine] ([_id], [name], [title], [id_pub], [id_lang], [img], [link_img], [date]) VALUES (5334, 'bh_U.pdf', 'Чему на самом деле учит Библия?', 4, 3, 0, 'http://www.jw.org/assets/a/bh/bh_U/bh_U.prd_md.jpg', '20130517');");
             database.execSQL("INSERT INTO [magazine] ([_id], [name], [title], [id_pub], [id_lang], [img], [link_img], [date]) VALUES (5913, 'yb13_U.pdf', 'Ежегодник Свидетелей Иеговы 2013', 4, 3, 0, 'http://www.jw.org/assets/a/yb13/yb13_U/yb13_U.prd_md.jpg', '20130517');");
+            database.execSQL("INSERT INTO [magazine] ([_id], [name], [title], [id_pub], [id_lang], [img], [link_img], [date]) VALUES (5338, 'sny_U.pdf', 'Пойте Иегове — тексты песен', 4, 3, 0, 'http://www.jw.org/assets/a/sny/sny_U/sny_U.prd_md.jpg', '20130517');");
             // -- Table: files
             database.execSQL("CREATE TABLE files (_id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, id_magazine INTEGER NOT NULL, id_type INTEGER NOT NULL, name VARCHAR(32) NOT NULL UNIQUE, link VARCHAR(256) NOT NULL, pubdate DATE NOT NULL, title VARCHAR(256) NOT NULL, file BOOLEAN DEFAULT (0));");
             database.execSQL("INSERT INTO [files] ([_id], [id_magazine], [id_type], [name], [link], [pubdate], [title], [file]) VALUES (null, 5334, 2, 'bh_U.pdf', 'http://download.jw.org/files/media_books/5e/bh_U.pdf', '20130517', '', 0);");
             database.execSQL("INSERT INTO [files] ([_id], [id_magazine], [id_type], [name], [link], [pubdate], [title], [file]) VALUES (null, 5913, 2, 'yb13_U.pdf', 'http://download.jw.org/files/media_books/0f/yb13_U.pdf', '20130517', '', 0);");
+            database.execSQL("INSERT INTO [files] ([_id], [id_magazine], [id_type], [name], [link], [pubdate], [title], [file]) VALUES (null, 5338, 2, 'sny_U.pdf', 'http://download.jw.org/files/media_books/b2/sny_U.pdf', '20130517', '', 0);");
             // -- Table: news
-            database.execSQL("CREATE TABLE news (_id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, id_lang INTEGER NOT NULL, title VARCHAR(256) NOT NULL, link VARCHAR(256) NOT NULL UNIQUE, link_img VARCHAR(256), description VARCHAR(256) NOT NULL, pubdate DATETIME NOT NULL, img BOOLEAN DEFAULT (0));");
+            database.execSQL("CREATE TABLE news (_id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, id_lang INTEGER NOT NULL, title VARCHAR(256) NOT NULL UNIQUE, link VARCHAR(256) NOT NULL UNIQUE, link_img VARCHAR(256), description VARCHAR(256) NOT NULL, pubdate DATETIME NOT NULL, img BOOLEAN DEFAULT (0));");
             // -- Table: language
             database.execSQL("CREATE TABLE language (_id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(64) NOT NULL UNIQUE, code VARCHAR(4) NOT NULL UNIQUE, code_an VARCHAR(6) NOT NULL UNIQUE, news_rss VARCHAR(24) NOT NULL);");
             database.execSQL("INSERT INTO [language] ([_id], [name], [code], [code_an], [news_rss]) VALUES (1, 'English', 'E', 'en', 'en/news');");
@@ -86,7 +88,6 @@ public class class_sqlite extends SQLiteOpenHelper {
                 database.execSQL("INSERT INTO [magazine] ([_id], [name], [title], [id_pub], [id_lang], [img], [link_img], [date]) VALUES (5334, 'bh_U.pdf', 'Чему на самом деле учит Библия?', 4, 3, 0, 'http://www.jw.org/assets/a/bh/bh_U/bh_U.prd_md.jpg', '20130517');");
                 database.execSQL("INSERT INTO [magazine] ([_id], [name], [title], [id_pub], [id_lang], [img], [link_img], [date]) VALUES (5913, 'yb13_U.pdf', 'Ежегодник Свидетелей Иеговы 2013', 4, 3, 0, 'http://www.jw.org/assets/a/yb13/yb13_U/yb13_U.prd_md.jpg', '20130517');");
 
-
                 // -- Table: files
                 database.execSQL("INSERT INTO [files] ([_id], [id_magazine], [id_type], [name], [link], [pubdate], [title], [file]) VALUES (null, 5334, 2, 'bh_U.pdf', 'http://download.jw.org/files/media_books/5e/bh_U.pdf', '20130517', '', 0);");
                 database.execSQL("INSERT INTO [files] ([_id], [id_magazine], [id_type], [name], [link], [pubdate], [title], [file]) VALUES (null, 5913, 2, 'yb13_U.pdf', 'http://download.jw.org/files/media_books/0f/yb13_U.pdf', '20130517', '', 0);");
@@ -94,6 +95,8 @@ public class class_sqlite extends SQLiteOpenHelper {
                 break;
             default:
                 database.execSQL("DROP TABLE IF EXISTS type");
+                database.execSQL("DROP TABLE IF EXISTS news");
+                database.execSQL("DROP TABLE IF EXISTS files");
                 database.execSQL("DROP TABLE IF EXISTS language");
                 database.execSQL("DROP TABLE IF EXISTS publication");
                 database.execSQL("DROP TABLE IF EXISTS magazine");

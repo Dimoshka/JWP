@@ -13,12 +13,20 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.widget.Toast;
+
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
-import com.dimoshka.ua.classes.*;
+import com.bugsense.trace.BugSenseHandler;
+import com.dimoshka.ua.classes.class_functions;
+import com.dimoshka.ua.classes.class_open_or_download;
+import com.dimoshka.ua.classes.class_rss_jornals;
+import com.dimoshka.ua.classes.class_rss_jornals_img;
+import com.dimoshka.ua.classes.class_rss_news;
+import com.dimoshka.ua.classes.class_rss_news_img;
+import com.dimoshka.ua.classes.class_sqlite;
 import com.google.analytics.tracking.android.EasyTracker;
 
 public class main extends SherlockFragmentActivity {
@@ -38,22 +46,24 @@ public class main extends SherlockFragmentActivity {
     private class_rss_news rss_news;
     private class_rss_news_img rss_news_img;
 
-
     jornals frag1;
     news frag2;
     books_brochures frag3;
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        BugSenseHandler.initAndStartSession(this, "63148966");
+        BugSenseHandler.setLogging(100);
         setContentView(R.layout.main);
-
 
         dbOpenHelper = new class_sqlite(this);
         database = dbOpenHelper.openDataBase();
 
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
         id_lang = Integer.parseInt(prefs.getString("language", "0"));
+
 
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);

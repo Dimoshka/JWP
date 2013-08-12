@@ -1,10 +1,11 @@
 <component name="libraryTable">
   <library name="libs">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/libs/libGoogleAnalyticsV2.jar!/" />
-      <root url="jar://$PROJECT_DIR$/libs/acra-4.5.0.jar!/" />
+      <root url="file://$PROJECT_DIR$/../../GoogleAnalyticsAndroid_2.0beta5" />
+      <root url="jar://$PROJECT_DIR$/../../bugsense3.4.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/../../GoogleAnalyticsAndroid_2.0beta5" recursive="false" />
   </library>
 </component>

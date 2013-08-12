@@ -9,15 +9,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.util.Log;
-import com.dimoshka.ua.jwp.R;
-import org.apache.http.util.ByteArrayBuffer;
 
-import java.io.BufferedInputStream;
+import com.dimoshka.ua.jwp.R;
+
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.List;
 
 public class class_rss_books_brochures_img {
@@ -73,32 +68,16 @@ public class class_rss_books_brochures_img {
                             Log.i("JWP_image", name + " - no found!");
 
                             try {
-                                URL url = new URL(link_img);
-                                File file = new File(dir, name + ".jpg");
-                                URLConnection ucon = url.openConnection();
-                                InputStream is = ucon.getInputStream();
-                                BufferedInputStream bis = new BufferedInputStream(
-                                        is);
-                                ByteArrayBuffer baf = new ByteArrayBuffer(5000);
-                                int current = 0;
-                                while ((current = bis.read()) != -1) {
-                                    baf.append((byte) current);
+                                if (funct.load_img(activity, dir, name, link_img)) {
+                                    Log.i("JWP_image", name
+                                            + " - file download complete!");
+                                    initialValues.put("img", "1");
+                                    String[] args = {String
+                                            .valueOf(cursor.getString(cursor
+                                                    .getColumnIndex("_id")))};
+                                    database.update("magazine", initialValues,
+                                            "_id=?", args);
                                 }
-
-                                FileOutputStream fos = new FileOutputStream(
-                                        file);
-                                fos.write(baf.toByteArray());
-                                fos.flush();
-                                fos.close();
-
-                                Log.i("JWP_image", name
-                                        + " - file download complete!");
-                                initialValues.put("img", "1");
-                                String[] args = {String
-                                        .valueOf(cursor.getString(cursor
-                                                .getColumnIndex("_id")))};
-                                database.update("magazine", initialValues,
-                                        "_id=?", args);
 
                             } catch (Exception e) {
                                 Log.e("JWP_" + getClass().getName(),
