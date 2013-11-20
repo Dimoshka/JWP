@@ -1,29 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/widget31"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
-
     <Button
         android:id="@+id/ButtonPlayStop"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/player_play"
-        android:textStyle="bold" />
+            />
+
+    <Button
+            android:id="@+id/ButtonBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="back"
+            android:layout_below="@+id/ButtonPlayStop"
+            android:layout_alignParentLeft="true"/>
+
+    <Button
+            android:id="@+id/ButtonNext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="next"
+            android:layout_below="@+id/ButtonPlayStop"
+            android:layout_alignParentRight="true"/>
 
     <SeekBar
         android:id="@+id/SeekBar01"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/ButtonPlayStop" />
+        android:layout_below="@+id/ButtonBack"
+        android:layout_alignRight="@+id/ButtonNext"/>
 
     <ListView
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:choiceMode="singleChoice"
         android:layout_below="@+id/SeekBar01"
-        android:choiceMode="singleChoice" >
+        android:layout_alignRight="@+id/ButtonNext">
     </ListView>
 
 </RelativeLayout>

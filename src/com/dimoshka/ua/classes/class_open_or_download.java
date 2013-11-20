@@ -25,14 +25,15 @@ public class class_open_or_download {
 
     private Activity activity;
     private Cursor cur_files;
-    private static SQLiteDatabase database;
+    private SQLiteDatabase database;
     
     public class_open_or_download(Activity activity, SQLiteDatabase database){
         this.activity =activity;
         this.database=database;
     }
 
-    @SuppressLint("ShowToast")
+    @SuppressWarnings("deprecation")
+	@SuppressLint("ShowToast")
     public void dialog_show(String _id) {
         try {
             if (main.funct.ExternalStorageState() == true) {
@@ -98,7 +99,8 @@ public class class_open_or_download {
         }
     }
 
-    @SuppressLint("ShowToast")
+    @SuppressWarnings("deprecation")
+	@SuppressLint("ShowToast")
     public void open_or_download(int id) {
         try {
             if (main.funct.ExternalStorageState() == true) {
@@ -159,9 +161,10 @@ public class class_open_or_download {
                     type = "*/*";
                 Uri data = Uri.fromFile(file);
                 intent.setDataAndType(data, type);
-                Intent ch = Intent.createChooser(intent,
-                        activity.getString(R.string.select));
-                activity.startActivity(ch);
+                //Intent ch = Intent.createChooser(intent,
+                //        activity.getString(R.string.select));
+                //activity.startActivity(ch);
+                activity.startActivity(intent);
 
             } else {
                 Intent i = new Intent(activity,

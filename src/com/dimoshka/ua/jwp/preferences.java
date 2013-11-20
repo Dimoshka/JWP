@@ -7,6 +7,7 @@ import com.actionbarsherlock.app.SherlockPreferenceActivity;
 
 public class preferences extends SherlockPreferenceActivity {
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

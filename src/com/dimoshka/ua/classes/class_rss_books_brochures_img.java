@@ -31,7 +31,8 @@ public class class_rss_books_brochures_img {
         this.database = database;
     }
 
-    public void verify_all_img() {
+    @SuppressWarnings("deprecation")
+	public void verify_all_img() {
         cursor = database
                 .rawQuery(
                         "select _id, name, img, link_img from magazine where img=0 and id_pub='4'",
@@ -100,7 +101,8 @@ public class class_rss_books_brochures_img {
             return null;
         }
 
-        protected void onPostExecute(Void result) {
+        @SuppressWarnings("deprecation")
+		protected void onPostExecute(Void result) {
             this.dialog.hide();
             activity.stopManagingCursor(cursor);
             cursor.close();

@@ -30,7 +30,8 @@ public class class_rss_news_img {
         this.database = database;
     }
 
-    public void verify_all_img() {
+    @SuppressWarnings("deprecation")
+	public void verify_all_img() {
         cursor = database.rawQuery(
                 "select _id, img, link_img from news where img=0", null);
         activity.startManagingCursor(cursor);
@@ -102,7 +103,8 @@ public class class_rss_news_img {
             return null;
         }
 
-        protected void onPostExecute(Void result) {
+        @SuppressWarnings("deprecation")
+		protected void onPostExecute(Void result) {
             this.dialog.hide();
             activity.stopManagingCursor(cursor);
             cursor.close();

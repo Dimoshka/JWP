@@ -27,7 +27,7 @@
     <ImageView
         android:id="@+id/aac"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_height="10dp"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/mp3"
         android:layout_marginRight="5dp"
@@ -36,7 +36,7 @@
     <ImageView
         android:id="@+id/mp3"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_height="10dp"
         android:layout_alignTop="@+id/audio"
         android:layout_marginRight="2dp"
         android:layout_toLeftOf="@+id/aac"
@@ -45,7 +45,7 @@
     <ImageView
         android:id="@+id/audio"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_height="10dp"
         android:layout_alignTop="@+id/epub"
         android:layout_marginRight="2dp"
         android:layout_toLeftOf="@+id/mp3"
@@ -54,7 +54,7 @@
     <ImageView
         android:id="@+id/epub"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_height="10dp"
         android:layout_alignTop="@+id/pdf"
         android:layout_marginRight="2dp"
         android:layout_toLeftOf="@+id/audio"
@@ -63,7 +63,7 @@
     <ImageView
         android:id="@+id/pdf"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_height="10dp"
         android:layout_alignTop="@+id/digitalpub"
         android:layout_marginRight="2dp"
         android:layout_toLeftOf="@+id/epub"
@@ -72,10 +72,20 @@
     <ImageView
         android:id="@+id/digitalpub"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_height="10dp"
         android:layout_alignBottom="@+id/img"
         android:layout_marginRight="2dp"
         android:layout_toLeftOf="@+id/pdf"
         android:src="@drawable/icon_digitalpub" />
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/digitalpub"
+        android:layout_alignLeft="@+id/title"
+        android:text="text"
+        android:textColor="@color/text_dark_gray"
+        android:textStyle="italic" />
 
 </RelativeLayout>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="101dp" >
+    android:layout_height="103dp" >
 
     <ImageView
         android:id="@+id/img"
@@ -11,6 +11,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignTop="@+id/title"
         android:layout_margin="5dp"
+        android:contentDescription="@string/jornals"
         android:src="@drawable/noimages" />
 
     <TextView
@@ -31,6 +32,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/mp3"
         android:layout_marginRight="5dp"
+        android:contentDescription="@string/rss_aac"
         android:src="@drawable/none_type" />
 
     <ImageView
@@ -40,6 +42,7 @@
         android:layout_alignTop="@+id/audio"
         android:layout_marginRight="2dp"
         android:layout_toLeftOf="@+id/aac"
+        android:contentDescription="@string/rss_mp3"
         android:src="@drawable/none_type" />
 
     <ImageView
@@ -49,6 +52,7 @@
         android:layout_alignTop="@+id/epub"
         android:layout_marginRight="2dp"
         android:layout_toLeftOf="@+id/mp3"
+        android:contentDescription="@string/jornals"
         android:src="@drawable/icon_audio" />
 
     <ImageView
@@ -58,6 +62,7 @@
         android:layout_alignTop="@+id/pdf"
         android:layout_marginRight="2dp"
         android:layout_toLeftOf="@+id/audio"
+        android:contentDescription="@string/rss_epub"
         android:src="@drawable/none_type" />
 
     <ImageView
@@ -67,6 +72,7 @@
         android:layout_alignTop="@+id/digitalpub"
         android:layout_marginRight="2dp"
         android:layout_toLeftOf="@+id/epub"
+        android:contentDescription="@string/rss_pdf"
         android:src="@drawable/none_type" />
 
     <ImageView
@@ -76,6 +82,7 @@
         android:layout_alignBottom="@+id/img"
         android:layout_marginRight="2dp"
         android:layout_toLeftOf="@+id/pdf"
+        android:contentDescription="@string/jornals"
         android:src="@drawable/icon_digitalpub" />
 
     <TextView

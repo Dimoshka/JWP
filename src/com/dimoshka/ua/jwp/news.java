@@ -20,114 +20,117 @@ import java.util.Map;
 @SuppressLint("HandlerLeak")
 public class news extends SherlockFragment {
 
-    private ExpandableListView list;
-    private Cursor cursor;
-    private ArrayList<Map<String, String>> groupData;
-    private ArrayList<Map<String, String>> childDataItem;
-    private ArrayList<ArrayList<Map<String, String>>> childData;
-    private Map<String, String> m;
+	private ExpandableListView list;
+	private Cursor cursor;
+	private ArrayList<Map<String, String>> groupData;
+	private ArrayList<Map<String, String>> childDataItem;
+	private ArrayList<ArrayList<Map<String, String>>> childData;
+	private Map<String, String> m;
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup group,
-                             Bundle saved) {
-        return inflater.inflate(R.layout.expandable_list, group, false);
-    }
+	View view = null;
 
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        try {
-            list = (ExpandableListView) getActivity().findViewById(R.id.list);
-            list.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup group,
+			Bundle saved) {
+		view = inflater.inflate(R.layout.expandable_list, group, false);
 
-                @Override
-                public boolean onChildClick(ExpandableListView arg0, View arg1,
-                                            int arg2, int arg3, long arg4) {
-                    Map<String, String> hash = new HashMap<String, String>();
-                    hash = childData.get(arg2).get(arg3);
+		try {
+			list = (ExpandableListView) view.findViewById(R.id.list);
+			list.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 
-                    Intent intent = new Intent();
-                    intent.setAction(android.content.Intent.ACTION_VIEW);
+				@Override
+				public boolean onChildClick(ExpandableListView arg0, View arg1,
+						int arg2, int arg3, long arg4) {
+					Map<String, String> hash = new HashMap<String, String>();
+					hash = childData.get(arg2).get(arg3);
 
-                    Uri data = Uri.parse(hash.get("link"));
-                    intent.setDataAndType(data, "text/html");
-                    Intent ch = Intent.createChooser(intent,
-                            getString(R.string.select));
-                    startActivity(ch);
-                    return false;
-                }
-            });
+					Intent intent = new Intent();
+					intent.setAction(android.content.Intent.ACTION_VIEW);
 
-        } catch (Exception e) {
-            main.funct.send_bug_report(getActivity(), e, getClass().getName(),
-                    102);
-        }
-        refresh();
-    }
+					Uri data = Uri.parse(hash.get("link"));
+					intent.setDataAndType(data, "text/html");
+					// Intent ch = Intent.createChooser(intent,
+					// getString(R.string.select));
+					// startActivity(ch);
+					startActivity(intent);
+					return false;
+				}
+			});
 
-    @SuppressLint("SimpleDateFormat")
-    public void refresh() {
-        try {
-            getActivity().stopManagingCursor(cursor);
-            cursor = main.database.rawQuery(
-                    "select * from news where news.id_lang='" + main.id_lang
-                            + "' order by pubdate desc, news._id asc", null);
-            getActivity().startManagingCursor(cursor);
+		} catch (Exception e) {
+			main.funct.send_bug_report(getActivity(), e, getClass().getName(),
+					102);
+		}
+		refresh();
 
-            groupData = new ArrayList<Map<String, String>>();
+		return view;
+	}
 
-            childData = new ArrayList<ArrayList<Map<String, String>>>();
-            childDataItem = new ArrayList<Map<String, String>>();
+	@SuppressWarnings("deprecation")
+	@SuppressLint("SimpleDateFormat")
+	public void refresh() {
+		try {
+			getActivity().stopManagingCursor(cursor);
+			cursor = main.database.rawQuery(
+					"select * from news where news.id_lang='" + main.id_lang
+							+ "' order by pubdate desc, news._id asc", null);
+			getActivity().startManagingCursor(cursor);
 
-            cursor.moveToFirst();
-            for (int i = 0; i < cursor.getCount(); i++) {
+			groupData = new ArrayList<Map<String, String>>();
 
-                childDataItem = new ArrayList<Map<String, String>>();
+			childData = new ArrayList<ArrayList<Map<String, String>>>();
+			childDataItem = new ArrayList<Map<String, String>>();
 
-                Integer _id = cursor.getInt(cursor.getColumnIndex("_id"));
-                String title = cursor.getString(cursor.getColumnIndex("title"));
-                String link = cursor.getString(cursor.getColumnIndex("link"));
-                String description = cursor.getString(cursor
-                        .getColumnIndex("description"));
-                String pubdate = cursor.getString(cursor
-                        .getColumnIndex("pubdate"));
+			cursor.moveToFirst();
+			for (int i = 0; i < cursor.getCount(); i++) {
 
-                Integer img = cursor.getInt(cursor.getColumnIndex("img"));
+				childDataItem = new ArrayList<Map<String, String>>();
 
-                m = new HashMap<String, String>();
-                m.put("groupName", title);
-                groupData.add(m);
+				Integer _id = cursor.getInt(cursor.getColumnIndex("_id"));
+				String title = cursor.getString(cursor.getColumnIndex("title"));
+				String link = cursor.getString(cursor.getColumnIndex("link"));
+				String description = cursor.getString(cursor
+						.getColumnIndex("description"));
+				String pubdate = cursor.getString(cursor
+						.getColumnIndex("pubdate"));
 
-                m = new HashMap<String, String>();
+				Integer img = cursor.getInt(cursor.getColumnIndex("img"));
 
-                m.put("_id", _id.toString());
-                m.put("name", "news_" + _id.toString());
-                m.put("title", title);
-                m.put("link", link);
-                m.put("description", description);
-                m.put("pubdate", pubdate);
-                m.put("img", img.toString());
+				m = new HashMap<String, String>();
+				m.put("groupName", title);
+				groupData.add(m);
 
-                childDataItem.add(m);
-                childData.add(childDataItem);
-                cursor.moveToNext();
-            }
+				m = new HashMap<String, String>();
 
-            getActivity().stopManagingCursor(cursor);
+				m.put("_id", _id.toString());
+				m.put("name", "news_" + _id.toString());
+				m.put("title", title);
+				m.put("link", link);
+				m.put("description", description);
+				m.put("pubdate", pubdate);
+				m.put("img", img.toString());
 
-            class_rss_news_adapter adapter = new class_rss_news_adapter(
-                    getActivity(), groupData, childData, main.database);
-            list.setAdapter(adapter);
-        } catch (Exception e) {
-            main.funct.send_bug_report(getActivity(), e, getClass().getName(),
-                    182);
-        }
-    }
+				childDataItem.add(m);
+				childData.add(childDataItem);
+				cursor.moveToNext();
+			}
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        getActivity().stopManagingCursor(cursor);
-    }
+			getActivity().stopManagingCursor(cursor);
+
+			class_rss_news_adapter adapter = new class_rss_news_adapter(
+					getActivity(), groupData, childData, main.database);
+			list.setAdapter(adapter);
+		} catch (Exception e) {
+			main.funct.send_bug_report(getActivity(), e, getClass().getName(),
+					182);
+		}
+	}
+
+	@SuppressWarnings("deprecation")
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		getActivity().stopManagingCursor(cursor);
+	}
 
 }

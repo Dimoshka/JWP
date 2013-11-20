@@ -36,7 +36,8 @@ public class class_rss_jornals_img {
         this.database = database;
     }
 
-    public void verify_all_img() {
+    @SuppressWarnings("deprecation")
+	public void verify_all_img() {
         cursor = database
                 .rawQuery(
                         "select magazine._id, magazine.name, magazine.img, language.code as code_lng, publication.code as code_pub, publication._id as cur_pub from magazine left join language on magazine.id_lang=language._id left join publication on magazine.id_pub=publication._id where img=0 and magazine.id_pub BETWEEN '1' and '3'",
@@ -133,7 +134,8 @@ public class class_rss_jornals_img {
             return null;
         }
 
-        protected void onPostExecute(Void result) {
+        @SuppressWarnings("deprecation")
+		protected void onPostExecute(Void result) {
             this.dialog.hide();
             activity.stopManagingCursor(cursor);
             cursor.close();

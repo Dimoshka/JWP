@@ -21,8 +21,6 @@ import java.util.ArrayList;
 public class class_rss_books_brochures_adapter extends SimpleCursorAdapter {
 
     private int layout;
-    private String[] from;
-    private int[] to;
     private class_functions funct = new class_functions();
     private SQLiteDatabase database;
     private ArrayList<String> files_arr;
@@ -34,8 +32,6 @@ public class class_rss_books_brochures_adapter extends SimpleCursorAdapter {
                                              SQLiteDatabase database, ArrayList<String> files_arr) {
         super(context, layout, c, from, to);
         this.layout = layout;
-        this.from = from;
-        this.to = to;
         this.database = database;
         this.files_arr = files_arr;
 

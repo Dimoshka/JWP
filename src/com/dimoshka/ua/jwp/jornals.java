@@ -33,20 +33,15 @@ public class jornals extends SherlockFragment {
     int mon = 0;
 
     private Cursor cursor;
-
+    View view = null;
+    
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup group,
                              Bundle saved) {
-        return inflater.inflate(R.layout.expandable_list, group, false);
-    }
-
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        try {
-            list = (ExpandableListView) getActivity().findViewById(R.id.list);
+    	view = inflater.inflate(R.layout.expandable_list, group, false);
+    	
+    	try {
+            list = (ExpandableListView) view.findViewById(R.id.list);
             list.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
                 @Override
                 public boolean onChildClick(ExpandableListView arg0, View arg1,
@@ -62,12 +57,12 @@ public class jornals extends SherlockFragment {
             main.funct.send_bug_report(getActivity(), e, getClass().getName(),
                     106);
         }
-
         refresh();
+        return view;
     }
 
-
-    public void refresh() {
+    @SuppressWarnings("deprecation")
+	public void refresh() {
         try {
             getActivity().stopManagingCursor(cursor);
             cursor = main.database
@@ -185,7 +180,8 @@ public class jornals extends SherlockFragment {
     }
 
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public void onDestroy() {
         super.onDestroy();
         getActivity().stopManagingCursor(cursor);

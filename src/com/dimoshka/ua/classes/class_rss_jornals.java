@@ -59,6 +59,7 @@ public class class_rss_jornals {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	public Integer get_language(int id) {
 		Cursor cursor = funct.get_language(database, id, activity);
 		activity.startManagingCursor(cursor);
@@ -74,6 +75,7 @@ public class class_rss_jornals {
 		return id_ln;
 	}
 
+	@SuppressWarnings("deprecation")
 	private void get_publication() {
 		try {
 			Cursor cursor_type = database.query("type", new String[] { "_id",
@@ -111,6 +113,7 @@ public class class_rss_jornals {
 		private ProgressDialog dialog;
 		List<class_rss_item> rss_list = null;
 
+		@SuppressWarnings("deprecation")
 		@TargetApi(Build.VERSION_CODES.FROYO)
         @SuppressLint({ "SimpleDateFormat", "NewApi" })
 		protected Void doInBackground(Void... paramArrayOfVoid) {

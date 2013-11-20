@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.dimoshka.ua.jwp"
-          android:versionCode="11"
-          android:versionName="2.0.0.1">
+          android:versionCode="13"
+          android:versionName="2.0.0.3">
 
     <uses-sdk
             android:minSdkVersion="7"
-            android:targetSdkVersion="16"/>
+            android:targetSdkVersion="17"/>
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
