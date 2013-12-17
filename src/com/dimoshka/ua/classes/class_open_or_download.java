@@ -1,6 +1,5 @@
 package com.dimoshka.ua.classes;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -33,8 +32,6 @@ public class class_open_or_download {
         this.database = database;
     }
 
-    @SuppressWarnings("deprecation")
-    @SuppressLint("ShowToast")
     public void dialog_show(String _id) {
         try {
             if (main.funct.ExternalStorageState() == true) {
@@ -45,7 +42,6 @@ public class class_open_or_download {
                         .rawQuery(
                                 "select id_type, file, type.name as name_type, files.name, link, files.id_magazine from files left join magazine on files.id_magazine=magazine._id left join type on files.id_type=type._id where files.id_magazine='"
                                         + _id + "' group by id_type", null);
-                activity.startManagingCursor(cur_files);
                 if (cur_files.getCount() > 0) {
                     cur_files.moveToFirst();
                     for (int i = 0; i < cur_files.getCount(); i++) {
@@ -100,8 +96,6 @@ public class class_open_or_download {
         }
     }
 
-    @SuppressWarnings("deprecation")
-    @SuppressLint("ShowToast")
     public void open_or_download(int id) {
         try {
             if (main.funct.ExternalStorageState() == true) {
@@ -127,7 +121,6 @@ public class class_open_or_download {
             } else
                 Toast.makeText(activity, R.string.no_sdcard,
                         Toast.LENGTH_SHORT);
-            activity.stopManagingCursor(cur_files);
         } catch (Exception e) {
             main.funct.send_bug_report(activity, e, getClass().getName(),
                     232);

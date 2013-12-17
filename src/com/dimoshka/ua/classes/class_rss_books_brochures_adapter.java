@@ -12,8 +12,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
+
 import com.dimoshka.ua.jwp.R;
 import com.dimoshka.ua.jwp.main;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -21,6 +24,7 @@ import java.util.ArrayList;
 public class class_rss_books_brochures_adapter extends SimpleCursorAdapter {
 
     private int layout;
+    @NotNull
     private class_functions funct = new class_functions();
     private SQLiteDatabase database;
     private ArrayList<String> files_arr;
@@ -28,7 +32,7 @@ public class class_rss_books_brochures_adapter extends SimpleCursorAdapter {
 
     @SuppressWarnings("deprecation")
     public class_rss_books_brochures_adapter(Context context, int layout,
-                                             Cursor c, String[] from, int[] to,
+                                             Cursor c, @NotNull String[] from, int[] to,
                                              SQLiteDatabase database, ArrayList<String> files_arr) {
         super(context, layout, c, from, to);
         this.layout = layout;
@@ -38,7 +42,7 @@ public class class_rss_books_brochures_adapter extends SimpleCursorAdapter {
     }
 
     @Override
-    public void bindView(View v, Context context, Cursor c) {
+    public void bindView(@NotNull View v, @NotNull Context context, @NotNull Cursor c) {
         try {
             Integer img = c.getInt(c.getColumnIndex("img"));
             Integer _id = c.getInt(c.getColumnIndex("_id"));
@@ -115,7 +119,7 @@ public class class_rss_books_brochures_adapter extends SimpleCursorAdapter {
     }
 
     @Override
-    public View newView(Context context, Cursor cursor, ViewGroup parent) {
+    public View newView(@NotNull Context context, Cursor cursor, ViewGroup parent) {
         final LayoutInflater inflater = LayoutInflater.from(context);
         return inflater.inflate(layout, parent, false);
     }

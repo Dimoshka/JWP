@@ -33,6 +33,9 @@ import com.dimoshka.ua.classes.class_simplecursoradapter_player;
 import com.dimoshka.ua.classes.class_sqlite;
 import com.google.analytics.tracking.android.EasyTracker;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.io.File;
 
 public class player extends SherlockActivity {
@@ -48,11 +51,13 @@ public class player extends SherlockActivity {
 	private Cursor cursor;
 	private Integer id_magazine;
 	private class_simplecursoradapter_player scAdapter;
-	private class_mediaplayer mediaplayer_class;
+	@Nullable
+    private class_mediaplayer mediaplayer_class;
 
 	public SharedPreferences prefs;
 	public SQLiteDatabase database;
-	public class_functions funct = new class_functions();
+	@NotNull
+    public class_functions funct = new class_functions();
 	public int id_lang = 0;
 	public OnSharedPreferenceChangeListener listener_pref;
 
@@ -191,7 +196,7 @@ public class player extends SherlockActivity {
 	}
 
 	@SuppressLint("HandlerLeak")
-	private void madia_player(final File file) {
+	private void madia_player(@NotNull final File file) {
 
 		/*
 		 * mpMusic = new MediaPlayer(); try {
@@ -215,7 +220,7 @@ public class player extends SherlockActivity {
 		startPlayProgressUpdater();
 	}
 
-	private void start_download(String link, File file) {
+	private void start_download(String link, @NotNull File file) {
 		Intent i = new Intent(getBaseContext(), class_downloads_files.class);
 		i.putExtra("file_url", link);
 		i.putExtra("file_putch", file.getAbsolutePath());
@@ -286,7 +291,7 @@ public class player extends SherlockActivity {
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
+	public boolean onOptionsItemSelected(@NotNull MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.item0:
 			System.exit(0);

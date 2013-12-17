@@ -1,6 +1,5 @@
 package com.dimoshka.ua.classes;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
@@ -12,6 +11,9 @@ import android.util.Log;
 
 import com.dimoshka.ua.jwp.R;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.io.File;
 import java.util.List;
 
@@ -19,6 +21,7 @@ public class class_rss_books_brochures_img {
 
 
     private SQLiteDatabase database;
+    @NotNull
     public class_functions funct = new class_functions();
     private Activity activity;
     private Cursor cursor;
@@ -31,21 +34,20 @@ public class class_rss_books_brochures_img {
         this.database = database;
     }
 
-    @SuppressWarnings("deprecation")
 	public void verify_all_img() {
         cursor = database
                 .rawQuery(
                         "select _id, name, img, link_img from magazine where img=0 and id_pub='4'",
                         null);
-        activity.startManagingCursor(cursor);
         new verify_img().execute();
     }
 
     class verify_img extends AsyncTask<Void, Integer, Void> {
         private ProgressDialog dialog;
+        @Nullable
         List<class_rss_item> rss_list = null;
 
-        @SuppressLint("SimpleDateFormat")
+        @Nullable
         protected Void doInBackground(Void... paramArrayOfVoid) {
             try {
                 if (funct.ExternalStorageState()) {
@@ -101,10 +103,8 @@ public class class_rss_books_brochures_img {
             return null;
         }
 
-        @SuppressWarnings("deprecation")
 		protected void onPostExecute(Void result) {
             this.dialog.hide();
-            activity.stopManagingCursor(cursor);
             cursor.close();
             handler.sendEmptyMessage(2);
         }

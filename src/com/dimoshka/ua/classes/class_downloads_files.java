@@ -1,6 +1,5 @@
 package com.dimoshka.ua.classes;
 
-import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -16,10 +15,14 @@ import android.widget.RemoteViews;
 
 import com.dimoshka.ua.jwp.R;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.net.HttpURLConnection;
+import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
@@ -30,16 +33,21 @@ public class class_downloads_files extends Service {
 
     public static final int SERVICE_ID = 0x101104;
     public static final int BYTES_BUFFER_SIZE = 2 * 1024;
+    @NotNull
     public class_functions funct = new class_functions();
     private NotificationManager notificationManager;
     private final IBinder binder = new FileDownloadBinder();
+    @Nullable
     private AsyncDownloadTask task = null;
     protected static boolean isRunning = false;
+    @Nullable
     private Map<String, String> targetFile = null;
+    @Nullable
     private ArrayList<Map<String, String>> targetFiles = null;
     private int now_targetFile = 0;
 
     public class FileDownloadBinder extends Binder {
+        @NotNull
         class_downloads_files getService() {
             return class_downloads_files.this;
         }
@@ -61,7 +69,7 @@ public class class_downloads_files extends Service {
     }
 
     @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
+    public int onStartCommand(@NotNull Intent intent, int flags, int startId) {
         try {
             Log.d("JWP" + getClass().getName(), "onStartCommand");
             String dir = funct.get_dir_app(getBaseContext()) + "/downloads/";
@@ -86,6 +94,7 @@ public class class_downloads_files extends Service {
         return START_STICKY;
     }
 
+    @Nullable
     protected ArrayList<Map<String, String>> get_targetFiles() {
         return targetFiles;
     }
@@ -146,6 +155,7 @@ public class class_downloads_files extends Service {
         return R.drawable.ic_launcher;
     }
 
+    @NotNull
     protected RemoteViews getProgressView(int currentNumFile,
                                           int totalNumFiles, int currentReceivedBytes, int totalNumBytes,
                                           String filename) {
@@ -161,35 +171,37 @@ public class class_downloads_files extends Service {
     }
 
 
-    @SuppressWarnings("deprecation")
     protected void showNotification_popup(String ticker, String title,
                                           String content, Context context) {
+
+        /*
         Notification notification = new Notification(getNotificationIcon(),
                 ticker, System.currentTimeMillis());
-        // PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
-        // new Intent(this, getIntentForLatestInfo()),
-        // Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
                 new Intent(), Intent.FLAG_ACTIVITY_CLEAR_TOP);
         notification.setLatestEventInfo(getApplicationContext(), title,
                 content, contentIntent);
         notification.flags = getNotificationFlag();
         notificationManager.notify(SERVICE_ID, notification);
+*/
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
+                new Intent(), Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        Notification.Builder builder = new Notification.Builder(context)
+                .setContentTitle(title).setContentText(ticker)
+                .setSmallIcon(getNotificationIcon()).setLargeIcon(null)
+                .setContentIntent(contentIntent).setAutoCancel(true);
+        Notification
+                notification = builder.build();
+        notificationManager.notify(SERVICE_ID, notification);
 
-		/*
-         * Builder builder = new Notification.Builder(context)
-		 * .setContentTitle(title).setContentText(ticker)
-		 * .setSmallIcon(getNotificationIcon()).setLargeIcon(null)
-		 * .setContentIntent(contentIntent).setAutoCancel(true); Notification
-		 * notification = builder.build();
-		 * notificationManager.notify(SERVICE_ID, notification);
-		 */
     }
 
 
-    @SuppressWarnings("deprecation")
     protected void showNotification(RemoteViews remoteView, String ticker,
                                     Context context) {
+
+       /*
         Notification notification = new Notification(getNotificationIcon(),
                 ticker, System.currentTimeMillis());
         notification.contentView = remoteView;
@@ -203,21 +215,20 @@ public class class_downloads_files extends Service {
         notification.flags = getNotificationFlag();
         notification.flags |= Notification.FLAG_ONGOING_EVENT;
         notificationManager.notify(SERVICE_ID, notification);
+        */
 
-		/*
-		 * PendingIntent contentIntent = PendingIntent.getActivity(this, 0, new
-		 * Intent(this, getIntentForLatestInfo()),
-		 * Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		 * 
-		 * Builder builder = new Notification.Builder(context)
-		 * .setContentTitle(ticker).setContentText(ticker)
-		 * .setSmallIcon(getNotificationIcon()).setLargeIcon(null)
-		 * .setContentIntent(contentIntent).setAutoCancel(true)
-		 * .setContent(remoteView);
-		 * 
-		 * Notification notification = builder.build();
-		 * notificationManager.notify(SERVICE_ID, notification);
-		 */
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, new
+                Intent(), Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+        Notification.Builder builder = new Notification.Builder(context)
+                .setContentTitle(ticker).setContentText(ticker)
+                .setSmallIcon(getNotificationIcon()).setLargeIcon(null)
+                .setContentIntent(contentIntent).setAutoCancel(true)
+                .setContent(remoteView);
+
+        Notification notification = builder.build();
+        notificationManager.notify(SERVICE_ID, notification);
+
     }
 
     protected int getConnectTimeout() {
@@ -229,6 +240,7 @@ public class class_downloads_files extends Service {
     }
 
     private class AsyncDownloadTask extends AsyncTask<Void, Void, Void> {
+        @Nullable
         private ArrayList<Map<String, String>> targetFiles = null;
         private int total_file = 0;
         private int success = 0;
@@ -240,7 +252,7 @@ public class class_downloads_files extends Service {
             total_file = get_targetFiles_num();
         }
 
-        public int getFileSizeAtURL(URL url) {
+        public int getFileSizeAtURL(@NotNull URL url) {
             int filesize = -1;
             try {
                 HttpURLConnection http = (HttpURLConnection) url
@@ -253,7 +265,7 @@ public class class_downloads_files extends Service {
             return filesize;
         }
 
-        @SuppressLint("DefaultLocale")
+        @Nullable
         @Override
         protected Void doInBackground(Void... params) {
             try {
@@ -261,7 +273,6 @@ public class class_downloads_files extends Service {
 
                 Log.i("JWP", "downloading: '" + total_file);
                 if (total_file > now_targetFile) {
-                    // for (int i = 0; i < targetFiles.size(); i++) {
                     Map<String, String> targetFile = targetFiles
                             .get(now_targetFile);
 
@@ -285,8 +296,8 @@ public class class_downloads_files extends Service {
                             if (filesize > 0) {
                                 URLConnection connection = url.openConnection();
                                 connection
-                                        .setConnectTimeout(getConnectTimeout());
-                                connection.setReadTimeout(getReadTimeout());
+                                        .setConnectTimeout(7000);
+                                connection.setReadTimeout(7000);
                                 BufferedInputStream bis = new BufferedInputStream(
                                         connection.getInputStream());
                                 FileOutputStream fos = new FileOutputStream(
@@ -345,6 +356,14 @@ public class class_downloads_files extends Service {
                             }
                         }
                         success = now_targetFile + 1;
+                    } catch (SocketTimeoutException e) {
+                        showNotification_popup(
+                                getString(R.string.download_failed),
+                                getString(R.string.download_title), "Failed: "
+                                + (new File(remoteFilepath)).getName(),
+                                getApplicationContext());
+                        success = 0;
+
                     } catch (Exception e) {
                         funct.send_bug_report(getBaseContext(), e, getClass()
                                 .getName(), 300);
@@ -375,7 +394,6 @@ public class class_downloads_files extends Service {
                     getApplicationContext());
         }
 
-        @SuppressLint("DefaultLocale")
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
@@ -392,7 +410,6 @@ public class class_downloads_files extends Service {
         }
     }
 
-    @SuppressLint("DefaultLocale")
     protected String getStringByteSize(int size) {
         if (size > 1024 * 1024) // mega
         {

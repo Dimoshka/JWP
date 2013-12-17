@@ -1,6 +1,5 @@
 package com.dimoshka.ua.jwp;
 
-import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
@@ -10,17 +9,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
+
 import com.actionbarsherlock.app.SherlockFragment;
 import com.dimoshka.ua.classes.class_downloads_files;
 import com.dimoshka.ua.classes.class_rss_jornals_adapter;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-@SuppressLint("HandlerLeak")
 public class jornals extends SherlockFragment {
 
     private ExpandableListView list;
@@ -33,14 +36,16 @@ public class jornals extends SherlockFragment {
     int mon = 0;
 
     private Cursor cursor;
+    @Nullable
     View view = null;
-    
+
+    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup group,
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup group,
                              Bundle saved) {
-    	view = inflater.inflate(R.layout.expandable_list, group, false);
-    	
-    	try {
+        view = inflater.inflate(R.layout.expandable_list, group, false);
+
+        try {
             list = (ExpandableListView) view.findViewById(R.id.list);
             list.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
                 @Override
@@ -61,23 +66,19 @@ public class jornals extends SherlockFragment {
         return view;
     }
 
-    @SuppressWarnings("deprecation")
-	public void refresh() {
+
+    public void refresh() {
         try {
-            getActivity().stopManagingCursor(cursor);
-                     cursor = main.database
+            cursor = main.database
                     .rawQuery(
                             "select magazine._id as _id, magazine.name as name, magazine.img as img, language.code as code_lng, publication.code as code_pub, publication._id as cur_pub, date from magazine left join language on magazine.id_lang=language._id left join publication on magazine.id_pub=publication._id where magazine.id_lang='"
                                     + main.id_lang
                                     + "' and magazine.id_pub BETWEEN '1' and '3' order by date desc, magazine.id_pub asc",
                             null);
-            getActivity().startManagingCursor(cursor);
 
             groupData = new ArrayList<Map<String, String>>();
-
             childData = new ArrayList<ArrayList<Map<String, String>>>();
             childDataItem = new ArrayList<Map<String, String>>();
-
             cursor.moveToFirst();
             for (int i = 0; i < cursor.getCount(); i++) {
 
@@ -94,7 +95,6 @@ public class jornals extends SherlockFragment {
                 Cursor cur = main.database.rawQuery(
                         "select id_type, file, name from files where `id_magazine`='"
                                 + _id + "' group by id_type", null);
-                getActivity().startManagingCursor(cur);
                 String files = "";
                 if (cur.getCount() > 0) {
                     cur.moveToFirst();
@@ -134,11 +134,13 @@ public class jornals extends SherlockFragment {
                         cur.moveToNext();
                     }
                 }
-                getActivity().stopManagingCursor(cur);
 
-                if (date.getYear() != yer || date.getMonth() != mon) {
-                    yer = date.getYear();
-                    mon = date.getMonth();
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(date);
+
+                if (calendar.get(Calendar.YEAR) != yer || calendar.get(Calendar.MONTH) != mon) {
+                    yer = calendar.get(Calendar.YEAR);
+                    mon = calendar.get(Calendar.MONTH);
                     m = new HashMap<String, String>();
                     m.put("groupName", main.funct.getMonth(mon));
                     groupData.add(m);
@@ -169,7 +171,6 @@ public class jornals extends SherlockFragment {
                 cursor.moveToNext();
             }
             childData.add(childDataItem);
-            getActivity().stopManagingCursor(cursor);
             class_rss_jornals_adapter adapter = new class_rss_jornals_adapter(
                     getActivity(), groupData, childData, main.database);
             list.setAdapter(adapter);
@@ -180,11 +181,9 @@ public class jornals extends SherlockFragment {
     }
 
 
-    @SuppressWarnings("deprecation")
-	@Override
+    @Override
     public void onDestroy() {
         super.onDestroy();
-        getActivity().stopManagingCursor(cursor);
         getActivity().stopService(
                 new Intent(getActivity(), class_downloads_files.class));
     }

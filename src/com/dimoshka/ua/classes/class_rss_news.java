@@ -15,6 +15,9 @@ import android.util.Log;
 
 import com.dimoshka.ua.jwp.R;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -29,15 +32,17 @@ public class class_rss_news {
 
     private class_rss_provider rssfeedprovider;
     private SQLiteDatabase database;
+    @NotNull
     public class_functions funct = new class_functions();
     private Activity activity;
     private Handler handler;
     private Integer id_ln = 0;
+    @Nullable
     private String ln_prefix = "en/news";
     public SharedPreferences prefs;
     private AsyncTask task;
 
-    public class_rss_news(Activity activity, int id_lang, Handler handler,
+    public class_rss_news(@NotNull Activity activity, int id_lang, Handler handler,
                           SQLiteDatabase database) {
         this.activity = activity;
         this.handler = handler;
@@ -72,8 +77,10 @@ public class class_rss_news {
 
     class ReadFeedTask extends AsyncTask<Void, Integer, Void> {
         private ProgressDialog dialog;
+        @Nullable
         List<class_rss_item> rss_list = null;
 
+        @Nullable
         @SuppressLint({"NewApi", "SimpleDateFormat"})
         protected Void doInBackground(Void... paramArrayOfVoid) {
             try {
@@ -147,7 +154,7 @@ public class class_rss_news {
             return null;
         }
 
-        protected int img(long id_news, String link_img) {
+        protected int img(long id_news, @NotNull String link_img) {
             int img = 0;
             if (prefs.getBoolean("downloads_img", true)) {
                 if (funct.ExternalStorageState()) {

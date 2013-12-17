@@ -1,7 +1,5 @@
 package com.dimoshka.ua.classes;
 
-import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
@@ -10,12 +8,14 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.dimoshka.ua.jwp.R;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -31,21 +31,27 @@ public class class_rss_jornals {
 
     private class_rss_provider rssfeedprovider;
     private SQLiteDatabase database;
+    @NotNull
     public class_functions funct = new class_functions();
     private Activity activity;
     private Handler handler;
     private Integer id_ln = 0;
+    @Nullable
     private String code_lng = "E";
+    @NotNull
     private ArrayList<Integer> id_pub = new ArrayList<Integer>();
+    @NotNull
     private ArrayList<String> code_pub = new ArrayList<String>();
     private Integer cur_pub = 0;
+    @NotNull
     private ArrayList<Integer> id_type = new ArrayList<Integer>();
+    @NotNull
     private ArrayList<String> code_type = new ArrayList<String>();
     private Integer cur_type = 0;
     public SharedPreferences prefs;
     private AsyncTask task;
 
-    public class_rss_jornals(Activity activity, int id_lang, Handler handler,
+    public class_rss_jornals(@NotNull Activity activity, int id_lang, Handler handler,
                              SQLiteDatabase database) {
         this.activity = activity;
         this.handler = handler;
@@ -64,10 +70,8 @@ public class class_rss_jornals {
         }
     }
 
-    @SuppressWarnings("deprecation")
     public Integer get_language(int id) {
         Cursor cursor = funct.get_language(database, id, activity);
-        activity.startManagingCursor(cursor);
         cursor.moveToFirst();
         if (cursor.getCount() > 0) {
             id_ln = cursor.getInt(cursor.getColumnIndex("_id"));
@@ -76,19 +80,15 @@ public class class_rss_jornals {
             id_ln = 1;
             code_lng = "E";
         }
-        activity.stopManagingCursor(cursor);
         return id_ln;
     }
 
-    @SuppressWarnings("deprecation")
     private void get_publication() {
         try {
             Cursor cursor_type = database.query("type", new String[]{"_id",
                     "code"}, null, null, null, null, "_id");
             Cursor cursor_pub = database.query("publication", new String[]{
                     "_id", "code"}, null, null, null, null, "_id");
-            activity.startManagingCursor(cursor_type);
-            activity.startManagingCursor(cursor_pub);
             cursor_type.moveToFirst();
             cursor_pub.moveToFirst();
 
@@ -106,9 +106,6 @@ public class class_rss_jornals {
                         .getColumnIndex("code")));
                 cursor_pub.moveToNext();
             }
-
-            activity.stopManagingCursor(cursor_type);
-            activity.stopManagingCursor(cursor_pub);
         } catch (Exception e) {
             funct.send_bug_report(activity, e, getClass().getName(), 107);
         }
@@ -116,11 +113,10 @@ public class class_rss_jornals {
 
     class ReadFeedTask extends AsyncTask<Void, Integer, Void> {
         private ProgressDialog dialog;
+        @Nullable
         List<class_rss_item> rss_list = null;
 
-        @SuppressWarnings("deprecation")
-        @TargetApi(Build.VERSION_CODES.FROYO)
-        @SuppressLint({"SimpleDateFormat", "NewApi"})
+        @Nullable
         protected Void doInBackground(Void... paramArrayOfVoid) {
             try {
                 for (int a = 0; a < id_pub.size(); a++) {
@@ -164,7 +160,6 @@ public class class_rss_jornals {
                                 Cursor cur = database.rawQuery(
                                         "select _id from magazine where `name` = '"
                                                 + name + "'", null);
-                                activity.startManagingCursor(cur);
                                 long id_magazine = 0;
 
                                 int img = img(name, format, date);
@@ -184,7 +179,6 @@ public class class_rss_jornals {
                                             null, init1);
                                 }
 
-                                activity.stopManagingCursor(cur);
                                 ContentValues init2 = new ContentValues();
                                 init2.put("id_magazine", id_magazine);
                                 init2.put("id_type", id_type.get(cur_type));
@@ -208,7 +202,7 @@ public class class_rss_jornals {
             return null;
         }
 
-        protected int img(String name, SimpleDateFormat format, Date date) {
+        protected int img(String name, @NotNull SimpleDateFormat format, Date date) {
             int img = 0;
             if (prefs.getBoolean("downloads_img", true)) {
                 if (funct.ExternalStorageState()) {

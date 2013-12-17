@@ -16,8 +16,11 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.SeekBar;
 
+import org.jetbrains.annotations.NotNull;
+
 public class class_mediaplayer {
-	private static String tag = "MediaPlayerWrapper";
+	@NotNull
+    private static String tag = "MediaPlayerWrapper";
 	private MediaPlayer mPlayer;
 	private State currentState;
 	private class_mediaplayer mWrapper;
@@ -137,7 +140,8 @@ public class class_mediaplayer {
 	}
 
 	/* INTERNAL LISTENERS */
-	private OnPreparedListener mOnPreparedListener = new OnPreparedListener() {
+	@NotNull
+    private OnPreparedListener mOnPreparedListener = new OnPreparedListener() {
 
 		@Override
 		public void onPrepared(MediaPlayer mp) {
@@ -152,7 +156,8 @@ public class class_mediaplayer {
 			currentState = State.STARTED;
 		}
 	};
-	private OnCompletionListener mOnCompletionListener = new OnCompletionListener() {
+	@NotNull
+    private OnCompletionListener mOnCompletionListener = new OnCompletionListener() {
 
 		@Override
 		public void onCompletion(MediaPlayer mp) {
@@ -161,7 +166,8 @@ public class class_mediaplayer {
 			mWrapper.onCompletion(mp);
 		}
 	};
-	private OnBufferingUpdateListener mOnBufferingUpdateListener = new OnBufferingUpdateListener() {
+	@NotNull
+    private OnBufferingUpdateListener mOnBufferingUpdateListener = new OnBufferingUpdateListener() {
 
 		@Override
 		public void onBufferingUpdate(MediaPlayer mp, int percent) {
@@ -169,7 +175,8 @@ public class class_mediaplayer {
 			mWrapper.onBufferingUpdate(mp, percent);
 		}
 	};
-	private OnErrorListener mOnErrorListener = new OnErrorListener() {
+	@NotNull
+    private OnErrorListener mOnErrorListener = new OnErrorListener() {
 
 		@Override
 		public boolean onError(MediaPlayer mp, int what, int extra) {
@@ -180,7 +187,8 @@ public class class_mediaplayer {
 			return false;
 		}
 	};
-	private OnInfoListener mOnInfoListener = new OnInfoListener() {
+	@NotNull
+    private OnInfoListener mOnInfoListener = new OnInfoListener() {
 
 		@Override
 		public boolean onInfo(MediaPlayer mp, int what, int extra) {

@@ -33,6 +33,8 @@ import com.dimoshka.ua.classes.class_rss_news;
 import com.dimoshka.ua.classes.class_sqlite;
 import com.google.analytics.tracking.android.EasyTracker;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 import java.util.Vector;
 
@@ -44,6 +46,7 @@ public class main extends SherlockFragmentActivity {
     public static SharedPreferences prefs;
     public static SQLiteDatabase database;
     public static class_sqlite dbOpenHelper;
+    @NotNull
     public static class_functions funct = new class_functions();
     public OnSharedPreferenceChangeListener listener_pref;
     public static class_open_or_download open_or_download;
@@ -127,7 +130,7 @@ public class main extends SherlockFragmentActivity {
 
 
         listener_pref = new SharedPreferences.OnSharedPreferenceChangeListener() {
-            public void onSharedPreferenceChanged(SharedPreferences prefs,
+            public void onSharedPreferenceChanged(@NotNull SharedPreferences prefs,
                                                   String key) {
                 id_lang = Integer.parseInt(prefs.getString("language", "0"));
             }
@@ -188,7 +191,7 @@ public class main extends SherlockFragmentActivity {
     @SuppressLint("HandlerLeak")
     private final Handler handler_jornals = new Handler() {
         @Override
-        public void handleMessage(Message msg) {
+        public void handleMessage(@NotNull Message msg) {
             switch (msg.what) {
                 case 1:
                     Log.e("JWP", "refrashe afte load");
@@ -201,7 +204,7 @@ public class main extends SherlockFragmentActivity {
     @SuppressLint("HandlerLeak")
     private final Handler handler_news = new Handler() {
         @Override
-        public void handleMessage(Message msg) {
+        public void handleMessage(@NotNull Message msg) {
             switch (msg.what) {
                 case 1:
                     Log.e("JWP", "refrashe afte load");
@@ -215,7 +218,7 @@ public class main extends SherlockFragmentActivity {
     @SuppressLint("HandlerLeak")
     private final Handler handler_books_brochures = new Handler() {
         @Override
-        public void handleMessage(Message msg) {
+        public void handleMessage(@NotNull Message msg) {
             switch (msg.what) {
                 case 1:
                     Log.e("JWP", "refrashe afte load");
@@ -225,6 +228,7 @@ public class main extends SherlockFragmentActivity {
         }
     };
 
+    @NotNull
     private SimpleOnPageChangeListener PageChangeListener = new SimpleOnPageChangeListener() {
         @Override
         public void onPageSelected(int position) {
@@ -234,7 +238,7 @@ public class main extends SherlockFragmentActivity {
     };
 
     private class MyTabListener implements ActionBar.TabListener {
-        public void onTabSelected(Tab tab, FragmentTransaction ft) {
+        public void onTabSelected(@NotNull Tab tab, FragmentTransaction ft) {
             curent_tab = tab.getPosition();
 
             switch (curent_tab) {
@@ -272,7 +276,7 @@ public class main extends SherlockFragmentActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NotNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.item0:
                 System.exit(0);

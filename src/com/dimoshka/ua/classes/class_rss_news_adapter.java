@@ -1,10 +1,5 @@
 package com.dimoshka.ua.classes;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Map;
-
-import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -19,9 +14,16 @@ import android.widget.TextView;
 
 import com.dimoshka.ua.jwp.R;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Map;
+
 public class class_rss_news_adapter extends BaseExpandableListAdapter {
 	private Context context;
-	public class_functions funct = new class_functions();
+	@NotNull
+    public class_functions funct = new class_functions();
 	private LayoutInflater inflater;
 	private SQLiteDatabase database;
 
@@ -39,7 +41,6 @@ public class class_rss_news_adapter extends BaseExpandableListAdapter {
 		this.context = context;
 	}
 
-	@SuppressLint("SimpleDateFormat")
 	public View getChildView(int groupPosition, int childPosition,
 			boolean isLastChild, View convertView, ViewGroup parent) {
 		try {

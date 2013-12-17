@@ -7,25 +7,31 @@ import android.util.Log;
 
 import com.dimoshka.ua.jwp.R;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 public class class_sqlite extends SQLiteOpenHelper {
 
+    @Nullable
     public SQLiteDatabase database;
+    @NotNull
     public class_functions funct = new class_functions();
     private Context context;
 
-    public class_sqlite(Context context) {
+    public class_sqlite(@NotNull Context context) {
         super(context, context.getString(R.string.db_name), null, Integer
                 .valueOf(context.getString(R.string.db_version)));
         this.context = context;
         database = this.getWritableDatabase();
     }
 
+    @Nullable
     public SQLiteDatabase openDataBase() {
         return database;
     }
 
     @Override
-    public void onCreate(SQLiteDatabase database) {
+    public void onCreate(@NotNull SQLiteDatabase database) {
         Log.i(getClass().getName(), "Start create SQLITE");
         try {
             // -- Table: type
@@ -71,7 +77,7 @@ public class class_sqlite extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase database, int oldVersion,
+    public void onUpgrade(@NotNull SQLiteDatabase database, int oldVersion,
                           int newVersion) {
         Log.i("JWP" + getClass().getName(), "Start update SQLITE");
         switch (oldVersion) {

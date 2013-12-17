@@ -1,5 +1,7 @@
 package com.dimoshka.ua.classes;
 
+import org.jetbrains.annotations.NotNull;
+
 public class class_rss_item {
 	private String pubDate;
 	private String description;
@@ -55,7 +57,8 @@ public class class_rss_item {
 		this.guid = guid;
 	}
 	
-	@Override
+	@NotNull
+    @Override
 	public String toString() {
 		return "RssItem [title=" + title + "]";
 	}
