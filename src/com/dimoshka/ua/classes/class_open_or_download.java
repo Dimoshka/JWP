@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.webkit.MimeTypeMap;
 import android.widget.Toast;
+
 import com.dimoshka.ua.jwp.R;
 import com.dimoshka.ua.jwp.main;
 import com.dimoshka.ua.jwp.player;
@@ -26,14 +27,14 @@ public class class_open_or_download {
     private Activity activity;
     private Cursor cur_files;
     private SQLiteDatabase database;
-    
-    public class_open_or_download(Activity activity, SQLiteDatabase database){
-        this.activity =activity;
-        this.database=database;
+
+    public class_open_or_download(Activity activity, SQLiteDatabase database) {
+        this.activity = activity;
+        this.database = database;
     }
 
     @SuppressWarnings("deprecation")
-	@SuppressLint("ShowToast")
+    @SuppressLint("ShowToast")
     public void dialog_show(String _id) {
         try {
             if (main.funct.ExternalStorageState() == true) {
@@ -100,7 +101,7 @@ public class class_open_or_download {
     }
 
     @SuppressWarnings("deprecation")
-	@SuppressLint("ShowToast")
+    @SuppressLint("ShowToast")
     public void open_or_download(int id) {
         try {
             if (main.funct.ExternalStorageState() == true) {
@@ -134,7 +135,7 @@ public class class_open_or_download {
     }
 
     public void start_open_or_download(String name, int file_enable,
-                                        String link) {
+                                       String link) {
         try {
             File file = new File(main.funct.get_dir_app(activity)
                     + "/downloads/" + name);
@@ -161,9 +162,6 @@ public class class_open_or_download {
                     type = "*/*";
                 Uri data = Uri.fromFile(file);
                 intent.setDataAndType(data, type);
-                //Intent ch = Intent.createChooser(intent,
-                //        activity.getString(R.string.select));
-                //activity.startActivity(ch);
                 activity.startActivity(intent);
 
             } else {
@@ -181,6 +179,4 @@ public class class_open_or_download {
                     273);
         }
     }
-    
-    
 }

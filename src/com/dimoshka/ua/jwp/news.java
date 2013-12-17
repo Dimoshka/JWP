@@ -58,7 +58,7 @@ public class news extends SherlockFragment {
 			});
 
 		} catch (Exception e) {
-			main.funct.send_bug_report(getActivity(), e, getClass().getName(),
+			main.funct.send_bug_report(getActivity(), e, "news",
 					102);
 		}
 		refresh();
@@ -121,7 +121,7 @@ public class news extends SherlockFragment {
 					getActivity(), groupData, childData, main.database);
 			list.setAdapter(adapter);
 		} catch (Exception e) {
-			main.funct.send_bug_report(getActivity(), e, getClass().getName(),
+			main.funct.send_bug_report(getActivity(), e, "news",
 					182);
 		}
 	}

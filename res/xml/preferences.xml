@@ -19,8 +19,7 @@
             android:title="@string/downloads_img" />
         <CheckBoxPreference
             android:defaultValue="false"
-            android:enabled="false"
-            android:key="downloads_on_start"
+                        android:key="downloads_on_start"
             android:summary="@string/downloads_on_start_summary"
             android:title="@string/downloads_on_start" />
     </PreferenceCategory>
@@ -31,17 +30,17 @@
             android:summary="@string/rss_pdf_summary"
             android:title="@string/rss_pdf" />
         <CheckBoxPreference
-            android:defaultValue="true"
+            android:defaultValue="false"
             android:key="rss_epub"
             android:summary="@string/rss_epub_summary"
             android:title="@string/rss_epub" />
         <CheckBoxPreference
-            android:defaultValue="true"
+            android:defaultValue="false"
             android:key="rss_mp3"
             android:summary="@string/rss_mp3_summary"
             android:title="@string/rss_mp3" />
         <CheckBoxPreference
-            android:defaultValue="true"
+            android:defaultValue="false"
             android:key="rss_m4b"
             android:summary="@string/rss_aac_summary"
             android:title="@string/rss_aac" />

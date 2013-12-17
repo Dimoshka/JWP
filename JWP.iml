@@ -13,9 +13,10 @@
     </content>
     <orderEntry type="jdk" jdkName="Android API 17 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="bugsense-3.5" level="application" />
     <orderEntry type="library" exported="" name="libGoogleAnalyticsV2" level="application" />
     <orderEntry type="module" module-name="actionbarsherlock" />
+    <orderEntry type="library" name="android-support-v4" level="project" />
+    <orderEntry type="library" exported="" name="bugsense-3.6" level="application" />
   </component>
 </module>
 

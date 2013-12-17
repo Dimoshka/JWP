@@ -21,6 +21,7 @@ import org.apache.http.util.ByteArrayBuffer;
 
 import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.URL;
@@ -159,13 +160,15 @@ public class class_functions {
             while ((current = bis.read()) != -1) {
                 baf.append((byte) current);
             }
-
             FileOutputStream fos = new FileOutputStream(
                     file);
             fos.write(baf.toByteArray());
             fos.flush();
             fos.close();
             return true;
+        } catch (FileNotFoundException e) {
+            Log.e("JWP", "Not file - " + link_img);
+            return false;
         } catch (Exception e) {
             send_bug_report(context, e, getClass().getName(), 148);
             return false;

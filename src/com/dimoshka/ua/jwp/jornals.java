@@ -54,7 +54,7 @@ public class jornals extends SherlockFragment {
             });
 
         } catch (Exception e) {
-            main.funct.send_bug_report(getActivity(), e, getClass().getName(),
+            main.funct.send_bug_report(getActivity(), e, "jornals",
                     106);
         }
         refresh();
@@ -65,7 +65,7 @@ public class jornals extends SherlockFragment {
 	public void refresh() {
         try {
             getActivity().stopManagingCursor(cursor);
-            cursor = main.database
+                     cursor = main.database
                     .rawQuery(
                             "select magazine._id as _id, magazine.name as name, magazine.img as img, language.code as code_lng, publication.code as code_pub, publication._id as cur_pub, date from magazine left join language on magazine.id_lang=language._id left join publication on magazine.id_pub=publication._id where magazine.id_lang='"
                                     + main.id_lang
@@ -109,13 +109,13 @@ public class jornals extends SherlockFragment {
                                             + cur.getString(cur
                                             .getColumnIndex("name")));
 
-                            Log.d("JWP" + getClass().getName(),
+                            Log.d("JWP" + "jornals",
                                     cur.getString(cur.getColumnIndex("name")));
 
                             if (file.exists()) {
                                 file_isn = 1;
                             } else {
-                                Log.d("JWP" + getClass().getName(),
+                                Log.d("JWP" + "jornals",
                                         "Update to 0 - "
                                                 + cur.getString(cur
                                                 .getColumnIndex("name")));
@@ -174,7 +174,7 @@ public class jornals extends SherlockFragment {
                     getActivity(), groupData, childData, main.database);
             list.setAdapter(adapter);
         } catch (Exception e) {
-            main.funct.send_bug_report(getActivity(), e, getClass().getName(),
+            main.funct.send_bug_report(getActivity(), e, "jornals",
                     392);
         }
     }
@@ -187,7 +187,5 @@ public class jornals extends SherlockFragment {
         getActivity().stopManagingCursor(cursor);
         getActivity().stopService(
                 new Intent(getActivity(), class_downloads_files.class));
-
     }
-
 }

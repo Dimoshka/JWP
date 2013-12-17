@@ -1,8 +1,5 @@
 package com.dimoshka.ua.jwp;
 
-import java.io.File;
-import java.util.ArrayList;
-
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -18,6 +15,9 @@ import android.widget.ListView;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.dimoshka.ua.classes.class_downloads_files;
 import com.dimoshka.ua.classes.class_rss_books_brochures_adapter;
+
+import java.io.File;
+import java.util.ArrayList;
 
 @SuppressLint("HandlerLeak")
 public class books_brochures extends SherlockFragment {
@@ -43,7 +43,7 @@ public class books_brochures extends SherlockFragment {
 			});
 
 		} catch (Exception e) {
-			main.funct.send_bug_report(getActivity(), e, getClass().getName(),
+			main.funct.send_bug_report(getActivity(), e, "books_broshures",
 					106);
 		}
 
@@ -88,13 +88,13 @@ public class books_brochures extends SherlockFragment {
 											+ cur.getString(cur
 													.getColumnIndex("name")));
 
-							Log.d("JWP" + getClass().getName(),
+							Log.d("JWP" + "books_broshures",
 									cur.getString(cur.getColumnIndex("name")));
 
 							if (file.exists()) {
 								file_isn = 1;
 							} else {
-								Log.d("JWP" + getClass().getName(),
+								Log.d("JWP" + "books_broshures",
 										"Update to 0 - "
 												+ cur.getString(cur
 														.getColumnIndex("name")));
@@ -127,7 +127,7 @@ public class books_brochures extends SherlockFragment {
 			list.setAdapter(scAdapter);
 
 		} catch (Exception e) {
-			main.funct.send_bug_report(getActivity(), e, getClass().getName(),
+			main.funct.send_bug_report(getActivity(), e, "books_broshures",
 					392);
 		}
 	}

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -14,6 +15,7 @@ import android.util.Log;
 
 import com.dimoshka.ua.jwp.R;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -33,6 +35,7 @@ public class class_rss_news {
     private Integer id_ln = 0;
     private String ln_prefix = "en/news";
     public SharedPreferences prefs;
+    private AsyncTask task;
 
     public class_rss_news(Activity activity, int id_lang, Handler handler,
                           SQLiteDatabase database) {
@@ -44,7 +47,7 @@ public class class_rss_news {
     }
 
     @SuppressWarnings("deprecation")
-	public Integer get_language(int id) {
+    public Integer get_language(int id) {
         Cursor cursor = funct.get_language(database, id, activity);
         activity.startManagingCursor(cursor);
         cursor.moveToFirst();
@@ -61,7 +64,7 @@ public class class_rss_news {
 
     public void get_all_feeds() {
         try {
-            new ReadFeedTask().execute();
+            task = new ReadFeedTask().execute();
         } catch (Exception e) {
             Log.e("JWP_" + getClass().getName(), e.toString());
         }
@@ -80,6 +83,7 @@ public class class_rss_news {
                 this.rss_list = rssfeedprovider.parse(feed, activity);
 
                 for (int i = 0; i < rss_list.size(); i++) {
+                    if (isCancelled()) break;
                     class_rss_item rss_item = rss_list.get(i);
                     String title = rss_item.getTitle();
                     title = title.trim();
@@ -114,12 +118,11 @@ public class class_rss_news {
                     Matcher mat1 = p1.matcher(description);
                     if (mat1.find()) {
                         description = description.replace(mat1.group(0), "");
-
                     }
 
                     description = description.trim();
                     description = funct.stripHtml(description);
-
+                    long id_news = 0;
                     ContentValues init = new ContentValues();
                     init.put("id_lang", id_ln);
                     init.put("title", title);
@@ -127,15 +130,50 @@ public class class_rss_news {
                     init.put("link_img", link_img);
                     init.put("description", description);
                     init.put("pubdate", format.format(date));
-
-                    database.insertWithOnConflict("news", null, init,
+                    id_news = database.insertWithOnConflict("news", null, init,
                             SQLiteDatabase.CONFLICT_IGNORE);
+                    if (id_news != 0) {
+                        int img = img(id_news, link_img);
+                        ContentValues init2 = new ContentValues();
+                        init2.put("img", img);
+                        String[] args = {String.valueOf(id_news)};
+                        database.update("news", init2, "_id=?", args);
+                    }
                 }
 
             } catch (Exception e) {
                 funct.send_bug_report(activity, e, getClass().getName(), 134);
             }
             return null;
+        }
+
+        protected int img(long id_news, String link_img) {
+            int img = 0;
+            if (prefs.getBoolean("downloads_img", true)) {
+                if (funct.ExternalStorageState()) {
+                    String dir = funct.get_dir_app(activity) + "/img/";
+                    File Directory = new File(dir);
+                    if (!Directory.isDirectory()) {
+                        Directory.mkdirs();
+                    }
+                    String name = "news_" + id_news;
+                    if (link_img.length() > 0) {
+                        File imgFile = new File(dir + "/img/" + name
+                                + ".jpg");
+                        if (!imgFile.exists()) {
+                            Log.i("JWP_image", name + " - no found!");
+                            if (funct.load_img(activity, dir, name, link_img)) {
+                                Log.i("JWP_image", name
+                                        + " - file download complete!");
+                                img = 1;
+                            }
+                        } else {
+                            img = 1;
+                        }
+                    } else img = 0;
+                }
+            }
+            return img;
         }
 
         protected void onPostExecute(Void result) {
@@ -148,8 +186,19 @@ public class class_rss_news {
                     .show(activity,
                             null,
                             activity.getResources().getString(
-                                    R.string.dialog_loaing_rss), true);
+                                    R.string.dialog_loaing_rss), true, true, new DialogInterface.OnCancelListener() {
+                        public void onCancel(DialogInterface pd) {
+                            task.cancel(true);
+                        }
+                    }
+                    );
         }
+
+        @Override
+        protected void onCancelled() {
+            super.onCancelled();
+        }
+
     }
 
 }

@@ -1,8 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AndroidConfiguredLogFilters">
+    <filters>
+      <filter>
+        <option name="logLevel" value="verbose" />
+        <option name="logMessagePattern" value="" />
+        <option name="logTagPattern" value="JWP" />
+        <option name="name" value="jwp" />
+        <option name="packageNamePattern" value="com.dimoshka.ua.jwp" />
+        <option name="pid" value="" />
+      </filter>
+      <filter>
+        <option name="logLevel" value="verbose" />
+        <option name="logMessagePattern" value="" />
+        <option name="logTagPattern" value="" />
+        <option name="name" value="list_order" />
+        <option name="packageNamePattern" value="com.dimoshka.ua.list_order" />
+        <option name="pid" value="" />
+      </filter>
+    </filters>
+  </component>
   <component name="AndroidLayoutPreviewToolWindow">
     <option name="state">
-      <GlobalState />
+      <GlobalState>
+        <option name="visible" value="false" />
+      </GlobalState>
     </option>
   </component>
   <component name="AndroidLayouts">
@@ -10,9 +32,30 @@
       <config />
     </shared>
   </component>
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="jwp" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="99cda063-fbbd-4666-86f0-79432dfa252f" name="Default" comment="">
-      <change type="DELETED" beforePath="Z:\Work\Android\ActionBarSherlock\actionbarsherlock\test\com\actionbarsherlock\internal\ResourcesCompatTest.java" afterPath="" />
+      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\src\com\dimoshka\ua\classes\class_rss_jornals_img.java" afterPath="" />
+      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\src\com\dimoshka\ua\classes\class_rss_news_img.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP.iml" afterPath="$PROJECT_DIR$/JWP.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/app/SherlockActivity.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/app/SherlockActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/books_brochures.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/books_brochures.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_downloads_files.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_downloads_files.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_functions.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_functions.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_open_or_download.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_open_or_download.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_jornals.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_jornals.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_news.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_news.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/colors.xml" afterPath="$PROJECT_DIR$/res/values/colors.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/jornals.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/jornals.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/list_items_section.xml" afterPath="$PROJECT_DIR$/res/layout/list_items_section.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/main.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/main.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/news.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/news.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/preferences.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/preferences.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/xml/preferences.xml" afterPath="$PROJECT_DIR$/res/xml/preferences.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/project.properties" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/project.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/menu/publication.xml" afterPath="$PROJECT_DIR$/res/menu/publication.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="JWP.iws" />
@@ -271,12 +314,24 @@
       <file leaf-file-name="main.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="138" column="0" selection-start="4870" selection-end="4870" vertical-scroll-proportion="0.030411448" vertical-offset="2329" max-vertical-offset="6426">
+            <state line="64" column="40" selection-start="2369" selection-end="2369" vertical-scroll-proportion="0.07533235" vertical-offset="459" max-vertical-offset="5202">
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#5350#5360#0" expanded="true" />
+                <element signature="e#7790#7978#0" expanded="true" />
+                <element signature="e#7961#7962#0" expanded="true" />
               </folding>
             </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="list_items_section.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/res/layout/list_items_section.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="7" column="0" selection-start="288" selection-end="288" vertical-scroll-proportion="0.0" vertical-offset="119" max-vertical-offset="442">
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer">
+            <state />
           </provider>
         </entry>
       </file>
@@ -286,6 +341,11 @@
     <FindUsagesManager>
       <setting name="OPEN_NEW_TAB" value="false" />
     </FindUsagesManager>
+  </component>
+  <component name="GenerateSignedApkSettings">
+    <option name="KEY_STORE_PATH" value="Z:\Work\Android\Keystore\key.txt" />
+    <option name="KEY_ALIAS" value="jwp" />
+    <option name="REMEMBER_PASSWORDS" value="true" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -301,17 +361,31 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/main.java" />
         <option value="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/player.java" />
+        <option value="$PROJECT_DIR$/res/values/colors.xml" />
+        <option value="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/news.java" />
+        <option value="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/books_brochures.java" />
         <option value="$PROJECT_DIR$/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/res/xml/preferences.xml" />
+        <option value="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/jornals.java" />
+        <option value="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/preferences.java" />
+        <option value="$PROJECT_DIR$/res/menu/publication.xml" />
+        <option value="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_downloads_files.java" />
+        <option value="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_open_or_download.java" />
+        <option value="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_jornals_img.java" />
+        <option value="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_functions.java" />
+        <option value="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_jornals.java" />
+        <option value="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_news.java" />
+        <option value="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/main.java" />
+        <option value="$PROJECT_DIR$/res/layout/list_items_section.xml" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="237" />
-    <option name="y" value="158" />
-    <option name="width" value="1400" />
-    <option name="height" value="1000" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1176" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -339,6 +413,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -357,9 +432,102 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JWP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JWP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ua" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jwp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JWP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JWP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ua" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="classes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JWP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JWP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JWP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JWP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="menu" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JWP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JWP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layout" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -367,7 +535,7 @@
     <property name="GoToFile.includeJavaFiles" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="options.lastSelected" value="project.propVCSSupport.Mappings" />
+    <property name="options.lastSelected" value="editor.preferences.completion" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
@@ -375,12 +543,19 @@
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="recentsLimit" value="5" />
-    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../bugsense-3.6.jar!/" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/com" />
     <property name="restartRequiresConfirmation" value="true" />
+    <property name="ExportedModule" value="JWP" />
+    <property name="ExportedApkPath" value="Z:\Work\Android\JWP\JWP_2.0.0.3.apk" />
+    <property name="AndroidRunProguardForReleaseBuild" value="true" />
+    <property name="AndroidProguardConfigPaths" value="Z:\Soft\android-sdk\tools\proguard\proguard-android.txt" />
+    <property name="FullScreen" value="false" />
+    <property name="show.migrate.to.gradle.popup" value="false" />
+    <property name="LayoutCode.rearrangeEntriesJava" value="false" />
   </component>
   <component name="RunManager" selected="Android Application.JWP">
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
@@ -569,7 +744,11 @@
       <created>1384940265925</created>
       <updated>1384940265926</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="restructurization project&#10;">
+      <created>1384941183892</created>
+      <updated>1384941183892</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -593,35 +772,35 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="237" y="158" width="1400" height="1000" extended-state="0" />
+    <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3283582" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2731614" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33014354" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295063" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32822967" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32983795" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298969" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24962631" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295063" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1782284" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3269781" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="364" y="215" width="1200" height="800" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32959402" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295964" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3291866" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39930955" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -638,7 +817,9 @@
       <TodoPanelSettings />
     </option>
     <MESSAGE value="restructurization project" />
-    <option name="LAST_COMMIT_MESSAGE" value="restructurization project" />
+    <MESSAGE value="restructurization project&#10;" />
+    <MESSAGE value="Fix bug + fix load image" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix bug + fix load image" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -646,59 +827,17 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="138" column="0" selection-start="4870" selection-end="4870" vertical-scroll-proportion="0.0" vertical-offset="2346" max-vertical-offset="6426">
+        <state line="228" column="17" selection-start="7842" selection-end="7842" vertical-scroll-proportion="0.0" vertical-offset="3876" max-vertical-offset="5202">
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#5350#5360#0" expanded="true" />
+            <element signature="e#7790#7978#0" expanded="true" />
+            <element signature="e#7961#7962#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/main.java">
+    <entry file="file://$PROJECT_DIR$/res/layout/list_items_section.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="369" column="32" selection-start="9865" selection-end="9865" vertical-scroll-proportion="0.0" vertical-offset="5780" max-vertical-offset="6477">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#5350#5360#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/preferences.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="34" selection-start="198" selection-end="198" vertical-scroll-proportion="0.1408284" vertical-offset="0" max-vertical-offset="845">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="161" column="43" selection-start="4791" selection-end="4791" vertical-scroll-proportion="0.6781065" vertical-offset="1807" max-vertical-offset="5576">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_functions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="139" column="45" selection-start="4889" selection-end="4889" vertical-scroll-proportion="0.3668639" vertical-offset="1577" max-vertical-offset="2601">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="40" selection-start="317" selection-end="317" vertical-scroll-proportion="-0.06627219" vertical-offset="192" max-vertical-offset="1037">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/res/layout-xlarge/abs__screen_action_bar_overlay.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="31" selection-start="964" selection-end="964" vertical-scroll-proportion="0.50955415" vertical-offset="202" max-vertical-offset="1020">
+        <state line="7" column="0" selection-start="288" selection-end="288" vertical-scroll-proportion="0.0" vertical-offset="119" max-vertical-offset="442">
           <folding />
         </state>
       </provider>
@@ -708,10 +847,274 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="138" column="0" selection-start="4870" selection-end="4870" vertical-scroll-proportion="0.030411448" vertical-offset="2329" max-vertical-offset="6426">
+        <state line="228" column="17" selection-start="7842" selection-end="7842" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5423">
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#5350#5360#0" expanded="true" />
+            <element signature="e#7790#7978#0" expanded="true" />
+            <element signature="e#7961#7962#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/list_items_section.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="0" selection-start="288" selection-end="288" vertical-scroll-proportion="0.0" vertical-offset="119" max-vertical-offset="442">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="63" column="32" selection-start="2299" selection-end="2327" vertical-scroll-proportion="0.0" vertical-offset="1071" max-vertical-offset="6647">
+          <folding>
+            <element signature="e#7790#7978#0" expanded="true" />
+            <element signature="e#7961#7962#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values/colors.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="1" selection-start="102" selection-end="143" vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="391">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/xml/preferences.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="42" column="39" selection-start="1837" selection-end="1837" vertical-scroll-proportion="0.0" vertical-offset="714" max-vertical-offset="1037" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/preferences.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="34" selection-start="198" selection-end="198" vertical-scroll-proportion="0.0" vertical-offset="119" max-vertical-offset="425" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="40" column="50" selection-start="1602" selection-end="1626" vertical-scroll-proportion="0.0" vertical-offset="680" max-vertical-offset="6426">
+          <folding>
+            <element signature="e#7790#7978#0" expanded="true" />
+            <element signature="e#7961#7962#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/preferences.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="34" selection-start="198" selection-end="198" vertical-scroll-proportion="0.0" vertical-offset="119" max-vertical-offset="425" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="43" column="0" selection-start="1659" selection-end="1659" vertical-scroll-proportion="0.0" vertical-offset="731" max-vertical-offset="5814">
+          <folding>
+            <element signature="e#7790#7978#0" expanded="true" />
+            <element signature="e#7961#7962#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/preferences.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="34" selection-start="198" selection-end="198" vertical-scroll-proportion="0.0" vertical-offset="119" max-vertical-offset="425" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="43" column="0" selection-start="1659" selection-end="1659" vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="6035">
+          <folding>
+            <element signature="e#7790#7978#0" expanded="true" />
+            <element signature="e#7961#7962#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/preferences.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="34" selection-start="198" selection-end="198" vertical-scroll-proportion="0.0" vertical-offset="119" max-vertical-offset="425" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="43" column="0" selection-start="1659" selection-end="1659" vertical-scroll-proportion="0.0" vertical-offset="731" max-vertical-offset="6647">
+          <folding>
+            <element signature="e#7790#7978#0" expanded="true" />
+            <element signature="e#7961#7962#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/preferences.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="34" selection-start="198" selection-end="198" vertical-scroll-proportion="0.0" vertical-offset="119" max-vertical-offset="425" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="50" selection-start="1422" selection-end="1422" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6647">
+          <folding>
+            <element signature="e#7790#7978#0" expanded="true" />
+            <element signature="e#7961#7962#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="138" column="0" selection-start="4870" selection-end="4870" vertical-scroll-proportion="0.0" vertical-offset="2346" max-vertical-offset="6426">
+          <folding>
+            <element signature="e#7790#7978#0" expanded="true" />
+            <element signature="e#7961#7962#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="369" column="32" selection-start="9865" selection-end="9865" vertical-scroll-proportion="0.0" vertical-offset="5780" max-vertical-offset="6477">
+          <folding>
+            <element signature="e#7790#7978#0" expanded="true" />
+            <element signature="e#7961#7962#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="161" column="43" selection-start="4791" selection-end="4791" vertical-scroll-proportion="0.6781065" vertical-offset="1807" max-vertical-offset="5576" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_functions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="145" column="42" selection-start="5277" selection-end="5277" vertical-scroll-proportion="0.3493621" vertical-offset="1616" max-vertical-offset="2635" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/res/layout-xlarge/abs__screen_action_bar_overlay.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="31" selection-start="964" selection-end="964" vertical-scroll-proportion="0.50955415" vertical-offset="202" max-vertical-offset="1020" />
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values-v14/styles.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="69" selection-start="82" selection-end="82" vertical-scroll-proportion="0.060822897" vertical-offset="0" max-vertical-offset="559" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values-v11/styles.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="559" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/books_brochures.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="96" column="63" selection-start="3123" selection-end="3123" vertical-scroll-proportion="0.0" vertical-offset="1084" max-vertical-offset="2210" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/expandable_list.xml">
+      <provider editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="323">
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/news.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="123" column="63" selection-start="3720" selection-end="3720" vertical-scroll-proportion="0.94977844" vertical-offset="1108" max-vertical-offset="2074" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="38" selection-start="1269" selection-end="1269" vertical-scroll-proportion="0.7260677" vertical-offset="0" max-vertical-offset="1037" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/preferences.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="7" selection-start="560" selection-end="560" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="493" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values/colors.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="1" selection-start="102" selection-end="143" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="391">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/xml/preferences.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="42" column="39" selection-start="1837" selection-end="1837" vertical-scroll-proportion="0.0" vertical-offset="70" max-vertical-offset="1037" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/jornals.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.75667655" vertical-offset="510" max-vertical-offset="2975" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_jornals.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="180" column="55" selection-start="7711" selection-end="7711" vertical-scroll-proportion="0.0" vertical-offset="2924" max-vertical-offset="5049" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_open_or_download.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="42" column="0" selection-start="1180" selection-end="1180" vertical-scroll-proportion="0.02514793" vertical-offset="408" max-vertical-offset="2873" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_downloads_files.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="1479" max-vertical-offset="6528" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_item.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="901" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_provider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-1.2700297" vertical-offset="856" max-vertical-offset="1530" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/menu/publication.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="11" selection-start="686" selection-end="686" vertical-scroll-proportion="0.50445104" vertical-offset="0" max-vertical-offset="674">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_news.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="146" column="24" selection-start="5769" selection-end="5769" vertical-scroll-proportion="-0.06771345" vertical-offset="2194" max-vertical-offset="3213" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_sqlite.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="42" selection-start="709" selection-end="709" vertical-scroll-proportion="-0.5515211" vertical-offset="851" max-vertical-offset="2176" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/list_items_section.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="0" selection-start="288" selection-end="288" vertical-scroll-proportion="0.0" vertical-offset="119" max-vertical-offset="442">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="64" column="40" selection-start="2369" selection-end="2369" vertical-scroll-proportion="0.07533235" vertical-offset="459" max-vertical-offset="5202">
+          <folding>
+            <element signature="e#7790#7978#0" expanded="true" />
+            <element signature="e#7961#7962#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -733,7 +1136,7 @@
       </state>
       <state key="FacetStructureConfigurable.UI">
         <settings>
-          <last-edited>Android (actionbarsherlock)|Android</last-edited>
+          <last-edited>Android (JWP)|Android</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -745,7 +1148,7 @@
       </state>
       <state key="GlobalLibrariesConfigurable.UI">
         <settings>
-          <last-edited>bugsense-3.5</last-edited>
+          <last-edited>bugsense-3.6</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -774,6 +1177,7 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
+                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>

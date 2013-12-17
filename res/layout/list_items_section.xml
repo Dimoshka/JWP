@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:mode="twoLine"
-    android:paddingBottom="3dip"
-    android:paddingTop="3dip" >
+    android:paddingBottom="5dip"
+    android:paddingTop="5dip" >
 
     <TextView
         android:id="@+id/text1"
