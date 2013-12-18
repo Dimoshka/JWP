@@ -83,7 +83,7 @@ public class player extends SherlockActivity {
 	public void onStart() {
 		super.onStart();
 		if (prefs.getBoolean("analytics", true)) {
-			EasyTracker.getInstance().activityStart(this);
+			EasyTracker.getInstance(this).activityStart(this);
 		}
 	}
 
@@ -91,7 +91,7 @@ public class player extends SherlockActivity {
 	public void onStop() {
 		super.onStop();
 		if (prefs.getBoolean("analytics", true)) {
-			EasyTracker.getInstance().activityStop(this);
+			EasyTracker.getInstance(this).activityStop(this);
 		}
 	}
 

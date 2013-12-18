@@ -43,7 +43,7 @@ public class main extends SherlockFragmentActivity {
     private int curent_tab = 0;
 
     public static int id_lang = 0;
-    public static SharedPreferences prefs;
+    private static SharedPreferences prefs;
     public static SQLiteDatabase database;
     public static class_sqlite dbOpenHelper;
     @NotNull
@@ -115,19 +115,6 @@ public class main extends SherlockFragmentActivity {
         rss_news.get_language(id_lang);
 
         boolean firstrun = prefs.getBoolean("first_run", true);
-        if (firstrun) {
-            new AlertDialog.Builder(this)
-                    .setTitle(getString(R.string.first_run_title))
-                    .setMessage(getString(R.string.first_run))
-                    .setNeutralButton("OK", null).show();
-            prefs.edit().putBoolean("first_run", false).commit();
-        } else if (prefs.getBoolean("downloads_on_start", false)) {
-            // load_rss();
-            rss_jornals.get_all_feeds();
-            rss_news.get_all_feeds();
-            rss_books_brochures_img.verify_all_img();
-        }
-
 
         listener_pref = new SharedPreferences.OnSharedPreferenceChangeListener() {
             public void onSharedPreferenceChanged(@NotNull SharedPreferences prefs,
@@ -138,6 +125,17 @@ public class main extends SherlockFragmentActivity {
         prefs.registerOnSharedPreferenceChangeListener(listener_pref);
         open_or_download = new class_open_or_download(this, database);
         refresh_pager();
+
+        if (firstrun) {
+            new AlertDialog.Builder(this)
+                    .setTitle(getString(R.string.first_run_title))
+                    .setMessage(getString(R.string.first_run))
+                    .setNeutralButton("OK", null).show();
+            prefs.edit().putBoolean("first_run", false).commit();
+        } else if (prefs.getBoolean("downloads_on_start", false)) {
+            rss_jornals.get_all_feeds();
+            rss_news.get_all_feeds();
+        }
     }
 
     private void refresh_pager() {
@@ -147,7 +145,6 @@ public class main extends SherlockFragmentActivity {
         fragments.add(frag3);
         pagerAdapter = new MyPagerAdapter(getSupportFragmentManager(),
                 fragments);
-
         pager.setAdapter(pagerAdapter);
     }
 
@@ -176,7 +173,7 @@ public class main extends SherlockFragmentActivity {
     public void onStart() {
         super.onStart();
         if (prefs.getBoolean("analytics", true)) {
-            EasyTracker.getInstance().activityStart(this);
+            EasyTracker.getInstance(this).activityStart(this);
         }
     }
 
@@ -184,7 +181,7 @@ public class main extends SherlockFragmentActivity {
     public void onStop() {
         super.onStop();
         if (prefs.getBoolean("analytics", true)) {
-            EasyTracker.getInstance().activityStop(this);
+            EasyTracker.getInstance(this).activityStop(this);
         }
     }
 
@@ -333,6 +330,7 @@ public class main extends SherlockFragmentActivity {
                     frag2.refresh();
                     break;
                 case 2:
+                    rss_books_brochures_img.verify_all_img();
                     frag3.refresh();
                     break;
                 default:

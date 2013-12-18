@@ -139,8 +139,8 @@ public class class_functions {
         return Html.fromHtml(html).toString();
     }
 
-    public void send_bug_report(@NotNull Context context, @NotNull Exception ex,
-                                @NotNull String class_name, @NotNull Integer num_row) {
+    public void send_bug_report(Context context, Exception ex,
+                                String class_name, Integer num_row) {
         Log.e(context.getString(R.string.app_name) + " - error " + class_name,
                 ex.toString() + " - " + num_row);
         BugSenseHandler.addCrashExtraData("class_name", class_name.toString());

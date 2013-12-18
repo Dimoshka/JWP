@@ -3,6 +3,7 @@ package com.dimoshka.ua.classes;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
@@ -26,6 +27,7 @@ public class class_rss_books_brochures_img {
     private Activity activity;
     private Cursor cursor;
     private Handler handler;
+    private AsyncTask task;
 
     public class_rss_books_brochures_img(Activity activity, Handler handler,
                                          SQLiteDatabase database) {
@@ -34,12 +36,12 @@ public class class_rss_books_brochures_img {
         this.database = database;
     }
 
-	public void verify_all_img() {
+    public void verify_all_img() {
         cursor = database
                 .rawQuery(
                         "select _id, name, img, link_img from magazine where img=0 and id_pub='4'",
                         null);
-        new verify_img().execute();
+        task = new verify_img().execute();
     }
 
     class verify_img extends AsyncTask<Void, Integer, Void> {
@@ -60,6 +62,7 @@ public class class_rss_books_brochures_img {
                     }
 
                     for (int i = 0; i < cursor.getCount(); i++) {
+                        if (isCancelled()) break;
                         String name = cursor.getString(cursor
                                 .getColumnIndex("name"));
                         String link_img = cursor.getString(cursor
@@ -103,7 +106,7 @@ public class class_rss_books_brochures_img {
             return null;
         }
 
-		protected void onPostExecute(Void result) {
+        protected void onPostExecute(Void result) {
             this.dialog.hide();
             cursor.close();
             handler.sendEmptyMessage(2);
@@ -114,7 +117,11 @@ public class class_rss_books_brochures_img {
                     .show(activity,
                             null,
                             activity.getResources().getString(
-                                    R.string.dialog_loaing_img), true);
+                                    R.string.dialog_loaing_img), true, true, new DialogInterface.OnCancelListener() {
+                        public void onCancel(DialogInterface pd) {
+                            task.cancel(true);
+                        }
+                    });
         }
     }
 
