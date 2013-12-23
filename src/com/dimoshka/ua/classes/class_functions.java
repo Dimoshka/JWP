@@ -25,6 +25,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -69,6 +70,7 @@ public class class_functions {
         String date_str = name;
         date_str = date_str.replace(code_pub + "_", "");
         date_str = date_str.replace(code_lng + "_", "");
+        date_str = date_str.replace(".", "");
         if (date_str.length() > 8) {
             date_str = date_str.substring(0, date_str.length() - 3);
         }
@@ -76,17 +78,16 @@ public class class_functions {
         if (date_str.length() == 6) {
             date_str += "01";
         }
-        Log.e("JWP", date_str + " - " + date_str.length());
+        Log.e("JWP_fn_date", date_str + " - " + date_str.length());
         return get_string_to_date(date_str, "yyyyMMdd");
     }
 
 
     public Date get_string_to_date(String date_str, String format_str) {
-        SimpleDateFormat format = new SimpleDateFormat(format_str,
-                Locale.ENGLISH);
-        Date date = null;
+        DateFormat format = new SimpleDateFormat(format_str);
+        Date date = new Date();
         try {
-            date = (Date) format.parse(date_str);
+            date = format.parse(date_str);
         } catch (java.text.ParseException e) {
             Log.e("JWP", e.toString() + " - " + date_str + " - " + format_str);
             return null;

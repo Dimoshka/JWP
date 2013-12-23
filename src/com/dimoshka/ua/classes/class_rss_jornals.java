@@ -15,6 +15,7 @@ import android.util.Log;
 import com.dimoshka.ua.jwp.R;
 
 import java.io.File;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -157,25 +158,24 @@ public class class_rss_jornals {
                                 name = name.replace(
                                         "." + code_type.get(cur_type), "");
 
+                                SimpleDateFormat sim_format = new SimpleDateFormat(
+                                        "yyyy-MM-dd");
+                                DateFormat dat_format = new SimpleDateFormat(
+                                        "yyyy-MM-dd");
+                                Date date = funct.get_jwp_jornals_rss_date(
+                                        name, code_pub.get(cur_pub), code_lng);
+                                Log.e("JWP_rss", "date = " + date.toString());
                                 String date_str = name.replace(
                                         code_pub.get(cur_pub) + "_", "");
                                 date_str = date_str.replace(code_lng + "_", "");
                                 Log.e("JWP_rss", "name = " + name);
                                 if (date_str.length() > 8)
                                     name = name.substring(0, name.length() - 3);
-
-                                SimpleDateFormat format = new SimpleDateFormat(
-                                        "yyyy-MM-dd");
-                                Date date = funct.get_jwp_jornals_rss_date(
-                                        name, code_pub.get(cur_pub), code_lng);
-
-                                Log.e("JWP_rss", "date = " + date.toString());
-
                                 Cursor cur = database.rawQuery(
                                         "select _id, img from magazine where `name` = '"
                                                 + name + "'", null);
                                 long id_magazine = 0;
-                                Integer img = img(name, format, date);
+                                Integer img = img(name, sim_format, date);
                                 Log.e("JWP", "img_ok - " + img.toString());
                                 if (cur.getCount() > 0) {
                                     cur.moveToFirst();
@@ -192,11 +192,12 @@ public class class_rss_jornals {
                                 } else {
                                     ContentValues init1 = new ContentValues();
                                     init1.put("name", name);
+                                    init1.put("name", name);
                                     init1.put("id_pub", id_pub.get(cur_pub));
                                     init1.put("id_lang", id_ln);
                                     init1.put("img", img);
-                                    init1.put("date", format.format(date));
-                                    Log.e("JWP_rss", "date_ok = " + format.format(date).toString());
+                                    init1.put("date", dat_format.format(date));
+                                    Log.e("JWP_rss", "date_ok = " + dat_format.format(date).toString());
                                     id_magazine = database.insert("magazine",
                                             null, init1);
                                 }

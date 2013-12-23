@@ -37,90 +37,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="99cda063-fbbd-4666-86f0-79432dfa252f" name="Default" comment="">
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-hdpi\aac_0.png" afterPath="" />
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-hdpi\aac_1.png" afterPath="" />
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-hdpi\epub_0.png" afterPath="" />
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-hdpi\epub_1.png" afterPath="" />
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-hdpi\icon_audio.png" afterPath="" />
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-hdpi\icon_digitalpub.png" afterPath="" />
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-hdpi\mp3_0.png" afterPath="" />
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-hdpi\mp3_1.png" afterPath="" />
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-hdpi\noimages.png" afterPath="" />
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-hdpi\none_type.png" afterPath="" />
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-hdpi\pdf_0.png" afterPath="" />
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-hdpi\pdf_1.png" afterPath="" />
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-ldpi\aac_0.png" afterPath="" />
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-ldpi\aac_1.png" afterPath="" />
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-ldpi\epub_0.png" afterPath="" />
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-ldpi\epub_1.png" afterPath="" />
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-ldpi\ic_launcher.png" afterPath="" />
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-ldpi\icon_audio.png" afterPath="" />
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-ldpi\icon_digitalpub.png" afterPath="" />
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-ldpi\mp3_0.png" afterPath="" />
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-ldpi\mp3_1.png" afterPath="" />
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-ldpi\noimages.png" afterPath="" />
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-ldpi\none_type.png" afterPath="" />
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-ldpi\pdf_0.png" afterPath="" />
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-ldpi\pdf_1.png" afterPath="" />
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-mdpi\aac_0.png" afterPath="" />
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-mdpi\aac_1.png" afterPath="" />
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-mdpi\epub_0.png" afterPath="" />
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-mdpi\epub_1.png" afterPath="" />
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-mdpi\icon_audio.png" afterPath="" />
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-mdpi\icon_digitalpub.png" afterPath="" />
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-mdpi\mp3_0.png" afterPath="" />
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-mdpi\mp3_1.png" afterPath="" />
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-mdpi\noimages.png" afterPath="" />
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-mdpi\none_type.png" afterPath="" />
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-mdpi\pdf_0.png" afterPath="" />
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-mdpi\pdf_1.png" afterPath="" />
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-xhdpi\aac_0.png" afterPath="" />
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-xhdpi\aac_1.png" afterPath="" />
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-xhdpi\epub_0.png" afterPath="" />
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-xhdpi\epub_1.png" afterPath="" />
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-xhdpi\icon_audio.png" afterPath="" />
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-xhdpi\icon_digitalpub.png" afterPath="" />
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-xhdpi\mp3_0.png" afterPath="" />
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-xhdpi\mp3_1.png" afterPath="" />
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-xhdpi\noimages.png" afterPath="" />
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-xhdpi\none_type.png" afterPath="" />
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-xhdpi\pdf_0.png" afterPath="" />
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-xhdpi\pdf_1.png" afterPath="" />
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\layout-xlarge\list_items_jornals.xml" afterPath="" />
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\values-v11\styles.xml" afterPath="" />
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\values-v14\styles.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable-hdpi/ic_launcher.png" afterPath="$PROJECT_DIR$/res/drawable-hdpi/ic_launcher.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable-mdpi/ic_launcher.png" afterPath="$PROJECT_DIR$/res/drawable-mdpi/ic_launcher.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable-xhdpi/ic_launcher.png" afterPath="$PROJECT_DIR$/res/drawable-xhdpi/ic_launcher.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP.iml" afterPath="$PROJECT_DIR$/JWP.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/book.xml" afterPath="$PROJECT_DIR$/res/layout/book.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/books_brochures.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/books_brochures.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/menu/books_broshures.xml" afterPath="$PROJECT_DIR$/res/menu/books_broshures.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_downloads_files.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_downloads_files.java" />
+      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\layout-ldpi\list_items_jornals.xml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_functions.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_functions.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_mediaplayer.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_mediaplayer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_books_brochures_adapter.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_books_brochures_adapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_books_brochures_img.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_books_brochures_img.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_item.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_item.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_jornals.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_jornals.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_jornals_adapter.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_jornals_adapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_news.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_news.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_news_adapter.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_news_adapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_provider.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_provider.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_simplecursoradapter_player.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_simplecursoradapter_player.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_sqlite.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_sqlite.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/jornal.xml" afterPath="$PROJECT_DIR$/res/layout/jornal.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/jornals.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/jornals.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/list_items_books_brochures.xml" afterPath="$PROJECT_DIR$/res/layout/list_items_books_brochures.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/list_items_jornals.xml" afterPath="$PROJECT_DIR$/res/layout/list_items_jornals.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/list_items_news.xml" afterPath="$PROJECT_DIR$/res/layout/list_items_news.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/main.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/news.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/news.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/player.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/player.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/preferences.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/preferences.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/project.properties" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/project.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/menu/publication.xml" afterPath="$PROJECT_DIR$/res/menu/publication.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="JWP.iws" />
@@ -379,7 +299,7 @@
       <file leaf-file-name="main.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="51" column="0" selection-start="2054" selection-end="2054" vertical-scroll-proportion="0.0" vertical-offset="1224" max-vertical-offset="5066">
+            <state line="51" column="0" selection-start="2054" selection-end="2054" vertical-scroll-proportion="0.0" vertical-offset="782" max-vertical-offset="5066">
               <folding>
                 <element signature="e#3244#3266#0" expanded="true" />
                 <element signature="e#3299#3316#0" expanded="true" />
@@ -397,21 +317,21 @@
       <file leaf-file-name="class_functions.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_functions.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="66" column="70" selection-start="2012" selection-end="2012" vertical-scroll-proportion="-9.52" vertical-offset="408" max-vertical-offset="2788">
+            <state line="95" column="5" selection-start="3079" selection-end="3079" vertical-scroll-proportion="-22.44" vertical-offset="561" max-vertical-offset="2788">
               <folding>
-                <element signature="e#3174#3224#0" expanded="true" />
-                <element signature="e#5086#5127#0" expanded="true" />
+                <element signature="e#3218#3268#0" expanded="true" />
+                <element signature="e#5130#5171#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="class_rss_jornals.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="class_rss_jornals.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_jornals.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="193" column="60" selection-start="8224" selection-end="8224" vertical-scroll-proportion="0.0" vertical-offset="3436" max-vertical-offset="4930">
+            <state line="204" column="74" selection-start="9085" selection-end="9085" vertical-scroll-proportion="0.7610063" vertical-offset="2661" max-vertical-offset="4930">
               <folding>
-                <element signature="e#12586#12684#0" expanded="true" />
+                <element signature="e#12822#12920#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -426,10 +346,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AndroidManifest.xml" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="AndroidManifest.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="33" selection-start="181" selection-end="181" vertical-scroll-proportion="0.07715582" vertical-offset="0" max-vertical-offset="1037">
+            <state line="3" column="33" selection-start="181" selection-end="181" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1037">
               <folding />
             </state>
           </provider>
@@ -524,11 +444,11 @@
         <option value="$PROJECT_DIR$/res/values-v14/styles_jwp.xml" />
         <option value="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/player.java" />
         <option value="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/preferences.java" />
-        <option value="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_functions.java" />
         <option value="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/main.java" />
         <option value="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/jornals.java" />
-        <option value="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_jornals.java" />
         <option value="$PROJECT_DIR$/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_functions.java" />
+        <option value="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_jornals.java" />
       </list>
     </option>
   </component>
@@ -830,7 +750,11 @@
       <created>1387362799271</created>
       <updated>1387362799271</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="fix bug + change theme">
+      <created>1387808299941</created>
+      <updated>1387808299941</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -868,13 +792,13 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295129" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33333334" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32844576" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32844576" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32908913" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17716116" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17716116" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32160312" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="364" y="215" width="1200" height="800" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -904,7 +828,8 @@
     <MESSAGE value="Fix bug + fix load image" />
     <MESSAGE value="Language level - 7" />
     <MESSAGE value="Update google analitic + update on start" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update google analitic + update on start" />
+    <MESSAGE value="fix bug + change theme" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix bug + change theme" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1252,13 +1177,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_functions.java">
+    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/jornals.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="66" column="70" selection-start="2012" selection-end="2012" vertical-scroll-proportion="-9.52" vertical-offset="408" max-vertical-offset="2788">
-          <folding>
-            <element signature="e#3174#3224#0" expanded="true" />
-            <element signature="e#5086#5127#0" expanded="true" />
-          </folding>
+        <state line="86" column="23" selection-start="3316" selection-end="3323" vertical-scroll-proportion="0.0" vertical-offset="978" max-vertical-offset="2975">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_jornals_adapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="81" column="58" selection-start="3227" selection-end="3338" vertical-scroll-proportion="-19.36" vertical-offset="587" max-vertical-offset="2975">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_downloads_files.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="256" column="0" selection-start="9026" selection-end="9026" vertical-scroll-proportion="0.0" vertical-offset="1974" max-vertical-offset="6613">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="33" selection-start="181" selection-end="181" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1037">
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1278,40 +1221,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/jornals.java">
+    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_functions.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="86" column="23" selection-start="3316" selection-end="3323" vertical-scroll-proportion="0.0" vertical-offset="978" max-vertical-offset="2975">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_jornals_adapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="81" column="58" selection-start="3227" selection-end="3338" vertical-scroll-proportion="-19.36" vertical-offset="587" max-vertical-offset="2975">
-          <folding />
+        <state line="95" column="5" selection-start="3079" selection-end="3079" vertical-scroll-proportion="-22.44" vertical-offset="561" max-vertical-offset="2788">
+          <folding>
+            <element signature="e#3218#3268#0" expanded="true" />
+            <element signature="e#5130#5171#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_jornals.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="193" column="60" selection-start="8224" selection-end="8224" vertical-scroll-proportion="0.0" vertical-offset="3436" max-vertical-offset="4930">
+        <state line="204" column="74" selection-start="9085" selection-end="9085" vertical-scroll-proportion="0.7610063" vertical-offset="2661" max-vertical-offset="4930">
           <folding>
-            <element signature="e#12586#12684#0" expanded="true" />
+            <element signature="e#12822#12920#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_downloads_files.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="256" column="0" selection-start="9026" selection-end="9026" vertical-scroll-proportion="0.0" vertical-offset="1974" max-vertical-offset="6613">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="33" selection-start="181" selection-end="181" vertical-scroll-proportion="0.07715582" vertical-offset="0" max-vertical-offset="1037">
-          <folding />
         </state>
       </provider>
     </entry>
