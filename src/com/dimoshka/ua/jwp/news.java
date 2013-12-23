@@ -12,9 +12,6 @@ import android.widget.ExpandableListView;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.dimoshka.ua.classes.class_rss_news_adapter;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -28,12 +25,12 @@ public class news extends SherlockFragment {
     private ArrayList<ArrayList<Map<String, String>>> childData;
     private Map<String, String> m;
 
-    @Nullable
+
     View view = null;
 
-    @Nullable
+
     @Override
-    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup group,
+    public View onCreateView(LayoutInflater inflater, ViewGroup group,
                              Bundle saved) {
         view = inflater.inflate(R.layout.expandable_list, group, false);
 

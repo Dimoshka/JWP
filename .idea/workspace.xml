@@ -37,86 +37,90 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="99cda063-fbbd-4666-86f0-79432dfa252f" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/widget/AbsActionBarView.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/widget/AbsActionBarView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/app/ActionBar.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/app/ActionBar.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/widget/ActionBarContainer.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/widget/ActionBarContainer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/widget/ActionBarContextView.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/widget/ActionBarContextView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/app/ActionBarImpl.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/app/ActionBarImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/ActionBarSherlock.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/ActionBarSherlock.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/ActionBarSherlockCompat.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/ActionBarSherlockCompat.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/ActionBarSherlockNative.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/ActionBarSherlockNative.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/widget/ActionBarView.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/widget/ActionBarView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/app/ActionBarWrapper.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/app/ActionBarWrapper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/view/menu/ActionMenu.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/view/menu/ActionMenu.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/view/menu/ActionMenuItem.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/view/menu/ActionMenuItem.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/view/menu/ActionMenuItemView.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/view/menu/ActionMenuItemView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/view/menu/ActionMenuPresenter.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/view/menu/ActionMenuPresenter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/view/menu/ActionMenuView.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/view/menu/ActionMenuView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/widget/ActivityChooserModel.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/widget/ActivityChooserModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/widget/ActivityChooserView.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/widget/ActivityChooserView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/nineoldandroids/animation/Animator.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/nineoldandroids/animation/Animator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/nineoldandroids/view/animation/AnimatorProxy.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/nineoldandroids/view/animation/AnimatorProxy.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/nineoldandroids/animation/AnimatorSet.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/nineoldandroids/animation/AnimatorSet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/view/menu/BaseMenuPresenter.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/view/menu/BaseMenuPresenter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/widget/CapitalizingButton.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/widget/CapitalizingButton.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/widget/CapitalizingTextView.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/widget/CapitalizingTextView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/widget/CollapsibleActionViewWrapper.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/widget/CollapsibleActionViewWrapper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/nineoldandroids/animation/FloatEvaluator.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/nineoldandroids/animation/FloatEvaluator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/nineoldandroids/animation/FloatKeyframeSet.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/nineoldandroids/animation/FloatKeyframeSet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/widget/IcsAbsSpinner.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/widget/IcsAbsSpinner.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/widget/IcsAdapterView.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/widget/IcsAdapterView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/widget/IcsColorDrawable.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/widget/IcsColorDrawable.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/widget/IcsLinearLayout.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/widget/IcsLinearLayout.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/widget/IcsListPopupWindow.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/widget/IcsListPopupWindow.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/widget/IcsProgressBar.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/widget/IcsProgressBar.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/widget/IcsSpinner.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/widget/IcsSpinner.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/widget/IcsToast.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/widget/IcsToast.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/widget/IcsView.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/widget/IcsView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/nineoldandroids/animation/IntEvaluator.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/nineoldandroids/animation/IntEvaluator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/nineoldandroids/animation/IntKeyframeSet.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/nineoldandroids/animation/IntKeyframeSet.java" />
+      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-hdpi\aac_0.png" afterPath="" />
+      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-hdpi\aac_1.png" afterPath="" />
+      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-hdpi\epub_0.png" afterPath="" />
+      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-hdpi\epub_1.png" afterPath="" />
+      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-hdpi\icon_audio.png" afterPath="" />
+      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-hdpi\icon_digitalpub.png" afterPath="" />
+      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-hdpi\mp3_0.png" afterPath="" />
+      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-hdpi\mp3_1.png" afterPath="" />
+      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-hdpi\noimages.png" afterPath="" />
+      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-hdpi\none_type.png" afterPath="" />
+      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-hdpi\pdf_0.png" afterPath="" />
+      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-hdpi\pdf_1.png" afterPath="" />
+      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-ldpi\aac_0.png" afterPath="" />
+      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-ldpi\aac_1.png" afterPath="" />
+      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-ldpi\epub_0.png" afterPath="" />
+      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-ldpi\epub_1.png" afterPath="" />
+      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-ldpi\ic_launcher.png" afterPath="" />
+      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-ldpi\icon_audio.png" afterPath="" />
+      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-ldpi\icon_digitalpub.png" afterPath="" />
+      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-ldpi\mp3_0.png" afterPath="" />
+      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-ldpi\mp3_1.png" afterPath="" />
+      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-ldpi\noimages.png" afterPath="" />
+      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-ldpi\none_type.png" afterPath="" />
+      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-ldpi\pdf_0.png" afterPath="" />
+      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-ldpi\pdf_1.png" afterPath="" />
+      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-mdpi\aac_0.png" afterPath="" />
+      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-mdpi\aac_1.png" afterPath="" />
+      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-mdpi\epub_0.png" afterPath="" />
+      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-mdpi\epub_1.png" afterPath="" />
+      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-mdpi\icon_audio.png" afterPath="" />
+      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-mdpi\icon_digitalpub.png" afterPath="" />
+      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-mdpi\mp3_0.png" afterPath="" />
+      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-mdpi\mp3_1.png" afterPath="" />
+      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-mdpi\noimages.png" afterPath="" />
+      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-mdpi\none_type.png" afterPath="" />
+      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-mdpi\pdf_0.png" afterPath="" />
+      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-mdpi\pdf_1.png" afterPath="" />
+      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-xhdpi\aac_0.png" afterPath="" />
+      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-xhdpi\aac_1.png" afterPath="" />
+      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-xhdpi\epub_0.png" afterPath="" />
+      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-xhdpi\epub_1.png" afterPath="" />
+      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-xhdpi\icon_audio.png" afterPath="" />
+      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-xhdpi\icon_digitalpub.png" afterPath="" />
+      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-xhdpi\mp3_0.png" afterPath="" />
+      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-xhdpi\mp3_1.png" afterPath="" />
+      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-xhdpi\noimages.png" afterPath="" />
+      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-xhdpi\none_type.png" afterPath="" />
+      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-xhdpi\pdf_0.png" afterPath="" />
+      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\drawable-xhdpi\pdf_1.png" afterPath="" />
+      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\layout-xlarge\list_items_jornals.xml" afterPath="" />
+      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\values-v11\styles.xml" afterPath="" />
+      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\res\values-v14\styles.xml" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable-hdpi/ic_launcher.png" afterPath="$PROJECT_DIR$/res/drawable-hdpi/ic_launcher.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable-mdpi/ic_launcher.png" afterPath="$PROJECT_DIR$/res/drawable-mdpi/ic_launcher.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable-xhdpi/ic_launcher.png" afterPath="$PROJECT_DIR$/res/drawable-xhdpi/ic_launcher.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP.iml" afterPath="$PROJECT_DIR$/JWP.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/nineoldandroids/animation/Keyframe.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/nineoldandroids/animation/Keyframe.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/nineoldandroids/animation/KeyframeSet.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/nineoldandroids/animation/KeyframeSet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/view/menu/ListMenuItemView.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/view/menu/ListMenuItemView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/view/menu/MenuBuilder.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/view/menu/MenuBuilder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/view/MenuInflater.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/view/MenuInflater.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/view/menu/MenuItemImpl.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/view/menu/MenuItemImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/view/menu/MenuItemWrapper.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/view/menu/MenuItemWrapper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/view/menu/MenuPopupHelper.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/view/menu/MenuPopupHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/view/menu/MenuWrapper.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/view/menu/MenuWrapper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/nineoldandroids/widget/NineFrameLayout.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/nineoldandroids/widget/NineFrameLayout.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/nineoldandroids/widget/NineHorizontalScrollView.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/nineoldandroids/widget/NineHorizontalScrollView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/nineoldandroids/widget/NineLinearLayout.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/nineoldandroids/widget/NineLinearLayout.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/nineoldandroids/view/NineViewGroup.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/nineoldandroids/view/NineViewGroup.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/nineoldandroids/animation/ObjectAnimator.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/nineoldandroids/animation/ObjectAnimator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/widget/PopupWindowCompat.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/widget/PopupWindowCompat.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/nineoldandroids/animation/PropertyValuesHolder.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/nineoldandroids/animation/PropertyValuesHolder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/ResourcesCompat.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/ResourcesCompat.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/widget/ScrollingTabContainerView.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/widget/ScrollingTabContainerView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/widget/SearchView.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/widget/SearchView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/widget/ShareActionProvider.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/widget/ShareActionProvider.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/app/SherlockActivity.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/app/SherlockActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/app/SherlockDialogFragment.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/app/SherlockDialogFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/app/SherlockExpandableListActivity.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/app/SherlockExpandableListActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/app/SherlockFragment.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/app/SherlockFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/app/SherlockFragmentActivity.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/app/SherlockFragmentActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/app/SherlockListActivity.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/app/SherlockListActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/app/SherlockListFragment.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/app/SherlockListFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/app/SherlockPreferenceActivity.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/app/SherlockPreferenceActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/view/StandaloneActionMode.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/view/StandaloneActionMode.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/view/menu/SubMenuBuilder.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/view/menu/SubMenuBuilder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/view/menu/SubMenuWrapper.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/view/menu/SubMenuWrapper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/widget/SuggestionsAdapter.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/widget/SuggestionsAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/widget/TabsLinearLayout.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/widget/TabsLinearLayout.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/nineoldandroids/animation/ValueAnimator.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/nineoldandroids/animation/ValueAnimator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/android/support/v4/app/Watson.java" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/android/support/v4/app/Watson.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/book.xml" afterPath="$PROJECT_DIR$/res/layout/book.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/books_brochures.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/books_brochures.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/menu/books_broshures.xml" afterPath="$PROJECT_DIR$/res/menu/books_broshures.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_downloads_files.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_downloads_files.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_functions.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_functions.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_mediaplayer.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_mediaplayer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_books_brochures_adapter.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_books_brochures_adapter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_books_brochures_img.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_books_brochures_img.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_item.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_item.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_jornals.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_jornals.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_jornals_adapter.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_jornals_adapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_news.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_news.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_news_adapter.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_news_adapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_provider.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_provider.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_simplecursoradapter_player.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_simplecursoradapter_player.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_sqlite.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_sqlite.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/jornal.xml" afterPath="$PROJECT_DIR$/res/layout/jornal.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/jornals.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/jornals.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/list_items_books_brochures.xml" afterPath="$PROJECT_DIR$/res/layout/list_items_books_brochures.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/list_items_jornals.xml" afterPath="$PROJECT_DIR$/res/layout/list_items_jornals.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/list_items_news.xml" afterPath="$PROJECT_DIR$/res/layout/list_items_news.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/main.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/news.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/news.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/player.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/player.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/preferences.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/preferences.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/project.properties" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/project.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/menu/publication.xml" afterPath="$PROJECT_DIR$/res/menu/publication.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="JWP.iws" />
@@ -372,10 +376,87 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="class_downloads_files.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="main.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/main.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="51" column="0" selection-start="2054" selection-end="2054" vertical-scroll-proportion="0.0" vertical-offset="1224" max-vertical-offset="5066">
+              <folding>
+                <element signature="e#3244#3266#0" expanded="true" />
+                <element signature="e#3299#3316#0" expanded="true" />
+                <element signature="e#3477#3493#0" expanded="true" />
+                <element signature="e#3595#3608#0" expanded="true" />
+                <element signature="e#3717#3741#0" expanded="true" />
+                <element signature="e#4964#4999#0" expanded="true" />
+                <element signature="e#5033#5062#0" expanded="true" />
+                <element signature="e#10250#10270#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="class_functions.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_functions.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="66" column="70" selection-start="2012" selection-end="2012" vertical-scroll-proportion="-9.52" vertical-offset="408" max-vertical-offset="2788">
+              <folding>
+                <element signature="e#3174#3224#0" expanded="true" />
+                <element signature="e#5086#5127#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="class_rss_jornals.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_jornals.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="193" column="60" selection-start="8224" selection-end="8224" vertical-scroll-proportion="0.0" vertical-offset="3436" max-vertical-offset="4930">
+              <folding>
+                <element signature="e#12586#12684#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="class_downloads_files.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_downloads_files.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="104" column="0" selection-start="3273" selection-end="3273" vertical-scroll-proportion="1.8860183" vertical-offset="0" max-vertical-offset="6766">
+            <state line="256" column="0" selection-start="9026" selection-end="9026" vertical-scroll-proportion="0.0" vertical-offset="1974" max-vertical-offset="6613">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AndroidManifest.xml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="3" column="33" selection-start="181" selection-end="181" vertical-scroll-proportion="0.07715582" vertical-offset="0" max-vertical-offset="1037">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="jornals.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/jornals.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="86" column="23" selection-start="3316" selection-end="3323" vertical-scroll-proportion="0.0" vertical-offset="978" max-vertical-offset="2975">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="class_rss_jornals_adapter.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_jornals_adapter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="81" column="58" selection-start="3227" selection-end="3338" vertical-scroll-proportion="-19.36" vertical-offset="587" max-vertical-offset="2975">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="class_sqlite.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_sqlite.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="66" column="85" selection-start="5136" selection-end="5142" vertical-scroll-proportion="0.0" vertical-offset="289" max-vertical-offset="2210">
               <folding />
             </state>
           </provider>
@@ -408,27 +489,46 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/res/values/colors.xml" />
-        <option value="$PROJECT_DIR$/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/res/xml/preferences.xml" />
-        <option value="$PROJECT_DIR$/res/menu/publication.xml" />
         <option value="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_jornals_img.java" />
-        <option value="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_news.java" />
         <option value="$PROJECT_DIR$/res/layout/list_items_section.xml" />
-        <option value="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/jornals.java" />
-        <option value="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/books_brochures.java" />
-        <option value="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/news.java" />
         <option value="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_open_or_download.java" />
-        <option value="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_jornals.java" />
-        <option value="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_books_brochures_adapter.java" />
-        <option value="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_jornals_adapter.java" />
-        <option value="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_news_adapter.java" />
-        <option value="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_simplecursoradapter_player.java" />
+        <option value="Z:/Soft/android-sdk/tools/proguard/proguard-android.txt" />
+        <option value="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/books_brochures.java" />
         <option value="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_downloads_files.java" />
+        <option value="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/view/menu/MenuBuilder.java" />
+        <option value="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_mediaplayer.java" />
+        <option value="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/news.java" />
         <option value="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_books_brochures_img.java" />
+        <option value="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_item.java" />
+        <option value="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_news.java" />
+        <option value="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_provider.java" />
+        <option value="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_simplecursoradapter_player.java" />
+        <option value="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_sqlite.java" />
+        <option value="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_jornals_adapter.java" />
+        <option value="$PROJECT_DIR$/res/layout/book.xml" />
+        <option value="$PROJECT_DIR$/res/layout/jornal.xml" />
+        <option value="$PROJECT_DIR$/res/layout/list_items_news.xml" />
+        <option value="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_news_adapter.java" />
+        <option value="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_books_brochures_adapter.java" />
+        <option value="$PROJECT_DIR$/res/menu/publication.xml" />
+        <option value="$PROJECT_DIR$/res/menu/books_broshures.xml" />
+        <option value="$PROJECT_DIR$/res/values-v11/themes_jwp.xml" />
+        <option value="$PROJECT_DIR$/res/layout-ldpi/list_items_jornals.xml" />
+        <option value="$PROJECT_DIR$/res/layout-xhdpi/list_items_jornals.xml" />
+        <option value="$PROJECT_DIR$/res/layout/list_items_jornals.xml" />
+        <option value="$PROJECT_DIR$/res/layout/list_items_books_brochures.xml" />
+        <option value="C:/Windows/Temp/styles_jwp.xml" />
+        <option value="$PROJECT_DIR$/res/values/styles_jwp.xml" />
+        <option value="$PROJECT_DIR$/res/values/themes_jwp.xml" />
+        <option value="$PROJECT_DIR$/res/values-v14/styles_jwp.xml" />
         <option value="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/player.java" />
         <option value="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/preferences.java" />
-        <option value="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/main.java" />
         <option value="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_functions.java" />
+        <option value="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/main.java" />
+        <option value="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/jornals.java" />
+        <option value="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_jornals.java" />
+        <option value="$PROJECT_DIR$/AndroidManifest.xml" />
       </list>
     </option>
   </component>
@@ -487,65 +587,11 @@
               <option name="myItemId" value="JWP" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JWP" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JWP" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JWP" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ua" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jwp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JWP" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JWP" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ua" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="classes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JWP" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -560,19 +606,26 @@
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="recentsLimit" value="5" />
-    <property name="project.structure.last.edited" value="Facets" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../libGoogleAnalyticsServices.jar!/" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/com" />
     <property name="restartRequiresConfirmation" value="true" />
     <property name="ExportedModule" value="JWP" />
-    <property name="ExportedApkPath" value="Z:\Work\Android\JWP\JWP_2.0.0.3.apk" />
-    <property name="AndroidRunProguardForReleaseBuild" value="true" />
+    <property name="ExportedApkPath" value="Z:\Work\Android\JWP\JWP_2.0.0.5.apk" />
+    <property name="AndroidRunProguardForReleaseBuild" value="false" />
     <property name="AndroidProguardConfigPaths" value="Z:\Soft\android-sdk\tools\proguard\proguard-android.txt" />
     <property name="FullScreen" value="false" />
     <property name="show.migrate.to.gradle.popup" value="false" />
     <property name="LayoutCode.rearrangeEntriesJava" value="false" />
+    <property name="GenerateAntBuildDialog.generateSingleFile" value="false" />
+    <property name="GenerateAntBuildDialog.enableUiFormCompile" value="true" />
+    <property name="GenerateAntBuildDialog.forceTargetJdk" value="true" />
+    <property name="GenerateAntBuildDialog.backupFiles" value="true" />
+    <property name="GenerateAntBuildDialog.inclineRuntiemClasspath" value="false" />
+    <property name="GenerateAntBuildDialog.generateIdeaHomeProperty" value="false" />
+    <property name="GenerateAntBuildDialog.outputFileNameProperty" value="jwp" />
   </component>
   <component name="RunManager" selected="Android Application.JWP">
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
@@ -603,6 +656,19 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method />
+    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -628,19 +694,6 @@
       <envs />
       <properties />
       <listeners />
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -773,7 +826,11 @@
       <created>1387292504320</created>
       <updated>1387292504320</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Update google analitic + update on start">
+      <created>1387362799271</created>
+      <updated>1387362799271</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -801,30 +858,30 @@
     <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2731614" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27228206" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295129" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32908913" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39957035" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33014354" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295129" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33366045" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32875368" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295129" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33333334" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32844576" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32908913" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17769477" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3238469" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17716116" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32160312" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="364" y="215" width="1200" height="800" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32959402" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32959402" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3291866" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295129" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39930955" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -846,227 +903,16 @@
     <MESSAGE value="restructurization project&#10;" />
     <MESSAGE value="Fix bug + fix load image" />
     <MESSAGE value="Language level - 7" />
-    <option name="LAST_COMMIT_MESSAGE" value="Language level - 7" />
+    <MESSAGE value="Update google analitic + update on start" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update google analitic + update on start" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="228" column="17" selection-start="7842" selection-end="7842" vertical-scroll-proportion="0.0" vertical-offset="3876" max-vertical-offset="5202" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/list_items_section.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="0" selection-start="288" selection-end="288" vertical-scroll-proportion="0.0" vertical-offset="119" max-vertical-offset="442" />
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="228" column="17" selection-start="7842" selection-end="7842" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5423" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/list_items_section.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="0" selection-start="288" selection-end="288" vertical-scroll-proportion="0.0" vertical-offset="119" max-vertical-offset="442" />
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="32" selection-start="2299" selection-end="2327" vertical-scroll-proportion="0.0" vertical-offset="1071" max-vertical-offset="6647" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/values/colors.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="1" selection-start="102" selection-end="143" vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="391" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/xml/preferences.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="39" selection-start="1837" selection-end="1837" vertical-scroll-proportion="0.0" vertical-offset="714" max-vertical-offset="1037" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/preferences.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="34" selection-start="198" selection-end="198" vertical-scroll-proportion="0.0" vertical-offset="119" max-vertical-offset="425" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="50" selection-start="1602" selection-end="1626" vertical-scroll-proportion="0.0" vertical-offset="680" max-vertical-offset="6426" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/preferences.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="34" selection-start="198" selection-end="198" vertical-scroll-proportion="0.0" vertical-offset="119" max-vertical-offset="425" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="0" selection-start="1659" selection-end="1659" vertical-scroll-proportion="0.0" vertical-offset="731" max-vertical-offset="5814" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/preferences.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="34" selection-start="198" selection-end="198" vertical-scroll-proportion="0.0" vertical-offset="119" max-vertical-offset="425" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="0" selection-start="1659" selection-end="1659" vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="6035" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/preferences.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="34" selection-start="198" selection-end="198" vertical-scroll-proportion="0.0" vertical-offset="119" max-vertical-offset="425" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="0" selection-start="1659" selection-end="1659" vertical-scroll-proportion="0.0" vertical-offset="731" max-vertical-offset="6647" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/preferences.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="34" selection-start="198" selection-end="198" vertical-scroll-proportion="0.0" vertical-offset="119" max-vertical-offset="425" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="50" selection-start="1422" selection-end="1422" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6647" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="138" column="0" selection-start="4870" selection-end="4870" vertical-scroll-proportion="0.0" vertical-offset="2346" max-vertical-offset="6426" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="369" column="32" selection-start="9865" selection-end="9865" vertical-scroll-proportion="0.0" vertical-offset="5780" max-vertical-offset="6477" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/res/layout-xlarge/abs__screen_action_bar_overlay.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="31" selection-start="964" selection-end="964" vertical-scroll-proportion="0.50955415" vertical-offset="202" max-vertical-offset="1020" />
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/values-v14/styles.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="69" selection-start="82" selection-end="82" vertical-scroll-proportion="0.060822897" vertical-offset="0" max-vertical-offset="559" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/values-v11/styles.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="559" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/expandable_list.xml">
-      <provider editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="323" />
-      </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/values/colors.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="1" selection-start="102" selection-end="143" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="391" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/xml/preferences.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="39" selection-start="1837" selection-end="1837" vertical-scroll-proportion="0.0" vertical-offset="70" max-vertical-offset="1037" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/menu/publication.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="11" selection-start="686" selection-end="686" vertical-scroll-proportion="0.50445104" vertical-offset="0" max-vertical-offset="674" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_news.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="146" column="24" selection-start="5769" selection-end="5769" vertical-scroll-proportion="-0.06771345" vertical-offset="2194" max-vertical-offset="3213" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/list_items_section.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="0" selection-start="288" selection-end="288" vertical-scroll-proportion="0.18251534" vertical-offset="0" max-vertical-offset="652" />
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/jornals.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="0" selection-start="1013" selection-end="1013" vertical-scroll-proportion="-0.3264402" vertical-offset="510" max-vertical-offset="2856" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_mediaplayer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="13" selection-start="553" selection-end="553" vertical-scroll-proportion="-2.4572272" vertical-offset="1734" max-vertical-offset="3417" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_open_or_download.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="123" column="0" selection-start="5395" selection-end="5395" vertical-scroll-proportion="2.6327434" vertical-offset="0" max-vertical-offset="2771" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_item.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="13" selection-start="47" selection-end="47" vertical-scroll-proportion="0.050147492" vertical-offset="0" max-vertical-offset="901" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_books_brochures_adapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="0" selection-start="1255" selection-end="1255" vertical-scroll-proportion="-1.2315634" vertical-offset="1209" max-vertical-offset="1887" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/news.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="121" column="0" selection-start="4385" selection-end="4385" vertical-scroll-proportion="1.6253687" vertical-offset="955" max-vertical-offset="2210" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_jornals_adapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="0" selection-start="1364" selection-end="1364" vertical-scroll-proportion="0.33333334" vertical-offset="471" max-vertical-offset="3264" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_news_adapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="0" selection-start="1151" selection-end="1151" vertical-scroll-proportion="-1.6578171" vertical-offset="1532" max-vertical-offset="2210" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_provider.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="13" selection-start="297" selection-end="297" vertical-scroll-proportion="-1.1563421" vertical-offset="852" max-vertical-offset="1530" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_simplecursoradapter_player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="21" selection-start="681" selection-end="681" vertical-scroll-proportion="0.14749263" vertical-offset="155" max-vertical-offset="833" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_sqlite.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="42" selection-start="709" selection-end="709" vertical-scroll-proportion="-1.7831858" vertical-offset="1498" max-vertical-offset="2176" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="38" selection-start="1269" selection-end="1269" vertical-scroll-proportion="0.5737463" vertical-offset="104" max-vertical-offset="1037">
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/values-fr/analytics.xml">
@@ -1079,79 +925,392 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="676" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_jornals.java">
+    <entry file="file://$PROJECT_DIR$/proguard_logs/dump.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="66" column="48" selection-start="2298" selection-end="2335" vertical-scroll-proportion="0.0" vertical-offset="306" max-vertical-offset="4539">
-          <folding />
-        </state>
+        <state line="37" column="21" selection-start="1055" selection-end="1055" vertical-scroll-proportion="-1.5895404" vertical-offset="1632" max-vertical-offset="5322853" />
       </provider>
     </entry>
-    <entry file="file://C:/Windows/Temp/MainActivity.java">
+    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/books_brochures.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="58" selection-start="957" selection-end="957" vertical-scroll-proportion="0.3100304" vertical-offset="0" max-vertical-offset="1683">
-          <folding />
-        </state>
+        <state line="19" column="0" selection-start="564" selection-end="564" vertical-scroll-proportion="-1.0120361" vertical-offset="1332" max-vertical-offset="2329" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/view/menu/MenuBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="49" column="17" selection-start="1630" selection-end="1630" vertical-scroll-proportion="-1.6585366" vertical-offset="1683" max-vertical-offset="22661" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/app/ActionBar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="29" selection-start="800" selection-end="800" vertical-scroll-proportion="0.025993884" vertical-offset="102" max-vertical-offset="16116" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_mediaplayer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="184" column="9" selection-start="5847" selection-end="5847" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4080" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/news.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="34" selection-start="784" selection-end="784" vertical-scroll-proportion="-2.0727272" vertical-offset="311" max-vertical-offset="2244" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_books_brochures_img.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="0" selection-start="544" selection-end="544" vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="2006">
+        <state line="6" column="31" selection-start="207" selection-end="207" vertical-scroll-proportion="0.0" vertical-offset="90" max-vertical-offset="1965">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_item.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="57" column="0" selection-start="1070" selection-end="1070" vertical-scroll-proportion="0.0" vertical-offset="855" max-vertical-offset="1035">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_simplecursoradapter_player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="5" selection-start="440" selection-end="441" vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="885">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_provider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="0" selection-start="658" selection-end="658" vertical-scroll-proportion="0.0" vertical-offset="360" max-vertical-offset="1515">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_news.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="94" column="55" selection-start="3310" selection-end="3310" vertical-scroll-proportion="0.0" vertical-offset="1410" max-vertical-offset="3165">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/xml/preferences.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="42" column="39" selection-start="1837" selection-end="1837" vertical-scroll-proportion="1.0801816" vertical-offset="0" max-vertical-offset="1037" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/book.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="0" selection-start="771" selection-end="771" vertical-scroll-proportion="-0.50871634" vertical-offset="712" max-vertical-offset="1343">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/expandable_list.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="631">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/jornal.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="70" column="38" selection-start="2532" selection-end="2532" vertical-scroll-proportion="0.7575277" vertical-offset="712" max-vertical-offset="1343">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/list.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="631">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/list_items_news.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="34" selection-start="882" selection-end="882" vertical-scroll-proportion="0.54199684" vertical-offset="66" max-vertical-offset="697">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/list_items_section.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="0" selection-start="288" selection-end="288" vertical-scroll-proportion="0.18858954" vertical-offset="0" max-vertical-offset="631">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/list_items_song.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="631">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/main.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="631">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/notification.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.42789224" vertical-offset="270" max-vertical-offset="901">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/player.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.32012677" vertical-offset="202" max-vertical-offset="833">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/table_list.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="631">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_books_brochures_adapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="106" column="59" selection-start="4326" selection-end="4326" vertical-scroll-proportion="2.2889562" vertical-offset="0" max-vertical-offset="1904">
           <folding>
-            <element signature="e#4504#4602#0" expanded="true" />
-            <element signature="e#4616#4818#0" expanded="true" />
-            <element signature="e#4795#4796#0" expanded="true" />
+            <element signature="e#820#852#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/player.java">
+    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_news_adapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="85" column="40" selection-start="2817" selection-end="2817" vertical-scroll-proportion="0.0" vertical-offset="662" max-vertical-offset="5049">
+        <state line="77" column="55" selection-start="2544" selection-end="2544" vertical-scroll-proportion="1.5688351" vertical-offset="0" max-vertical-offset="2227">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/menu/publication.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="41" selection-start="283" selection-end="283" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="578">
+          <folding>
+            <element signature="e#264#282#0" expanded="false" />
+            <element signature="e#460#482#0" expanded="false" />
+            <element signature="e#657#677#0" expanded="false" />
+            <element signature="e#851#865#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/menu/books_broshures.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="9" selection-start="319" selection-end="319" vertical-scroll-proportion="0.20574887" vertical-offset="0" max-vertical-offset="661">
+          <folding>
+            <element signature="e#278#296#0" expanded="false" />
+            <element signature="e#496#516#0" expanded="false" />
+            <element signature="e#706#720#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/list_items_jornals.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="43" selection-start="1089" selection-end="1089" vertical-scroll-proportion="0.8018868" vertical-offset="0" max-vertical-offset="1751">
+          <folding>
+            <element signature="e#516#533#0" expanded="false" />
+            <element signature="e#1257#1274#0" expanded="false" />
+            <element signature="e#1622#1639#0" expanded="false" />
+            <element signature="e#1988#2005#0" expanded="false" />
+            <element signature="e#2355#2373#0" expanded="false" />
+            <element signature="e#2727#2744#0" expanded="false" />
+            <element signature="e#3100#3117#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/list_items_books_brochures.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="27" selection-start="867" selection-end="867" vertical-scroll-proportion="0.37421384" vertical-offset="153" max-vertical-offset="1462">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://C:/Windows/Temp/styles_jwp.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="77" column="12" selection-start="801" selection-end="3878" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1445" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/drawable/spinner_background_ab_jwp.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="661" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/drawable/selectable_background_jwp.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="661" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/drawable/jwp_activated_background_holo_light.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="661" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/drawable/ab_background_textured_jwp.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="46" selection-start="822" selection-end="841" vertical-scroll-proportion="0.48865354" vertical-offset="0" max-vertical-offset="661" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values/themes_jwp.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="53" selection-start="216" selection-end="265" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="629">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/drawable/tab_indicator_ab_jwp.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="70" max-vertical-offset="731" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values/styles_jwp.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="35" selection-start="202" selection-end="202" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1989">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values-v14/styles_jwp.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="76" selection-start="1787" selection-end="1813" vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="969">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/preferences.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="11" selection-start="461" selection-end="461" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="901">
+        <state line="36" column="0" selection-start="1409" selection-end="1409" vertical-scroll-proportion="0.74583966" vertical-offset="0" max-vertical-offset="901">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/books_brochures.java">
+    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/player.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="59" column="28" selection-start="1791" selection-end="1791" vertical-scroll-proportion="0.0" vertical-offset="55" max-vertical-offset="2091">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="0" selection-start="1567" selection-end="1567" vertical-scroll-proportion="0.0" vertical-offset="612" max-vertical-offset="5746">
+        <state line="73" column="107" selection-start="2408" selection-end="2508" vertical-scroll-proportion="0.6429652" vertical-offset="255" max-vertical-offset="5168">
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3272#3294#0" expanded="true" />
-            <element signature="e#3327#3344#0" expanded="true" />
-            <element signature="e#3482#3498#0" expanded="true" />
-            <element signature="e#3600#3613#0" expanded="true" />
-            <element signature="e#3722#3746#0" expanded="true" />
-            <element signature="e#4978#5013#0" expanded="true" />
-            <element signature="e#5047#5076#0" expanded="true" />
-            <element signature="e#10255#10275#0" expanded="true" />
+            <element signature="e#5274#5306#0" expanded="false" />
+            <element signature="e#6951#6992#0" expanded="false" />
+            <element signature="e#7277#7308#0" expanded="false" />
+            <element signature="e#7793#7824#0" expanded="false" />
+            <element signature="e#7854#7886#0" expanded="false" />
+            <element signature="e#7987#8018#0" expanded="false" />
+            <element signature="e#8865#8897#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_sqlite.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="66" column="85" selection-start="5136" selection-end="5142" vertical-scroll-proportion="0.0" vertical-offset="289" max-vertical-offset="2210">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_functions.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="154" column="54" selection-start="5623" selection-end="5623" vertical-scroll-proportion="2.2735562" vertical-offset="612" max-vertical-offset="2652">
+        <state line="66" column="70" selection-start="2012" selection-end="2012" vertical-scroll-proportion="-9.52" vertical-offset="408" max-vertical-offset="2788">
+          <folding>
+            <element signature="e#3174#3224#0" expanded="true" />
+            <element signature="e#5086#5127#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="51" column="0" selection-start="2054" selection-end="2054" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5066">
+          <folding>
+            <element signature="e#3244#3266#0" expanded="true" />
+            <element signature="e#3299#3316#0" expanded="true" />
+            <element signature="e#3477#3493#0" expanded="true" />
+            <element signature="e#3595#3608#0" expanded="true" />
+            <element signature="e#3717#3741#0" expanded="true" />
+            <element signature="e#4964#4999#0" expanded="true" />
+            <element signature="e#5033#5062#0" expanded="true" />
+            <element signature="e#10250#10270#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/jornals.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="86" column="23" selection-start="3316" selection-end="3323" vertical-scroll-proportion="0.0" vertical-offset="978" max-vertical-offset="2975">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_jornals_adapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="81" column="58" selection-start="3227" selection-end="3338" vertical-scroll-proportion="-19.36" vertical-offset="587" max-vertical-offset="2975">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_jornals.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="193" column="60" selection-start="8224" selection-end="8224" vertical-scroll-proportion="0.0" vertical-offset="3436" max-vertical-offset="4930">
+          <folding>
+            <element signature="e#12586#12684#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_downloads_files.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="104" column="0" selection-start="3273" selection-end="3273" vertical-scroll-proportion="1.8860183" vertical-offset="0" max-vertical-offset="6766">
+        <state line="256" column="0" selection-start="9026" selection-end="9026" vertical-scroll-proportion="0.0" vertical-offset="1974" max-vertical-offset="6613">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="33" selection-start="181" selection-end="181" vertical-scroll-proportion="0.07715582" vertical-offset="0" max-vertical-offset="1037">
           <folding />
         </state>
       </provider>
@@ -1209,12 +1368,11 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>actionbarsherlock</last-edited>
+          <last-edited>JWP</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
                 <option value="0.2" />
-                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>

@@ -15,9 +15,6 @@ import android.widget.RemoteViews;
 
 import com.dimoshka.ua.jwp.R;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -33,21 +30,16 @@ public class class_downloads_files extends Service {
 
     public static final int SERVICE_ID = 0x101104;
     public static final int BYTES_BUFFER_SIZE = 2 * 1024;
-    @NotNull
     public class_functions funct = new class_functions();
     private NotificationManager notificationManager;
     private final IBinder binder = new FileDownloadBinder();
-    @Nullable
     private AsyncDownloadTask task = null;
     protected static boolean isRunning = false;
-    @Nullable
     private Map<String, String> targetFile = null;
-    @Nullable
     private ArrayList<Map<String, String>> targetFiles = null;
     private int now_targetFile = 0;
 
     public class FileDownloadBinder extends Binder {
-        @NotNull
         class_downloads_files getService() {
             return class_downloads_files.this;
         }
@@ -69,7 +61,7 @@ public class class_downloads_files extends Service {
     }
 
     @Override
-    public int onStartCommand(@NotNull Intent intent, int flags, int startId) {
+    public int onStartCommand(Intent intent, int flags, int startId) {
         try {
             Log.d("JWP" + getClass().getName(), "onStartCommand");
             String dir = funct.get_dir_app(getBaseContext()) + "/downloads/";
@@ -94,7 +86,6 @@ public class class_downloads_files extends Service {
         return START_STICKY;
     }
 
-    @Nullable
     protected ArrayList<Map<String, String>> get_targetFiles() {
         return targetFiles;
     }
@@ -155,7 +146,6 @@ public class class_downloads_files extends Service {
         return R.drawable.ic_launcher;
     }
 
-    @NotNull
     protected RemoteViews getProgressView(int currentNumFile,
                                           int totalNumFiles, int currentReceivedBytes, int totalNumBytes,
                                           String filename) {
@@ -240,7 +230,6 @@ public class class_downloads_files extends Service {
     }
 
     private class AsyncDownloadTask extends AsyncTask<Void, Void, Void> {
-        @Nullable
         private ArrayList<Map<String, String>> targetFiles = null;
         private int total_file = 0;
         private int success = 0;
@@ -252,7 +241,7 @@ public class class_downloads_files extends Service {
             total_file = get_targetFiles_num();
         }
 
-        public int getFileSizeAtURL(@NotNull URL url) {
+        public int getFileSizeAtURL(URL url) {
             int filesize = -1;
             try {
                 HttpURLConnection http = (HttpURLConnection) url
@@ -265,7 +254,6 @@ public class class_downloads_files extends Service {
             return filesize;
         }
 
-        @Nullable
         @Override
         protected Void doInBackground(Void... params) {
             try {

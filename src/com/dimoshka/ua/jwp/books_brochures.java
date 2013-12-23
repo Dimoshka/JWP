@@ -15,9 +15,6 @@ import com.actionbarsherlock.app.SherlockFragment;
 import com.dimoshka.ua.classes.class_downloads_files;
 import com.dimoshka.ua.classes.class_rss_books_brochures_adapter;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.io.File;
 import java.util.ArrayList;
 
@@ -25,12 +22,10 @@ public class books_brochures extends SherlockFragment {
 
     private ListView list;
     private Cursor cursor;
-    @Nullable
     View view = null;
 
-    @Nullable
     @Override
-    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup group,
+    public View onCreateView(LayoutInflater inflater, ViewGroup group,
                              Bundle saved) {
         view = inflater.inflate(R.layout.list, group, false);
         try {

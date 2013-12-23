@@ -12,9 +12,6 @@ import android.util.Log;
 
 import com.dimoshka.ua.jwp.R;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.io.File;
 import java.util.List;
 
@@ -22,7 +19,7 @@ public class class_rss_books_brochures_img {
 
 
     private SQLiteDatabase database;
-    @NotNull
+
     public class_functions funct = new class_functions();
     private Activity activity;
     private Cursor cursor;
@@ -46,10 +43,10 @@ public class class_rss_books_brochures_img {
 
     class verify_img extends AsyncTask<Void, Integer, Void> {
         private ProgressDialog dialog;
-        @Nullable
+
         List<class_rss_item> rss_list = null;
 
-        @Nullable
+
         protected Void doInBackground(Void... paramArrayOfVoid) {
             try {
                 if (funct.ExternalStorageState()) {

@@ -1,17 +1,16 @@
 package com.dimoshka.ua.classes;
 
+import android.content.Context;
+import android.util.Log;
+import android.util.Xml;
+
+import org.xmlpull.v1.XmlPullParser;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.jetbrains.annotations.NotNull;
-import org.xmlpull.v1.XmlPullParser;
-
-import android.content.Context;
-import android.util.Log;
-import android.util.Xml;
 
 public class class_rss_provider {
 	static final String ITEM = "item";
@@ -23,7 +22,7 @@ public class class_rss_provider {
 	static final String CHANNEL = "channel";
 	//private class_functions funct = new class_functions();
 
-	@NotNull
+	
     public List<class_rss_item> parse(String rssFeed, Context context) {
 		List<class_rss_item> list = new ArrayList<class_rss_item>();
 		XmlPullParser parser = Xml.newPullParser();

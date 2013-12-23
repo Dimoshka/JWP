@@ -22,7 +22,7 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/text"
         android:layout_margin="2dp"
-        android:src="@drawable/noimages" />
+        android:src="@drawable/ic_noimages" />
 
     <TextView
         android:id="@+id/title"

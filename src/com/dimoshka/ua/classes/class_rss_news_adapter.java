@@ -14,15 +14,13 @@ import android.widget.TextView;
 
 import com.dimoshka.ua.jwp.R;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Map;
 
 public class class_rss_news_adapter extends BaseExpandableListAdapter {
 	private Context context;
-	@NotNull
+	
     public class_functions funct = new class_functions();
 	private LayoutInflater inflater;
 	private SQLiteDatabase database;
@@ -70,14 +68,14 @@ public class class_rss_news_adapter extends BaseExpandableListAdapter {
 							.getAbsolutePath());
 					myImage.setImageBitmap(myBitmap);
 				} else {
-					myImage.setImageResource(R.drawable.noimages);
+					myImage.setImageResource(R.drawable.ic_noimages);
 					ContentValues initialValues = new ContentValues();
 					initialValues.put("img", "0");
 					database.update("news", initialValues, "_id=?",
 							new String[] { _id.toString() });
 				}
 			} else {
-				myImage.setImageResource(R.drawable.noimages);
+				myImage.setImageResource(R.drawable.ic_noimages);
 			}
 
 			return v;

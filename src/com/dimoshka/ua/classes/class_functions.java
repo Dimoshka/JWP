@@ -17,8 +17,6 @@ import com.bugsense.trace.BugSenseHandler;
 import com.dimoshka.ua.jwp.R;
 
 import org.apache.http.util.ByteArrayBuffer;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -35,7 +33,7 @@ import java.util.Locale;
 public class class_functions {
     public SharedPreferences prefs;
 
-    public boolean isNetworkAvailable(@NotNull Activity activity) {
+    public boolean isNetworkAvailable(Activity activity) {
         try {
             ConnectivityManager cm = (ConnectivityManager) activity
                     .getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -65,18 +63,24 @@ public class class_functions {
         }
     }
 
-    @Nullable
-    public Date get_jwp_jornals_rss_date(@NotNull String name, String code_pub,
+
+    public Date get_jwp_jornals_rss_date(String name, String code_pub,
                                          String code_lng) {
-        String date_str = name.replace(code_pub, "");
-        date_str = date_str.replace(code_lng, "");
+        String date_str = name;
+        date_str = date_str.replace(code_pub + "_", "");
+        date_str = date_str.replace(code_lng + "_", "");
+        if (date_str.length() > 8) {
+            date_str = date_str.substring(0, date_str.length() - 3);
+        }
         date_str = date_str.replace("_", "");
-        if (date_str.length() == 6)
+        if (date_str.length() == 6) {
             date_str += "01";
+        }
+        Log.e("JWP", date_str + " - " + date_str.length());
         return get_string_to_date(date_str, "yyyyMMdd");
     }
 
-    @Nullable
+
     public Date get_string_to_date(String date_str, String format_str) {
         SimpleDateFormat format = new SimpleDateFormat(format_str,
                 Locale.ENGLISH);
@@ -90,8 +94,8 @@ public class class_functions {
         return date;
     }
 
-    @NotNull
-    public String get_dir_app(@NotNull Context context) {
+
+    public String get_dir_app(Context context) {
         String dir = Environment.getExternalStorageDirectory() + "/"
                 + context.getResources().getString(R.string.app_dir);
         return dir;
@@ -107,8 +111,8 @@ public class class_functions {
         return m;
     }
 
-    public Cursor get_language(@NotNull SQLiteDatabase database, Integer id,
-                               @NotNull Activity activity) {
+    public Cursor get_language(SQLiteDatabase database, Integer id,
+                               Activity activity) {
         Cursor cursor;
         if (id == 0) {
             cursor = database.rawQuery("SELECT * from language where code_an='"
@@ -128,8 +132,9 @@ public class class_functions {
         return cursor;
     }
 
-    public void update_file_isn(@NotNull SQLiteDatabase database, String name,
-                                @NotNull Integer file) {
+    public void update_file_isn(SQLiteDatabase database, String name,
+
+                                Integer file) {
         ContentValues initialValues = new ContentValues();
         initialValues.put("file", file.toString());
         database.update("files", initialValues, "name=?", new String[]{name});
@@ -141,14 +146,15 @@ public class class_functions {
 
     public void send_bug_report(Context context, Exception ex,
                                 String class_name, Integer num_row) {
-        Log.e(context.getString(R.string.app_name) + " - error " + class_name,
+        Log.e(context.getString(R.string.app_name_shot) + " - error: " + class_name,
                 ex.toString() + " - " + num_row);
         BugSenseHandler.addCrashExtraData("class_name", class_name.toString());
         BugSenseHandler.addCrashExtraData("num_row", num_row.toString());
         BugSenseHandler.sendException(ex);
+        BugSenseHandler.sendExceptionMessage("level", class_name, ex);
     }
 
-    public boolean load_img(@NotNull Activity context, String dir, String name, String link_img) {
+    public boolean load_img(Activity context, String dir, String name, String link_img) {
         try {
             URL url = new URL(link_img);
             File file = new File(dir, name + ".jpg");

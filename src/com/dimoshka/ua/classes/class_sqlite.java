@@ -7,31 +7,28 @@ import android.util.Log;
 
 import com.dimoshka.ua.jwp.R;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 public class class_sqlite extends SQLiteOpenHelper {
 
-    @Nullable
+
     public SQLiteDatabase database;
-    @NotNull
+
     public class_functions funct = new class_functions();
     private Context context;
 
-    public class_sqlite(@NotNull Context context) {
+    public class_sqlite(Context context) {
         super(context, context.getString(R.string.db_name), null, Integer
                 .valueOf(context.getString(R.string.db_version)));
         this.context = context;
         database = this.getWritableDatabase();
     }
 
-    @Nullable
+
     public SQLiteDatabase openDataBase() {
         return database;
     }
 
     @Override
-    public void onCreate(@NotNull SQLiteDatabase database) {
+    public void onCreate(SQLiteDatabase database) {
         Log.i(getClass().getName(), "Start create SQLITE");
         try {
             // -- Table: type
@@ -48,14 +45,8 @@ public class class_sqlite extends SQLiteOpenHelper {
             database.execSQL("INSERT INTO [publication] ([_id], [name], [code]) VALUES (4, 'Books and brochures', 'b');");
             // -- Table: magazine
             database.execSQL("CREATE TABLE magazine (_id INTEGER PRIMARY KEY ASC AUTOINCREMENT UNIQUE, name VARCHAR(128) UNIQUE, title VARCHAR(128), id_pub INTEGER NOT NULL, id_lang INTEGER NOT NULL, img BOOLEAN DEFAULT (0), link_img VARCHAR(256), date DATE NOT NULL);");
-            database.execSQL("INSERT INTO [magazine] ([_id], [name], [title], [id_pub], [id_lang], [img], [link_img], [date]) VALUES (5334, 'bh_U.pdf', 'Чему на самом деле учит Библия?', 4, 3, 0, 'http://www.jw.org/assets/a/bh/bh_U/bh_U.prd_md.jpg', '20130517');");
-            database.execSQL("INSERT INTO [magazine] ([_id], [name], [title], [id_pub], [id_lang], [img], [link_img], [date]) VALUES (5913, 'yb13_U.pdf', 'Ежегодник Свидетелей Иеговы 2013', 4, 3, 0, 'http://www.jw.org/assets/a/yb13/yb13_U/yb13_U.prd_md.jpg', '20130517');");
-            database.execSQL("INSERT INTO [magazine] ([_id], [name], [title], [id_pub], [id_lang], [img], [link_img], [date]) VALUES (5338, 'sny_U.pdf', 'Пойте Иегове — тексты песен', 4, 3, 0, 'http://www.jw.org/assets/a/sny/sny_U/sny_U.prd_md.jpg', '20130517');");
             // -- Table: files
             database.execSQL("CREATE TABLE files (_id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, id_magazine INTEGER NOT NULL, id_type INTEGER NOT NULL, name VARCHAR(32) NOT NULL UNIQUE, link VARCHAR(256) NOT NULL, pubdate DATE NOT NULL, title VARCHAR(256) NOT NULL, file BOOLEAN DEFAULT (0));");
-            database.execSQL("INSERT INTO [files] ([_id], [id_magazine], [id_type], [name], [link], [pubdate], [title], [file]) VALUES (null, 5334, 2, 'bh_U.pdf', 'http://download.jw.org/files/media_books/5e/bh_U.pdf', '20130517', '', 0);");
-            database.execSQL("INSERT INTO [files] ([_id], [id_magazine], [id_type], [name], [link], [pubdate], [title], [file]) VALUES (null, 5913, 2, 'yb13_U.pdf', 'http://download.jw.org/files/media_books/0f/yb13_U.pdf', '20130517', '', 0);");
-            database.execSQL("INSERT INTO [files] ([_id], [id_magazine], [id_type], [name], [link], [pubdate], [title], [file]) VALUES (null, 5338, 2, 'sny_U.pdf', 'http://download.jw.org/files/media_books/b2/sny_U.pdf', '20130517', '', 0);");
             // -- Table: news
             database.execSQL("CREATE TABLE news (_id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, id_lang INTEGER NOT NULL, title VARCHAR(256) NOT NULL UNIQUE, link VARCHAR(256) NOT NULL UNIQUE, link_img VARCHAR(256), description VARCHAR(256) NOT NULL, pubdate DATETIME NOT NULL, img BOOLEAN DEFAULT (0));");
             // -- Table: language
@@ -68,36 +59,42 @@ public class class_sqlite extends SQLiteOpenHelper {
             database.execSQL("INSERT INTO [language] ([_id], [name], [code], [code_an], [news_rss]) VALUES (6, 'Spanish', 'S', 'es', 'es/noticias');");
             database.execSQL("INSERT INTO [language] ([_id], [name], [code], [code_an], [news_rss]) VALUES (7, '漢語繁體字', 'CH', 'zh', 'zh-hant/%E6%96%B0%E8%81%9E');");
             database.execSQL("INSERT INTO [language] ([_id], [name], [code], [code_an], [news_rss]) VALUES (8, '汉语简化字', 'CHS', 'zhc', 'zh-hans/%E6%96%B0%E9%97%BB');");
-
-            // -- Index: idx_files
+            // -- Index
+            database.execSQL("CREATE INDEX idx_magazine ON magazine (id_pub COLLATE NOCASE ASC, id_lang COLLATE NOCASE ASC);");
             database.execSQL("CREATE INDEX idx_files ON files (id_magazine COLLATE NOCASE ASC, id_type COLLATE NOCASE ASC);");
+
+            // -- INSERT: Books and brochures
+            database.execSQL("INSERT INTO [magazine] ([_id], [name], [title], [id_pub], [id_lang], [img], [link_img], [date]) VALUES (5334, 'bh_U.pdf', 'Чему на самом деле учит Библия?', 4, 3, 0, 'http://www.jw.org/assets/a/bh/bh_U/bh_U.prd_md.jpg', '20130517');");
+            database.execSQL("INSERT INTO [magazine] ([_id], [name], [title], [id_pub], [id_lang], [img], [link_img], [date]) VALUES (5913, 'yb13_U.pdf', 'Ежегодник Свидетелей Иеговы 2013', 4, 3, 0, 'http://www.jw.org/assets/a/yb13/yb13_U/yb13_U.prd_md.jpg', '20130517');");
+            database.execSQL("INSERT INTO [magazine] ([_id], [name], [title], [id_pub], [id_lang], [img], [link_img], [date]) VALUES (5338, 'sny_U.pdf', 'Пойте Иегове — тексты песен', 4, 3, 0, 'http://www.jw.org/assets/a/sny/sny_U/sny_U.prd_md.jpg', '20130517');");
+
+            database.execSQL("INSERT INTO [files] ([_id], [id_magazine], [id_type], [name], [link], [pubdate], [title], [file]) VALUES (null, 5334, 2, 'bh_U.pdf', 'http://download.jw.org/files/media_books/5e/bh_U.pdf', '20130517', '', 0);");
+            database.execSQL("INSERT INTO [files] ([_id], [id_magazine], [id_type], [name], [link], [pubdate], [title], [file]) VALUES (null, 5913, 2, 'yb13_U.pdf', 'http://download.jw.org/files/media_books/0f/yb13_U.pdf', '20130517', '', 0);");
+            database.execSQL("INSERT INTO [files] ([_id], [id_magazine], [id_type], [name], [link], [pubdate], [title], [file]) VALUES (null, 5338, 2, 'sny_U.pdf', 'http://download.jw.org/files/media_books/b2/sny_U.pdf', '20130517', '', 0);");
+
+
         } catch (Exception ex) {
             funct.send_bug_report(context, ex, getClass().getName(), 63);
         }
     }
 
     @Override
-    public void onUpgrade(@NotNull SQLiteDatabase database, int oldVersion,
+    public void onUpgrade(SQLiteDatabase database, int oldVersion,
                           int newVersion) {
         Log.i("JWP" + getClass().getName(), "Start update SQLITE");
         switch (oldVersion) {
             case 1:
-
                 // -- Table: magazine
                 database.execSQL("ALTER TABLE [magazine] ADD link_img VARCHAR(256);");
                 database.execSQL("ALTER TABLE [magazine] ADD title VARCHAR(128);");
-
                 // -- Table: publication
                 database.execSQL("INSERT INTO [publication] ([_id], [name], [code]) VALUES (4, 'Books and brochures', 'b');");
-
                 // -- Table: magazine
                 database.execSQL("INSERT INTO [magazine] ([_id], [name], [title], [id_pub], [id_lang], [img], [link_img], [date]) VALUES (5334, 'bh_U.pdf', 'Чему на самом деле учит Библия?', 4, 3, 0, 'http://www.jw.org/assets/a/bh/bh_U/bh_U.prd_md.jpg', '20130517');");
                 database.execSQL("INSERT INTO [magazine] ([_id], [name], [title], [id_pub], [id_lang], [img], [link_img], [date]) VALUES (5913, 'yb13_U.pdf', 'Ежегодник Свидетелей Иеговы 2013', 4, 3, 0, 'http://www.jw.org/assets/a/yb13/yb13_U/yb13_U.prd_md.jpg', '20130517');");
-
                 // -- Table: files
                 database.execSQL("INSERT INTO [files] ([_id], [id_magazine], [id_type], [name], [link], [pubdate], [title], [file]) VALUES (null, 5334, 2, 'bh_U.pdf', 'http://download.jw.org/files/media_books/5e/bh_U.pdf', '20130517', '', 0);");
                 database.execSQL("INSERT INTO [files] ([_id], [id_magazine], [id_type], [name], [link], [pubdate], [title], [file]) VALUES (null, 5913, 2, 'yb13_U.pdf', 'http://download.jw.org/files/media_books/0f/yb13_U.pdf', '20130517', '', 0);");
-
                 break;
             default:
                 database.execSQL("DROP TABLE IF EXISTS type");
@@ -109,7 +106,6 @@ public class class_sqlite extends SQLiteOpenHelper {
                 onCreate(database);
                 break;
         }
-
     }
 
     public void close() {

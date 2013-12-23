@@ -33,28 +33,22 @@ import com.dimoshka.ua.classes.class_rss_news;
 import com.dimoshka.ua.classes.class_sqlite;
 import com.google.analytics.tracking.android.EasyTracker;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.List;
 import java.util.Vector;
 
 public class main extends SherlockFragmentActivity {
 
     private int curent_tab = 0;
-
     public static int id_lang = 0;
     private static SharedPreferences prefs;
     public static SQLiteDatabase database;
     public static class_sqlite dbOpenHelper;
-    @NotNull
     public static class_functions funct = new class_functions();
     public OnSharedPreferenceChangeListener listener_pref;
     public static class_open_or_download open_or_download;
-
     private class_rss_jornals rss_jornals;
     private class_rss_news rss_news;
     private class_rss_books_brochures_img rss_books_brochures_img;
-
     jornals frag1;
     news frag2;
     books_brochures frag3;
@@ -69,6 +63,7 @@ public class main extends SherlockFragmentActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.jwp);
         super.onCreate(savedInstanceState);
         BugSenseHandler.initAndStartSession(this, "63148966");
         BugSenseHandler.setLogging(100);
@@ -91,7 +86,7 @@ public class main extends SherlockFragmentActivity {
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
         actionBar.setTitle(R.string.app_name_shot);
         actionBar.setSubtitle(R.string.app_name);
-        actionBar.setBackgroundDrawable(getResources().getDrawable(R.color.orange));
+        actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.ab_background_textured_jwp));
 
         jornals_Tab = actionBar.newTab().setText(R.string.jornals)
                 .setTabListener(new MyTabListener());
@@ -117,7 +112,7 @@ public class main extends SherlockFragmentActivity {
         boolean firstrun = prefs.getBoolean("first_run", true);
 
         listener_pref = new SharedPreferences.OnSharedPreferenceChangeListener() {
-            public void onSharedPreferenceChanged(@NotNull SharedPreferences prefs,
+            public void onSharedPreferenceChanged(SharedPreferences prefs,
                                                   String key) {
                 id_lang = Integer.parseInt(prefs.getString("language", "0"));
             }
@@ -188,7 +183,7 @@ public class main extends SherlockFragmentActivity {
     @SuppressLint("HandlerLeak")
     private final Handler handler_jornals = new Handler() {
         @Override
-        public void handleMessage(@NotNull Message msg) {
+        public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 1:
                     Log.e("JWP", "refrashe afte load");
@@ -201,7 +196,7 @@ public class main extends SherlockFragmentActivity {
     @SuppressLint("HandlerLeak")
     private final Handler handler_news = new Handler() {
         @Override
-        public void handleMessage(@NotNull Message msg) {
+        public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 1:
                     Log.e("JWP", "refrashe afte load");
@@ -215,7 +210,7 @@ public class main extends SherlockFragmentActivity {
     @SuppressLint("HandlerLeak")
     private final Handler handler_books_brochures = new Handler() {
         @Override
-        public void handleMessage(@NotNull Message msg) {
+        public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 1:
                     Log.e("JWP", "refrashe afte load");
@@ -225,17 +220,17 @@ public class main extends SherlockFragmentActivity {
         }
     };
 
-    @NotNull
     private SimpleOnPageChangeListener PageChangeListener = new SimpleOnPageChangeListener() {
         @Override
         public void onPageSelected(int position) {
             actionBar.setSelectedNavigationItem(position);
         }
+
         ;
     };
 
     private class MyTabListener implements ActionBar.TabListener {
-        public void onTabSelected(@NotNull Tab tab, FragmentTransaction ft) {
+        public void onTabSelected(Tab tab, FragmentTransaction ft) {
             curent_tab = tab.getPosition();
 
             switch (curent_tab) {
@@ -273,7 +268,7 @@ public class main extends SherlockFragmentActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(@NotNull MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.item0:
                 System.exit(0);
@@ -306,6 +301,7 @@ public class main extends SherlockFragmentActivity {
                         rss_news.get_all_feeds();
                         break;
                     case 2:
+                        rss_books_brochures_img.verify_all_img();
                         frag3.refresh();
                         break;
                     default:
@@ -330,7 +326,6 @@ public class main extends SherlockFragmentActivity {
                     frag2.refresh();
                     break;
                 case 2:
-                    rss_books_brochures_img.verify_all_img();
                     frag3.refresh();
                     break;
                 default:

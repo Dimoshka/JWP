@@ -23,6 +23,7 @@ import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
+import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
@@ -32,10 +33,6 @@ import com.dimoshka.ua.classes.class_mediaplayer;
 import com.dimoshka.ua.classes.class_simplecursoradapter_player;
 import com.dimoshka.ua.classes.class_sqlite;
 import com.google.analytics.tracking.android.EasyTracker;
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.io.File;
 
 public class player extends SherlockActivity {
@@ -51,15 +48,17 @@ public class player extends SherlockActivity {
 	private Cursor cursor;
 	private Integer id_magazine;
 	private class_simplecursoradapter_player scAdapter;
-	@Nullable
+	
     private class_mediaplayer mediaplayer_class;
 
 	public SharedPreferences prefs;
 	public SQLiteDatabase database;
-	@NotNull
+	
     public class_functions funct = new class_functions();
 	public int id_lang = 0;
 	public OnSharedPreferenceChangeListener listener_pref;
+
+    private ActionBar actionBar;
 
 	AudioManager audioManager;
 	AFListener afListenerMusic;
@@ -67,8 +66,13 @@ public class player extends SherlockActivity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.jwp);
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.player);
+        setContentView(R.layout.player);
+
+        actionBar = getSupportActionBar();
+        actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.ab_background_textured_jwp));
+
 		Bundle extras = getIntent().getExtras();
 		id_magazine = extras.getInt("id_magazine");
 		prefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -196,7 +200,7 @@ public class player extends SherlockActivity {
 	}
 
 	@SuppressLint("HandlerLeak")
-	private void madia_player(@NotNull final File file) {
+	private void madia_player(final File file) {
 
 		/*
 		 * mpMusic = new MediaPlayer(); try {
@@ -220,7 +224,7 @@ public class player extends SherlockActivity {
 		startPlayProgressUpdater();
 	}
 
-	private void start_download(String link, @NotNull File file) {
+	private void start_download(String link, File file) {
 		Intent i = new Intent(getBaseContext(), class_downloads_files.class);
 		i.putExtra("file_url", link);
 		i.putExtra("file_putch", file.getAbsolutePath());
@@ -291,7 +295,7 @@ public class player extends SherlockActivity {
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(@NotNull MenuItem item) {
+	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.item0:
 			System.exit(0);

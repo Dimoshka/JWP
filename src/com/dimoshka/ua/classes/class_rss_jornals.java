@@ -14,9 +14,6 @@ import android.util.Log;
 
 import com.dimoshka.ua.jwp.R;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -31,27 +28,27 @@ public class class_rss_jornals {
 
     private class_rss_provider rssfeedprovider;
     private SQLiteDatabase database;
-    @NotNull
+
     public class_functions funct = new class_functions();
     private Activity activity;
     private Handler handler;
     private Integer id_ln = 0;
-    @Nullable
+
     private String code_lng = "E";
-    @NotNull
+
     private ArrayList<Integer> id_pub = new ArrayList<Integer>();
-    @NotNull
+
     private ArrayList<String> code_pub = new ArrayList<String>();
     private Integer cur_pub = 0;
-    @NotNull
+
     private ArrayList<Integer> id_type = new ArrayList<Integer>();
-    @NotNull
+
     private ArrayList<String> code_type = new ArrayList<String>();
     private Integer cur_type = 0;
     public SharedPreferences prefs;
     private AsyncTask task;
 
-    public class_rss_jornals(@NotNull Activity activity, int id_lang, Handler handler,
+    public class_rss_jornals(Activity activity, int id_lang, Handler handler,
                              SQLiteDatabase database) {
         this.activity = activity;
         this.handler = handler;
@@ -113,18 +110,35 @@ public class class_rss_jornals {
 
     class ReadFeedTask extends AsyncTask<Void, Integer, Void> {
         private ProgressDialog dialog;
-        @Nullable
+
         List<class_rss_item> rss_list = null;
 
-        @Nullable
+
         protected Void doInBackground(Void... paramArrayOfVoid) {
             try {
                 for (int a = 0; a < id_pub.size(); a++) {
                     if (isCancelled()) break;
                     for (int b = 0; b < id_type.size(); b++) {
 
-                        if (prefs.getBoolean("rss_" + code_type.get(b), true)) {
-                            Log.i("JWP_rss", "rss_" + code_type.get(b));
+                        Boolean load_pub = false;
+
+                        switch (code_type.get(b)) {
+                            case "epub":
+                                load_pub = prefs.getBoolean("rss_epub", false);
+                                break;
+                            case "pdf":
+                                load_pub = prefs.getBoolean("rss_pdf", true);
+                                break;
+                            case "mp3":
+                                load_pub = prefs.getBoolean("rss_mp3", false);
+                                break;
+                            case "m4b":
+                                load_pub = prefs.getBoolean("rss_m4b", false);
+                                break;
+                        }
+
+                        if (load_pub) {
+                            //Log.i("JWP_rss", "rss_" + code_type.get(b));
 
                             cur_type = b;
                             cur_pub = a;
@@ -144,12 +158,10 @@ public class class_rss_jornals {
                                         "." + code_type.get(cur_type), "");
 
                                 String date_str = name.replace(
-                                        code_pub.get(cur_pub), "");
-                                date_str = date_str.replace(code_lng, "");
-                                date_str = date_str.replace("_", "");
-
-                                if (date_str.length() > 8
-                                        || (cur_pub == 2 && date_str.length() > 6))
+                                        code_pub.get(cur_pub) + "_", "");
+                                date_str = date_str.replace(code_lng + "_", "");
+                                Log.e("JWP_rss", "name = " + name);
+                                if (date_str.length() > 8)
                                     name = name.substring(0, name.length() - 3);
 
                                 SimpleDateFormat format = new SimpleDateFormat(
@@ -157,17 +169,26 @@ public class class_rss_jornals {
                                 Date date = funct.get_jwp_jornals_rss_date(
                                         name, code_pub.get(cur_pub), code_lng);
 
+                                Log.e("JWP_rss", "date = " + date.toString());
+
                                 Cursor cur = database.rawQuery(
-                                        "select _id from magazine where `name` = '"
+                                        "select _id, img from magazine where `name` = '"
                                                 + name + "'", null);
                                 long id_magazine = 0;
-
-                                int img = img(name, format, date);
-
+                                Integer img = img(name, format, date);
+                                Log.e("JWP", "img_ok - " + img.toString());
                                 if (cur.getCount() > 0) {
                                     cur.moveToFirst();
                                     id_magazine = cur.getLong(cur
                                             .getColumnIndex("_id"));
+                                    if (img != cur.getInt(cur
+                                            .getColumnIndex("img"))) {
+                                        ContentValues init = new ContentValues();
+                                        init.put("img", img);
+                                        Log.e("JWP_img", "update img to " + img.toString());
+                                        database.update("magazine", init, "_id=?",
+                                                new String[]{String.valueOf(id_magazine)});
+                                    }
                                 } else {
                                     ContentValues init1 = new ContentValues();
                                     init1.put("name", name);
@@ -175,6 +196,7 @@ public class class_rss_jornals {
                                     init1.put("id_lang", id_ln);
                                     init1.put("img", img);
                                     init1.put("date", format.format(date));
+                                    Log.e("JWP_rss", "date_ok = " + format.format(date).toString());
                                     id_magazine = database.insert("magazine",
                                             null, init1);
                                 }
@@ -202,8 +224,8 @@ public class class_rss_jornals {
             return null;
         }
 
-        protected int img(String name, @NotNull SimpleDateFormat format, Date date) {
-            int img = 0;
+        protected Integer img(String name, SimpleDateFormat format, Date date) {
+            Integer img = 0;
             if (prefs.getBoolean("downloads_img", true)) {
                 if (funct.ExternalStorageState()) {
                     String dir = funct.get_dir_app(activity) + "/img/";
@@ -213,8 +235,7 @@ public class class_rss_jornals {
                     }
                     File imgFile = new File(dir + "/img/" + name + ".jpg");
                     if (!imgFile.exists()) {
-                        Log.i("JWP_image", name + " - no found!");
-
+                        Log.i("JWP_image", name + " - not found!");
                         String code_pub = "";
                         switch (cur_pub) {
                             case 0:
@@ -227,15 +248,12 @@ public class class_rss_jornals {
                                 code_pub = "g";
                                 break;
                         }
-
                         String url_str = URL_IMG;
-
                         if (cur_pub == 1) url_str = url_str.replace("{code_pub_shot}", "w");
                         else
                             url_str = url_str.replace("{code_pub_shot}", code_pub);
                         url_str = url_str.replace("{code_pub}", code_pub);
                         url_str = url_str.replace("{code_lng}", code_lng);
-
                         format.applyPattern("yy");
                         url_str = url_str.replace("{YY}",
                                 format.format(date));
@@ -253,6 +271,7 @@ public class class_rss_jornals {
                         } else img = 0;
 
                     } else {
+                        Log.i("JWP_image", name + " - found!");
                         img = 1;
                     }
                 }

@@ -11,7 +11,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignTop="@+id/title"
         android:layout_margin="5dp"
-        android:src="@drawable/noimages" />
+        android:src="@drawable/ic_noimages" />
 
     <TextView
         android:id="@+id/title"
@@ -27,47 +27,47 @@
     <ImageView
         android:id="@+id/aac"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/mp3"
         android:layout_marginRight="5dp"
-        android:src="@drawable/none_type" />
+        android:src="@drawable/ic_none_type" />
 
     <ImageView
         android:id="@+id/mp3"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
         android:layout_alignTop="@+id/audio"
         android:layout_marginRight="2dp"
         android:layout_toLeftOf="@+id/aac"
-        android:src="@drawable/none_type" />
+        android:src="@drawable/ic_none_type" />
 
     <ImageView
         android:id="@+id/audio"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
         android:layout_alignTop="@+id/epub"
         android:layout_marginRight="2dp"
         android:layout_toLeftOf="@+id/mp3"
-        android:src="@drawable/icon_audio" />
+        android:src="@drawable/ic_icon_audio" />
 
     <ImageView
         android:id="@+id/epub"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
         android:layout_alignTop="@+id/pdf"
         android:layout_marginRight="2dp"
         android:layout_toLeftOf="@+id/audio"
-        android:src="@drawable/none_type" />
+        android:src="@drawable/ic_none_type" />
 
     <ImageView
         android:id="@+id/pdf"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
         android:layout_alignTop="@+id/digitalpub"
         android:layout_marginRight="2dp"
         android:layout_toLeftOf="@+id/epub"
-        android:src="@drawable/none_type" />
+        android:src="@drawable/ic_none_type" />
 
     <ImageView
         android:id="@+id/digitalpub"
@@ -76,6 +76,6 @@
         android:layout_alignBottom="@+id/img"
         android:layout_marginRight="2dp"
         android:layout_toLeftOf="@+id/pdf"
-        android:src="@drawable/icon_digitalpub" />
+        android:src="@drawable/ic_icon_digitalpub" />
 
 </RelativeLayout>

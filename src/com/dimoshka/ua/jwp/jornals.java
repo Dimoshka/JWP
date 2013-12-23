@@ -14,9 +14,6 @@ import com.actionbarsherlock.app.SherlockFragment;
 import com.dimoshka.ua.classes.class_downloads_files;
 import com.dimoshka.ua.classes.class_rss_jornals_adapter;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -36,12 +33,12 @@ public class jornals extends SherlockFragment {
     int mon = 0;
 
     private Cursor cursor;
-    @Nullable
+    
     View view = null;
 
-    @Nullable
+    
     @Override
-    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup group,
+    public View onCreateView(LayoutInflater inflater, ViewGroup group,
                              Bundle saved) {
         view = inflater.inflate(R.layout.expandable_list, group, false);
 
@@ -92,6 +89,9 @@ public class jornals extends SherlockFragment {
                 Date date = main.funct.get_jwp_jornals_rss_date(name, code_pub,
                         code_lng);
 
+                Log.e("JWP", cursor.getString(cursor
+                        .getColumnIndex("date")));
+
                 Cursor cur = main.database.rawQuery(
                         "select id_type, file, name from files where `id_magazine`='"
                                 + _id + "' group by id_type", null);
@@ -137,6 +137,8 @@ public class jornals extends SherlockFragment {
 
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(date);
+
+                Log.e("JWP", "img - "+img.toString());
 
                 if (calendar.get(Calendar.YEAR) != yer || calendar.get(Calendar.MONTH) != mon) {
                     yer = calendar.get(Calendar.YEAR);
