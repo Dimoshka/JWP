@@ -19,6 +19,7 @@
     <orderEntry type="library" exported="" name="libGoogleAnalyticsServices" level="application" />
     <orderEntry type="library" name="android-support-v4" level="project" />
     <orderEntry type="module" module-name="actionbarsherlock" />
+    <orderEntry type="library" exported="" name="jsoup-1.7.3" level="application" />
   </component>
 </module>
 

@@ -15,6 +15,7 @@ import android.util.Log;
 import com.dimoshka.ua.jwp.R;
 
 import java.io.File;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -73,14 +74,12 @@ public class class_rss_news {
 
     class ReadFeedTask extends AsyncTask<Void, Integer, Void> {
         private ProgressDialog dialog;
-
         List<class_rss_item> rss_list = null;
-
         protected Void doInBackground(Void... paramArrayOfVoid) {
             try {
                 rssfeedprovider = new class_rss_provider();
                 String feed = String.format(URL_FEED, ln_prefix);
-                Log.e("JWP_" + getClass().getName(), feed);
+                Log.d("JWP-news", feed);
                 this.rss_list = rssfeedprovider.parse(feed, activity);
 
                 for (int i = 0; i < rss_list.size(); i++) {
@@ -92,7 +91,7 @@ public class class_rss_news {
                     String description = rss_item.getDescription();
                     String pubdate = rss_item.getPubDate();
 
-                    SimpleDateFormat format = new SimpleDateFormat(
+                    DateFormat format = new SimpleDateFormat(
                             "yyyy-MM-dd HH:mm:ss", Locale.getDefault());
                     Date date = funct.get_string_to_date(pubdate,
                             "EEE, dd MMM yyyy HH:mm:ss Z");

@@ -25,7 +25,6 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -84,12 +83,13 @@ public class class_functions {
 
 
     public Date get_string_to_date(String date_str, String format_str) {
-        DateFormat format = new SimpleDateFormat(format_str);
+        SimpleDateFormat format = new SimpleDateFormat(format_str, Locale.US);
+        format.setLenient(true);
         Date date = new Date();
         try {
             date = format.parse(date_str);
         } catch (java.text.ParseException e) {
-            Log.e("JWP", e.toString() + " - " + date_str + " - " + format_str);
+            Log.e("JWP_date", e.toString() + " - " + date_str + " - " + format_str);
             return null;
         }
         return date;
