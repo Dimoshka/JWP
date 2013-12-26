@@ -147,12 +147,16 @@ public class class_functions {
 
     public void send_bug_report(Context context, Exception ex,
                                 String class_name, Integer num_row) {
-        Log.e(context.getString(R.string.app_name_shot) + " - error: " + class_name,
-                ex.toString() + " - " + num_row);
-        BugSenseHandler.addCrashExtraData("class_name", class_name.toString());
-        BugSenseHandler.addCrashExtraData("num_row", num_row.toString());
-        BugSenseHandler.sendException(ex);
-        BugSenseHandler.sendExceptionMessage("level", class_name, ex);
+        try {
+            Log.e(context.getString(R.string.app_name_shot) + " - error: " + class_name,
+                    ex.toString() + " - " + num_row);
+            BugSenseHandler.addCrashExtraData("class_name", class_name.toString());
+            BugSenseHandler.addCrashExtraData("num_row", num_row.toString());
+            BugSenseHandler.sendException(ex);
+            BugSenseHandler.sendExceptionMessage("level", class_name, ex);
+        } catch (Exception e) {
+
+        }
     }
 
     public boolean load_img(Activity context, String dir, String name, String link_img) {

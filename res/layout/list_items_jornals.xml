@@ -23,7 +23,7 @@
         android:layout_marginTop="20dp"
         android:layout_toRightOf="@+id/img"
         android:text="text"
-        android:textSize="20sp" />
+        android:textSize="18sp" />
 
     <ImageView
         android:id="@+id/aac"
@@ -93,10 +93,10 @@
         android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/digitalpub"
         android:layout_alignLeft="@+id/title"
         android:text="text"
         android:textColor="@color/text_dark_gray"
-        android:textStyle="italic" />
+        android:textStyle="italic"
+        android:layout_below="@+id/title" />
 
 </RelativeLayout>

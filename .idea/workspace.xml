@@ -39,39 +39,26 @@
     <shared>
       <config />
     </shared>
+    <layouts>
+      <layout url="file://$PROJECT_DIR$/res/layout/list_items_jornals.xml">
+        <config>
+          <device>Nexus 4</device>
+          <theme>@style/jwp</theme>
+        </config>
+      </layout>
+    </layouts>
   </component>
   <component name="AndroidLogFilters">
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="jwp-error" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="99cda063-fbbd-4666-86f0-79432dfa252f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_books_brochures.java" />
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\src\com\dimoshka\ua\classes\class_html_parser.java" afterPath="" />
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\src\com\dimoshka\ua\classes\class_rss_books_brochures_img.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP.iml" afterPath="$PROJECT_DIR$/JWP.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/books_brochures.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/books_brochures.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_jornals.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_jornals.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_news.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_news.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_sqlite.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_sqlite.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/expandable_list.xml" afterPath="$PROJECT_DIR$/res/layout/expandable_list.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/jornals.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/jornals.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/list.xml" afterPath="$PROJECT_DIR$/res/layout/list.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/list_items_books_brochures.xml" afterPath="$PROJECT_DIR$/res/layout/list_items_books_brochures.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_books_brochures.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_books_brochures.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_functions.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_functions.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/list_items_jornals.xml" afterPath="$PROJECT_DIR$/res/layout/list_items_jornals.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/main.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/xml/preferences.xml" afterPath="$PROJECT_DIR$/res/xml/preferences.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/project.properties" afterPath="$PROJECT_DIR$/../../ActionBarSherlock/actionbarsherlock/project.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../Android-PullToRefresh/library/project.properties" afterPath="$PROJECT_DIR$/../../Android-PullToRefresh/library/project.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/strings.xml" afterPath="$PROJECT_DIR$/res/values/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values-de/strings.xml" afterPath="$PROJECT_DIR$/res/values-de/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values-es/strings.xml" afterPath="$PROJECT_DIR$/res/values-es/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values-fr/strings.xml" afterPath="$PROJECT_DIR$/res/values-fr/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values-ru/strings.xml" afterPath="$PROJECT_DIR$/res/values-ru/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MOVED" beforePath="Z:\Work\Android\JWP\JWP\src\com\dimoshka\ua\classes\class_rss_books_brochures_adapter.java" afterPath="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_books_brochures_adapter.java" />
     </list>
     <ignored path="JWP.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -326,38 +313,28 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="class_sqlite.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_sqlite.java">
+      <file leaf-file-name="class_books_brochures.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_books_brochures.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="50" selection-start="253" selection-end="269" vertical-scroll-proportion="0.23181818" vertical-offset="0" max-vertical-offset="2023">
+            <state line="254" column="156" selection-start="40869" selection-end="40869" vertical-scroll-proportion="0.9464567" vertical-offset="6029" max-vertical-offset="7616">
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#42838#42934#0" expanded="true" />
+                <element signature="e#42964#43062#0" expanded="true" />
+                <element signature="e#43076#43278#0" expanded="true" />
+                <element signature="e#43255#43256#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/main.java">
+      <file leaf-file-name="class_functions.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_functions.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="206" column="17" selection-start="7408" selection-end="7408" vertical-scroll-proportion="0.0" vertical-offset="2553" max-vertical-offset="5661">
+            <state line="144" column="46" selection-start="5001" selection-end="5001" vertical-scroll-proportion="-8.44" vertical-offset="1761" max-vertical-offset="2873">
               <folding>
-                <element signature="e#3279#3301#0" expanded="true" />
-                <element signature="e#3334#3351#0" expanded="true" />
-                <element signature="e#3512#3528#0" expanded="true" />
-                <element signature="e#3630#3643#0" expanded="true" />
-                <element signature="e#3752#3776#0" expanded="true" />
-                <element signature="e#4958#4993#0" expanded="true" />
-                <element signature="e#5027#5056#0" expanded="true" />
-                <element signature="e#6737#7175#0" expanded="true" />
-                <element signature="e#7168#7169#0" expanded="true" />
-                <element signature="e#7252#7535#0" expanded="true" />
-                <element signature="e#7527#7528#0" expanded="true" />
-                <element signature="e#7623#8037#0" expanded="true" />
-                <element signature="e#8030#8031#0" expanded="true" />
-                <element signature="e#8100#8289#0" expanded="true" />
-                <element signature="e#8271#8272#0" expanded="true" />
-                <element signature="e#10790#10810#0" expanded="true" />
+                <element signature="e#3244#3294#0" expanded="true" />
+                <element signature="e#5174#5215#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -366,90 +343,7 @@
       <file leaf-file-name="books_brochures.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/books_brochures.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="107" column="18" selection-start="4605" selection-end="4605" vertical-scroll-proportion="0.0" vertical-offset="1091" max-vertical-offset="1989">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="jornals.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/jornals.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="101" column="74" selection-start="4260" selection-end="4260" vertical-scroll-proportion="0.0" vertical-offset="1295" max-vertical-offset="2924">
-              <folding>
-                <element signature="e#1632#1648#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="class_books_brochures.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_books_brochures.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="197" column="35" selection-start="25269" selection-end="25269" vertical-scroll-proportion="-21.76" vertical-offset="2805" max-vertical-offset="5287">
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#25753#25849#0" expanded="true" />
-                <element signature="e#25879#25977#0" expanded="true" />
-                <element signature="e#25991#26193#0" expanded="true" />
-                <element signature="e#26170#26171#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="class_rss_news.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_news.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="194" column="73" selection-start="7536" selection-end="7536" vertical-scroll-proportion="0.0" vertical-offset="2284" max-vertical-offset="3281">
-              <folding>
-                <element signature="e#1574#1606#0" expanded="true" />
-                <element signature="e#7313#7398#0" expanded="true" />
-                <element signature="e#7428#7526#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="class_books_brochures_adapter.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_books_brochures_adapter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="118" column="75" selection-start="4695" selection-end="4695" vertical-scroll-proportion="0.0" vertical-offset="1074" max-vertical-offset="1887">
-              <folding>
-                <element signature="e#816#848#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="list_items_jornals.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/layout/list_items_jornals.xml">
-          <provider editor-type-id="text-editor">
-            <state line="30" column="43" selection-start="1089" selection-end="1089" vertical-scroll-proportion="0.0" vertical-offset="493" max-vertical-offset="1819">
-              <folding />
-            </state>
-          </provider>
-          <provider selected="true" editor-type-id="android-designer">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="list_items_books_brochures.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/layout/list_items_books_brochures.xml">
-          <provider editor-type-id="text-editor">
-            <state line="79" column="45" selection-start="2860" selection-end="2860" vertical-scroll-proportion="0.0" vertical-offset="833" max-vertical-offset="1530">
-              <folding />
-            </state>
-          </provider>
-          <provider selected="true" editor-type-id="android-designer">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="class_rss_jornals_adapter.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_jornals_adapter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="44" column="13" selection-start="1537" selection-end="1537" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2975">
+            <state line="101" column="37" selection-start="4375" selection-end="4375" vertical-scroll-proportion="0.0" vertical-offset="1346" max-vertical-offset="2006">
               <folding />
             </state>
           </provider>
@@ -508,7 +402,6 @@
         <option value="$PROJECT_DIR$/res/values-v14/styles_jwp.xml" />
         <option value="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/player.java" />
         <option value="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/preferences.java" />
-        <option value="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_functions.java" />
         <option value="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_html_parser.java" />
         <option value="$PROJECT_DIR$/res/layout/list_pulltorefrash.xml" />
         <option value="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_jornals_adapter.java" />
@@ -527,11 +420,12 @@
         <option value="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_news.java" />
         <option value="$PROJECT_DIR$/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/main.java" />
-        <option value="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_books_brochures.java" />
         <option value="$PROJECT_DIR$/src/com/dimoshka/ua/jwp/books_brochures.java" />
         <option value="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_books_brochures_adapter.java" />
-        <option value="$PROJECT_DIR$/res/layout/list_items_jornals.xml" />
         <option value="$PROJECT_DIR$/res/layout/list_items_books_brochures.xml" />
+        <option value="$PROJECT_DIR$/res/layout/list_items_jornals.xml" />
+        <option value="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_functions.java" />
+        <option value="$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_books_brochures.java" />
       </list>
     </option>
   </component>
@@ -956,7 +850,11 @@
       <created>1387878249730</created>
       <updated>1387878249730</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="fix bag books + add more books">
+      <created>1388058224521</created>
+      <updated>1388058224521</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1227,16 +1125,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_functions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="66" column="6" selection-start="1948" selection-end="1948" vertical-scroll-proportion="0.051437218" vertical-offset="612" max-vertical-offset="2805">
-          <folding>
-            <element signature="e#3244#3294#0" expanded="false" />
-            <element signature="e#5156#5197#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/jwp.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="654" />
@@ -1351,9 +1239,45 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/list_items_jornals.xml">
+      <provider editor-type-id="text-editor">
+        <state line="28" column="29" selection-start="1001" selection-end="1001" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1819">
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/list_items_books_brochures.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="79" column="45" selection-start="2860" selection-end="2860" vertical-scroll-proportion="0.9464567" vertical-offset="742" max-vertical-offset="1530">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_jornals_adapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="44" column="13" selection-start="1537" selection-end="1537" vertical-scroll-proportion="0.669697" vertical-offset="0" max-vertical-offset="2975">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_books_brochures_adapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="118" column="75" selection-start="4695" selection-end="4695" vertical-scroll-proportion="0.94848484" vertical-offset="1091" max-vertical-offset="1887">
+          <folding>
+            <element signature="e#816#848#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_news.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="194" column="73" selection-start="7536" selection-end="7536" vertical-scroll-proportion="0.0" vertical-offset="2448" max-vertical-offset="3281">
+        <state line="194" column="73" selection-start="7536" selection-end="7536" vertical-scroll-proportion="0.99545455" vertical-offset="2284" max-vertical-offset="3281">
           <folding>
             <element signature="e#1574#1606#0" expanded="true" />
             <element signature="e#7313#7398#0" expanded="true" />
@@ -1362,45 +1286,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_books_brochures.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="197" column="35" selection-start="25269" selection-end="25269" vertical-scroll-proportion="-21.76" vertical-offset="2805" max-vertical-offset="5287">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#25753#25849#0" expanded="true" />
-            <element signature="e#25879#25977#0" expanded="true" />
-            <element signature="e#25991#26193#0" expanded="true" />
-            <element signature="e#26170#26171#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/jornals.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="101" column="74" selection-start="4260" selection-end="4260" vertical-scroll-proportion="0.0" vertical-offset="1295" max-vertical-offset="2924">
+        <state line="101" column="74" selection-start="4260" selection-end="4260" vertical-scroll-proportion="0.07272727" vertical-offset="1295" max-vertical-offset="2924">
           <folding>
             <element signature="e#1632#1648#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/books_brochures.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="107" column="18" selection-start="4605" selection-end="4605" vertical-scroll-proportion="0.0" vertical-offset="1091" max-vertical-offset="1989">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_rss_jornals_adapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="13" selection-start="1537" selection-end="1537" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2975">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="206" column="17" selection-start="7408" selection-end="7408" vertical-scroll-proportion="0.0" vertical-offset="2553" max-vertical-offset="5661">
+        <state line="222" column="28" selection-start="7890" selection-end="7890" vertical-scroll-proportion="0.66515154" vertical-offset="2706" max-vertical-offset="5661">
           <folding>
             <element signature="e#3279#3301#0" expanded="true" />
             <element signature="e#3334#3351#0" expanded="true" />
@@ -1422,40 +1319,41 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_books_brochures_adapter.java">
+    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_sqlite.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="118" column="75" selection-start="4695" selection-end="4695" vertical-scroll-proportion="0.0" vertical-offset="1074" max-vertical-offset="1887">
+        <state line="7" column="29" selection-start="217" selection-end="217" vertical-scroll-proportion="-1.2878788" vertical-offset="969" max-vertical-offset="2023">
           <folding>
-            <element signature="e#816#848#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/list_items_jornals.xml">
-      <provider editor-type-id="text-editor">
-        <state line="30" column="43" selection-start="1089" selection-end="1089" vertical-scroll-proportion="0.0" vertical-offset="493" max-vertical-offset="1751">
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/list_items_books_brochures.xml">
-      <provider editor-type-id="text-editor">
-        <state line="79" column="45" selection-start="2860" selection-end="2860" vertical-scroll-proportion="0.0" vertical-offset="833" max-vertical-offset="1530">
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_sqlite.java">
+    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_functions.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="50" selection-start="253" selection-end="269" vertical-scroll-proportion="0.23181818" vertical-offset="0" max-vertical-offset="2023">
+        <state line="144" column="46" selection-start="5001" selection-end="5001" vertical-scroll-proportion="-8.44" vertical-offset="1761" max-vertical-offset="2873">
+          <folding>
+            <element signature="e#3244#3294#0" expanded="true" />
+            <element signature="e#5174#5215#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/jwp/books_brochures.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="101" column="37" selection-start="4375" selection-end="4375" vertical-scroll-proportion="0.0" vertical-offset="1346" max-vertical-offset="2006">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dimoshka/ua/classes/class_books_brochures.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="254" column="156" selection-start="40869" selection-end="40869" vertical-scroll-proportion="0.9464567" vertical-offset="6029" max-vertical-offset="7616">
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#42838#42934#0" expanded="true" />
+            <element signature="e#42964#43062#0" expanded="true" />
+            <element signature="e#43076#43278#0" expanded="true" />
+            <element signature="e#43255#43256#0" expanded="true" />
           </folding>
         </state>
       </provider>
