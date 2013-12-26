@@ -33,15 +33,13 @@ public class jornals extends SherlockFragment {
     int mon = 0;
 
     private Cursor cursor;
-    
     View view = null;
 
-    
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup group,
                              Bundle saved) {
         view = inflater.inflate(R.layout.expandable_list, group, false);
-
         try {
             list = (ExpandableListView) view.findViewById(R.id.list);
             list.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
@@ -54,7 +52,6 @@ public class jornals extends SherlockFragment {
                     return false;
                 }
             });
-
         } catch (Exception e) {
             main.funct.send_bug_report(getActivity(), e, "jornals",
                     106);
@@ -138,7 +135,7 @@ public class jornals extends SherlockFragment {
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(date);
 
-                Log.e("JWP", "img - "+img.toString());
+                Log.e("JWP", "img - " + img.toString());
 
                 if (calendar.get(Calendar.YEAR) != yer || calendar.get(Calendar.MONTH) != mon) {
                     yer = calendar.get(Calendar.YEAR);

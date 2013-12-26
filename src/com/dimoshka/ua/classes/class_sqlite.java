@@ -62,18 +62,8 @@ public class class_sqlite extends SQLiteOpenHelper {
             // -- Index
             database.execSQL("CREATE INDEX idx_magazine ON magazine (id_pub COLLATE NOCASE ASC, id_lang COLLATE NOCASE ASC);");
             database.execSQL("CREATE INDEX idx_files ON files (id_magazine COLLATE NOCASE ASC, id_type COLLATE NOCASE ASC);");
-
-            // -- INSERT: Books and brochures
-            database.execSQL("INSERT INTO [magazine] ([_id], [name], [title], [id_pub], [id_lang], [img], [link_img], [date]) VALUES (5334, 'bh_U.pdf', 'Чему на самом деле учит Библия?', 4, 3, 0, 'http://www.jw.org/assets/a/bh/bh_U/bh_U.prd_md.jpg', '20130517');");
-            database.execSQL("INSERT INTO [magazine] ([_id], [name], [title], [id_pub], [id_lang], [img], [link_img], [date]) VALUES (5913, 'yb13_U.pdf', 'Ежегодник Свидетелей Иеговы 2013', 4, 3, 0, 'http://www.jw.org/assets/a/yb13/yb13_U/yb13_U.prd_md.jpg', '20130517');");
-            database.execSQL("INSERT INTO [magazine] ([_id], [name], [title], [id_pub], [id_lang], [img], [link_img], [date]) VALUES (5338, 'sny_U.pdf', 'Пойте Иегове — тексты песен', 4, 3, 0, 'http://www.jw.org/assets/a/sny/sny_U/sny_U.prd_md.jpg', '20130517');");
-
-            database.execSQL("INSERT INTO [files] ([_id], [id_magazine], [id_type], [name], [link], [pubdate], [title], [file]) VALUES (null, 5334, 2, 'bh_U.pdf', 'http://download.jw.org/files/media_books/5e/bh_U.pdf', '20130517', '', 0);");
-            database.execSQL("INSERT INTO [files] ([_id], [id_magazine], [id_type], [name], [link], [pubdate], [title], [file]) VALUES (null, 5913, 2, 'yb13_U.pdf', 'http://download.jw.org/files/media_books/0f/yb13_U.pdf', '20130517', '', 0);");
-            database.execSQL("INSERT INTO [files] ([_id], [id_magazine], [id_type], [name], [link], [pubdate], [title], [file]) VALUES (null, 5338, 2, 'sny_U.pdf', 'http://download.jw.org/files/media_books/b2/sny_U.pdf', '20130517', '', 0);");
-
-
         } catch (Exception ex) {
+            Log.e("JWP", ex.toString());
             funct.send_bug_report(context, ex, getClass().getName(), 63);
         }
     }

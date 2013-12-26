@@ -114,28 +114,25 @@ public class class_rss_jornals {
 
         List<class_rss_item> rss_list = null;
 
-
+        @Override
         protected Void doInBackground(Void... paramArrayOfVoid) {
             try {
                 for (int a = 0; a < id_pub.size(); a++) {
                     if (isCancelled()) break;
                     for (int b = 0; b < id_type.size(); b++) {
-
                         Boolean load_pub = false;
+                        String s = code_type.get(b);
+                        if (s.equals("epub")) {
+                            load_pub = prefs.getBoolean("rss_epub", false);
+                        } else if (s.equals("pdf")) {
+                            load_pub = prefs.getBoolean("rss_pdf", true);
 
-                        switch (code_type.get(b)) {
-                            case "epub":
-                                load_pub = prefs.getBoolean("rss_epub", false);
-                                break;
-                            case "pdf":
-                                load_pub = prefs.getBoolean("rss_pdf", true);
-                                break;
-                            case "mp3":
-                                load_pub = prefs.getBoolean("rss_mp3", false);
-                                break;
-                            case "m4b":
-                                load_pub = prefs.getBoolean("rss_m4b", false);
-                                break;
+                        } else if (s.equals("mp3")) {
+                            load_pub = prefs.getBoolean("rss_mp3", false);
+
+                        } else if (s.equals("m4b")) {
+                            load_pub = prefs.getBoolean("rss_m4b", false);
+
                         }
 
                         if (load_pub) {
@@ -280,15 +277,19 @@ public class class_rss_jornals {
             return img;
         }
 
+        @Override
         protected void onPostExecute(Void result) {
-            this.dialog.hide();
+            if (dialog != null)
+                dialog.dismiss();
             handler.sendEmptyMessage(1);
         }
 
+        @Override
         protected void onPreExecute() {
             this.dialog = ProgressDialog
                     .show(activity,
-                            null,
+                            activity.getResources().getString(
+                                    R.string.jornals),
                             activity.getResources().getString(
                                     R.string.dialog_loaing_rss), true, true, new DialogInterface.OnCancelListener() {
                         public void onCancel(DialogInterface pd) {

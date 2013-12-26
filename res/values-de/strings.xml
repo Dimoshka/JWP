@@ -8,6 +8,8 @@ Mit diesem Programm haben Sie immer Zugriff auf aktuelle Fragen der Zeitschrifte
 Sie müssen Publikationen in verschiedenen Sprachen und in verschiedenen Formaten downloaden (pdf, epub, mp3, aac).
 Und auch über Neuigkeiten von der Website www.jw.org.
 Das Programm arbeitet als RSS-Client."</string>
+    <string name="update_all_at_once">"Aktualisieren Sie alle auf einmal"</string>
+    <string name="update_all_at_once_summary">"Update-Protokolle, Nachrichten, Bücher und Broschüren gleichzeitig"</string>
     <string name="books_brochures">"Bücher und Broschüren"</string>
     <string name="player">"MP3 player"</string>
     <string name="player_open">"Öffnen Sie im Player"</string>

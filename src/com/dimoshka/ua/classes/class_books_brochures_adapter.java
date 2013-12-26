@@ -19,7 +19,7 @@ import com.dimoshka.ua.jwp.main;
 import java.io.File;
 import java.util.ArrayList;
 
-public class class_rss_books_brochures_adapter extends SimpleCursorAdapter {
+public class class_books_brochures_adapter extends SimpleCursorAdapter {
 
     private int layout;
     
@@ -29,14 +29,13 @@ public class class_rss_books_brochures_adapter extends SimpleCursorAdapter {
 
 
     @SuppressWarnings("deprecation")
-    public class_rss_books_brochures_adapter(Context context, int layout,
-                                             Cursor c, String[] from, int[] to,
-                                             SQLiteDatabase database, ArrayList<String> files_arr) {
+    public class_books_brochures_adapter(Context context, int layout,
+                                         Cursor c, String[] from, int[] to,
+                                         SQLiteDatabase database, ArrayList<String> files_arr) {
         super(context, layout, c, from, to);
         this.layout = layout;
         this.database = database;
         this.files_arr = files_arr;
-
     }
 
     @Override
@@ -47,7 +46,7 @@ public class class_rss_books_brochures_adapter extends SimpleCursorAdapter {
             //String files = c.getString(c.getColumnIndex("id_type"));
             String name = c.getString(c.getColumnIndex("name"));
             String title = c.getString(c.getColumnIndex("title"));
-            String[] id_types = files_arr.get(0).split(",");
+            String[] id_types = files_arr.get(c.getPosition()).split(",");
 
             TextView titlet = (TextView) v.findViewById(R.id.title);
             titlet.setText(title);

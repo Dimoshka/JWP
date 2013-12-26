@@ -12,16 +12,16 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockFragment;
+import com.dimoshka.ua.classes.class_books_brochures_adapter;
 import com.dimoshka.ua.classes.class_downloads_files;
-import com.dimoshka.ua.classes.class_rss_books_brochures_adapter;
 
 import java.io.File;
 import java.util.ArrayList;
 
 public class books_brochures extends SherlockFragment {
-
     private ListView list;
     private Cursor cursor;
+    class_books_brochures_adapter scAdapter;
     View view = null;
 
     @Override
@@ -39,7 +39,6 @@ public class books_brochures extends SherlockFragment {
                             .getColumnIndex("_id")));
                 }
             });
-
         } catch (Exception e) {
             main.funct.send_bug_report(getActivity(), e, "books_broshures",
                     106);
@@ -68,12 +67,15 @@ public class books_brochures extends SherlockFragment {
                                 + _id + "' group by id_type", null);
 
                 String files = "";
+
+
                 if (cur.getCount() > 0) {
                     cur.moveToFirst();
                     for (int a = 0; a < cur.getCount(); a++) {
                         if (files.length() > 0)
                             files = files + ",";
                         int file_isn = 0;
+
                         if (cur.getInt(cur.getColumnIndex("file")) == 1) {
                             File file = new File(
                                     main.funct.get_dir_app(getActivity())
@@ -81,13 +83,10 @@ public class books_brochures extends SherlockFragment {
                                             + cur.getString(cur
                                             .getColumnIndex("name")));
 
-                            Log.d("JWP" + "books_broshures",
-                                    cur.getString(cur.getColumnIndex("name")));
-
                             if (file.exists()) {
                                 file_isn = 1;
                             } else {
-                                Log.d("JWP" + "books_broshures",
+                                Log.e("JWP" + "books_broshures",
                                         "Update to 0 - "
                                                 + cur.getString(cur
                                                 .getColumnIndex("name")));
@@ -103,7 +102,6 @@ public class books_brochures extends SherlockFragment {
                         files = files
                                 + cur.getString(cur.getColumnIndex("id_type"))
                                 + "=" + file_isn;
-
                         cur.moveToNext();
                     }
                 }
@@ -112,12 +110,11 @@ public class books_brochures extends SherlockFragment {
             }
 
             cursor.moveToFirst();
-            class_rss_books_brochures_adapter scAdapter = new class_rss_books_brochures_adapter(
+            scAdapter = new class_books_brochures_adapter(
                     getActivity(), R.layout.list_items_books_brochures, cursor,
                     new String[]{"_id"}, new int[]{R.id.title},
                     main.database, files_arr);
             list.setAdapter(scAdapter);
-
         } catch (Exception e) {
             main.funct.send_bug_report(getActivity(), e, "books_broshures",
                     392);

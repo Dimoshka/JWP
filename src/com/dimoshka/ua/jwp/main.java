@@ -25,9 +25,9 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.bugsense.trace.BugSenseHandler;
+import com.dimoshka.ua.classes.class_books_brochures;
 import com.dimoshka.ua.classes.class_functions;
 import com.dimoshka.ua.classes.class_open_or_download;
-import com.dimoshka.ua.classes.class_rss_books_brochures_img;
 import com.dimoshka.ua.classes.class_rss_jornals;
 import com.dimoshka.ua.classes.class_rss_news;
 import com.dimoshka.ua.classes.class_sqlite;
@@ -46,9 +46,9 @@ public class main extends SherlockFragmentActivity {
     public static class_functions funct = new class_functions();
     public OnSharedPreferenceChangeListener listener_pref;
     public static class_open_or_download open_or_download;
-    private class_rss_jornals rss_jornals;
-    private class_rss_news rss_news;
-    private class_rss_books_brochures_img rss_books_brochures_img;
+    public static class_rss_jornals rss_jornals;
+    public static class_rss_news rss_news;
+    public static class_books_brochures books_brochures;
     jornals frag1;
     news frag2;
     books_brochures frag3;
@@ -60,6 +60,7 @@ public class main extends SherlockFragmentActivity {
     private ActionBar.Tab publication_Tab;
     List<Fragment> fragments;
     private MyPagerAdapter pagerAdapter;
+    private Boolean refresh_all = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -103,7 +104,7 @@ public class main extends SherlockFragmentActivity {
         rss_jornals = new class_rss_jornals(this, id_lang, handler_jornals,
                 database);
         rss_news = new class_rss_news(this, id_lang, handler_news, database);
-        rss_books_brochures_img = new class_rss_books_brochures_img(this,
+        books_brochures = new class_books_brochures(this,
                 handler_books_brochures, database);
 
         rss_jornals.get_language(id_lang);
@@ -119,7 +120,6 @@ public class main extends SherlockFragmentActivity {
         };
         prefs.registerOnSharedPreferenceChangeListener(listener_pref);
         open_or_download = new class_open_or_download(this, database);
-        refresh_pager();
 
         if (firstrun) {
             new AlertDialog.Builder(this)
@@ -127,10 +127,11 @@ public class main extends SherlockFragmentActivity {
                     .setMessage(getString(R.string.first_run))
                     .setNeutralButton("OK", null).show();
             prefs.edit().putBoolean("first_run", false).commit();
+            refresh_pager();
         } else if (prefs.getBoolean("downloads_on_start", false)) {
-            rss_jornals.get_all_feeds();
-            rss_news.get_all_feeds();
-        }
+            refresh_all = true;
+            books_brochures.verify_all_img();
+        } else refresh_pager();
     }
 
     private void refresh_pager() {
@@ -186,8 +187,12 @@ public class main extends SherlockFragmentActivity {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 1:
-                    Log.e("JWP", "refrashe afte load");
-                    refresh();
+                    if (refresh_all == true) {
+                        rss_news.get_all_feeds();
+                    } else {
+                        Log.e("JWP", "refrashe afte load");
+                        refresh();
+                    }
                     break;
             }
         }
@@ -213,9 +218,12 @@ public class main extends SherlockFragmentActivity {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 1:
-                    Log.e("JWP", "refrashe afte load");
-                    refresh();
-                    break;
+                    if (refresh_all == true) {
+                        rss_jornals.get_all_feeds();
+                    } else {
+                        Log.e("JWP", "refrashe afte load");
+                        refresh();
+                    }
             }
         }
     };
@@ -293,19 +301,23 @@ public class main extends SherlockFragmentActivity {
     private void load_rss() {
         try {
             if (funct.isNetworkAvailable(this) == true) {
-                switch (curent_tab) {
-                    case 0:
-                        rss_jornals.get_all_feeds();
-                        break;
-                    case 1:
-                        rss_news.get_all_feeds();
-                        break;
-                    case 2:
-                        rss_books_brochures_img.verify_all_img();
-                        frag3.refresh();
-                        break;
-                    default:
-                        break;
+                if (prefs.getBoolean("update_all_at_once", true)) {
+                    refresh_all = true;
+                    books_brochures.verify_all_img();
+                } else {
+                    switch (curent_tab) {
+                        case 0:
+                            rss_jornals.get_all_feeds();
+                            break;
+                        case 1:
+                            rss_news.get_all_feeds();
+                            break;
+                        case 2:
+                            books_brochures.verify_all_img();
+                            break;
+                        default:
+                            break;
+                    }
                 }
             } else
                 Toast.makeText(this, R.string.no_internet, Toast.LENGTH_SHORT)
@@ -317,29 +329,37 @@ public class main extends SherlockFragmentActivity {
 
     private void refresh() {
         try {
-
-            switch (curent_tab) {
-                case 0:
-                    frag1.refresh();
-                    break;
-                case 1:
-                    frag2.refresh();
-                    break;
-                case 2:
-                    frag3.refresh();
-                    break;
-                default:
-                    break;
+            if (refresh_all == true) {
+                frag1.refresh();
+                frag2.refresh();
+                frag3.refresh();
+                refresh_all = false;
+            } else {
+                switch (curent_tab) {
+                    case 0:
+                        frag1.refresh();
+                        break;
+                    case 1:
+                        frag2.refresh();
+                        break;
+                    case 2:
+                        frag3.refresh();
+                        break;
+                    default:
+                        break;
+                }
             }
+
         } catch (Exception e) {
-            funct.send_bug_report(this, e, "main", 157);
+            funct.send_bug_report(this, e, "main", 334);
         }
     }
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
         dbOpenHelper.close();
+        database.close();
+        super.onDestroy();
     }
 
 }

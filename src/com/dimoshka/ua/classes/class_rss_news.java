@@ -75,6 +75,8 @@ public class class_rss_news {
     class ReadFeedTask extends AsyncTask<Void, Integer, Void> {
         private ProgressDialog dialog;
         List<class_rss_item> rss_list = null;
+
+        @Override
         protected Void doInBackground(Void... paramArrayOfVoid) {
             try {
                 rssfeedprovider = new class_rss_provider();
@@ -176,15 +178,19 @@ public class class_rss_news {
             return img;
         }
 
+        @Override
         protected void onPostExecute(Void result) {
-            this.dialog.hide();
+            if (dialog != null)
+                dialog.dismiss();
             handler.sendEmptyMessage(1);
         }
 
+        @Override
         protected void onPreExecute() {
             this.dialog = ProgressDialog
                     .show(activity,
-                            null,
+                            activity.getResources().getString(
+                                    R.string.news),
                             activity.getResources().getString(
                                     R.string.dialog_loaing_rss), true, true, new DialogInterface.OnCancelListener() {
                         public void onCancel(DialogInterface pd) {

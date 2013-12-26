@@ -14,6 +14,11 @@
     <PreferenceCategory android:title="@string/downloads" >
         <CheckBoxPreference
             android:defaultValue="true"
+            android:key="update_all_at_once"
+            android:summary="@string/update_all_at_once_summary"
+            android:title="@string/update_all_at_once" />
+        <CheckBoxPreference
+            android:defaultValue="true"
             android:key="downloads_img"
             android:summary="@string/downloads_img_summary"
             android:title="@string/downloads_img" />

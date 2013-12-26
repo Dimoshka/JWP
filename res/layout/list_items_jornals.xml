@@ -33,7 +33,8 @@
         android:layout_alignTop="@+id/mp3"
         android:layout_marginRight="5dp"
         android:contentDescription="@string/rss_aac"
-        android:src="@drawable/ic_none_type" />
+        android:src="@drawable/ic_none_type"
+        android:layout_alignParentBottom="true" />
 
     <ImageView
         android:id="@+id/mp3"
@@ -43,17 +44,18 @@
         android:layout_marginRight="2dp"
         android:layout_toLeftOf="@+id/aac"
         android:contentDescription="@string/rss_mp3"
-        android:src="@drawable/ic_none_type" />
+        android:src="@drawable/ic_none_type"
+        android:layout_alignParentBottom="true" />
 
     <ImageView
         android:id="@+id/audio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/epub"
-        android:layout_marginRight="2dp"
         android:layout_toLeftOf="@+id/mp3"
         android:contentDescription="@string/jornals"
-        android:src="@drawable/ic_icon_audio" />
+        android:src="@drawable/ic_icon_audio"
+        android:layout_alignParentBottom="true" />
 
     <ImageView
         android:id="@+id/epub"
@@ -63,7 +65,8 @@
         android:layout_marginRight="2dp"
         android:layout_toLeftOf="@+id/audio"
         android:contentDescription="@string/rss_epub"
-        android:src="@drawable/ic_none_type" />
+        android:src="@drawable/ic_none_type"
+        android:layout_alignParentBottom="true" />
 
     <ImageView
         android:id="@+id/pdf"
@@ -73,17 +76,18 @@
         android:layout_marginRight="2dp"
         android:layout_toLeftOf="@+id/epub"
         android:contentDescription="@string/rss_pdf"
-        android:src="@drawable/ic_none_type" />
+        android:src="@drawable/ic_none_type"
+        android:layout_alignParentBottom="true" />
 
     <ImageView
         android:id="@+id/digitalpub"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/img"
-        android:layout_marginRight="2dp"
         android:layout_toLeftOf="@+id/pdf"
         android:contentDescription="@string/jornals"
-        android:src="@drawable/ic_icon_digitalpub" />
+        android:src="@drawable/ic_icon_digitalpub"
+        android:layout_alignParentBottom="true" />
 
     <TextView
         android:id="@+id/text"
