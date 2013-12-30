@@ -18,11 +18,11 @@ public class preferences extends SherlockPreferenceActivity {
     public void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.jwp);
         super.onCreate(savedInstanceState);
-        // addPreferencesFromResource(R.xml.preferences);
+        addPreferencesFromResource(R.xml.preferences);
         actionBar = getSupportActionBar();
         actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.ab_background_textured_jwp));
-        // PreferenceManager.setDefaultValues(preferences.this, R.xml.preferences, true);
-        getFragmentManager().beginTransaction().replace(android.R.id.content, new MyPreferenceFragment()).commit();
+        PreferenceManager.setDefaultValues(preferences.this, R.xml.preferences, true);
+        //getFragmentManager().beginTransaction().replace(android.R.id.content, new MyPreferenceFragment()).commit();
 
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
     }

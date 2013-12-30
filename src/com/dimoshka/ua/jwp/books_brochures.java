@@ -55,7 +55,7 @@ public class books_brochures extends SherlockFragment {
                     .rawQuery(
                             "select magazine._id as _id, magazine.name as name, magazine.title as title, magazine.img as img, language.code as code_lng, publication.code as code_pub, publication._id as cur_pub, date from magazine left join language on magazine.id_lang=language._id left join publication on magazine.id_pub=publication._id where magazine.id_lang='"
                                     + main.id_lang
-                                    + "' and magazine.id_pub='4' order by date desc, magazine.id_pub asc",
+                                    + "' and magazine.id_pub='4' order by magazine.name asc",
                             null);
             ArrayList<String> files_arr = new ArrayList<String>();
             cursor.moveToFirst();
@@ -67,8 +67,6 @@ public class books_brochures extends SherlockFragment {
                                 + _id + "' group by id_type", null);
 
                 String files = "";
-
-
                 if (cur.getCount() > 0) {
                     cur.moveToFirst();
                     for (int a = 0; a < cur.getCount(); a++) {
@@ -103,6 +101,7 @@ public class books_brochures extends SherlockFragment {
                                 + cur.getString(cur.getColumnIndex("id_type"))
                                 + "=" + file_isn;
                         cur.moveToNext();
+
                     }
                 }
                 files_arr.add(files);

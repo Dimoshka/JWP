@@ -22,7 +22,7 @@ import java.util.Map;
 
 public class class_rss_jornals_adapter extends BaseExpandableListAdapter {
     private Context context;
-    
+
     public class_functions funct = new class_functions();
     private SQLiteDatabase database;
     private LayoutInflater inflater;
@@ -85,6 +85,15 @@ public class class_rss_jornals_adapter extends BaseExpandableListAdapter {
                 myImage.setImageResource(R.drawable.ic_noimages);
             }
 
+            ImageView epub = (ImageView) v.findViewById(R.id.epub);
+            ImageView pdf = (ImageView) v.findViewById(R.id.pdf);
+            ImageView mp3 = (ImageView) v.findViewById(R.id.mp3);
+            ImageView aac = (ImageView) v.findViewById(R.id.aac);
+            epub.setImageResource(R.drawable.ic_none_type);
+            pdf.setImageResource(R.drawable.ic_none_type);
+            mp3.setImageResource(R.drawable.ic_none_type);
+            aac.setImageResource(R.drawable.ic_none_type);
+
             for (int i = 0; i < id_types.length; i++) {
 
                 String[] f = id_types[i].split("=");
@@ -92,29 +101,24 @@ public class class_rss_jornals_adapter extends BaseExpandableListAdapter {
 
                 switch (Integer.parseInt(f[0])) {
                     case 1:
-                        ImageView epub = (ImageView) v.findViewById(R.id.epub);
                         if (file_isn == 1)
                             epub.setImageResource(R.drawable.ic_epub_1);
                         else
                             epub.setImageResource(R.drawable.ic_epub_0);
                         break;
                     case 2:
-
-                        ImageView pdf = (ImageView) v.findViewById(R.id.pdf);
                         if (file_isn == 1)
                             pdf.setImageResource(R.drawable.ic_pdf_1);
                         else
                             pdf.setImageResource(R.drawable.ic_pdf_0);
                         break;
                     case 3:
-                        ImageView mp3 = (ImageView) v.findViewById(R.id.mp3);
                         if (file_isn == 1)
                             mp3.setImageResource(R.drawable.ic_mp3_1);
                         else
                             mp3.setImageResource(R.drawable.ic_mp3_0);
                         break;
                     case 4:
-                        ImageView aac = (ImageView) v.findViewById(R.id.aac);
                         if (file_isn == 1)
                             aac.setImageResource(R.drawable.ic_aac_0);
                         else
