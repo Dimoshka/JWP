@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Handler;
 import android.util.Log;
 
@@ -62,7 +63,20 @@ public class class_books_brochures {
                     }
 
                     for (int i = 0; i < cursor.getCount(); i++) {
-                        if (isCancelled()) break;
+                        if (isCancelled()) {
+                            int currentapiVersion = android.os.Build.VERSION.SDK_INT;
+                            if (currentapiVersion >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+                                Log.e("JWP", "isCancelled+");
+                                if (dialog != null)
+                                    dialog.dismiss();
+                                if (cursor != null && !cursor.isClosed()) {
+                                    cursor.close();
+                                }
+                                Log.e("JWP", "onPostExecute+");
+                                handler.sendEmptyMessage(1);
+                            }
+                            break;
+                        }
                         String name = cursor.getString(cursor
                                 .getColumnIndex("name"));
                         String link_img = cursor.getString(cursor
@@ -260,7 +274,6 @@ public class class_books_brochures {
                 database.execSQL("INSERT INTO [files] ([id_magazine], [id_type], [name], [link], [pubdate], [title], [file]) VALUES ('31', '4', 'we_U.m4b', 'http://www.jw.org/download/?http://download.jw.org/files/media_books/31/we_U.m4b', '20131226', '', 0);");
 
 
-
                 Log.e("JWP_sql", "end add in files");
                 //database.endTransaction();
                 Log.e("JWP_sql", "end add Books and brochures");
@@ -274,7 +287,10 @@ public class class_books_brochures {
         protected void onPostExecute(Void result) {
             if (dialog != null)
                 dialog.dismiss();
-            cursor.close();
+            if (cursor != null && !cursor.isClosed()) {
+                cursor.close();
+            }
+            Log.e("JWP", "onPostExecute+");
             handler.sendEmptyMessage(1);
         }
 

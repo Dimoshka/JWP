@@ -129,8 +129,8 @@ public class main extends SherlockFragmentActivity {
             prefs.edit().putBoolean("first_run", false).commit();
             refresh_pager();
         } else if (prefs.getBoolean("downloads_on_start", false)) {
-            refresh_all = true;
-            books_brochures.verify_all_img();
+            refresh_pager();
+            load_rss();
         } else refresh_pager();
     }
 

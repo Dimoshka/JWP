@@ -106,8 +106,8 @@ public class jornals extends SherlockFragment {
                                             + cur.getString(cur
                                             .getColumnIndex("name")));
 
-                            Log.d("JWP" + "jornals",
-                                    cur.getString(cur.getColumnIndex("name")));
+                            //Log.d("JWP" + "jornals",
+                            //        cur.getString(cur.getColumnIndex("name")));
 
                             if (file.exists()) {
                                 file_isn = 1;

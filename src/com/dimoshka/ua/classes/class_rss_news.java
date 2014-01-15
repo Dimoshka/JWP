@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -85,7 +86,17 @@ public class class_rss_news {
                 this.rss_list = rssfeedprovider.parse(feed, activity);
 
                 for (int i = 0; i < rss_list.size(); i++) {
-                    if (isCancelled()) break;
+                    if (isCancelled()) {
+                        int currentapiVersion = android.os.Build.VERSION.SDK_INT;
+                        if (currentapiVersion >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+                            Log.e("JWP", "isCancelled+");
+                            if (dialog != null)
+                                dialog.dismiss();
+                            Log.e("JWP", "onPostExecute+");
+                            handler.sendEmptyMessage(1);
+                        }
+                        break;
+                    }
                     class_rss_item rss_item = rss_list.get(i);
                     String title = rss_item.getTitle();
                     title = title.trim();
@@ -182,6 +193,7 @@ public class class_rss_news {
         protected void onPostExecute(Void result) {
             if (dialog != null)
                 dialog.dismiss();
+            Log.e("JWP", "onPostExecute+");
             handler.sendEmptyMessage(1);
         }
 

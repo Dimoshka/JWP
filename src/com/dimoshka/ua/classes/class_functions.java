@@ -77,7 +77,7 @@ public class class_functions {
         if (date_str.length() == 6) {
             date_str += "01";
         }
-        Log.e("JWP_fn_date", date_str + " - " + date_str.length());
+        //Log.e("JWP_fn_date", date_str + " - " + date_str.length());
         return get_string_to_date(date_str, "yyyyMMdd");
     }
 
