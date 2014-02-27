@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
-    <string name="db_name">"jwp.sqlite"</string>
-    <string name="db_version">"4"</string>
-    <string name="app_dir">"JWP"</string>
+    <string name="db_name" tools:ignore="MissingTranslation">"jwp.sqlite"</string>
+    <string name="db_version" tools:ignore="MissingTranslation">"4"</string>
+    <string name="app_dir" tools:ignore="MissingTranslation">"JWP"</string>
 
-    <string-array name="language_arr">
+    <string-array name="language_arr" tools:ignore="MissingTranslation">
         <item>English</item>
         <item>French</item>
         <item>Русский</item>
@@ -15,7 +15,7 @@
         <item>漢語繁體字</item>
         <item>汉语简化字</item>
     </string-array>
-    <string-array name="language_arr_value">
+    <string-array name="language_arr_value" tools:ignore="MissingTranslation">
         <item>1</item>
         <item>2</item>
         <item>3</item>

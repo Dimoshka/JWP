@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Binder;
 import android.os.IBinder;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.RemoteViews;
 
@@ -110,10 +111,6 @@ public class class_downloads_files extends Service {
         return binder;
     }
 
-    // protected Class<?> getIntentForLatestInfo() {
-    // return main.class;
-    // }
-
     protected int getNotificationFlag() {
         return Notification.FLAG_AUTO_CANCEL | Notification.DEFAULT_LIGHTS
                 | Intent.FLAG_ACTIVITY_CLEAR_TOP
@@ -163,21 +160,9 @@ public class class_downloads_files extends Service {
 
     protected void showNotification_popup(String ticker, String title,
                                           String content, Context context) {
-
-        /*
-        Notification notification = new Notification(getNotificationIcon(),
-                ticker, System.currentTimeMillis());
-
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
                 new Intent(), Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        notification.setLatestEventInfo(getApplicationContext(), title,
-                content, contentIntent);
-        notification.flags = getNotificationFlag();
-        notificationManager.notify(SERVICE_ID, notification);
-*/
-        PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
-                new Intent(), Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        Notification.Builder builder = new Notification.Builder(context)
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
                 .setContentTitle(title).setContentText(ticker)
                 .setSmallIcon(getNotificationIcon()).setLargeIcon(null)
                 .setContentIntent(contentIntent).setAutoCancel(true);
@@ -190,27 +175,10 @@ public class class_downloads_files extends Service {
 
     protected void showNotification(RemoteViews remoteView, String ticker,
                                     Context context) {
-
-       /*
-        Notification notification = new Notification(getNotificationIcon(),
-                ticker, System.currentTimeMillis());
-        notification.contentView = remoteView;
-        // notification.contentIntent = PendingIntent.getActivity(this, 0,
-        // new Intent(this, getIntentForLatestInfo()),
-        // Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-        notification.contentIntent = PendingIntent.getActivity(this, 0,
-                new Intent(), Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-        notification.flags = getNotificationFlag();
-        notification.flags |= Notification.FLAG_ONGOING_EVENT;
-        notificationManager.notify(SERVICE_ID, notification);
-        */
-
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0, new
                 Intent(), Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-        Notification.Builder builder = new Notification.Builder(context)
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
                 .setContentTitle(ticker).setContentText(ticker)
                 .setSmallIcon(getNotificationIcon()).setLargeIcon(null)
                 .setContentIntent(contentIntent).setAutoCancel(true)

@@ -120,7 +120,7 @@ public class class_open_or_download {
                 }
             } else
                 Toast.makeText(activity, R.string.no_sdcard,
-                        Toast.LENGTH_SHORT);
+                        Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             main.funct.send_bug_report(activity, e, getClass().getName(),
                     232);

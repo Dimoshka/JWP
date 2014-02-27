@@ -226,7 +226,6 @@ public class player extends ActionBarActivity {
             if (mediaplayer_class.isPlaying()) {
                 seekBar.setProgress(mediaplayer_class.getCurrentPosition());
             } else {
-                // mediaplayer_class.pause();
                 buttonPlayStop.setImageResource(R.drawable.ic_av_play);
                 seekBar.setProgress(0);
             }

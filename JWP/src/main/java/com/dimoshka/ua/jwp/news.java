@@ -49,9 +49,6 @@ public class news extends Fragment {
 
                     Uri data = Uri.parse(hash.get("link"));
                     intent.setDataAndType(data, "text/html");
-                    // Intent ch = Intent.createChooser(intent,
-                    // getString(R.string.select));
-                    // startActivity(ch);
                     startActivity(intent);
                     return false;
                 }

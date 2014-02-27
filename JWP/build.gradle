@@ -3,26 +3,49 @@ apply plugin: 'android'
 
 repositories {
     mavenCentral()
-    maven {
-        url "http://www.bugsense.com/gradle/"
-    }
+    maven { url 'http://www.bugsense.com/gradle/' }
 }
 
 
 android {
     compileSdkVersion 17
-    buildToolsVersion "19.0.1"
-
+    buildToolsVersion '19.0.1'
     defaultConfig {
-        minSdkVersion 9
         targetSdkVersion 19
+        minSdkVersion 9
         versionCode 18
         versionName "2.0.0.8"
     }
+
+    signingConfigs {
+        jwp {
+            keyAlias 'jwp'
+            keyPassword 'Dimoshka9101'
+            storeFile file('Z:/Work/Android/Keystore/dimoshka.keystore')
+            storePassword 'Dimoshka9101'
+        }
+        debug {
+            keyAlias 'debug'
+            keyPassword '12345678'
+            storeFile file('Z:/Work/Android/Keystore/debug.keystore')
+            storePassword '12345678'
+        }
+    }
+
     buildTypes {
-        release {
-            runProguard false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        buildTypes {
+            release {
+                debuggable false
+                runProguard true
+                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+                signingConfig signingConfigs.jwp
+            }
+            debug {
+                debuggable true
+                runProguard false
+                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+                signingConfig signingConfigs.debug
+            }
         }
     }
 }
@@ -30,6 +53,6 @@ android {
 dependencies {
     compile 'com.android.support:support-v4:+'
     compile 'com.android.support:appcompat-v7:+'
-    compile "com.bugsense.trace:bugsense:3.6"
+    compile 'com.bugsense.trace:bugsense:3.6'
     compile files('libs/libGoogleAnalyticsServices.jar')
 }
