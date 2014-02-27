@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <item
+        android:id="@+id/item3"
+        android:icon="@android:drawable/ic_menu_revert"
+        android:showAsAction="never"
+        android:title="@string/refrashe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </item>
+    <item
+        android:id="@+id/item2"
+        android:icon="@drawable/ic_action_navigation_refresh"
+        android:showAsAction="always"
+        android:title="@string/download_rss"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </item>
+    <item
+        android:id="@+id/item1"
+        android:icon="@drawable/ic_action_action_settings"
+        android:showAsAction="always"
+        android:title="@string/preference"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </item>
+    <item
+        android:id="@+id/item0"
+        android:icon="@android:drawable/ic_lock_power_off"
+        android:showAsAction="never"
+        android:title="@string/exit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </item>
+
+</menu>

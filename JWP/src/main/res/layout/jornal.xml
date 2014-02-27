@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="5dp" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_noimages" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/digitalpub"
+            android:layout_width="wrap_content"
+            android:layout_height="15dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/ic_icon_digitalpub" />
+
+        <ImageView
+            android:id="@+id/pdf"
+            android:layout_width="wrap_content"
+            android:layout_height="15dp"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/digitalpub"
+            android:src="@drawable/ic_none_type" />
+
+        <ImageView
+            android:id="@+id/epub"
+            android:layout_width="wrap_content"
+            android:layout_height="15dp"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/pdf"
+            android:src="@drawable/ic_none_type" />
+
+        <ImageView
+            android:id="@+id/mp3"
+            android:layout_width="wrap_content"
+            android:layout_height="15dp"
+            android:layout_below="@+id/pdf"
+            android:layout_toRightOf="@+id/audio"
+            android:src="@drawable/ic_none_type" />
+
+        <ImageView
+            android:id="@+id/aac"
+            android:layout_width="wrap_content"
+            android:layout_height="15dp"
+            android:layout_below="@+id/epub"
+            android:layout_toRightOf="@+id/mp3"
+            android:src="@drawable/ic_none_type" />
+
+        <ImageView
+            android:id="@+id/audio"
+            android:layout_width="wrap_content"
+            android:layout_height="15dp"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/digitalpub"
+            android:src="@drawable/ic_icon_audio" />
+    </RelativeLayout>
+
+</LinearLayout>

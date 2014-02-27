@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">"Publicaciones de los Testigos de Jehová"</string>
+    <string name="app_name_shot">"JWP"</string>
+    <string name="description">"JWP - un programa para los lectores de las publicaciones de los Testigos de Jehová.
+El uso de este programa, usted siempre tendrá acceso a temas de actualidad de las revistas "La Atalaya" y "Awake".
+Usted tendrá que descargar publicaciones en diferentes idiomas y en diferentes formatos (pdf, epub, mp3, aac).
+Y también para recibir noticias de la www.jw.org sitio.
+El programa funciona como cliente RSS."</string>
+    <string name="update_all_at_once">"Actualización de todos a la vez"</string>
+    <string name="update_all_at_once_summary">"Actualizar registros, noticias, libros y folletos de forma simultánea"</string>
+    <string name="books_brochures">"Libros y folletos"</string>
+    <string name="player">"MP3 player"</string>
+    <string name="player_open">"Open in reproductor"</string>
+    <string name="player_play">"Jugar"</string>
+    <string name="player_pause">"Pausa"</string>
+    <string name="send_bug_report">"Envío de informe de errores&#8230;"</string>
+    <string name="not_email_client">"Usted no tiene un cliente de correo electrónico."</string>
+    <string name="first_run_title">"Primera ejecución"</string>
+    <string name="first_run">"Esta es la primera vez que ejecuta el programa. Por favor, vaya a Configuración y seleccione las opciones adecuadas para usted. Ýttu síðan á hnappinn - Download RSS."</string>
+    <string name="no_internet">"No hay conexión a Internet!"</string>
+    <string name="no_sdcard">"SDCARD no está conectado!"</string>
+    <string name="dialog_loaing_rss">"Descargar RSS. Por favor, espere&#8230;"</string>
+    <string name="dialog_loaing_img">"Actualización de imágenes. Por favor, espere&#8230;"</string>
+    <string name="management">"Manejo"</string>
+    <string name="analytics">"Informes"</string>
+    <string name="analytics_summary">"Deje de enviar automáticamente los informes sobre la aplicación?"</string>
+    <string name="downloads_img">"Cargar imágenes"</string>
+    <string name="downloads_img_summary">"Cargar imágenes automáticamente después de la actualización?"</string>
+    <string name="downloads_on_start">"Descarga automática"</string>
+    <string name="downloads_on_start_summary">"Descarga automáticamente el inicio RSS?"</string>
+    <string name="language">"Idioma"</string>
+    <string name="language_summary">"Seleccione un idioma publicaciones."</string>
+    <string name="exit">"Salida"</string>
+    <string name="preference">"Configuración"</string>
+    <string name="refrashe">"Actualizar"</string>
+    <string name="intetface">"Interfaz"</string>
+    <string name="open">"Abierto"</string>
+    <string name="select_the_action">"Elija una acción"</string>
+    <string name="download_rss">"Descargar RSS"</string>
+    <string name="download">"Descargar"</string>
+    <string name="downloads">"Descargas"</string>
+    <string name="download_title">"Descarga de archivos"</string>
+    <string name="download_failed">"Error al cargar"</string>
+    <string name="download_finished">"Descarga completa!"</string>
+    <string name="download_finished_failed">"Descarga completa ( %d con errores)."</string>
+    <string name="download_cancelled">"Descarga cancelada!"</string>
+    <string name="download_progress">"Descargar "</string>
+    <string name="download_task_addeded">"Archivo añade a la cola de descarga."</string>
+    <string name="select">"Seleccionar"</string>
+    <string name="rss_pdf">"RSS - PDF"</string>
+    <string name="rss_pdf_summary">"Cargar RSS feed formato PDF"</string>
+    <string name="rss_epub">"RSS - EPUB"</string>
+    <string name="rss_epub_summary">"Cargar RSS feed formato EPUB"</string>
+    <string name="rss_mp3">"RSS - MP3"</string>
+    <string name="rss_mp3_summary">"RSS feed subida formato MP3"</string>
+    <string name="rss_aac">"RSS - AAC"</string>
+    <string name="rss_aac_summary">"Cargar RSS feed formato AAC"</string>
+    <string name="rss_chanel">"RSS Feeds"</string>
+    <string name="jornals">"Revistas"</string>
+    <string name="news">"Noticias"</string>
+
+</resources>
