@@ -11,6 +11,7 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -27,10 +28,10 @@ import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
+import com.dimoshka.ua.classes.class_cursoradapter_player;
 import com.dimoshka.ua.classes.class_downloads_files;
 import com.dimoshka.ua.classes.class_functions;
 import com.dimoshka.ua.classes.class_mediaplayer;
-import com.dimoshka.ua.classes.class_simplecursoradapter_player;
 import com.dimoshka.ua.classes.class_sqlite;
 import com.google.analytics.tracking.android.EasyTracker;
 
@@ -41,14 +42,13 @@ public class player extends ActionBarActivity {
     private ImageButton buttonPlayStop;
     private ImageButton ButtonNext;
     private ImageButton ButtonBack;
-    // private MediaPlayer mediaPlayer = new MediaPlayer();
     private SeekBar seekBar;
     private final Handler handler = new Handler();
     private class_sqlite dbOpenHelper;
     private ListView listView;
     private Cursor cursor;
     private Integer id_magazine;
-    private class_simplecursoradapter_player scAdapter;
+    private class_cursoradapter_player scAdapter;
 
     private class_mediaplayer mediaplayer_class;
 
@@ -64,6 +64,17 @@ public class player extends ActionBarActivity {
     AudioManager audioManager;
     AFListener afListenerMusic;
     MediaPlayer mpMusic;
+
+    private final Handler handler_completion = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            int select = (int) listView.getCheckedItemPosition();
+            if (select < listView.getCount() - 1) {
+                listView.setItemChecked(select + 1, true);
+                play(select + 1);
+            }
+        }
+    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -107,7 +118,7 @@ public class player extends ActionBarActivity {
             seekBar = (SeekBar) findViewById(R.id.SeekBar01);
 
             mediaplayer_class = new class_mediaplayer(getApplicationContext(),
-                    buttonPlayStop, seekBar);
+                    buttonPlayStop, seekBar, handler_completion);
 
             buttonPlayStop.setOnClickListener(new OnClickListener() {
                 @Override
@@ -194,7 +205,7 @@ public class player extends ActionBarActivity {
                         null);
 
         startManagingCursor(cursor);
-        scAdapter = new class_simplecursoradapter_player(this,
+        scAdapter = new class_cursoradapter_player(this,
                 android.R.layout.simple_list_item_single_choice, cursor,
                 new String[]{"title"}, new int[]{android.R.id.text1});
         listView.setAdapter(scAdapter);

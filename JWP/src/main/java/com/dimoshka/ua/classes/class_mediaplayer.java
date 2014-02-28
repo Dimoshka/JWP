@@ -7,6 +7,7 @@ import android.media.MediaPlayer.OnCompletionListener;
 import android.media.MediaPlayer.OnErrorListener;
 import android.media.MediaPlayer.OnInfoListener;
 import android.media.MediaPlayer.OnPreparedListener;
+import android.os.Handler;
 import android.util.Log;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
@@ -25,9 +26,10 @@ public class class_mediaplayer {
     private ImageButton buttonPlayStop;
     private SeekBar seekBar;
     private Context context;
+    private Handler handler;
 
     public class_mediaplayer(Context context, ImageButton buttonPlayStop,
-                             SeekBar seekBar) {
+                             SeekBar seekBar, Handler handler_completion) {
         mWrapper = this;
         mPlayer = new MediaPlayer();
         currentState = State.IDLE;
@@ -39,6 +41,7 @@ public class class_mediaplayer {
         this.buttonPlayStop = buttonPlayStop;
         this.seekBar = seekBar;
         this.context = context;
+        this.handler = handler_completion;
     }
 
     /* METHOD WRAPPING FOR STATE CHANGES */
@@ -145,7 +148,6 @@ public class class_mediaplayer {
             Log.d(tag, "on prepared");
             currentState = State.PREPARED;
             mWrapper.onPrepared(mp);
-            //buttonPlayStop.setText(context.getString(R.string.player_pause));
             buttonPlayStop.setImageResource(R.drawable.ic_av_pause);
             buttonPlayStop.setEnabled(true);
             seekBar.setMax(getDuration());
@@ -200,6 +202,7 @@ public class class_mediaplayer {
     }
 
     public void onCompletion(MediaPlayer mp) {
+        handler.sendEmptyMessage(1);
     }
 
     public void onBufferingUpdate(MediaPlayer mp, int percent) {

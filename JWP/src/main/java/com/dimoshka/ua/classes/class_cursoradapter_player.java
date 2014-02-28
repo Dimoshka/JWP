@@ -10,14 +10,14 @@ import android.widget.TextView;
 
 import com.dimoshka.ua.jwp.R;
 
-public class class_simplecursoradapter_player extends SimpleCursorAdapter {
+public class class_cursoradapter_player extends SimpleCursorAdapter {
 	private int layout;
 	private String[] from;
 	private int[] to;
 
 	@SuppressWarnings("deprecation")
-	public class_simplecursoradapter_player(Context context, int layout,
-			Cursor c, String[] from, int[] to) {
+	public class_cursoradapter_player(Context context, int layout,
+                                      Cursor c, String[] from, int[] to) {
 		super(context, layout, c, from, to);
 		this.layout = layout;
 		this.from = from;

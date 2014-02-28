@@ -3,6 +3,14 @@
   <component name="AndroidConfiguredLogFilters">
     <filters>
       <filter>
+        <option name="logLevel" value="verbose" />
+        <option name="logMessagePattern" value="" />
+        <option name="logTagPattern" value="" />
+        <option name="name" value="jwp" />
+        <option name="packageNamePattern" value="com.dimoshka.ua.jwp" />
+        <option name="pid" value="" />
+      </filter>
+      <filter>
         <option name="name" value="app: com.dimoshka.ua.jwp" />
         <option name="packageNamePattern" value="com.dimoshka.ua.jwp" />
       </filter>
@@ -32,7 +40,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cab6d560-7775-43bf-bc3a-e43f3f235f38" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/classes/class_mediaplayer.java" afterPath="$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/classes/class_mediaplayer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/jwp/player.java" afterPath="$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/jwp/player.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MOVED" beforePath="Z:\Work\Android\JWP\JWP\JWP\src\main\java\com\dimoshka\ua\classes\class_simplecursoradapter_player.java" afterPath="$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/classes/class_cursoradapter_player.java" />
     </list>
     <ignored path="JWP.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -95,7 +106,71 @@
     <favorites_list name="JWP" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="player.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/jwp/player.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="120" column="56" selection-start="4056" selection-end="4056" vertical-scroll-proportion="-37.53846" vertical-offset="1064" max-vertical-offset="5695">
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#2228#2551#0" expanded="true" />
+                <element signature="e#2544#2545#0" expanded="true" />
+                <element signature="e#6379#6411#0" expanded="true" />
+                <element signature="e#7838#7879#0" expanded="true" />
+                <element signature="e#10314#10346#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="jornals.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/jwp/jornals.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="33" column="0" selection-start="944" selection-end="944" vertical-scroll-proportion="0.0" vertical-offset="2264" max-vertical-offset="2924">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="news.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/jwp/news.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="51" column="0" selection-start="1737" selection-end="1737" vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="1870">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/jwp/main.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="210" column="41" selection-start="7169" selection-end="7184" vertical-scroll-proportion="-10.076923" vertical-offset="2696" max-vertical-offset="5321">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="class_rss_jornals.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/classes/class_rss_jornals.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="11" column="0" selection-start="351" selection-end="377" vertical-scroll-proportion="-7.1923075" vertical-offset="0" max-vertical-offset="5440">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="class_mediaplayer.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/classes/class_mediaplayer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="205" column="0" selection-start="6442" selection-end="6442" vertical-scroll-proportion="0.14195584" vertical-offset="3055" max-vertical-offset="3791">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -1286,8 +1361,6 @@
         <option value="$PROJECT_DIR$/JWP/src/main/res/values-fr/strings.xml" />
         <option value="$PROJECT_DIR$/JWP/src/main/res/values-ru/strings.xml" />
         <option value="$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/classes/class_simplecursoradapter_player.java" />
-        <option value="$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/classes/class_mediaplayer.java" />
-        <option value="$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/jwp/player.java" />
         <option value="$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/classes/class_downloads_files.java" />
         <option value="$PROJECT_DIR$/JWP/src/main/res/menu/publication.xml" />
         <option value="$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/classes/class_open_or_download.java" />
@@ -1296,6 +1369,8 @@
         <option value="$PROJECT_DIR$/JWP/src/main/res/layout/player.xml" />
         <option value="$PROJECT_DIR$/JWP/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/JWP/build.gradle" />
+        <option value="$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/jwp/player.java" />
+        <option value="$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/classes/class_mediaplayer.java" />
       </list>
     </option>
   </component>
@@ -1331,7 +1406,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -1355,8 +1429,131 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JWP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JWP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JWP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JWP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JWP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JWP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JWP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JWP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JWP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ua" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jwp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JWP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JWP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JWP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ua" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="classes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JWP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JWP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JWP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1448,6 +1645,19 @@
       </ExternalSystemSettings>
       <method />
     </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method />
+    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -1473,19 +1683,6 @@
       <envs />
       <properties />
       <listeners />
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -1614,7 +1811,11 @@
       <created>1393504927744</created>
       <updated>1393504927744</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="small">
+      <created>1393510717651</created>
+      <updated>1393510717651</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1647,7 +1848,7 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32942328" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32942328" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32942328" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -1684,7 +1885,8 @@
       <TodoPanelSettings />
     </option>
     <MESSAGE value="Player" />
-    <option name="LAST_COMMIT_MESSAGE" value="Player" />
+    <MESSAGE value="small" />
+    <option name="LAST_COMMIT_MESSAGE" value="small" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1732,11 +1934,6 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="660" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/jwp/jornals.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="0" selection-start="944" selection-end="944" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2924" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/JWP/src/main/res/menu/books_broshures.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="26" column="7" selection-start="1019" selection-end="1019" vertical-scroll-proportion="0.669697" vertical-offset="0" max-vertical-offset="660" />
@@ -1770,24 +1967,9 @@
         <state line="3" column="30" selection-start="82" selection-end="82" vertical-scroll-proportion="0.07727273" vertical-offset="0" max-vertical-offset="1190" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/classes/class_simplecursoradapter_player.java">
+    <entry file="file://$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/classes/class_cursoradapter_player.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="44" column="0" selection-start="1165" selection-end="1165" vertical-scroll-proportion="0.92727274" vertical-offset="0" max-vertical-offset="833" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/jwp/main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="88" column="0" selection-start="3261" selection-end="3261" vertical-scroll-proportion="0.0" vertical-offset="970" max-vertical-offset="5882" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/jwp/player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="228" column="0" selection-start="7821" selection-end="7821" vertical-scroll-proportion="-23.615385" vertical-offset="3262" max-vertical-offset="5950" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/classes/class_mediaplayer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="147" column="0" selection-start="4629" selection-end="4629" vertical-scroll-proportion="-0.95757574" vertical-offset="2842" max-vertical-offset="3502" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/JWP/build/exploded-bundles/ComAndroidSupportAppcompatV71900.aar/res/drawable/abc_item_background_holo_dark.xml">
@@ -1867,11 +2049,6 @@
         <state line="180" column="84" selection-start="6521" selection-end="6521" vertical-scroll-proportion="1.6742424" vertical-offset="1428" max-vertical-offset="6052" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/jwp/news.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="0" selection-start="1737" selection-end="1737" vertical-scroll-proportion="0.85" vertical-offset="0" max-vertical-offset="1870" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/JWP/src/main/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="30" column="103" selection-start="1169" selection-end="1169" vertical-scroll-proportion="-0.6484848" vertical-offset="938" max-vertical-offset="1598" />
@@ -1911,6 +2088,57 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="8" column="0" selection-start="115" selection-end="115" vertical-scroll-proportion="0.2060606" vertical-offset="0" max-vertical-offset="1088">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/jwp/jornals.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="0" selection-start="944" selection-end="944" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2924">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/jwp/news.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="51" column="0" selection-start="1737" selection-end="1737" vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="1870">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/jwp/main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="210" column="41" selection-start="7169" selection-end="7184" vertical-scroll-proportion="-10.076923" vertical-offset="2696" max-vertical-offset="5321">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/classes/class_rss_jornals.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="0" selection-start="351" selection-end="377" vertical-scroll-proportion="-7.1923075" vertical-offset="0" max-vertical-offset="5440">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/jwp/player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="120" column="56" selection-start="4056" selection-end="4056" vertical-scroll-proportion="-37.53846" vertical-offset="1064" max-vertical-offset="5695">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2228#2551#0" expanded="true" />
+            <element signature="e#2544#2545#0" expanded="true" />
+            <element signature="e#6379#6411#0" expanded="true" />
+            <element signature="e#7838#7879#0" expanded="true" />
+            <element signature="e#10314#10346#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/classes/class_mediaplayer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="205" column="0" selection-start="6442" selection-end="6442" vertical-scroll-proportion="0.14195584" vertical-offset="3055" max-vertical-offset="3791">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
