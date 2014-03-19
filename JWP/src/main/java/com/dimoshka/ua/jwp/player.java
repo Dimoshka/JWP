@@ -68,7 +68,7 @@ public class player extends ActionBarActivity {
     private final Handler handler_completion = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            int select = (int) listView.getCheckedItemPosition();
+            @SuppressWarnings("RedundantCast") int select = (int) listView.getCheckedItemPosition();
             if (select < listView.getCount() - 1) {
                 listView.setItemChecked(select + 1, true);
                 play(select + 1);
@@ -273,7 +273,7 @@ public class player extends ActionBarActivity {
     }
 
     private void buttonClick_Next() {
-        int select = (int) listView.getCheckedItemPosition();
+        @SuppressWarnings("RedundantCast") int select = (int) listView.getCheckedItemPosition();
         if (select < listView.getCount() - 1) {
             listView.setItemChecked(select + 1, true);
             play(select + 1);
@@ -281,7 +281,7 @@ public class player extends ActionBarActivity {
     }
 
     private void buttonClick_Back() {
-        int select = (int) listView.getCheckedItemPosition();
+        @SuppressWarnings("RedundantCast") int select = (int) listView.getCheckedItemPosition();
         if (select > 0) {
             listView.setItemChecked(select - 1, true);
             play(select - 1);
@@ -290,7 +290,7 @@ public class player extends ActionBarActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.books_broshures, menu);
+        getMenuInflater().inflate(R.menu.player, menu);
         return true;
     }
 
@@ -318,7 +318,7 @@ public class player extends ActionBarActivity {
         super.onDestroy();
         mediaplayer_class.release();
         stopManagingCursor(cursor);
-        dbOpenHelper.close();
+        //dbOpenHelper.close();
     }
 
     class AFListener implements AudioManager.OnAudioFocusChangeListener {

@@ -97,9 +97,8 @@ public class class_functions {
 
 
     public String get_dir_app(Context context) {
-        String dir = Environment.getExternalStorageDirectory() + "/"
+        return Environment.getExternalStorageDirectory() + "/"
                 + context.getResources().getString(R.string.app_dir);
-        return dir;
     }
 
     public String getMonth(int month) {
@@ -155,30 +154,33 @@ public class class_functions {
             BugSenseHandler.sendException(ex);
             BugSenseHandler.sendExceptionMessage("level", class_name, ex);
         } catch (Exception e) {
-
+            Log.e("error: functionn",
+                    ex.toString() + " - 159");
         }
     }
 
     public boolean load_img(Activity context, String dir, String name, String link_img) {
         try {
-            URL url = new URL(link_img);
-            File file = new File(dir, name + ".jpg");
-            URLConnection ucon = url.openConnection();
-            InputStream is = ucon.getInputStream();
-            BufferedInputStream bis = new BufferedInputStream(
-                    is);
-            ByteArrayBuffer baf = new ByteArrayBuffer(
-                    5000);
-            int current = 0;
-            while ((current = bis.read()) != -1) {
-                baf.append((byte) current);
-            }
-            FileOutputStream fos = new FileOutputStream(
-                    file);
-            fos.write(baf.toByteArray());
-            fos.flush();
-            fos.close();
-            return true;
+            if (isNetworkAvailable(context)) {
+                URL url = new URL(link_img);
+                File file = new File(dir, name + ".jpg");
+                URLConnection ucon = url.openConnection();
+                InputStream is = ucon.getInputStream();
+                BufferedInputStream bis = new BufferedInputStream(
+                        is);
+                ByteArrayBuffer baf = new ByteArrayBuffer(
+                        5000);
+                int current = 0;
+                while ((current = bis.read()) != -1) {
+                    baf.append((byte) current);
+                }
+                FileOutputStream fos = new FileOutputStream(
+                        file);
+                fos.write(baf.toByteArray());
+                fos.flush();
+                fos.close();
+                return true;
+            } else return false;
         } catch (FileNotFoundException e) {
             Log.e("JWP", "Not file - " + link_img);
             return false;

@@ -68,7 +68,8 @@ public class news extends Fragment {
         try {
             cursor = main.database.rawQuery(
                     "select * from news where news.id_lang='" + main.id_lang
-                            + "' order by pubdate desc, news._id asc", null);
+                            + "' order by pubdate desc, news._id asc", null
+            );
             groupData = new ArrayList<Map<String, String>>();
             childData = new ArrayList<ArrayList<Map<String, String>>>();
             childDataItem = new ArrayList<Map<String, String>>();

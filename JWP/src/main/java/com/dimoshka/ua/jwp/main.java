@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import com.bugsense.trace.BugSenseHandler;
 import com.dimoshka.ua.classes.class_books_brochures;
+import com.dimoshka.ua.classes.class_downloads_files;
 import com.dimoshka.ua.classes.class_functions;
 import com.dimoshka.ua.classes.class_open_or_download;
 import com.dimoshka.ua.classes.class_rss_jornals;
@@ -265,7 +266,8 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.publication, menu);
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
@@ -351,6 +353,8 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
 
     @Override
     public void onDestroy() {
+        stopService(
+                new Intent(this, class_downloads_files.class));
         dbOpenHelper.close();
         database.close();
         super.onDestroy();

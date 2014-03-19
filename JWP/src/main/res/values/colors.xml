@@ -14,5 +14,6 @@
     <color name="gr_3">#ffffff</color>
     <color name="gr_4">#09a201</color>
     <color name="gr_5">#eef6fc</color>
+    <color name="apptheme_color">#ff8308</color>
 
 </resources>

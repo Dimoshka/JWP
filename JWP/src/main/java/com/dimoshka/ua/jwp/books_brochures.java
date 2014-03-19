@@ -1,7 +1,6 @@
 package com.dimoshka.ua.jwp;
 
 import android.content.ContentValues;
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,7 +12,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.dimoshka.ua.classes.class_books_brochures_adapter;
-import com.dimoshka.ua.classes.class_downloads_files;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -40,7 +38,7 @@ public class books_brochures extends Fragment {
                 }
             });
         } catch (Exception e) {
-            main.funct.send_bug_report(getActivity(), e, "books_broshures",
+            main.funct.send_bug_report(getActivity(), e, "player",
                     106);
         }
 
@@ -56,7 +54,8 @@ public class books_brochures extends Fragment {
                             "select magazine._id as _id, magazine.name as name, magazine.title as title, magazine.img as img, language.code as code_lng, publication.code as code_pub, publication._id as cur_pub, date from magazine left join language on magazine.id_lang=language._id left join publication on magazine.id_pub=publication._id where magazine.id_lang='"
                                     + main.id_lang
                                     + "' and magazine.id_pub='4' order by magazine.name asc",
-                            null);
+                            null
+                    );
             ArrayList<String> files_arr = new ArrayList<String>();
             cursor.moveToFirst();
 
@@ -64,7 +63,8 @@ public class books_brochures extends Fragment {
                 Integer _id = cursor.getInt(cursor.getColumnIndex("_id"));
                 Cursor cur = main.database.rawQuery(
                         "select id_type, file, name from files where `id_magazine`='"
-                                + _id + "' group by id_type", null);
+                                + _id + "' group by id_type", null
+                );
 
                 String files = "";
                 if (cur.getCount() > 0) {
@@ -79,21 +79,24 @@ public class books_brochures extends Fragment {
                                     main.funct.get_dir_app(getActivity())
                                             + "/downloads/"
                                             + cur.getString(cur
-                                            .getColumnIndex("name")));
+                                            .getColumnIndex("name"))
+                            );
 
                             if (file.exists()) {
                                 file_isn = 1;
                             } else {
-                                Log.e("JWP" + "books_broshures",
+                                Log.e("JWP" + "player",
                                         "Update to 0 - "
                                                 + cur.getString(cur
-                                                .getColumnIndex("name")));
+                                                .getColumnIndex("name"))
+                                );
                                 ContentValues initialValues = new ContentValues();
                                 initialValues.put("file", "0");
                                 main.database.update("files", initialValues,
                                         "name=?",
                                         new String[]{cur.getString(cur
-                                                .getColumnIndex("name"))});
+                                                .getColumnIndex("name"))}
+                                );
                             }
                         }
 
@@ -115,7 +118,7 @@ public class books_brochures extends Fragment {
                     main.database, files_arr);
             list.setAdapter(scAdapter);
         } catch (Exception e) {
-            main.funct.send_bug_report(getActivity(), e, "books_broshures",
+            main.funct.send_bug_report(getActivity(), e, "player",
                     392);
         }
     }
@@ -123,8 +126,5 @@ public class books_brochures extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        getActivity().stopService(
-                new Intent(getActivity(), class_downloads_files.class));
-
     }
 }

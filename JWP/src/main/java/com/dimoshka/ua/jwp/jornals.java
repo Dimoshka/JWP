@@ -1,7 +1,6 @@
 package com.dimoshka.ua.jwp;
 
 import android.content.ContentValues;
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 
-import com.dimoshka.ua.classes.class_downloads_files;
 import com.dimoshka.ua.classes.class_rss_jornals_adapter;
 
 import java.io.File;
@@ -68,7 +66,8 @@ public class jornals extends Fragment {
                             "select magazine._id as _id, magazine.name as name, magazine.img as img, language.code as code_lng, publication.code as code_pub, publication._id as cur_pub, date from magazine left join language on magazine.id_lang=language._id left join publication on magazine.id_pub=publication._id where magazine.id_lang='"
                                     + main.id_lang
                                     + "' and magazine.id_pub BETWEEN '1' and '3' order by date desc, magazine.id_pub asc",
-                            null);
+                            null
+                    );
 
             groupData = new ArrayList<Map<String, String>>();
             childData = new ArrayList<ArrayList<Map<String, String>>>();
@@ -86,12 +85,13 @@ public class jornals extends Fragment {
                 Date date = main.funct.get_jwp_jornals_rss_date(name, code_pub,
                         code_lng);
 
-                Log.e("JWP", cursor.getString(cursor
-                        .getColumnIndex("date")));
+                //Log.e("JWP", cursor.getString(cursor
+                //        .getColumnIndex("date")));
 
                 Cursor cur = main.database.rawQuery(
                         "select id_type, file, name from files where `id_magazine`='"
-                                + _id + "' group by id_type", null);
+                                + _id + "' group by id_type", null
+                );
                 String files = "";
                 if (cur.getCount() > 0) {
                     cur.moveToFirst();
@@ -104,7 +104,8 @@ public class jornals extends Fragment {
                                     main.funct.get_dir_app(getActivity())
                                             + "/downloads/"
                                             + cur.getString(cur
-                                            .getColumnIndex("name")));
+                                            .getColumnIndex("name"))
+                            );
 
                             //Log.d("JWP" + "jornals",
                             //        cur.getString(cur.getColumnIndex("name")));
@@ -115,13 +116,15 @@ public class jornals extends Fragment {
                                 Log.d("JWP" + "jornals",
                                         "Update to 0 - "
                                                 + cur.getString(cur
-                                                .getColumnIndex("name")));
+                                                .getColumnIndex("name"))
+                                );
                                 ContentValues initialValues = new ContentValues();
                                 initialValues.put("file", "0");
                                 main.database.update("files", initialValues,
                                         "name=?",
                                         new String[]{cur.getString(cur
-                                                .getColumnIndex("name"))});
+                                                .getColumnIndex("name"))}
+                                );
                             }
                         }
 
@@ -135,7 +138,7 @@ public class jornals extends Fragment {
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(date);
 
-                Log.e("JWP", "img - " + img.toString());
+                //Log.e("JWP", "img - " + img.toString());
 
                 if (calendar.get(Calendar.YEAR) != yer || calendar.get(Calendar.MONTH) != mon) {
                     yer = calendar.get(Calendar.YEAR);
@@ -183,7 +186,5 @@ public class jornals extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        getActivity().stopService(
-                new Intent(getActivity(), class_downloads_files.class));
     }
 }

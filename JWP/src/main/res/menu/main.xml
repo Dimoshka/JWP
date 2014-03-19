@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".main"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
@@ -9,31 +11,27 @@
         android:showAsAction="never"
         android:title="@string/refrashe"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-    </item>
+        android:layout_height="wrap_content" />
     <item
         android:id="@+id/item2"
         android:icon="@drawable/ic_action_navigation_refresh"
         android:showAsAction="ifRoom"
         android:title="@string/download_rss"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-    </item>
+        android:layout_height="wrap_content" />
     <item
         android:id="@+id/item1"
         android:icon="@drawable/ic_action_action_settings"
         android:showAsAction="ifRoom"
         android:title="@string/preference"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-    </item>
+        android:layout_height="wrap_content" />
     <item
         android:id="@+id/item0"
         android:icon="@android:drawable/ic_lock_power_off"
         android:showAsAction="never"
         android:title="@string/exit"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-    </item>
+        android:layout_height="wrap_content" />
 
 </menu>

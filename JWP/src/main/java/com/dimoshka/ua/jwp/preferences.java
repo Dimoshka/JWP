@@ -14,6 +14,7 @@ public class preferences extends PreferenceActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //noinspection deprecation
         addPreferencesFromResource(R.xml.preferences);
         PreferenceManager.setDefaultValues(preferences.this, R.xml.preferences, true);
         prefs = PreferenceManager.getDefaultSharedPreferences(this);

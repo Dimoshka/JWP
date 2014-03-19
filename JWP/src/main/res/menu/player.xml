@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".main"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
+
     <item
         android:id="@+id/item3"
         android:icon="@android:drawable/ic_menu_revert"
