@@ -149,7 +149,7 @@ public class class_functions {
         try {
             Log.e(context.getString(R.string.app_name_shot) + " - error: " + class_name,
                     ex.toString() + " - " + num_row);
-            BugSenseHandler.addCrashExtraData("class_name", class_name.toString());
+            BugSenseHandler.addCrashExtraData("class_name", class_name);
             BugSenseHandler.addCrashExtraData("num_row", num_row.toString());
             BugSenseHandler.sendException(ex);
             BugSenseHandler.sendExceptionMessage("level", class_name, ex);

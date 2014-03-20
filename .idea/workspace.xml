@@ -67,67 +67,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cab6d560-7775-43bf-bc3a-e43f3f235f38" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/JWP/src/main/res/layout/list_items_news_img.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/JWP/src/main/res/layout/list_items_news_noimg.xml" />
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\JWP\src\main\ic_launcher-web.png" afterPath="" />
-      <change type="DELETED" beforePath="Z:\Work\Android\JWP\JWP\JWP\src\main\res\layout\list_items_news.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP/src/main/res/drawable-hdpi/ab_stacked_solid_apptheme.9.png" afterPath="$PROJECT_DIR$/JWP/src/main/res/drawable-hdpi/ab_stacked_solid_apptheme.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP/src/main/res/drawable-mdpi/ab_stacked_solid_apptheme.9.png" afterPath="$PROJECT_DIR$/JWP/src/main/res/drawable-mdpi/ab_stacked_solid_apptheme.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP/src/main/res/drawable-xhdpi/ab_stacked_solid_apptheme.9.png" afterPath="$PROJECT_DIR$/JWP/src/main/res/drawable-xhdpi/ab_stacked_solid_apptheme.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP/src/main/res/drawable-xxhdpi/ab_stacked_solid_apptheme.9.png" afterPath="$PROJECT_DIR$/JWP/src/main/res/drawable-xxhdpi/ab_stacked_solid_apptheme.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP/src/main/res/drawable-hdpi/cab_background_bottom_apptheme.9.png" afterPath="$PROJECT_DIR$/JWP/src/main/res/drawable-hdpi/cab_background_bottom_apptheme.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP/src/main/res/drawable-mdpi/cab_background_bottom_apptheme.9.png" afterPath="$PROJECT_DIR$/JWP/src/main/res/drawable-mdpi/cab_background_bottom_apptheme.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP/src/main/res/drawable-xhdpi/cab_background_bottom_apptheme.9.png" afterPath="$PROJECT_DIR$/JWP/src/main/res/drawable-xhdpi/cab_background_bottom_apptheme.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP/src/main/res/drawable-xxhdpi/cab_background_bottom_apptheme.9.png" afterPath="$PROJECT_DIR$/JWP/src/main/res/drawable-xxhdpi/cab_background_bottom_apptheme.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP/src/main/res/drawable-hdpi/cab_background_top_apptheme.9.png" afterPath="$PROJECT_DIR$/JWP/src/main/res/drawable-hdpi/cab_background_top_apptheme.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP/src/main/res/drawable-mdpi/cab_background_top_apptheme.9.png" afterPath="$PROJECT_DIR$/JWP/src/main/res/drawable-mdpi/cab_background_top_apptheme.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP/src/main/res/drawable-xhdpi/cab_background_top_apptheme.9.png" afterPath="$PROJECT_DIR$/JWP/src/main/res/drawable-xhdpi/cab_background_top_apptheme.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP/src/main/res/drawable-xxhdpi/cab_background_top_apptheme.9.png" afterPath="$PROJECT_DIR$/JWP/src/main/res/drawable-xxhdpi/cab_background_top_apptheme.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP/src/main/res/drawable-hdpi/menu_dropdown_panel_apptheme.9.png" afterPath="$PROJECT_DIR$/JWP/src/main/res/drawable-hdpi/menu_dropdown_panel_apptheme.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP/src/main/res/drawable-mdpi/menu_dropdown_panel_apptheme.9.png" afterPath="$PROJECT_DIR$/JWP/src/main/res/drawable-mdpi/menu_dropdown_panel_apptheme.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP/src/main/res/drawable-xhdpi/menu_dropdown_panel_apptheme.9.png" afterPath="$PROJECT_DIR$/JWP/src/main/res/drawable-xhdpi/menu_dropdown_panel_apptheme.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP/src/main/res/drawable-xxhdpi/menu_dropdown_panel_apptheme.9.png" afterPath="$PROJECT_DIR$/JWP/src/main/res/drawable-xxhdpi/menu_dropdown_panel_apptheme.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP/src/main/res/drawable-hdpi/tab_selected_apptheme.9.png" afterPath="$PROJECT_DIR$/JWP/src/main/res/drawable-hdpi/tab_selected_apptheme.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP/src/main/res/drawable-mdpi/tab_selected_apptheme.9.png" afterPath="$PROJECT_DIR$/JWP/src/main/res/drawable-mdpi/tab_selected_apptheme.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP/src/main/res/drawable-xhdpi/tab_selected_apptheme.9.png" afterPath="$PROJECT_DIR$/JWP/src/main/res/drawable-xhdpi/tab_selected_apptheme.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP/src/main/res/drawable-xxhdpi/tab_selected_apptheme.9.png" afterPath="$PROJECT_DIR$/JWP/src/main/res/drawable-xxhdpi/tab_selected_apptheme.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP/src/main/res/drawable-hdpi/tab_selected_focused_apptheme.9.png" afterPath="$PROJECT_DIR$/JWP/src/main/res/drawable-hdpi/tab_selected_focused_apptheme.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP/src/main/res/drawable-mdpi/tab_selected_focused_apptheme.9.png" afterPath="$PROJECT_DIR$/JWP/src/main/res/drawable-mdpi/tab_selected_focused_apptheme.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP/src/main/res/drawable-xhdpi/tab_selected_focused_apptheme.9.png" afterPath="$PROJECT_DIR$/JWP/src/main/res/drawable-xhdpi/tab_selected_focused_apptheme.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP/src/main/res/drawable-xxhdpi/tab_selected_focused_apptheme.9.png" afterPath="$PROJECT_DIR$/JWP/src/main/res/drawable-xxhdpi/tab_selected_focused_apptheme.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP/src/main/res/drawable-hdpi/tab_selected_pressed_apptheme.9.png" afterPath="$PROJECT_DIR$/JWP/src/main/res/drawable-hdpi/tab_selected_pressed_apptheme.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP/src/main/res/drawable-mdpi/tab_selected_pressed_apptheme.9.png" afterPath="$PROJECT_DIR$/JWP/src/main/res/drawable-mdpi/tab_selected_pressed_apptheme.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP/src/main/res/drawable-xhdpi/tab_selected_pressed_apptheme.9.png" afterPath="$PROJECT_DIR$/JWP/src/main/res/drawable-xhdpi/tab_selected_pressed_apptheme.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP/src/main/res/drawable-xxhdpi/tab_selected_pressed_apptheme.9.png" afterPath="$PROJECT_DIR$/JWP/src/main/res/drawable-xxhdpi/tab_selected_pressed_apptheme.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP/src/main/res/drawable-hdpi/tab_unselected_apptheme.9.png" afterPath="$PROJECT_DIR$/JWP/src/main/res/drawable-hdpi/tab_unselected_apptheme.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP/src/main/res/drawable-mdpi/tab_unselected_apptheme.9.png" afterPath="$PROJECT_DIR$/JWP/src/main/res/drawable-mdpi/tab_unselected_apptheme.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP/src/main/res/drawable-xhdpi/tab_unselected_apptheme.9.png" afterPath="$PROJECT_DIR$/JWP/src/main/res/drawable-xhdpi/tab_unselected_apptheme.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP/src/main/res/drawable-xxhdpi/tab_unselected_apptheme.9.png" afterPath="$PROJECT_DIR$/JWP/src/main/res/drawable-xxhdpi/tab_unselected_apptheme.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/JWP/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP/JWP-JWP.iml" afterPath="$PROJECT_DIR$/JWP/JWP-JWP.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP/src/main/res/layout/book.xml" afterPath="$PROJECT_DIR$/JWP/src/main/res/layout/book.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/jwp/books_brochures.java" afterPath="$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/jwp/books_brochures.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP/build.gradle" afterPath="$PROJECT_DIR$/JWP/build.gradle" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/classes/class_functions.java" afterPath="$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/classes/class_functions.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/classes/class_rss_news_adapter.java" afterPath="$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/classes/class_rss_news_adapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP/src/main/res/values/colors.xml" afterPath="$PROJECT_DIR$/JWP/src/main/res/values/colors.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/jwp/jornals.java" afterPath="$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/jwp/jornals.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP/src/main/res/layout/list_items_books_brochures.xml" afterPath="$PROJECT_DIR$/JWP/src/main/res/layout/list_items_books_brochures.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP/src/main/res/layout/list_items_jornals.xml" afterPath="$PROJECT_DIR$/JWP/src/main/res/layout/list_items_jornals.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP/src/main/res/layout/list_items_section.xml" afterPath="$PROJECT_DIR$/JWP/src/main/res/layout/list_items_section.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/jwp/main.java" afterPath="$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/jwp/main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/jwp/news.java" afterPath="$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/jwp/news.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP/src/main/res/layout/notification.xml" afterPath="$PROJECT_DIR$/JWP/src/main/res/layout/notification.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/jwp/player.java" afterPath="$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/jwp/player.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/jwp/preferences.java" afterPath="$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/jwp/preferences.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_v4_19_0_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_v4_19_0_1.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP/src/main/res/menu/main.xml" afterPath="$PROJECT_DIR$/JWP/src/main/res/menu/main.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JWP/src/main/res/menu/player.xml" afterPath="$PROJECT_DIR$/JWP/src/main/res/menu/player.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MOVED" beforePath="Z:\Work\Android\JWP\JWP\.idea\libraries\appcompat_v7_19_0_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/appcompat_v7_19_0_1.xml" />
-      <change type="MOVED" beforePath="Z:\Work\Android\JWP\JWP\JWP\src\main\res\menu\books_broshures.xml" afterPath="$PROJECT_DIR$/JWP/src/main/res/menu/player.xml" />
-      <change type="MOVED" beforePath="Z:\Work\Android\JWP\JWP\JWP\src\main\res\menu\publication.xml" afterPath="$PROJECT_DIR$/JWP/src/main/res/menu/main.xml" />
-      <change type="MOVED" beforePath="Z:\Work\Android\JWP\JWP\JWP\src\main\res\values-v14\styles_apptheme.xml" afterPath="$PROJECT_DIR$/JWP/src/main/res/values-v14/styles.xml" />
-      <change type="MOVED" beforePath="Z:\Work\Android\JWP\JWP\JWP\src\main\res\values\styles_apptheme.xml" afterPath="$PROJECT_DIR$/JWP/src/main/res/values/styles.xml" />
     </list>
     <ignored path="JWP.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -194,7 +139,7 @@
       <file leaf-file-name="AndroidManifest.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/JWP/src/main/AndroidManifest.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="73" max-vertical-offset="731">
+            <state vertical-scroll-proportion="-9.52" vertical-offset="0" max-vertical-offset="731">
               <caret line="14" column="0" selection-start="617" selection-end="617" />
               <folding />
             </state>
@@ -204,8 +149,8 @@
       <file leaf-file-name="build.gradle" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/JWP/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.98176295" vertical-offset="0" max-vertical-offset="1122">
-              <caret line="38" column="21" selection-start="970" selection-end="970" />
+            <state vertical-scroll-proportion="0.7515244" vertical-offset="0" max-vertical-offset="1122">
+              <caret line="29" column="34" selection-start="707" selection-end="707" />
               <folding />
             </state>
           </provider>
@@ -234,6 +179,76 @@
     </option>
     <option name="recentTasks">
       <list>
+        <ExternalTaskExecutionInfo>
+          <option name="executorId" value="Run" />
+          <option name="settings">
+            <ExternalSystemSettings>
+              <option name="externalProjectPath" value="$PROJECT_DIR$" />
+              <option name="externalSystemIdString" value="GRADLE" />
+              <option name="taskNames">
+                <list>
+                  <option value="uninstallAll" />
+                </list>
+              </option>
+            </ExternalSystemSettings>
+          </option>
+        </ExternalTaskExecutionInfo>
+        <ExternalTaskExecutionInfo>
+          <option name="executorId" value="Run" />
+          <option name="settings">
+            <ExternalSystemSettings>
+              <option name="externalProjectPath" value="$PROJECT_DIR$" />
+              <option name="externalSystemIdString" value="GRADLE" />
+              <option name="taskNames">
+                <list>
+                  <option value="uninstallDebug" />
+                </list>
+              </option>
+            </ExternalSystemSettings>
+          </option>
+        </ExternalTaskExecutionInfo>
+        <ExternalTaskExecutionInfo>
+          <option name="executorId" value="Run" />
+          <option name="settings">
+            <ExternalSystemSettings>
+              <option name="externalProjectPath" value="$PROJECT_DIR$" />
+              <option name="externalSystemIdString" value="GRADLE" />
+              <option name="taskNames">
+                <list>
+                  <option value="uninstallRelease" />
+                </list>
+              </option>
+            </ExternalSystemSettings>
+          </option>
+        </ExternalTaskExecutionInfo>
+        <ExternalTaskExecutionInfo>
+          <option name="executorId" value="Run" />
+          <option name="settings">
+            <ExternalSystemSettings>
+              <option name="externalProjectPath" value="$PROJECT_DIR$" />
+              <option name="externalSystemIdString" value="GRADLE" />
+              <option name="taskNames">
+                <list>
+                  <option value="assembleRelease" />
+                </list>
+              </option>
+            </ExternalSystemSettings>
+          </option>
+        </ExternalTaskExecutionInfo>
+        <ExternalTaskExecutionInfo>
+          <option name="executorId" value="Run" />
+          <option name="settings">
+            <ExternalSystemSettings>
+              <option name="externalProjectPath" value="$PROJECT_DIR$" />
+              <option name="externalSystemIdString" value="GRADLE" />
+              <option name="taskNames">
+                <list>
+                  <option value="compileReleaseJava" />
+                </list>
+              </option>
+            </ExternalSystemSettings>
+          </option>
+        </ExternalTaskExecutionInfo>
         <ExternalTaskExecutionInfo>
           <option name="executorId" value="Run" />
           <option name="settings">
@@ -1118,7 +1133,7 @@
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/JWP" />
-                <option name="name" value="validateJwpSigning" />
+                <option name="name" value="validateReleaseSigning" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/JWP" />
@@ -1132,7 +1147,7 @@
     <option name="modificationStamps">
       <map>
         <entry key="$PROJECT_DIR$/../.." value="1384931128000" />
-        <entry key="$PROJECT_DIR$" value="4183455283000" />
+        <entry key="$PROJECT_DIR$" value="4183520599000" />
         <entry key="$PROJECT_DIR$/../../card_territory" value="1392362238000" />
       </map>
     </option>
@@ -1420,15 +1435,17 @@
         <option value="$PROJECT_DIR$/JWP/src/main/res/values/styles_apptheme.xml" />
         <option value="$PROJECT_DIR$/JWP/src/main/res/values/colors_apptheme.xml" />
         <option value="$PROJECT_DIR$/JWP/src/main/res/values/colors.xml" />
-        <option value="$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/classes/class_functions.java" />
         <option value="$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/jwp/preferences.java" />
         <option value="$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/jwp/player.java" />
         <option value="$PROJECT_DIR$/JWP/src/main/res/layout/list_items_section.xml" />
         <option value="$PROJECT_DIR$/JWP/src/main/res/layout/list_items_books_brochures.xml" />
         <option value="$PROJECT_DIR$/JWP/src/main/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/JWP/build.gradle" />
-        <option value="$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/jwp/main.java" />
         <option value="$PROJECT_DIR$/JWP/src/main/res/values/styles.xml" />
+        <option value="$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/jwp/main.java" />
+        <option value="$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/classes/class_functions.java" />
+        <option value="$PROJECT_DIR$/JWP/src/main/res/menu/main.xml" />
+        <option value="$PROJECT_DIR$/JWP/src/main/res/menu/player.xml" />
+        <option value="$PROJECT_DIR$/JWP/build.gradle" />
       </list>
     </option>
   </component>
@@ -1464,8 +1481,8 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -1658,36 +1675,6 @@
               <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drawable" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JWP" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JWP" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JWP" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="java" />
               <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -1754,7 +1741,7 @@
     <property name="OverrideImplement.overriding.sorted" value="false" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="0123456789ABCDEF" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="android_2_3_3" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/JWP/src/main/res" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../card_territory/card_territory" />
     <property name="ExportedModule" value="JWP-JWP" />
     <property name="ExportedApkPath" value="Z:\Work\Android\JWP\JWP\JWP\JWP_2.0.0.8.apk" />
     <property name="AndroidRunProguardForReleaseBuild" value="false" />
@@ -1768,8 +1755,8 @@
       <recent name="Z:\Work\Android\JWP\JWP\JWP\src\main\res\layout" />
     </key>
   </component>
-  <component name="RunManager" selected="Android Application.JWP-JWP">
-    <configuration default="false" name="JWP [androidDependencies]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+  <component name="RunManager" selected="Gradle.JWP [uninstallAll]">
+    <configuration default="false" name="JWP [compileReleaseJava]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
@@ -1779,7 +1766,83 @@
         </option>
         <option name="taskNames">
           <list>
-            <option value="androidDependencies" />
+            <option value="compileReleaseJava" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <RunnerSettings RunnerId="ExternalSystemTaskRunner" />
+      <ConfigurationWrapper RunnerId="ExternalSystemTaskRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="JWP [assembleRelease]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="assembleRelease" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <RunnerSettings RunnerId="ExternalSystemTaskRunner" />
+      <ConfigurationWrapper RunnerId="ExternalSystemTaskRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="JWP [uninstallRelease]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="uninstallRelease" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <RunnerSettings RunnerId="ExternalSystemTaskRunner" />
+      <ConfigurationWrapper RunnerId="ExternalSystemTaskRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="JWP [uninstallDebug]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="uninstallDebug" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <RunnerSettings RunnerId="ExternalSystemTaskRunner" />
+      <ConfigurationWrapper RunnerId="ExternalSystemTaskRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="JWP [uninstallAll]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="uninstallAll" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -1832,19 +1895,6 @@
       </ExternalSystemSettings>
       <method />
     </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <method />
-    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -1870,6 +1920,19 @@
       <envs />
       <properties />
       <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -1948,13 +2011,21 @@
       <ConfigurationWrapper RunnerId="AndroidDebugRunner" />
       <method />
     </configuration>
-    <list size="2">
+    <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Android Application.JWP-JWP" />
-      <item index="1" class="java.lang.String" itemvalue="Gradle.JWP [androidDependencies]" />
+      <item index="1" class="java.lang.String" itemvalue="Gradle.JWP [compileReleaseJava]" />
+      <item index="2" class="java.lang.String" itemvalue="Gradle.JWP [assembleRelease]" />
+      <item index="3" class="java.lang.String" itemvalue="Gradle.JWP [uninstallRelease]" />
+      <item index="4" class="java.lang.String" itemvalue="Gradle.JWP [uninstallDebug]" />
+      <item index="5" class="java.lang.String" itemvalue="Gradle.JWP [uninstallAll]" />
     </list>
     <recent_temporary>
-      <list size="1">
-        <item index="0" class="java.lang.String" itemvalue="Gradle.JWP [androidDependencies]" />
+      <list size="5">
+        <item index="0" class="java.lang.String" itemvalue="Gradle.JWP [uninstallAll]" />
+        <item index="1" class="java.lang.String" itemvalue="Gradle.JWP [uninstallDebug]" />
+        <item index="2" class="java.lang.String" itemvalue="Gradle.JWP [uninstallRelease]" />
+        <item index="3" class="java.lang.String" itemvalue="Gradle.JWP [assembleRelease]" />
+        <item index="4" class="java.lang.String" itemvalue="Gradle.JWP [compileReleaseJava]" />
       </list>
     </recent_temporary>
     <configuration name="&lt;template&gt;" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" default="true" selected="false">
@@ -1996,7 +2067,11 @@
       <created>1394734112735</created>
       <updated>1394734112735</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="edit theme">
+      <created>1395235464690</created>
+      <updated>1395235464690</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -2029,28 +2104,28 @@
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32906666" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32941177" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32941177" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.327451" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32941177" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.327451" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.327451" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.327451" sideWeight="0.49973333" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32960597" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32942432" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32941177" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24946696" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3990196" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32941177" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32941177" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32941177" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3990196" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -2076,23 +2151,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/JWP/src/main/res/layout/list.xml">
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
-          <caret line="0" column="0" selection-start="0" selection-end="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/JWP/src/main/res/values-de/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
-          <caret line="0" column="0" selection-start="0" selection-end="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/JWP/src/main/res/values-ru/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
@@ -2168,38 +2226,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/JWP/src/main/res/menu/player.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.20731707" vertical-offset="0" max-vertical-offset="656">
-          <caret line="8" column="24" selection-start="298" selection-end="298" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/JWP/src/main/res/menu/main.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.025914634" vertical-offset="0" max-vertical-offset="714">
-          <caret line="1" column="0" selection-start="39" selection-end="262" />
-          <folding>
-            <element signature="e#421#439#0" expanded="false" />
-            <element signature="e#696#718#0" expanded="false" />
-            <element signature="e#972#992#0" expanded="false" />
-            <element signature="e#1245#1259#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/classes/class_sqlite.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-2.7894738" vertical-offset="1303" max-vertical-offset="2023">
           <caret line="86" column="241" selection-start="6904" selection-end="6904" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/jwp/jornals.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="51.57143" vertical-offset="2311" max-vertical-offset="2941">
-          <caret line="72" column="72" selection-start="2743" selection-end="2743" />
         </state>
       </provider>
     </entry>
@@ -2320,17 +2350,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/classes/class_functions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="995" max-vertical-offset="2873">
-          <caret line="99" column="7" selection-start="3166" selection-end="3166" />
-          <folding>
-            <element signature="e#3240#3290#0" expanded="false" />
-            <element signature="e#5150#5191#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/jwp/books_brochures.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1989">
@@ -2343,7 +2362,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="3434">
           <caret line="19" column="13" selection-start="585" selection-end="585" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2351,7 +2369,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="2865" max-vertical-offset="5882">
           <caret line="219" column="0" selection-start="7761" selection-end="7761" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2367,19 +2384,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="748">
           <caret line="25" column="47" selection-start="869" selection-end="869" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/jwp/player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3409" max-vertical-offset="5049">
-          <caret line="275" column="57" selection-start="9299" selection-end="9299" />
-          <folding>
-            <element signature="e#2323#2357#1" expanded="true" />
-            <element signature="e#9250#9284#1" expanded="true" />
-            <element signature="e#9535#9569#1" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2431,34 +2435,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.25835866" vertical-offset="0" max-vertical-offset="658">
           <caret line="10" column="0" selection-start="422" selection-end="422" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/JWP/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="731">
-          <caret line="14" column="0" selection-start="617" selection-end="617" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/JWP/src/main/res/drawable-mdpi/apptheme_list_focused_holo.9.png">
-      <provider editor-type-id="images">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="ninepatcheditor">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/jwp/main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3804" max-vertical-offset="5882">
-          <caret line="282" column="22" selection-start="9326" selection-end="9326" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
+      <provider editor-type-id="images">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/JWP/src/main/res/values/styles.xml">
@@ -2469,10 +2454,110 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/jwp/jornals.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.51367784" vertical-offset="223" max-vertical-offset="2941">
+          <caret line="54" column="25" selection-start="1871" selection-end="1871" />
+          <folding>
+            <element signature="e#1528#1544#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/jwp/player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33282673" vertical-offset="563" max-vertical-offset="5049">
+          <caret line="84" column="22" selection-start="2856" selection-end="2856" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/classes/class_functions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.48784193" vertical-offset="1838" max-vertical-offset="2873">
+          <caret line="157" column="46" selection-start="5664" selection-end="5664" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/JWP/src/main/res/drawable-hdpi/apptheme_progressbar_indeterminate_holo7.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/JWP/src/main/res/drawable-hdpi/apptheme_progressbar_indeterminate_holo4.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/JWP/src/main/res/drawable-hdpi/apptheme_btn_check_on_disabled_holo_light.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/JWP/src/main/res/drawable-hdpi/apptheme_btn_check_on_focused_holo_light.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/JWP/src/main/res/drawable-hdpi/apptheme_progress_bg_holo_light.9.png">
+      <provider selected="true" editor-type-id="ninepatcheditor">
+        <state />
+      </provider>
+      <provider editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/JWP/src/main/res/drawable-hdpi/apptheme_scrubber_secondary_holo.9.png">
+      <provider selected="true" editor-type-id="ninepatcheditor">
+        <state />
+      </provider>
+      <provider editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/JWP/src/main/res/drawable-hdpi/apptheme_scrubber_control_pressed_holo.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/JWP/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.52" vertical-offset="0" max-vertical-offset="731">
+          <caret line="14" column="0" selection-start="617" selection-end="617" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/JWP/src/main/res/menu/player.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.17580144" vertical-offset="0" max-vertical-offset="967">
+          <caret line="10" column="55" selection-start="438" selection-end="438" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/JWP/src/main/res/menu/main.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.03516029" vertical-offset="0" max-vertical-offset="967">
+          <caret line="2" column="55" selection-start="107" selection-end="159" />
+          <folding>
+            <element signature="e#491#509#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/JWP/src/main/java/com/dimoshka/ua/jwp/main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.5274043" vertical-offset="3419" max-vertical-offset="5304">
+          <caret line="342" column="26" selection-start="11209" selection-end="11209" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/JWP/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.98176295" vertical-offset="0" max-vertical-offset="1122">
-          <caret line="38" column="21" selection-start="970" selection-end="970" />
+        <state vertical-scroll-proportion="0.7515244" vertical-offset="0" max-vertical-offset="1122">
+          <caret line="29" column="34" selection-start="707" selection-end="707" />
           <folding />
         </state>
       </provider>

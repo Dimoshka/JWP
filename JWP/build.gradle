@@ -11,14 +11,14 @@ android {
     compileSdkVersion 17
     buildToolsVersion '19.0.3'
     defaultConfig {
-      // targetSdkVersion 19
+        targetSdkVersion 19
         minSdkVersion 9
         versionCode 18
         versionName "2.0.0.8"
     }
 
     signingConfigs {
-        jwp {
+        release {
             keyAlias 'jwp'
             keyPassword 'Dimoshka9101'
             storeFile file('Z:/Work/Android/Keystore/dimoshka.keystore')
@@ -40,7 +40,7 @@ android {
                 debuggable false
                 runProguard true
                 proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
-                signingConfig signingConfigs.jwp
+                signingConfig signingConfigs.release
             }
             debug {
                 debuggable true

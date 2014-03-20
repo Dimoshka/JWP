@@ -214,7 +214,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 1:
-                    if (refresh_all == true) {
+                    if (refresh_all) {
                         rss_news.get_all_feeds();
                     } else {
                         Log.e("JWP", "refrashe afte load");
@@ -245,7 +245,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 1:
-                    if (refresh_all == true) {
+                    if (refresh_all) {
                         rss_jornals.get_all_feeds();
                     } else {
                         Log.e("JWP", "refrashe afte load");
@@ -260,8 +260,6 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
         public void onPageSelected(int position) {
             actionBar.setSelectedNavigationItem(position);
         }
-
-        ;
     };
 
     @Override
@@ -296,7 +294,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
 
     private void load_rss() {
         try {
-            if (funct.isNetworkAvailable(this) == true) {
+            if (funct.isNetworkAvailable(this)) {
                 if (prefs.getBoolean("update_all_at_once", true)) {
                     refresh_all = true;
                     books_brochures.verify_all_img();
@@ -325,7 +323,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
 
     private void refresh() {
         try {
-            if (refresh_all == true) {
+            if (refresh_all) {
                 frag1.refresh();
                 frag2.refresh();
                 frag3.refresh();
