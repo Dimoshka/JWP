@@ -1,0 +1,60 @@
+apply plugin: 'android'
+
+
+repositories {
+    mavenCentral()
+    maven { url 'http://www.bugsense.com/gradle/' }
+}
+
+
+android {
+    compileSdkVersion 17
+    buildToolsVersion '19.0.3'
+    defaultConfig {
+        targetSdkVersion 19
+        minSdkVersion 9
+        versionCode 18
+        versionName "2.0.0.8"
+    }
+
+    signingConfigs {
+        release {
+            keyAlias 'jwp'
+            keyPassword 'Dimoshka9101'
+            storeFile file('Z:/Work/Android/Keystore/dimoshka.jsk')
+            //storeFile file('/media/Files/Work/Android/Keystore/dimoshka.keystore')
+            storePassword 'Dimoshka9101'
+        }
+        debug {
+            keyAlias 'debug'
+            keyPassword '12345678'
+            storeFile file('Z:/Work/Android/Keystore/debug.jsk')
+            //storeFile file('/media/Files/Work/Android/Keystore/debug.keystore')
+            storePassword '12345678'
+        }
+    }
+
+    buildTypes {
+        buildTypes {
+            release {
+                debuggable false
+                runProguard true
+                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+                signingConfig signingConfigs.release
+            }
+            debug {
+                debuggable true
+                runProguard false
+                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+                signingConfig signingConfigs.debug
+            }
+        }
+    }
+}
+
+dependencies {
+    compile 'com.android.support:support-v4:+'
+    compile 'com.android.support:appcompat-v7:+'
+    compile 'com.bugsense.trace:bugsense:3.6'
+    compile files('libs/libGoogleAnalyticsServices.jar')
+}

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="@string/intetface" >
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/language_arr"
+            android:entryValues="@array/language_arr_value"
+            android:key="language"
+            android:summary="@string/language_summary"
+            android:title="@string/language" >
+        </ListPreference>
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/downloads" >
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="update_all_at_once"
+            android:summary="@string/update_all_at_once_summary"
+            android:title="@string/update_all_at_once" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="downloads_img"
+            android:summary="@string/downloads_img_summary"
+            android:title="@string/downloads_img" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+                        android:key="downloads_on_start"
+            android:summary="@string/downloads_on_start_summary"
+            android:title="@string/downloads_on_start" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/rss_chanel" >
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="rss_pdf"
+            android:summary="@string/rss_pdf_summary"
+            android:title="@string/rss_pdf" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="rss_epub"
+            android:summary="@string/rss_epub_summary"
+            android:title="@string/rss_epub" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="rss_mp3"
+            android:summary="@string/rss_mp3_summary"
+            android:title="@string/rss_mp3" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="rss_m4b"
+            android:summary="@string/rss_aac_summary"
+            android:title="@string/rss_aac" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/management" >
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="analytics"
+            android:summary="@string/analytics_summary"
+            android:title="@string/analytics" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

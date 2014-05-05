@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.dimoshka.ua.jwp.main"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <item
+        android:id="@+id/item3"
+        android:icon="@android:drawable/ic_menu_revert"
+        app:showAsAction="never"
+        android:title="@string/refrashe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <item
+        android:id="@+id/item2"
+        android:icon="@drawable/ic_action_navigation_refresh"
+        app:showAsAction="ifRoom"
+        android:title="@string/download_rss"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <item
+        android:id="@+id/item1"
+        android:icon="@drawable/ic_action_action_settings"
+        app:showAsAction="ifRoom"
+        android:title="@string/preference"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <item
+        android:id="@+id/item0"
+        android:icon="@android:drawable/ic_lock_power_off"
+        app:showAsAction="never"
+        android:title="@string/exit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</menu>
