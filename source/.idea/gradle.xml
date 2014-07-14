@@ -8,8 +8,8 @@
         <option name="gradleHome" value="Z:/Soft/gradle-1.11/bin" />
         <option name="modules">
           <set>
-            <option value="Z:\Work\Android\JWP\JWP" />
-            <option value="Z:\Work\Android\JWP\JWP\JWP" />
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/JWP" />
           </set>
         </option>
       </GradleProjectSettings>

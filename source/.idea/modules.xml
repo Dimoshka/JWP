@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/JWP.iml" filepath="$PROJECT_DIR$/JWP.iml" />
-      <module fileurl="file://$PROJECT_DIR$/JWP/JWP-JWP.iml" filepath="$PROJECT_DIR$/JWP/JWP-JWP.iml" />
+      <module fileurl="file://$PROJECT_DIR$/source.iml" filepath="$PROJECT_DIR$/source.iml" />
     </modules>
   </component>
 </project>

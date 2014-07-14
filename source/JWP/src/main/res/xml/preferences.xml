@@ -12,46 +12,46 @@
         </ListPreference>
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/downloads" >
-        <CheckBoxPreference
+        <SwitchPreference
             android:defaultValue="true"
             android:key="update_all_at_once"
             android:summary="@string/update_all_at_once_summary"
             android:title="@string/update_all_at_once" />
-        <CheckBoxPreference
+        <SwitchPreference
             android:defaultValue="true"
             android:key="downloads_img"
             android:summary="@string/downloads_img_summary"
             android:title="@string/downloads_img" />
-        <CheckBoxPreference
+        <SwitchPreference
             android:defaultValue="false"
                         android:key="downloads_on_start"
             android:summary="@string/downloads_on_start_summary"
             android:title="@string/downloads_on_start" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/rss_chanel" >
-        <CheckBoxPreference
+        <SwitchPreference
             android:defaultValue="true"
             android:key="rss_pdf"
             android:summary="@string/rss_pdf_summary"
             android:title="@string/rss_pdf" />
-        <CheckBoxPreference
+        <SwitchPreference
             android:defaultValue="false"
             android:key="rss_epub"
             android:summary="@string/rss_epub_summary"
             android:title="@string/rss_epub" />
-        <CheckBoxPreference
-            android:defaultValue="false"
+        <SwitchPreference
+            android:defaultValue="true"
             android:key="rss_mp3"
             android:summary="@string/rss_mp3_summary"
             android:title="@string/rss_mp3" />
-        <CheckBoxPreference
+        <SwitchPreference
             android:defaultValue="false"
             android:key="rss_m4b"
             android:summary="@string/rss_aac_summary"
             android:title="@string/rss_aac" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/management" >
-        <CheckBoxPreference
+        <SwitchPreference
             android:defaultValue="true"
             android:key="analytics"
             android:summary="@string/analytics_summary"
