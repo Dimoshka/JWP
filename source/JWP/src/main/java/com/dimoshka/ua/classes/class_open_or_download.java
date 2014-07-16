@@ -11,7 +11,6 @@ import android.webkit.MimeTypeMap;
 import android.widget.Toast;
 
 import com.dimoshka.ua.jwp.R;
-import com.dimoshka.ua.jwp.main;
 import com.dimoshka.ua.jwp.player;
 
 import java.io.File;
@@ -26,22 +25,25 @@ public class class_open_or_download {
     private Activity activity;
     private Cursor cur_files;
     private SQLiteDatabase database;
+    private class_functions funct;
 
-    public class_open_or_download(Activity activity, SQLiteDatabase database) {
+    public class_open_or_download(Activity activity, SQLiteDatabase database, class_functions funct) {
         this.activity = activity;
         this.database = database;
+        this.funct = funct;
     }
 
     public void dialog_show(String _id) {
         try {
-            if (main.funct.ExternalStorageState() == true) {
+            if (funct.ExternalStorageState() == true) {
                 List<String> listItems = new ArrayList<String>();
                 CharSequence[] items = null;
 
                 cur_files = database
                         .rawQuery(
                                 "select id_type, file, type.name as name_type, files.name, link, files.id_magazine from files left join magazine on files.id_magazine=magazine._id left join type on files.id_type=type._id where files.id_magazine='"
-                                        + _id + "' group by id_type", null);
+                                        + _id + "' group by id_type", null
+                        );
                 if (cur_files.getCount() > 0) {
                     cur_files.moveToFirst();
                     for (int i = 0; i < cur_files.getCount(); i++) {
@@ -83,7 +85,8 @@ public class class_open_or_download {
                                                     int item) {
                                     open_or_download(item);
                                 }
-                            });
+                            }
+                    );
                     AlertDialog alert = builder.create();
                     alert.show();
                 }
@@ -91,14 +94,13 @@ public class class_open_or_download {
                 Toast.makeText(activity, R.string.no_sdcard,
                         Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
-            main.funct.send_bug_report(activity, e, getClass().getName(),
-                    183);
+            funct.send_bug_report(e);
         }
     }
 
     public void open_or_download(int id) {
         try {
-            if (main.funct.ExternalStorageState() == true) {
+            if (funct.ExternalStorageState()) {
                 if (cur_files.getCount() > 0) {
                     cur_files.moveToPosition(id);
                     if (cur_files.getInt(cur_files.getColumnIndex("id_type")) == 3) {
@@ -111,34 +113,34 @@ public class class_open_or_download {
                         activity.startActivity(i);
                     } else {
                         start_open_or_download(cur_files.getString(cur_files
-                                .getColumnIndex("name")),
+                                        .getColumnIndex("name")),
                                 cur_files.getInt(cur_files
                                         .getColumnIndex("file")),
                                 cur_files.getString(cur_files
-                                        .getColumnIndex("link")));
+                                        .getColumnIndex("link"))
+                        );
                     }
                 }
             } else
                 Toast.makeText(activity, R.string.no_sdcard,
                         Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
-            main.funct.send_bug_report(activity, e, getClass().getName(),
-                    232);
+            funct.send_bug_report(e);
         }
     }
 
     public void start_open_or_download(String name, int file_enable,
                                        String link) {
         try {
-            File file = new File(main.funct.get_dir_app(activity)
+            File file = new File(funct.get_dir_app()
                     + "/downloads/" + name);
             if (file.exists() != true) {
                 if (file_enable == 1)
-                    main.funct.update_file_isn(database, name, 0);
+                    funct.update_file_isn(database, name, 0);
                 file_enable = 0;
             } else {
                 if (file_enable == 0)
-                    main.funct.update_file_isn(database, name, 1);
+                    funct.update_file_isn(database, name, 1);
                 file_enable = 1;
             }
 
@@ -168,8 +170,7 @@ public class class_open_or_download {
                 activity.startService(i);
             }
         } catch (Exception e) {
-            main.funct.send_bug_report(activity, e, getClass().getName(),
-                    273);
+            funct.send_bug_report(e);
         }
     }
 }

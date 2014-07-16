@@ -51,13 +51,11 @@ public class player extends ActionBarActivity {
     private class_cursoradapter_player scAdapter;
 
     private class_mediaplayer mediaplayer_class;
-
-    public SharedPreferences prefs;
-    public SQLiteDatabase database;
-
-    public class_functions funct = new class_functions();
+    private SharedPreferences prefs;
+    private SQLiteDatabase database;
+    private class_functions funct;
     public int id_lang = 0;
-    public OnSharedPreferenceChangeListener listener_pref;
+    private OnSharedPreferenceChangeListener listener_pref;
 
     private ActionBar actionBar;
 
@@ -84,7 +82,8 @@ public class player extends ActionBarActivity {
         Bundle extras = getIntent().getExtras();
         id_magazine = extras.getInt("id_magazine");
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        dbOpenHelper = new class_sqlite(this);
+        funct = new class_functions(this);
+        dbOpenHelper = new class_sqlite(this, funct);
         database = dbOpenHelper.openDataBase();
         audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         initViews();
@@ -160,8 +159,7 @@ public class player extends ActionBarActivity {
             });
 
         } catch (Exception e) {
-            funct.send_bug_report(getBaseContext(), e, "player",
-                    120);
+            funct.send_bug_report(e);
         }
     }
 
@@ -174,7 +172,7 @@ public class player extends ActionBarActivity {
                 .getColumnIndex("link"));
         int file_enable = cursor.getInt(cursor
                 .getColumnIndex("file"));
-        File file = new File(funct.get_dir_app(getBaseContext())
+        File file = new File(funct.get_dir_app()
                 + "/downloads/" + name);
         if (file.exists()) {
             if (file_enable == 0)
@@ -202,7 +200,8 @@ public class player extends ActionBarActivity {
                         "select files._id, id_type, file, type.name as name_type, files.name, link, files.title from files left join magazine on files.id_magazine=magazine._id left join type on files.id_type=type._id where files.id_magazine='"
                                 + id_magazine
                                 + "' and id_type='3' order by files.name asc",
-                        null);
+                        null
+                );
 
         startManagingCursor(cursor);
         scAdapter = new class_cursoradapter_player(this,

@@ -1,10 +1,8 @@
 package com.dimoshka.ua.jwp;
 
-import android.content.ContentValues;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +10,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.dimoshka.ua.classes.class_books_brochures_adapter;
-
-import java.io.File;
-import java.util.ArrayList;
 
 public class books_brochures extends Fragment {
     private ListView list;
@@ -38,8 +33,7 @@ public class books_brochures extends Fragment {
                 }
             });
         } catch (Exception e) {
-            main.funct.send_bug_report(getActivity(), e, "player",
-                    106);
+            main.funct.send_bug_report(e);
         }
 
         refresh();
@@ -49,77 +43,36 @@ public class books_brochures extends Fragment {
 
     public void refresh() {
         try {
+            //cursor = main.database
+            //       .rawQuery(
+            //              "select magazine._id as _id, magazine.name as name, magazine.title as title, magazine.img as img, language.code as code_lng, publication.code as code_pub, publication._id as cur_pub, date from magazine left join language on magazine.id_lang=language._id left join publication on magazine.id_pub=publication._id where magazine.id_lang='"
+            //                     + main.id_lang
+            //                    + "' and magazine.id_pub='4' order by magazine.name asc",
+            //            null
+            //   );
+
             cursor = main.database
                     .rawQuery(
-                            "select magazine._id as _id, magazine.name as name, magazine.title as title, magazine.img as img, language.code as code_lng, publication.code as code_pub, publication._id as cur_pub, date from magazine left join language on magazine.id_lang=language._id left join publication on magazine.id_pub=publication._id where magazine.id_lang='"
-                                    + main.id_lang
-                                    + "' and magazine.id_pub='4' order by magazine.name asc",
+                            "select magazine._id as _id, magazine.name as name, magazine.title as title, magazine.img as img, " +
+                                    "language.code as code_lng, " +
+                                    "publication.code as code_pub, publication._id as cur_pub, date, " +
+                                    "files.id_type as id_type_files, files.name as name_files, files.file as file_files " +
+                                    "from magazine " +
+                                    "left join language on magazine.id_lang=language._id " +
+                                    "left join publication on magazine.id_pub=publication._id " +
+                                    "left join (select id_magazine, GROUP_CONCAT(id_type) as id_type, GROUP_CONCAT(name) as name, GROUP_CONCAT(file) as file from files group by id_magazine) as files on magazine._id=files.id_magazine " +
+                                    "where magazine.id_lang='" + main.id_lang + "' and magazine.id_pub='4' order by magazine.name asc",
                             null
                     );
-            ArrayList<String> files_arr = new ArrayList<String>();
-            cursor.moveToFirst();
-
-            for (int i = 0; i < cursor.getCount(); i++) {
-                Integer _id = cursor.getInt(cursor.getColumnIndex("_id"));
-                Cursor cur = main.database.rawQuery(
-                        "select id_type, file, name from files where `id_magazine`='"
-                                + _id + "' group by id_type", null
-                );
-
-                String files = "";
-                if (cur.getCount() > 0) {
-                    cur.moveToFirst();
-                    for (int a = 0; a < cur.getCount(); a++) {
-                        if (files.length() > 0)
-                            files = files + ",";
-                        int file_isn = 0;
-
-                        if (cur.getInt(cur.getColumnIndex("file")) == 1) {
-                            File file = new File(
-                                    main.funct.get_dir_app(getActivity())
-                                            + "/downloads/"
-                                            + cur.getString(cur
-                                            .getColumnIndex("name"))
-                            );
-
-                            if (file.exists()) {
-                                file_isn = 1;
-                            } else {
-                                Log.e("JWP" + "player",
-                                        "Update to 0 - "
-                                                + cur.getString(cur
-                                                .getColumnIndex("name"))
-                                );
-                                ContentValues initialValues = new ContentValues();
-                                initialValues.put("file", "0");
-                                main.database.update("files", initialValues,
-                                        "name=?",
-                                        new String[]{cur.getString(cur
-                                                .getColumnIndex("name"))}
-                                );
-                            }
-                        }
-
-                        files = files
-                                + cur.getString(cur.getColumnIndex("id_type"))
-                                + "=" + file_isn;
-                        cur.moveToNext();
-
-                    }
-                }
-                files_arr.add(files);
-                cursor.moveToNext();
-            }
 
             cursor.moveToFirst();
             scAdapter = new class_books_brochures_adapter(
                     getActivity(), R.layout.list_items_books_brochures, cursor,
-                    new String[]{"_id"}, new int[]{R.id.title},
-                    main.database, files_arr);
+                    new String[]{"_id"}, new int[]{R.id.title}, 0,
+                    main.database, main.funct);
             list.setAdapter(scAdapter);
         } catch (Exception e) {
-            main.funct.send_bug_report(getActivity(), e, "player",
-                    392);
+            main.funct.send_bug_report(e);
         }
     }
 

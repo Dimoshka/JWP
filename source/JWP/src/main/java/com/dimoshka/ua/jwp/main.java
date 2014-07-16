@@ -23,6 +23,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.androidquery.AQuery;
 import com.bugsense.trace.BugSenseHandler;
 import com.dimoshka.ua.classes.class_books_brochures;
 import com.dimoshka.ua.classes.class_downloads_files;
@@ -40,25 +41,28 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
 
     private int curent_tab = 0;
     public static int id_lang = 0;
-    private static SharedPreferences prefs;
+
     public static SQLiteDatabase database;
     public static class_sqlite dbOpenHelper;
-    public static class_functions funct = new class_functions();
-    public OnSharedPreferenceChangeListener listener_pref;
+    public static class_functions funct;
+    public static AQuery aq;
+
     public static class_open_or_download open_or_download;
     public static class_rss_jornals rss_jornals;
     public static class_rss_news rss_news;
     public static class_books_brochures books_brochures;
-    jornals frag1;
-    news frag2;
-    books_brochures frag3;
 
+    private SharedPreferences prefs;
+    private jornals jornals_fragm;
+    private news news_fragm;
+    private books_brochures book_fragm;
+    private OnSharedPreferenceChangeListener listener_pref;
     private ViewPager pager;
     private ActionBar actionBar;
     private ActionBar.Tab jornals_Tab;
     private ActionBar.Tab news_Tab;
     private ActionBar.Tab publication_Tab;
-    List<Fragment> fragments;
+    private List<Fragment> fragments;
     private MyPagerAdapter pagerAdapter;
     private Boolean refresh_all = false;
 
@@ -67,20 +71,20 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         BugSenseHandler.initAndStartSession(this, "63148966");
-        BugSenseHandler.setLogging(100);
         setContentView(R.layout.main);
 
-        frag1 = new jornals();
-        frag2 = new news();
-        frag3 = new books_brochures();
+        aq = new AQuery(this);
+        funct = new class_functions(this);
+        dbOpenHelper = new class_sqlite(this, funct);
+        database = dbOpenHelper.openDataBase();
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+
+        jornals_fragm = new jornals();
+        news_fragm = new news();
+        book_fragm = new books_brochures();
 
         pager = (ViewPager) findViewById(R.id.pager);
         pager.setOnPageChangeListener(PageChangeListener);
-
-        dbOpenHelper = new class_sqlite(this);
-        database = dbOpenHelper.openDataBase();
-
-        prefs = PreferenceManager.getDefaultSharedPreferences(this);
         id_lang = Integer.parseInt(prefs.getString("language", "0"));
 
         actionBar = getSupportActionBar();
@@ -100,15 +104,14 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
 
 
         rss_jornals = new class_rss_jornals(this, id_lang, handler_jornals,
-                database);
-        rss_news = new class_rss_news(this, id_lang, handler_news, database);
+                database, funct);
+        rss_news = new class_rss_news(this, id_lang, handler_news, database, funct);
         books_brochures = new class_books_brochures(this,
-                handler_books_brochures, database);
+                handler_books_brochures, database, funct);
 
         rss_jornals.get_language(id_lang);
         rss_news.get_language(id_lang);
 
-        boolean firstrun = prefs.getBoolean("first_run", true);
 
         listener_pref = new SharedPreferences.OnSharedPreferenceChangeListener() {
             public void onSharedPreferenceChanged(SharedPreferences prefs,
@@ -117,9 +120,9 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
             }
         };
         prefs.registerOnSharedPreferenceChangeListener(listener_pref);
-        open_or_download = new class_open_or_download(this, database);
+        open_or_download = new class_open_or_download(this, database, funct);
 
-        if (firstrun) {
+        if (prefs.getBoolean("first_run", true)) {
             new AlertDialog.Builder(this)
                     .setTitle(getString(R.string.first_run_title))
                     .setMessage(getString(R.string.first_run))
@@ -134,9 +137,9 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
 
     private void refresh_pager() {
         List<Fragment> fragments = new Vector<Fragment>();
-        fragments.add(frag1);
-        fragments.add(frag2);
-        fragments.add(frag3);
+        fragments.add(jornals_fragm);
+        fragments.add(news_fragm);
+        fragments.add(book_fragm);
         pagerAdapter = new MyPagerAdapter(getSupportFragmentManager(),
                 fragments);
         pager.setAdapter(pagerAdapter);
@@ -293,7 +296,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
 
     private void load_rss() {
         try {
-            if (funct.isNetworkAvailable(this)) {
+            if (funct.isNetworkAvailable()) {
                 if (prefs.getBoolean("update_all_at_once", true)) {
                     refresh_all = true;
                     books_brochures.verify_all_img();
@@ -316,27 +319,27 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
                 Toast.makeText(this, R.string.no_internet, Toast.LENGTH_SHORT)
                         .show();
         } catch (Exception e) {
-            funct.send_bug_report(this, e, "main", 148);
+            funct.send_bug_report(e);
         }
     }
 
     private void refresh() {
         try {
             if (refresh_all) {
-                frag1.refresh();
-                frag2.refresh();
-                frag3.refresh();
+                jornals_fragm.refresh();
+                news_fragm.refresh();
+                book_fragm.refresh();
                 refresh_all = false;
             } else {
                 switch (curent_tab) {
                     case 0:
-                        frag1.refresh();
+                        jornals_fragm.refresh();
                         break;
                     case 1:
-                        frag2.refresh();
+                        news_fragm.refresh();
                         break;
                     case 2:
-                        frag3.refresh();
+                        book_fragm.refresh();
                         break;
                     default:
                         break;
@@ -344,7 +347,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
             }
 
         } catch (Exception e) {
-            funct.send_bug_report(this, e, "main", 334);
+            funct.send_bug_report(e);
         }
     }
 

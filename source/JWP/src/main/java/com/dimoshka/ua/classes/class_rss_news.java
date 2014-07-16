@@ -31,7 +31,7 @@ public class class_rss_news {
     private class_rss_provider rssfeedprovider;
     private SQLiteDatabase database;
 
-    public class_functions funct = new class_functions();
+    public class_functions funct;
     private Activity activity;
     private Handler handler;
     private Integer id_ln = 0;
@@ -41,17 +41,18 @@ public class class_rss_news {
     private AsyncTask task;
 
     public class_rss_news(Activity activity, int id_lang, Handler handler,
-                          SQLiteDatabase database) {
+                          SQLiteDatabase database, class_functions funct) {
         this.activity = activity;
         this.handler = handler;
         this.database = database;
+        this.funct = funct;
         prefs = PreferenceManager.getDefaultSharedPreferences(activity);
         get_language(id_lang);
     }
 
     @SuppressWarnings("deprecation")
     public Integer get_language(int id) {
-        Cursor cursor = funct.get_language(database, id, activity);
+        Cursor cursor = funct.get_language(database, id);
         activity.startManagingCursor(cursor);
         cursor.moveToFirst();
         if (cursor.getCount() > 0) {
@@ -155,7 +156,7 @@ public class class_rss_news {
                 }
 
             } catch (Exception e) {
-                funct.send_bug_report(activity, e, getClass().getName(), 134);
+                funct.send_bug_report(e);
             }
             return null;
         }
@@ -164,7 +165,7 @@ public class class_rss_news {
             int img = 0;
             if (prefs.getBoolean("downloads_img", true)) {
                 if (funct.ExternalStorageState()) {
-                    String dir = funct.get_dir_app(activity) + "/img/";
+                    String dir = funct.get_dir_app() + "/img/";
                     File Directory = new File(dir);
                     if (!Directory.isDirectory()) {
                         Directory.mkdirs();
@@ -175,7 +176,7 @@ public class class_rss_news {
                                 + ".jpg");
                         if (!imgFile.exists()) {
                             Log.i("JWP_image", name + " - no found!");
-                            if (funct.load_img(activity, dir, name, link_img)) {
+                            if (funct.load_img(dir, name, link_img)) {
                                 Log.i("JWP_image", name
                                         + " - file download complete!");
                                 img = 1;
@@ -205,10 +206,10 @@ public class class_rss_news {
                                     R.string.news),
                             activity.getResources().getString(
                                     R.string.dialog_loaing_rss), true, true, new DialogInterface.OnCancelListener() {
-                        public void onCancel(DialogInterface pd) {
-                            task.cancel(true);
-                        }
-                    }
+                                public void onCancel(DialogInterface pd) {
+                                    task.cancel(true);
+                                }
+                            }
                     );
         }
 

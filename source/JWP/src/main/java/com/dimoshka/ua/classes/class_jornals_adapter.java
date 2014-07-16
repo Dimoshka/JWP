@@ -17,16 +17,18 @@ import com.androidquery.callback.BitmapAjaxCallback;
 import com.dimoshka.ua.jwp.R;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-public class class_books_brochures_adapter extends SimpleCursorAdapter {
+public class class_jornals_adapter extends SimpleCursorAdapter {
 
     private int layout;
     private class_functions funct;
     private SQLiteDatabase database;
 
-    public class_books_brochures_adapter(Context context, int layout,
-                                         Cursor c, String[] from, int[] to, int flags,
-                                         SQLiteDatabase database, class_functions funct) {
+    public class_jornals_adapter(Context context, int layout,
+                                 Cursor c, String[] from, int[] to, int flags,
+                                 SQLiteDatabase database, class_functions funct) {
         super(context, layout, c, from, to, flags);
         this.layout = layout;
         this.database = database;
@@ -38,22 +40,23 @@ public class class_books_brochures_adapter extends SimpleCursorAdapter {
         try {
             super.bindView(v, context, c);
             AQuery aq = new AQuery(v);
-
+            String name = c.getString(c.getColumnIndex("name"));
+            Date date = funct.get_string_to_date(c.getString(c.getColumnIndex("date")), "yyyy-MM-dd");
             Boolean img = c.getInt(c.getColumnIndex("img")) != 0;
             Integer _id = c.getInt(c.getColumnIndex("_id"));
-            String name = c.getString(c.getColumnIndex("name"));
-            String title = c.getString(c.getColumnIndex("title"));
+            SimpleDateFormat format = new SimpleDateFormat("d MMMM yyyy");
 
             String[] id_type_files = c.getString(c.getColumnIndex("id_type_files")).split(",");
             //String[] name_files = c.getString(c.getColumnIndex("name_files")).split(",");
             String[] file_files = c.getString(c.getColumnIndex("file_files")).split(",");
 
-
-            aq.id(R.id.title).text(title);
+            aq.id(R.id.title).text(format.format(date));
+            aq.id(R.id.text).text(name);
 
             if (img) {
                 File imgFile = new File(funct.get_dir_app() + "/img/"
                         + name + ".jpg");
+
                 if (imgFile.exists()) {
                     aq.id(R.id.img).image(imgFile, false, 78, new BitmapAjaxCallback() {
                         @Override
@@ -63,6 +66,7 @@ public class class_books_brochures_adapter extends SimpleCursorAdapter {
                     });
                 } else {
                     aq.id(R.id.img).image(R.drawable.ic_noimages);
+
                     ContentValues initialValues = new ContentValues();
                     initialValues.put("img", "0");
                     database.update("magazine", initialValues, "_id=?",
@@ -76,7 +80,6 @@ public class class_books_brochures_adapter extends SimpleCursorAdapter {
             aq.id(R.id.pdf).image(R.drawable.ic_none_type);
             aq.id(R.id.mp3).image(R.drawable.ic_none_type);
             aq.id(R.id.aac).image(R.drawable.ic_none_type);
-
 
             for (int i = 0; i < id_type_files.length; i++) {
                 Boolean file_isn = Integer.parseInt(file_files[i]) != 0;

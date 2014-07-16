@@ -1,26 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp">
+    android:padding="5dp"
+    android:background="#fff">
 
     <TextView
-        android:id="@+id/text"
+        android:id="@+id/title"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:gravity="right"
-        android:text="text"
-        android:textColor="@color/text_dark_gray"
-        android:textStyle="italic" />
+        android:layout_marginLeft="11dp"
+        android:textSize="20sp"
+        android:text="title" />
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="title"
+        android:text="text"
+        android:textColor="@color/text_dark_gray"
+        android:textStyle="italic"
+        android:layout_below="@+id/title"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/text" />
+        android:layout_marginLeft="11dp"
+        android:textSize="14sp" />
 
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="text"
+        android:textColor="@color/text_dark_gray"
+        android:textStyle="italic"
+        android:layout_below="@+id/text"
+        android:layout_alignRight="@+id/title"
+        android:layout_alignEnd="@+id/title"
+        android:textSize="10sp"
+        android:layout_marginRight="11dp" />
+
+    ImageView
+    android:id="@+id/img"
+    android:layout_width="60dp"
+    android:layout_height="78dp"
+    android:contentDescription="@string/jornals"
+    android:src="@drawable/ic_noimages"
+    android:layout_toEndOf="@id/img"
+    android:layout_below="@+id/title"
+    android:layout_alignLeft="@+id/title"
+    android:layout_alignStart="@+id/title" />
 </RelativeLayout>

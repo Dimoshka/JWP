@@ -18,17 +18,18 @@ import java.util.List;
 
 public class class_books_brochures {
     private SQLiteDatabase database;
-    public class_functions funct = new class_functions();
+    public class_functions funct;
     private Activity activity;
     private Cursor cursor;
     private Handler handler;
     private AsyncTask task;
 
     public class_books_brochures(Activity activity, Handler handler,
-                                 SQLiteDatabase database) {
+                                 SQLiteDatabase database, class_functions funct) {
         this.activity = activity;
         this.handler = handler;
         this.database = database;
+        this.funct = funct;
     }
 
     public void verify_all_img() {
@@ -55,7 +56,7 @@ public class class_books_brochures {
                                     "select _id, name, img, link_img from magazine where img=0 and id_pub='4';",
                                     null);
                     cursor.moveToFirst();
-                    String dir = funct.get_dir_app(activity) + "/img/";
+                    String dir = funct.get_dir_app() + "/img/";
 
                     File Directory = new File(dir);
                     if (!Directory.isDirectory()) {
@@ -88,7 +89,7 @@ public class class_books_brochures {
                             Log.i("JWP_image", name + " - not found!");
 
                             try {
-                                if (funct.load_img(activity, dir, name, link_img)) {
+                                if (funct.load_img(dir, name, link_img)) {
                                     Log.i("JWP_image", name
                                             + " - file download complete!");
                                     initialValues.put("img", "1");
@@ -115,7 +116,7 @@ public class class_books_brochures {
                     }
                 }
             } catch (Exception e) {
-                funct.send_bug_report(activity, e, getClass().getName(), 154);
+                funct.send_bug_report(e);
             }
             return null;
         }
@@ -279,7 +280,7 @@ public class class_books_brochures {
                 Log.e("JWP_sql", "end add Books and brochures");
 
             } catch (Exception e) {
-                funct.send_bug_report(activity, e, getClass().getName(), 196);
+                funct.send_bug_report(e);
             }
         }
 
@@ -302,10 +303,11 @@ public class class_books_brochures {
                                     R.string.books_brochures),
                             activity.getResources().getString(
                                     R.string.dialog_loaing_img), true, true, new DialogInterface.OnCancelListener() {
-                        public void onCancel(DialogInterface pd) {
-                            task.cancel(true);
-                        }
-                    });
+                                public void onCancel(DialogInterface pd) {
+                                    task.cancel(true);
+                                }
+                            }
+                    );
         }
 
         @Override

@@ -2,6 +2,7 @@
 <resources>
 
     <color name="text_dark_gray">#aaaaaa</color>
+    <color name="text_gray">#ddd</color>
     <color name="orange">#ffff8308</color>
     <color name="text_blue">#0092FF</color>
     <color name="text_green">#ff00afa7</color>

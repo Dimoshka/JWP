@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="90dp" >
+    android:layout_width="fill_parent"
+    android:layout_height="88dp"
+    android:padding="5dp"
+    android:background="#fff">
 
     <ImageView
         android:id="@+id/img"
-        android:layout_width="74dp"
-        android:layout_height="74dp"
+        android:layout_width="60dp"
+        android:layout_height="78dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_alignTop="@+id/title"
-        android:layout_margin="5dp"
+        android:layout_marginLeft="11dp"
+        android:layout_marginRight="2dp"
+        android:contentDescription="@string/jornals"
         android:src="@drawable/ic_noimages" />
 
     <TextView
@@ -19,67 +23,87 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginLeft="11dp"
+        android:layout_marginTop="2dp"
+        android:textSize="20sp"
         android:layout_toRightOf="@+id/img"
-        android:text="text"
-        android:textSize="16sp" />
+        android:text="Text title" />
 
     <ImageView
         android:id="@+id/aac"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="30dp"
+        android:layout_height="20dp"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/mp3"
-        android:layout_marginRight="5dp"
-        android:src="@drawable/ic_none_type"
+        android:layout_marginRight="11dp"
+        android:contentDescription="@string/rss_aac"
+        android:src="@drawable/ic_aac_0"
         android:layout_alignParentBottom="true" />
 
     <ImageView
         android:id="@+id/mp3"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="30dp"
+        android:layout_height="20dp"
         android:layout_alignTop="@+id/audio"
         android:layout_marginRight="2dp"
         android:layout_toLeftOf="@+id/aac"
-        android:src="@drawable/ic_none_type"
+        android:contentDescription="@string/rss_mp3"
+        android:src="@drawable/ic_mp3_0"
         android:layout_alignParentBottom="true" />
 
     <ImageView
         android:id="@+id/audio"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:layout_alignTop="@+id/epub"
         android:layout_toLeftOf="@+id/mp3"
+        android:layout_marginRight="2dp"
+        android:contentDescription="@string/jornals"
         android:src="@drawable/ic_icon_audio"
         android:layout_alignParentBottom="true" />
 
     <ImageView
         android:id="@+id/epub"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="30dp"
+        android:layout_height="20dp"
         android:layout_alignTop="@+id/pdf"
         android:layout_marginRight="2dp"
         android:layout_toLeftOf="@+id/audio"
-        android:src="@drawable/ic_none_type"
+        android:contentDescription="@string/rss_epub"
+        android:src="@drawable/ic_epub_0"
         android:layout_alignParentBottom="true" />
 
     <ImageView
         android:id="@+id/pdf"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="30dp"
+        android:layout_height="20dp"
         android:layout_alignTop="@+id/digitalpub"
         android:layout_marginRight="2dp"
         android:layout_toLeftOf="@+id/epub"
-        android:src="@drawable/ic_none_type"
+        android:contentDescription="@string/rss_pdf"
+        android:src="@drawable/ic_pdf_0"
         android:layout_alignParentBottom="true" />
 
     <ImageView
         android:id="@+id/digitalpub"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:layout_alignBottom="@+id/img"
         android:layout_toLeftOf="@+id/pdf"
+        android:layout_marginRight="2dp"
+        android:contentDescription="@string/jornals"
         android:src="@drawable/ic_icon_digitalpub"
         android:layout_alignParentBottom="true" />
+
+    TextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/title"
+        android:text="text"
+        android:textSize="14sp"
+        android:textColor="@color/text_dark_gray"
+        android:textStyle="italic"
+        android:layout_below="@+id/title" />
 
 </RelativeLayout>

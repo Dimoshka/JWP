@@ -31,7 +31,7 @@ public class class_downloads_files extends Service {
 
     public static final int SERVICE_ID = 0x101104;
     public static final int BYTES_BUFFER_SIZE = 2 * 1024;
-    public class_functions funct = new class_functions();
+    public class_functions funct = new class_functions(getBaseContext());
     private NotificationManager notificationManager;
     private final IBinder binder = new FileDownloadBinder();
     private AsyncDownloadTask task = null;
@@ -65,7 +65,7 @@ public class class_downloads_files extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         try {
             Log.d("JWP" + getClass().getName(), "onStartCommand");
-            String dir = funct.get_dir_app(getBaseContext()) + "/downloads/";
+            String dir = funct.get_dir_app() + "/downloads/";
             File Directory = new File(dir);
             if (!Directory.isDirectory()) {
                 Directory.mkdirs();
@@ -82,7 +82,7 @@ public class class_downloads_files extends Service {
             task = new AsyncDownloadTask();
             task.execute();
         } catch (Exception e) {
-            funct.send_bug_report(getBaseContext(), e, getClass().getName(), 83);
+            funct.send_bug_report(e);
         }
         return START_STICKY;
     }
@@ -127,15 +127,14 @@ public class class_downloads_files extends Service {
                     Log.d("JWP" + getClass().getName(), "Update to 1 - "
                             + localFile.getName());
 
-                    class_sqlite dbOpenHelper = new class_sqlite(this);
+                    class_sqlite dbOpenHelper = new class_sqlite(this, funct);
                     SQLiteDatabase database = dbOpenHelper.openDataBase();
                     funct.update_file_isn(database, localFile.getName(), 1);
                     dbOpenHelper.close();
                 }
             }
         } catch (Exception e) {
-            funct.send_bug_report(getBaseContext(), e, getClass().getName(),
-                    145);
+            funct.send_bug_report(e);
         }
     }
 
@@ -238,7 +237,7 @@ public class class_downloads_files extends Service {
                             + remoteFilepath + "' => '" + localFilepath + "'");
 
                     File tempFile = File.createTempFile("jwp_", "_temp",
-                            new File(funct.get_dir_app(getBaseContext())
+                            new File(funct.get_dir_app()
                                     + "/downloads/temp/"));
 
                     try {
@@ -321,8 +320,7 @@ public class class_downloads_files extends Service {
                         success = 0;
 
                     } catch (Exception e) {
-                        funct.send_bug_report(getBaseContext(), e, getClass()
-                                .getName(), 300);
+                        funct.send_bug_report(e);
 
                         showNotification_popup(
                                 getString(R.string.download_failed),
@@ -334,8 +332,7 @@ public class class_downloads_files extends Service {
                     now_targetFile++;
                 }
             } catch (Exception e) {
-                funct.send_bug_report(getBaseContext(), e,
-                        getClass().getName(), 319);
+                funct.send_bug_report(e);
             }
             return null;
         }
@@ -360,8 +357,7 @@ public class class_downloads_files extends Service {
                         getString(R.string.download_finished),
                         getApplicationContext());
             } catch (Exception e) {
-                funct.send_bug_report(getBaseContext(), e,
-                        getClass().getName(), 346);
+                funct.send_bug_report(e);
             }
         }
     }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <string name="db_name" tools:ignore="MissingTranslation">"jwp.sqlite"</string>
+    <string name="db_name" tools:ignore="MissingTranslation">"jwp.sqlite3"</string>
     <string name="db_version" tools:ignore="MissingTranslation">"4"</string>
     <string name="app_dir" tools:ignore="MissingTranslation">"JWP"</string>
 
@@ -33,6 +33,7 @@ Using this program, you will always have access to current issues of the journal
 You will have to download publications in different languages ​​and in different formats (pdf, epub, mp3, aac).
 And also to receive news from the site www.jw.org.
 The program works as RSS client."</string>
+
     <string name="update_all_at_once">"Update all at once"</string>
     <string name="update_all_at_once_summary">"Update logs, news, books and brochures simultaneously"</string>
     <string name="books_brochures">"Books and brochures"</string>

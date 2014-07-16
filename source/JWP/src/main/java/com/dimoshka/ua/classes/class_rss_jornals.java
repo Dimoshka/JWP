@@ -24,14 +24,12 @@ import java.util.List;
 
 public class class_rss_jornals {
     static final String URL_FEED = "http://www.jw.org/apps/index.xjp?option=sFFZRQVNZNT&rln=%s&rmn=%s&rfm=%s&rpf=&rpe=";
-    static final String URL_IMG = "http://assets.jw.org/assets/a/{code_pub_shot}{YY}/{YYYYMMDD}/{code_pub_shot}{YY}_{YYYYMMDD}_{code_lng}/{code_pub}_{code_lng}_{YYYYMMDD}.prd_md.jpg";
-    // http://www.jw.org/apps/index.xjp?option=sFFZRQVNZNT&rln=U&rmn=w&rfm=m4b
-    // wp_U_20130301
+    static final String URL_IMG = "http://assets.jw.org/assets/a/{code_pub_shot}{YY}/{YYYYMMDD}/{code_pub_shot}{YY}_{YYYYMMDD}_{code_lng}/{code_pub}_{code_lng}_{YYYYMMDD}_md.jpg";
 
     private class_rss_provider rssfeedprovider;
     private SQLiteDatabase database;
 
-    public class_functions funct = new class_functions();
+    public class_functions funct;
     private Activity activity;
     private Handler handler;
     private Integer id_ln = 0;
@@ -51,10 +49,11 @@ public class class_rss_jornals {
     private AsyncTask task;
 
     public class_rss_jornals(Activity activity, int id_lang, Handler handler,
-                             SQLiteDatabase database) {
+                             SQLiteDatabase database, class_functions funct) {
         this.activity = activity;
         this.handler = handler;
         this.database = database;
+        this.funct = funct;
         prefs = PreferenceManager.getDefaultSharedPreferences(activity);
         get_language(id_lang);
         get_publication();
@@ -70,7 +69,7 @@ public class class_rss_jornals {
     }
 
     public Integer get_language(int id) {
-        Cursor cursor = funct.get_language(database, id, activity);
+        Cursor cursor = funct.get_language(database, id);
         cursor.moveToFirst();
         if (cursor.getCount() > 0) {
             id_ln = cursor.getInt(cursor.getColumnIndex("_id"));
@@ -106,7 +105,7 @@ public class class_rss_jornals {
                 cursor_pub.moveToNext();
             }
         } catch (Exception e) {
-            funct.send_bug_report(activity, e, getClass().getName(), 107);
+            funct.send_bug_report(e);
         }
     }
 
@@ -181,7 +180,8 @@ public class class_rss_jornals {
                                     name = name.substring(0, name.length() - 3);
                                 Cursor cur = database.rawQuery(
                                         "select _id, img from magazine where `name` = '"
-                                                + name + "'", null);
+                                                + name + "'", null
+                                );
                                 long id_magazine = 0;
                                 Integer img = img(name, sim_format, date);
                                 Log.e("JWP", "img_ok - " + img.toString());
@@ -228,7 +228,7 @@ public class class_rss_jornals {
                 }
 
             } catch (Exception e) {
-                funct.send_bug_report(activity, e, getClass().getName(), 197);
+                funct.send_bug_report(e);
             }
             return null;
         }
@@ -237,7 +237,7 @@ public class class_rss_jornals {
             Integer img = 0;
             if (prefs.getBoolean("downloads_img", true)) {
                 if (funct.ExternalStorageState()) {
-                    String dir = funct.get_dir_app(activity) + "/img/";
+                    String dir = funct.get_dir_app() + "/img/";
                     File Directory = new File(dir);
                     if (!Directory.isDirectory()) {
                         Directory.mkdirs();
@@ -273,7 +273,7 @@ public class class_rss_jornals {
                         url_str = url_str.replace("{YYYYMMDD}",
                                 format.format(date));
 
-                        if (funct.load_img(activity, dir, name, url_str)) {
+                        if (funct.load_img(dir, name, url_str)) {
                             Log.i("JWP_image", name
                                     + " - file download complete!");
                             img = 1;
@@ -304,10 +304,11 @@ public class class_rss_jornals {
                                     R.string.jornals),
                             activity.getResources().getString(
                                     R.string.dialog_loaing_rss), true, true, new DialogInterface.OnCancelListener() {
-                        public void onCancel(DialogInterface pd) {
-                            task.cancel(true);
-                        }
-                    });
+                                public void onCancel(DialogInterface pd) {
+                                    task.cancel(true);
+                                }
+                            }
+                    );
         }
 
         @Override

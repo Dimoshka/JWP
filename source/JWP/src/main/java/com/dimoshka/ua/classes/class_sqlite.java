@@ -12,13 +12,14 @@ public class class_sqlite extends SQLiteOpenHelper {
 
     public SQLiteDatabase database;
 
-    public class_functions funct = new class_functions();
+    private class_functions funct;
     private Context context;
 
-    public class_sqlite(Context context) {
+    public class_sqlite(Context context, class_functions funct) {
         super(context, context.getString(R.string.db_name), null, Integer
                 .valueOf(context.getString(R.string.db_version)));
         this.context = context;
+        this.funct = funct;
         database = this.getWritableDatabase();
     }
 
@@ -64,7 +65,7 @@ public class class_sqlite extends SQLiteOpenHelper {
             database.execSQL("CREATE INDEX idx_files ON files (id_magazine COLLATE NOCASE ASC, id_type COLLATE NOCASE ASC);");
         } catch (Exception ex) {
             Log.e("JWP", ex.toString());
-            funct.send_bug_report(context, ex, getClass().getName(), 63);
+            funct.send_bug_report(ex);
         }
     }
 
@@ -72,30 +73,13 @@ public class class_sqlite extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase database, int oldVersion,
                           int newVersion) {
         Log.i("JWP" + getClass().getName(), "Start update SQLITE");
-        switch (oldVersion) {
-            case 1:
-                // -- Table: magazine
-                database.execSQL("ALTER TABLE [magazine] ADD link_img VARCHAR(256);");
-                database.execSQL("ALTER TABLE [magazine] ADD title VARCHAR(128);");
-                // -- Table: publication
-                database.execSQL("INSERT INTO [publication] ([_id], [name], [code]) VALUES (4, 'Books and brochures', 'b');");
-                // -- Table: magazine
-                database.execSQL("INSERT INTO [magazine] ([_id], [name], [title], [id_pub], [id_lang], [img], [link_img], [date]) VALUES (5334, 'bh_U.pdf', 'Чему на самом деле учит Библия?', 4, 3, 0, 'http://www.jw.org/assets/a/bh/bh_U/bh_U.prd_md.jpg', '20130517');");
-                database.execSQL("INSERT INTO [magazine] ([_id], [name], [title], [id_pub], [id_lang], [img], [link_img], [date]) VALUES (5913, 'yb13_U.pdf', 'Ежегодник Свидетелей Иеговы 2013', 4, 3, 0, 'http://www.jw.org/assets/a/yb13/yb13_U/yb13_U.prd_md.jpg', '20130517');");
-                // -- Table: files
-                database.execSQL("INSERT INTO [files] ([_id], [id_magazine], [id_type], [name], [link], [pubdate], [title], [file]) VALUES (null, 5334, 2, 'bh_U.pdf', 'http://download.jw.org/files/media_books/5e/bh_U.pdf', '20130517', '', 0);");
-                database.execSQL("INSERT INTO [files] ([_id], [id_magazine], [id_type], [name], [link], [pubdate], [title], [file]) VALUES (null, 5913, 2, 'yb13_U.pdf', 'http://download.jw.org/files/media_books/0f/yb13_U.pdf', '20130517', '', 0);");
-                break;
-            default:
-                database.execSQL("DROP TABLE IF EXISTS type");
-                database.execSQL("DROP TABLE IF EXISTS news");
-                database.execSQL("DROP TABLE IF EXISTS files");
-                database.execSQL("DROP TABLE IF EXISTS language");
-                database.execSQL("DROP TABLE IF EXISTS publication");
-                database.execSQL("DROP TABLE IF EXISTS magazine");
-                onCreate(database);
-                break;
-        }
+        database.execSQL("DROP TABLE IF EXISTS type");
+        database.execSQL("DROP TABLE IF EXISTS news");
+        database.execSQL("DROP TABLE IF EXISTS files");
+        database.execSQL("DROP TABLE IF EXISTS language");
+        database.execSQL("DROP TABLE IF EXISTS publication");
+        database.execSQL("DROP TABLE IF EXISTS magazine");
+        onCreate(database);
     }
 
     public void close() {

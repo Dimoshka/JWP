@@ -13,8 +13,8 @@ android {
     defaultConfig {
         targetSdkVersion 19
         minSdkVersion 9
-        versionCode 18
-        versionName "2.0.0.8"
+        versionCode 20
+        versionName "3.0.0.0"
     }
 
     signingConfigs {
@@ -39,13 +39,13 @@ android {
             release {
                 debuggable false
                 runProguard true
-                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
                 signingConfig signingConfigs.release
             }
             debug {
                 debuggable true
                 runProguard false
-                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
                 signingConfig signingConfigs.debug
             }
         }
