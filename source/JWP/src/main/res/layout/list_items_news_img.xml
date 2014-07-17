@@ -26,7 +26,7 @@
         android:layout_toRightOf="@+id/img"
         android:layout_toEndOf="@+id/img"
         android:textSize="14sp"
-        android:layout_marginLeft="4dp" />
+        android:layout_marginLeft="11dp" />
 
     <TextView
         android:id="@+id/date"

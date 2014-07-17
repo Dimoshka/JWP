@@ -1,8 +1,8 @@
 package com.dimoshka.ua.classes;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -25,14 +25,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class class_rss_news {
-    //static final String URL_FEED = "http://www.jw.org/%s/rss/LatestNewsList/feed.xml";
-    static final String URL_FEED = "http://www.jw.org/%s/rss/WhatsNewWebArticles/feed.xml";
+    static final String URL_FEED_NEWS = "http://www.jw.org/%s/rss/LatestNewsList/feed.xml";
+    static final String URL_FEED_NEW_IN_SITE = "http://www.jw.org/%s/rss/WhatsNewWebArticles/feed.xml";
 
     private class_rss_provider rssfeedprovider;
     private SQLiteDatabase database;
 
     public class_functions funct;
-    private Activity activity;
+    private Context context;
     private Handler handler;
     private Integer id_ln = 0;
 
@@ -40,20 +40,18 @@ public class class_rss_news {
     public SharedPreferences prefs;
     private AsyncTask task;
 
-    public class_rss_news(Activity activity, int id_lang, Handler handler,
+    public class_rss_news(Context context, int id_lang, Handler handler,
                           SQLiteDatabase database, class_functions funct) {
-        this.activity = activity;
+        this.context = context;
         this.handler = handler;
         this.database = database;
         this.funct = funct;
-        prefs = PreferenceManager.getDefaultSharedPreferences(activity);
+        prefs = PreferenceManager.getDefaultSharedPreferences(context);
         get_language(id_lang);
     }
 
-    @SuppressWarnings("deprecation")
     public Integer get_language(int id) {
         Cursor cursor = funct.get_language(database, id);
-        activity.startManagingCursor(cursor);
         cursor.moveToFirst();
         if (cursor.getCount() > 0) {
             id_ln = cursor.getInt(cursor.getColumnIndex("_id"));
@@ -62,7 +60,6 @@ public class class_rss_news {
             id_ln = 1;
             ln_prefix = "en/news";
         }
-        activity.stopManagingCursor(cursor);
         return id_ln;
     }
 
@@ -70,7 +67,7 @@ public class class_rss_news {
         try {
             task = new ReadFeedTask().execute();
         } catch (Exception e) {
-            Log.e("JWP_" + getClass().getName(), e.toString());
+            Log.d("JWP_" + getClass().getName(), e.toString());
         }
     }
 
@@ -81,19 +78,19 @@ public class class_rss_news {
         @Override
         protected Void doInBackground(Void... paramArrayOfVoid) {
             try {
-                rssfeedprovider = new class_rss_provider();
-                String feed = String.format(URL_FEED, ln_prefix);
+                rssfeedprovider = new class_rss_provider(context, funct);
+                String feed = String.format(URL_FEED_NEW_IN_SITE, ln_prefix);
                 Log.d("JWP-news", feed);
-                this.rss_list = rssfeedprovider.parse(feed, activity);
+                this.rss_list = rssfeedprovider.parse(feed);
 
                 for (int i = 0; i < rss_list.size(); i++) {
                     if (isCancelled()) {
                         int currentapiVersion = android.os.Build.VERSION.SDK_INT;
                         if (currentapiVersion >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-                            Log.e("JWP", "isCancelled+");
+                            Log.d("JWP", "isCancelled+");
                             if (dialog != null)
                                 dialog.dismiss();
-                            Log.e("JWP", "onPostExecute+");
+                            Log.d("JWP", "onPostExecute+");
                             handler.sendEmptyMessage(1);
                         }
                         break;
@@ -146,7 +143,7 @@ public class class_rss_news {
                     init.put("pubdate", format.format(date));
                     id_news = database.insertWithOnConflict("news", null, init,
                             SQLiteDatabase.CONFLICT_IGNORE);
-                    if (id_news != 0) {
+                    if (id_news > -1) {
                         int img = img(id_news, link_img);
                         ContentValues init2 = new ContentValues();
                         init2.put("img", img);
@@ -161,22 +158,21 @@ public class class_rss_news {
             return null;
         }
 
-        protected int img(long id_news, String link_img) {
+        protected int img(long _id, String link_img) {
             int img = 0;
             if (prefs.getBoolean("downloads_img", true)) {
                 if (funct.ExternalStorageState()) {
-                    String dir = funct.get_dir_app() + "/img/";
-                    File Directory = new File(dir);
-                    if (!Directory.isDirectory()) {
-                        Directory.mkdirs();
+                    File dir = new File(funct.get_dir_app() + "/img/news/");
+                    if (!dir.isDirectory()) {
+                        dir.mkdirs();
                     }
-                    String name = "news_" + id_news;
+                    String name = _id + "";
                     if (link_img.length() > 0) {
-                        File imgFile = new File(dir + "/img/" + name
+                        File imgFile = new File(dir.getAbsolutePath() + name
                                 + ".jpg");
                         if (!imgFile.exists()) {
                             Log.i("JWP_image", name + " - no found!");
-                            if (funct.load_img(dir, name, link_img)) {
+                            if (funct.load_img(dir.getAbsolutePath(), name, link_img)) {
                                 Log.i("JWP_image", name
                                         + " - file download complete!");
                                 img = 1;
@@ -194,17 +190,17 @@ public class class_rss_news {
         protected void onPostExecute(Void result) {
             if (dialog != null)
                 dialog.dismiss();
-            Log.e("JWP", "onPostExecute+");
+            Log.d("JWP", "onPostExecute+");
             handler.sendEmptyMessage(1);
         }
 
         @Override
         protected void onPreExecute() {
             this.dialog = ProgressDialog
-                    .show(activity,
-                            activity.getResources().getString(
+                    .show(context,
+                            context.getResources().getString(
                                     R.string.news),
-                            activity.getResources().getString(
+                            context.getResources().getString(
                                     R.string.dialog_loaing_rss), true, true, new DialogInterface.OnCancelListener() {
                                 public void onCancel(DialogInterface pd) {
                                     task.cancel(true);

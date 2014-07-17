@@ -56,11 +56,9 @@ public class class_books_brochures {
                                     "select _id, name, img, link_img from magazine where img=0 and id_pub='4';",
                                     null);
                     cursor.moveToFirst();
-                    String dir = funct.get_dir_app() + "/img/";
-
-                    File Directory = new File(dir);
-                    if (!Directory.isDirectory()) {
-                        Directory.mkdirs();
+                    File dir = new File(funct.get_dir_app() + "/img/books_brochures/");
+                    if (!dir.isDirectory()) {
+                        dir.mkdirs();
                     }
 
                     for (int i = 0; i < cursor.getCount(); i++) {
@@ -84,12 +82,11 @@ public class class_books_brochures {
                                 .getColumnIndex("link_img"));
                         ContentValues initialValues = new ContentValues();
 
-                        File imgFile = new File(dir + "/img/" + name + ".jpg");
+                        File imgFile = new File(dir.getAbsolutePath() + name + ".jpg");
                         if (!imgFile.exists()) {
                             Log.i("JWP_image", name + " - not found!");
-
                             try {
-                                if (funct.load_img(dir, name, link_img)) {
+                                if (funct.load_img(dir.getAbsolutePath(), name, link_img)) {
                                     Log.i("JWP_image", name
                                             + " - file download complete!");
                                     initialValues.put("img", "1");

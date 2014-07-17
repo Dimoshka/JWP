@@ -21,6 +21,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
 import android.widget.Toast;
 
 import com.androidquery.AQuery;
@@ -71,6 +72,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         BugSenseHandler.initAndStartSession(this, "63148966");
+        //requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.main);
 
         aq = new AQuery(this);
@@ -220,7 +222,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
                     if (refresh_all) {
                         rss_news.get_all_feeds();
                     } else {
-                        Log.e("JWP", "refrashe afte load");
+                        Log.d("JWP", "refrashe afte load");
                         refresh();
                     }
                     break;
@@ -234,7 +236,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 1:
-                    Log.e("JWP", "refrashe afte load");
+                    Log.d("JWP", "refrashe afte load");
                     refresh();
                     break;
             }
@@ -251,7 +253,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
                     if (refresh_all) {
                         rss_jornals.get_all_feeds();
                     } else {
-                        Log.e("JWP", "refrashe afte load");
+                        Log.d("JWP", "refrashe afte load");
                         refresh();
                     }
             }

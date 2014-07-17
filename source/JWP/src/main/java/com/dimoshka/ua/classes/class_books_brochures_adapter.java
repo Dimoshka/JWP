@@ -45,14 +45,13 @@ public class class_books_brochures_adapter extends SimpleCursorAdapter {
             String title = c.getString(c.getColumnIndex("title"));
 
             String[] id_type_files = c.getString(c.getColumnIndex("id_type_files")).split(",");
-            //String[] name_files = c.getString(c.getColumnIndex("name_files")).split(",");
             String[] file_files = c.getString(c.getColumnIndex("file_files")).split(",");
 
 
             aq.id(R.id.title).text(title);
 
             if (img) {
-                File imgFile = new File(funct.get_dir_app() + "/img/"
+                File imgFile = new File(funct.get_dir_app() + "/img/books_brochures/"
                         + name + ".jpg");
                 if (imgFile.exists()) {
                     aq.id(R.id.img).image(imgFile, false, 78, new BitmapAjaxCallback() {

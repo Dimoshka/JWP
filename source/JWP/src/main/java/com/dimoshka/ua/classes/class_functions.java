@@ -144,15 +144,26 @@ public class class_functions {
 
     public void send_bug_report(Exception ex) {
         try {
-            StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
             String message = "";
-            if (stackTraceElements.length >= 3) {
-                StackTraceElement element = stackTraceElements[2];
-                String className = element.getClassName();
-                String methodName = element.getMethodName();
-                message = className + ": " + methodName;
+            ex.printStackTrace();
+            StackTraceElement[] stackElements = ex.getStackTrace();
+            message += "The " + stackElements.length + " element"
+                    + ((stackElements.length == 1) ? "" : "s") + " of the stack trace:\n";
+            for (int lcv = 0; lcv < stackElements.length; lcv++) {
+                message += "File name: " + stackElements[lcv].getFileName();
+                message += "Line number: " + stackElements[lcv].getLineNumber();
+                String className = stackElements[lcv].getClassName();
+                String packageName = extractPackageName(className);
+                String simpleClassName = extractSimpleClassName(className);
+                message += "Package name: " + ("".equals(packageName) ? "[default package]" : packageName);
+                message += "Full class name: " + className;
+                message += "Simple class name: " + simpleClassName;
+                message += "Unmunged class name: " + unmungeSimpleClassName(simpleClassName);
+                message += "Direct class name: " + extractDirectClassName(simpleClassName);
+                message += "Method name: " + stackElements[lcv].getMethodName();
+                message += "Native method?: " + stackElements[lcv].isNativeMethod();
+                message += "toString(): " + stackElements[lcv].toString();
             }
-
             Log.e(context.getString(R.string.app_name_shot) + " - error: " + message,
                     ex.toString());
             BugSenseHandler.addCrashExtraData("class_name", message);
@@ -162,6 +173,43 @@ public class class_functions {
             Log.e("error: functionn",
                     ex.toString());
         }
+    }
+
+    public static String extractPackageName(String fullClassName) {
+        if ((null == fullClassName) || ("".equals(fullClassName)))
+            return "";
+
+        int lastDot = fullClassName.lastIndexOf('.');
+        if (0 >= lastDot)
+            return "";
+        return fullClassName.substring(0, lastDot);
+    }
+
+    public static String extractSimpleClassName(String fullClassName) {
+        if ((null == fullClassName) || ("".equals(fullClassName)))
+            return "";
+
+        int lastDot = fullClassName.lastIndexOf('.');
+        if (0 > lastDot)
+            return fullClassName;
+
+        return fullClassName.substring(++lastDot);
+    }
+
+    public static String extractDirectClassName(String simpleClassName) {
+        if ((null == simpleClassName) || ("".equals(simpleClassName)))
+            return "";
+
+        int lastSign = simpleClassName.lastIndexOf('$');
+        if (0 > lastSign)
+            return simpleClassName;
+        return simpleClassName.substring(++lastSign);
+    }
+
+    public static String unmungeSimpleClassName(String simpleClassName) {
+        if ((null == simpleClassName) || ("".equals(simpleClassName)))
+            return "";
+        return simpleClassName.replace('$', '.');
     }
 
     public boolean load_img(String dir, String name, String link_img) {

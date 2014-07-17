@@ -29,9 +29,9 @@ import java.util.Map;
 
 public class class_downloads_files extends Service {
 
-    public static final int SERVICE_ID = 0x101104;
-    public static final int BYTES_BUFFER_SIZE = 2 * 1024;
-    public class_functions funct = new class_functions(getBaseContext());
+    private static final int SERVICE_ID = 0x101104;
+    private static final int BYTES_BUFFER_SIZE = 2 * 1024;
+    private class_functions funct;
     private NotificationManager notificationManager;
     private final IBinder binder = new FileDownloadBinder();
     private AsyncDownloadTask task = null;
@@ -46,16 +46,13 @@ public class class_downloads_files extends Service {
         }
     }
 
-    public static boolean isRunning() {
-        return isRunning;
-    }
-
     @Override
     public void onCreate() {
         if (isRunning)
             return;
         else
-            isRunning = true;
+            funct = new class_functions(getBaseContext());
+        isRunning = true;
         targetFiles = new ArrayList<Map<String, String>>();
         notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         Log.i("JWP" + getClass().getName(), "START SERVICE");
@@ -83,6 +80,7 @@ public class class_downloads_files extends Service {
             task.execute();
         } catch (Exception e) {
             funct.send_bug_report(e);
+            Log.e("err", e.toString());
         }
         return START_STICKY;
     }
@@ -139,7 +137,7 @@ public class class_downloads_files extends Service {
     }
 
     protected int getNotificationIcon() {
-        return R.drawable.ic_launcher;
+        return R.drawable.ic_stat_logo;
     }
 
     protected RemoteViews getProgressView(int currentNumFile,
@@ -153,39 +151,37 @@ public class class_downloads_files extends Service {
                 * currentReceivedBytes / totalNumBytes, false);
         contentView.setTextViewText(R.id.text2,
                 String.format("(%d / %d)", currentNumFile, totalNumFiles));
+        contentView.setTextViewText(R.id.text3, getStringByteSize(currentReceivedBytes) + " / " + getStringByteSize(totalNumBytes));
         return contentView;
     }
 
 
-    protected void showNotification_popup(String ticker, String title,
-                                          String content, Context context) {
-        PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
-                new Intent(), Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
-                .setContentTitle(title).setContentText(ticker)
-                .setSmallIcon(getNotificationIcon()).setLargeIcon(null)
-                .setContentIntent(contentIntent).setAutoCancel(true);
-        Notification
-                notification = builder.build();
+    protected void showNotification_popup(String ticker, String title, String text, Context context) {
+        NotificationCompat.Builder nb = new NotificationCompat.Builder(context)
+                .setSmallIcon(getNotificationIcon())
+                .setAutoCancel(true)
+                .setTicker(ticker)
+                .setContentText(text)
+                .setContentIntent(PendingIntent.getActivity(context, 0, new Intent(), PendingIntent.FLAG_CANCEL_CURRENT))
+                .setWhen(System.currentTimeMillis())
+                .setContentTitle(title)
+                .setDefaults(Notification.DEFAULT_ALL);
+        Notification notification = nb.build();
         notificationManager.notify(SERVICE_ID, notification);
-
     }
 
 
-    protected void showNotification(RemoteViews remoteView, String ticker,
-                                    Context context) {
-        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, new
-                Intent(), Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
-                .setContentTitle(ticker).setContentText(ticker)
-                .setSmallIcon(getNotificationIcon()).setLargeIcon(null)
-                .setContentIntent(contentIntent).setAutoCancel(true)
+    protected void showNotification(RemoteViews remoteView, String ticker, Context context) {
+        NotificationCompat.Builder nb = new NotificationCompat.Builder(context)
+                .setContentTitle(ticker)
+                .setContentText(ticker)
+                .setSmallIcon(getNotificationIcon())
+                .setLargeIcon(null)
+                .setContentIntent(PendingIntent.getActivity(context, 0, new Intent(), PendingIntent.FLAG_CANCEL_CURRENT))
+                .setAutoCancel(false)
                 .setContent(remoteView);
-
-        Notification notification = builder.build();
+        Notification notification = nb.build();
         notificationManager.notify(SERVICE_ID, notification);
-
     }
 
     protected int getConnectTimeout() {
@@ -238,7 +234,8 @@ public class class_downloads_files extends Service {
 
                     File tempFile = File.createTempFile("jwp_", "_temp",
                             new File(funct.get_dir_app()
-                                    + "/downloads/temp/"));
+                                    + "/downloads/temp/")
+                    );
 
                     try {
                         File localFile = new File(localFilepath);
@@ -297,7 +294,8 @@ public class class_downloads_files extends Service {
                             } else {
                                 Log.i("JWP" + getClass().getName(),
                                         "file size unknown for remote file: "
-                                                + remoteFilepath);
+                                                + remoteFilepath
+                                );
 
                                 showNotification_popup(
                                         getString(R.string.download_failed),
@@ -305,7 +303,8 @@ public class class_downloads_files extends Service {
                                         "Failed: "
                                                 + (new File(remoteFilepath))
                                                 .getName(),
-                                        getApplicationContext());
+                                        getApplicationContext()
+                                );
 
                                 success = 0;
                             }
@@ -315,8 +314,9 @@ public class class_downloads_files extends Service {
                         showNotification_popup(
                                 getString(R.string.download_failed),
                                 getString(R.string.download_title), "Failed: "
-                                + (new File(remoteFilepath)).getName(),
-                                getApplicationContext());
+                                        + (new File(remoteFilepath)).getName(),
+                                getApplicationContext()
+                        );
                         success = 0;
 
                     } catch (Exception e) {
@@ -325,8 +325,9 @@ public class class_downloads_files extends Service {
                         showNotification_popup(
                                 getString(R.string.download_failed),
                                 getString(R.string.download_title), "Failed: "
-                                + (new File(remoteFilepath)).getName(),
-                                getApplicationContext());
+                                        + (new File(remoteFilepath)).getName(),
+                                getApplicationContext()
+                        );
                         success = 0;
                     }
                     now_targetFile++;

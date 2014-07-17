@@ -1,8 +1,8 @@
 package com.dimoshka.ua.classes;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -30,41 +30,35 @@ public class class_rss_jornals {
     private SQLiteDatabase database;
 
     public class_functions funct;
-    private Activity activity;
+    private Context context;
     private Handler handler;
     private Integer id_ln = 0;
-
     private String code_lng = "E";
-
     private ArrayList<Integer> id_pub = new ArrayList<Integer>();
-
     private ArrayList<String> code_pub = new ArrayList<String>();
     private Integer cur_pub = 0;
-
     private ArrayList<Integer> id_type = new ArrayList<Integer>();
-
     private ArrayList<String> code_type = new ArrayList<String>();
     private Integer cur_type = 0;
     public SharedPreferences prefs;
     private AsyncTask task;
 
-    public class_rss_jornals(Activity activity, int id_lang, Handler handler,
+    public class_rss_jornals(Context context, int id_lang, Handler handler,
                              SQLiteDatabase database, class_functions funct) {
-        this.activity = activity;
+        this.context = context;
         this.handler = handler;
         this.database = database;
         this.funct = funct;
-        prefs = PreferenceManager.getDefaultSharedPreferences(activity);
+        prefs = PreferenceManager.getDefaultSharedPreferences(context);
         get_language(id_lang);
         get_publication();
-
     }
 
     public void get_all_feeds() {
         try {
             task = new ReadFeedTask().execute();
         } catch (Exception e) {
-            Log.e("JWP_" + getClass().getName(), e.toString());
+            Log.d("JWP_" + getClass().getName(), e.toString());
         }
     }
 
@@ -121,10 +115,10 @@ public class class_rss_jornals {
                     if (isCancelled()) {
                         int currentapiVersion = android.os.Build.VERSION.SDK_INT;
                         if (currentapiVersion >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-                            Log.e("JWP", "isCancelled+");
+                            Log.d("JWP", "isCancelled+");
                             if (dialog != null)
                                 dialog.dismiss();
-                            Log.e("JWP", "onPostExecute+");
+                            Log.d("JWP", "onPostExecute+");
                             handler.sendEmptyMessage(1);
                         }
                         break;
@@ -136,13 +130,10 @@ public class class_rss_jornals {
                             load_pub = prefs.getBoolean("rss_epub", false);
                         } else if (s.equals("pdf")) {
                             load_pub = prefs.getBoolean("rss_pdf", true);
-
                         } else if (s.equals("mp3")) {
-                            load_pub = prefs.getBoolean("rss_mp3", false);
-
+                            load_pub = prefs.getBoolean("rss_mp3", true);
                         } else if (s.equals("m4b")) {
                             load_pub = prefs.getBoolean("rss_m4b", false);
-
                         }
 
                         if (load_pub) {
@@ -150,12 +141,11 @@ public class class_rss_jornals {
 
                             cur_type = b;
                             cur_pub = a;
-                            rssfeedprovider = new class_rss_provider();
+                            rssfeedprovider = new class_rss_provider(context, funct);
                             String feed = String.format(URL_FEED, code_lng,
                                     code_pub.get(cur_pub),
                                     code_type.get(cur_type));
-                            this.rss_list = rssfeedprovider.parse(feed,
-                                    activity);
+                            this.rss_list = rssfeedprovider.parse(feed);
 
                             for (int i = 0; i < rss_list.size(); i++) {
 
@@ -171,11 +161,11 @@ public class class_rss_jornals {
                                         "yyyy-MM-dd");
                                 Date date = funct.get_jwp_jornals_rss_date(
                                         name, code_pub.get(cur_pub), code_lng);
-                                Log.e("JWP_rss", "date = " + date.toString());
+                                Log.d("JWP_rss", "date = " + date.toString());
                                 String date_str = name.replace(
                                         code_pub.get(cur_pub) + "_", "");
                                 date_str = date_str.replace(code_lng + "_", "");
-                                Log.e("JWP_rss", "name = " + name);
+                                Log.d("JWP_rss", "name = " + name);
                                 if (date_str.length() > 8)
                                     name = name.substring(0, name.length() - 3);
                                 Cursor cur = database.rawQuery(
@@ -184,7 +174,7 @@ public class class_rss_jornals {
                                 );
                                 long id_magazine = 0;
                                 Integer img = img(name, sim_format, date);
-                                Log.e("JWP", "img_ok - " + img.toString());
+                                Log.d("JWP", "img_ok - " + img.toString());
                                 if (cur.getCount() > 0) {
                                     cur.moveToFirst();
                                     id_magazine = cur.getLong(cur
@@ -193,7 +183,7 @@ public class class_rss_jornals {
                                             .getColumnIndex("img"))) {
                                         ContentValues init = new ContentValues();
                                         init.put("img", img);
-                                        Log.e("JWP_img", "update img to " + img.toString());
+                                        Log.d("JWP_img", "update img to " + img.toString());
                                         database.update("magazine", init, "_id=?",
                                                 new String[]{String.valueOf(id_magazine)});
                                     }
@@ -205,7 +195,7 @@ public class class_rss_jornals {
                                     init1.put("id_lang", id_ln);
                                     init1.put("img", img);
                                     init1.put("date", dat_format.format(date));
-                                    Log.e("JWP_rss", "date_ok = " + dat_format.format(date).toString());
+                                    Log.d("JWP_rss", "date_ok = " + dat_format.format(date).toString());
                                     id_magazine = database.insert("magazine",
                                             null, init1);
                                 }
@@ -237,12 +227,11 @@ public class class_rss_jornals {
             Integer img = 0;
             if (prefs.getBoolean("downloads_img", true)) {
                 if (funct.ExternalStorageState()) {
-                    String dir = funct.get_dir_app() + "/img/";
-                    File Directory = new File(dir);
-                    if (!Directory.isDirectory()) {
-                        Directory.mkdirs();
+                    File dir = new File(funct.get_dir_app() + "/img/jornals/");
+                    if (!dir.isDirectory()) {
+                        dir.mkdirs();
                     }
-                    File imgFile = new File(dir + "/img/" + name + ".jpg");
+                    File imgFile = new File(dir.getAbsolutePath() + name + ".jpg");
                     if (!imgFile.exists()) {
                         Log.i("JWP_image", name + " - not found!");
                         String code_pub = "";
@@ -273,7 +262,7 @@ public class class_rss_jornals {
                         url_str = url_str.replace("{YYYYMMDD}",
                                 format.format(date));
 
-                        if (funct.load_img(dir, name, url_str)) {
+                        if (funct.load_img(dir.getAbsolutePath(), name, url_str)) {
                             Log.i("JWP_image", name
                                     + " - file download complete!");
                             img = 1;
@@ -292,17 +281,17 @@ public class class_rss_jornals {
         protected void onPostExecute(Void result) {
             if (dialog != null)
                 dialog.dismiss();
-            Log.e("JWP", "onPostExecute+");
+            Log.d("JWP", "onPostExecute+");
             handler.sendEmptyMessage(1);
         }
 
         @Override
         protected void onPreExecute() {
             this.dialog = ProgressDialog
-                    .show(activity,
-                            activity.getResources().getString(
+                    .show(context,
+                            context.getResources().getString(
                                     R.string.jornals),
-                            activity.getResources().getString(
+                            context.getResources().getString(
                                     R.string.dialog_loaing_rss), true, true, new DialogInterface.OnCancelListener() {
                                 public void onCancel(DialogInterface pd) {
                                     task.cancel(true);

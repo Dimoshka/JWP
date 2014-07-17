@@ -48,7 +48,7 @@ public class class_news_adapter extends SimpleCursorAdapter {
             aq.id(R.id.date).text(pubdate);
 
             if (img) {
-                File imgFile = new File(funct.get_dir_app() + "/img/news_"
+                File imgFile = new File(funct.get_dir_app() + "/img/news/"
                         + _id + ".jpg");
                 if (imgFile.exists()) {
                     aq.id(R.id.img).image(imgFile, false, 78, new BitmapAjaxCallback() {

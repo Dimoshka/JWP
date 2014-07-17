@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.support.v4.widget.SimpleCursorAdapter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,14 +48,13 @@ public class class_jornals_adapter extends SimpleCursorAdapter {
             SimpleDateFormat format = new SimpleDateFormat("d MMMM yyyy");
 
             String[] id_type_files = c.getString(c.getColumnIndex("id_type_files")).split(",");
-            //String[] name_files = c.getString(c.getColumnIndex("name_files")).split(",");
             String[] file_files = c.getString(c.getColumnIndex("file_files")).split(",");
 
             aq.id(R.id.title).text(format.format(date));
             aq.id(R.id.text).text(name);
 
             if (img) {
-                File imgFile = new File(funct.get_dir_app() + "/img/"
+                File imgFile = new File(funct.get_dir_app() + "/img/jornals/"
                         + name + ".jpg");
 
                 if (imgFile.exists()) {
