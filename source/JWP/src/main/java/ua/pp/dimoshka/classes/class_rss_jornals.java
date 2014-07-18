@@ -1,4 +1,4 @@
-package com.dimoshka.ua.classes;
+package ua.pp.dimoshka.classes;
 
 import android.app.ProgressDialog;
 import android.content.ContentValues;
@@ -13,8 +13,6 @@ import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-import com.dimoshka.ua.jwp.R;
-
 import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -22,18 +20,18 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import ua.pp.dimoshka.jwp.R;
+import ua.pp.dimoshka.jwp.main;
+
 public class class_rss_jornals {
     static final String URL_FEED = "http://www.jw.org/apps/index.xjp?option=sFFZRQVNZNT&rln=%s&rmn=%s&rfm=%s&rpf=&rpe=";
     static final String URL_IMG = "http://assets.jw.org/assets/a/{code_pub_shot}{YY}/{YYYYMMDD}/{code_pub_shot}{YY}_{YYYYMMDD}_{code_lng}/{code_pub}_{code_lng}_{YYYYMMDD}_md.jpg";
 
-    private class_rss_provider rssfeedprovider;
     private SQLiteDatabase database;
 
     public class_functions funct;
     private Context context;
     private Handler handler;
-    private Integer id_ln = 0;
-    private String code_lng = "E";
     private ArrayList<Integer> id_pub = new ArrayList<Integer>();
     private ArrayList<String> code_pub = new ArrayList<String>();
     private Integer cur_pub = 0;
@@ -43,14 +41,13 @@ public class class_rss_jornals {
     public SharedPreferences prefs;
     private AsyncTask task;
 
-    public class_rss_jornals(Context context, int id_lang, Handler handler,
+    public class_rss_jornals(Context context, Handler handler,
                              SQLiteDatabase database, class_functions funct) {
         this.context = context;
         this.handler = handler;
         this.database = database;
         this.funct = funct;
         prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        get_language(id_lang);
         get_publication();
     }
 
@@ -62,18 +59,6 @@ public class class_rss_jornals {
         }
     }
 
-    public Integer get_language(int id) {
-        Cursor cursor = funct.get_language(database, id);
-        cursor.moveToFirst();
-        if (cursor.getCount() > 0) {
-            id_ln = cursor.getInt(cursor.getColumnIndex("_id"));
-            code_lng = cursor.getString(cursor.getColumnIndex("code"));
-        } else {
-            id_ln = 1;
-            code_lng = "E";
-        }
-        return id_ln;
-    }
 
     private void get_publication() {
         try {
@@ -141,8 +126,8 @@ public class class_rss_jornals {
 
                             cur_type = b;
                             cur_pub = a;
-                            rssfeedprovider = new class_rss_provider(context, funct);
-                            String feed = String.format(URL_FEED, code_lng,
+                            class_rss_provider rssfeedprovider = new class_rss_provider(context, funct);
+                            String feed = String.format(URL_FEED, main.code_lng,
                                     code_pub.get(cur_pub),
                                     code_type.get(cur_type));
                             this.rss_list = rssfeedprovider.parse(feed);
@@ -160,11 +145,11 @@ public class class_rss_jornals {
                                 DateFormat dat_format = new SimpleDateFormat(
                                         "yyyy-MM-dd");
                                 Date date = funct.get_jwp_jornals_rss_date(
-                                        name, code_pub.get(cur_pub), code_lng);
+                                        name, code_pub.get(cur_pub), main.code_lng);
                                 Log.d("JWP_rss", "date = " + date.toString());
                                 String date_str = name.replace(
                                         code_pub.get(cur_pub) + "_", "");
-                                date_str = date_str.replace(code_lng + "_", "");
+                                date_str = date_str.replace(main.code_lng + "_", "");
                                 Log.d("JWP_rss", "name = " + name);
                                 if (date_str.length() > 8)
                                     name = name.substring(0, name.length() - 3);
@@ -192,7 +177,7 @@ public class class_rss_jornals {
                                     init1.put("name", name);
                                     init1.put("name", name);
                                     init1.put("id_pub", id_pub.get(cur_pub));
-                                    init1.put("id_lang", id_ln);
+                                    init1.put("id_lang", main.id_lng);
                                     init1.put("img", img);
                                     init1.put("date", dat_format.format(date));
                                     Log.d("JWP_rss", "date_ok = " + dat_format.format(date).toString());
@@ -251,7 +236,7 @@ public class class_rss_jornals {
                         else
                             url_str = url_str.replace("{code_pub_shot}", code_pub);
                         url_str = url_str.replace("{code_pub}", code_pub);
-                        url_str = url_str.replace("{code_lng}", code_lng);
+                        url_str = url_str.replace("{code_lng}", main.code_lng);
                         format.applyPattern("yy");
                         url_str = url_str.replace("{YY}",
                                 format.format(date));

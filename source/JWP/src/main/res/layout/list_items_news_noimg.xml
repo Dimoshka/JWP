@@ -39,15 +39,4 @@
         android:layout_alignEnd="@+id/title"
         android:textSize="10sp"
         android:layout_marginRight="11dp" />
-
-    ImageView
-    android:id="@+id/img"
-    android:layout_width="60dp"
-    android:layout_height="78dp"
-    android:contentDescription="@string/jornals"
-    android:src="@drawable/ic_noimages"
-    android:layout_toEndOf="@id/img"
-    android:layout_below="@+id/title"
-    android:layout_alignLeft="@+id/title"
-    android:layout_alignStart="@+id/title" />
 </RelativeLayout>

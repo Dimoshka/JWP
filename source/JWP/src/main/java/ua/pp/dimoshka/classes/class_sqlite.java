@@ -1,24 +1,19 @@
-package com.dimoshka.ua.classes;
+package ua.pp.dimoshka.classes;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.dimoshka.ua.jwp.R;
+import ua.pp.dimoshka.jwp.R;
 
 public class class_sqlite extends SQLiteOpenHelper {
-
-
     public SQLiteDatabase database;
-
     private class_functions funct;
-    private Context context;
 
     public class_sqlite(Context context, class_functions funct) {
         super(context, context.getString(R.string.db_name), null, Integer
                 .valueOf(context.getString(R.string.db_version)));
-        this.context = context;
         this.funct = funct;
         database = this.getWritableDatabase();
     }

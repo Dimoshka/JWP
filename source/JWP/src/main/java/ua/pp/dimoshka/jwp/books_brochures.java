@@ -1,4 +1,4 @@
-package com.dimoshka.ua.jwp;
+package ua.pp.dimoshka.jwp;
 
 import android.database.Cursor;
 import android.os.Bundle;
@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.dimoshka.ua.classes.class_books_brochures_adapter;
+import ua.pp.dimoshka.classes.class_books_brochures_adapter;
 
 public class books_brochures extends Fragment {
     private ListView list;
@@ -53,7 +53,7 @@ public class books_brochures extends Fragment {
                                     "left join language on magazine.id_lang=language._id " +
                                     "left join publication on magazine.id_pub=publication._id " +
                                     "left join (select id_magazine, GROUP_CONCAT(id_type) as id_type, GROUP_CONCAT(file) as file from files group by id_magazine) as files on magazine._id=files.id_magazine " +
-                                    "where magazine.id_lang='" + main.id_lang + "' and magazine.id_pub='4' order by magazine.name asc",
+                                    "where magazine.id_lang='" + main.id_lng + "' and magazine.id_pub='4' order by magazine.name asc",
                             null
                     );
 

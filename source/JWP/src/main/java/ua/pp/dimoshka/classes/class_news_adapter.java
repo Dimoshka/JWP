@@ -1,4 +1,4 @@
-package com.dimoshka.ua.classes;
+package ua.pp.dimoshka.classes;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -14,12 +14,11 @@ import android.widget.ImageView;
 import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxStatus;
 import com.androidquery.callback.BitmapAjaxCallback;
-import com.dimoshka.ua.jwp.R;
+import ua.pp.dimoshka.jwp.R;
 
 import java.io.File;
 
 public class class_news_adapter extends SimpleCursorAdapter {
-    private int layout;
     private class_functions funct;
     private SQLiteDatabase database;
 
@@ -27,7 +26,6 @@ public class class_news_adapter extends SimpleCursorAdapter {
                               Cursor c, String[] from, int[] to, int flags,
                               SQLiteDatabase database, class_functions funct) {
         super(context, layout, c, from, to, flags);
-        this.layout = layout;
         this.database = database;
         this.funct = funct;
     }

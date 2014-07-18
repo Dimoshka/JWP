@@ -40,9 +40,6 @@ The program works as RSS client."</string>
     <string name="player">"MP3 player"</string>
     <string name="player_open">"Open in player"</string>
     <string name="player_play">"Play"</string>
-    <string name="player_pause">"Pause"</string>
-    <string name="send_bug_report">"Send mail report of error&#8230;"</string>
-    <string name="not_email_client">"There are no email clients installed."</string>
     <string name="first_run_title">"First run"</string>
     <string name="first_run">"This is your first time running the program. Please go to settings and select the appropriate options for you. Then press the button - Download RSS."</string>
     <string name="no_internet">"No internet connection!"</string>
@@ -70,11 +67,8 @@ The program works as RSS client."</string>
     <string name="download_title">"Download files"</string>
     <string name="download_failed">"Error occurred during loading"</string>
     <string name="download_finished">"Download Complete!"</string>
-    <string name="download_finished_failed">"Download Complete ( %d with errors)."</string>
     <string name="download_cancelled">"Download canceled!"</string>
-    <string name="download_progress">"Download "</string>
     <string name="download_task_addeded">"File added to the download queue."</string>
-    <string name="select">"Select"</string>
     <string name="rss_pdf">"RSS - PDF"</string>
     <string name="rss_pdf_summary">"Load RSS feed PDF format"</string>
     <string name="rss_epub">"RSS - EPUB"</string>

@@ -1,4 +1,4 @@
-package com.dimoshka.ua.jwp;
+package ua.pp.dimoshka.jwp;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -28,27 +28,24 @@ import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
-import com.dimoshka.ua.classes.class_cursoradapter_player;
-import com.dimoshka.ua.classes.class_downloads_files;
-import com.dimoshka.ua.classes.class_functions;
-import com.dimoshka.ua.classes.class_mediaplayer;
-import com.dimoshka.ua.classes.class_sqlite;
 import com.google.analytics.tracking.android.EasyTracker;
 
 import java.io.File;
 
+import ua.pp.dimoshka.classes.class_cursoradapter_player;
+import ua.pp.dimoshka.classes.class_functions;
+import ua.pp.dimoshka.classes.class_mediaplayer;
+import ua.pp.dimoshka.classes.class_sqlite;
+import ua.pp.dimoshka.classes.service_downloads_files;
+
 public class player extends ActionBarActivity {
 
     private ImageButton buttonPlayStop;
-    private ImageButton ButtonNext;
-    private ImageButton ButtonBack;
     private SeekBar seekBar;
     private final Handler handler = new Handler();
-    private class_sqlite dbOpenHelper;
     private ListView listView;
     private Cursor cursor;
     private Integer id_magazine;
-    private class_cursoradapter_player scAdapter;
 
     private class_mediaplayer mediaplayer_class;
     private SharedPreferences prefs;
@@ -56,8 +53,6 @@ public class player extends ActionBarActivity {
     private class_functions funct;
     public int id_lang = 0;
     private OnSharedPreferenceChangeListener listener_pref;
-
-    private ActionBar actionBar;
 
     AudioManager audioManager;
     AFListener afListenerMusic;
@@ -78,12 +73,12 @@ public class player extends ActionBarActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.player);
-        actionBar = getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
         Bundle extras = getIntent().getExtras();
         id_magazine = extras.getInt("id_magazine");
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
         funct = new class_functions(this);
-        dbOpenHelper = new class_sqlite(this, funct);
+        class_sqlite dbOpenHelper = new class_sqlite(this, funct);
         database = dbOpenHelper.openDataBase();
         audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         initViews();
@@ -111,13 +106,12 @@ public class player extends ActionBarActivity {
             listView = (ListView) findViewById(R.id.list);
             buttonPlayStop = (ImageButton) findViewById(R.id.ButtonPlayStop);
 
-            ButtonNext = (ImageButton) findViewById(R.id.ButtonNext);
-            ButtonBack = (ImageButton) findViewById(R.id.ButtonBack);
+            ImageButton buttonNext = (ImageButton) findViewById(R.id.ButtonNext);
+            ImageButton buttonBack = (ImageButton) findViewById(R.id.ButtonBack);
 
             seekBar = (SeekBar) findViewById(R.id.SeekBar01);
 
-            mediaplayer_class = new class_mediaplayer(getApplicationContext(),
-                    buttonPlayStop, seekBar, handler_completion);
+            mediaplayer_class = new class_mediaplayer(buttonPlayStop, seekBar, handler_completion);
 
             buttonPlayStop.setOnClickListener(new OnClickListener() {
                 @Override
@@ -126,14 +120,14 @@ public class player extends ActionBarActivity {
                 }
             });
 
-            ButtonNext.setOnClickListener(new OnClickListener() {
+            buttonNext.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     buttonClick_Next();
                 }
             });
 
-            ButtonBack.setOnClickListener(new OnClickListener() {
+            buttonBack.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     buttonClick_Back();
@@ -204,7 +198,7 @@ public class player extends ActionBarActivity {
                 );
 
         startManagingCursor(cursor);
-        scAdapter = new class_cursoradapter_player(this,
+        class_cursoradapter_player scAdapter = new class_cursoradapter_player(this,
                 android.R.layout.simple_list_item_single_choice, cursor,
                 new String[]{"title"}, new int[]{android.R.id.text1});
         listView.setAdapter(scAdapter);
@@ -223,7 +217,7 @@ public class player extends ActionBarActivity {
     }
 
     private void start_download(String link, File file) {
-        Intent i = new Intent(getBaseContext(), class_downloads_files.class);
+        Intent i = new Intent(getBaseContext(), service_downloads_files.class);
         i.putExtra("file_url", link);
         i.putExtra("file_putch", file.getAbsolutePath());
         Toast.makeText(this, getString(R.string.download_task_addeded),

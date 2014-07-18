@@ -1,4 +1,4 @@
-package com.dimoshka.ua.classes;
+package ua.pp.dimoshka.classes;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.support.v4.widget.SimpleCursorAdapter;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,7 @@ import android.widget.ImageView;
 import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxStatus;
 import com.androidquery.callback.BitmapAjaxCallback;
-import com.dimoshka.ua.jwp.R;
+import ua.pp.dimoshka.jwp.R;
 
 import java.io.File;
 import java.text.SimpleDateFormat;

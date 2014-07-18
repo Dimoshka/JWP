@@ -1,4 +1,4 @@
-package com.dimoshka.ua.classes;
+package ua.pp.dimoshka.classes;
 
 import android.content.Context;
 import android.util.Log;

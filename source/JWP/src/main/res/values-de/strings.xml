@@ -14,9 +14,6 @@ Das Programm arbeitet als RSS-Client."</string>
     <string name="player">"MP3 player"</string>
     <string name="player_open">"Öffnen Sie im Player"</string>
     <string name="player_play">"Spielen"</string>
-    <string name="player_pause">"Pause"</string>
-    <string name="send_bug_report">"Senden Fehlerbericht&#8230;"</string>
-    <string name="not_email_client">"Sie haben noch eine E-Mail-Client."</string>
     <string name="first_run_title">"Erstaufführung"</string>
     <string name="first_run">"Dies ist das erste Mal das Programm läuft. Bitte gehen Sie auf Einstellungen und wählen Sie die entsprechenden Optionen für Sie. Dann drücken Sie die Taste - Download RSS."</string>
     <string name="no_internet">"Keine Internet-Verbindung!"</string>
@@ -44,11 +41,8 @@ Das Programm arbeitet als RSS-Client."</string>
     <string name="download_title">"Herunterladen von Dateien"</string>
     <string name="download_failed">"Fehler beim Laden"</string>
     <string name="download_finished">"Download Complete!"</string>
-    <string name="download_finished_failed">"Download Complete ( %d mit Fehlern)."</string>
     <string name="download_cancelled">"Laden abgesagt!"</string>
-    <string name="download_progress">"Herunterladen "</string>
     <string name="download_task_addeded">"Datei hinzugefügt, um die Download-Warteschlange."</string>
-    <string name="select">"Wählen"</string>
     <string name="rss_pdf">"RSS - PDF"</string>
     <string name="rss_pdf_summary">"Legen Sie RSS-Feed PDF-Format"</string>
     <string name="rss_epub">"RSS - EPUB"</string>

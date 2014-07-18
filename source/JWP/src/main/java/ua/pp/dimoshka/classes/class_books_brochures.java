@@ -1,4 +1,4 @@
-package com.dimoshka.ua.classes;
+package ua.pp.dimoshka.classes;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -11,7 +11,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.util.Log;
 
-import com.dimoshka.ua.jwp.R;
+import ua.pp.dimoshka.jwp.R;
 
 import java.io.File;
 import java.util.List;
@@ -38,7 +38,6 @@ public class class_books_brochures {
 
     class verify_img extends AsyncTask<Void, Integer, Void> {
         private ProgressDialog dialog;
-        List<class_rss_item> rss_list = null;
 
         @Override
         protected Void doInBackground(Void... paramArrayOfVoid) {
@@ -65,13 +64,13 @@ public class class_books_brochures {
                         if (isCancelled()) {
                             int currentapiVersion = android.os.Build.VERSION.SDK_INT;
                             if (currentapiVersion >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-                                Log.e("JWP", "isCancelled+");
+                                Log.d("JWP", "isCancelled+");
                                 if (dialog != null)
                                     dialog.dismiss();
                                 if (cursor != null && !cursor.isClosed()) {
                                     cursor.close();
                                 }
-                                Log.e("JWP", "onPostExecute+");
+                                Log.d("JWP", "onPostExecute+");
                                 handler.sendEmptyMessage(1);
                             }
                             break;
@@ -98,7 +97,7 @@ public class class_books_brochures {
                                 }
 
                             } catch (Exception e) {
-                                Log.e("JWP_" + getClass().getName(),
+                                Log.d("JWP_" + getClass().getName(),
                                         e.toString());
                             }
                         } else {
@@ -120,9 +119,9 @@ public class class_books_brochures {
 
         public void add_books_and_brochures() {
             try {
-                Log.e("JWP_sql", "start add Books and brochures");
+                Log.d("JWP_sql", "start add Books and brochures");
                 //database.beginTransaction();
-                Log.e("JWP_sql", "start add in magazine");
+                Log.d("JWP_sql", "start add in magazine");
                 // -- INSERT: Books and brochures
                 database.execSQL("INSERT INTO [magazine] ([_id], [name], [title], [id_pub], [id_lang], [img], [link_img], [date]) VALUES (1, 'pc_U', 'Прочный мир и счастье. Как их найти', 4, '3', 0, 'http://www.jw.org/assets/a/pc/pc_U/pc_U_md.jpg', '20131225');");
                 database.execSQL("INSERT INTO [magazine] ([_id], [name], [title], [id_pub], [id_lang], [img], [link_img], [date]) VALUES (2, 'ca14_U', 'Календарь Свидетелей Иеговы 2014', 4, '3', 0, 'http://assets.jw.org/assets/a/ca14/ca14_U/ca14_U_md.jpg', '20131225');");
@@ -156,8 +155,8 @@ public class class_books_brochures {
                 database.execSQL("INSERT INTO [magazine] ([_id], [name], [title], [id_pub], [id_lang], [img], [link_img], [date]) VALUES ('30', 'cf_U', '«Приходи и следуй за мной»', 4, '3', 0, 'http://assets.jw.org/assets/a/cf/cf_U/cf_U_md.jpg', '20131226');");
                 database.execSQL("INSERT INTO [magazine] ([_id], [name], [title], [id_pub], [id_lang], [img], [link_img], [date]) VALUES ('31', 'we_U', 'Когда умер близкий тебе человек', 4, '3', 0, 'http://assets.jw.org/assets/a/we/we_U/we_U_md.jpg', '20131226');");
 
-                Log.e("JWP_sql", "end add Books and brochures");
-                Log.e("JWP_sql", "start add in files");
+                Log.d("JWP_sql", "end add Books and brochures");
+                Log.d("JWP_sql", "start add in files");
 
                 database.execSQL("INSERT INTO [files] ([id_magazine], [id_type], [name], [link], [pubdate], [title], [file]) VALUES ('1', '2', 'pc_U.pdf', 'http://download.jw.org/files/media_books/49/pc_U.pdf', '20131225', '', 0);");
                 database.execSQL("INSERT INTO [files] ([id_magazine], [id_type], [name], [link], [pubdate], [title], [file]) VALUES ('2', '2', 'ca14_U.pdf', 'http://download.jw.org/files/media_books/a5/ca14_U.pdf', '20131225', '', 0);");
@@ -270,11 +269,9 @@ public class class_books_brochures {
                 database.execSQL("INSERT INTO [files] ([id_magazine], [id_type], [name], [link], [pubdate], [title], [file]) VALUES ('30', '2', 'cf_U.pdf', 'http://download.jw.org/files/media_books/e0/cf_U.pdf', '20131226', '', 0);");
                 database.execSQL("INSERT INTO [files] ([id_magazine], [id_type], [name], [link], [pubdate], [title], [file]) VALUES ('30', '4', 'cf_U.m4b', 'http://download.jw.org/files/media_books/ca/cf_U.m4b', '20131226', '', 0);");
                 database.execSQL("INSERT INTO [files] ([id_magazine], [id_type], [name], [link], [pubdate], [title], [file]) VALUES ('31', '4', 'we_U.m4b', 'http://www.jw.org/download/?http://download.jw.org/files/media_books/31/we_U.m4b', '20131226', '', 0);");
-
-
-                Log.e("JWP_sql", "end add in files");
+                Log.d("JWP_sql", "end add in files");
                 //database.endTransaction();
-                Log.e("JWP_sql", "end add Books and brochures");
+                Log.d("JWP_sql", "end add Books and brochures");
 
             } catch (Exception e) {
                 funct.send_bug_report(e);
@@ -288,7 +285,7 @@ public class class_books_brochures {
             if (cursor != null && !cursor.isClosed()) {
                 cursor.close();
             }
-            Log.e("JWP", "onPostExecute+");
+            Log.d("JWP", "onPostExecute+");
             handler.sendEmptyMessage(1);
         }
 

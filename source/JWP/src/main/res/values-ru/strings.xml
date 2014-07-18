@@ -14,10 +14,7 @@
     <string name="player">"MP3 player"</string>
     <string name="player_open">"Открыть в плеере"</string>
     <string name="player_play">"Воспроизвести"</string>
-    <string name="player_pause">"Пауза"</string>
-    <string name="send_bug_report">"Отправка отчета об ошибке&#8230;"</string>
-    <string name="not_email_client">"У вас не установлен почтовый клиент."</string>
-    <string name="first_run_title">"Первый запуск программы"</string>
+     <string name="first_run_title">"Первый запуск программы"</string>
     <string name="first_run">"Это ваш первый запуск программы. Пожалуйста зайдите в настройки и выберите подходящие для вас параметры. После этого нажмите на кнопку - Загрузить RSS."</string>
     <string name="no_internet">"Нету подключения к интернету!"</string>
     <string name="no_sdcard">"SDCARD не подключена!"</string>
@@ -44,11 +41,8 @@
     <string name="download_title">"Загрузка файлов"</string>
     <string name="download_failed">"Ошибка загрузки"</string>
     <string name="download_finished">"Загрузка завершена!"</string>
-    <string name="download_finished_failed">"Загрузка завершена (%d с ошибками)."</string>
     <string name="download_cancelled">"Загрузка отменена!"</string>
-    <string name="download_progress">"Загрузка "</string>
     <string name="download_task_addeded">"Файл добавлен в очередь загрузки."</string>
-    <string name="select">"Выберите"</string>
     <string name="rss_pdf">"RSS - PDF"</string>
     <string name="rss_pdf_summary">"Загружать RSS ленту PDF формата"</string>
     <string name="rss_epub">"RSS - EPUB"</string>

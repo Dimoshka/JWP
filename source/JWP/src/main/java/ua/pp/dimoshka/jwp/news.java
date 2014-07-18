@@ -1,4 +1,4 @@
-package com.dimoshka.ua.jwp;
+package ua.pp.dimoshka.jwp;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -8,7 +8,7 @@ import android.support.v4.app.ListFragment;
 import android.view.View;
 import android.widget.ListView;
 
-import com.dimoshka.ua.classes.class_news_adapter;
+import ua.pp.dimoshka.classes.class_news_adapter;
 
 public class news extends ListFragment {
 
@@ -34,7 +34,7 @@ public class news extends ListFragment {
     public void refresh() {
         try {
             cursor = main.database.rawQuery(
-                    "select * from news where news.id_lang='" + main.id_lang
+                    "select * from news where news.id_lang='" + main.id_lng
                             + "' order by pubdate desc, news._id asc", null
             );
             class_news_adapter adapter = new class_news_adapter(

@@ -1,4 +1,4 @@
-package com.dimoshka.ua.classes;
+package ua.pp.dimoshka.classes;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
-import com.dimoshka.ua.jwp.R;
+import ua.pp.dimoshka.jwp.R;
 
 public class class_cursoradapter_player extends SimpleCursorAdapter {
 	private int layout;

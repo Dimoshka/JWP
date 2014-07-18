@@ -1,4 +1,4 @@
-package com.dimoshka.ua.jwp;
+package ua.pp.dimoshka.jwp;
 
 import android.content.SharedPreferences;
 import android.content.res.Configuration;

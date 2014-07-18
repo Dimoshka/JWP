@@ -1,4 +1,4 @@
-package com.dimoshka.ua.classes;
+package ua.pp.dimoshka.classes;
 
 import android.content.Context;
 import android.media.MediaPlayer;
@@ -12,7 +12,7 @@ import android.util.Log;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
 
-import com.dimoshka.ua.jwp.R;
+import ua.pp.dimoshka.jwp.R;
 
 import java.io.IOException;
 import java.util.EnumSet;
@@ -25,22 +25,70 @@ public class class_mediaplayer {
 
     private ImageButton buttonPlayStop;
     private SeekBar seekBar;
-    private Context context;
     private Handler handler;
 
-    public class_mediaplayer(Context context, ImageButton buttonPlayStop,
-                             SeekBar seekBar, Handler handler_completion) {
+    public class_mediaplayer(final ImageButton buttonPlayStop,
+                             final SeekBar seekBar, Handler handler_completion) {
         mWrapper = this;
         mPlayer = new MediaPlayer();
         currentState = State.IDLE;
+        OnPreparedListener mOnPreparedListener = new OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                Log.d(tag, "on prepared");
+                currentState = State.PREPARED;
+                mWrapper.onPrepared(mp);
+                buttonPlayStop.setImageResource(R.drawable.ic_av_pause);
+                buttonPlayStop.setEnabled(true);
+                seekBar.setMax(getDuration());
+                mPlayer.start();
+                currentState = State.STARTED;
+            }
+        };
         mPlayer.setOnPreparedListener(mOnPreparedListener);
+        OnCompletionListener mOnCompletionListener = new OnCompletionListener() {
+
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                Log.d(tag, "on completion");
+                currentState = State.PLAYBACK_COMPLETE;
+                mWrapper.onCompletion(mp);
+            }
+        };
         mPlayer.setOnCompletionListener(mOnCompletionListener);
+        OnBufferingUpdateListener mOnBufferingUpdateListener = new OnBufferingUpdateListener() {
+
+            @Override
+            public void onBufferingUpdate(MediaPlayer mp, int percent) {
+                Log.d(tag, "on buffering update");
+                mWrapper.onBufferingUpdate(mp, percent);
+            }
+        };
         mPlayer.setOnBufferingUpdateListener(mOnBufferingUpdateListener);
+        OnErrorListener mOnErrorListener = new OnErrorListener() {
+
+            @Override
+            public boolean onError(MediaPlayer mp, int what, int extra) {
+                Log.d(tag, "on error");
+                currentState = State.ERROR;
+                mWrapper.onError(mp, what, extra);
+                buttonPlayStop.setEnabled(false);
+                return false;
+            }
+        };
         mPlayer.setOnErrorListener(mOnErrorListener);
+        OnInfoListener mOnInfoListener = new OnInfoListener() {
+
+            @Override
+            public boolean onInfo(MediaPlayer mp, int what, int extra) {
+                Log.d(tag, "on info");
+                mWrapper.onInfo(mp, what, extra);
+                return false;
+            }
+        };
         mPlayer.setOnInfoListener(mOnInfoListener);
         this.buttonPlayStop = buttonPlayStop;
         this.seekBar = seekBar;
-        this.context = context;
         this.handler = handler_completion;
     }
 
@@ -140,62 +188,6 @@ public class class_mediaplayer {
     }
 
 	/* INTERNAL LISTENERS */
-
-    private OnPreparedListener mOnPreparedListener = new OnPreparedListener() {
-
-        @Override
-        public void onPrepared(MediaPlayer mp) {
-            Log.d(tag, "on prepared");
-            currentState = State.PREPARED;
-            mWrapper.onPrepared(mp);
-            buttonPlayStop.setImageResource(R.drawable.ic_av_pause);
-            buttonPlayStop.setEnabled(true);
-            seekBar.setMax(getDuration());
-            mPlayer.start();
-            currentState = State.STARTED;
-        }
-    };
-
-    private OnCompletionListener mOnCompletionListener = new OnCompletionListener() {
-
-        @Override
-        public void onCompletion(MediaPlayer mp) {
-            Log.d(tag, "on completion");
-            currentState = State.PLAYBACK_COMPLETE;
-            mWrapper.onCompletion(mp);
-        }
-    };
-
-    private OnBufferingUpdateListener mOnBufferingUpdateListener = new OnBufferingUpdateListener() {
-
-        @Override
-        public void onBufferingUpdate(MediaPlayer mp, int percent) {
-            Log.d(tag, "on buffering update");
-            mWrapper.onBufferingUpdate(mp, percent);
-        }
-    };
-
-    private OnErrorListener mOnErrorListener = new OnErrorListener() {
-
-        @Override
-        public boolean onError(MediaPlayer mp, int what, int extra) {
-            Log.d(tag, "on error");
-            currentState = State.ERROR;
-            mWrapper.onError(mp, what, extra);
-            buttonPlayStop.setEnabled(false);
-            return false;
-        }
-    };
-
-    private OnInfoListener mOnInfoListener = new OnInfoListener() {
-
-        @Override
-        public boolean onInfo(MediaPlayer mp, int what, int extra) {
-            Log.d(tag, "on info");
-            mWrapper.onInfo(mp, what, extra);
-            return false;
-        }
-    };
 
     /* EXTERNAL STUBS TO OVERRIDE */
     public void onPrepared(MediaPlayer mp) {

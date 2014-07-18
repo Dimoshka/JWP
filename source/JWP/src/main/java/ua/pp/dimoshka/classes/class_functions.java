@@ -1,19 +1,15 @@
-package com.dimoshka.ua.classes;
+package ua.pp.dimoshka.classes;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Environment;
-import android.preference.PreferenceManager;
 import android.text.Html;
 import android.util.Log;
 
 import com.bugsense.trace.BugSenseHandler;
-import com.dimoshka.ua.jwp.R;
 
 import org.apache.http.util.ByteArrayBuffer;
 
@@ -22,15 +18,16 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import ua.pp.dimoshka.jwp.R;
+
 public class class_functions {
-    private SharedPreferences prefs;
     private Context context;
 
     public class_functions(Context context) {
@@ -46,7 +43,7 @@ public class class_functions {
                 return true;
             }
         } catch (Exception e) {
-            Log.e("JWP_" + getClass().getName(), e.toString());
+            Log.d("JWP_" + getClass().getName(), e.toString());
         }
         return false;
     }
@@ -91,7 +88,7 @@ public class class_functions {
         try {
             date = format.parse(date_str);
         } catch (java.text.ParseException e) {
-            Log.e("JWP_date", e.toString() + " - " + date_str + " - " + format_str);
+            Log.d("JWP_date", e.toString() + " - " + date_str + " - " + format_str);
             return null;
         }
         return date;
@@ -112,26 +109,6 @@ public class class_functions {
         return m;
     }
 
-    public Cursor get_language(SQLiteDatabase database, Integer id) {
-        Cursor cursor;
-        if (id == 0) {
-            cursor = database.rawQuery("SELECT * from language where code_an='"
-                    + Locale.getDefault().getLanguage() + "'", null);
-            cursor.moveToFirst();
-            if (cursor.getCount() > 0) {
-                prefs = PreferenceManager.getDefaultSharedPreferences(context);
-                prefs.edit()
-                        .putString("language",
-                                cursor.getString(cursor.getColumnIndex("_id")))
-                        .commit();
-            }
-        } else {
-            cursor = database.rawQuery("SELECT* from language where _id='" + id
-                    + "'", null);
-        }
-        return cursor;
-    }
-
     public void update_file_isn(SQLiteDatabase database, String name, Integer file) {
         ContentValues initialValues = new ContentValues();
         initialValues.put("file", file.toString());
@@ -147,34 +124,33 @@ public class class_functions {
             String message = "";
             ex.printStackTrace();
             StackTraceElement[] stackElements = ex.getStackTrace();
-            message += "The " + stackElements.length + " element"
-                    + ((stackElements.length == 1) ? "" : "s") + " of the stack trace:\n";
             for (int lcv = 0; lcv < stackElements.length; lcv++) {
-                message += "File name: " + stackElements[lcv].getFileName();
-                message += "Line number: " + stackElements[lcv].getLineNumber();
-                String className = stackElements[lcv].getClassName();
-                String packageName = extractPackageName(className);
-                String simpleClassName = extractSimpleClassName(className);
-                message += "Package name: " + ("".equals(packageName) ? "[default package]" : packageName);
-                message += "Full class name: " + className;
-                message += "Simple class name: " + simpleClassName;
-                message += "Unmunged class name: " + unmungeSimpleClassName(simpleClassName);
-                message += "Direct class name: " + extractDirectClassName(simpleClassName);
-                message += "Method name: " + stackElements[lcv].getMethodName();
-                message += "Native method?: " + stackElements[lcv].isNativeMethod();
-                message += "toString(): " + stackElements[lcv].toString();
+                message += "File name: " + stackElements[lcv].getFileName() + " ";
+                message += "Line number: " + stackElements[lcv].getLineNumber() + " ";
+                //String className = stackElements[lcv].getClassName() + " ";
+                // String packageName = extractPackageName(className) + " ";
+                //String simpleClassName = extractSimpleClassName(className) + " ";
+                //message += "Package name: " + ("".equals(packageName) ? "[default package]" : packageName) + " ";
+                //message += "Full class name: " + className + " ";
+                //message += "Simple class name: " + simpleClassName + " ";
+                //message += "Unmunged class name: " + unmungeSimpleClassName(simpleClassName) + " ";
+                //message += "Direct class name: " + extractDirectClassName(simpleClassName) + " ";
+                //message += "Method name: " + stackElements[lcv].getMethodName() + "";
+                //message += "Native method?: " + stackElements[lcv].isNativeMethod() + " ";
+                message += "toString(): " + stackElements[lcv].toString() + " ";
             }
-            Log.e(context.getString(R.string.app_name_shot) + " - error: " + message,
-                    ex.toString());
-            BugSenseHandler.addCrashExtraData("class_name", message);
+            Log.e(context.getString(R.string.app_name_shot) + " - error: ",
+                    message);
+            //BugSenseHandler.addCrashExtraData("StackTrace", message);
             BugSenseHandler.sendException(ex);
-            BugSenseHandler.sendExceptionMessage("level", message, ex);
+            //BugSenseHandler.sendExceptionMessage("level", message, ex);
         } catch (Exception e) {
             Log.e("error: functionn",
                     ex.toString());
         }
     }
 
+    /*
     public static String extractPackageName(String fullClassName) {
         if ((null == fullClassName) || ("".equals(fullClassName)))
             return "";
@@ -212,35 +188,47 @@ public class class_functions {
         return simpleClassName.replace('$', '.');
     }
 
+    */
+
     public boolean load_img(String dir, String name, String link_img) {
-        try {
-            if (isNetworkAvailable()) {
+        if (isNetworkAvailable()) {
+            try {
                 URL url = new URL(link_img);
-                File file = new File(dir, name + ".jpg");
-                URLConnection ucon = url.openConnection();
-                InputStream is = ucon.getInputStream();
-                BufferedInputStream bis = new BufferedInputStream(
-                        is);
-                ByteArrayBuffer baf = new ByteArrayBuffer(
-                        5000);
-                int current = 0;
-                while ((current = bis.read()) != -1) {
-                    baf.append((byte) current);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                try {
+                    //connection.setDoInput(true);
+                    //connection.connect();
+                    InputStream is = connection.getInputStream();
+                    int statusCode = connection.getResponseCode();
+                    if (statusCode == 200) {
+                        BufferedInputStream bis = new BufferedInputStream(is);
+                        ByteArrayBuffer baf = new ByteArrayBuffer(
+                                5000);
+                        int current = 0;
+                        while ((current = bis.read()) != -1) {
+                            baf.append((byte) current);
+                        }
+                        File file = new File(dir, name + ".jpg");
+                        FileOutputStream fos = new FileOutputStream(
+                                file);
+                        fos.write(baf.toByteArray());
+                        fos.flush();
+                        fos.close();
+                        return true;
+                    } else return false;
+                } catch (FileNotFoundException e) {
+                    Log.d("JWP", "Not file - " + link_img);
+                    return false;
+                } catch (Exception e) {
+                    send_bug_report(e);
+                    return false;
+                } finally {
+                    connection.disconnect();
                 }
-                FileOutputStream fos = new FileOutputStream(
-                        file);
-                fos.write(baf.toByteArray());
-                fos.flush();
-                fos.close();
-                return true;
-            } else return false;
-        } catch (FileNotFoundException e) {
-            Log.e("JWP", "Not file - " + link_img);
-            return false;
-        } catch (Exception e) {
-            send_bug_report(e);
-            return false;
-        }
+            } catch (Exception e) {
+                return false;
+            }
+        } else return false;
     }
 
 }

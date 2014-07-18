@@ -1,4 +1,4 @@
-package com.dimoshka.ua.classes;
+package ua.pp.dimoshka.classes;
 
 import android.app.ProgressDialog;
 import android.content.ContentValues;
@@ -13,8 +13,6 @@ import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-import com.dimoshka.ua.jwp.R;
-
 import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -23,6 +21,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import ua.pp.dimoshka.jwp.R;
+import ua.pp.dimoshka.jwp.main;
 
 public class class_rss_news {
     static final String URL_FEED_NEWS = "http://www.jw.org/%s/rss/LatestNewsList/feed.xml";
@@ -34,34 +35,18 @@ public class class_rss_news {
     public class_functions funct;
     private Context context;
     private Handler handler;
-    private Integer id_ln = 0;
-
-    private String ln_prefix = "en/news";
     public SharedPreferences prefs;
     private AsyncTask task;
 
-    public class_rss_news(Context context, int id_lang, Handler handler,
+    public class_rss_news(Context context, Handler handler,
                           SQLiteDatabase database, class_functions funct) {
         this.context = context;
         this.handler = handler;
         this.database = database;
         this.funct = funct;
         prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        get_language(id_lang);
     }
 
-    public Integer get_language(int id) {
-        Cursor cursor = funct.get_language(database, id);
-        cursor.moveToFirst();
-        if (cursor.getCount() > 0) {
-            id_ln = cursor.getInt(cursor.getColumnIndex("_id"));
-            ln_prefix = cursor.getString(cursor.getColumnIndex("news_rss"));
-        } else {
-            id_ln = 1;
-            ln_prefix = "en/news";
-        }
-        return id_ln;
-    }
 
     public void get_all_feeds() {
         try {
@@ -79,7 +64,7 @@ public class class_rss_news {
         protected Void doInBackground(Void... paramArrayOfVoid) {
             try {
                 rssfeedprovider = new class_rss_provider(context, funct);
-                String feed = String.format(URL_FEED_NEW_IN_SITE, ln_prefix);
+                String feed = String.format(URL_FEED_NEW_IN_SITE, main.ln_prefix);
                 Log.d("JWP-news", feed);
                 this.rss_list = rssfeedprovider.parse(feed);
 
@@ -135,7 +120,7 @@ public class class_rss_news {
                     description = funct.stripHtml(description);
                     long id_news = 0;
                     ContentValues init = new ContentValues();
-                    init.put("id_lang", id_ln);
+                    init.put("id_lang", main.id_lng);
                     init.put("title", title);
                     init.put("link", link);
                     init.put("link_img", link_img);

@@ -1,4 +1,4 @@
-package com.dimoshka.ua.classes;
+package ua.pp.dimoshka.classes;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -7,12 +7,11 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
-import android.util.Log;
 import android.webkit.MimeTypeMap;
 import android.widget.Toast;
 
-import com.dimoshka.ua.jwp.R;
-import com.dimoshka.ua.jwp.player;
+import ua.pp.dimoshka.jwp.R;
+import ua.pp.dimoshka.jwp.player;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -170,7 +169,7 @@ public class class_open_or_download {
 
             } else {
                 Intent i = new Intent(context,
-                        class_downloads_files.class);
+                        service_downloads_files.class);
                 i.putExtra("file_url", link);
                 i.putExtra("file_putch", file.getAbsolutePath());
                 Toast.makeText(context,

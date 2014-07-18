@@ -1,4 +1,4 @@
-package com.dimoshka.ua.classes;
+package ua.pp.dimoshka.classes;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -14,7 +14,7 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.RemoteViews;
 
-import com.dimoshka.ua.jwp.R;
+import ua.pp.dimoshka.jwp.R;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class class_downloads_files extends Service {
+public class service_downloads_files extends Service {
 
     private static final int SERVICE_ID = 0x101104;
     private static final int BYTES_BUFFER_SIZE = 2 * 1024;
@@ -36,13 +36,12 @@ public class class_downloads_files extends Service {
     private final IBinder binder = new FileDownloadBinder();
     private AsyncDownloadTask task = null;
     protected static boolean isRunning = false;
-    private Map<String, String> targetFile = null;
     private ArrayList<Map<String, String>> targetFiles = null;
     private int now_targetFile = 0;
 
     public class FileDownloadBinder extends Binder {
-        class_downloads_files getService() {
-            return class_downloads_files.this;
+        service_downloads_files getService() {
+            return service_downloads_files.this;
         }
     }
 
@@ -71,7 +70,7 @@ public class class_downloads_files extends Service {
             if (!Directory.isDirectory()) {
                 Directory.mkdirs();
             }
-            targetFile = new HashMap<String, String>();
+            Map<String, String> targetFile = new HashMap<String, String>();
             targetFile.put("link", intent.getStringExtra("file_url"));
             targetFile.put("putch", intent.getStringExtra("file_putch"));
             targetFiles.add(targetFile);
@@ -80,7 +79,7 @@ public class class_downloads_files extends Service {
             task.execute();
         } catch (Exception e) {
             funct.send_bug_report(e);
-            Log.e("err", e.toString());
+            Log.d("err", e.toString());
         }
         return START_STICKY;
     }
@@ -96,7 +95,7 @@ public class class_downloads_files extends Service {
     @Override
     public void onDestroy() {
         notificationManager.cancelAll();
-        Log.e("JWP" + getClass().getName(), "Service Cancelled");
+        Log.d("JWP" + getClass().getName(), "Service Cancelled");
         if (task != null) {
             if (!task.isCancelled())
                 task.cancel(true);
@@ -137,7 +136,7 @@ public class class_downloads_files extends Service {
     }
 
     protected int getNotificationIcon() {
-        return R.drawable.ic_stat_logo;
+        return R.drawable.ic_launcher;
     }
 
     protected RemoteViews getProgressView(int currentNumFile,
@@ -341,7 +340,7 @@ public class class_downloads_files extends Service {
         @Override
         protected void onCancelled() {
             super.onCancelled();
-            Log.e("JWP" + getClass().getName(), "AsyncTask Cancelled");
+            Log.d("JWP" + getClass().getName(), "AsyncTask Cancelled");
             showNotification_popup(getString(R.string.download_cancelled),
                     getString(R.string.download_title),
                     getString(R.string.download_cancelled),
