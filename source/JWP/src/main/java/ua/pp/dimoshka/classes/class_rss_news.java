@@ -5,7 +5,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -29,7 +28,6 @@ public class class_rss_news {
     static final String URL_FEED_NEWS = "http://www.jw.org/%s/rss/LatestNewsList/feed.xml";
     static final String URL_FEED_NEW_IN_SITE = "http://www.jw.org/%s/rss/WhatsNewWebArticles/feed.xml";
 
-    private class_rss_provider rssfeedprovider;
     private SQLiteDatabase database;
 
     public class_functions funct;
@@ -63,14 +61,14 @@ public class class_rss_news {
         @Override
         protected Void doInBackground(Void... paramArrayOfVoid) {
             try {
-                rssfeedprovider = new class_rss_provider(context, funct);
+                class_rss_provider rssfeedprovider = new class_rss_provider(context, funct);
                 String feed = String.format(URL_FEED_NEW_IN_SITE, main.ln_prefix);
                 Log.d("JWP-news", feed);
                 this.rss_list = rssfeedprovider.parse(feed);
 
-                for (int i = 0; i < rss_list.size(); i++) {
+                for (class_rss_item aRss_list : rss_list) {
                     if (isCancelled()) {
-                        int currentapiVersion = android.os.Build.VERSION.SDK_INT;
+                        int currentapiVersion = Build.VERSION.SDK_INT;
                         if (currentapiVersion >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
                             Log.d("JWP", "isCancelled+");
                             if (dialog != null)
@@ -80,7 +78,7 @@ public class class_rss_news {
                         }
                         break;
                     }
-                    class_rss_item rss_item = rss_list.get(i);
+                    class_rss_item rss_item = aRss_list;
                     String title = rss_item.getTitle();
                     title = title.trim();
                     String link = rss_item.getLink();
@@ -118,7 +116,7 @@ public class class_rss_news {
 
                     description = description.trim();
                     description = funct.stripHtml(description);
-                    long id_news = 0;
+                    long id_news;
                     ContentValues init = new ContentValues();
                     init.put("id_lang", main.id_lng);
                     init.put("title", title);

@@ -13,13 +13,13 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="11dp"
         android:textSize="20sp"
-        android:text="title" />
+        android:text="@string/text_test" />
 
     <TextView
         android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="text"
+        android:text="@string/text_test"
         android:textColor="@color/text_dark_gray"
         android:textStyle="italic"
         android:layout_below="@+id/title"
@@ -31,12 +31,12 @@
         android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="text"
+        android:text="@string/text_test"
         android:textColor="@color/text_dark_gray"
         android:textStyle="italic"
         android:layout_below="@+id/text"
         android:layout_alignRight="@+id/title"
         android:layout_alignEnd="@+id/title"
-        android:textSize="10sp"
+        android:textSize="12sp"
         android:layout_marginRight="11dp" />
 </RelativeLayout>

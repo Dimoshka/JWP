@@ -211,7 +211,7 @@ public class service_downloads_files extends Service {
                 filesize = http.getContentLength();
                 http.disconnect();
             } catch (Exception e) {
-
+                return filesize;
             }
             return filesize;
         }

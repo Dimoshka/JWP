@@ -69,144 +69,149 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        BugSenseHandler.initAndStartSession(this, "63148966");
-        setContentView(R.layout.main);
+        try {
+            super.onCreate(savedInstanceState);
+            BugSenseHandler.initAndStartSession(this, "63148966");
+            setContentView(R.layout.main);
 
-        aq = new AQuery(this);
-        funct = new class_functions(this);
-        dbOpenHelper = new class_sqlite(this, funct);
-        database = dbOpenHelper.openDataBase();
-        prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        pager = (ViewPager) findViewById(R.id.pager);
+            aq = new AQuery(this);
+            funct = new class_functions(this);
+            dbOpenHelper = new class_sqlite(this, funct);
+            database = dbOpenHelper.openDataBase();
+            prefs = PreferenceManager.getDefaultSharedPreferences(this);
+            open_or_download = new class_open_or_download(this, database, funct);
+            pager = (ViewPager) findViewById(R.id.pager);
 
-        actionBar = getSupportActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-        actionBar.setTitle(R.string.app_name_shot);
-        actionBar.setSubtitle(R.string.app_name);
+            actionBar = getSupportActionBar();
+            actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+            actionBar.setTitle(R.string.app_name_shot);
+            actionBar.setSubtitle(R.string.app_name);
 
-        get_language(Integer.parseInt(prefs.getString("language", "1")));
+            load_first();
 
-        create_tabs();
-
-        open_or_download = new class_open_or_download(this, database, funct);
-
-        if (prefs.getBoolean("first_run", true)) {
-            new AlertDialog.Builder(this)
-                    .setTitle(getString(R.string.first_run_title))
-                    .setMessage(getString(R.string.first_run))
-                    .setNeutralButton("OK", null).show();
-            prefs.edit().putBoolean("first_run", false).commit();
-            refresh_pager();
-            //load_rss();
-        } else if (prefs.getBoolean("downloads_on_start", false)) {
-            refresh_pager();
-            load_rss();
-        } else refresh_pager();
-
-        OnSharedPreferenceChangeListener listener_pref = new OnSharedPreferenceChangeListener() {
-            public void onSharedPreferenceChanged(SharedPreferences prefs,
-                                                  String key) {
-                get_language(Integer.parseInt(prefs.getString("language", "1")));
-                create_tabs();
-                refresh_pager();
+            if (prefs.getBoolean("first_run", true)) {
+                new AlertDialog.Builder(this)
+                        .setTitle(getString(R.string.first_run_title))
+                        .setMessage(getString(R.string.first_run))
+                        .setNeutralButton("OK", null).show();
+                prefs.edit().putBoolean("first_run", false).apply();
+            } else if (prefs.getBoolean("downloads_on_start", false)) {
+                load_rss();
             }
-        };
-        prefs.registerOnSharedPreferenceChangeListener(listener_pref);
-        pager.setOnPageChangeListener(PageChangeListener);
+            prefs.registerOnSharedPreferenceChangeListener(PreferenceChangeListener);
+            pager.setOnPageChangeListener(PageChangeListener);
+        } catch (Exception e) {
+            funct.send_bug_report(e);
+        }
+    }
+
+    private void load_first() {
+        try {
+            Log.e("PREFF", "change1111");
+            get_language(Integer.parseInt(prefs.getString("language", "1")));
+            create_tabs();
+            create_fragments();
+        } catch (Exception e) {
+            funct.send_bug_report(e);
+        }
+    }
+
+    private void create_fragments() {
+        try {
+            List<Fragment> fragment_list = new Vector<Fragment>();
+
+            jornals_fragm = new jornals();
+            fragment_list.add(jornals_fragm);
+            rss_jornals = new class_rss_jornals(this, handler_jornals,
+                    database, funct);
+
+            news_fragm = new news();
+            fragment_list.add(news_fragm);
+            rss_news = new class_rss_news(this, handler_news, database, funct);
+
+            if (id_lng == 3) {
+                book_fragm = new books_brochures();
+                fragment_list.add(book_fragm);
+                books_brochures = new class_books_brochures(this,
+                        handler_books_brochures, database, funct);
+            }
+
+            MyPagerAdapter pagerAdapter = new MyPagerAdapter(getSupportFragmentManager(),
+                    fragment_list);
+            pager.setAdapter(pagerAdapter);
+
+        } catch (Exception e) {
+            funct.send_bug_report(e);
+        }
     }
 
     private void create_tabs() {
-        if (actionBar.getTabCount() > 0) actionBar.removeAllTabs();
-        curent_tab = 0;
-        //add jornals tab and fragment
-        jornals_fragm = new jornals();
-        ActionBar.Tab jornals_Tab = actionBar.newTab().setText(R.string.jornals)
-                .setTabListener(this);
-        actionBar.addTab(jornals_Tab);
-        rss_jornals = new class_rss_jornals(this, handler_jornals,
-                database, funct);
-        //add news tab and fragment
-        news_fragm = new news();
-        ActionBar.Tab news_Tab = actionBar.newTab().setText(R.string.news)
-                .setTabListener(this);
-        actionBar.addTab(news_Tab);
-        rss_news = new class_rss_news(this, handler_news, database, funct);
-
-        //add publication tab and fragment
-        if (id_lng == 3) {
-            book_fragm = new books_brochures();
-            ActionBar.Tab publication_Tab = actionBar.newTab().setText(R.string.books_brochures)
+        try {
+            if (actionBar.getTabCount() > 0) actionBar.removeAllTabs();
+            //add jornals tab and fragment
+            ActionBar.Tab jornals_Tab = actionBar.newTab().setText(R.string.jornals)
                     .setTabListener(this);
-            actionBar.addTab(publication_Tab);
-            books_brochures = new class_books_brochures(this,
-                    handler_books_brochures, database, funct);
+            actionBar.addTab(jornals_Tab);
+            //add news tab and fragment
+            ActionBar.Tab news_Tab = actionBar.newTab().setText(R.string.news)
+                    .setTabListener(this);
+            actionBar.addTab(news_Tab);
+            //add publication tab and fragment
+            if (id_lng == 3) {
+                Log.d("LANG3", "tabs");
+                ActionBar.Tab publication_Tab = actionBar.newTab().setText(R.string.books_brochures)
+                        .setTabListener(this);
+                actionBar.addTab(publication_Tab);
+            }
+            curent_tab = 0;
+        } catch (Exception e) {
+            funct.send_bug_report(e);
         }
     }
 
     private void get_language(int id) {
-        Cursor cursor;
-        if (prefs.getBoolean("first_run", true)) {
-            cursor = database.rawQuery("SELECT * from language where code_an='"
-                    + Locale.getDefault().getLanguage() + "'", null);
-            cursor.moveToFirst();
-            if (cursor.getCount() > 0) {
-                prefs.edit()
-                        .putString("language",
-                                cursor.getString(cursor.getColumnIndex("_id")))
-                        .commit();
-                id_lng = cursor.getInt(cursor.getColumnIndex("_id"));
-                ln_prefix = cursor.getString(cursor.getColumnIndex("news_rss"));
-                code_lng = cursor.getString(cursor.getColumnIndex("code"));
+        try {
+            Cursor cursor;
+            if (prefs.getBoolean("first_run", true)) {
+                cursor = database.rawQuery("SELECT * from language where code_an='"
+                        + Locale.getDefault().getLanguage() + "'", null);
+                cursor.moveToFirst();
+                if (cursor.getCount() > 0) {
+                    prefs.edit()
+                            .putString("language",
+                                    cursor.getString(cursor.getColumnIndex("_id")))
+                            .apply();
+                    id_lng = cursor.getInt(cursor.getColumnIndex("_id"));
+                    ln_prefix = cursor.getString(cursor.getColumnIndex("news_rss"));
+                    code_lng = cursor.getString(cursor.getColumnIndex("code"));
+                } else {
+                    id_lng = 1;
+                    ln_prefix = "en/news";
+                    code_lng = "E";
+                }
             } else {
-                id_lng = 1;
-                ln_prefix = "en/news";
-                code_lng = "E";
+                cursor = database.rawQuery("SELECT* from language where _id='" + id + "'", null);
+                cursor.moveToFirst();
+                if (cursor.getCount() > 0) {
+                    id_lng = cursor.getInt(cursor.getColumnIndex("_id"));
+                    ln_prefix = cursor.getString(cursor.getColumnIndex("news_rss"));
+                    code_lng = cursor.getString(cursor.getColumnIndex("code"));
+                } else {
+                    id_lng = 1;
+                    ln_prefix = "en/news";
+                    code_lng = "E";
+                }
             }
-        } else {
-            cursor = database.rawQuery("SELECT* from language where _id='" + id + "'", null);
-            cursor.moveToFirst();
-            if (cursor.getCount() > 0) {
-                id_lng = cursor.getInt(cursor.getColumnIndex("_id"));
-                ln_prefix = cursor.getString(cursor.getColumnIndex("news_rss"));
-                code_lng = cursor.getString(cursor.getColumnIndex("code"));
-            } else {
-                id_lng = 1;
-                ln_prefix = "en/news";
-                code_lng = "E";
-            }
+        } catch (Exception e) {
+            funct.send_bug_report(e);
         }
     }
 
-    private void refresh_pager() {
-        List<Fragment> fragments = new Vector<Fragment>();
-        fragments.add(jornals_fragm);
-        fragments.add(news_fragm);
-        if (id_lng == 3 & actionBar.getTabCount() == 3) {
-            fragments.add(book_fragm);
-        }
-        MyPagerAdapter pagerAdapter = new MyPagerAdapter(getSupportFragmentManager(),
-                fragments);
-        pager.setAdapter(pagerAdapter);
-    }
 
     @Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
         curent_tab = tab.getPosition();
-
-        switch (curent_tab) {
-            case 0:
-                pager.setCurrentItem(0);
-                break;
-            case 1:
-                pager.setCurrentItem(1);
-                break;
-            case 2:
-                pager.setCurrentItem(2);
-                break;
-            default:
-                break;
-        }
+        pager.setCurrentItem(tab.getPosition());
     }
 
     @Override
@@ -303,6 +308,28 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
         }
     };
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        prefs.registerOnSharedPreferenceChangeListener(PreferenceChangeListener);
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        prefs.unregisterOnSharedPreferenceChangeListener(PreferenceChangeListener);
+    }
+
+
+    private OnSharedPreferenceChangeListener PreferenceChangeListener = new OnSharedPreferenceChangeListener() {
+        @Override
+        public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
+            load_first();
+        }
+    };
+
     private SimpleOnPageChangeListener PageChangeListener = new SimpleOnPageChangeListener() {
         @Override
         public void onPageSelected(int position) {
@@ -344,9 +371,10 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
             if (funct.isNetworkAvailable()) {
                 if (prefs.getBoolean("update_all_at_once", true)) {
                     refresh_all = true;
-                    if (id_lng == 3 & actionBar.getTabCount() == 3)
+                    if (id_lng == 3 && actionBar.getTabCount() == 3) {
+                        Log.d("LANG3", "load rss");
                         books_brochures.verify_all_img();
-                    else rss_jornals.get_all_feeds();
+                    } else rss_jornals.get_all_feeds();
                 } else {
                     switch (curent_tab) {
                         case 0:
@@ -375,7 +403,8 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
             if (refresh_all) {
                 jornals_fragm.refresh();
                 news_fragm.refresh();
-                if (id_lng == 3 & actionBar.getTabCount() == 3) {
+                if (id_lng == 3 && actionBar.getTabCount() == 3) {
+                    Log.d("LANG3", "refress");
                     book_fragm.refresh();
                 }
                 refresh_all = false;

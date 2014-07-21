@@ -37,7 +37,6 @@ public class class_rss_jornals {
     private Integer cur_pub = 0;
     private ArrayList<Integer> id_type = new ArrayList<Integer>();
     private ArrayList<String> code_type = new ArrayList<String>();
-    private Integer cur_type = 0;
     public SharedPreferences prefs;
     private AsyncTask task;
 
@@ -124,7 +123,7 @@ public class class_rss_jornals {
                         if (load_pub) {
                             //Log.i("JWP_rss", "rss_" + code_type.get(b));
 
-                            cur_type = b;
+                            Integer cur_type = b;
                             cur_pub = a;
                             class_rss_provider rssfeedprovider = new class_rss_provider(context, funct);
                             String feed = String.format(URL_FEED, main.code_lng,
@@ -132,9 +131,7 @@ public class class_rss_jornals {
                                     code_type.get(cur_type));
                             this.rss_list = rssfeedprovider.parse(feed);
 
-                            for (int i = 0; i < rss_list.size(); i++) {
-
-                                class_rss_item rss_item = rss_list.get(i);
+                            for (class_rss_item rss_item : rss_list) {
 
                                 String name = rss_item.getguid();
                                 name = name.replace(
@@ -157,7 +154,7 @@ public class class_rss_jornals {
                                         "select _id, img from magazine where `name` = '"
                                                 + name + "'", null
                                 );
-                                long id_magazine = 0;
+                                long id_magazine;
                                 Integer img = img(name, sim_format, date);
                                 Log.d("JWP", "img_ok - " + img.toString());
                                 if (cur.getCount() > 0) {
@@ -180,7 +177,7 @@ public class class_rss_jornals {
                                     init1.put("id_lang", main.id_lng);
                                     init1.put("img", img);
                                     init1.put("date", dat_format.format(date));
-                                    Log.d("JWP_rss", "date_ok = " + dat_format.format(date).toString());
+                                    Log.d("JWP_rss", "date_ok = " + dat_format.format(date));
                                     id_magazine = database.insert("magazine",
                                             null, init1);
                                 }

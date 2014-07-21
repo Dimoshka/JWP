@@ -124,9 +124,9 @@ public class class_functions {
             String message = "";
             ex.printStackTrace();
             StackTraceElement[] stackElements = ex.getStackTrace();
-            for (int lcv = 0; lcv < stackElements.length; lcv++) {
-                message += "File name: " + stackElements[lcv].getFileName() + " ";
-                message += "Line number: " + stackElements[lcv].getLineNumber() + " ";
+            for (StackTraceElement stackElement : stackElements) {
+                message += "File name: " + stackElement.getFileName() + " ";
+                message += "Line number: " + stackElement.getLineNumber() + " ";
                 //String className = stackElements[lcv].getClassName() + " ";
                 // String packageName = extractPackageName(className) + " ";
                 //String simpleClassName = extractSimpleClassName(className) + " ";
@@ -137,7 +137,7 @@ public class class_functions {
                 //message += "Direct class name: " + extractDirectClassName(simpleClassName) + " ";
                 //message += "Method name: " + stackElements[lcv].getMethodName() + "";
                 //message += "Native method?: " + stackElements[lcv].isNativeMethod() + " ";
-                message += "toString(): " + stackElements[lcv].toString() + " ";
+                message += "toString(): " + stackElement.toString() + " ";
             }
             Log.e(context.getString(R.string.app_name_shot) + " - error: ",
                     message);

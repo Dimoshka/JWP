@@ -46,7 +46,7 @@ public class class_rss_provider {
             boolean done = false;
             class_rss_item item = null;
             while (eventType != XmlPullParser.END_DOCUMENT && !done) {
-                String name = null;
+                String name;
                 switch (eventType) {
                     case XmlPullParser.START_DOCUMENT:
                         break;
@@ -110,7 +110,7 @@ public class class_rss_provider {
                 public void callback(String url, XmlDom xml, AjaxStatus status) {
                     List<XmlDom> entries = xml.tags(ITEM);
                     //List<class_rss_item> list = new ArrayList<class_rss_item>();
-                    class_rss_item item = null;
+                    class_rss_item item;
                     for (XmlDom entry : entries) {
                         item = new class_rss_item();
 

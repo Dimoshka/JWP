@@ -26,6 +26,8 @@
         <item>8</item>
     </string-array>
 
+    <string name="text_test" tools:ignore="MissingTranslation">"Text title"</string>
+
     <string name="app_name">"Publications of Jehovah's Witnesses"</string>
     <string name="app_name_shot">"JWP"</string>
     <string name="description">"JWP - a program for readers of the publications of Jehovah's Witnesses.

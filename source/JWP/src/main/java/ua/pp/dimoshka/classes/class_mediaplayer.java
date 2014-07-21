@@ -1,6 +1,5 @@
 package ua.pp.dimoshka.classes;
 
-import android.content.Context;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnBufferingUpdateListener;
 import android.media.MediaPlayer.OnCompletionListener;
@@ -12,10 +11,10 @@ import android.util.Log;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
 
-import ua.pp.dimoshka.jwp.R;
-
 import java.io.IOException;
 import java.util.EnumSet;
+
+import ua.pp.dimoshka.jwp.R;
 
 public class class_mediaplayer {
     private static String tag = "MediaPlayerWrapper";
@@ -23,8 +22,6 @@ public class class_mediaplayer {
     private State currentState;
     private class_mediaplayer mWrapper;
 
-    private ImageButton buttonPlayStop;
-    private SeekBar seekBar;
     private Handler handler;
 
     public class_mediaplayer(final ImageButton buttonPlayStop,
@@ -87,14 +84,14 @@ public class class_mediaplayer {
             }
         };
         mPlayer.setOnInfoListener(mOnInfoListener);
-        this.buttonPlayStop = buttonPlayStop;
-        this.seekBar = seekBar;
+        //ImageButton buttonPlayStop1 = buttonPlayStop;
+        //SeekBar seekBar1 = seekBar;
         this.handler = handler_completion;
     }
 
     /* METHOD WRAPPING FOR STATE CHANGES */
     public static enum State {
-        IDLE, ERROR, INITIALIZED, PREPARING, PREPARED, STARTED, STOPPED, PLAYBACK_COMPLETE, PAUSED;
+        IDLE, ERROR, INITIALIZED, PREPARING, PREPARED, STARTED, STOPPED, PLAYBACK_COMPLETE, PAUSED
     }
 
     public void setDataSource(String path) {

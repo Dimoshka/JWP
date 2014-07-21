@@ -73,7 +73,7 @@ public class player extends ActionBarActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.player);
-        ActionBar actionBar = getSupportActionBar();
+        //ActionBar actionBar = getSupportActionBar();
         Bundle extras = getIntent().getExtras();
         id_magazine = extras.getInt("id_magazine");
         prefs = PreferenceManager.getDefaultSharedPreferences(this);

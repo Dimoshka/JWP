@@ -11,10 +11,9 @@ import android.os.Build;
 import android.os.Handler;
 import android.util.Log;
 
-import ua.pp.dimoshka.jwp.R;
-
 import java.io.File;
-import java.util.List;
+
+import ua.pp.dimoshka.jwp.R;
 
 public class class_books_brochures {
     private SQLiteDatabase database;

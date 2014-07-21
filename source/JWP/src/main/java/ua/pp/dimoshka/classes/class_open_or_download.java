@@ -10,12 +10,12 @@ import android.net.Uri;
 import android.webkit.MimeTypeMap;
 import android.widget.Toast;
 
-import ua.pp.dimoshka.jwp.R;
-import ua.pp.dimoshka.jwp.player;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import ua.pp.dimoshka.jwp.R;
+import ua.pp.dimoshka.jwp.player;
 
 /**
  * Created by designers on 23.05.13.
@@ -35,9 +35,9 @@ public class class_open_or_download {
 
     public void dialog_show(String _id) {
         try {
-            if (funct.ExternalStorageState() == true) {
+            if (funct.ExternalStorageState()) {
                 List<String> listItems = new ArrayList<String>();
-                CharSequence[] items = null;
+                CharSequence[] items;
 
                 cur_files = database
                         .rawQuery(
@@ -47,7 +47,7 @@ public class class_open_or_download {
                 if (cur_files.getCount() > 0) {
                     cur_files.moveToFirst();
                     for (int i = 0; i < cur_files.getCount(); i++) {
-                        String name = null;
+                        String name;
 
                         if (cur_files.getInt(cur_files
                                 .getColumnIndex("id_type")) != 3) {
@@ -142,7 +142,7 @@ public class class_open_or_download {
             }
 
             File file = new File(dir.getAbsolutePath() + "/" + name);
-            if (file.exists() != true) {
+            if (!file.exists()) {
                 if (file_enable)
                     funct.update_file_isn(database, name, 0);
                 file_enable = false;
