@@ -85,21 +85,6 @@ public class player extends ActionBarActivity {
         refresh();
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        if (prefs.getBoolean("analytics", true)) {
-            EasyTracker.getInstance(this).activityStart(this);
-        }
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        if (prefs.getBoolean("analytics", true)) {
-            EasyTracker.getInstance(this).activityStop(this);
-        }
-    }
 
     private void initViews() {
         try {
@@ -186,9 +171,25 @@ public class player extends ActionBarActivity {
         }
     }
 
-    @SuppressWarnings("deprecation")
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (prefs.getBoolean("analytics", true)) {
+            EasyTracker.getInstance(this).activityStart(this);
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (prefs.getBoolean("analytics", true)) {
+            EasyTracker.getInstance(this).activityStop(this);
+        }
+    }
+
+
     private void refresh() {
-        stopManagingCursor(cursor);
         cursor = database
                 .rawQuery(
                         "select files._id, id_type, file, type.name as name_type, files.name, link, files.title from files left join magazine on files.id_magazine=magazine._id left join type on files.id_type=type._id where files.id_magazine='"
@@ -197,7 +198,6 @@ public class player extends ActionBarActivity {
                         null
                 );
 
-        startManagingCursor(cursor);
         class_cursoradapter_player scAdapter = new class_cursoradapter_player(this,
                 android.R.layout.simple_list_item_single_choice, cursor,
                 new String[]{"title"}, new int[]{android.R.id.text1});
@@ -306,12 +306,9 @@ public class player extends ActionBarActivity {
         return false;
     }
 
-    @SuppressWarnings("deprecation")
     protected void onDestroy() {
         super.onDestroy();
         mediaplayer_class.release();
-        stopManagingCursor(cursor);
-        //dbOpenHelper.close();
     }
 
     class AFListener implements AudioManager.OnAudioFocusChangeListener {
