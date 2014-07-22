@@ -4,4 +4,7 @@
     <color name="text_dark_gray">#aaaaaa</color>
     <color name="text_green">#ff00afa7</color>
     <color name="text_dark_blue">#415884</color>
+    <color name="text_main">#ffbb33</color>
+    <color name="text_main_transp">#33ffbb33</color>
+
 </resources>
