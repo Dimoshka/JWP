@@ -2,22 +2,22 @@ package ua.pp.dimoshka.classes;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import ua.pp.dimoshka.jwp.R;
 
-public class class_cursoradapter_player extends SimpleCursorAdapter {
+public class class_player_adapter extends SimpleCursorAdapter {
 	private int layout;
 	private String[] from;
 	private int[] to;
 
 	@SuppressWarnings("deprecation")
-	public class_cursoradapter_player(Context context, int layout,
-                                      Cursor c, String[] from, int[] to) {
+	public class_player_adapter(Context context, int layout,
+                                Cursor c, String[] from, int[] to) {
 		super(context, layout, c, from, to);
 		this.layout = layout;
 		this.from = from;

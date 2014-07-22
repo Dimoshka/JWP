@@ -66,6 +66,53 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
     public static String ln_prefix = "en/news";
     public static String code_lng = "E";
 
+    @SuppressLint("HandlerLeak")
+    private final Handler handler_jornals = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 1:
+                    if (refresh_all) {
+                        rss_news.get_all_feeds();
+                    } else {
+                        Log.d("JWP", "refrashe afte load");
+                        refresh();
+                    }
+                    break;
+            }
+        }
+    };
+
+    @SuppressLint("HandlerLeak")
+    private final Handler handler_news = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 1:
+                    Log.d("JWP", "refrashe afte load");
+                    refresh();
+                    break;
+            }
+        }
+
+    };
+
+    @SuppressLint("HandlerLeak")
+    private final Handler handler_books_brochures = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 1:
+                    if (refresh_all) {
+                        rss_jornals.get_all_feeds();
+                    } else {
+                        Log.d("JWP", "refrashe afte load");
+                        refresh();
+                    }
+            }
+        }
+    };
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -107,7 +154,6 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
 
     private void load_first() {
         try {
-            Log.e("PREFF", "change1111");
             get_language(Integer.parseInt(prefs.getString("language", "1")));
             create_tabs();
             create_fragments();
@@ -120,20 +166,18 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
         try {
             List<Fragment> fragment_list = new Vector<Fragment>();
 
+            rss_jornals = new class_rss_jornals(this, handler_jornals, database, funct);
             jornals_fragm = new jornals();
             fragment_list.add(jornals_fragm);
-            rss_jornals = new class_rss_jornals(this, handler_jornals,
-                    database, funct);
 
+            rss_news = new class_rss_news(this, handler_news, database, funct);
             news_fragm = new news();
             fragment_list.add(news_fragm);
-            rss_news = new class_rss_news(this, handler_news, database, funct);
 
             if (id_lng == 3) {
+                books_brochures = new class_books_brochures(this, handler_books_brochures, database, funct);
                 book_fragm = new books_brochures();
                 fragment_list.add(book_fragm);
-                books_brochures = new class_books_brochures(this,
-                        handler_books_brochures, database, funct);
             }
 
             MyPagerAdapter pagerAdapter = new MyPagerAdapter(getSupportFragmentManager(),
@@ -260,53 +304,6 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
             EasyTracker.getInstance(this).activityStop(this);
         }
     }
-
-    @SuppressLint("HandlerLeak")
-    private final Handler handler_jornals = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case 1:
-                    if (refresh_all) {
-                        rss_news.get_all_feeds();
-                    } else {
-                        Log.d("JWP", "refrashe afte load");
-                        refresh();
-                    }
-                    break;
-            }
-        }
-    };
-
-    @SuppressLint("HandlerLeak")
-    private final Handler handler_news = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case 1:
-                    Log.d("JWP", "refrashe afte load");
-                    refresh();
-                    break;
-            }
-        }
-
-    };
-
-    @SuppressLint("HandlerLeak")
-    private final Handler handler_books_brochures = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case 1:
-                    if (refresh_all) {
-                        rss_jornals.get_all_feeds();
-                    } else {
-                        Log.d("JWP", "refrashe afte load");
-                        refresh();
-                    }
-            }
-        }
-    };
 
 
     @Override

@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.media.AudioManager;
@@ -13,16 +12,15 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.preference.PreferenceManager;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.SeekBar;
@@ -32,31 +30,32 @@ import com.google.analytics.tracking.android.EasyTracker;
 
 import java.io.File;
 
-import ua.pp.dimoshka.classes.class_cursoradapter_player;
+import ua.pp.dimoshka.classes.class_player_adapter;
 import ua.pp.dimoshka.classes.class_functions;
 import ua.pp.dimoshka.classes.class_mediaplayer;
+import ua.pp.dimoshka.classes.class_news_adapter;
 import ua.pp.dimoshka.classes.class_sqlite;
 import ua.pp.dimoshka.classes.service_downloads_files;
 
-public class player extends ActionBarActivity {
+public class player extends FragmentActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private ImageButton buttonPlayStop;
     private SeekBar seekBar;
     private final Handler handler = new Handler();
     private ListView listView;
-    private Cursor cursor;
     private Integer id_magazine;
 
     private class_mediaplayer mediaplayer_class;
     private SharedPreferences prefs;
     private SQLiteDatabase database;
     private class_functions funct;
-    public int id_lang = 0;
-    private OnSharedPreferenceChangeListener listener_pref;
+    private SharedPreferences.OnSharedPreferenceChangeListener listener_pref;
 
     AudioManager audioManager;
     AFListener afListenerMusic;
     MediaPlayer mpMusic;
+
+    private class_player_adapter mAdapter;
 
     private final Handler handler_completion = new Handler() {
         @Override
@@ -82,9 +81,14 @@ public class player extends ActionBarActivity {
         database = dbOpenHelper.openDataBase();
         audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         initViews();
-        refresh();
-    }
 
+        mAdapter = new class_player_adapter(this,
+                android.R.layout.simple_list_item_single_choice, null,
+                new String[]{"title"}, new int[]{android.R.id.text1});
+        listView.setAdapter(mAdapter);
+        getSupportLoaderManager().initLoader(0, null, this);
+
+    }
 
     private void initViews() {
         try {
@@ -98,21 +102,21 @@ public class player extends ActionBarActivity {
 
             mediaplayer_class = new class_mediaplayer(buttonPlayStop, seekBar, handler_completion);
 
-            buttonPlayStop.setOnClickListener(new OnClickListener() {
+            buttonPlayStop.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     buttonClick_Play();
                 }
             });
 
-            buttonNext.setOnClickListener(new OnClickListener() {
+            buttonNext.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     buttonClick_Next();
                 }
             });
 
-            buttonBack.setOnClickListener(new OnClickListener() {
+            buttonBack.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     buttonClick_Back();
@@ -121,7 +125,7 @@ public class player extends ActionBarActivity {
 
             buttonPlayStop.setEnabled(false);
 
-            seekBar.setOnTouchListener(new OnTouchListener() {
+            seekBar.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
                     seekChange(v);
@@ -130,7 +134,7 @@ public class player extends ActionBarActivity {
 
             });
 
-            listView.setOnItemClickListener(new OnItemClickListener() {
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView<?> parent, View view,
                                         int position, long id) {
                     play(position);
@@ -144,7 +148,9 @@ public class player extends ActionBarActivity {
 
     private void play(Integer position) {
         buttonPlayStop.setEnabled(false);
+        Cursor cursor = ((class_news_adapter) listView.getAdapter()).getCursor();
         cursor.moveToPosition(position);
+
         String name = cursor.getString(cursor
                 .getColumnIndex("name"));
         String link = cursor.getString(cursor
@@ -188,20 +194,8 @@ public class player extends ActionBarActivity {
         }
     }
 
-
     private void refresh() {
-        cursor = database
-                .rawQuery(
-                        "select files._id, id_type, file, type.name as name_type, files.name, link, files.title from files left join magazine on files.id_magazine=magazine._id left join type on files.id_type=type._id where files.id_magazine='"
-                                + id_magazine
-                                + "' and id_type='3' order by files.name asc",
-                        null
-                );
-
-        class_cursoradapter_player scAdapter = new class_cursoradapter_player(this,
-                android.R.layout.simple_list_item_single_choice, cursor,
-                new String[]{"title"}, new int[]{android.R.id.text1});
-        listView.setAdapter(scAdapter);
+        getSupportLoaderManager().restartLoader(0, null, this);
     }
 
     @SuppressLint("HandlerLeak")
@@ -309,6 +303,47 @@ public class player extends ActionBarActivity {
     protected void onDestroy() {
         super.onDestroy();
         mediaplayer_class.release();
+    }
+
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        return new MyCursorLoader(this, database, id_magazine);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
+        mAdapter.swapCursor(cursor);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> cursorLoader) {
+        mAdapter.swapCursor(null);
+    }
+
+
+    static class MyCursorLoader extends CursorLoader {
+        SQLiteDatabase database;
+        int id_magazine;
+
+        public MyCursorLoader(Context context, SQLiteDatabase database, int id_magazine) {
+            super(context);
+            this.database = database;
+            this.id_magazine = id_magazine;
+        }
+
+        @Override
+        public Cursor loadInBackground() {
+            Cursor cursor = database
+                    .rawQuery(
+                            "select files._id, id_type, file, type.name as name_type, files.name, link, files.title from files left join magazine on files.id_magazine=magazine._id left join type on files.id_type=type._id where files.id_magazine='"
+                                    + id_magazine
+                                    + "' and id_type='3' order by files.name asc",
+                            null
+                    );
+            return cursor;
+        }
+
     }
 
     class AFListener implements AudioManager.OnAudioFocusChangeListener {

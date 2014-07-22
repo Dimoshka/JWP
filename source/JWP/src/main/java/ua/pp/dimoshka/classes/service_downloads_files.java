@@ -7,14 +7,14 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Binder;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.RemoteViews;
-
-import ua.pp.dimoshka.jwp.R;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -26,6 +26,8 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import ua.pp.dimoshka.jwp.R;
 
 public class service_downloads_files extends Service {
 
@@ -73,6 +75,7 @@ public class service_downloads_files extends Service {
             Map<String, String> targetFile = new HashMap<String, String>();
             targetFile.put("link", intent.getStringExtra("file_url"));
             targetFile.put("putch", intent.getStringExtra("file_putch"));
+            targetFile.put("img", intent.getStringExtra("img_putch"));
             targetFiles.add(targetFile);
 
             task = new AsyncDownloadTask();
@@ -141,10 +144,21 @@ public class service_downloads_files extends Service {
 
     protected RemoteViews getProgressView(int currentNumFile,
                                           int totalNumFiles, int currentReceivedBytes, int totalNumBytes,
-                                          String filename) {
+                                          String filename, String imgpatch) {
         RemoteViews contentView = new RemoteViews(getPackageName(),
                 R.layout.notification);
-        contentView.setImageViewResource(R.id.image, R.drawable.ic_launcher);
+
+        try {
+            if (imgpatch.length() > 0) {
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+                Bitmap bitmap = BitmapFactory.decodeFile(imgpatch, options);
+                contentView.setImageViewBitmap(R.id.image, bitmap);
+            } else contentView.setImageViewResource(R.id.image, R.drawable.ic_launcher);
+        } catch (Exception ex) {
+            contentView.setImageViewResource(R.id.image, R.drawable.ic_launcher);
+        }
+
         contentView.setTextViewText(R.id.text1, filename);
         contentView.setProgressBar(R.id.progress, 100, 100
                 * currentReceivedBytes / totalNumBytes, false);
@@ -219,7 +233,7 @@ public class service_downloads_files extends Service {
         @Override
         protected Void doInBackground(Void... params) {
             try {
-                String remoteFilepath, localFilepath;
+                String remoteFilepath, localFilepath, imgFilepath;
 
                 Log.i("JWP", "downloading: '" + total_file);
                 if (total_file > now_targetFile) {
@@ -228,6 +242,8 @@ public class service_downloads_files extends Service {
 
                     remoteFilepath = targetFile.get("link");
                     localFilepath = targetFile.get("putch");
+                    imgFilepath = targetFile.get("img");
+
                     Log.i("JWP" + getClass().getName(), "downloading: '"
                             + remoteFilepath + "' => '" + localFilepath + "'");
 
@@ -267,7 +283,7 @@ public class service_downloads_files extends Service {
                                         RemoteViews progressView = getProgressView(
                                                 now_targetFile + 1, total_file,
                                                 totalBytesRead, filesize,
-                                                localFile.getName());
+                                                localFile.getName(), imgFilepath);
 
                                         if (!isCancelled()) {
                                             showNotification(

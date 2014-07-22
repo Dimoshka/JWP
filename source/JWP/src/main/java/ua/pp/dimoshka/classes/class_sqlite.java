@@ -29,8 +29,8 @@ public class class_sqlite extends SQLiteOpenHelper {
         try {
             // -- Table: type
             database.execSQL("CREATE TABLE type (_id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, name VARCHAR(16) UNIQUE, code VARCHAR(6) NOT NULL UNIQUE);");
-            database.execSQL("INSERT INTO [type] ([_id], [name], [code]) VALUES (1, 'EPUB', 'epub');");
-            database.execSQL("INSERT INTO [type] ([_id], [name], [code]) VALUES (2, 'PDF', 'pdf');");
+            database.execSQL("INSERT INTO [type] ([_id], [name], [code]) VALUES (2, 'EPUB', 'epub');");
+            database.execSQL("INSERT INTO [type] ([_id], [name], [code]) VALUES (1, 'PDF', 'pdf');");
             database.execSQL("INSERT INTO [type] ([_id], [name], [code]) VALUES (3, 'MP3', 'mp3');");
             database.execSQL("INSERT INTO [type] ([_id], [name], [code]) VALUES (4, 'AAC', 'm4b');");
             // -- Table: publication

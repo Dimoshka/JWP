@@ -24,7 +24,7 @@
             android:id="@+id/progress"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="fill_parent"
-            android:layout_height="15dp"
+            android:layout_height="10dp"
             android:max="100"
             android:progress="0" />
 
@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/progress"
-            android:textSize="12sp"
+            android:textSize="11sp"
             android:text="@string/text_test" />
 
         <TextView
@@ -54,7 +54,7 @@
             android:layout_marginBottom="2dp"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/text2"
-            android:textSize="12sp"
+            android:textSize="11sp"
             android:text="@string/text_test" />
 
     </RelativeLayout>

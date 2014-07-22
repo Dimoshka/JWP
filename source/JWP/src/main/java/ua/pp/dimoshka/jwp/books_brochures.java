@@ -1,49 +1,74 @@
 package ua.pp.dimoshka.jwp;
 
+import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
+import android.support.v4.app.ListFragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
 
 import ua.pp.dimoshka.classes.class_books_brochures_adapter;
 
-public class books_brochures extends Fragment {
-    private ListView list;
-    private Cursor cursor;
-    class_books_brochures_adapter scAdapter;
-    View view = null;
+public class books_brochures extends ListFragment implements LoaderManager.LoaderCallbacks<Cursor> {
+
+    class_books_brochures_adapter mAdapter;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup group,
-                             Bundle saved) {
-        view = inflater.inflate(R.layout.list, group, false);
-        try {
-            list = (ListView) view.findViewById(R.id.list);
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mAdapter = new class_books_brochures_adapter(
+                getActivity(), R.layout.list_items_books_brochures, null,
+                new String[]{"_id"}, new int[]{R.id.title}, 0,
+                main.database, main.funct);
+        setListAdapter(mAdapter);
+        getLoaderManager().initLoader(0, null, this);
+    }
 
-            list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                public void onItemClick(AdapterView<?> parent, View view,
-                                        int position, long id) {
-                    cursor.moveToPosition(position);
-                    main.open_or_download.dialog_show(cursor.getString(cursor
-                            .getColumnIndex("_id")));
-                }
-            });
-        } catch (Exception e) {
-            main.funct.send_bug_report(e);
-        }
 
-        refresh();
-
-        return view;
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+        main.open_or_download.dialog_show(id);
     }
 
     public void refresh() {
         try {
-             cursor = main.database
+            getLoaderManager().restartLoader(0, null, this);
+        } catch (Exception e) {
+            main.funct.send_bug_report(e);
+        }
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        return new MyCursorLoader(getActivity(), main.database);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
+        mAdapter.swapCursor(cursor);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        mAdapter.swapCursor(null);
+    }
+
+    static class MyCursorLoader extends CursorLoader {
+        SQLiteDatabase database;
+
+        public MyCursorLoader(Context context, SQLiteDatabase database) {
+            super(context);
+            this.database = database;
+        }
+
+        @Override
+        public Cursor loadInBackground() {
+            Cursor cursor = main.database
                     .rawQuery(
                             "select magazine._id as _id, magazine.name as name, magazine.title as title, magazine.img as img, " +
                                     "language.code as code_lng, " +
@@ -56,20 +81,8 @@ public class books_brochures extends Fragment {
                                     "where magazine.id_lang='" + main.id_lng + "' and magazine.id_pub='4' order by magazine.name asc",
                             null
                     );
-
-            cursor.moveToFirst();
-            scAdapter = new class_books_brochures_adapter(
-                    getActivity(), R.layout.list_items_books_brochures, cursor,
-                    new String[]{"_id"}, new int[]{R.id.title}, 0,
-                    main.database, main.funct);
-            list.setAdapter(scAdapter);
-        } catch (Exception e) {
-            main.funct.send_bug_report(e);
+            return cursor;
         }
-    }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
     }
 }

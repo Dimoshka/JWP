@@ -23,7 +23,7 @@ import ua.pp.dimoshka.jwp.player;
 public class class_open_or_download {
 
     private Context context;
-    private Cursor cur_files;
+    private Cursor cursor;
     private SQLiteDatabase database;
     private class_functions funct;
 
@@ -33,44 +33,44 @@ public class class_open_or_download {
         this.funct = funct;
     }
 
-    public void dialog_show(String _id) {
+    public void dialog_show(long id) {
         try {
             if (funct.ExternalStorageState()) {
                 List<String> listItems = new ArrayList<String>();
                 CharSequence[] items;
 
-                cur_files = database
+                cursor = database
                         .rawQuery(
-                                "select id_type, file, type.name as name_type, files.name, link, files.id_magazine, magazine.id_pub from files left join magazine on files.id_magazine=magazine._id left join type on files.id_type=type._id where files.id_magazine='"
-                                        + _id + "' group by id_type", null
+                                "select files._id, id_type, file, type.name as name_type, files.name, link, files.id_magazine, magazine.id_pub, magazine.name as name_magazine from files left join magazine on files.id_magazine=magazine._id left join type on files.id_type=type._id where files.id_magazine='"
+                                        + id + "' group by id_type order by files.id_type", null
                         );
-                if (cur_files.getCount() > 0) {
-                    cur_files.moveToFirst();
-                    for (int i = 0; i < cur_files.getCount(); i++) {
+                if (cursor.getCount() > 0) {
+                    cursor.moveToFirst();
+                    for (int i = 0; i < cursor.getCount(); i++) {
                         String name;
 
-                        if (cur_files.getInt(cur_files
+                        if (cursor.getInt(cursor
                                 .getColumnIndex("id_type")) != 3) {
-                            if (cur_files.getInt(cur_files
+                            if (cursor.getInt(cursor
                                     .getColumnIndex("file")) == 1) {
                                 name = context.getString(R.string.open)
                                         + " "
-                                        + cur_files.getString(cur_files
+                                        + cursor.getString(cursor
                                         .getColumnIndex("name_type"));
                             } else {
                                 name = context.getString(R.string.download)
                                         + " "
-                                        + cur_files.getString(cur_files
+                                        + cursor.getString(cursor
                                         .getColumnIndex("name_type"));
                             }
                         } else {
                             name = context.getString(R.string.player_open)
                                     + " ("
-                                    + cur_files.getString(cur_files
+                                    + cursor.getString(cursor
                                     .getColumnIndex("name_type")) + ")";
                         }
                         listItems.add(name);
-                        cur_files.moveToNext();
+                        cursor.moveToNext();
                     }
 
                     items = listItems
@@ -101,23 +101,23 @@ public class class_open_or_download {
     public void open_or_download(int id) {
         try {
             if (funct.ExternalStorageState()) {
-                if (cur_files.getCount() > 0) {
-                    cur_files.moveToPosition(id);
-                    if (cur_files.getInt(cur_files.getColumnIndex("id_type")) == 3) {
+                if (cursor.getCount() > 0) {
+                    cursor.moveToPosition(id);
+                    if (cursor.getInt(cursor.getColumnIndex("id_type")) == 3) {
                         Intent i = new Intent(context, player.class);
                         i.setFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
                         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        i.putExtra("id_magazine", cur_files.getInt(cur_files
+                        i.putExtra("id_magazine", cursor.getInt(cursor
                                 .getColumnIndex("id_magazine")));
                         context.startActivity(i);
                     } else {
-                        start_open_or_download(cur_files.getString(cur_files
-                                        .getColumnIndex("name")),
-                                cur_files.getInt(cur_files
+                        start_open_or_download(cursor.getString(cursor
+                                        .getColumnIndex("name")), cursor.getString(cursor.getColumnIndex("name_magazine")),
+                                cursor.getInt(cursor
                                         .getColumnIndex("file")) != 0,
-                                cur_files.getString(cur_files
-                                        .getColumnIndex("link")), cur_files.getInt(cur_files.getColumnIndex("id_pub"))
+                                cursor.getString(cursor
+                                        .getColumnIndex("link")), cursor.getInt(cursor.getColumnIndex("id_pub"))
                         );
                     }
                 }
@@ -129,25 +129,20 @@ public class class_open_or_download {
         }
     }
 
-    public void start_open_or_download(String name, Boolean file_enable,
+    public void start_open_or_download(String name, String name_magazine, Boolean file_enable,
                                        String link, Integer id_pub) {
         try {
-            String dir_path = funct.get_dir_app();
-            if (id_pub != 4) dir_path += "/downloads/jornals/";
-            else dir_path += "/downloads/books_brochures/";
+            String dir_path_pub;
+            if (id_pub != 4) dir_path_pub = "/jornals/";
+            else dir_path_pub = "/books_brochures/";
 
-            File dir = new File(dir_path);
-            if (!dir.isDirectory()) {
-                dir.mkdirs();
-            }
-
-            File file = new File(dir.getAbsolutePath() + "/" + name);
+            File file = new File(funct.get_dir_app() + "/downloads" + dir_path_pub + name);
             if (!file.exists()) {
                 if (file_enable)
                     funct.update_file_isn(database, name, 0);
                 file_enable = false;
             } else {
-                if (file_enable)
+                if (!file_enable)
                     funct.update_file_isn(database, name, 1);
                 file_enable = true;
             }
@@ -168,10 +163,19 @@ public class class_open_or_download {
                 context.startActivity(intent);
 
             } else {
+
+                File dir = new File(funct.get_dir_app() + "/downloads" + dir_path_pub);
+                if (!dir.isDirectory()) {
+                    dir.mkdirs();
+                }
+                File imgFile = new File(funct.get_dir_app() + "/img" + dir_path_pub + name_magazine + ".jpg");
                 Intent i = new Intent(context,
                         service_downloads_files.class);
                 i.putExtra("file_url", link);
                 i.putExtra("file_putch", file.getAbsolutePath());
+                if (imgFile.exists()) i.putExtra("img_putch", imgFile.getAbsolutePath());
+                else i.putExtra("img_putch", "");
+
                 Toast.makeText(context,
                         context.getString(R.string.download_task_addeded),
                         Toast.LENGTH_SHORT).show();

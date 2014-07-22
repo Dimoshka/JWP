@@ -1,33 +1,71 @@
 package ua.pp.dimoshka.jwp;
 
+import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.view.View;
 import android.widget.ListView;
 
 import ua.pp.dimoshka.classes.class_jornals_adapter;
 
-public class jornals extends ListFragment {
+public class jornals extends ListFragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    private Cursor cursor;
+    private class_jornals_adapter mAdapter;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        refresh();
+        mAdapter = new class_jornals_adapter(
+                getActivity(), R.layout.list_items_jornals, null, new String[]{}, new int[]{}, 0, main.database, main.funct);
+        setListAdapter(mAdapter);
+        getLoaderManager().initLoader(0, null, this);
     }
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-        cursor.moveToPosition(position);
-        main.open_or_download.dialog_show(cursor.getString(cursor.getColumnIndex("_id")));
+        main.open_or_download.dialog_show(id);
     }
 
     public void refresh() {
         try {
-            cursor = main.database
+            getLoaderManager().restartLoader(0, null, this);
+        } catch (Exception e) {
+            main.funct.send_bug_report(e);
+        }
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        return new MyCursorLoader(getActivity(), main.database);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
+        mAdapter.swapCursor(cursor);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        mAdapter.swapCursor(null);
+    }
+
+    static class MyCursorLoader extends CursorLoader {
+        SQLiteDatabase database;
+
+        public MyCursorLoader(Context context, SQLiteDatabase database) {
+            super(context);
+            this.database = database;
+        }
+
+        @Override
+        public Cursor loadInBackground() {
+            Cursor cursor = main.database
                     .rawQuery(
                             "select " +
                                     "magazine._id as _id, magazine.name as name, magazine.img as img, " +
@@ -41,18 +79,8 @@ public class jornals extends ListFragment {
                                     "where magazine.id_lang='" + main.id_lng + "' and magazine.id_pub BETWEEN '1' and '3' order by date desc, magazine.id_pub asc;",
                             null
                     );
-
-            class_jornals_adapter adapter = new class_jornals_adapter(
-                    getActivity(), R.layout.list_items_jornals, cursor, new String[]{}, new int[]{}, 0, main.database, main.funct);
-            setListAdapter(adapter);
-
-        } catch (Exception e) {
-            main.funct.send_bug_report(e);
+            return cursor;
         }
-    }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
     }
 }
