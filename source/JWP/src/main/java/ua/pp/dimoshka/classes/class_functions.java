@@ -139,14 +139,13 @@ public class class_functions {
                 //message += "Native method?: " + stackElements[lcv].isNativeMethod() + " ";
                 message += "toString(): " + stackElement.toString() + " ";
             }
-            Log.e(context.getString(R.string.app_name_shot) + " - error: ",
-                    message);
+            ex.printStackTrace();
+            Log.e("EERROORR", ex.toString());
             //BugSenseHandler.addCrashExtraData("StackTrace", message);
             BugSenseHandler.sendException(ex);
             //BugSenseHandler.sendExceptionMessage("level", message, ex);
         } catch (Exception e) {
-            Log.e("error: functionn",
-                    ex.toString());
+            ex.printStackTrace();
         }
     }
 

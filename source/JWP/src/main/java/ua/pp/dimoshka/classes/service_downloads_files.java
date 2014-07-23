@@ -82,7 +82,6 @@ public class service_downloads_files extends Service {
             task.execute();
         } catch (Exception e) {
             funct.send_bug_report(e);
-            Log.d("err", e.toString());
         }
         return START_STICKY;
     }

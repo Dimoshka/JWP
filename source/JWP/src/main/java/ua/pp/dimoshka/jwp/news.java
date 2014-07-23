@@ -10,6 +10,7 @@ import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 
@@ -44,7 +45,11 @@ public class news extends ListFragment implements LoaderManager.LoaderCallbacks<
 
     public void refresh() {
         try {
-            getLoaderManager().restartLoader(0, null, this);
+            Log.e("REFRESH", "news");
+            //if (isAdded()) {
+                Log.e("REFRESH", "1");
+                getLoaderManager().restartLoader(0, null, this);
+            //}
         } catch (Exception e) {
             main.funct.send_bug_report(e);
         }

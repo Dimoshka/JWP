@@ -17,9 +17,6 @@ import java.util.List;
 import ua.pp.dimoshka.jwp.R;
 import ua.pp.dimoshka.jwp.player;
 
-/**
- * Created by designers on 23.05.13.
- */
 public class class_open_or_download {
 
     private Context context;

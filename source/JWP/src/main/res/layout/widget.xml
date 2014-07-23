@@ -8,14 +8,29 @@
     <TextView
         android:id="@+id/tvUpdate"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:background="@color/text_main_transp"
+        android:layout_height="40dp"
+        android:background="@color/main_transp"
+        android:textColor="@color/text_dark_blue"
         android:gravity="center"
-        android:textAppearance="?android:attr/textAppearanceLarge">
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:text="@string/news"
+        android:layout_toEndOf="@+id/image"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/image">
     </TextView>
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/image"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/ic_launcher" />
+
     <ListView
-        android:id="@+id/lvList"
+        android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/tvUpdate">

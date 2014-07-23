@@ -28,7 +28,6 @@ public class class_rss_jornals {
     static final String URL_IMG = "http://assets.jw.org/assets/a/{code_pub_shot}{YY}/{YYYYMMDD}/{code_pub_shot}{YY}_{YYYYMMDD}_{code_lng}/{code_pub}_{code_lng}_{YYYYMMDD}_md.jpg";
 
     private SQLiteDatabase database;
-
     public class_functions funct;
     private Context context;
     private Handler handler;
@@ -39,6 +38,7 @@ public class class_rss_jornals {
     private ArrayList<String> code_type = new ArrayList<String>();
     public SharedPreferences prefs;
     private AsyncTask task;
+
 
     public class_rss_jornals(Context context, Handler handler,
                              SQLiteDatabase database, class_functions funct) {

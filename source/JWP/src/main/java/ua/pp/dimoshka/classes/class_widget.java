@@ -1,26 +1,40 @@
 package ua.pp.dimoshka.classes;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.widget.RemoteViews;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import ua.pp.dimoshka.jwp.R;
+import ua.pp.dimoshka.jwp.main;
 
 public class class_widget extends AppWidgetProvider {
 
     SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-    final String ACTION_ON_CLICK = "ua.pp.dimoshka.classes.class_widget.itemonclick";
+    final String ACTION_ON_LISTCLICK = "ua.pp.dimoshka.jwp.widget_listitemonclick";
+    final String ACTION_ON_UPDATEOK = "ua.pp.dimoshka.jwp.widget_updateok";
+
     final static String ITEM_POSITION = "item_position";
     final static String ITEM_LINK = "item_link";
+
+    private static class_rss_news rss_news;
+    public static SQLiteDatabase database;
+    private static class_sqlite dbOpenHelper;
+    public static class_functions funct;
+
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager,
@@ -42,19 +56,29 @@ public class class_widget extends AppWidgetProvider {
 
         appWidgetManager.updateAppWidget(appWidgetId, view);
         appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId,
-                R.id.lvList);
+                R.id.list);
     }
 
     void setUpdateTV(RemoteViews view, Context context, int appWidgetId) {
-        view.setTextViewText(R.id.tvUpdate,
-                sdf.format(new Date(System.currentTimeMillis())));
+        //view.setTextViewText(R.id.tvUpdate,
+        //        sdf.format(new Date(System.currentTimeMillis())));
+
+        update_rss_news(context);
+
         Intent updIntent = new Intent(context, class_widget.class);
         updIntent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-        updIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS,
-                new int[]{appWidgetId});
+        updIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, new int[]{appWidgetId});
+
+        //updIntent.setAction(ACTION_ON_UPDATECLICK);
+        //updIntent.putExtra(IDWIDGET, appWidgetId);
         PendingIntent updPIntent = PendingIntent.getBroadcast(context,
                 appWidgetId, updIntent, 0);
         view.setOnClickPendingIntent(R.id.tvUpdate, updPIntent);
+
+
+        Intent intentapp = new Intent(context, main.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intentapp, 0);
+        view.setOnClickPendingIntent(R.id.image, pendingIntent);
     }
 
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
@@ -63,22 +87,65 @@ public class class_widget extends AppWidgetProvider {
         adapter.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
         Uri data = Uri.parse(adapter.toUri(Intent.URI_INTENT_SCHEME));
         adapter.setData(data);
-        rv.setRemoteAdapter(R.id.lvList, adapter);
+        rv.setRemoteAdapter(R.id.list, adapter);
     }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     void setListClick(RemoteViews rv, Context context, int appWidgetId) {
         Intent listClickIntent = new Intent(context, class_widget.class);
-        listClickIntent.setAction(ACTION_ON_CLICK);
-        PendingIntent listClickPIntent = PendingIntent.getBroadcast(context, 0,
+        listClickIntent.setAction(ACTION_ON_LISTCLICK);
+        PendingIntent listClickPIntent = PendingIntent.getBroadcast(context, appWidgetId,
                 listClickIntent, 0);
-        rv.setPendingIntentTemplate(R.id.lvList, listClickPIntent);
+        rv.setPendingIntentTemplate(R.id.list, listClickPIntent);
     }
 
+
+
+    @SuppressLint("HandlerLeak")
+    private final Handler handler_news = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 1:
+                    Log.e("JWP", "refrashe afte load");
+
+/*
+                    Intent updIntent = new Intent(context, class_widget.class);
+
+                    //updIntent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+                    //updIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, new int[]{appWidgetId});
+
+                    updIntent.setAction(ACTION_ON_UPDATEOK);
+                    updIntent.putExtra(IDWIDGET, 0);
+                    PendingIntent updPIntent = PendingIntent.getBroadcast(context,
+                            appWidgetId, updIntent, 0);
+*/
+
+                    break;
+            }
+        }
+
+    };
+
+    private void update_rss_news (Context context){
+        funct = new class_functions(context);
+        dbOpenHelper = new class_sqlite(context, funct);
+        database = dbOpenHelper.openDataBase();
+        rss_news = new class_rss_news(context, handler_news, database, funct, false);
+        rss_news.get_all_feeds();
+    }
+
+
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
-        if (intent.getAction().equalsIgnoreCase(ACTION_ON_CLICK)) {
+        if (intent.getAction().equalsIgnoreCase(ACTION_ON_UPDATEOK)) {
+            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+            int appWidgetIds[] = appWidgetManager.getAppWidgetIds(
+                    new ComponentName(context, class_widget.class));
+            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.list);
+        } else if (intent.getAction().equalsIgnoreCase(ACTION_ON_LISTCLICK)) {
             int itemPos = intent.getIntExtra(ITEM_POSITION, -1);
             String itemLink = intent.getStringExtra(ITEM_LINK);
             if (itemPos != -1 && itemLink.length() > 0) {
@@ -91,6 +158,4 @@ public class class_widget extends AppWidgetProvider {
             }
         }
     }
-
-
 }

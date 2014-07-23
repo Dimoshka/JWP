@@ -37,7 +37,9 @@ public class books_brochures extends ListFragment implements LoaderManager.Loade
 
     public void refresh() {
         try {
-            getLoaderManager().restartLoader(0, null, this);
+            if (isAdded()) {
+                getLoaderManager().restartLoader(0, null, this);
+            }
         } catch (Exception e) {
             main.funct.send_bug_report(e);
         }

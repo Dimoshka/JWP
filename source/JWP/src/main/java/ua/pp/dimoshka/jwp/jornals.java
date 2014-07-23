@@ -34,7 +34,9 @@ public class jornals extends ListFragment implements LoaderManager.LoaderCallbac
 
     public void refresh() {
         try {
-            getLoaderManager().restartLoader(0, null, this);
+            //if (isAdded()) {
+                getLoaderManager().restartLoader(0, null, this);
+            //}
         } catch (Exception e) {
             main.funct.send_bug_report(e);
         }

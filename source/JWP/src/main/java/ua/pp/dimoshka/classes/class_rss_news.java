@@ -33,24 +33,27 @@ public class class_rss_news {
     public class_functions funct;
     private Context context;
     private Handler handler;
+    private boolean show_dialog;
     public SharedPreferences prefs;
     private AsyncTask task;
 
     public class_rss_news(Context context, Handler handler,
-                          SQLiteDatabase database, class_functions funct) {
+                          SQLiteDatabase database, class_functions funct, boolean show_dialog) {
         this.context = context;
         this.handler = handler;
         this.database = database;
         this.funct = funct;
+        this.show_dialog = show_dialog;
         prefs = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
 
     public void get_all_feeds() {
         try {
+            Log.d("JWP", "get_all_feeds");
             task = new ReadFeedTask().execute();
-        } catch (Exception e) {
-            Log.d("JWP_" + getClass().getName(), e.toString());
+        } catch (Exception ex) {
+            funct.send_bug_report(ex);
         }
     }
 
@@ -114,8 +117,8 @@ public class class_rss_news {
                         description = description.replace(mat1.group(0), "");
                     }
 
-                    description = description.trim();
                     description = funct.stripHtml(description);
+                    description = description.trim();
                     long id_news;
                     ContentValues init = new ContentValues();
                     init.put("id_lang", main.id_lng);
@@ -179,17 +182,19 @@ public class class_rss_news {
 
         @Override
         protected void onPreExecute() {
-            this.dialog = ProgressDialog
-                    .show(context,
-                            context.getResources().getString(
-                                    R.string.news),
-                            context.getResources().getString(
-                                    R.string.dialog_loaing_rss), true, true, new DialogInterface.OnCancelListener() {
-                                public void onCancel(DialogInterface pd) {
-                                    task.cancel(true);
+            if (show_dialog) {
+                this.dialog = ProgressDialog
+                        .show(context,
+                                context.getResources().getString(
+                                        R.string.news),
+                                context.getResources().getString(
+                                        R.string.dialog_loaing_rss), true, true, new DialogInterface.OnCancelListener() {
+                                    public void onCancel(DialogInterface pd) {
+                                        task.cancel(true);
+                                    }
                                 }
-                            }
-                    );
+                        );
+            }
         }
 
         @Override

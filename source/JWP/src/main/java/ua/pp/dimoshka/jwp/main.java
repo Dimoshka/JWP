@@ -61,10 +61,10 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
     private ActionBar actionBar;
     private Boolean refresh_all = false;
 
-
     public static Integer id_lng = 1;
     public static String ln_prefix = "en/news";
     public static String code_lng = "E";
+
 
     @SuppressLint("HandlerLeak")
     private final Handler handler_jornals = new Handler() {
@@ -96,6 +96,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
         }
 
     };
+
 
     @SuppressLint("HandlerLeak")
     private final Handler handler_books_brochures = new Handler() {
@@ -170,7 +171,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
             jornals_fragm = new jornals();
             fragment_list.add(jornals_fragm);
 
-            rss_news = new class_rss_news(this, handler_news, database, funct);
+            rss_news = new class_rss_news(this, handler_news, database, funct, true);
             news_fragm = new news();
             fragment_list.add(news_fragm);
 
@@ -192,15 +193,12 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
     private void create_tabs() {
         try {
             if (actionBar.getTabCount() > 0) actionBar.removeAllTabs();
-            //add jornals tab and fragment
             ActionBar.Tab jornals_Tab = actionBar.newTab().setText(R.string.jornals)
                     .setTabListener(this);
             actionBar.addTab(jornals_Tab);
-            //add news tab and fragment
             ActionBar.Tab news_Tab = actionBar.newTab().setText(R.string.news)
                     .setTabListener(this);
             actionBar.addTab(news_Tab);
-            //add publication tab and fragment
             if (id_lng == 3) {
                 Log.d("LANG3", "tabs");
                 ActionBar.Tab publication_Tab = actionBar.newTab().setText(R.string.books_brochures)
@@ -305,6 +303,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
         }
     }
 
+    /*
 
     @Override
     protected void onResume() {
@@ -319,10 +318,13 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
         prefs.unregisterOnSharedPreferenceChangeListener(PreferenceChangeListener);
     }
 
+*/
 
     private OnSharedPreferenceChangeListener PreferenceChangeListener = new OnSharedPreferenceChangeListener() {
         @Override
         public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
+
+            Log.e("PREFF_UPDATE", key);
             load_first();
         }
     };
@@ -371,7 +373,9 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
                     if (id_lng == 3 && actionBar.getTabCount() == 3) {
                         Log.d("LANG3", "load rss");
                         books_brochures.verify_all_img();
-                    } else rss_jornals.get_all_feeds();
+                    } else {
+                        rss_jornals.get_all_feeds();
+                    }
                 } else {
                     switch (curent_tab) {
                         case 0:
