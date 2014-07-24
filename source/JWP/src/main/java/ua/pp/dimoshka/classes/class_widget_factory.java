@@ -1,6 +1,5 @@
 package ua.pp.dimoshka.classes;
 
-import android.annotation.TargetApi;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -9,7 +8,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Build;
 import android.preference.PreferenceManager;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
@@ -19,7 +17,6 @@ import java.util.Locale;
 
 import ua.pp.dimoshka.jwp.R;
 
-@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class class_widget_factory implements RemoteViewsService.RemoteViewsFactory {
 
     private Context context;

@@ -4,28 +4,6 @@
     <string name="db_name" tools:ignore="MissingTranslation">"jwp.sqlite3"</string>
     <string name="db_version" tools:ignore="MissingTranslation">"4"</string>
     <string name="app_dir" tools:ignore="MissingTranslation">"JWP"</string>
-
-    <string-array name="language_arr" tools:ignore="MissingTranslation">
-        <item>English</item>
-        <item>French</item>
-        <item>Русский</item>
-        <item>Українська</item>
-        <item>Deutsch</item>
-        <item>Spanish</item>
-        <item>漢語繁體字</item>
-        <item>汉语简化字</item>
-    </string-array>
-    <string-array name="language_arr_value" tools:ignore="MissingTranslation">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-        <item>6</item>
-        <item>7</item>
-        <item>8</item>
-    </string-array>
-
     <string name="text_test" tools:ignore="MissingTranslation">"Text title"</string>
 
     <string name="app_name">"Publications of Jehovah's Witnesses"</string>

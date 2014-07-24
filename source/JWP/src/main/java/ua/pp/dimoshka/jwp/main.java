@@ -15,6 +15,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.SimpleOnPageChangeListener;
 import android.support.v7.app.ActionBar;
@@ -54,9 +55,9 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
     private static class_books_brochures books_brochures;
 
     private SharedPreferences prefs;
-    private jornals jornals_fragm;
-    private news news_fragm;
-    private books_brochures book_fragm;
+    //private jornals jornals_fragm;
+    //private news news_fragm;
+    //private books_brochures book_fragm;
     private ViewPager pager;
     private ActionBar actionBar;
     private Boolean refresh_all = false;
@@ -64,6 +65,10 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
     public static Integer id_lng = 1;
     public static String ln_prefix = "en/news";
     public static String code_lng = "E";
+
+    private List<Fragment> fragment_list = new Vector<Fragment>();
+    private MyPagerAdapter pagerAdapter;
+    private FragmentManager frafment_mn;
 
 
     @SuppressLint("HandlerLeak")
@@ -148,6 +153,12 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
             }
             prefs.registerOnSharedPreferenceChangeListener(PreferenceChangeListener);
             pager.setOnPageChangeListener(PageChangeListener);
+
+
+            frafment_mn = getSupportFragmentManager();
+            pagerAdapter = new MyPagerAdapter(frafment_mn, fragment_list);
+            pager.setAdapter(pagerAdapter);
+
         } catch (Exception e) {
             funct.send_bug_report(e);
         }
@@ -165,26 +176,17 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
 
     private void create_fragments() {
         try {
-            List<Fragment> fragment_list = new Vector<Fragment>();
-
+            fragment_list.clear();
             rss_jornals = new class_rss_jornals(this, handler_jornals, database, funct);
-            jornals_fragm = new jornals();
-            fragment_list.add(jornals_fragm);
-
+            fragment_list.add(new jornals());
             rss_news = new class_rss_news(this, database, funct);
-            news_fragm = new news();
-            fragment_list.add(news_fragm);
+            fragment_list.add(new news());
 
             if (id_lng == 3) {
                 books_brochures = new class_books_brochures(this, handler_books_brochures, database, funct);
-                book_fragm = new books_brochures();
-                fragment_list.add(book_fragm);
+                fragment_list.add(new books_brochures());
             }
-
-            MyPagerAdapter pagerAdapter = new MyPagerAdapter(getSupportFragmentManager(),
-                    fragment_list);
-            pager.setAdapter(pagerAdapter);
-
+            pagerAdapter.notifyDataSetChanged();
         } catch (Exception e) {
             funct.send_bug_report(e);
         }
@@ -249,7 +251,6 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
         }
     }
 
-
     @Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
         curent_tab = tab.getPosition();
@@ -302,23 +303,6 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
             EasyTracker.getInstance(this).activityStop(this);
         }
     }
-
-    /*
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        prefs.registerOnSharedPreferenceChangeListener(PreferenceChangeListener);
-    }
-
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        prefs.unregisterOnSharedPreferenceChangeListener(PreferenceChangeListener);
-    }
-
-*/
 
     private OnSharedPreferenceChangeListener PreferenceChangeListener = new OnSharedPreferenceChangeListener() {
         @Override
@@ -401,30 +385,12 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
 
     private void refresh() {
         try {
-            if (refresh_all) {
-                jornals_fragm.refresh();
-                news_fragm.refresh();
-                if (id_lng == 3 && actionBar.getTabCount() == 3) {
-                    Log.d("LANG3", "refress");
-                    book_fragm.refresh();
-                }
-                refresh_all = false;
-            } else {
-                switch (curent_tab) {
-                    case 0:
-                        jornals_fragm.refresh();
-                        break;
-                    case 1:
-                        news_fragm.refresh();
-                        break;
-                    case 2:
-                        book_fragm.refresh();
-                        break;
-                    default:
-                        break;
-                }
-            }
-
+            Intent intent = new Intent("update");
+            LocalBroadcastManager broadcastManager = LocalBroadcastManager.getInstance(this);
+            broadcastManager.sendBroadcast(intent);
+            Log.e("FRAGMENT", "start_refresh");
+            refresh_all = false;
+            pagerAdapter.notifyDataSetChanged();
         } catch (Exception e) {
             funct.send_bug_report(e);
         }

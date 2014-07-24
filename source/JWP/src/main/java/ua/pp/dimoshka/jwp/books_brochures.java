@@ -1,6 +1,9 @@
 package ua.pp.dimoshka.jwp;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -8,6 +11,7 @@ import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.support.v4.content.LocalBroadcastManager;
 import android.view.View;
 import android.widget.ListView;
 
@@ -16,6 +20,16 @@ import ua.pp.dimoshka.classes.class_books_brochures_adapter;
 public class books_brochures extends ListFragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
     class_books_brochures_adapter mAdapter;
+
+    private BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action != null && action.equals("update")) {
+                refresh();
+            }
+        }
+    };
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -26,6 +40,10 @@ public class books_brochures extends ListFragment implements LoaderManager.Loade
                 main.database, main.funct);
         setListAdapter(mAdapter);
         getLoaderManager().initLoader(0, null, this);
+
+        LocalBroadcastManager broadcastManager = LocalBroadcastManager.getInstance(getActivity());
+        IntentFilter intentFilter = new IntentFilter("update");
+        broadcastManager.registerReceiver(receiver, intentFilter);
     }
 
 

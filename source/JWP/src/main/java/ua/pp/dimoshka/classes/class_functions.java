@@ -20,6 +20,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -215,6 +216,9 @@ public class class_functions {
                         fos.close();
                         return true;
                     } else return false;
+                } catch (UnknownHostException e) {
+                    Log.d("JWP", "Not file - " + link_img);
+                    return false;
                 } catch (FileNotFoundException e) {
                     Log.d("JWP", "Not file - " + link_img);
                     return false;

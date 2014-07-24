@@ -4,8 +4,6 @@
     <PreferenceCategory android:title="@string/interface_group">
         <ListPreference
             android:defaultValue="1"
-            android:entries="@array/language_arr"
-            android:entryValues="@array/language_arr_value"
             android:key="language"
             android:summary="@string/language_summary"
             android:title="@string/language"></ListPreference>

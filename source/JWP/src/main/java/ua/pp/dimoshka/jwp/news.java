@@ -1,7 +1,9 @@
 package ua.pp.dimoshka.jwp;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
@@ -10,6 +12,7 @@ import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
@@ -20,6 +23,17 @@ public class news extends ListFragment implements LoaderManager.LoaderCallbacks<
 
     private class_news_adapter mAdapter;
 
+    private BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action != null && action.equals("update")) {
+                refresh();
+            }
+        }
+    };
+
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -27,6 +41,10 @@ public class news extends ListFragment implements LoaderManager.LoaderCallbacks<
                 getActivity(), R.layout.list_items_news_img, null, new String[]{}, new int[]{}, 0, main.database, main.funct);
         setListAdapter(mAdapter);
         getLoaderManager().initLoader(0, null, this);
+
+        LocalBroadcastManager broadcastManager = LocalBroadcastManager.getInstance(getActivity());
+        IntentFilter intentFilter = new IntentFilter("update");
+        broadcastManager.registerReceiver(receiver, intentFilter);
     }
 
     @Override
@@ -43,13 +61,11 @@ public class news extends ListFragment implements LoaderManager.LoaderCallbacks<
     }
 
 
-    public void refresh() {
+    private void refresh() {
         try {
-            Log.e("REFRESH", "news");
-            //if (isAdded()) {
-                Log.e("REFRESH", "1");
+             if (isAdded()) {
                 getLoaderManager().restartLoader(0, null, this);
-            //}
+            }
         } catch (Exception e) {
             main.funct.send_bug_report(e);
         }

@@ -1,6 +1,5 @@
 package ua.pp.dimoshka.classes;
 
-import android.annotation.TargetApi;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
@@ -9,7 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
-import android.os.Build;
 import android.util.Log;
 import android.widget.RemoteViews;
 
@@ -44,7 +42,6 @@ public class class_widget extends AppWidgetProvider {
         }
     }
 
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     void updateWidget(Context context, AppWidgetManager appWidgetManager,
                       int appWidgetId) {
         RemoteViews view = new RemoteViews(context.getPackageName(),
@@ -72,7 +69,6 @@ public class class_widget extends AppWidgetProvider {
         view.setOnClickPendingIntent(R.id.image, pendingIntent);
     }
 
-    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     void setList(RemoteViews rv, Context context, int appWidgetId) {
         Intent adapter = new Intent(context, class_widget_service.class);
         adapter.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
@@ -81,7 +77,6 @@ public class class_widget extends AppWidgetProvider {
         rv.setRemoteAdapter(R.id.list, adapter);
     }
 
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     void setListClick(RemoteViews rv, Context context, int appWidgetId) {
         Intent listClickIntent = new Intent(context, class_widget.class);
         listClickIntent.setAction(ACTION_ON_LISTCLICK);
@@ -98,8 +93,6 @@ public class class_widget extends AppWidgetProvider {
         rss_news.get_all_feeds_widget(appWidgetId);
     }
 
-
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
