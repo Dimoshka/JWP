@@ -18,6 +18,7 @@ import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Matcher;
@@ -34,11 +35,11 @@ public class class_rss_news {
 
     public class_functions funct;
     private Context context;
-    private Handler handler;
-    private boolean is_activity;
+    private Handler handler = null;
+    private boolean is_activity = false;
     public SharedPreferences prefs;
-    private AsyncTask task;
-    private int appWidgetId;
+    private AsyncTask task = null;
+    private int appWidgetId = 0;
 
     public class_rss_news(Context context, SQLiteDatabase database, class_functions funct) {
         this.context = context;
@@ -86,18 +87,22 @@ public class class_rss_news {
     }
 
     class ReadFeedTask extends AsyncTask<Void, Integer, Void> {
-        private ProgressDialog dialog;
+        private ProgressDialog dialog = null;
         List<class_rss_item> rss_list = null;
 
+        ReadFeedTask() {
+        }
+
         @Override
-        protected Void doInBackground(Void... paramArrayOfVoid) {
+        protected Void doInBackground(Void[] paramArrayOfVoid) {
             try {
                 class_rss_provider rssfeedprovider = new class_rss_provider(context, funct);
                 String feed = String.format(URL_FEED_NEW_IN_SITE, main.ln_prefix);
                 Log.d("JWP-news", feed);
                 this.rss_list = rssfeedprovider.parse(feed);
 
-                for (class_rss_item aRss_list : rss_list) {
+                for (Iterator<class_rss_item> iterator = rss_list.iterator(); iterator.hasNext(); ) {
+                    class_rss_item aRss_list = iterator.next();
                     if (isCancelled()) {
                         int currentapiVersion = Build.VERSION.SDK_INT;
                         if (currentapiVersion >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
@@ -111,7 +116,7 @@ public class class_rss_news {
                         }
                         break;
                     }
-                    class_rss_item rss_item = aRss_list;
+                    @SuppressWarnings("UnnecessaryLocalVariable") class_rss_item rss_item = aRss_list;
                     String title = rss_item.getTitle();
                     title = title.trim();
                     String link = rss_item.getLink();

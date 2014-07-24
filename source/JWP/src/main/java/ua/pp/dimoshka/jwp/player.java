@@ -39,23 +39,23 @@ import ua.pp.dimoshka.classes.service_downloads_files;
 
 public class player extends FragmentActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    private ImageButton buttonPlayStop;
-    private SeekBar seekBar;
+    private ImageButton buttonPlayStop = null;
+    private SeekBar seekBar = null;
     private final Handler handler = new Handler();
-    private ListView listView;
-    private Integer id_magazine;
+    private ListView listView = null;
+    private Integer id_magazine = null;
 
-    private class_mediaplayer mediaplayer_class;
-    private SharedPreferences prefs;
-    private SQLiteDatabase database;
-    private class_functions funct;
-    private SharedPreferences.OnSharedPreferenceChangeListener listener_pref;
+    private class_mediaplayer mediaplayer_class = null;
+    private SharedPreferences prefs = null;
+    private SQLiteDatabase database = null;
+    private class_functions funct = null;
+    private SharedPreferences.OnSharedPreferenceChangeListener listener_pref = null;
 
-    AudioManager audioManager;
-    AFListener afListenerMusic;
-    MediaPlayer mpMusic;
+    AudioManager audioManager = null;
+    AFListener afListenerMusic = null;
+    MediaPlayer mpMusic = null;
 
-    private class_player_adapter mAdapter;
+    private class_player_adapter mAdapter = null;
 
     private final Handler handler_completion = new Handler() {
         @Override
@@ -334,7 +334,7 @@ public class player extends FragmentActivity implements LoaderManager.LoaderCall
 
         @Override
         public Cursor loadInBackground() {
-            Cursor cursor = database
+            @SuppressWarnings("UnnecessaryLocalVariable") Cursor cursor = database
                     .rawQuery(
                             "select files._id, id_type, file, type.name as name_type, files.name, link, files.title from files left join magazine on files.id_magazine=magazine._id left join type on files.id_type=type._id where files.id_magazine='"
                                     + id_magazine

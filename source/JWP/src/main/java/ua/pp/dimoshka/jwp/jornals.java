@@ -19,7 +19,7 @@ import ua.pp.dimoshka.classes.class_jornals_adapter;
 
 public class jornals extends ListFragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    private class_jornals_adapter mAdapter;
+    private class_jornals_adapter mAdapter = null;
 
     private BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
@@ -30,6 +30,9 @@ public class jornals extends ListFragment implements LoaderManager.LoaderCallbac
             }
         }
     };
+
+    public jornals() {
+    }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -85,7 +88,7 @@ public class jornals extends ListFragment implements LoaderManager.LoaderCallbac
 
         @Override
         public Cursor loadInBackground() {
-            Cursor cursor = main.database
+            @SuppressWarnings("UnnecessaryLocalVariable") Cursor cursor = main.database
                     .rawQuery(
                             "select " +
                                     "magazine._id as _id, magazine.name as name, magazine.img as img, " +

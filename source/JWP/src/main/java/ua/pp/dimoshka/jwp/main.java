@@ -44,22 +44,19 @@ import ua.pp.dimoshka.classes.service_downloads_files;
 public class main extends ActionBarActivity implements ActionBar.TabListener {
 
     private int curent_tab = 0;
-    public static SQLiteDatabase database;
-    private static class_sqlite dbOpenHelper;
-    public static class_functions funct;
-    public static AQuery aq;
+    public static SQLiteDatabase database = null;
+    private static class_sqlite dbOpenHelper = null;
+    public static class_functions funct = null;
+    public static AQuery aq = null;
 
-    public static class_open_or_download open_or_download;
-    private static class_rss_jornals rss_jornals;
-    private static class_rss_news rss_news;
-    private static class_books_brochures books_brochures;
+    public static class_open_or_download open_or_download = null;
+    private static class_rss_jornals rss_jornals = null;
+    private static class_rss_news rss_news = null;
+    private static class_books_brochures books_brochures = null;
 
-    private SharedPreferences prefs;
-    //private jornals jornals_fragm;
-    //private news news_fragm;
-    //private books_brochures book_fragm;
-    private ViewPager pager;
-    private ActionBar actionBar;
+    private SharedPreferences prefs = null;
+    private ViewPager pager = null;
+    private ActionBar actionBar = null;
     private Boolean refresh_all = false;
 
     public static Integer id_lng = 1;
@@ -67,8 +64,8 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
     public static String code_lng = "E";
 
     private List<Fragment> fragment_list = new Vector<Fragment>();
-    private MyPagerAdapter pagerAdapter;
-    private FragmentManager frafment_mn;
+    private MyPagerAdapter pagerAdapter = null;
+    private Boolean change_prefference = false;
 
 
     @SuppressLint("HandlerLeak")
@@ -140,6 +137,10 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
             actionBar.setTitle(R.string.app_name_shot);
             actionBar.setSubtitle(R.string.app_name);
 
+            FragmentManager frafment_mn = getSupportFragmentManager();
+            pagerAdapter = new MyPagerAdapter(frafment_mn, fragment_list);
+            pager.setAdapter(pagerAdapter);
+
             load_first();
 
             if (prefs.getBoolean("first_run", true)) {
@@ -155,10 +156,6 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
             pager.setOnPageChangeListener(PageChangeListener);
 
 
-            frafment_mn = getSupportFragmentManager();
-            pagerAdapter = new MyPagerAdapter(frafment_mn, fragment_list);
-            pager.setAdapter(pagerAdapter);
-
         } catch (Exception e) {
             funct.send_bug_report(e);
         }
@@ -169,6 +166,8 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
             get_language(Integer.parseInt(prefs.getString("language", "1")));
             create_tabs();
             create_fragments();
+
+            if (change_prefference) refresh();
         } catch (Exception e) {
             funct.send_bug_report(e);
         }
@@ -307,7 +306,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
     private OnSharedPreferenceChangeListener PreferenceChangeListener = new OnSharedPreferenceChangeListener() {
         @Override
         public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
-
+            change_prefference = true;
             Log.d("PREFF_UPDATE", key);
             load_first();
         }
@@ -388,7 +387,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
             Intent intent = new Intent("update");
             LocalBroadcastManager broadcastManager = LocalBroadcastManager.getInstance(this);
             broadcastManager.sendBroadcast(intent);
-            Log.e("FRAGMENT", "start_refresh");
+            Log.d("FRAGMENT", "start_refresh");
             refresh_all = false;
             pagerAdapter.notifyDataSetChanged();
         } catch (Exception e) {

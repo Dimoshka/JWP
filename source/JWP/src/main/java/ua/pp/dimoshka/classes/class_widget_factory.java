@@ -22,10 +22,10 @@ public class class_widget_factory implements RemoteViewsService.RemoteViewsFacto
     private Context context;
     public static Integer id_lng = 1;
 
-    private SQLiteDatabase database;
-    private class_functions funct;
-    private SharedPreferences prefs;
-    private Cursor cursor;
+    private SQLiteDatabase database = null;
+    private class_functions funct = null;
+    private SharedPreferences prefs = null;
+    private Cursor cursor = null;
 
     class_widget_factory(Context context) {
         this.context = context;

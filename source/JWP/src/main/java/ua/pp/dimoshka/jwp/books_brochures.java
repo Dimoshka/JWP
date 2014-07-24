@@ -19,7 +19,7 @@ import ua.pp.dimoshka.classes.class_books_brochures_adapter;
 
 public class books_brochures extends ListFragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    class_books_brochures_adapter mAdapter;
+    class_books_brochures_adapter mAdapter = null;
 
     private BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
@@ -30,6 +30,9 @@ public class books_brochures extends ListFragment implements LoaderManager.Loade
             }
         }
     };
+
+    public books_brochures() {
+    }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -88,7 +91,7 @@ public class books_brochures extends ListFragment implements LoaderManager.Loade
 
         @Override
         public Cursor loadInBackground() {
-            Cursor cursor = main.database
+            @SuppressWarnings("UnnecessaryLocalVariable") Cursor cursor = main.database
                     .rawQuery(
                             "select magazine._id as _id, magazine.name as name, magazine.title as title, magazine.img as img, " +
                                     "language.code as code_lng, " +

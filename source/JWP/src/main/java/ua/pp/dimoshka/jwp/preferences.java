@@ -20,17 +20,15 @@ import ua.pp.dimoshka.classes.class_functions;
 import ua.pp.dimoshka.classes.class_sqlite;
 
 public class preferences extends PreferenceActivity {
-    private SharedPreferences prefs;
-    private static SQLiteDatabase database;
-    private static class_sqlite dbOpenHelper;
-    private static class_functions funct;
+    private SharedPreferences prefs = null;
+    private static SQLiteDatabase database = null;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        funct = new class_functions(this);
-        dbOpenHelper = new class_sqlite(this, funct);
+        class_functions funct = new class_functions(this);
+        class_sqlite dbOpenHelper = new class_sqlite(this, funct);
         database = dbOpenHelper.openDataBase();
         getFragmentManager().beginTransaction().replace(android.R.id.content, new MyPreferenceFragment()).commit();
     }
@@ -55,7 +53,7 @@ public class preferences extends PreferenceActivity {
     }
 
     protected static void setListPreferenceData(ListPreference listPreference) {
-        Cursor cursor = database.rawQuery("SELECT * from language", null);
+        @SuppressWarnings("StaticVariableUsedBeforeInitialization") Cursor cursor = database.rawQuery("SELECT * from language", null);
 
 
         List<String> entries_list = new ArrayList<String>();

@@ -18,6 +18,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import ua.pp.dimoshka.jwp.R;
@@ -37,7 +38,7 @@ public class class_rss_jornals {
     private ArrayList<Integer> id_type = new ArrayList<Integer>();
     private ArrayList<String> code_type = new ArrayList<String>();
     public SharedPreferences prefs;
-    private AsyncTask task;
+    private AsyncTask task = null;
 
 
     public class_rss_jornals(Context context, Handler handler,
@@ -88,12 +89,15 @@ public class class_rss_jornals {
     }
 
     class ReadFeedTask extends AsyncTask<Void, Integer, Void> {
-        private ProgressDialog dialog;
+        private ProgressDialog dialog = null;
 
         List<class_rss_item> rss_list = null;
 
+        ReadFeedTask() {
+        }
+
         @Override
-        protected Void doInBackground(Void... paramArrayOfVoid) {
+        protected Void doInBackground(Void[] paramArrayOfVoid) {
             try {
                 for (int a = 0; a < id_pub.size(); a++) {
                     if (isCancelled()) {
@@ -131,7 +135,8 @@ public class class_rss_jornals {
                                     code_type.get(cur_type));
                             this.rss_list = rssfeedprovider.parse(feed);
 
-                            for (class_rss_item rss_item : rss_list) {
+                            for (Iterator<class_rss_item> iterator = rss_list.iterator(); iterator.hasNext(); ) {
+                                class_rss_item rss_item = iterator.next();
 
                                 String name = rss_item.getguid();
                                 name = name.replace(

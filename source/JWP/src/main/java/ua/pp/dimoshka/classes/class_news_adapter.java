@@ -45,7 +45,7 @@ public class class_news_adapter extends SimpleCursorAdapter {
             aq.id(R.id.text).text(description);
             aq.id(R.id.date).text(pubdate);
 
-            if (img) {
+            if (img.booleanValue()) {
                 File imgFile = new File(funct.get_dir_app() + "/img/news/"
                         + _id + ".jpg");
                 if (imgFile.exists()) {
@@ -74,7 +74,7 @@ public class class_news_adapter extends SimpleCursorAdapter {
         final LayoutInflater inflater = LayoutInflater.from(context);
 
         Boolean img = c.getInt(c.getColumnIndex("img")) != 0;
-        if (img) {
+        if (img.booleanValue()) {
             return inflater.inflate(R.layout.list_items_news_img, parent, false);
         } else {
             return inflater.inflate(R.layout.list_items_news_noimg, parent, false);

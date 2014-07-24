@@ -52,7 +52,7 @@ public class class_jornals_adapter extends SimpleCursorAdapter {
             aq.id(R.id.title).text(format.format(date));
             aq.id(R.id.text).text(name);
 
-            if (img) {
+            if (img.booleanValue()) {
                 File imgFile = new File(funct.get_dir_app() + "/img/jornals/"
                         + name + ".jpg");
 
@@ -84,25 +84,25 @@ public class class_jornals_adapter extends SimpleCursorAdapter {
                 Boolean file_isn = Integer.parseInt(file_files[i]) != 0;
                 switch (Integer.parseInt(id_type_files[i])) {
                     case 1:
-                        if (file_isn)
+                        if (file_isn.booleanValue())
                             aq.id(R.id.epub).image(R.drawable.ic_epub_1);
                         else
                             aq.id(R.id.epub).image(R.drawable.ic_epub_0);
                         break;
                     case 2:
-                        if (file_isn)
+                        if (file_isn.booleanValue())
                             aq.id(R.id.pdf).image(R.drawable.ic_pdf_1);
                         else
                             aq.id(R.id.pdf).image(R.drawable.ic_pdf_0);
                         break;
                     case 3:
-                        if (file_isn)
+                        if (file_isn.booleanValue())
                             aq.id(R.id.mp3).image(R.drawable.ic_mp3_1);
                         else
                             aq.id(R.id.mp3).image(R.drawable.ic_mp3_0);
                         break;
                     case 4:
-                        if (file_isn)
+                        if (file_isn.booleanValue())
                             aq.id(R.id.aac).image(R.drawable.ic_aac_1);
                         else
                             aq.id(R.id.aac).image(R.drawable.ic_aac_0);

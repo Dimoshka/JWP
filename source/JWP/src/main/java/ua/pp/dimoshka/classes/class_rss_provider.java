@@ -16,6 +16,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class class_rss_provider {
@@ -116,7 +117,8 @@ public class class_rss_provider {
                     List<XmlDom> entries = xml.tags(ITEM);
                     //List<class_rss_item> list = new ArrayList<class_rss_item>();
                     class_rss_item item;
-                    for (XmlDom entry : entries) {
+                    for (Iterator<XmlDom> iterator = entries.iterator(); iterator.hasNext(); ) {
+                        XmlDom entry = iterator.next();
                         item = new class_rss_item();
 
                         Log.d("RSS Attribute", LINK);

@@ -33,8 +33,8 @@ public class service_downloads_files extends Service {
 
     private static final int SERVICE_ID = 0x101104;
     private static final int BYTES_BUFFER_SIZE = 2 * 1024;
-    private class_functions funct;
-    private NotificationManager notificationManager;
+    private class_functions funct = null;
+    private NotificationManager notificationManager = null;
     private final IBinder binder = new FileDownloadBinder();
     private AsyncDownloadTask task = null;
     protected static boolean isRunning = false;
@@ -230,7 +230,7 @@ public class service_downloads_files extends Service {
         }
 
         @Override
-        protected Void doInBackground(Void... params) {
+        protected Void doInBackground(Void[] params) {
             try {
                 String remoteFilepath, localFilepath, imgFilepath;
 

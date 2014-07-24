@@ -27,10 +27,11 @@ public class class_widget extends AppWidgetProvider {
     final static String ITEM_POSITION = "item_position";
     final static String ITEM_LINK = "item_link";
 
-    private static class_rss_news rss_news;
-    public static SQLiteDatabase database;
-    private static class_sqlite dbOpenHelper;
-    public static class_functions funct;
+    public static SQLiteDatabase database = null;
+    public static class_functions funct = null;
+
+    public class_widget() {
+    }
 
 
     @Override
@@ -87,9 +88,9 @@ public class class_widget extends AppWidgetProvider {
 
     private void update_rss_news(Context context, int appWidgetId) {
         funct = new class_functions(context);
-        dbOpenHelper = new class_sqlite(context, funct);
+        class_sqlite dbOpenHelper = new class_sqlite(context, funct);
         database = dbOpenHelper.openDataBase();
-        rss_news = new class_rss_news(context, database, funct);
+        class_rss_news rss_news = new class_rss_news(context, database, funct);
         rss_news.get_all_feeds_widget(appWidgetId);
     }
 

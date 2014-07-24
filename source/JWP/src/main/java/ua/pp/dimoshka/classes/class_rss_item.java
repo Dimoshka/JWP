@@ -1,11 +1,11 @@
 package ua.pp.dimoshka.classes;
 
 public class class_rss_item {
-    private String pubDate;
-    private String description;
-    private String link;
-    private String title;
-    private String guid;
+    private String pubDate = null;
+    private String description = null;
+    private String link = null;
+    private String title = null;
+    private String guid = null;
 
     public class_rss_item() {
     }

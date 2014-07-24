@@ -20,7 +20,7 @@ import ua.pp.dimoshka.jwp.player;
 public class class_open_or_download {
 
     private Context context;
-    private Cursor cursor;
+    private Cursor cursor = null;
     private SQLiteDatabase database;
     private class_functions funct;
 
@@ -130,21 +130,21 @@ public class class_open_or_download {
                                        String link, Integer id_pub) {
         try {
             String dir_path_pub;
-            if (id_pub != 4) dir_path_pub = "/jornals/";
+            if (id_pub.intValue() != 4) dir_path_pub = "/jornals/";
             else dir_path_pub = "/books_brochures/";
 
             File file = new File(funct.get_dir_app() + "/downloads" + dir_path_pub + name);
             if (!file.exists()) {
-                if (file_enable)
+                if (file_enable.booleanValue())
                     funct.update_file_isn(database, name, 0);
                 file_enable = false;
             } else {
-                if (!file_enable)
+                if (!file_enable.booleanValue())
                     funct.update_file_isn(database, name, 1);
                 file_enable = true;
             }
 
-            if (file_enable) {
+            if (file_enable.booleanValue()) {
                 Intent intent = new Intent();
                 intent.setAction(android.content.Intent.ACTION_VIEW);
 

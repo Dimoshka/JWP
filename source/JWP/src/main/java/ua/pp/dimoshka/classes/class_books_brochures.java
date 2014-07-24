@@ -19,9 +19,9 @@ public class class_books_brochures {
     private SQLiteDatabase database;
     public class_functions funct;
     private Activity activity;
-    private Cursor cursor;
+    private Cursor cursor = null;
     private Handler handler;
-    private AsyncTask task;
+    private AsyncTask task = null;
 
     public class_books_brochures(Activity activity, Handler handler,
                                  SQLiteDatabase database, class_functions funct) {
@@ -36,10 +36,13 @@ public class class_books_brochures {
     }
 
     class verify_img extends AsyncTask<Void, Integer, Void> {
-        private ProgressDialog dialog;
+        private ProgressDialog dialog = null;
+
+        verify_img() {
+        }
 
         @Override
-        protected Void doInBackground(Void... paramArrayOfVoid) {
+        protected Void doInBackground(Void[] paramArrayOfVoid) {
             try {
                 if (funct.ExternalStorageState()) {
                     cursor = database

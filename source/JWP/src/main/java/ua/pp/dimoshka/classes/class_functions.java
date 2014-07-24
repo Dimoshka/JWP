@@ -122,26 +122,7 @@ public class class_functions {
 
     public void send_bug_report(Exception ex) {
         try {
-            String message = "";
-            ex.printStackTrace();
-            StackTraceElement[] stackElements = ex.getStackTrace();
-            for (StackTraceElement stackElement : stackElements) {
-                message += "File name: " + stackElement.getFileName() + " ";
-                message += "Line number: " + stackElement.getLineNumber() + " ";
-                //String className = stackElements[lcv].getClassName() + " ";
-                // String packageName = extractPackageName(className) + " ";
-                //String simpleClassName = extractSimpleClassName(className) + " ";
-                //message += "Package name: " + ("".equals(packageName) ? "[default package]" : packageName) + " ";
-                //message += "Full class name: " + className + " ";
-                //message += "Simple class name: " + simpleClassName + " ";
-                //message += "Unmunged class name: " + unmungeSimpleClassName(simpleClassName) + " ";
-                //message += "Direct class name: " + extractDirectClassName(simpleClassName) + " ";
-                //message += "Method name: " + stackElements[lcv].getMethodName() + "";
-                //message += "Native method?: " + stackElements[lcv].isNativeMethod() + " ";
-                message += "toString(): " + stackElement.toString() + " ";
-            }
-            ex.printStackTrace();
-            Log.e("EERROORR", ex.toString());
+            Log.e("EERROORR", "FN_class", ex);
             //BugSenseHandler.addCrashExtraData("StackTrace", message);
             BugSenseHandler.sendException(ex);
             //BugSenseHandler.sendExceptionMessage("level", message, ex);
@@ -150,45 +131,6 @@ public class class_functions {
         }
     }
 
-    /*
-    public static String extractPackageName(String fullClassName) {
-        if ((null == fullClassName) || ("".equals(fullClassName)))
-            return "";
-
-        int lastDot = fullClassName.lastIndexOf('.');
-        if (0 >= lastDot)
-            return "";
-        return fullClassName.substring(0, lastDot);
-    }
-
-    public static String extractSimpleClassName(String fullClassName) {
-        if ((null == fullClassName) || ("".equals(fullClassName)))
-            return "";
-
-        int lastDot = fullClassName.lastIndexOf('.');
-        if (0 > lastDot)
-            return fullClassName;
-
-        return fullClassName.substring(++lastDot);
-    }
-
-    public static String extractDirectClassName(String simpleClassName) {
-        if ((null == simpleClassName) || ("".equals(simpleClassName)))
-            return "";
-
-        int lastSign = simpleClassName.lastIndexOf('$');
-        if (0 > lastSign)
-            return simpleClassName;
-        return simpleClassName.substring(++lastSign);
-    }
-
-    public static String unmungeSimpleClassName(String simpleClassName) {
-        if ((null == simpleClassName) || ("".equals(simpleClassName)))
-            return "";
-        return simpleClassName.replace('$', '.');
-    }
-
-    */
 
     public boolean load_img(String dir, String name, String link_img) {
         if (isNetworkAvailable()) {

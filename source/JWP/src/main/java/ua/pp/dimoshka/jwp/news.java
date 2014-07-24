@@ -13,7 +13,6 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.content.LocalBroadcastManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 
@@ -21,7 +20,7 @@ import ua.pp.dimoshka.classes.class_news_adapter;
 
 public class news extends ListFragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    private class_news_adapter mAdapter;
+    private class_news_adapter mAdapter = null;
 
     private BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
@@ -63,7 +62,7 @@ public class news extends ListFragment implements LoaderManager.LoaderCallbacks<
 
     private void refresh() {
         try {
-             if (isAdded()) {
+            if (isAdded()) {
                 getLoaderManager().restartLoader(0, null, this);
             }
         } catch (Exception e) {
@@ -96,7 +95,7 @@ public class news extends ListFragment implements LoaderManager.LoaderCallbacks<
 
         @Override
         public Cursor loadInBackground() {
-            Cursor cursor = main.database.rawQuery("select * from news where news.id_lang='" + main.id_lng + "' order by pubdate desc, news._id asc", null);
+            @SuppressWarnings("UnnecessaryLocalVariable") Cursor cursor = main.database.rawQuery("select * from news where news.id_lang='" + main.id_lng + "' order by pubdate desc, news._id asc", null);
             return cursor;
         }
 
