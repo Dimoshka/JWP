@@ -73,7 +73,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
             switch (msg.what) {
                 case 1:
                     if (refresh_all) {
-                        rss_news.get_all_feeds();
+                        rss_news.get_all_feeds_activity(handler_news);
                     } else {
                         Log.d("JWP", "refrashe afte load");
                         refresh();
@@ -140,7 +140,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
             if (prefs.getBoolean("first_run", true)) {
                 new AlertDialog.Builder(this)
                         .setTitle(getString(R.string.first_run_title))
-                        .setMessage(getString(R.string.first_run))
+                        .setMessage(getString(R.string.first_run_text))
                         .setNeutralButton("OK", null).show();
                 prefs.edit().putBoolean("first_run", false).apply();
             } else if (prefs.getBoolean("downloads_on_start", false)) {
@@ -171,7 +171,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
             jornals_fragm = new jornals();
             fragment_list.add(jornals_fragm);
 
-            rss_news = new class_rss_news(this, handler_news, database, funct, true);
+            rss_news = new class_rss_news(this, database, funct);
             news_fragm = new news();
             fragment_list.add(news_fragm);
 
@@ -324,7 +324,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
         @Override
         public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
 
-            Log.e("PREFF_UPDATE", key);
+            Log.d("PREFF_UPDATE", key);
             load_first();
         }
     };
@@ -382,7 +382,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
                             rss_jornals.get_all_feeds();
                             break;
                         case 1:
-                            rss_news.get_all_feeds();
+                            rss_news.get_all_feeds_activity(handler_news);
                             break;
                         case 2:
                             books_brochures.verify_all_img();

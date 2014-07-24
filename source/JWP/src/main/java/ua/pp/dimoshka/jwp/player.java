@@ -214,7 +214,7 @@ public class player extends FragmentActivity implements LoaderManager.LoaderCall
         Intent i = new Intent(getBaseContext(), service_downloads_files.class);
         i.putExtra("file_url", link);
         i.putExtra("file_putch", file.getAbsolutePath());
-        Toast.makeText(this, getString(R.string.download_task_addeded),
+        Toast.makeText(this, getString(R.string.download_task_added),
                 Toast.LENGTH_SHORT).show();
         startService(i);
     }

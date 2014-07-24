@@ -103,7 +103,7 @@ public class class_rss_jornals {
                             if (dialog != null)
                                 dialog.dismiss();
                             Log.d("JWP", "onPostExecute+");
-                            handler.sendEmptyMessage(1);
+                            handler.sendEmptyMessage(0);
                         }
                         break;
                     }

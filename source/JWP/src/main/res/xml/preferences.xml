@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory android:title="@string/intetface">
+    <PreferenceCategory android:title="@string/interface_group">
         <ListPreference
             android:defaultValue="1"
             android:entries="@array/language_arr"
@@ -19,15 +19,15 @@
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="downloads_img"
-            android:summary="@string/downloads_img_summary"
-            android:title="@string/downloads_img" />
+            android:summary="@string/download_images_summary"
+            android:title="@string/download_images" />
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="downloads_on_start"
-            android:summary="@string/downloads_on_start_summary"
-            android:title="@string/downloads_on_start" />
+            android:summary="@string/download_on_start_summary"
+            android:title="@string/download_on_start" />
     </PreferenceCategory>
-    <PreferenceCategory android:title="@string/rss_chanel">
+    <PreferenceCategory android:title="@string/rss_chanel_group">
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="rss_pdf"
@@ -53,8 +53,8 @@
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="analytics"
-            android:summary="@string/analytics_summary"
-            android:title="@string/analytics" />
+            android:summary="@string/reporting_summary"
+            android:title="@string/reporting" />
     </PreferenceCategory>
 
 </PreferenceScreen>

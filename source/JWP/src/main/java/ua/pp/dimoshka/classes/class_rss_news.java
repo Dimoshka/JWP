@@ -1,9 +1,11 @@
 package ua.pp.dimoshka.classes;
 
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
@@ -33,28 +35,54 @@ public class class_rss_news {
     public class_functions funct;
     private Context context;
     private Handler handler;
-    private boolean show_dialog;
+    private boolean is_activity;
     public SharedPreferences prefs;
     private AsyncTask task;
+    private int appWidgetId;
 
-    public class_rss_news(Context context, Handler handler,
-                          SQLiteDatabase database, class_functions funct, boolean show_dialog) {
+    public class_rss_news(Context context, SQLiteDatabase database, class_functions funct) {
         this.context = context;
-        this.handler = handler;
         this.database = database;
         this.funct = funct;
-        this.show_dialog = show_dialog;
         prefs = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
 
-    public void get_all_feeds() {
+    public void get_all_feeds_activity(Handler handler) {
         try {
-            Log.d("JWP", "get_all_feeds");
+            Log.d("JWP", "get_all_feeds_activity");
+            this.handler = handler;
+            is_activity = true;
             task = new ReadFeedTask().execute();
         } catch (Exception ex) {
             funct.send_bug_report(ex);
         }
+    }
+
+    public void get_all_feeds_widget(int appWidgetId) {
+        try {
+            Log.d("JWP", "get_all_feeds_widget");
+            is_activity = false;
+            this.appWidgetId = appWidgetId;
+            task = new ReadFeedTask().execute();
+        } catch (Exception ex) {
+            funct.send_bug_report(ex);
+        }
+    }
+
+    private void update_widget() {
+        try {
+            Log.d("WIDGET", "start update afte load rss");
+            Intent updIntent = new Intent(context, class_widget.class);
+            updIntent.setAction(class_widget.ACTION_ON_UPDATEOK);
+            updIntent.putExtra(class_widget.IDWIDGET, appWidgetId);
+            PendingIntent updPIntent = PendingIntent.getBroadcast(context,
+                    appWidgetId, updIntent, 0);
+            updPIntent.send(context, 0, updIntent);
+        } catch (Exception ex) {
+            funct.send_bug_report(ex);
+        }
+
     }
 
     class ReadFeedTask extends AsyncTask<Void, Integer, Void> {
@@ -77,7 +105,9 @@ public class class_rss_news {
                             if (dialog != null)
                                 dialog.dismiss();
                             Log.d("JWP", "onPostExecute+");
-                            handler.sendEmptyMessage(1);
+                            if (is_activity) {
+                                handler.sendEmptyMessage(0);
+                            }
                         }
                         break;
                     }
@@ -177,12 +207,17 @@ public class class_rss_news {
             if (dialog != null)
                 dialog.dismiss();
             Log.d("JWP", "onPostExecute+");
-            handler.sendEmptyMessage(1);
+            if (is_activity) {
+                handler.sendEmptyMessage(1);
+            } else {
+                update_widget();
+            }
+
         }
 
         @Override
         protected void onPreExecute() {
-            if (show_dialog) {
+            if (is_activity) {
                 this.dialog = ProgressDialog
                         .show(context,
                                 context.getResources().getString(

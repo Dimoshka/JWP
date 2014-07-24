@@ -1,6 +1,5 @@
 package ua.pp.dimoshka.classes;
 
-import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
@@ -11,8 +10,6 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
 import android.widget.RemoteViews;
 
@@ -24,8 +21,10 @@ import ua.pp.dimoshka.jwp.main;
 public class class_widget extends AppWidgetProvider {
 
     SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-    final String ACTION_ON_LISTCLICK = "ua.pp.dimoshka.jwp.widget_listitemonclick";
-    final String ACTION_ON_UPDATEOK = "ua.pp.dimoshka.jwp.widget_updateok";
+    public static final String ACTION_ON_LISTCLICK = "ua.pp.dimoshka.jwp.widget_listitemonclick";
+    public static final String ACTION_ON_UPDATEOK = "ua.pp.dimoshka.jwp.widget_updateok";
+    public static final String IDWIDGET = "idwidget";
+
 
     final static String ITEM_POSITION = "item_position";
     final static String ITEM_LINK = "item_link";
@@ -60,22 +59,14 @@ public class class_widget extends AppWidgetProvider {
     }
 
     void setUpdateTV(RemoteViews view, Context context, int appWidgetId) {
-        //view.setTextViewText(R.id.tvUpdate,
-        //        sdf.format(new Date(System.currentTimeMillis())));
-
-        update_rss_news(context);
-
+        //view.setTextViewText(R.id.tvUpdate, context.getString(R.string.download_rss));
+        update_rss_news(context, appWidgetId);
         Intent updIntent = new Intent(context, class_widget.class);
         updIntent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
         updIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, new int[]{appWidgetId});
-
-        //updIntent.setAction(ACTION_ON_UPDATECLICK);
-        //updIntent.putExtra(IDWIDGET, appWidgetId);
         PendingIntent updPIntent = PendingIntent.getBroadcast(context,
                 appWidgetId, updIntent, 0);
         view.setOnClickPendingIntent(R.id.tvUpdate, updPIntent);
-
-
         Intent intentapp = new Intent(context, main.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intentapp, 0);
         view.setOnClickPendingIntent(R.id.image, pendingIntent);
@@ -99,40 +90,12 @@ public class class_widget extends AppWidgetProvider {
         rv.setPendingIntentTemplate(R.id.list, listClickPIntent);
     }
 
-
-
-    @SuppressLint("HandlerLeak")
-    private final Handler handler_news = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case 1:
-                    Log.e("JWP", "refrashe afte load");
-
-/*
-                    Intent updIntent = new Intent(context, class_widget.class);
-
-                    //updIntent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-                    //updIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, new int[]{appWidgetId});
-
-                    updIntent.setAction(ACTION_ON_UPDATEOK);
-                    updIntent.putExtra(IDWIDGET, 0);
-                    PendingIntent updPIntent = PendingIntent.getBroadcast(context,
-                            appWidgetId, updIntent, 0);
-*/
-
-                    break;
-            }
-        }
-
-    };
-
-    private void update_rss_news (Context context){
+    private void update_rss_news(Context context, int appWidgetId) {
         funct = new class_functions(context);
         dbOpenHelper = new class_sqlite(context, funct);
         database = dbOpenHelper.openDataBase();
-        rss_news = new class_rss_news(context, handler_news, database, funct, false);
-        rss_news.get_all_feeds();
+        rss_news = new class_rss_news(context, database, funct);
+        rss_news.get_all_feeds_widget(appWidgetId);
     }
 
 
@@ -141,6 +104,7 @@ public class class_widget extends AppWidgetProvider {
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
         if (intent.getAction().equalsIgnoreCase(ACTION_ON_UPDATEOK)) {
+            Log.d("WIDGET", "updated afte load rss");
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
             int appWidgetIds[] = appWidgetManager.getAppWidgetIds(
                     new ComponentName(context, class_widget.class));

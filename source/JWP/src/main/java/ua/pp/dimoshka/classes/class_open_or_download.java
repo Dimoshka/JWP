@@ -75,7 +75,7 @@ public class class_open_or_download {
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(
                             context);
-                    builder.setTitle(context.getString(R.string.select_the_action));
+                    builder.setTitle(context.getString(R.string.choose_the_action));
                     builder.setItems(items,
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog,
@@ -174,7 +174,7 @@ public class class_open_or_download {
                 else i.putExtra("img_putch", "");
 
                 Toast.makeText(context,
-                        context.getString(R.string.download_task_addeded),
+                        context.getString(R.string.download_task_added),
                         Toast.LENGTH_SHORT).show();
                 context.startService(i);
             }
