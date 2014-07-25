@@ -77,7 +77,7 @@ public class player extends FragmentActivity implements LoaderManager.LoaderCall
         id_magazine = extras.getInt("id_magazine");
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
         funct = new class_functions(this);
-        class_sqlite dbOpenHelper = new class_sqlite(this, funct);
+        class_sqlite dbOpenHelper = new class_sqlite(this);
         database = dbOpenHelper.openDataBase();
         audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         initViews();

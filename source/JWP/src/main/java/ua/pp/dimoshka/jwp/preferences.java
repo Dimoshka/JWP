@@ -27,8 +27,7 @@ public class preferences extends PreferenceActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        class_functions funct = new class_functions(this);
-        class_sqlite dbOpenHelper = new class_sqlite(this, funct);
+        class_sqlite dbOpenHelper = new class_sqlite(this);
         database = dbOpenHelper.openDataBase();
         getFragmentManager().beginTransaction().replace(android.R.id.content, new MyPreferenceFragment()).commit();
     }

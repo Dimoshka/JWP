@@ -34,7 +34,7 @@ public class class_widget_factory implements RemoteViewsService.RemoteViewsFacto
     @Override
     public void onCreate() {
         funct = new class_functions(context);
-        class_sqlite dbOpenHelper = new class_sqlite(context, funct);
+        class_sqlite dbOpenHelper = new class_sqlite(context);
         database = dbOpenHelper.openDataBase();
         prefs = PreferenceManager.getDefaultSharedPreferences(context);
         get_language(Integer.parseInt(prefs.getString("language", "1")));

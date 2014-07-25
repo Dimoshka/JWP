@@ -122,11 +122,9 @@ public class service_downloads_files extends Service {
                 Map<String, String> targetFile = targetFiles.get(success - 1);
                 File localFile = new File(targetFile.get("putch"));
                 if (localFile.exists()) {
-
                     Log.d("JWP" + getClass().getName(), "Update to 1 - "
                             + localFile.getName());
-
-                    class_sqlite dbOpenHelper = new class_sqlite(this, funct);
+                    class_sqlite dbOpenHelper = new class_sqlite(this);
                     SQLiteDatabase database = dbOpenHelper.openDataBase();
                     funct.update_file_isn(database, localFile.getName(), 1);
                     dbOpenHelper.close();

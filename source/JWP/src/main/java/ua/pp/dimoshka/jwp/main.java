@@ -126,7 +126,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
 
             aq = new AQuery(this);
             funct = new class_functions(this);
-            dbOpenHelper = new class_sqlite(this, funct);
+            dbOpenHelper = new class_sqlite(this);
             database = dbOpenHelper.openDataBase();
             prefs = PreferenceManager.getDefaultSharedPreferences(this);
             open_or_download = new class_open_or_download(this, database, funct);
