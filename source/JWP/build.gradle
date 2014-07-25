@@ -22,14 +22,14 @@ android {
             keyAlias 'jwp'
             keyPassword 'Dimoshka9101'
             storeFile file('H:/Work/Android/Keystore/dimoshka.jks')
-            //storeFile file('/media/Files/Work/Android/Keystore/dimoshka.jks')
+            //storeFile file('/media/Dimoshka/Work/Android/Keystore/dimoshka.jks')
             storePassword 'Dimoshka9101'
         }
         debug {
             keyAlias 'debug'
             keyPassword '12345678'
             storeFile file('H:/Work/Android/Keystore/debug.jks')
-            //storeFile file('/media/Files/Work/Android/Keystore/debug.jks')
+            //storeFile file('/media/Dimoshka/Work/Android/Keystore/debug.jks')
             storePassword '12345678'
         }
     }

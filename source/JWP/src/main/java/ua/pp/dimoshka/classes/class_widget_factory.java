@@ -89,8 +89,10 @@ public class class_widget_factory implements RemoteViewsService.RemoteViewsFacto
     public RemoteViews getViewAt(int position) {
         cursor.moveToPosition(position);
 
-        RemoteViews view;
+        RemoteViews view = new RemoteViews(context.getPackageName(),
+                R.layout.list_items_news_img);
         Boolean img = cursor.getInt(cursor.getColumnIndex("img")) != 0;
+       /*
         if (img) {
             view = new RemoteViews(context.getPackageName(),
                     R.layout.list_items_news_img);
@@ -98,7 +100,7 @@ public class class_widget_factory implements RemoteViewsService.RemoteViewsFacto
             view = new RemoteViews(context.getPackageName(),
                     R.layout.list_items_news_noimg);
         }
-
+*/
         try {
             String titles = cursor.getString(cursor.getColumnIndex("title"));
             String description = cursor.getString(cursor.getColumnIndex("description"));
@@ -124,6 +126,8 @@ public class class_widget_factory implements RemoteViewsService.RemoteViewsFacto
                     database.update("news", initialValues, "_id=?",
                             new String[]{_id.toString()});
                 }
+            } else {
+                view.setImageViewResource(R.id.img, R.drawable.ic_noimages);
             }
 
             Intent clickIntent = new Intent();
