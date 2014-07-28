@@ -17,6 +17,7 @@ import android.util.Log;
 import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -100,9 +101,11 @@ public class class_rss_news {
                 String feed = String.format(URL_FEED_NEW_IN_SITE, main.ln_prefix);
                 Log.d("JWP-news", feed);
                 this.rss_list = rssfeedprovider.parse(feed);
+                ArrayList<ArrayList> items_news = new ArrayList();
 
                 for (Iterator<class_rss_item> iterator = rss_list.iterator(); iterator.hasNext(); ) {
                     class_rss_item aRss_list = iterator.next();
+
                     if (isCancelled()) {
                         int currentapiVersion = Build.VERSION.SDK_INT;
                         if (currentapiVersion >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
@@ -154,24 +157,38 @@ public class class_rss_news {
 
                     description = funct.stripHtml(description);
                     description = description.trim();
+
+                    ArrayList<String> items = new ArrayList();
+                    items.add(main.id_lng.toString());
+                    items.add(title);
+                    items.add(link);
+                    items.add(link_img);
+                    items.add(description);
+                    items.add(format.format(date));
+                    items_news.add(items);
+                }
+
+                for (int i = items_news.size(); i > 0; i--) {
+                    ArrayList<String> items = items_news.get(i-1);
                     long id_news;
                     ContentValues init = new ContentValues();
-                    init.put("id_lang", main.id_lng);
-                    init.put("title", title);
-                    init.put("link", link);
-                    init.put("link_img", link_img);
-                    init.put("description", description);
-                    init.put("pubdate", format.format(date));
+                    init.put("id_lang", items.get(0));
+                    init.put("title", items.get(1));
+                    init.put("link", items.get(2));
+                    init.put("link_img", items.get(3));
+                    init.put("description", items.get(4));
+                    init.put("pubdate", items.get(5));
                     id_news = database.insertWithOnConflict("news", null, init,
                             SQLiteDatabase.CONFLICT_IGNORE);
                     if (id_news > -1) {
-                        int img = img(id_news, link_img);
+                        int img = img(id_news, items.get(3));
                         ContentValues init2 = new ContentValues();
                         init2.put("img", img);
                         String[] args = {String.valueOf(id_news)};
                         database.update("news", init2, "_id=?", args);
                     }
                 }
+
 
             } catch (Exception e) {
                 funct.send_bug_report(e);

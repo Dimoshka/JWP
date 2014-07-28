@@ -95,7 +95,7 @@ public class news extends ListFragment implements LoaderManager.LoaderCallbacks<
 
         @Override
         public Cursor loadInBackground() {
-            @SuppressWarnings("UnnecessaryLocalVariable") Cursor cursor = main.database.rawQuery("select * from news where news.id_lang='" + main.id_lng + "' order by pubdate desc, news._id asc", null);
+            @SuppressWarnings("UnnecessaryLocalVariable") Cursor cursor = main.database.rawQuery("select * from news where news.id_lang='" + main.id_lng + "' order by news._id DESC", null);
             return cursor;
         }
 
