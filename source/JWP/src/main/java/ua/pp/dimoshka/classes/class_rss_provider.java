@@ -20,13 +20,13 @@ import java.util.Iterator;
 import java.util.List;
 
 public class class_rss_provider {
-    static final String ITEM = "item";
-    static final String TITLE = "title";
-    static final String DESCRIPTION = "description";
-    static final String LINK = "link";
-    static final String PUB_DATE = "pubDate";
-    static final String GUID = "guid";
-    static final String CHANNEL = "channel";
+    private static final String ITEM = "item";
+    private static final String TITLE = "title";
+    private static final String DESCRIPTION = "description";
+    private static final String LINK = "link";
+    private static final String PUB_DATE = "pubDate";
+    private static final String GUID = "guid";
+    private static final String CHANNEL = "channel";
     private class_functions funct;
     private AQuery aq;
 

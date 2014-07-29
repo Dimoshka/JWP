@@ -17,7 +17,7 @@ import ua.pp.dimoshka.jwp.R;
 
 public class class_books_brochures {
     private SQLiteDatabase database;
-    public class_functions funct;
+    private class_functions funct;
     private Activity activity;
     private Cursor cursor = null;
     private Handler handler;
@@ -294,8 +294,8 @@ public class class_books_brochures {
             } catch (final Exception e) {
                 // Handle or log or ignore
             } finally {
-                dialog = null;
-                cursor = null;
+                //dialog = null;
+                //cursor = null;
                 Log.d("JWP", "onPostExecute+");
                 handler.sendEmptyMessage(1);
             }

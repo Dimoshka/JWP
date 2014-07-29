@@ -37,7 +37,7 @@ public class news extends ListFragment implements LoaderManager.LoaderCallbacks<
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mAdapter = new class_news_adapter(
-                getActivity(), R.layout.list_items_news_img, null, new String[]{}, new int[]{}, 0, main.database, main.funct);
+                getActivity(), new String[]{}, new int[]{}, main.database, main.funct);
         setListAdapter(mAdapter);
         getLoaderManager().initLoader(0, null, this);
 

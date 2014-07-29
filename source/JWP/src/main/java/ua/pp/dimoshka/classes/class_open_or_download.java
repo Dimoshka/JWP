@@ -95,7 +95,7 @@ public class class_open_or_download {
         }
     }
 
-    public void open_or_download(int id) {
+    void open_or_download(int id) {
         try {
             if (funct.ExternalStorageState()) {
                 if (cursor.getCount() > 0) {
@@ -111,10 +111,10 @@ public class class_open_or_download {
                     } else {
                         start_open_or_download(cursor.getString(cursor
                                         .getColumnIndex("name")), cursor.getString(cursor.getColumnIndex("name_magazine")),
-                                cursor.getInt(cursor
-                                        .getColumnIndex("file")) != 0,
+                                Boolean.valueOf(cursor.getInt(cursor
+                                        .getColumnIndex("file")) != 0),
                                 cursor.getString(cursor
-                                        .getColumnIndex("link")), cursor.getInt(cursor.getColumnIndex("id_pub"))
+                                        .getColumnIndex("link")), Integer.valueOf(cursor.getInt(cursor.getColumnIndex("id_pub")))
                         );
                     }
                 }
@@ -126,8 +126,9 @@ public class class_open_or_download {
         }
     }
 
-    public void start_open_or_download(String name, String name_magazine, Boolean file_enable,
-                                       String link, Integer id_pub) {
+    void start_open_or_download(String name, String name_magazine, Boolean file_enable,
+                                String link, Integer id_pub) {
+        Boolean file_enable1 = file_enable;
         try {
             String dir_path_pub;
             if (id_pub.intValue() != 4) dir_path_pub = "/jornals/";
@@ -135,18 +136,18 @@ public class class_open_or_download {
 
             File file = new File(funct.get_dir_app() + "/downloads" + dir_path_pub + name);
             if (!file.exists()) {
-                if (file_enable.booleanValue())
-                    funct.update_file_isn(database, name, 0);
-                file_enable = false;
+                if (file_enable1.booleanValue())
+                    funct.update_file_isn(database, name, Integer.valueOf(0));
+                file_enable1 = Boolean.FALSE;
             } else {
-                if (!file_enable.booleanValue())
-                    funct.update_file_isn(database, name, 1);
-                file_enable = true;
+                if (!file_enable1.booleanValue())
+                    funct.update_file_isn(database, name, Integer.valueOf(1));
+                file_enable1 = Boolean.TRUE;
             }
 
-            if (file_enable.booleanValue()) {
+            if (file_enable1.booleanValue()) {
                 Intent intent = new Intent();
-                intent.setAction(android.content.Intent.ACTION_VIEW);
+                intent.setAction(Intent.ACTION_VIEW);
 
                 MimeTypeMap map = MimeTypeMap.getSingleton();
                 String ext = MimeTypeMap

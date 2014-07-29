@@ -26,11 +26,11 @@ public class class_jornals_adapter extends SimpleCursorAdapter {
     private class_functions funct;
     private SQLiteDatabase database;
 
-    public class_jornals_adapter(Context context, int layout,
-                                 Cursor c, String[] from, int[] to, int flags,
+    public class_jornals_adapter(Context context,
+                                 String[] from, int[] to,
                                  SQLiteDatabase database, class_functions funct) {
-        super(context, layout, c, from, to, flags);
-        this.layout = layout;
+        super(context, R.layout.list_items_jornals, null, from, to, 0);
+        this.layout = R.layout.list_items_jornals;
         this.database = database;
         this.funct = funct;
     }
@@ -42,8 +42,8 @@ public class class_jornals_adapter extends SimpleCursorAdapter {
             AQuery aq = new AQuery(v);
             String name = c.getString(c.getColumnIndex("name"));
             Date date = funct.get_string_to_date(c.getString(c.getColumnIndex("date")), "yyyy-MM-dd");
-            Boolean img = c.getInt(c.getColumnIndex("img")) != 0;
-            Integer _id = c.getInt(c.getColumnIndex("_id"));
+            Boolean img = Boolean.valueOf(c.getInt(c.getColumnIndex("img")) != 0);
+            Integer _id = Integer.valueOf(c.getInt(c.getColumnIndex("_id")));
             SimpleDateFormat format = new SimpleDateFormat("d MMMM yyyy");
 
             String[] id_type_files = c.getString(c.getColumnIndex("id_type_files")).split(",");
@@ -81,7 +81,7 @@ public class class_jornals_adapter extends SimpleCursorAdapter {
             aq.id(R.id.aac).image(R.drawable.ic_none_type);
 
             for (int i = 0; i < id_type_files.length; i++) {
-                Boolean file_isn = Integer.parseInt(file_files[i]) != 0;
+                Boolean file_isn = Boolean.valueOf(Integer.parseInt(file_files[i]) != 0);
                 switch (Integer.parseInt(id_type_files[i])) {
                     case 1:
                         if (file_isn.booleanValue())

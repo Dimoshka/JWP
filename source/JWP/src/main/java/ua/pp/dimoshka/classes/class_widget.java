@@ -1,5 +1,6 @@
 package ua.pp.dimoshka.classes;
 
+import android.annotation.TargetApi;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
@@ -8,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
+import android.os.Build;
 import android.util.Log;
 import android.widget.RemoteViews;
 
@@ -19,7 +21,7 @@ import ua.pp.dimoshka.jwp.main;
 public class class_widget extends AppWidgetProvider {
 
     SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-    public static final String ACTION_ON_LISTCLICK = "ua.pp.dimoshka.jwp.widget_listitemonclick";
+    private static final String ACTION_ON_LISTCLICK = "ua.pp.dimoshka.jwp.widget_listitemonclick";
     public static final String ACTION_ON_UPDATEOK = "ua.pp.dimoshka.jwp.widget_updateok";
     public static final String IDWIDGET = "idwidget";
 
@@ -27,8 +29,8 @@ public class class_widget extends AppWidgetProvider {
     final static String ITEM_POSITION = "item_position";
     final static String ITEM_LINK = "item_link";
 
-    public static SQLiteDatabase database = null;
-    public static class_functions funct = null;
+    private static SQLiteDatabase database = null;
+    private class_functions funct = null;
 
     public class_widget() {
     }
@@ -70,6 +72,7 @@ public class class_widget extends AppWidgetProvider {
         view.setOnClickPendingIntent(R.id.image, pendingIntent);
     }
 
+    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     void setList(RemoteViews rv, Context context, int appWidgetId) {
         Intent adapter = new Intent(context, class_widget_service.class);
         adapter.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);

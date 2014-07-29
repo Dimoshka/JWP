@@ -9,11 +9,11 @@ import ua.pp.dimoshka.jwp.R;
 
 public class class_sqlite extends SQLiteAssetHelper {
 
-    public SQLiteDatabase database;
+    private SQLiteDatabase database;
 
     public class_sqlite(Context context) {
         super(context, context.getString(R.string.db_name), null, Integer
-                .valueOf(context.getString(R.string.db_version)));
+                .valueOf(context.getString(R.string.db_version)).intValue());
         database = this.getWritableDatabase();
     }
 

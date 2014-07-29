@@ -17,10 +17,11 @@ import java.util.Locale;
 
 import ua.pp.dimoshka.jwp.R;
 
+@SuppressWarnings("AutoUnboxing")
 public class class_widget_factory implements RemoteViewsService.RemoteViewsFactory {
 
     private Context context;
-    public static Integer id_lng = 1;
+    public Integer id_lng = Integer.valueOf(1);
 
     private SQLiteDatabase database = null;
     private class_functions funct = null;
@@ -52,17 +53,17 @@ public class class_widget_factory implements RemoteViewsService.RemoteViewsFacto
                             .putString("language",
                                     cursor.getString(cursor.getColumnIndex("_id")))
                             .apply();
-                    id_lng = cursor.getInt(cursor.getColumnIndex("_id"));
+                    id_lng = Integer.valueOf(cursor.getInt(cursor.getColumnIndex("_id")));
                 } else {
-                    id_lng = 1;
+                    id_lng = Integer.valueOf(1);
                 }
             } else {
                 cursor = database.rawQuery("SELECT* from language where _id='" + id + "'", null);
                 cursor.moveToFirst();
                 if (cursor.getCount() > 0) {
-                    id_lng = cursor.getInt(cursor.getColumnIndex("_id"));
+                    id_lng = Integer.valueOf(cursor.getInt(cursor.getColumnIndex("_id")));
                 } else {
-                    id_lng = 1;
+                    id_lng = Integer.valueOf(1);
                 }
             }
         } catch (Exception e) {
@@ -91,7 +92,7 @@ public class class_widget_factory implements RemoteViewsService.RemoteViewsFacto
 
         RemoteViews view = new RemoteViews(context.getPackageName(),
                 R.layout.list_items_news_img);
-        Boolean img = cursor.getInt(cursor.getColumnIndex("img")) != 0;
+        Boolean img = Boolean.valueOf(cursor.getInt(cursor.getColumnIndex("img")) != 0);
        /*
         if (img) {
             view = new RemoteViews(context.getPackageName(),
@@ -105,7 +106,7 @@ public class class_widget_factory implements RemoteViewsService.RemoteViewsFacto
             String titles = cursor.getString(cursor.getColumnIndex("title"));
             String description = cursor.getString(cursor.getColumnIndex("description"));
             String pubdate = cursor.getString(cursor.getColumnIndex("pubdate"));
-            Integer _id = cursor.getInt(cursor.getColumnIndex("_id"));
+            Integer _id = Integer.valueOf(cursor.getInt(cursor.getColumnIndex("_id")));
 
             view.setTextViewText(R.id.title, titles);
             view.setTextViewText(R.id.text, description);

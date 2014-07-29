@@ -16,7 +16,6 @@ import com.google.analytics.tracking.android.EasyTracker;
 import java.util.ArrayList;
 import java.util.List;
 
-import ua.pp.dimoshka.classes.class_functions;
 import ua.pp.dimoshka.classes.class_sqlite;
 
 public class preferences extends PreferenceActivity {
@@ -52,7 +51,7 @@ public class preferences extends PreferenceActivity {
     }
 
     protected static void setListPreferenceData(ListPreference listPreference) {
-        @SuppressWarnings("StaticVariableUsedBeforeInitialization") Cursor cursor = database.rawQuery("SELECT * from language", null);
+        Cursor cursor = database.rawQuery("SELECT * from language", null);
 
 
         List<String> entries_list = new ArrayList<String>();

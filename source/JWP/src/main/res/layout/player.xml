@@ -16,7 +16,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/app_name_shot"
-                android:text="back"
+                android:text="@string/previous"
                 android:src="@drawable/ic_av_rewind" />
 
 
@@ -35,7 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/app_name_shot"
-                android:text="next"
+                android:text="@string/next"
                 android:src="@drawable/ic_av_fast_forward" />
         </TableRow>
     </TableLayout>

@@ -37,11 +37,11 @@ public class service_downloads_files extends Service {
     private NotificationManager notificationManager = null;
     private final IBinder binder = new FileDownloadBinder();
     private AsyncDownloadTask task = null;
-    protected static boolean isRunning = false;
+    private static boolean isRunning = false;
     private ArrayList<Map<String, String>> targetFiles = null;
     private int now_targetFile = 0;
 
-    public class FileDownloadBinder extends Binder {
+    private class FileDownloadBinder extends Binder {
         service_downloads_files getService() {
             return service_downloads_files.this;
         }
@@ -86,11 +86,11 @@ public class service_downloads_files extends Service {
         return START_STICKY;
     }
 
-    protected ArrayList<Map<String, String>> get_targetFiles() {
+    ArrayList<Map<String, String>> get_targetFiles() {
         return targetFiles;
     }
 
-    protected int get_targetFiles_num() {
+    int get_targetFiles_num() {
         return targetFiles.size();
     }
 
@@ -116,7 +116,7 @@ public class service_downloads_files extends Service {
                 | Intent.FLAG_ACTIVITY_SINGLE_TOP;
     }
 
-    protected void onFinishDownload(int success) {
+    void onFinishDownload(int success) {
         try {
             if (success > 0) {
                 Map<String, String> targetFile = targetFiles.get(success - 1);
@@ -126,7 +126,7 @@ public class service_downloads_files extends Service {
                             + localFile.getName());
                     class_sqlite dbOpenHelper = new class_sqlite(this);
                     SQLiteDatabase database = dbOpenHelper.openDataBase();
-                    funct.update_file_isn(database, localFile.getName(), 1);
+                    funct.update_file_isn(database, localFile.getName(), Integer.valueOf(1));
                     dbOpenHelper.close();
                 }
             }
@@ -135,13 +135,13 @@ public class service_downloads_files extends Service {
         }
     }
 
-    protected int getNotificationIcon() {
+    int getNotificationIcon() {
         return R.drawable.ic_launcher;
     }
 
-    protected RemoteViews getProgressView(int currentNumFile,
-                                          int totalNumFiles, int currentReceivedBytes, int totalNumBytes,
-                                          String filename, String imgpatch) {
+    RemoteViews getProgressView(int currentNumFile,
+                                int totalNumFiles, int currentReceivedBytes, int totalNumBytes,
+                                String filename, String imgpatch) {
         RemoteViews contentView = new RemoteViews(getPackageName(),
                 R.layout.notification);
 
@@ -160,13 +160,13 @@ public class service_downloads_files extends Service {
         contentView.setProgressBar(R.id.progress, 100, 100
                 * currentReceivedBytes / totalNumBytes, false);
         contentView.setTextViewText(R.id.text2,
-                String.format("(%d / %d)", currentNumFile, totalNumFiles));
+                String.format("(%d / %d)", Integer.valueOf(currentNumFile), Integer.valueOf(totalNumFiles)));
         contentView.setTextViewText(R.id.text3, getStringByteSize(currentReceivedBytes) + " / " + getStringByteSize(totalNumBytes));
         return contentView;
     }
 
 
-    protected void showNotification_popup(String ticker, String title, String text, Context context) {
+    void showNotification_popup(String ticker, String title, String text, Context context) {
         NotificationCompat.Builder nb = new NotificationCompat.Builder(context)
                 .setSmallIcon(getNotificationIcon())
                 .setAutoCancel(true)
@@ -181,7 +181,7 @@ public class service_downloads_files extends Service {
     }
 
 
-    protected void showNotification(RemoteViews remoteView, String ticker, Context context) {
+    void showNotification(RemoteViews remoteView, String ticker, Context context) {
         NotificationCompat.Builder nb = new NotificationCompat.Builder(context)
                 .setContentTitle(ticker)
                 .setContentText(ticker)
@@ -276,7 +276,7 @@ public class service_downloads_files extends Service {
 
                                     total_file = get_targetFiles_num();
 
-                                    if (!isCancelled() && loopCount++ % 20 == 0) {
+                                    if (!isCancelled() && loopCount % 20 == 0) {
                                         RemoteViews progressView = getProgressView(
                                                 now_targetFile + 1, total_file,
                                                 totalBytesRead, filesize,
@@ -294,6 +294,7 @@ public class service_downloads_files extends Service {
                                                     getApplicationContext());
                                         }
                                     }
+                                    loopCount++;
                                 }
 
                                 fos.close();
@@ -378,10 +379,10 @@ public class service_downloads_files extends Service {
     protected String getStringByteSize(int size) {
         if (size > 1024 * 1024) // mega
         {
-            return String.format("%.1f MB", size / (float) (1024 * 1024));
+            return String.format("%.1f MB", Float.valueOf(size / (float) (1024 * 1024)));
         } else if (size > 1024) // kilo
         {
-            return String.format("%.1f KB", size / 1024.0f);
+            return String.format("%.1f KB", Float.valueOf(size / 1024.0f));
         } else {
             return String.format("%d B");
         }

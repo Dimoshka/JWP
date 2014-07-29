@@ -12,13 +12,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.preference.PreferenceManager;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -53,7 +51,7 @@ public class player extends ActionBarActivity implements LoaderManager.LoaderCal
     private class_functions funct = null;
     private SharedPreferences.OnSharedPreferenceChangeListener listener_pref = null;
 
-    AudioManager audioManager = null;
+    private AudioManager audioManager = null;
     AFListener afListenerMusic = null;
     MediaPlayer mpMusic = null;
 
@@ -65,7 +63,7 @@ public class player extends ActionBarActivity implements LoaderManager.LoaderCal
             @SuppressWarnings("RedundantCast") int select = (int) listView.getCheckedItemPosition();
             if (select < listView.getCount() - 1) {
                 listView.setItemChecked(select + 1, true);
-                play(select + 1);
+                play(Integer.valueOf(select + 1));
             }
         }
     };
@@ -79,7 +77,7 @@ public class player extends ActionBarActivity implements LoaderManager.LoaderCal
         actionBar.setSubtitle(R.string.player);
 
         Bundle extras = getIntent().getExtras();
-        id_magazine = extras.getInt("id_magazine");
+        id_magazine = Integer.valueOf(extras.getInt("id_magazine"));
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
         funct = new class_functions(this);
         class_sqlite dbOpenHelper = new class_sqlite(this);
@@ -88,7 +86,6 @@ public class player extends ActionBarActivity implements LoaderManager.LoaderCal
         initViews();
 
         mAdapter = new class_player_adapter(this,
-                android.R.layout.simple_list_item_single_choice, null,
                 new String[]{"title"}, new int[]{android.R.id.text1});
         listView.setAdapter(mAdapter);
         getSupportLoaderManager().initLoader(0, null, this);
@@ -142,7 +139,7 @@ public class player extends ActionBarActivity implements LoaderManager.LoaderCal
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView<?> parent, View view,
                                         int position, long id) {
-                    play(position);
+                    play(Integer.valueOf(position));
                 }
             });
 
@@ -154,7 +151,7 @@ public class player extends ActionBarActivity implements LoaderManager.LoaderCal
     private void play(Integer position) {
         buttonPlayStop.setEnabled(false);
         Cursor cursor = ((class_player_adapter) listView.getAdapter()).getCursor();
-        cursor.moveToPosition(position);
+        cursor.moveToPosition(position.intValue());
 
         String name = cursor.getString(cursor
                 .getColumnIndex("name"));
@@ -166,12 +163,12 @@ public class player extends ActionBarActivity implements LoaderManager.LoaderCal
                 + "/downloads/" + name);
         if (file.exists()) {
             if (file_enable == 0)
-                funct.update_file_isn(database, name, 1);
+                funct.update_file_isn(database, name, Integer.valueOf(1));
             file_enable = 1;
 
         } else {
             if (file_enable == 1)
-                funct.update_file_isn(database, name, 0);
+                funct.update_file_isn(database, name, Integer.valueOf(0));
             file_enable = 0;
         }
 
@@ -224,7 +221,7 @@ public class player extends ActionBarActivity implements LoaderManager.LoaderCal
         startService(i);
     }
 
-    public void startPlayProgressUpdater() {
+    void startPlayProgressUpdater() {
         try {
             if (mediaplayer_class.isPlaying()) {
                 seekBar.setProgress(mediaplayer_class.getCurrentPosition());
@@ -268,7 +265,7 @@ public class player extends ActionBarActivity implements LoaderManager.LoaderCal
         @SuppressWarnings("RedundantCast") int select = (int) listView.getCheckedItemPosition();
         if (select < listView.getCount() - 1) {
             listView.setItemChecked(select + 1, true);
-            play(select + 1);
+            play(Integer.valueOf(select + 1));
         }
     }
 
@@ -276,7 +273,7 @@ public class player extends ActionBarActivity implements LoaderManager.LoaderCal
         @SuppressWarnings("RedundantCast") int select = (int) listView.getCheckedItemPosition();
         if (select > 0) {
             listView.setItemChecked(select - 1, true);
-            play(select - 1);
+            play(Integer.valueOf(select - 1));
         }
     }
 
@@ -323,7 +320,7 @@ public class player extends ActionBarActivity implements LoaderManager.LoaderCal
                     + "/downloads/" + name);
             if (!file.exists()) {
                 if (file_enable == 1)
-                    funct.update_file_isn(database, name, 0);
+                    funct.update_file_isn(database, name, Integer.valueOf(0));
                 start_download(link, file);
             }
             cursor.moveToNext();
@@ -339,7 +336,7 @@ public class player extends ActionBarActivity implements LoaderManager.LoaderCal
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return new MyCursorLoader(this, database, id_magazine);
+        return new MyCursorLoader(this, database, id_magazine.intValue());
     }
 
     @Override

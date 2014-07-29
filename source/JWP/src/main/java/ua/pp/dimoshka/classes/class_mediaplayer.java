@@ -187,21 +187,21 @@ public class class_mediaplayer {
 	/* INTERNAL LISTENERS */
 
     /* EXTERNAL STUBS TO OVERRIDE */
-    public void onPrepared(MediaPlayer mp) {
+    void onPrepared(MediaPlayer mp) {
     }
 
-    public void onCompletion(MediaPlayer mp) {
+    void onCompletion(MediaPlayer mp) {
         handler.sendEmptyMessage(1);
     }
 
-    public void onBufferingUpdate(MediaPlayer mp, int percent) {
+    void onBufferingUpdate(MediaPlayer mp, int percent) {
     }
 
     boolean onError(MediaPlayer mp, int what, int extra) {
         return false;
     }
 
-    public boolean onInfo(MediaPlayer mp, int what, int extra) {
+    boolean onInfo(MediaPlayer mp, int what, int extra) {
         return false;
     }
 
@@ -214,7 +214,7 @@ public class class_mediaplayer {
         }
     }
 
-    public int getDuration() {
+    int getDuration() {
         // Prepared, Started, Paused, Stopped, PlaybackCompleted
         if (EnumSet.of(State.PREPARED, State.STARTED, State.PAUSED,
                 State.STOPPED, State.PLAYBACK_COMPLETE).contains(currentState)) {

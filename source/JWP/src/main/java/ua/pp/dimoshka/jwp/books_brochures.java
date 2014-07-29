@@ -15,14 +15,11 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.view.View;
 import android.widget.ListView;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-
 import ua.pp.dimoshka.classes.class_books_brochures_adapter;
 
 public class books_brochures extends ListFragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    class_books_brochures_adapter mAdapter = null;
+    private class_books_brochures_adapter mAdapter = null;
 
     private BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
@@ -41,8 +38,8 @@ public class books_brochures extends ListFragment implements LoaderManager.Loade
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mAdapter = new class_books_brochures_adapter(
-                getActivity(), R.layout.list_items_books_brochures, null,
-                new String[]{"_id"}, new int[]{R.id.title}, 0,
+                getActivity(),
+                new String[]{"_id"}, new int[]{R.id.title},
                 main.database, main.funct);
         setListAdapter(mAdapter);
         getLoaderManager().initLoader(0, null, this);
@@ -62,13 +59,9 @@ public class books_brochures extends ListFragment implements LoaderManager.Loade
     public void refresh() {
         try {
             if (isAdded()) {
-                //getLoaderManager().restartLoader(0, null, this);
-
-
-                Document doc = Jsoup.connect("http://example.com/").get();
-                String title = doc.title();
-
-
+                getLoaderManager().restartLoader(0, null, this);
+                // Document doc = Jsoup.connect("http://example.com/").get();
+                //String title = doc.title();
             }
         } catch (Exception e) {
             main.funct.send_bug_report(e);
@@ -110,7 +103,7 @@ public class books_brochures extends ListFragment implements LoaderManager.Loade
                                     "left join language on magazine.id_lang=language._id " +
                                     "left join publication on magazine.id_pub=publication._id " +
                                     "left join (select id_magazine, GROUP_CONCAT(id_type) as id_type, GROUP_CONCAT(file) as file from files group by id_magazine) as files on magazine._id=files.id_magazine " +
-                                    "where magazine.id_lang='" + main.id_lng + "' and magazine.id_pub='4' order by magazine.name asc",
+                                    "where magazine.id_lang='" + main.id_lng + "' and magazine.id_pub='4' order by magazine.title asc",
                             null
                     );
             return cursor;

@@ -47,7 +47,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
     public static SQLiteDatabase database = null;
     private static class_sqlite dbOpenHelper = null;
     public static class_functions funct = null;
-    public static AQuery aq = null;
+    private static AQuery aq = null;
 
     public static class_open_or_download open_or_download = null;
     private static class_rss_jornals rss_jornals = null;
@@ -57,15 +57,15 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
     private SharedPreferences prefs = null;
     private ViewPager pager = null;
     private ActionBar actionBar = null;
-    private Boolean refresh_all = false;
+    private Boolean refresh_all = Boolean.FALSE;
 
-    public static Integer id_lng = 1;
+    public static Integer id_lng = Integer.valueOf(1);
     public static String ln_prefix = "en/news";
     public static String code_lng = "E";
 
     private List<Fragment> fragment_list = new Vector<Fragment>();
     private MyPagerAdapter pagerAdapter = null;
-    private Boolean change_prefference = false;
+    private Boolean change_prefference = Boolean.FALSE;
 
 
     @SuppressLint("HandlerLeak")
@@ -74,7 +74,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 1:
-                    if (refresh_all) {
+                    if (refresh_all.booleanValue()) {
                         rss_news.get_all_feeds_activity(handler_news);
                     } else {
                         Log.d("JWP", "refrashe afte load");
@@ -106,7 +106,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 1:
-                    if (refresh_all) {
+                    if (refresh_all.booleanValue()) {
                         rss_jornals.get_all_feeds();
                     } else {
                         Log.d("JWP", "refrashe afte load");
@@ -167,7 +167,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
             create_tabs();
             create_fragments();
 
-            if (change_prefference) refresh();
+            if (change_prefference.booleanValue()) refresh();
         } catch (Exception e) {
             funct.send_bug_report(e);
         }
@@ -181,7 +181,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
             rss_news = new class_rss_news(this, database, funct);
             fragment_list.add(new news());
 
-            if (id_lng == 3) {
+            if (id_lng.intValue() == 3) {
                 books_brochures = new class_books_brochures(this, handler_books_brochures, database, funct);
                 fragment_list.add(new books_brochures());
             }
@@ -200,7 +200,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
             ActionBar.Tab news_Tab = actionBar.newTab().setText(R.string.news)
                     .setTabListener(this);
             actionBar.addTab(news_Tab);
-            if (id_lng == 3) {
+            if (id_lng.intValue() == 3) {
                 Log.d("LANG3", "tabs");
                 ActionBar.Tab publication_Tab = actionBar.newTab().setText(R.string.books_brochures)
                         .setTabListener(this);
@@ -224,11 +224,11 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
                             .putString("language",
                                     cursor.getString(cursor.getColumnIndex("_id")))
                             .apply();
-                    id_lng = cursor.getInt(cursor.getColumnIndex("_id"));
+                    id_lng = Integer.valueOf(cursor.getInt(cursor.getColumnIndex("_id")));
                     ln_prefix = cursor.getString(cursor.getColumnIndex("news_rss"));
                     code_lng = cursor.getString(cursor.getColumnIndex("code"));
                 } else {
-                    id_lng = 1;
+                    id_lng = Integer.valueOf(1);
                     ln_prefix = "en/news";
                     code_lng = "E";
                 }
@@ -236,11 +236,11 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
                 cursor = database.rawQuery("SELECT* from language where _id='" + id + "'", null);
                 cursor.moveToFirst();
                 if (cursor.getCount() > 0) {
-                    id_lng = cursor.getInt(cursor.getColumnIndex("_id"));
+                    id_lng = Integer.valueOf(cursor.getInt(cursor.getColumnIndex("_id")));
                     ln_prefix = cursor.getString(cursor.getColumnIndex("news_rss"));
                     code_lng = cursor.getString(cursor.getColumnIndex("code"));
                 } else {
-                    id_lng = 1;
+                    id_lng = Integer.valueOf(1);
                     ln_prefix = "en/news";
                     code_lng = "E";
                 }
@@ -306,7 +306,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
     private OnSharedPreferenceChangeListener PreferenceChangeListener = new OnSharedPreferenceChangeListener() {
         @Override
         public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
-            change_prefference = true;
+            change_prefference = Boolean.TRUE;
             Log.d("PREFF_UPDATE", key);
             load_first();
         }
@@ -352,8 +352,8 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
         try {
             if (funct.isNetworkAvailable()) {
                 if (prefs.getBoolean("update_all_at_once", true)) {
-                    refresh_all = true;
-                    if (id_lng == 3 && actionBar.getTabCount() == 3) {
+                    refresh_all = Boolean.TRUE;
+                    if (id_lng.intValue() == 3 && actionBar.getTabCount() == 3) {
                         Log.d("LANG3", "load rss");
                         books_brochures.verify_all_img();
                     } else {
@@ -388,7 +388,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
             LocalBroadcastManager broadcastManager = LocalBroadcastManager.getInstance(this);
             broadcastManager.sendBroadcast(intent);
             Log.d("FRAGMENT", "start_refresh");
-            refresh_all = false;
+            refresh_all = Boolean.FALSE;
             pagerAdapter.notifyDataSetChanged();
         } catch (Exception e) {
             funct.send_bug_report(e);

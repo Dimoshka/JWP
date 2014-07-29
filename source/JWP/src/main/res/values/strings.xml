@@ -14,6 +14,9 @@ You will have to download publications in different languages ​​and in diffe
 And also to receive news from the site www.jw.org.
 The program works as RSS client."</string>
 
+    <string name="previous">"Previous"</string>
+    <string name="next">"Next"</string>
+
     <string name="update_all_at_once">"Update all at once"</string>
     <string name="update_all_at_once_summary">"Update logs, news, books and brochures simultaneously"</string>
     <string name="books_brochures">"Books and brochures"</string>

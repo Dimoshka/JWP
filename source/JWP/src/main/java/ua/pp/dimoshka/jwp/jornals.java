@@ -38,7 +38,7 @@ public class jornals extends ListFragment implements LoaderManager.LoaderCallbac
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mAdapter = new class_jornals_adapter(
-                getActivity(), R.layout.list_items_jornals, null, new String[]{}, new int[]{}, 0, main.database, main.funct);
+                getActivity(), new String[]{}, new int[]{}, main.database, main.funct);
         setListAdapter(mAdapter);
         getLoaderManager().initLoader(0, null, this);
 

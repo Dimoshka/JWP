@@ -27,6 +27,7 @@
         android:layout_alignParentStart="false"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
+        android:contentDescription="@string/app_name_shot"
         android:background="@drawable/ic_launcher" />
 
     <ListView

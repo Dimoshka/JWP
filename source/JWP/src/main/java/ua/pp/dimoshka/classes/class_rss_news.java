@@ -30,15 +30,15 @@ import ua.pp.dimoshka.jwp.main;
 
 public class class_rss_news {
     static final String URL_FEED_NEWS = "http://www.jw.org/%s/rss/LatestNewsList/feed.xml";
-    static final String URL_FEED_NEW_IN_SITE = "http://www.jw.org/%s/rss/WhatsNewWebArticles/feed.xml";
+    private static final String URL_FEED_NEW_IN_SITE = "http://www.jw.org/%s/rss/WhatsNewWebArticles/feed.xml";
 
     private SQLiteDatabase database;
 
-    public class_functions funct;
+    private class_functions funct;
     private Context context;
     private Handler handler = null;
     private boolean is_activity = false;
-    public SharedPreferences prefs;
+    private SharedPreferences prefs;
     private AsyncTask task = null;
     private int appWidgetId = 0;
 
@@ -183,7 +183,7 @@ public class class_rss_news {
                     if (id_news > -1) {
                         int img = img(id_news, items.get(3));
                         ContentValues init2 = new ContentValues();
-                        init2.put("img", img);
+                        init2.put("img", Integer.valueOf(img));
                         String[] args = {String.valueOf(id_news)};
                         database.update("news", init2, "_id=?", args);
                     }
@@ -196,7 +196,7 @@ public class class_rss_news {
             return null;
         }
 
-        protected int img(long _id, String link_img) {
+        int img(long _id, String link_img) {
             int img = 0;
             if (prefs.getBoolean("downloads_img", true)) {
                 if (funct.ExternalStorageState()) {
@@ -235,7 +235,7 @@ public class class_rss_news {
             } catch (final Exception e) {
                 // Handle or log or ignore
             } finally {
-                dialog = null;
+                //dialog = null;
                 Log.d("JWP", "onPostExecute+");
                 if (is_activity) {
                     handler.sendEmptyMessage(1);

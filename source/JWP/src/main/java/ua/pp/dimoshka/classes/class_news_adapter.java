@@ -22,10 +22,10 @@ public class class_news_adapter extends SimpleCursorAdapter {
     private class_functions funct;
     private SQLiteDatabase database;
 
-    public class_news_adapter(Context context, int layout,
-                              Cursor c, String[] from, int[] to, int flags,
+    public class_news_adapter(Context context,
+                              String[] from, int[] to,
                               SQLiteDatabase database, class_functions funct) {
-        super(context, layout, c, from, to, flags);
+        super(context, R.layout.list_items_news_img, null, from, to, 0);
         this.database = database;
         this.funct = funct;
     }
@@ -38,8 +38,8 @@ public class class_news_adapter extends SimpleCursorAdapter {
             String titles = c.getString(c.getColumnIndex("title"));
             String description = c.getString(c.getColumnIndex("description"));
             String pubdate = c.getString(c.getColumnIndex("pubdate"));
-            Boolean img = c.getInt(c.getColumnIndex("img")) != 0;
-            Integer _id = c.getInt(c.getColumnIndex("_id"));
+            Boolean img = Boolean.valueOf(c.getInt(c.getColumnIndex("img")) != 0);
+            Integer _id = Integer.valueOf(c.getInt(c.getColumnIndex("_id")));
 
             aq.id(R.id.title).text(titles);
             aq.id(R.id.text).text(description);
@@ -73,7 +73,7 @@ public class class_news_adapter extends SimpleCursorAdapter {
     public View newView(Context context, Cursor c, ViewGroup parent) {
         final LayoutInflater inflater = LayoutInflater.from(context);
 
-        Boolean img = c.getInt(c.getColumnIndex("img")) != 0;
+        Boolean img = Boolean.valueOf(c.getInt(c.getColumnIndex("img")) != 0);
         if (img.booleanValue()) {
             return inflater.inflate(R.layout.list_items_news_img, parent, false);
         } else {

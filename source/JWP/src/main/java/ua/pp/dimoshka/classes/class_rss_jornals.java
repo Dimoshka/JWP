@@ -25,19 +25,19 @@ import ua.pp.dimoshka.jwp.R;
 import ua.pp.dimoshka.jwp.main;
 
 public class class_rss_jornals {
-    static final String URL_FEED = "http://www.jw.org/apps/index.xjp?option=sFFZRQVNZNT&rln=%s&rmn=%s&rfm=%s&rpf=&rpe=";
-    static final String URL_IMG = "http://assets.jw.org/assets/a/{code_pub_shot}{YY}/{YYYYMMDD}/{code_pub_shot}{YY}_{YYYYMMDD}_{code_lng}/{code_pub}_{code_lng}_{YYYYMMDD}_md.jpg";
+    private static final String URL_FEED = "http://www.jw.org/apps/index.xjp?option=sFFZRQVNZNT&rln=%s&rmn=%s&rfm=%s&rpf=&rpe=";
+    private static final String URL_IMG = "http://assets.jw.org/assets/a/{code_pub_shot}{YY}/{YYYYMMDD}/{code_pub_shot}{YY}_{YYYYMMDD}_{code_lng}/{code_pub}_{code_lng}_{YYYYMMDD}_md.jpg";
 
     private SQLiteDatabase database;
-    public class_functions funct;
+    private class_functions funct;
     private Context context;
     private Handler handler;
     private ArrayList<Integer> id_pub = new ArrayList<Integer>();
     private ArrayList<String> code_pub = new ArrayList<String>();
-    private Integer cur_pub = 0;
+    private Integer cur_pub = Integer.valueOf(0);
     private ArrayList<Integer> id_type = new ArrayList<Integer>();
     private ArrayList<String> code_type = new ArrayList<String>();
-    public SharedPreferences prefs;
+    private SharedPreferences prefs;
     private AsyncTask task = null;
 
 
@@ -70,15 +70,15 @@ public class class_rss_jornals {
             cursor_pub.moveToFirst();
 
             for (int i = 0; i < cursor_type.getCount(); i++) {
-                id_type.add(cursor_type.getInt(cursor_type
-                        .getColumnIndex("_id")));
+                id_type.add(Integer.valueOf(cursor_type.getInt(cursor_type
+                        .getColumnIndex("_id"))));
                 code_type.add(cursor_type.getString(cursor_type
                         .getColumnIndex("code")));
                 cursor_type.moveToNext();
             }
 
             for (int i = 0; i < cursor_pub.getCount(); i++) {
-                id_pub.add(cursor_pub.getInt(cursor_pub.getColumnIndex("_id")));
+                id_pub.add(Integer.valueOf(cursor_pub.getInt(cursor_pub.getColumnIndex("_id"))));
                 code_pub.add(cursor_pub.getString(cursor_pub
                         .getColumnIndex("code")));
                 cursor_pub.moveToNext();
@@ -112,27 +112,27 @@ public class class_rss_jornals {
                         break;
                     }
                     for (int b = 0; b < id_type.size(); b++) {
-                        Boolean load_pub = false;
+                        Boolean load_pub = Boolean.FALSE;
                         String s = code_type.get(b);
                         if (s.equals("epub")) {
-                            load_pub = prefs.getBoolean("rss_epub", false);
+                            load_pub = Boolean.valueOf(prefs.getBoolean("rss_epub", false));
                         } else if (s.equals("pdf")) {
-                            load_pub = prefs.getBoolean("rss_pdf", true);
+                            load_pub = Boolean.valueOf(prefs.getBoolean("rss_pdf", true));
                         } else if (s.equals("mp3")) {
-                            load_pub = prefs.getBoolean("rss_mp3", true);
+                            load_pub = Boolean.valueOf(prefs.getBoolean("rss_mp3", true));
                         } else if (s.equals("m4b")) {
-                            load_pub = prefs.getBoolean("rss_m4b", false);
+                            load_pub = Boolean.valueOf(prefs.getBoolean("rss_m4b", false));
                         }
 
-                        if (load_pub) {
+                        if (load_pub.booleanValue()) {
                             //Log.i("JWP_rss", "rss_" + code_type.get(b));
 
-                            Integer cur_type = b;
-                            cur_pub = a;
+                            Integer cur_type = Integer.valueOf(b);
+                            cur_pub = Integer.valueOf(a);
                             class_rss_provider rssfeedprovider = new class_rss_provider(context, funct);
                             String feed = String.format(URL_FEED, main.code_lng,
-                                    code_pub.get(cur_pub),
-                                    code_type.get(cur_type));
+                                    code_pub.get(cur_pub.intValue()),
+                                    code_type.get(cur_type.intValue()));
                             this.rss_list = rssfeedprovider.parse(feed);
 
                             for (Iterator<class_rss_item> iterator = rss_list.iterator(); iterator.hasNext(); ) {
@@ -140,17 +140,17 @@ public class class_rss_jornals {
 
                                 String name = rss_item.getguid();
                                 name = name.replace(
-                                        "." + code_type.get(cur_type), "");
+                                        "." + code_type.get(cur_type.intValue()), "");
 
                                 SimpleDateFormat sim_format = new SimpleDateFormat(
                                         "yyyy-MM-dd");
                                 DateFormat dat_format = new SimpleDateFormat(
                                         "yyyy-MM-dd");
                                 Date date = funct.get_jwp_jornals_rss_date(
-                                        name, code_pub.get(cur_pub), main.code_lng);
+                                        name, code_pub.get(cur_pub.intValue()), main.code_lng);
                                 Log.d("JWP_rss", "date = " + date.toString());
                                 String date_str = name.replace(
-                                        code_pub.get(cur_pub) + "_", "");
+                                        code_pub.get(cur_pub.intValue()) + "_", "");
                                 date_str = date_str.replace(main.code_lng + "_", "");
                                 Log.d("JWP_rss", "name = " + name);
                                 if (date_str.length() > 8)
@@ -166,7 +166,7 @@ public class class_rss_jornals {
                                     cur.moveToFirst();
                                     id_magazine = cur.getLong(cur
                                             .getColumnIndex("_id"));
-                                    if (img != cur.getInt(cur
+                                    if (img.intValue() != cur.getInt(cur
                                             .getColumnIndex("img"))) {
                                         ContentValues init = new ContentValues();
                                         init.put("img", img);
@@ -178,7 +178,7 @@ public class class_rss_jornals {
                                     ContentValues init1 = new ContentValues();
                                     init1.put("name", name);
                                     init1.put("name", name);
-                                    init1.put("id_pub", id_pub.get(cur_pub));
+                                    init1.put("id_pub", id_pub.get(cur_pub.intValue()));
                                     init1.put("id_lang", main.id_lng);
                                     init1.put("img", img);
                                     init1.put("date", dat_format.format(date));
@@ -188,13 +188,13 @@ public class class_rss_jornals {
                                 }
 
                                 ContentValues init2 = new ContentValues();
-                                init2.put("id_magazine", id_magazine);
-                                init2.put("id_type", id_type.get(cur_type));
+                                init2.put("id_magazine", Long.valueOf(id_magazine));
+                                init2.put("id_type", id_type.get(cur_type.intValue()));
                                 init2.put("name", rss_item.getguid());
                                 init2.put("link", rss_item.getLink());
                                 init2.put("pubdate", rss_item.getPubDate());
                                 init2.put("title", rss_item.getTitle());
-                                init2.put("file", 0);
+                                init2.put("file", Integer.valueOf(0));
 
                                 database.insertWithOnConflict("files", null,
                                         init2, SQLiteDatabase.CONFLICT_IGNORE);
@@ -210,8 +210,8 @@ public class class_rss_jornals {
             return null;
         }
 
-        protected Integer img(String name, SimpleDateFormat format, Date date) {
-            Integer img = 0;
+        Integer img(String name, SimpleDateFormat format, Date date) {
+            Integer img = Integer.valueOf(0);
             if (prefs.getBoolean("downloads_img", true)) {
                 if (funct.ExternalStorageState()) {
                     File dir = new File(funct.get_dir_app() + "/img/jornals/");
@@ -222,7 +222,7 @@ public class class_rss_jornals {
                     if (!imgFile.exists()) {
                         Log.i("JWP_image", name + " - not found!");
                         String code_pub = "";
-                        switch (cur_pub) {
+                        switch (cur_pub.intValue()) {
                             case 0:
                                 code_pub = "w";
                                 break;
@@ -234,7 +234,7 @@ public class class_rss_jornals {
                                 break;
                         }
                         String url_str = URL_IMG;
-                        if (cur_pub == 1) url_str = url_str.replace("{code_pub_shot}", "w");
+                        if (cur_pub.intValue() == 1) url_str = url_str.replace("{code_pub_shot}", "w");
                         else
                             url_str = url_str.replace("{code_pub_shot}", code_pub);
                         url_str = url_str.replace("{code_pub}", code_pub);
@@ -242,7 +242,7 @@ public class class_rss_jornals {
                         format.applyPattern("yy");
                         url_str = url_str.replace("{YY}",
                                 format.format(date));
-                        if (cur_pub == 2)
+                        if (cur_pub.intValue() == 2)
                             format.applyPattern("yyyyMM");
                         else
                             format.applyPattern("yyyyMMdd");
@@ -252,12 +252,12 @@ public class class_rss_jornals {
                         if (funct.load_img(dir.getAbsolutePath(), name, url_str)) {
                             Log.i("JWP_image", name
                                     + " - file download complete!");
-                            img = 1;
-                        } else img = 0;
+                            img = Integer.valueOf(1);
+                        } else img = Integer.valueOf(0);
 
                     } else {
                         Log.i("JWP_image", name + " - found!");
-                        img = 1;
+                        img = Integer.valueOf(1);
                     }
                 }
             }
@@ -275,7 +275,7 @@ public class class_rss_jornals {
             } catch (final Exception e) {
                 // Handle or log or ignore
             } finally {
-                dialog = null;
+                //dialog = null;
                 Log.d("JWP", "onPostExecute+");
                 handler.sendEmptyMessage(1);
             }
