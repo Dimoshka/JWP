@@ -152,7 +152,7 @@ public class class_widget_factory implements RemoteViewsService.RemoteViewsFacto
 
     @Override
     public void onDataSetChanged() {
-        cursor = database.rawQuery("select * from news where news.id_lang='" + id_lng + "' order by pubdate desc, news._id asc limit 0, 5", null);
+        cursor = database.rawQuery("select * from news where news.id_lang='" + id_lng + "' order by news._id desc limit 0, 5", null);
     }
 
     @Override

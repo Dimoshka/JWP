@@ -16,6 +16,9 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -30,14 +33,13 @@ import com.google.analytics.tracking.android.EasyTracker;
 
 import java.io.File;
 
-import ua.pp.dimoshka.classes.class_player_adapter;
 import ua.pp.dimoshka.classes.class_functions;
 import ua.pp.dimoshka.classes.class_mediaplayer;
-import ua.pp.dimoshka.classes.class_news_adapter;
+import ua.pp.dimoshka.classes.class_player_adapter;
 import ua.pp.dimoshka.classes.class_sqlite;
 import ua.pp.dimoshka.classes.service_downloads_files;
 
-public class player extends FragmentActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+public class player extends ActionBarActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private ImageButton buttonPlayStop = null;
     private SeekBar seekBar = null;
@@ -72,7 +74,10 @@ public class player extends FragmentActivity implements LoaderManager.LoaderCall
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.player);
-        //ActionBar actionBar = getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle(R.string.app_name_shot);
+        actionBar.setSubtitle(R.string.player);
+
         Bundle extras = getIntent().getExtras();
         id_magazine = extras.getInt("id_magazine");
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -148,7 +153,7 @@ public class player extends FragmentActivity implements LoaderManager.LoaderCall
 
     private void play(Integer position) {
         buttonPlayStop.setEnabled(false);
-        Cursor cursor = ((class_news_adapter) listView.getAdapter()).getCursor();
+        Cursor cursor = ((class_player_adapter) listView.getAdapter()).getCursor();
         cursor.moveToPosition(position);
 
         String name = cursor.getString(cursor
@@ -287,6 +292,9 @@ public class player extends FragmentActivity implements LoaderManager.LoaderCall
             case R.id.item0:
                 System.exit(0);
                 break;
+            case R.id.item2:
+                load_all_file();
+                break;
             case R.id.item1:
                 Intent i = new Intent(this, preferences.class);
                 startActivity(i);
@@ -299,6 +307,29 @@ public class player extends FragmentActivity implements LoaderManager.LoaderCall
         }
         return false;
     }
+
+
+    private void load_all_file() {
+        Cursor cursor = ((class_player_adapter) listView.getAdapter()).getCursor();
+        cursor.moveToFirst();
+        for (int i = 0; i < cursor.getCount(); i++) {
+            String name = cursor.getString(cursor
+                    .getColumnIndex("name"));
+            String link = cursor.getString(cursor
+                    .getColumnIndex("link"));
+            int file_enable = cursor.getInt(cursor
+                    .getColumnIndex("file"));
+            File file = new File(funct.get_dir_app()
+                    + "/downloads/" + name);
+            if (!file.exists()) {
+                if (file_enable == 1)
+                    funct.update_file_isn(database, name, 0);
+                start_download(link, file);
+            }
+            cursor.moveToNext();
+        }
+    }
+
 
     protected void onDestroy() {
         super.onDestroy();

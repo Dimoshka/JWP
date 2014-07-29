@@ -169,7 +169,7 @@ public class class_rss_news {
                 }
 
                 for (int i = items_news.size(); i > 0; i--) {
-                    ArrayList<String> items = items_news.get(i-1);
+                    ArrayList<String> items = items_news.get(i - 1);
                     long id_news;
                     ContentValues init = new ContentValues();
                     init.put("id_lang", items.get(0));
@@ -226,15 +226,23 @@ public class class_rss_news {
 
         @Override
         protected void onPostExecute(Void result) {
-            if (dialog != null)
-                dialog.dismiss();
-            Log.d("JWP", "onPostExecute+");
-            if (is_activity) {
-                handler.sendEmptyMessage(1);
-            } else {
-                update_widget();
+            try {
+                if ((dialog != null) && dialog.isShowing()) {
+                    dialog.dismiss();
+                }
+            } catch (final IllegalArgumentException e) {
+                // Handle or log or ignore
+            } catch (final Exception e) {
+                // Handle or log or ignore
+            } finally {
+                dialog = null;
+                Log.d("JWP", "onPostExecute+");
+                if (is_activity) {
+                    handler.sendEmptyMessage(1);
+                } else {
+                    update_widget();
+                }
             }
-
         }
 
         @Override

@@ -15,6 +15,9 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.view.View;
 import android.widget.ListView;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+
 import ua.pp.dimoshka.classes.class_books_brochures_adapter;
 
 public class books_brochures extends ListFragment implements LoaderManager.LoaderCallbacks<Cursor> {
@@ -59,7 +62,13 @@ public class books_brochures extends ListFragment implements LoaderManager.Loade
     public void refresh() {
         try {
             if (isAdded()) {
-                getLoaderManager().restartLoader(0, null, this);
+                //getLoaderManager().restartLoader(0, null, this);
+
+
+                Document doc = Jsoup.connect("http://example.com/").get();
+                String title = doc.title();
+
+
             }
         } catch (Exception e) {
             main.funct.send_bug_report(e);

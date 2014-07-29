@@ -266,10 +266,19 @@ public class class_rss_jornals {
 
         @Override
         protected void onPostExecute(Void result) {
-            if (dialog != null)
-                dialog.dismiss();
-            Log.d("JWP", "onPostExecute+");
-            handler.sendEmptyMessage(1);
+            try {
+                if ((dialog != null) && dialog.isShowing()) {
+                    dialog.dismiss();
+                }
+            } catch (final IllegalArgumentException e) {
+                // Handle or log or ignore
+            } catch (final Exception e) {
+                // Handle or log or ignore
+            } finally {
+                dialog = null;
+                Log.d("JWP", "onPostExecute+");
+                handler.sendEmptyMessage(1);
+            }
         }
 
         @Override

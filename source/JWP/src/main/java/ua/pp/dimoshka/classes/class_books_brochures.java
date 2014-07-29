@@ -282,13 +282,23 @@ public class class_books_brochures {
 
         @Override
         protected void onPostExecute(Void result) {
-            if (dialog != null)
-                dialog.dismiss();
-            if (cursor != null && !cursor.isClosed()) {
-                cursor.close();
+            try {
+                if ((dialog != null) && dialog.isShowing()) {
+                    dialog.dismiss();
+                }
+                if (cursor != null && !cursor.isClosed()) {
+                    cursor.close();
+                }
+            } catch (final IllegalArgumentException e) {
+                // Handle or log or ignore
+            } catch (final Exception e) {
+                // Handle or log or ignore
+            } finally {
+                dialog = null;
+                cursor = null;
+                Log.d("JWP", "onPostExecute+");
+                handler.sendEmptyMessage(1);
             }
-            Log.d("JWP", "onPostExecute+");
-            handler.sendEmptyMessage(1);
         }
 
         @Override
