@@ -6,12 +6,14 @@ import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
 import android.util.Log;
 
 import java.io.File;
+import java.sql.SQLDataException;
 
 import ua.pp.dimoshka.jwp.R;
 
@@ -125,6 +127,7 @@ public class class_books_brochures {
                 //database.beginTransaction();
                 Log.d("JWP_sql", "start add in magazine");
                 // -- INSERT: Books and brochures
+
                 database.execSQL("INSERT INTO [magazine] ([_id], [name], [title], [id_pub], [id_lang], [img], [link_img], [date]) VALUES (1, 'pc_U', 'Прочный мир и счастье. Как их найти', 4, '3', 0, 'http://www.jw.org/assets/a/pc/pc_U/pc_U_md.jpg', '20131225');");
                 database.execSQL("INSERT INTO [magazine] ([_id], [name], [title], [id_pub], [id_lang], [img], [link_img], [date]) VALUES (2, 'ca14_U', 'Календарь Свидетелей Иеговы 2014', 4, '3', 0, 'http://assets.jw.org/assets/a/ca14/ca14_U/ca14_U_md.jpg', '20131225');");
                 database.execSQL("INSERT INTO [magazine] ([_id], [name], [title], [id_pub], [id_lang], [img], [link_img], [date]) VALUES (3, 'es14_U', 'Исследовать Писания каждый день 2014', 4, '3', 0, 'http://assets.jw.org/assets/a/es14/es14_U/es14_U_md.jpg', '20131225');");
@@ -274,6 +277,7 @@ public class class_books_brochures {
                 Log.d("JWP_sql", "end add in files");
                 //database.endTransaction();
                 Log.d("JWP_sql", "end add Books and brochures");
+            } catch (SQLiteException e) {
 
             } catch (Exception e) {
                 funct.send_bug_report(e);
