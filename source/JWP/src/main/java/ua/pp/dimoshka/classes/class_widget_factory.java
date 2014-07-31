@@ -91,12 +91,12 @@ public class class_widget_factory implements RemoteViewsService.RemoteViewsFacto
         cursor.moveToPosition(position);
 
         RemoteViews view = new RemoteViews(context.getPackageName(),
-                R.layout.list_items_news_img);
+                R.layout.list_items_news);
         Boolean img = Boolean.valueOf(cursor.getInt(cursor.getColumnIndex("img")) != 0);
        /*
         if (img) {
             view = new RemoteViews(context.getPackageName(),
-                    R.layout.list_items_news_img);
+                    R.layout.list_items_news);
         } else {
             view = new RemoteViews(context.getPackageName(),
                     R.layout.list_items_news_noimg);

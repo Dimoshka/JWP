@@ -14,9 +14,10 @@ import android.widget.ImageView;
 import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxStatus;
 import com.androidquery.callback.BitmapAjaxCallback;
-import ua.pp.dimoshka.jwp.R;
 
 import java.io.File;
+
+import ua.pp.dimoshka.jwp.R;
 
 public class class_news_adapter extends SimpleCursorAdapter {
     private class_functions funct;
@@ -25,7 +26,7 @@ public class class_news_adapter extends SimpleCursorAdapter {
     public class_news_adapter(Context context,
                               String[] from, int[] to,
                               SQLiteDatabase database, class_functions funct) {
-        super(context, R.layout.list_items_news_img, null, from, to, 0);
+        super(context, R.layout.list_items_news, null, from, to, 0);
         this.database = database;
         this.funct = funct;
     }
@@ -46,36 +47,40 @@ public class class_news_adapter extends SimpleCursorAdapter {
             aq.id(R.id.date).text(pubdate);
 
             if (img.booleanValue()) {
-                File imgFile = new File(funct.get_dir_app() + "/img/news/"
-                        + _id + ".jpg");
-                if (imgFile.exists()) {
-                    aq.id(R.id.img).image(imgFile, false, 78, new BitmapAjaxCallback() {
-                        @Override
-                        public void callback(String url, ImageView iv, Bitmap bm, AjaxStatus status) {
-                            iv.setImageBitmap(bm);
-                        }
-                    });
+                if (funct.ExternalStorageState()) {
+                    File imgFile = new File(funct.get_dir_app() + "/img/news/"
+                            + _id + ".jpg");
+                    if (imgFile.exists()) {
+                        aq.id(R.id.img).image(imgFile, false, 78, new BitmapAjaxCallback() {
+                            @Override
+                            public void callback(String url, ImageView iv, Bitmap bm, AjaxStatus status) {
+                                iv.setImageBitmap(bm);
+                            }
+                        });
+                    } else {
+                        aq.id(R.id.img).image(R.drawable.ic_noimages);
+                        ContentValues initialValues = new ContentValues();
+                        initialValues.put("img", "0");
+                        database.update("news", initialValues, "_id=?",
+                                new String[]{_id.toString()});
+                    }
                 } else {
                     aq.id(R.id.img).image(R.drawable.ic_noimages);
-                    ContentValues initialValues = new ContentValues();
-                    initialValues.put("img", "0");
-                    database.update("news", initialValues, "_id=?",
-                            new String[]{_id.toString()});
                 }
+            } else {
+                //aq.id(R.id.img).image(R.drawable.ic_noimages);
             }
         } catch (Exception e) {
             funct.send_bug_report(e);
         }
     }
 
-
     @Override
     public View newView(Context context, Cursor c, ViewGroup parent) {
         final LayoutInflater inflater = LayoutInflater.from(context);
-
         Boolean img = Boolean.valueOf(c.getInt(c.getColumnIndex("img")) != 0);
         if (img.booleanValue()) {
-            return inflater.inflate(R.layout.list_items_news_img, parent, false);
+            return inflater.inflate(R.layout.list_items_news, parent, false);
         } else {
             return inflater.inflate(R.layout.list_items_news_noimg, parent, false);
         }

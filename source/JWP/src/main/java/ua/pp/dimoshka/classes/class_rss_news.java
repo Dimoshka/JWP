@@ -106,6 +106,7 @@ public class class_rss_news {
                 for (Iterator<class_rss_item> iterator = rss_list.iterator(); iterator.hasNext(); ) {
                     class_rss_item aRss_list = iterator.next();
 
+
                     if (isCancelled()) {
                         int currentapiVersion = Build.VERSION.SDK_INT;
                         if (currentapiVersion >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
@@ -125,7 +126,6 @@ public class class_rss_news {
                     String link = rss_item.getLink();
                     String description = rss_item.getDescription();
                     String pubdate = rss_item.getPubDate();
-
                     DateFormat format = new SimpleDateFormat(
                             "yyyy-MM-dd HH:mm:ss", Locale.getDefault());
                     Date date = funct.get_string_to_date(pubdate,
@@ -209,9 +209,9 @@ public class class_rss_news {
                         File imgFile = new File(dir.getAbsolutePath() + name
                                 + ".jpg");
                         if (!imgFile.exists()) {
-                            Log.i("JWP_image", name + " - no found!");
+                            Log.d("JWP_image", name + " - no found!");
                             if (funct.load_img(dir.getAbsolutePath(), name, link_img)) {
-                                Log.i("JWP_image", name
+                                Log.d("JWP_image", name
                                         + " - file download complete!");
                                 img = 1;
                             }

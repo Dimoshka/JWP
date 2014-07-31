@@ -14,11 +14,12 @@ import android.widget.ImageView;
 import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxStatus;
 import com.androidquery.callback.BitmapAjaxCallback;
-import ua.pp.dimoshka.jwp.R;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import ua.pp.dimoshka.jwp.R;
 
 public class class_jornals_adapter extends SimpleCursorAdapter {
 
@@ -53,23 +54,27 @@ public class class_jornals_adapter extends SimpleCursorAdapter {
             aq.id(R.id.text).text(name);
 
             if (img.booleanValue()) {
-                File imgFile = new File(funct.get_dir_app() + "/img/jornals/"
-                        + name + ".jpg");
+                if (funct.ExternalStorageState()) {
+                    File imgFile = new File(funct.get_dir_app() + "/img/jornals/"
+                            + name + ".jpg");
 
-                if (imgFile.exists()) {
-                    aq.id(R.id.img).image(imgFile, false, 78, new BitmapAjaxCallback() {
-                        @Override
-                        public void callback(String url, ImageView iv, Bitmap bm, AjaxStatus status) {
-                            iv.setImageBitmap(bm);
-                        }
-                    });
+                    if (imgFile.exists()) {
+                        aq.id(R.id.img).image(imgFile, false, 78, new BitmapAjaxCallback() {
+                            @Override
+                            public void callback(String url, ImageView iv, Bitmap bm, AjaxStatus status) {
+                                iv.setImageBitmap(bm);
+                            }
+                        });
+                    } else {
+                        aq.id(R.id.img).image(R.drawable.ic_noimages);
+
+                        ContentValues initialValues = new ContentValues();
+                        initialValues.put("img", "0");
+                        database.update("magazine", initialValues, "_id=?",
+                                new String[]{_id.toString()});
+                    }
                 } else {
                     aq.id(R.id.img).image(R.drawable.ic_noimages);
-
-                    ContentValues initialValues = new ContentValues();
-                    initialValues.put("img", "0");
-                    database.update("magazine", initialValues, "_id=?",
-                            new String[]{_id.toString()});
                 }
             } else {
                 aq.id(R.id.img).image(R.drawable.ic_noimages);
