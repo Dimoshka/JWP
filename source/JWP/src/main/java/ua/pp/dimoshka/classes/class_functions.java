@@ -135,14 +135,13 @@ public class class_functions {
     public boolean load_img(String dir, String name, String link_img) {
         if (isNetworkAvailable()) {
             try {
-                URL url = new URL(link_img);
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                HttpURLConnection.setFollowRedirects(false);
+                HttpURLConnection connection = (HttpURLConnection) new URL(link_img).openConnection();
+                connection.setRequestProperty("Accept-Encoding", "");
+                connection.setConnectTimeout(5000);
                 try {
-                    //connection.setDoInput(true);
-                    //connection.connect();
                     InputStream is = connection.getInputStream();
-                    int statusCode = connection.getResponseCode();
-                    if (statusCode == 200) {
+                    if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
                         BufferedInputStream bis = new BufferedInputStream(is);
                         ByteArrayBuffer baf = new ByteArrayBuffer(
                                 5000);
@@ -158,11 +157,11 @@ public class class_functions {
                         fos.close();
                         return true;
                     } else return false;
+                } catch (java.net.SocketTimeoutException e) {
+                    return false;
                 } catch (UnknownHostException e) {
-                    Log.d("JWP", "Not file - " + link_img);
                     return false;
                 } catch (FileNotFoundException e) {
-                    Log.d("JWP", "Not file - " + link_img);
                     return false;
                 } catch (Exception e) {
                     send_bug_report(e);

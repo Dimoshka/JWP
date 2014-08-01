@@ -60,8 +60,6 @@ public class books_brochures extends ListFragment implements LoaderManager.Loade
         try {
             if (isAdded()) {
                 getLoaderManager().restartLoader(0, null, this);
-                // Document doc = Jsoup.connect("http://example.com/").get();
-                //String title = doc.title();
             }
         } catch (Exception e) {
             main.funct.send_bug_report(e);

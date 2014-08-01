@@ -13,6 +13,7 @@ import org.xmlpull.v1.XmlPullParser;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -37,72 +38,84 @@ public class class_rss_provider {
 
     public List<class_rss_item> parse(String rssFeed) {
         List<class_rss_item> list = new ArrayList<class_rss_item>();
-        XmlPullParser parser = Xml.newPullParser();
-        if (funct.isNetworkAvailable()) {
-
-            InputStream stream = null;
-            try {
-                stream = new URL(rssFeed).openConnection().getInputStream();
-                parser.setInput(stream, null);
-
-                int eventType = parser.getEventType();
-                boolean done = false;
-                class_rss_item item = null;
-                while (eventType != XmlPullParser.END_DOCUMENT && !done) {
-                    String name;
-                    switch (eventType) {
-                        case XmlPullParser.START_DOCUMENT:
-                            break;
-                        case XmlPullParser.START_TAG:
-                            name = parser.getName();
-                            if (name.equalsIgnoreCase(ITEM)) {
-                                Log.d("new item", "Create new item");
-                                item = new class_rss_item();
-                            } else if (item != null) {
-                                if (name.equalsIgnoreCase(LINK)) {
-                                    Log.d("Attribute", LINK);
-                                    item.setLink(parser.nextText());
-                                } else if (name.equalsIgnoreCase(DESCRIPTION)) {
-                                    Log.d("Attribute", DESCRIPTION);
-                                    item.setDescription(parser.nextText().trim());
-                                } else if (name.equalsIgnoreCase(PUB_DATE)) {
-                                    Log.d("Attribute", PUB_DATE);
-                                    item.setPubDate(parser.nextText());
-                                } else if (name.equalsIgnoreCase(TITLE)) {
-                                    Log.d("Attribute", TITLE);
-                                    item.setTitle(parser.nextText().trim());
-                                } else if (name.equalsIgnoreCase(GUID)) {
-                                    Log.d("Attribute", GUID);
-                                    item.setguid(parser.nextText().trim());
-                                }
+        try {
+            XmlPullParser parser = Xml.newPullParser();
+            if (funct.isNetworkAvailable()) {
+                HttpURLConnection.setFollowRedirects(false);
+                HttpURLConnection connection = (HttpURLConnection) new URL(rssFeed).openConnection();
+                connection.setRequestProperty("Accept-Encoding", "");
+                connection.setConnectTimeout(5000);
+                InputStream stream = null;
+                try {
+                    if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                        stream = connection.getInputStream();
+                        parser.setInput(stream, null);
+                        int eventType = parser.getEventType();
+                        boolean done = false;
+                        class_rss_item item = null;
+                        while (eventType != XmlPullParser.END_DOCUMENT && !done) {
+                            String name;
+                            switch (eventType) {
+                                case XmlPullParser.START_DOCUMENT:
+                                    break;
+                                case XmlPullParser.START_TAG:
+                                    name = parser.getName();
+                                    if (name.equalsIgnoreCase(ITEM)) {
+                                        Log.d("new item", "Create new item");
+                                        item = new class_rss_item();
+                                    } else if (item != null) {
+                                        if (name.equalsIgnoreCase(LINK)) {
+                                            Log.d("Attribute", LINK);
+                                            item.setLink(parser.nextText());
+                                        } else if (name.equalsIgnoreCase(DESCRIPTION)) {
+                                            Log.d("Attribute", DESCRIPTION);
+                                            item.setDescription(parser.nextText().trim());
+                                        } else if (name.equalsIgnoreCase(PUB_DATE)) {
+                                            Log.d("Attribute", PUB_DATE);
+                                            item.setPubDate(parser.nextText());
+                                        } else if (name.equalsIgnoreCase(TITLE)) {
+                                            Log.d("Attribute", TITLE);
+                                            item.setTitle(parser.nextText().trim());
+                                        } else if (name.equalsIgnoreCase(GUID)) {
+                                            Log.d("Attribute", GUID);
+                                            item.setguid(parser.nextText().trim());
+                                        }
+                                    }
+                                    break;
+                                case XmlPullParser.END_TAG:
+                                    name = parser.getName();
+                                    Log.d("End tag", name);
+                                    if (name.equalsIgnoreCase(ITEM) && item != null) {
+                                        Log.d("Added", item.toString());
+                                        list.add(item);
+                                    } else if (name.equalsIgnoreCase(CHANNEL)) {
+                                        done = true;
+                                    }
+                                    break;
                             }
-                            break;
-                        case XmlPullParser.END_TAG:
-                            name = parser.getName();
-                            Log.d("End tag", name);
-                            if (name.equalsIgnoreCase(ITEM) && item != null) {
-                                Log.d("Added", item.toString());
-                                list.add(item);
-                            } else if (name.equalsIgnoreCase(CHANNEL)) {
-                                done = true;
-                            }
-                            break;
+                            eventType = parser.next();
+                        }
                     }
-                    eventType = parser.next();
-                }
-            } catch (UnknownHostException e) {
-                return list;
-            } catch (Exception e) {
-                funct.send_bug_report(e);
-            } finally {
-                if (stream != null) {
-                    try {
-                        stream.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                } catch (java.net.SocketTimeoutException e) {
+
+                } catch (UnknownHostException e) {
+
+                } catch (Exception e) {
+                    funct.send_bug_report(e);
+                } finally {
+                    if (stream != null) {
+                        try {
+                            stream.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
+                    connection.disconnect();
                 }
             }
+
+        } catch (Exception e) {
+            funct.send_bug_report(e);
         }
         return list;
     }

@@ -177,7 +177,7 @@ public class class_rss_jornals {
                                 } else {
                                     ContentValues init1 = new ContentValues();
                                     init1.put("name", name);
-                                    init1.put("name", name);
+                                    init1.put("title", name);
                                     init1.put("id_pub", id_pub.get(cur_pub.intValue()));
                                     init1.put("id_lang", main.id_lng);
                                     init1.put("img", img);

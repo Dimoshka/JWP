@@ -60,7 +60,8 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
     private Boolean refresh_all = Boolean.FALSE;
 
     public static Integer id_lng = Integer.valueOf(1);
-    public static String ln_prefix = "en/news";
+    public static String news_prefix = "en/news";
+    public static String books_brochures_prefix = "en/publications";
     public static String code_lng = "E";
 
     private List<Fragment> fragment_list = new Vector<Fragment>();
@@ -225,11 +226,14 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
                                     cursor.getString(cursor.getColumnIndex("_id")))
                             .apply();
                     id_lng = Integer.valueOf(cursor.getInt(cursor.getColumnIndex("_id")));
-                    ln_prefix = cursor.getString(cursor.getColumnIndex("news_rss"));
+                    news_prefix = cursor.getString(cursor.getColumnIndex("news_rss"));
                     code_lng = cursor.getString(cursor.getColumnIndex("code"));
+                    books_brochures_prefix = cursor.getString(cursor.getColumnIndex("books_brochures_link"));
+
                 } else {
                     id_lng = Integer.valueOf(1);
-                    ln_prefix = "en/news";
+                    news_prefix = "en/news";
+                    books_brochures_prefix = "en/publications";
                     code_lng = "E";
                 }
             } else {
@@ -237,11 +241,13 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
                 cursor.moveToFirst();
                 if (cursor.getCount() > 0) {
                     id_lng = Integer.valueOf(cursor.getInt(cursor.getColumnIndex("_id")));
-                    ln_prefix = cursor.getString(cursor.getColumnIndex("news_rss"));
+                    news_prefix = cursor.getString(cursor.getColumnIndex("news_rss"));
                     code_lng = cursor.getString(cursor.getColumnIndex("code"));
+                    books_brochures_prefix = cursor.getString(cursor.getColumnIndex("books_brochures_link"));
                 } else {
                     id_lng = Integer.valueOf(1);
-                    ln_prefix = "en/news";
+                    news_prefix = "en/news";
+                    books_brochures_prefix = "en/publications";
                     code_lng = "E";
                 }
             }

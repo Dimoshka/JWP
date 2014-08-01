@@ -1,36 +1,50 @@
 package ua.pp.dimoshka.classes;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
 import java.io.File;
-import java.sql.SQLDataException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
 import ua.pp.dimoshka.jwp.R;
+import ua.pp.dimoshka.jwp.main;
 
 public class class_books_brochures {
     private SQLiteDatabase database;
     private class_functions funct;
-    private Activity activity;
+    private Context context;
     private Cursor cursor = null;
     private Handler handler;
     private AsyncTask task = null;
+    private SharedPreferences prefs;
 
-    public class_books_brochures(Activity activity, Handler handler,
+    private static final String URL_SITE = "http://www.jw.org/";
+
+    public class_books_brochures(Context context, Handler handler,
                                  SQLiteDatabase database, class_functions funct) {
-        this.activity = activity;
+        this.context = context;
         this.handler = handler;
         this.database = database;
         this.funct = funct;
+        prefs = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
     public void verify_all_img() {
@@ -47,6 +61,95 @@ public class class_books_brochures {
         protected Void doInBackground(Void[] paramArrayOfVoid) {
             try {
                 if (funct.ExternalStorageState()) {
+
+
+                    Document doc = Jsoup.connect(URL_SITE + main.books_brochures_prefix).get();
+                    Log.e("BOOKS", doc.title());
+                    Elements pages = doc.getElementsByClass("pageNum");
+
+                    //Elements pages_a = pages.get(0).getElementsByTag("a");
+                    ArrayList<String> pages_list = new ArrayList();
+                    pages_list.add(URL_SITE + main.books_brochures_prefix);
+
+                    for (Element link : pages) {
+                        pages_list.add(URL_SITE + link.attr("href"));
+                        //Log.e("BOOKS", link.attr("href") + " " + link.text());
+                    }
+
+
+                    for (int i = 0; i < pages_list.size(); i++) {
+                        if (i != 0) {
+                            doc = Jsoup.connect(pages_list.get(i)).get();
+                        }
+                        Elements publications = doc.getElementsByClass("synopsis");
+
+
+                        for (Element link : publications) {
+
+                            String img_link = null;
+                            String title = null;
+                            String name = null;
+
+
+                            Elements img_el = link.getElementsByClass("hideObj");
+                            if (img_el.size() > 0) {
+                                img_link = URL_SITE + img_el.get(0).attr("data-src");
+                                String[] a = img_link.split("/");
+                                name = a[a.length - 1].replace("_xs.jpg", "").toString();
+
+                            } else continue;
+                            Elements publicationDesc = link.getElementsByClass("publicationDesc");
+                            if (publicationDesc.size() > 0) {
+                                Elements h3 = publicationDesc.get(0).getElementsByTag("h3");
+                                if (h3.size() > 0) {
+                                    title = funct.stripHtml(h3.text());
+                                } else continue;
+                            }
+
+                            Log.e("BOOKS", name + " - " + title);
+
+
+                            Cursor cur = database.rawQuery(
+                                    "select _id, img from magazine where `name` = '"
+                                            + name + "'", null
+                            );
+                            long id_magazine;
+                            Integer img = img(name, img_link);
+
+                            if (cur.getCount() > 0) {
+                                cur.moveToFirst();
+                                id_magazine = cur.getLong(cur
+                                        .getColumnIndex("_id"));
+                                if (img.intValue() != cur.getInt(cur
+                                        .getColumnIndex("img"))) {
+                                    ContentValues init = new ContentValues();
+                                    init.put("img", img);
+                                    Log.d("JWP_img", "update img to " + img.toString());
+                                    database.update("magazine", init, "_id=?",
+                                            new String[]{String.valueOf(id_magazine)});
+                                }
+                            } else {
+                                DateFormat dat_format = new SimpleDateFormat("yyyy-MM-dd");
+                                ContentValues init1 = new ContentValues();
+                                init1.put("name", name);
+                                init1.put("title", name);
+                                init1.put("id_pub", 4);
+                                init1.put("id_lang", main.id_lng);
+                                init1.put("img", img);
+                                init1.put("date", dat_format.format(new Date()));
+                                Log.d("JWP_rss", "date_ok = " + dat_format.format(new Date()));
+                                id_magazine = database.insert("magazine",
+                                        null, init1);
+                            }
+
+
+                        }
+                    }
+
+
+
+                    /*
+
                     cursor = database
                             .rawQuery(
                                     "select _id from magazine where id_pub='4';",
@@ -114,11 +217,40 @@ public class class_books_brochures {
                         }
                         cursor.moveToNext();
                     }
+                    */
                 }
             } catch (Exception e) {
                 funct.send_bug_report(e);
             }
             return null;
+        }
+
+
+        int img(String name, String link_img) {
+            int img = 0;
+            if (prefs.getBoolean("downloads_img", true)) {
+                if (funct.ExternalStorageState()) {
+                    File dir = new File(funct.get_dir_app() + "/img/books_brochures/");
+                    if (!dir.isDirectory()) {
+                        dir.mkdirs();
+                    }
+                    if (link_img.length() > 0) {
+                        File imgFile = new File(dir.getAbsolutePath() + name
+                                + ".jpg");
+                        if (!imgFile.exists()) {
+                            Log.d("JWP_image", name + " - no found!");
+                            if (funct.load_img(dir.getAbsolutePath(), name, link_img)) {
+                                Log.d("JWP_image", name
+                                        + " - file download complete!");
+                                img = 1;
+                            }
+                        } else {
+                            img = 1;
+                        }
+                    } else img = 0;
+                }
+            }
+            return img;
         }
 
         public void add_books_and_brochures() {
@@ -273,7 +405,7 @@ public class class_books_brochures {
                 database.execSQL("INSERT INTO [files] ([id_magazine], [id_type], [name], [link], [pubdate], [title], [file]) VALUES ('29', '2', 'bt_U.pdf', 'http://download.jw.org/files/media_books/18/bt_U.pdf', '20131226', '', 0);");
                 database.execSQL("INSERT INTO [files] ([id_magazine], [id_type], [name], [link], [pubdate], [title], [file]) VALUES ('30', '2', 'cf_U.pdf', 'http://download.jw.org/files/media_books/e0/cf_U.pdf', '20131226', '', 0);");
                 database.execSQL("INSERT INTO [files] ([id_magazine], [id_type], [name], [link], [pubdate], [title], [file]) VALUES ('30', '4', 'cf_U.m4b', 'http://download.jw.org/files/media_books/ca/cf_U.m4b', '20131226', '', 0);");
-                database.execSQL("INSERT INTO [files] ([id_magazine], [id_type], [name], [link], [pubdate], [title], [file]) VALUES ('31', '4', 'we_U.m4b', 'http://www.jw.org/download/?http://download.jw.org/files/media_books/31/we_U.m4b', '20131226', '', 0);");
+                database.execSQL("INSERT INTO [files] ([id_magazine], [id_type], [name], [link], [pubdate], [title], [file]) VALUES ('31', '4', 'we_U.m4b', 'http://download.jw.org/files/media_books/31/we_U.m4b', '20131226', '', 0);");
                 Log.d("JWP_sql", "end add in files");
                 //database.endTransaction();
                 Log.d("JWP_sql", "end add Books and brochures");
@@ -308,10 +440,10 @@ public class class_books_brochures {
         @Override
         protected void onPreExecute() {
             this.dialog = ProgressDialog
-                    .show(activity,
-                            activity.getResources().getString(
+                    .show(context,
+                            context.getResources().getString(
                                     R.string.books_brochures),
-                            activity.getResources().getString(
+                            context.getResources().getString(
                                     R.string.dialog_loaing_img), true, true, new DialogInterface.OnCancelListener() {
                                 public void onCancel(DialogInterface pd) {
                                     task.cancel(true);

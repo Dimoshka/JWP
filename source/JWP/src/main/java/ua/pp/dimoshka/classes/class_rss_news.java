@@ -98,7 +98,7 @@ public class class_rss_news {
         protected Void doInBackground(Void[] paramArrayOfVoid) {
             try {
                 class_rss_provider rssfeedprovider = new class_rss_provider(context, funct);
-                String feed = String.format(URL_FEED_NEW_IN_SITE, main.ln_prefix);
+                String feed = String.format(URL_FEED_NEW_IN_SITE, main.news_prefix);
                 Log.d("JWP-news", feed);
                 this.rss_list = rssfeedprovider.parse(feed);
                 ArrayList<ArrayList> items_news = new ArrayList();
