@@ -13,8 +13,8 @@ android {
     defaultConfig {
         targetSdkVersion 19
         minSdkVersion 11
-        versionCode 21
-        versionName "0.1"
+        versionCode 22
+        versionName "0.2"
     }
 
     signingConfigs {
@@ -22,14 +22,14 @@ android {
             keyAlias 'jwp'
             keyPassword 'Dimoshka9101'
             storeFile file('H:/Work/Android/Keystore/dimoshka.jks')
-            //storeFile file('/media/Dimoshka/Work/Android/Keystore/dimoshka.jks')
+            //storeFile file('/media/dimoshka/DIMOSHKA/Work/Android/Keystore/dimoshka.jks')
             storePassword 'Dimoshka9101'
         }
         debug {
             keyAlias 'debug'
             keyPassword '12345678'
             storeFile file('H:/Work/Android/Keystore/debug.jks')
-            //storeFile file('/media/Dimoshka/Work/Android/Keystore/debug.jks')
+            //storeFile file('/media/dimoshka/DIMOSHKA/Work/Android/Keystore/debug.jks')
             storePassword '12345678'
         }
     }

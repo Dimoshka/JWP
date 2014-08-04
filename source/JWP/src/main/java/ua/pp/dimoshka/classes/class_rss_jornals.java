@@ -18,15 +18,20 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import ua.pp.dimoshka.jwp.R;
 import ua.pp.dimoshka.jwp.main;
 
 public class class_rss_jornals {
-    private static final String URL_FEED = "http://www.jw.org/apps/index.xjp?option=sFFZRQVNZNT&rln=%s&rmn=%s&rfm=%s&rpf=&rpe=";
-    private static final String URL_IMG = "http://assets.jw.org/assets/a/{code_pub_shot}{YY}/{YYYYMMDD}/{code_pub_shot}{YY}_{YYYYMMDD}_{code_lng}/{code_pub}_{code_lng}_{YYYYMMDD}_md.jpg";
+
+
+    private static final String URL_FEED = "http://www.jw.org/apps/%s_sFFZRQVNZNT?rln=%s&rmn=%s&rfm=%s&rpf=&rpe=";
+    private static final String URL_IMG = "http://assets.jw.org/assets/a/{code_pub_shot}{YY}/{YYYYMMDD}/{code_pub_shot}{YY}_{YYYYMMDD}_{code_lng}/{code_pub}_{code_lng}_{YYYYMMDD}_xs.jpg";
+
 
     private SQLiteDatabase database;
     private class_functions funct;
@@ -60,7 +65,7 @@ public class class_rss_jornals {
     }
 
 
-    private void get_publication() {
+    void get_publication() {
         try {
             Cursor cursor_type = database.query("type", new String[]{"_id",
                     "code"}, null, null, null, null, "_id");
@@ -111,28 +116,37 @@ public class class_rss_jornals {
                         }
                         break;
                     }
+
+                    if (id_pub.get(a) != 1 && id_pub.get(a) != 2 && id_pub.get(a) != 3) continue;
+
+
                     for (int b = 0; b < id_type.size(); b++) {
                         Boolean load_pub = Boolean.FALSE;
                         String s = code_type.get(b);
+
+
                         if (s.equals("epub")) {
                             load_pub = Boolean.valueOf(prefs.getBoolean("rss_epub", false));
                         } else if (s.equals("pdf")) {
                             load_pub = Boolean.valueOf(prefs.getBoolean("rss_pdf", true));
+                        } else if (s.equals("mobi")) {
+                            load_pub = Boolean.valueOf(prefs.getBoolean("rss_mobi", false));
                         } else if (s.equals("mp3")) {
-                            load_pub = Boolean.valueOf(prefs.getBoolean("rss_mp3", true));
+                            load_pub = Boolean.valueOf(prefs.getBoolean("rss_mp3", false));
                         } else if (s.equals("m4b")) {
                             load_pub = Boolean.valueOf(prefs.getBoolean("rss_m4b", false));
-                        }
+                        } else continue;
 
                         if (load_pub.booleanValue()) {
-                            //Log.i("JWP_rss", "rss_" + code_type.get(b));
+
 
                             Integer cur_type = Integer.valueOf(b);
                             cur_pub = Integer.valueOf(a);
                             class_rss_provider rssfeedprovider = new class_rss_provider(context, funct);
-                            String feed = String.format(URL_FEED, main.code_lng,
+                            String feed = String.format(URL_FEED, main.code_lng, main.code_lng,
                                     code_pub.get(cur_pub.intValue()),
                                     code_type.get(cur_type.intValue()));
+
                             this.rss_list = rssfeedprovider.parse(feed);
 
                             for (Iterator<class_rss_item> iterator = rss_list.iterator(); iterator.hasNext(); ) {
@@ -234,7 +248,8 @@ public class class_rss_jornals {
                                 break;
                         }
                         String url_str = URL_IMG;
-                        if (cur_pub.intValue() == 1) url_str = url_str.replace("{code_pub_shot}", "w");
+                        if (cur_pub.intValue() == 1)
+                            url_str = url_str.replace("{code_pub_shot}", "w");
                         else
                             url_str = url_str.replace("{code_pub_shot}", code_pub);
                         url_str = url_str.replace("{code_pub}", code_pub);

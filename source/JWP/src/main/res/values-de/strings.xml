@@ -47,6 +47,8 @@ Das Programm arbeitet als RSS-Client."</string>
     <string name="rss_pdf_summary">"Legen Sie RSS-Feed PDF-Format"</string>
     <string name="rss_epub">"RSS - EPUB"</string>
     <string name="rss_epub_summary">"Legen Sie RSS-Feed EPUB-Format"</string>
+    <string name="rss_mobi">"RSS - MOBI"</string>
+    <string name="rss_mobi_summary">"Legen Sie RSS-Feed MOBI-Format"</string>
     <string name="rss_mp3">"RSS - MP3"</string>
     <string name="rss_mp3_summary">"RSS-Feed Upload MP3-Format"</string>
     <string name="rss_aac">"RSS - AAC"</string>

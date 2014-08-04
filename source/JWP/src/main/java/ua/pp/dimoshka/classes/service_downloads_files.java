@@ -22,7 +22,6 @@ import java.io.FileOutputStream;
 import java.net.HttpURLConnection;
 import java.net.SocketTimeoutException;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -214,18 +213,6 @@ public class service_downloads_files extends Service {
             total_file = get_targetFiles_num();
         }
 
-        public int getFileSizeAtURL(URL url) {
-            int filesize = -1;
-            try {
-                HttpURLConnection http = (HttpURLConnection) url
-                        .openConnection();
-                filesize = http.getContentLength();
-                http.disconnect();
-            } catch (Exception e) {
-                return filesize;
-            }
-            return filesize;
-        }
 
         @Override
         protected Void doInBackground(Void[] params) {
@@ -254,18 +241,38 @@ public class service_downloads_files extends Service {
                         if (!localFile.exists()) {
                             if (isCancelled())
                                 return null;
-                            URL url = new URL(remoteFilepath);
-                            int filesize = getFileSizeAtURL(url);
+
+
+                            int filesize = -1;
+
+                            HttpURLConnection.setFollowRedirects(false);
+                            HttpURLConnection connection = (HttpURLConnection) new URL(remoteFilepath).openConnection();
+                            connection.setRequestProperty("Accept-Encoding", "");
+                            connection.setConnectTimeout(7000);
+                            connection.setReadTimeout(7000);
+
+                            try {
+                                filesize = connection.getContentLength();
+                            } catch (Exception e) {
+
+                            }
+
+                            Log.e("SIZE", connection.getResponseMessage() + "-");
+
                             int loopCount = 0;
                             if (filesize > 0) {
-                                URLConnection connection = url.openConnection();
-                                connection
-                                        .setConnectTimeout(7000);
-                                connection.setReadTimeout(7000);
+
                                 BufferedInputStream bis = new BufferedInputStream(
                                         connection.getInputStream());
                                 FileOutputStream fos = new FileOutputStream(
                                         tempFile);
+
+
+                                if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+
+                                }
+
+
                                 int bytesRead, totalBytesRead = 0;
                                 byte[] bytes = new byte[BYTES_BUFFER_SIZE];
                                 // String progress, kbytes;
@@ -305,7 +312,7 @@ public class service_downloads_files extends Service {
                                 if (isCancelled())
                                     return null;
                             } else {
-                                Log.i("JWP" + getClass().getName(),
+                                Log.e("JWP" + getClass().getName(),
                                         "file size unknown for remote file: "
                                                 + remoteFilepath
                                 );
@@ -323,6 +330,7 @@ public class service_downloads_files extends Service {
                             }
                         }
                         success = now_targetFile + 1;
+
                     } catch (SocketTimeoutException e) {
                         showNotification_popup(
                                 getString(R.string.download_failed),

@@ -47,6 +47,8 @@ Le programme fonctionne comme client RSS."</string>
     <string name="rss_pdf_summary">"Chargez Flux RSS au format PDF"</string>
     <string name="rss_epub">"RSS - EPUB"</string>
     <string name="rss_epub_summary">"Chargez le format EPUB Flux RSS"</string>
+    <string name="rss_mobi">"RSS - MOBI"</string>
+    <string name="rss_mobi_summary">"Chargez le format MOBI Flux RSS"</string>
     <string name="rss_mp3">"RSS - MP3"</string>
     <string name="rss_mp3_summary">"Flux RSS téléchargement format MP3"</string>
     <string name="rss_aac">"RSS - AAC"</string>

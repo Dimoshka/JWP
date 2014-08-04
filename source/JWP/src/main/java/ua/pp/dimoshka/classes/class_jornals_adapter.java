@@ -82,6 +82,7 @@ public class class_jornals_adapter extends SimpleCursorAdapter {
 
             aq.id(R.id.epub).image(R.drawable.ic_none_type);
             aq.id(R.id.pdf).image(R.drawable.ic_none_type);
+            aq.id(R.id.mobi).image(R.drawable.ic_none_type);
             aq.id(R.id.mp3).image(R.drawable.ic_none_type);
             aq.id(R.id.aac).image(R.drawable.ic_none_type);
 
@@ -111,6 +112,12 @@ public class class_jornals_adapter extends SimpleCursorAdapter {
                             aq.id(R.id.aac).image(R.drawable.ic_aac_1);
                         else
                             aq.id(R.id.aac).image(R.drawable.ic_aac_0);
+                        break;
+                    case 6:
+                        if (file_isn.booleanValue())
+                            aq.id(R.id.mobi).image(R.drawable.ic_mobi_1);
+                        else
+                            aq.id(R.id.mobi).image(R.drawable.ic_mobi_0);
                         break;
                     default:
                         break;

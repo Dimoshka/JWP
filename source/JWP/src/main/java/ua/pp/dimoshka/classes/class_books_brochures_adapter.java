@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.support.v4.widget.SimpleCursorAdapter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,9 +46,12 @@ public class class_books_brochures_adapter extends SimpleCursorAdapter {
             String name = c.getString(c.getColumnIndex("name"));
             String title = c.getString(c.getColumnIndex("title"));
 
-            String[] id_type_files = c.getString(c.getColumnIndex("id_type_files")).split(",");
-            String[] file_files = c.getString(c.getColumnIndex("file_files")).split(",");
-
+            String[] id_type_files = null;
+            String[] file_files = null;
+            if (!c.isNull(c.getColumnIndex("id_type_files")) && !c.isNull(c.getColumnIndex("file_files"))) {
+                id_type_files = c.getString(c.getColumnIndex("id_type_files")).split(",");
+                file_files = c.getString(c.getColumnIndex("file_files")).split(",");
+            }
 
             aq.id(R.id.title).text(title);
 
@@ -78,39 +82,47 @@ public class class_books_brochures_adapter extends SimpleCursorAdapter {
 
             aq.id(R.id.epub).image(R.drawable.ic_none_type);
             aq.id(R.id.pdf).image(R.drawable.ic_none_type);
+            aq.id(R.id.mobi).image(R.drawable.ic_none_type);
             aq.id(R.id.mp3).image(R.drawable.ic_none_type);
             aq.id(R.id.aac).image(R.drawable.ic_none_type);
 
-
-            for (int i = 0; i < id_type_files.length; i++) {
-                Boolean file_isn = Boolean.valueOf(Integer.parseInt(file_files[i]) != 0);
-                switch (Integer.parseInt(id_type_files[i])) {
-                    case 1:
-                        if (file_isn.booleanValue())
-                            aq.id(R.id.epub).image(R.drawable.ic_epub_1);
-                        else
-                            aq.id(R.id.epub).image(R.drawable.ic_epub_0);
-                        break;
-                    case 2:
-                        if (file_isn.booleanValue())
-                            aq.id(R.id.pdf).image(R.drawable.ic_pdf_1);
-                        else
-                            aq.id(R.id.pdf).image(R.drawable.ic_pdf_0);
-                        break;
-                    case 3:
-                        if (file_isn.booleanValue())
-                            aq.id(R.id.mp3).image(R.drawable.ic_mp3_1);
-                        else
-                            aq.id(R.id.mp3).image(R.drawable.ic_mp3_0);
-                        break;
-                    case 4:
-                        if (file_isn.booleanValue())
-                            aq.id(R.id.aac).image(R.drawable.ic_aac_1);
-                        else
-                            aq.id(R.id.aac).image(R.drawable.ic_aac_0);
-                        break;
-                    default:
-                        break;
+            if (id_type_files!=null) {
+                for (int i = 0; i < id_type_files.length; i++) {
+                    Boolean file_isn = Boolean.valueOf(Integer.parseInt(file_files[i]) != 0);
+                    switch (Integer.parseInt(id_type_files[i])) {
+                        case 1:
+                            if (file_isn.booleanValue())
+                                aq.id(R.id.epub).image(R.drawable.ic_epub_1);
+                            else
+                                aq.id(R.id.epub).image(R.drawable.ic_epub_0);
+                            break;
+                        case 2:
+                            if (file_isn.booleanValue())
+                                aq.id(R.id.pdf).image(R.drawable.ic_pdf_1);
+                            else
+                                aq.id(R.id.pdf).image(R.drawable.ic_pdf_0);
+                            break;
+                        case 3:
+                            if (file_isn.booleanValue())
+                                aq.id(R.id.mp3).image(R.drawable.ic_mp3_1);
+                            else
+                                aq.id(R.id.mp3).image(R.drawable.ic_mp3_0);
+                            break;
+                        case 4:
+                            if (file_isn.booleanValue())
+                                aq.id(R.id.aac).image(R.drawable.ic_aac_1);
+                            else
+                                aq.id(R.id.aac).image(R.drawable.ic_aac_0);
+                            break;
+                        case 6:
+                            if (file_isn.booleanValue())
+                                aq.id(R.id.mobi).image(R.drawable.ic_mobi_1);
+                            else
+                                aq.id(R.id.mobi).image(R.drawable.ic_mobi_0);
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
         } catch (Exception e) {

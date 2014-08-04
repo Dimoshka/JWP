@@ -101,7 +101,7 @@ public class class_rss_provider {
                 } catch (UnknownHostException e) {
 
                 } catch (Exception e) {
-                    funct.send_bug_report(e);
+                    //funct.send_bug_report(e);
                 } finally {
                     if (stream != null) {
                         try {

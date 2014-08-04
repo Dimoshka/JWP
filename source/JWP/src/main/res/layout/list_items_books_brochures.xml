@@ -63,11 +63,21 @@
         android:layout_alignParentBottom="true" />
 
     <ImageView
-        android:id="@+id/epub"
+        android:id="@+id/mobi"
         android:layout_width="30dp"
         android:layout_height="20dp"
         android:layout_alignTop="@+id/pdf"
         android:layout_toLeftOf="@+id/audio"
+        android:contentDescription="@string/rss_epub"
+        android:src="@drawable/ic_mobi_0"
+        android:layout_alignParentBottom="true" />
+
+    <ImageView
+        android:id="@+id/epub"
+        android:layout_width="30dp"
+        android:layout_height="20dp"
+        android:layout_alignTop="@+id/pdf"
+        android:layout_toLeftOf="@+id/mobi"
         android:contentDescription="@string/rss_epub"
         android:src="@drawable/ic_epub_0"
         android:layout_alignParentBottom="true" />

@@ -37,7 +37,12 @@
             android:summary="@string/rss_epub_summary"
             android:title="@string/rss_epub" />
         <CheckBoxPreference
-            android:defaultValue="true"
+            android:defaultValue="false"
+            android:key="rss_mobi"
+            android:summary="@string/rss_mobi_summary"
+            android:title="@string/rss_mobi" />
+        <CheckBoxPreference
+            android:defaultValue="false"
             android:key="rss_mp3"
             android:summary="@string/rss_mp3_summary"
             android:title="@string/rss_mp3" />

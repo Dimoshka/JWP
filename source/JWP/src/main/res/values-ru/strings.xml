@@ -47,6 +47,8 @@
     <string name="rss_pdf_summary">"Загружать RSS ленту PDF формата"</string>
     <string name="rss_epub">"RSS - EPUB"</string>
     <string name="rss_epub_summary">"Загружать RSS ленту EPUB формата"</string>
+    <string name="rss_mobi">"RSS - MOBI"</string>
+    <string name="rss_mobi_summary">"Загружать RSS ленту MOBI формата"</string>
     <string name="rss_mp3">"RSS - MP3"</string>
     <string name="rss_mp3_summary">"Загружать RSS ленту MP3 формата"</string>
     <string name="rss_aac">"RSS - AAC"</string>
