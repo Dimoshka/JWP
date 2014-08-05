@@ -51,7 +51,6 @@ public class player extends ActionBarActivity implements LoaderManager.LoaderCal
     private class_functions funct = null;
     private SharedPreferences.OnSharedPreferenceChangeListener listener_pref = null;
 
-    private AudioManager audioManager = null;
     AFListener afListenerMusic = null;
     MediaPlayer mpMusic = null;
 
@@ -82,7 +81,7 @@ public class player extends ActionBarActivity implements LoaderManager.LoaderCal
         funct = new class_functions(this);
         class_sqlite dbOpenHelper = new class_sqlite(this);
         database = dbOpenHelper.openDataBase();
-        audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         initViews();
 
         mAdapter = new class_player_adapter(this,

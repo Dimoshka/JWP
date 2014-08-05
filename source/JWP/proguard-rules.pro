@@ -8,6 +8,7 @@
 -renamesourcefileattribute SourceFile
 -keepattributes SourceFile,LineNumberTable
 -keep class com.bugsense.** { *; }
+-keep public class org.jsoup.** { *;}
 -keep public class * extends android.app.Activity
 -keep public class * extends android.app.Application
 -keep public class * extends android.app.Service

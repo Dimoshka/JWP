@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import ua.pp.dimoshka.jwp.R;
-import ua.pp.dimoshka.jwp.main;
 
 public class class_books_brochures {
     private SQLiteDatabase database;
@@ -39,8 +38,6 @@ public class class_books_brochures {
     private ArrayList<Integer> id_type = new ArrayList<Integer>();
     private ArrayList<String> code_type = new ArrayList<String>();
     private ArrayList<String> name_type = new ArrayList<String>();
-
-
     private static final String URL_SITE = "http://www.jw.org/";
 
     public class_books_brochures(Context context, Handler handler,
@@ -54,10 +51,10 @@ public class class_books_brochures {
     }
 
     public void verify_all() {
-        task = new verify_img().execute();
+        task = new load_from_site().execute();
     }
 
-    void get_publication() {
+    final void get_publication() {
         try {
             Cursor cursor_type = database.query("type", new String[]{"_id",
                     "name", "code"}, null, null, null, null, "_id");
@@ -77,10 +74,10 @@ public class class_books_brochures {
         }
     }
 
-    class verify_img extends AsyncTask<Void, Integer, Void> {
+    class load_from_site extends AsyncTask<Void, Integer, Void> {
         private ProgressDialog dialog = null;
 
-        verify_img() {
+        load_from_site() {
         }
 
         @Override
@@ -90,12 +87,12 @@ public class class_books_brochures {
                 Date date_now = new Date();
 
                 if (funct.ExternalStorageState()) {
-                    Document doc = Jsoup.connect(URL_SITE + main.books_brochures_prefix + "?sortBy=1").get();
+                    Document doc = Jsoup.connect(URL_SITE + funct.get_books_brochures_prefix() + "?sortBy=1").get();
                     Elements pages = doc.getElementsByClass("pageNum");
 
                     //Elements pages_a = pages.get(0).getElementsByTag("a");
-                    ArrayList<String> pages_list = new ArrayList();
-                    pages_list.add(URL_SITE + main.books_brochures_prefix);
+                    ArrayList<String> pages_list = new ArrayList<String>();
+                    pages_list.add(URL_SITE + funct.get_books_brochures_prefix());
 
                     for (Element link : pages) {
                         pages_list.add(URL_SITE + link.attr("href"));
@@ -169,7 +166,7 @@ public class class_books_brochures {
                                 init1.put("name", name);
                                 init1.put("title", title);
                                 init1.put("id_pub", 4);
-                                init1.put("id_lang", main.id_lng);
+                                init1.put("id_lang", funct.get_id_lng());
                                 init1.put("img", img);
                                 init1.put("date", dat_format.format(date_now));
                                 init1.put("link_img", img_link);
@@ -202,7 +199,7 @@ public class class_books_brochures {
                                                         database.insertWithOnConflict("files", null, init, SQLiteDatabase.CONFLICT_IGNORE);
                                                         //Log.e("Pub", init.toString());
                                                     }
-                                                } else continue;
+                                                }
                                             }
                                         }
                                     }
@@ -280,11 +277,6 @@ public class class_books_brochures {
                                 }
                             }
                     );
-        }
-
-        @Override
-        protected void onCancelled() {
-            super.onCancelled();
         }
     }
 }

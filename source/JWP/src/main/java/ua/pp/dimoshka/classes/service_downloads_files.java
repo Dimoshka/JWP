@@ -36,7 +36,7 @@ public class service_downloads_files extends Service {
     private NotificationManager notificationManager = null;
     private final IBinder binder = new FileDownloadBinder();
     private AsyncDownloadTask task = null;
-    private static boolean isRunning = false;
+    private boolean isRunning = false;
     private ArrayList<Map<String, String>> targetFiles = null;
     private int now_targetFile = 0;
 

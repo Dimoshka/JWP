@@ -20,8 +20,9 @@ import ua.pp.dimoshka.classes.class_books_brochures_adapter;
 public class books_brochures extends ListFragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private class_books_brochures_adapter mAdapter = null;
+    private static main main = null;
 
-    private BroadcastReceiver receiver = new BroadcastReceiver() {
+    private final BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
@@ -37,10 +38,11 @@ public class books_brochures extends ListFragment implements LoaderManager.Loade
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        main = (main) getActivity();
         mAdapter = new class_books_brochures_adapter(
                 getActivity(),
                 new String[]{"_id"}, new int[]{R.id.title},
-                main.database, main.funct);
+                main.get_database(), main.get_funct());
         setListAdapter(mAdapter);
         getLoaderManager().initLoader(0, null, this);
 
@@ -53,7 +55,7 @@ public class books_brochures extends ListFragment implements LoaderManager.Loade
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-        main.open_or_download.dialog_show(id);
+        main.get_open_or_download().dialog_show(id);
     }
 
     public void refresh() {
@@ -62,13 +64,13 @@ public class books_brochures extends ListFragment implements LoaderManager.Loade
                 getLoaderManager().restartLoader(0, null, this);
             }
         } catch (Exception e) {
-            main.funct.send_bug_report(e);
+            main.get_funct().send_bug_report(e);
         }
     }
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return new MyCursorLoader(getActivity(), main.database);
+        return new MyCursorLoader(getActivity(), main.get_database());
     }
 
     @Override
@@ -82,7 +84,7 @@ public class books_brochures extends ListFragment implements LoaderManager.Loade
     }
 
     static class MyCursorLoader extends CursorLoader {
-        SQLiteDatabase database;
+        final SQLiteDatabase database;
 
         public MyCursorLoader(Context context, SQLiteDatabase database) {
             super(context);
@@ -91,7 +93,7 @@ public class books_brochures extends ListFragment implements LoaderManager.Loade
 
         @Override
         public Cursor loadInBackground() {
-            @SuppressWarnings("UnnecessaryLocalVariable") Cursor cursor = main.database
+            @SuppressWarnings("UnnecessaryLocalVariable") Cursor cursor = database
                     .rawQuery(
                             "select magazine._id as _id, magazine.name as name, magazine.title as title, magazine.img as img, " +
                                     "language.code as code_lng, " +
@@ -101,7 +103,7 @@ public class books_brochures extends ListFragment implements LoaderManager.Loade
                                     "left join language on magazine.id_lang=language._id " +
                                     "left join publication on magazine.id_pub=publication._id " +
                                     "left join (select id_magazine, GROUP_CONCAT(id_type) as id_type, GROUP_CONCAT(file) as file from files group by id_magazine) as files on magazine._id=files.id_magazine " +
-                                    "where magazine.id_lang='" + main.id_lng + "' and magazine.id_pub='4' order by magazine.date desc, magazine._id asc",
+                                    "where magazine.id_lang='" + main.get_funct().get_id_lng() + "' and magazine.id_pub='4' order by magazine.date desc, magazine._id asc",
                             null
                     );
             return cursor;

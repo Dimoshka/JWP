@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.support.v4.widget.SimpleCursorAdapter;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -86,7 +85,7 @@ public class class_books_brochures_adapter extends SimpleCursorAdapter {
             aq.id(R.id.mp3).image(R.drawable.ic_none_type);
             aq.id(R.id.aac).image(R.drawable.ic_none_type);
 
-            if (id_type_files!=null) {
+            if (id_type_files != null) {
                 for (int i = 0; i < id_type_files.length; i++) {
                     Boolean file_isn = Boolean.valueOf(Integer.parseInt(file_files[i]) != 0);
                     switch (Integer.parseInt(id_type_files[i])) {

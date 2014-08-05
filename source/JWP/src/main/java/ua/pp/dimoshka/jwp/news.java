@@ -21,6 +21,7 @@ import ua.pp.dimoshka.classes.class_news_adapter;
 public class news extends ListFragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private class_news_adapter mAdapter = null;
+    private static main main = null;
 
     private BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
@@ -36,11 +37,11 @@ public class news extends ListFragment implements LoaderManager.LoaderCallbacks<
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        main = (main) getActivity();
         mAdapter = new class_news_adapter(
-                getActivity(), new String[]{}, new int[]{}, main.database, main.funct);
+                getActivity(), new String[]{}, new int[]{}, main.get_database(), main.get_funct());
         setListAdapter(mAdapter);
         getLoaderManager().initLoader(0, null, this);
-
         LocalBroadcastManager broadcastManager = LocalBroadcastManager.getInstance(getActivity());
         IntentFilter intentFilter = new IntentFilter("update");
         broadcastManager.registerReceiver(receiver, intentFilter);
@@ -66,13 +67,13 @@ public class news extends ListFragment implements LoaderManager.LoaderCallbacks<
                 getLoaderManager().restartLoader(0, null, this);
             }
         } catch (Exception e) {
-            main.funct.send_bug_report(e);
+            main.get_funct().send_bug_report(e);
         }
     }
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return new MyCursorLoader(getActivity(), main.database);
+        return new MyCursorLoader(getActivity(), main.get_database());
     }
 
     @Override
@@ -95,7 +96,7 @@ public class news extends ListFragment implements LoaderManager.LoaderCallbacks<
 
         @Override
         public Cursor loadInBackground() {
-            @SuppressWarnings("UnnecessaryLocalVariable") Cursor cursor = main.database.rawQuery("select * from news where news.id_lang='" + main.id_lng + "' order by news._id DESC", null);
+            @SuppressWarnings("UnnecessaryLocalVariable") Cursor cursor = database.rawQuery("select * from news where news.id_lang='" + main.get_funct().get_id_lng() + "' order by news._id DESC", null);
             return cursor;
         }
 

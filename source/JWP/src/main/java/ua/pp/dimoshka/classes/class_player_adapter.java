@@ -15,10 +15,9 @@ public class class_player_adapter extends SimpleCursorAdapter {
 	private String[] from;
 	private int[] to;
 
-	@SuppressWarnings("deprecation")
 	public class_player_adapter(Context context,
                                 String[] from, int[] to) {
-		super(context, android.R.layout.simple_list_item_single_choice, null, from, to);
+		super(context, android.R.layout.simple_list_item_single_choice, null, from, to, 0);
 		this.layout = android.R.layout.simple_list_item_single_choice;
 		this.from = from;
 		this.to = to;

@@ -99,9 +99,9 @@ public class class_rss_provider {
                         }
                     }
                 } catch (java.net.SocketTimeoutException e) {
-
+//funct.send_bug_report(e);
                 } catch (UnknownHostException e) {
-
+//funct.send_bug_report(e);
                 } catch (Exception e) {
                     //funct.send_bug_report(e);
                 } finally {

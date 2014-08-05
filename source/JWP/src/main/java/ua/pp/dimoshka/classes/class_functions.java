@@ -2,6 +2,8 @@ package ua.pp.dimoshka.classes;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -29,7 +31,26 @@ import java.util.Locale;
 import ua.pp.dimoshka.jwp.R;
 
 public class class_functions {
+
     private Context context;
+    private Integer id_lng = Integer.valueOf(1);
+    private String news_prefix = "en/news";
+    private String books_brochures_prefix = "en/publications";
+    private String code_lng = "E";
+
+    public Integer get_id_lng() {
+        return id_lng;
+    }
+    public String get_news_prefix() {
+        return news_prefix;
+    }
+    public String get_books_brochures_prefix() {
+        return books_brochures_prefix;
+    }
+    public String get_code_lng() {
+        return code_lng;
+    }
+
 
     public class_functions(Context context) {
         this.context = context;
@@ -128,6 +149,51 @@ public class class_functions {
             //BugSenseHandler.sendExceptionMessage("level", message, ex);
         } catch (Exception e) {
             ex.printStackTrace();
+        }
+    }
+
+    public void get_language(SQLiteDatabase database, SharedPreferences prefs) {
+        try {
+            Cursor cursor;
+            int id = Integer.parseInt(prefs.getString("language", "1"));
+
+            if (prefs.getBoolean("first_run", true)) {
+                cursor = database.rawQuery("SELECT * from language where code_an='"
+                        + Locale.getDefault().getLanguage() + "'", null);
+                cursor.moveToFirst();
+                if (cursor.getCount() > 0) {
+                    prefs.edit()
+                            .putString("language",
+                                    cursor.getString(cursor.getColumnIndex("_id")))
+                            .apply();
+                    id_lng = Integer.valueOf(cursor.getInt(cursor.getColumnIndex("_id")));
+                    news_prefix = cursor.getString(cursor.getColumnIndex("news_rss"));
+                    code_lng = cursor.getString(cursor.getColumnIndex("code"));
+                    books_brochures_prefix = cursor.getString(cursor.getColumnIndex("books_brochures_link"));
+
+                } else {
+                    id_lng = Integer.valueOf(1);
+                    news_prefix = "en/news";
+                    books_brochures_prefix = "en/publications";
+                    code_lng = "E";
+                }
+            } else {
+                cursor = database.rawQuery("SELECT* from language where _id='" + id + "'", null);
+                cursor.moveToFirst();
+                if (cursor.getCount() > 0) {
+                    id_lng = Integer.valueOf(cursor.getInt(cursor.getColumnIndex("_id")));
+                    news_prefix = cursor.getString(cursor.getColumnIndex("news_rss"));
+                    code_lng = cursor.getString(cursor.getColumnIndex("code"));
+                    books_brochures_prefix = cursor.getString(cursor.getColumnIndex("books_brochures_link"));
+                } else {
+                    id_lng = Integer.valueOf(1);
+                    news_prefix = "en/news";
+                    books_brochures_prefix = "en/publications";
+                    code_lng = "E";
+                }
+            }
+        } catch (Exception e) {
+            send_bug_report(e);
         }
     }
 

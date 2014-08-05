@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
@@ -30,7 +29,6 @@ import com.bugsense.trace.BugSenseHandler;
 import com.google.analytics.tracking.android.EasyTracker;
 
 import java.util.List;
-import java.util.Locale;
 import java.util.Vector;
 
 import ua.pp.dimoshka.classes.class_books_brochures;
@@ -44,30 +42,35 @@ import ua.pp.dimoshka.classes.service_downloads_files;
 public class main extends ActionBarActivity implements ActionBar.TabListener {
 
     private int curent_tab = 0;
-    public static SQLiteDatabase database = null;
-    private static class_sqlite dbOpenHelper = null;
-    public static class_functions funct = null;
-    private static AQuery aq = null;
+    private SQLiteDatabase database = null;
+    private class_sqlite dbOpenHelper = null;
+    private class_functions funct = null;
 
-    public static class_open_or_download open_or_download = null;
-    private static class_rss_jornals rss_jornals = null;
-    private static class_rss_news rss_news = null;
-    private static class_books_brochures books_brochures = null;
+    private class_open_or_download open_or_download = null;
+    private class_rss_jornals rss_jornals = null;
+    private class_rss_news rss_news = null;
+    private class_books_brochures books_brochures = null;
 
     private SharedPreferences prefs = null;
     private ViewPager pager = null;
     private ActionBar actionBar = null;
     private Boolean refresh_all = Boolean.FALSE;
 
-    public static Integer id_lng = Integer.valueOf(1);
-    public static String news_prefix = "en/news";
-    public static String books_brochures_prefix = "en/publications";
-    public static String code_lng = "E";
-
     private List<Fragment> fragment_list = new Vector<Fragment>();
     private MyPagerAdapter pagerAdapter = null;
     private Boolean change_prefference = Boolean.FALSE;
 
+    public SQLiteDatabase get_database() {
+        return database;
+    }
+
+    public class_functions get_funct() {
+        return funct;
+    }
+
+    public class_open_or_download get_open_or_download() {
+        return open_or_download;
+    }
 
     @SuppressLint("HandlerLeak")
     private final Handler handler_jornals = new Handler() {
@@ -126,7 +129,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
             BugSenseHandler.initAndStartSession(this, "63148966");
             setContentView(R.layout.main);
 
-            aq = new AQuery(this);
+            AQuery aq = new AQuery(this);
             funct = new class_functions(this);
             dbOpenHelper = new class_sqlite(this);
             database = dbOpenHelper.openDataBase();
@@ -165,7 +168,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
 
     private void load_first() {
         try {
-            get_language(Integer.parseInt(prefs.getString("language", "1")));
+            funct.get_language(get_database(), prefs);
             create_tabs();
             create_fragments();
 
@@ -182,11 +185,8 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
             fragment_list.add(new jornals());
             rss_news = new class_rss_news(this, database, funct);
             fragment_list.add(new news());
-
-            //if (id_lng.intValue() == 3) {
             books_brochures = new class_books_brochures(this, handler_books_brochures, database, funct);
             fragment_list.add(new books_brochures());
-            //}
             pagerAdapter.notifyDataSetChanged();
         } catch (Exception e) {
             funct.send_bug_report(e);
@@ -202,60 +202,16 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
             ActionBar.Tab news_Tab = actionBar.newTab().setText(R.string.news)
                     .setTabListener(this);
             actionBar.addTab(news_Tab);
-            //if (id_lng.intValue() == 3) {
             Log.d("LANG3", "tabs");
             ActionBar.Tab publication_Tab = actionBar.newTab().setText(R.string.books_brochures)
                     .setTabListener(this);
             actionBar.addTab(publication_Tab);
-            //}
             curent_tab = 0;
         } catch (Exception e) {
             funct.send_bug_report(e);
         }
     }
 
-    private void get_language(int id) {
-        try {
-            Cursor cursor;
-            if (prefs.getBoolean("first_run", true)) {
-                cursor = database.rawQuery("SELECT * from language where code_an='"
-                        + Locale.getDefault().getLanguage() + "'", null);
-                cursor.moveToFirst();
-                if (cursor.getCount() > 0) {
-                    prefs.edit()
-                            .putString("language",
-                                    cursor.getString(cursor.getColumnIndex("_id")))
-                            .apply();
-                    id_lng = Integer.valueOf(cursor.getInt(cursor.getColumnIndex("_id")));
-                    news_prefix = cursor.getString(cursor.getColumnIndex("news_rss"));
-                    code_lng = cursor.getString(cursor.getColumnIndex("code"));
-                    books_brochures_prefix = cursor.getString(cursor.getColumnIndex("books_brochures_link"));
-
-                } else {
-                    id_lng = Integer.valueOf(1);
-                    news_prefix = "en/news";
-                    books_brochures_prefix = "en/publications";
-                    code_lng = "E";
-                }
-            } else {
-                cursor = database.rawQuery("SELECT* from language where _id='" + id + "'", null);
-                cursor.moveToFirst();
-                if (cursor.getCount() > 0) {
-                    id_lng = Integer.valueOf(cursor.getInt(cursor.getColumnIndex("_id")));
-                    news_prefix = cursor.getString(cursor.getColumnIndex("news_rss"));
-                    code_lng = cursor.getString(cursor.getColumnIndex("code"));
-                    books_brochures_prefix = cursor.getString(cursor.getColumnIndex("books_brochures_link"));
-                } else {
-                    id_lng = Integer.valueOf(1);
-                    news_prefix = "en/news";
-                    books_brochures_prefix = "en/publications";
-                    code_lng = "E";
-                }
-            }
-        } catch (Exception e) {
-            funct.send_bug_report(e);
-        }
-    }
 
     @Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
@@ -360,13 +316,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
             if (funct.isNetworkAvailable()) {
                 if (prefs.getBoolean("update_all_at_once", true)) {
                     refresh_all = Boolean.TRUE;
-                    //if (id_lng.intValue() == 3 && actionBar.getTabCount() == 3) {
-                    //Log.d("LANG3", "load rss");
-                    //books_brochures.verify_all();
                     rss_jornals.get_all_feeds();
-                    //} else {
-                    //    rss_jornals.get_all_feeds();
-                    //}
                 } else {
                     switch (curent_tab) {
                         case 0:

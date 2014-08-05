@@ -18,13 +18,10 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import ua.pp.dimoshka.jwp.R;
-import ua.pp.dimoshka.jwp.main;
 
 public class class_rss_jornals {
 
@@ -65,7 +62,7 @@ public class class_rss_jornals {
     }
 
 
-    void get_publication() {
+    final void get_publication() {
         try {
             Cursor cursor_type = database.query("type", new String[]{"_id",
                     "code"}, null, null, null, null, "_id");
@@ -143,7 +140,7 @@ public class class_rss_jornals {
                             Integer cur_type = Integer.valueOf(b);
                             cur_pub = Integer.valueOf(a);
                             class_rss_provider rssfeedprovider = new class_rss_provider(context, funct);
-                            String feed = String.format(URL_FEED, main.code_lng, main.code_lng,
+                            String feed = String.format(URL_FEED, funct.get_code_lng(), funct.get_code_lng(),
                                     code_pub.get(cur_pub.intValue()),
                                     code_type.get(cur_type.intValue()));
 
@@ -161,11 +158,11 @@ public class class_rss_jornals {
                                 DateFormat dat_format = new SimpleDateFormat(
                                         "yyyy-MM-dd");
                                 Date date = funct.get_jwp_jornals_rss_date(
-                                        name, code_pub.get(cur_pub.intValue()), main.code_lng);
+                                        name, code_pub.get(cur_pub.intValue()), funct.get_code_lng());
                                 Log.d("JWP_rss", "date = " + date.toString());
                                 String date_str = name.replace(
                                         code_pub.get(cur_pub.intValue()) + "_", "");
-                                date_str = date_str.replace(main.code_lng + "_", "");
+                                date_str = date_str.replace(funct.get_code_lng() + "_", "");
                                 Log.d("JWP_rss", "name = " + name);
                                 if (date_str.length() > 8)
                                     name = name.substring(0, name.length() - 3);
@@ -193,7 +190,7 @@ public class class_rss_jornals {
                                     init1.put("name", name);
                                     init1.put("title", name);
                                     init1.put("id_pub", id_pub.get(cur_pub.intValue()));
-                                    init1.put("id_lang", main.id_lng);
+                                    init1.put("id_lang", funct.get_id_lng());
                                     init1.put("img", img);
                                     init1.put("date", dat_format.format(date));
                                     Log.d("JWP_rss", "date_ok = " + dat_format.format(date));
@@ -253,7 +250,7 @@ public class class_rss_jornals {
                         else
                             url_str = url_str.replace("{code_pub_shot}", code_pub);
                         url_str = url_str.replace("{code_pub}", code_pub);
-                        url_str = url_str.replace("{code_lng}", main.code_lng);
+                        url_str = url_str.replace("{code_lng}", funct.get_code_lng());
                         format.applyPattern("yy");
                         url_str = url_str.replace("{YY}",
                                 format.format(date));
@@ -311,9 +308,5 @@ public class class_rss_jornals {
                     );
         }
 
-        @Override
-        protected void onCancelled() {
-            super.onCancelled();
-        }
     }
 }

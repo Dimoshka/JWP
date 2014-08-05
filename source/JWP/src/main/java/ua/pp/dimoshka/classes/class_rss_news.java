@@ -26,7 +26,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import ua.pp.dimoshka.jwp.R;
-import ua.pp.dimoshka.jwp.main;
 
 public class class_rss_news {
     static final String URL_FEED_NEWS = "http://www.jw.org/%s/rss/LatestNewsList/feed.xml";
@@ -98,10 +97,10 @@ public class class_rss_news {
         protected Void doInBackground(Void[] paramArrayOfVoid) {
             try {
                 class_rss_provider rssfeedprovider = new class_rss_provider(context, funct);
-                String feed = String.format(URL_FEED_NEW_IN_SITE, main.news_prefix);
+                String feed = String.format(URL_FEED_NEW_IN_SITE, funct.get_news_prefix());
                 Log.d("JWP-news", feed);
                 this.rss_list = rssfeedprovider.parse(feed);
-                ArrayList<ArrayList> items_news = new ArrayList();
+                ArrayList<ArrayList> items_news = new ArrayList<ArrayList>();
 
                 for (Iterator<class_rss_item> iterator = rss_list.iterator(); iterator.hasNext(); ) {
                     class_rss_item aRss_list = iterator.next();
@@ -158,8 +157,8 @@ public class class_rss_news {
                     description = funct.stripHtml(description);
                     description = description.trim();
 
-                    ArrayList<String> items = new ArrayList();
-                    items.add(main.id_lng.toString());
+                    ArrayList<String> items = new ArrayList<String>();
+                    items.add(funct.get_id_lng().toString());
                     items.add(title);
                     items.add(link);
                     items.add(link_img);
@@ -169,7 +168,7 @@ public class class_rss_news {
                 }
 
                 for (int i = items_news.size(); i > 0; i--) {
-                    ArrayList<String> items = items_news.get(i - 1);
+                    ArrayList<String> items = (ArrayList<String>) items_news.get(i - 1);
                     long id_news;
                     ContentValues init = new ContentValues();
                     init.put("id_lang", items.get(0));
@@ -261,12 +260,6 @@ public class class_rss_news {
                         );
             }
         }
-
-        @Override
-        protected void onCancelled() {
-            super.onCancelled();
-        }
-
     }
 
 }

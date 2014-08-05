@@ -20,6 +20,7 @@ import ua.pp.dimoshka.classes.class_jornals_adapter;
 public class jornals extends ListFragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private class_jornals_adapter mAdapter = null;
+    private static main main = null;
 
     private BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
@@ -37,8 +38,9 @@ public class jornals extends ListFragment implements LoaderManager.LoaderCallbac
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        main = (main) getActivity();
         mAdapter = new class_jornals_adapter(
-                getActivity(), new String[]{}, new int[]{}, main.database, main.funct);
+                getActivity(), new String[]{}, new int[]{}, main.get_database(), main.get_funct());
         setListAdapter(mAdapter);
         getLoaderManager().initLoader(0, null, this);
 
@@ -50,22 +52,22 @@ public class jornals extends ListFragment implements LoaderManager.LoaderCallbac
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-        main.open_or_download.dialog_show(id);
+        main.get_open_or_download().dialog_show(id);
     }
 
     public void refresh() {
         try {
             if (isAdded()) {
                 getLoaderManager().restartLoader(0, null, this);
-           }
+            }
         } catch (Exception e) {
-            main.funct.send_bug_report(e);
+            main.get_funct().send_bug_report(e);
         }
     }
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return new MyCursorLoader(getActivity(), main.database);
+        return new MyCursorLoader(getActivity(), main.get_database());
     }
 
     @Override
@@ -88,7 +90,7 @@ public class jornals extends ListFragment implements LoaderManager.LoaderCallbac
 
         @Override
         public Cursor loadInBackground() {
-            @SuppressWarnings("UnnecessaryLocalVariable") Cursor cursor = main.database
+            @SuppressWarnings("UnnecessaryLocalVariable") Cursor cursor = database
                     .rawQuery(
                             "select " +
                                     "magazine._id as _id, magazine.name as name, magazine.img as img, " +
@@ -99,7 +101,7 @@ public class jornals extends ListFragment implements LoaderManager.LoaderCallbac
                                     "left join language on magazine.id_lang=language._id " +
                                     "left join publication on magazine.id_pub=publication._id " +
                                     "left join (select id_magazine, GROUP_CONCAT(id_type) as id_type, GROUP_CONCAT(file) as file from files group by id_magazine) as files on magazine._id=files.id_magazine " +
-                                    "where magazine.id_lang='" + main.id_lng + "' and magazine.id_pub BETWEEN '1' and '3' order by date desc, magazine.id_pub asc;",
+                                    "where magazine.id_lang='" + main.get_funct().get_id_lng() + "' and magazine.id_pub BETWEEN '1' and '3' order by date desc, magazine.id_pub asc;",
                             null
                     );
             return cursor;

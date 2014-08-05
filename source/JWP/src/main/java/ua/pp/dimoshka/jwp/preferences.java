@@ -1,7 +1,6 @@
 package ua.pp.dimoshka.jwp;
 
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -88,10 +87,5 @@ public class preferences extends PreferenceActivity {
         if (prefs.getBoolean("analytics", true)) {
             EasyTracker.getInstance(this).activityStop(this);
         }
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
     }
 }
