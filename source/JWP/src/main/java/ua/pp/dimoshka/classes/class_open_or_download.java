@@ -39,7 +39,7 @@ public class class_open_or_download {
                 cursor = database
                         .rawQuery(
                                 "select files._id, id_type, file, type.name as name_type, files.name, link, files.id_magazine, magazine.id_pub, magazine.name as name_magazine from files left join magazine on files.id_magazine=magazine._id left join type on files.id_type=type._id where files.id_magazine='"
-                                        + id + "' group by id_type order by files.id_type", null
+                                        + id + "' group by id_type order by files.id_type asc", null
                         );
                 if (cursor.getCount() > 0) {
                     cursor.moveToFirst();

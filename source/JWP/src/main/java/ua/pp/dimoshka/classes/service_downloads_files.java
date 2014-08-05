@@ -218,6 +218,10 @@ public class service_downloads_files extends Service {
         protected Void doInBackground(Void[] params) {
             try {
                 String remoteFilepath, localFilepath, imgFilepath;
+                boolean redirect = false;
+                int filesize = -1;
+
+                if (isCancelled()) return null;
 
                 Log.i("JWP", "downloading: '" + total_file);
                 if (total_file > now_targetFile) {
@@ -236,43 +240,56 @@ public class service_downloads_files extends Service {
                                     + "/downloads/temp/")
                     );
 
-                    try {
-                        File localFile = new File(localFilepath);
-                        if (!localFile.exists()) {
-                            if (isCancelled())
-                                return null;
 
+                    File localFile = new File(localFilepath);
+                    if (!localFile.exists()) {
+                        URL obj = new URL(remoteFilepath);
+                        HttpURLConnection conn = (HttpURLConnection) obj.openConnection();
+                        conn.setReadTimeout(5000);
+                        conn.addRequestProperty("Accept-Language", "en-US,en;q=0.8");
+                        conn.addRequestProperty("User-Agent", "Mozilla");
+                        //conn.addRequestProperty("Referer", "google.com");
 
-                            int filesize = -1;
+                        try {
 
-                            HttpURLConnection.setFollowRedirects(false);
-                            HttpURLConnection connection = (HttpURLConnection) new URL(remoteFilepath).openConnection();
-                            connection.setRequestProperty("Accept-Encoding", "");
-                            connection.setConnectTimeout(7000);
-                            connection.setReadTimeout(7000);
-
-                            try {
-                                filesize = connection.getContentLength();
-                            } catch (Exception e) {
-
+                            int status = conn.getResponseCode();
+                            if (status != HttpURLConnection.HTTP_OK) {
+                                if (status == HttpURLConnection.HTTP_MOVED_TEMP
+                                        || status == HttpURLConnection.HTTP_MOVED_PERM
+                                        || status == HttpURLConnection.HTTP_SEE_OTHER)
+                                    redirect = true;
                             }
 
-                            Log.e("SIZE", connection.getResponseMessage() + "-");
+                            Log.d("Response Code ... ", status + "");
+
+
+                            if (redirect) {
+                                String newUrl = conn.getHeaderField("Location");
+                                String cookies = conn.getHeaderField("Set-Cookie");
+                                conn = (HttpURLConnection) new URL(newUrl).openConnection();
+                                conn.setRequestProperty("Cookie", cookies);
+                                conn.addRequestProperty("Accept-Language", "en-US,en;q=0.8");
+                                conn.addRequestProperty("User-Agent", "Mozilla");
+                                conn.addRequestProperty("Referer", "google.com");
+                                Log.d("Redirect to URL : ", newUrl);
+                            }
+
+
+                            try {
+                                filesize = conn.getContentLength();
+                            } catch (Exception e) {
+                                filesize = -1;
+                            }
+
+                            Log.d("filesize : ", filesize + "");
 
                             int loopCount = 0;
                             if (filesize > 0) {
 
                                 BufferedInputStream bis = new BufferedInputStream(
-                                        connection.getInputStream());
+                                        conn.getInputStream());
                                 FileOutputStream fos = new FileOutputStream(
                                         tempFile);
-
-
-                                if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
-
-                                }
-
-
                                 int bytesRead, totalBytesRead = 0;
                                 byte[] bytes = new byte[BYTES_BUFFER_SIZE];
                                 // String progress, kbytes;
@@ -328,28 +345,32 @@ public class service_downloads_files extends Service {
 
                                 success = 0;
                             }
+
+                            success = now_targetFile + 1;
+
+                        } catch (SocketTimeoutException e) {
+                            showNotification_popup(
+                                    getString(R.string.download_failed),
+                                    getString(R.string.download_title), "Failed: "
+                                            + (new File(remoteFilepath)).getName(),
+                                    getApplicationContext()
+                            );
+                            success = 0;
+
+                        } catch (Exception e) {
+                            funct.send_bug_report(e);
+
+                            showNotification_popup(
+                                    getString(R.string.download_failed),
+                                    getString(R.string.download_title), "Failed: "
+                                            + (new File(remoteFilepath)).getName(),
+                                    getApplicationContext()
+                            );
+                            success = 0;
+                        } finally {
+                            conn.disconnect();
                         }
-                        success = now_targetFile + 1;
 
-                    } catch (SocketTimeoutException e) {
-                        showNotification_popup(
-                                getString(R.string.download_failed),
-                                getString(R.string.download_title), "Failed: "
-                                        + (new File(remoteFilepath)).getName(),
-                                getApplicationContext()
-                        );
-                        success = 0;
-
-                    } catch (Exception e) {
-                        funct.send_bug_report(e);
-
-                        showNotification_popup(
-                                getString(R.string.download_failed),
-                                getString(R.string.download_title), "Failed: "
-                                        + (new File(remoteFilepath)).getName(),
-                                getApplicationContext()
-                        );
-                        success = 0;
                     }
                     now_targetFile++;
                 }

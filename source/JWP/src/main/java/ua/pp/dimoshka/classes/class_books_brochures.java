@@ -86,9 +86,11 @@ public class class_books_brochures {
         @Override
         protected Void doInBackground(Void[] paramArrayOfVoid) {
             try {
+                DateFormat dat_format = new SimpleDateFormat("yyyy-MM-dd");
+                Date date_now = new Date();
 
                 if (funct.ExternalStorageState()) {
-                    Document doc = Jsoup.connect(URL_SITE + main.books_brochures_prefix).get();
+                    Document doc = Jsoup.connect(URL_SITE + main.books_brochures_prefix + "?sortBy=1").get();
                     Elements pages = doc.getElementsByClass("pageNum");
 
                     //Elements pages_a = pages.get(0).getElementsByTag("a");
@@ -128,7 +130,6 @@ public class class_books_brochures {
                             String title = null;
                             String name = null;
 
-
                             Elements img_el = publ.getElementsByClass("hideObj");
                             if (img_el.size() > 0) {
                                 img_link = URL_SITE + img_el.get(0).attr("data-src");
@@ -147,9 +148,9 @@ public class class_books_brochures {
 
                             Cursor cur = database.rawQuery(
                                     "select _id, img from magazine where `name` = '" + name + "'", null);
-                            long id_magazine;
+                            long id_magazine = -1;
                             Integer img = img(name, img_link);
-                            DateFormat dat_format = new SimpleDateFormat("yyyy-MM-dd");
+
 
                             if (cur.getCount() > 0) {
                                 cur.moveToFirst();
@@ -164,15 +165,17 @@ public class class_books_brochures {
                                             new String[]{String.valueOf(id_magazine)});
                                 }
                             } else {
-
                                 ContentValues init1 = new ContentValues();
                                 init1.put("name", name);
                                 init1.put("title", title);
                                 init1.put("id_pub", 4);
                                 init1.put("id_lang", main.id_lng);
                                 init1.put("img", img);
-                                init1.put("date", dat_format.format(new Date()));
+                                init1.put("date", dat_format.format(date_now));
+                                init1.put("link_img", img_link);
                                 id_magazine = database.insert("magazine", null, init1);
+                                //id_magazine = database.insertWithOnConflict("magazine", null, init1, SQLiteDatabase.CONFLICT_IGNORE);
+
                             }
 
 
@@ -187,17 +190,17 @@ public class class_books_brochures {
                                                 //Log.e("Pub", id_magazine + " - " + ahref.get(b).text().trim() + " " + (URL_SITE + ahref.get(b).attr("href")).replace("//apps", "/apps"));
                                                 int id = name_type.indexOf(ahref.get(b).text().trim());
                                                 if (id > -1) {
-                                                    if (id_type.get(id) != 3) {
+                                                    if (id_type.get(id) != 3 && id_magazine > -1) {
                                                         ContentValues init = new ContentValues();
                                                         init.put("id_magazine", id_magazine);
                                                         init.put("id_type", id_type.get(id));
                                                         init.put("name", name + "." + code_type.get(id));
                                                         init.put("link", (URL_SITE + ahref.get(b).attr("href")).replace("//apps", "/apps"));
-                                                        init.put("pubdate", dat_format.format(new Date()));
+                                                        init.put("pubdate", dat_format.format(date_now));
                                                         init.put("title", "");
                                                         init.put("file", 0);
                                                         database.insertWithOnConflict("files", null, init, SQLiteDatabase.CONFLICT_IGNORE);
-                                                        Log.e("Pub", init.toString());
+                                                        //Log.e("Pub", init.toString());
                                                     }
                                                 } else continue;
                                             }
@@ -207,79 +210,6 @@ public class class_books_brochures {
                             }
                         }
                     }
-
-
-
-                    /*
-
-                    cursor = database
-                            .rawQuery(
-                                    "select _id from magazine where id_pub='4';",
-                                    null);
-                    if (cursor.getCount() == 0) {
-                        add_books_and_brochures();
-                    }
-                    cursor = database
-                            .rawQuery(
-                                    "select _id, name, img, link_img from magazine where img=0 and id_pub='4';",
-                                    null);
-                    cursor.moveToFirst();
-                    File dir = new File(funct.get_dir_app() + "/img/books_brochures/");
-                    if (!dir.isDirectory()) {
-                        dir.mkdirs();
-                    }
-
-                    for (int i = 0; i < cursor.getCount(); i++) {
-                        if (isCancelled()) {
-                            int currentapiVersion = android.os.Build.VERSION.SDK_INT;
-                            if (currentapiVersion >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-                                Log.d("JWP", "isCancelled+");
-                                if (dialog != null)
-                                    dialog.dismiss();
-                                if (cursor != null && !cursor.isClosed()) {
-                                    cursor.close();
-                                }
-                                Log.d("JWP", "onPostExecute+");
-                                handler.sendEmptyMessage(1);
-                            }
-                            break;
-                        }
-                        String name = cursor.getString(cursor
-                                .getColumnIndex("name"));
-                        String link_img = cursor.getString(cursor
-                                .getColumnIndex("link_img"));
-                        ContentValues initialValues = new ContentValues();
-
-                        File imgFile = new File(dir.getAbsolutePath() + name + ".jpg");
-                        if (!imgFile.exists()) {
-                            Log.i("JWP_image", name + " - not found!");
-                            try {
-                                if (funct.load_img(dir.getAbsolutePath(), name, link_img)) {
-                                    Log.i("JWP_image", name
-                                            + " - file download complete!");
-                                    initialValues.put("img", "1");
-                                    String[] args = {String
-                                            .valueOf(cursor.getString(cursor
-                                                    .getColumnIndex("_id")))};
-                                    database.update("magazine", initialValues,
-                                            "_id=?", args);
-                                }
-
-                            } catch (Exception e) {
-                                Log.d("JWP_" + getClass().getName(),
-                                        e.toString());
-                            }
-                        } else {
-                            Log.i("JWP_image", name + " found!");
-                            initialValues.put("img", "1");
-                            String[] args = {String.valueOf(cursor
-                                    .getString(cursor.getColumnIndex("_id")))};
-                            database.update("magazine", initialValues, "_id=?",
-                                    args);
-                        }
-                        cursor.moveToNext();
-                    }
-                    */
                 }
             } catch (Exception e) {
                 funct.send_bug_report(e);

@@ -41,14 +41,16 @@ public class class_rss_provider {
         try {
             XmlPullParser parser = Xml.newPullParser();
             if (funct.isNetworkAvailable()) {
-                HttpURLConnection.setFollowRedirects(false);
-                HttpURLConnection connection = (HttpURLConnection) new URL(rssFeed).openConnection();
-                connection.setRequestProperty("Accept-Encoding", "");
-                connection.setConnectTimeout(5000);
+                URL obj = new URL(rssFeed);
+                HttpURLConnection conn = (HttpURLConnection) obj.openConnection();
+                conn.setReadTimeout(5000);
+                conn.addRequestProperty("Accept-Language", "en-US,en;q=0.8");
+                conn.addRequestProperty("User-Agent", "Mozilla");
+                //conn.addRequestProperty("Referer", "google.com");
                 InputStream stream = null;
                 try {
-                    if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
-                        stream = connection.getInputStream();
+                    if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                        stream = conn.getInputStream();
                         parser.setInput(stream, null);
                         int eventType = parser.getEventType();
                         boolean done = false;
@@ -110,7 +112,7 @@ public class class_rss_provider {
                             e.printStackTrace();
                         }
                     }
-                    connection.disconnect();
+                    conn.disconnect();
                 }
             }
 

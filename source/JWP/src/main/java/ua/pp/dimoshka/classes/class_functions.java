@@ -135,13 +135,17 @@ public class class_functions {
     public boolean load_img(String dir, String name, String link_img) {
         if (isNetworkAvailable()) {
             try {
-                HttpURLConnection.setFollowRedirects(false);
-                HttpURLConnection connection = (HttpURLConnection) new URL(link_img).openConnection();
-                connection.setRequestProperty("Accept-Encoding", "");
-                connection.setConnectTimeout(5000);
+                URL obj = new URL(link_img);
+                HttpURLConnection conn = (HttpURLConnection) obj.openConnection();
+                conn.setReadTimeout(5000);
+                conn.addRequestProperty("Accept-Language", "en-US,en;q=0.8");
+                conn.addRequestProperty("User-Agent", "Mozilla");
+                //conn.addRequestProperty("Referer", "google.com");
                 try {
-                    InputStream is = connection.getInputStream();
-                    if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                    //Log.e("Response Code ... ", conn.getResponseCode() + "");
+                    //Log.e("Response Code ... ", link_img);
+                    if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                        InputStream is = conn.getInputStream();
                         BufferedInputStream bis = new BufferedInputStream(is);
                         ByteArrayBuffer baf = new ByteArrayBuffer(
                                 5000);
@@ -167,7 +171,7 @@ public class class_functions {
                     send_bug_report(e);
                     return false;
                 } finally {
-                    connection.disconnect();
+                    conn.disconnect();
                 }
             } catch (Exception e) {
                 return false;

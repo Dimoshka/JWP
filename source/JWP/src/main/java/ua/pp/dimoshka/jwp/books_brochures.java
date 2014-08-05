@@ -101,7 +101,7 @@ public class books_brochures extends ListFragment implements LoaderManager.Loade
                                     "left join language on magazine.id_lang=language._id " +
                                     "left join publication on magazine.id_pub=publication._id " +
                                     "left join (select id_magazine, GROUP_CONCAT(id_type) as id_type, GROUP_CONCAT(file) as file from files group by id_magazine) as files on magazine._id=files.id_magazine " +
-                                    "where magazine.id_lang='" + main.id_lng + "' and magazine.id_pub='4' order by magazine.title asc",
+                                    "where magazine.id_lang='" + main.id_lng + "' and magazine.id_pub='4' order by magazine.date desc, magazine._id asc",
                             null
                     );
             return cursor;
