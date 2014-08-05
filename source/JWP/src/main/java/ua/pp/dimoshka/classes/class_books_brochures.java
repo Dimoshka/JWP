@@ -53,7 +53,7 @@ public class class_books_brochures {
         get_publication();
     }
 
-    public void verify_all_img() {
+    public void verify_all() {
         task = new verify_img().execute();
     }
 

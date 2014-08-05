@@ -92,8 +92,12 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 1:
-                    Log.d("JWP", "refrashe afte load");
-                    refresh();
+                    if (refresh_all.booleanValue()) {
+                        books_brochures.verify_all();
+                    } else {
+                        Log.d("JWP", "refrashe afte load");
+                        refresh();
+                    }
                     break;
             }
         }
@@ -107,12 +111,9 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 1:
-                    if (refresh_all.booleanValue()) {
-                        rss_jornals.get_all_feeds();
-                    } else {
-                        Log.d("JWP", "refrashe afte load");
-                        refresh();
-                    }
+                    Log.d("JWP", "refrashe afte load");
+                    refresh();
+                    break;
             }
         }
     };
@@ -182,10 +183,10 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
             rss_news = new class_rss_news(this, database, funct);
             fragment_list.add(new news());
 
-            if (id_lng.intValue() == 3) {
-                books_brochures = new class_books_brochures(this, handler_books_brochures, database, funct);
-                fragment_list.add(new books_brochures());
-            }
+            //if (id_lng.intValue() == 3) {
+            books_brochures = new class_books_brochures(this, handler_books_brochures, database, funct);
+            fragment_list.add(new books_brochures());
+            //}
             pagerAdapter.notifyDataSetChanged();
         } catch (Exception e) {
             funct.send_bug_report(e);
@@ -201,12 +202,12 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
             ActionBar.Tab news_Tab = actionBar.newTab().setText(R.string.news)
                     .setTabListener(this);
             actionBar.addTab(news_Tab);
-            if (id_lng.intValue() == 3) {
-                Log.d("LANG3", "tabs");
-                ActionBar.Tab publication_Tab = actionBar.newTab().setText(R.string.books_brochures)
-                        .setTabListener(this);
-                actionBar.addTab(publication_Tab);
-            }
+            //if (id_lng.intValue() == 3) {
+            Log.d("LANG3", "tabs");
+            ActionBar.Tab publication_Tab = actionBar.newTab().setText(R.string.books_brochures)
+                    .setTabListener(this);
+            actionBar.addTab(publication_Tab);
+            //}
             curent_tab = 0;
         } catch (Exception e) {
             funct.send_bug_report(e);
@@ -359,12 +360,13 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
             if (funct.isNetworkAvailable()) {
                 if (prefs.getBoolean("update_all_at_once", true)) {
                     refresh_all = Boolean.TRUE;
-                    if (id_lng.intValue() == 3 && actionBar.getTabCount() == 3) {
-                        Log.d("LANG3", "load rss");
-                        books_brochures.verify_all_img();
-                    } else {
-                        rss_jornals.get_all_feeds();
-                    }
+                    //if (id_lng.intValue() == 3 && actionBar.getTabCount() == 3) {
+                    //Log.d("LANG3", "load rss");
+                    //books_brochures.verify_all();
+                    rss_jornals.get_all_feeds();
+                    //} else {
+                    //    rss_jornals.get_all_feeds();
+                    //}
                 } else {
                     switch (curent_tab) {
                         case 0:
@@ -374,7 +376,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
                             rss_news.get_all_feeds_activity(handler_news);
                             break;
                         case 2:
-                            books_brochures.verify_all_img();
+                            books_brochures.verify_all();
                             break;
                         default:
                             break;
