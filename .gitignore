@@ -1,3 +1,4 @@
+.DS_Store
 /logo.png
 
 /logo_transparence.png
@@ -10,9 +11,7 @@
 
 /logo.ai
 
-
 /source/.gradle
 /source/local.properties
 /source/.idea/workspace.xml
-.DS_Store
 /source/build
