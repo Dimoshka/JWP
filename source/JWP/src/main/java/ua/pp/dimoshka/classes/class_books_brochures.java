@@ -19,6 +19,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.File;
+import java.net.SocketTimeoutException;
+import java.net.UnknownHostException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -208,6 +210,10 @@ public class class_books_brochures {
                         }
                     }
                 }
+            } catch (SocketTimeoutException e) {
+                //funct.send_bug_report(e);
+            } catch (UnknownHostException e) {
+                //funct.send_bug_report(e);
             } catch (Exception e) {
                 funct.send_bug_report(e);
             }
@@ -271,7 +277,7 @@ public class class_books_brochures {
                             context.getResources().getString(
                                     R.string.books_brochures),
                             context.getResources().getString(
-                                    R.string.dialog_loaing_img), true, true, new DialogInterface.OnCancelListener() {
+                                    R.string.dialog_loaing_site), true, true, new DialogInterface.OnCancelListener() {
                                 public void onCancel(DialogInterface pd) {
                                     task.cancel(true);
                                 }

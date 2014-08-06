@@ -14,6 +14,7 @@ import org.xmlpull.v1.XmlPullParser;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -98,10 +99,10 @@ public class class_rss_provider {
                             eventType = parser.next();
                         }
                     }
-                } catch (java.net.SocketTimeoutException e) {
-//funct.send_bug_report(e);
+                } catch (SocketTimeoutException e) {
+                    //funct.send_bug_report(e);
                 } catch (UnknownHostException e) {
-//funct.send_bug_report(e);
+                    //funct.send_bug_report(e);
                 } catch (Exception e) {
                     //funct.send_bug_report(e);
                 } finally {

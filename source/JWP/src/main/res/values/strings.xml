@@ -29,6 +29,7 @@ The program works as RSS client."</string>
     <string name="no_sdcard">"SDCARD is not connected!"</string>
     <string name="dialog_loaing_rss">"Download RSS. Please wait&#8230;"</string>
     <string name="dialog_loaing_img">"Update images. Please wait&#8230;"</string>
+    <string name="dialog_loaing_site">"Loading from site. Please wait&#8230;"</string>
     <string name="management">"Management"</string>
     <string name="reporting">"Reporting"</string>
     <string name="reporting_summary">"Allow to automatically send reports on the application?"</string>

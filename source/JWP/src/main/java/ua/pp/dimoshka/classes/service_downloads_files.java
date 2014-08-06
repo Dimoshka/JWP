@@ -22,6 +22,7 @@ import java.io.FileOutputStream;
 import java.net.HttpURLConnection;
 import java.net.SocketTimeoutException;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -374,6 +375,10 @@ public class service_downloads_files extends Service {
                     }
                     now_targetFile++;
                 }
+            } catch (SocketTimeoutException e) {
+                //funct.send_bug_report(e);
+            } catch (UnknownHostException e) {
+                //funct.send_bug_report(e);
             } catch (Exception e) {
                 funct.send_bug_report(e);
             }

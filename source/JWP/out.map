@@ -10154,30 +10154,30 @@ ua.pp.dimoshka.classes.class_books_brochures -> ua.pp.dimoshka.classes.a:
     java.util.ArrayList id_type -> h
     java.util.ArrayList code_type -> i
     java.util.ArrayList name_type -> j
-    54:55:void verify_all() -> a
-    59:75:void get_publication() -> b
-    29:29:ua.pp.dimoshka.classes.class_functions access$000(ua.pp.dimoshka.classes.class_books_brochures) -> a
-    29:29:android.os.Handler access$100(ua.pp.dimoshka.classes.class_books_brochures) -> b
-    29:29:android.database.sqlite.SQLiteDatabase access$200(ua.pp.dimoshka.classes.class_books_brochures) -> c
-    29:29:java.util.ArrayList access$300(ua.pp.dimoshka.classes.class_books_brochures) -> d
-    29:29:java.util.ArrayList access$400(ua.pp.dimoshka.classes.class_books_brochures) -> e
-    29:29:java.util.ArrayList access$500(ua.pp.dimoshka.classes.class_books_brochures) -> f
-    29:29:android.content.SharedPreferences access$600(ua.pp.dimoshka.classes.class_books_brochures) -> g
-    29:29:android.database.Cursor access$700(ua.pp.dimoshka.classes.class_books_brochures) -> h
-    29:29:android.content.Context access$800(ua.pp.dimoshka.classes.class_books_brochures) -> i
-    29:29:android.os.AsyncTask access$900(ua.pp.dimoshka.classes.class_books_brochures) -> j
+    56:57:void verify_all() -> a
+    61:77:void get_publication() -> b
+    31:31:ua.pp.dimoshka.classes.class_functions access$000(ua.pp.dimoshka.classes.class_books_brochures) -> a
+    31:31:android.os.Handler access$100(ua.pp.dimoshka.classes.class_books_brochures) -> b
+    31:31:android.database.sqlite.SQLiteDatabase access$200(ua.pp.dimoshka.classes.class_books_brochures) -> c
+    31:31:java.util.ArrayList access$300(ua.pp.dimoshka.classes.class_books_brochures) -> d
+    31:31:java.util.ArrayList access$400(ua.pp.dimoshka.classes.class_books_brochures) -> e
+    31:31:java.util.ArrayList access$500(ua.pp.dimoshka.classes.class_books_brochures) -> f
+    31:31:android.content.SharedPreferences access$600(ua.pp.dimoshka.classes.class_books_brochures) -> g
+    31:31:android.database.Cursor access$700(ua.pp.dimoshka.classes.class_books_brochures) -> h
+    31:31:android.content.Context access$800(ua.pp.dimoshka.classes.class_books_brochures) -> i
+    31:31:android.os.AsyncTask access$900(ua.pp.dimoshka.classes.class_books_brochures) -> j
 ua.pp.dimoshka.classes.class_books_brochures$load_from_site -> ua.pp.dimoshka.classes.b:
     android.app.ProgressDialog dialog -> b
     ua.pp.dimoshka.classes.class_books_brochures this$0 -> a
-    86:214:java.lang.Void doInBackground(java.lang.Void[]) -> a
-    219:242:int img(java.lang.String,java.lang.String) -> a
-    249:265:void onPostExecute(java.lang.Void) -> a
-    269:280:void onPreExecute() -> onPreExecute
-    77:77:void onPostExecute(java.lang.Object) -> onPostExecute
-    77:77:java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
+    88:220:java.lang.Void doInBackground(java.lang.Void[]) -> a
+    225:248:int img(java.lang.String,java.lang.String) -> a
+    255:271:void onPostExecute(java.lang.Void) -> a
+    275:286:void onPreExecute() -> onPreExecute
+    79:79:void onPostExecute(java.lang.Object) -> onPostExecute
+    79:79:java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
 ua.pp.dimoshka.classes.class_books_brochures$load_from_site$1 -> ua.pp.dimoshka.classes.c:
     ua.pp.dimoshka.classes.class_books_brochures$load_from_site this$1 -> a
-    276:277:void onCancel(android.content.DialogInterface) -> onCancel
+    282:283:void onCancel(android.content.DialogInterface) -> onCancel
 ua.pp.dimoshka.classes.class_books_brochures_adapter -> ua.pp.dimoshka.classes.d:
     int layout -> m
     ua.pp.dimoshka.classes.class_functions funct -> n
@@ -10193,20 +10193,20 @@ ua.pp.dimoshka.classes.class_functions -> ua.pp.dimoshka.classes.f:
     java.lang.String news_prefix -> c
     java.lang.String books_brochures_prefix -> d
     java.lang.String code_lng -> e
-    42:42:java.lang.Integer get_id_lng() -> a
-    45:45:java.lang.String get_news_prefix() -> b
-    48:48:java.lang.String get_books_brochures_prefix() -> c
-    51:51:java.lang.String get_code_lng() -> d
-    61:70:boolean isNetworkAvailable() -> e
-    75:84:boolean ExternalStorageState() -> f
-    91:102:java.util.Date get_jwp_jornals_rss_date(java.lang.String,java.lang.String,java.lang.String) -> a
-    107:116:java.util.Date get_string_to_date(java.lang.String,java.lang.String) -> a
-    120:120:java.lang.String get_dir_app() -> g
-    135:138:void update_file_isn(android.database.sqlite.SQLiteDatabase,java.lang.String,java.lang.Integer) -> a
-    141:141:java.lang.String stripHtml(java.lang.String) -> a
-    146:153:void send_bug_report(java.lang.Exception) -> a
-    158:198:void get_language(android.database.sqlite.SQLiteDatabase,android.content.SharedPreferences) -> a
-    202:245:boolean load_img(java.lang.String,java.lang.String,java.lang.String) -> b
+    43:43:java.lang.Integer get_id_lng() -> a
+    47:47:java.lang.String get_news_prefix() -> b
+    51:51:java.lang.String get_books_brochures_prefix() -> c
+    55:55:java.lang.String get_code_lng() -> d
+    65:74:boolean isNetworkAvailable() -> e
+    79:88:boolean ExternalStorageState() -> f
+    95:106:java.util.Date get_jwp_jornals_rss_date(java.lang.String,java.lang.String,java.lang.String) -> a
+    111:120:java.util.Date get_string_to_date(java.lang.String,java.lang.String) -> a
+    124:124:java.lang.String get_dir_app() -> g
+    139:142:void update_file_isn(android.database.sqlite.SQLiteDatabase,java.lang.String,java.lang.Integer) -> a
+    145:145:java.lang.String stripHtml(java.lang.String) -> a
+    150:157:void send_bug_report(java.lang.Exception) -> a
+    162:202:void get_language(android.database.sqlite.SQLiteDatabase,android.content.SharedPreferences) -> a
+    206:249:boolean load_img(java.lang.String,java.lang.String,java.lang.String) -> b
 ua.pp.dimoshka.classes.class_jornals_adapter -> ua.pp.dimoshka.classes.g:
     int layout -> m
     ua.pp.dimoshka.classes.class_functions funct -> n
@@ -10390,7 +10390,7 @@ ua.pp.dimoshka.classes.class_rss_news$ReadFeedTask$1 -> ua.pp.dimoshka.classes.a
 ua.pp.dimoshka.classes.class_rss_provider -> ua.pp.dimoshka.classes.ab:
     ua.pp.dimoshka.classes.class_functions funct -> a
     com.androidquery.AQuery aq -> b
-    40:122:java.util.List parse(java.lang.String) -> a
+    41:123:java.util.List parse(java.lang.String) -> a
 ua.pp.dimoshka.classes.class_sqlite -> ua.pp.dimoshka.classes.ac:
     android.database.sqlite.SQLiteDatabase database -> a
     21:21:android.database.sqlite.SQLiteDatabase openDataBase() -> a
@@ -10430,33 +10430,33 @@ ua.pp.dimoshka.classes.service_downloads_files -> ua.pp.dimoshka.classes.service
     boolean isRunning -> e
     java.util.ArrayList targetFiles -> f
     int now_targetFile -> g
-    51:59:void onCreate() -> onCreate
-    64:85:int onStartCommand(android.content.Intent,int,int) -> onStartCommand
-    89:89:java.util.ArrayList get_targetFiles() -> a
-    93:93:int get_targetFiles_num() -> b
-    98:105:void onDestroy() -> onDestroy
-    109:109:android.os.IBinder onBind(android.content.Intent) -> onBind
-    120:135:void onFinishDownload(int) -> a
-    138:138:int getNotificationIcon() -> c
-    144:164:android.widget.RemoteViews getProgressView(int,int,int,int,java.lang.String,java.lang.String) -> a
-    169:180:void showNotification_popup(java.lang.String,java.lang.String,java.lang.String,android.content.Context) -> a
-    184:194:void showNotification(android.widget.RemoteViews,java.lang.String,android.content.Context) -> a
-    409:416:java.lang.String getStringByteSize(int) -> b
-    31:31:int access$200(ua.pp.dimoshka.classes.service_downloads_files) -> a
-    31:31:ua.pp.dimoshka.classes.class_functions access$300(ua.pp.dimoshka.classes.service_downloads_files) -> b
-    31:31:int access$208(ua.pp.dimoshka.classes.service_downloads_files) -> c
+    52:60:void onCreate() -> onCreate
+    65:86:int onStartCommand(android.content.Intent,int,int) -> onStartCommand
+    90:90:java.util.ArrayList get_targetFiles() -> a
+    94:94:int get_targetFiles_num() -> b
+    99:106:void onDestroy() -> onDestroy
+    110:110:android.os.IBinder onBind(android.content.Intent) -> onBind
+    121:136:void onFinishDownload(int) -> a
+    139:139:int getNotificationIcon() -> c
+    145:165:android.widget.RemoteViews getProgressView(int,int,int,int,java.lang.String,java.lang.String) -> a
+    170:181:void showNotification_popup(java.lang.String,java.lang.String,java.lang.String,android.content.Context) -> a
+    185:195:void showNotification(android.widget.RemoteViews,java.lang.String,android.content.Context) -> a
+    414:421:java.lang.String getStringByteSize(int) -> b
+    32:32:int access$200(ua.pp.dimoshka.classes.service_downloads_files) -> a
+    32:32:ua.pp.dimoshka.classes.class_functions access$300(ua.pp.dimoshka.classes.service_downloads_files) -> b
+    32:32:int access$208(ua.pp.dimoshka.classes.service_downloads_files) -> c
 ua.pp.dimoshka.classes.service_downloads_files$1 -> ua.pp.dimoshka.classes.ae:
 ua.pp.dimoshka.classes.service_downloads_files$AsyncDownloadTask -> ua.pp.dimoshka.classes.af:
     java.util.ArrayList targetFiles -> b
     int total_file -> c
     int success -> d
     ua.pp.dimoshka.classes.service_downloads_files this$0 -> a
-    211:214:void onPreExecute() -> onPreExecute
-    221:380:java.lang.Void doInBackground(java.lang.Void[]) -> a
-    385:391:void onCancelled() -> onCancelled
-    395:405:void onPostExecute(java.lang.Void) -> a
-    204:204:void onPostExecute(java.lang.Object) -> onPostExecute
-    204:204:java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
+    212:215:void onPreExecute() -> onPreExecute
+    222:385:java.lang.Void doInBackground(java.lang.Void[]) -> a
+    390:396:void onCancelled() -> onCancelled
+    400:410:void onPostExecute(java.lang.Void) -> a
+    205:205:void onPostExecute(java.lang.Object) -> onPostExecute
+    205:205:java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
 ua.pp.dimoshka.classes.service_downloads_files$FileDownloadBinder -> ua.pp.dimoshka.classes.ag:
     ua.pp.dimoshka.classes.service_downloads_files this$0 -> a
 ua.pp.dimoshka.jwp.books_brochures -> ua.pp.dimoshka.jwp.a:

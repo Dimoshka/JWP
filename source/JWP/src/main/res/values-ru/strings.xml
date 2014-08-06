@@ -18,8 +18,9 @@
     <string name="first_run_text">"Это ваш первый запуск программы. Пожалуйста зайдите в настройки и выберите подходящие для вас параметры. После этого нажмите на кнопку - Загрузить RSS."</string>
     <string name="no_internet">"Нету подключения к интернету!"</string>
     <string name="no_sdcard">"SDCARD не подключена!"</string>
-    <string name="dialog_loaing_rss">"Загрузка RSS. Пожалуйста подождите &#8230;"</string>
-    <string name="dialog_loaing_img">"Обновление изображений. Пожалуйста подождите &#8230;"</string>
+    <string name="dialog_loaing_rss">"Загрузка RSS. Пожалуйста подождите&#8230;"</string>
+    <string name="dialog_loaing_img">"Обновление изображений. Пожалуйста подождите&#8230;"</string>
+    <string name="dialog_loaing_site">"Загрузка с сайта. Пожалуйста подождите&#8230;"</string>
     <string name="management">"Управление"</string>
     <string name="reporting">"Отправка отчетов"</string>
     <string name="reporting_summary">"Разрешать автоматически отправлять отчеты о работе приложения?"</string>

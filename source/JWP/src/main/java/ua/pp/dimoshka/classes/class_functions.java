@@ -21,6 +21,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
@@ -41,12 +42,15 @@ public class class_functions {
     public Integer get_id_lng() {
         return id_lng;
     }
+
     public String get_news_prefix() {
         return news_prefix;
     }
+
     public String get_books_brochures_prefix() {
         return books_brochures_prefix;
     }
+
     public String get_code_lng() {
         return code_lng;
     }
@@ -227,7 +231,7 @@ public class class_functions {
                         fos.close();
                         return true;
                     } else return false;
-                } catch (java.net.SocketTimeoutException e) {
+                } catch (SocketTimeoutException e) {
                     return false;
                 } catch (UnknownHostException e) {
                     return false;
