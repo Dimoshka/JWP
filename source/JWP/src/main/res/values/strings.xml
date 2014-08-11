@@ -2,7 +2,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <string name="db_name" tools:ignore="MissingTranslation">"jwp.sqlite3"</string>
-    <string name="db_version" tools:ignore="MissingTranslation">"5"</string>
+    <string name="db_version" tools:ignore="MissingTranslation">"6"</string>
     <string name="app_dir" tools:ignore="MissingTranslation">"JWP"</string>
     <string name="text_test" tools:ignore="MissingTranslation">"Text title"</string>
 
@@ -17,6 +17,12 @@ The program works as RSS client."</string>
     <string name="previous" tools:ignore="MissingTranslation">"Previous"</string>
     <string name="next" tools:ignore="MissingTranslation">"Next"</string>
 
+    <string name="video_s" tools:ignore="MissingTranslation">"240p"</string>
+    <string name="video_m" tools:ignore="MissingTranslation">"360p"</string>
+    <string name="video_l" tools:ignore="MissingTranslation">"480p"</string>
+    <string name="video_xl" tools:ignore="MissingTranslation">"720p"</string>
+
+    <string name="video">"Video"</string>
     <string name="update_all_at_once">"Update all at once"</string>
     <string name="update_all_at_once_summary">"Update logs, news, books and brochures simultaneously"</string>
     <string name="books_brochures">"Books and brochures"</string>

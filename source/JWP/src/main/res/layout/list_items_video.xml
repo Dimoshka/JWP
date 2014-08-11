@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:padding="5dp"
     android:background="#fff">
 
     <ImageView
         android:id="@+id/img"
-        android:layout_width="60dp"
-        android:layout_height="78dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_alignTop="@+id/title"
@@ -25,80 +25,64 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="11dp"
         android:layout_marginTop="2dp"
-        android:paddingBottom="24dp"
-        android:textSize="16sp"
         android:textColor="@color/text_dark_blue"
+        android:textSize="16sp"
         android:layout_toRightOf="@+id/img"
+        android:paddingBottom="25dp"
         android:text="@string/text_test" />
 
+
     <ImageView
-        android:id="@+id/type5"
-        android:layout_width="30dp"
+        android:id="@+id/video"
+        android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/digitalpub"
-        android:layout_marginRight="11dp"
-        android:contentDescription="@string/rss_aac"
-        android:src="@drawable/ic_aac_0"
+        android:layout_alignBottom="@+id/img"
+        android:layout_toLeftOf="@+id/type1"
+        android:contentDescription="@string/video"
+        android:src="@drawable/ic_icon_video"
         android:layout_alignParentBottom="true" />
 
     <ImageView
         android:id="@+id/type4"
         android:layout_width="30dp"
         android:layout_height="20dp"
-        android:layout_alignTop="@+id/digitalpub"
-        android:layout_toLeftOf="@+id/type5"
-        android:contentDescription="@string/rss_mp3"
-        android:src="@drawable/ic_mp3_0"
-        android:layout_alignParentBottom="true" />
-
-    <ImageView
-        android:id="@+id/audio"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_alignTop="@+id/digitalpub"
-        android:layout_toLeftOf="@+id/type4"
-        android:contentDescription="@string/jornals"
-        android:src="@drawable/ic_icon_audio"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/video"
+        android:layout_marginRight="11dp"
+        android:contentDescription="@string/video_xl"
+        android:src="@drawable/ic_mp4_720_0"
         android:layout_alignParentBottom="true" />
 
     <ImageView
         android:id="@+id/type3"
         android:layout_width="30dp"
         android:layout_height="20dp"
-        android:layout_alignTop="@+id/digitalpub"
-        android:layout_toLeftOf="@+id/audio"
-        android:contentDescription="@string/rss_epub"
-        android:src="@drawable/ic_mobi_0"
+        android:layout_alignTop="@+id/video"
+        android:layout_toLeftOf="@+id/type4"
+        android:contentDescription="@string/video_l"
+        android:src="@drawable/ic_mp4_480_0"
         android:layout_alignParentBottom="true" />
+
 
     <ImageView
         android:id="@+id/type2"
         android:layout_width="30dp"
         android:layout_height="20dp"
-        android:layout_alignTop="@+id/digitalpub"
+        android:layout_alignTop="@+id/video"
         android:layout_toLeftOf="@+id/type3"
-        android:contentDescription="@string/rss_epub"
-        android:src="@drawable/ic_epub_0"
+        android:contentDescription="@string/video_m"
+        android:src="@drawable/ic_mp4_360_0"
         android:layout_alignParentBottom="true" />
 
     <ImageView
         android:id="@+id/type1"
         android:layout_width="30dp"
         android:layout_height="20dp"
-        android:layout_alignTop="@+id/digitalpub"
+        android:layout_alignTop="@+id/video"
         android:layout_toLeftOf="@+id/type2"
-        android:contentDescription="@string/rss_pdf"
-        android:src="@drawable/ic_pdf_0"
+        android:contentDescription="@string/video_s"
+        android:src="@drawable/ic_mp4_240_0"
         android:layout_alignParentBottom="true" />
 
-    <ImageView
-        android:id="@+id/digitalpub"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_alignBottom="@+id/img"
-        android:layout_toLeftOf="@+id/type1"
-        android:contentDescription="@string/jornals"
-        android:src="@drawable/ic_icon_digitalpub"
-        android:layout_alignParentBottom="true" />
+
 </RelativeLayout>

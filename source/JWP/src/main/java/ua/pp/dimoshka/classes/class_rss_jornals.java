@@ -65,7 +65,7 @@ public class class_rss_jornals {
     final void get_publication() {
         try {
             Cursor cursor_type = database.query("type", new String[]{"_id",
-                    "code"}, null, null, null, null, "_id");
+                    "code"}, "_id BETWEEN '1' and '10'", null, null, null, "_id");
             Cursor cursor_pub = database.query("publication", new String[]{
                     "_id", "code"}, null, null, null, null, "_id");
             cursor_type.moveToFirst();

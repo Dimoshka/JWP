@@ -15,14 +15,14 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.view.View;
 import android.widget.ListView;
 
-import ua.pp.dimoshka.adapter.jornals_adapter;
+import ua.pp.dimoshka.adapter.video_adapter;
 
-public class jornals extends ListFragment implements LoaderManager.LoaderCallbacks<Cursor> {
+public class video extends ListFragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    private jornals_adapter mAdapter = null;
+    private video_adapter mAdapter = null;
     private static main main = null;
 
-    private BroadcastReceiver receiver = new BroadcastReceiver() {
+    private final BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
@@ -32,15 +32,17 @@ public class jornals extends ListFragment implements LoaderManager.LoaderCallbac
         }
     };
 
-    public jornals() {
+    public video() {
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         main = (main) getActivity();
-        mAdapter = new jornals_adapter(
-                getActivity(), new String[]{}, new int[]{}, main.get_database(), main.get_funct());
+        mAdapter = new video_adapter(
+                getActivity(),
+                new String[]{"_id"}, new int[]{R.id.title},
+                main.get_database(), main.get_funct());
         setListAdapter(mAdapter);
         getLoaderManager().initLoader(0, null, this);
 
@@ -48,6 +50,7 @@ public class jornals extends ListFragment implements LoaderManager.LoaderCallbac
         IntentFilter intentFilter = new IntentFilter("update");
         broadcastManager.registerReceiver(receiver, intentFilter);
     }
+
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
@@ -81,7 +84,7 @@ public class jornals extends ListFragment implements LoaderManager.LoaderCallbac
     }
 
     static class MyCursorLoader extends CursorLoader {
-        SQLiteDatabase database;
+        final SQLiteDatabase database;
 
         public MyCursorLoader(Context context, SQLiteDatabase database) {
             super(context);
@@ -92,8 +95,7 @@ public class jornals extends ListFragment implements LoaderManager.LoaderCallbac
         public Cursor loadInBackground() {
             @SuppressWarnings("UnnecessaryLocalVariable") Cursor cursor = database
                     .rawQuery(
-                            "select " +
-                                    "magazine._id as _id, magazine.name as name, magazine.img as img, " +
+                            "select magazine._id as _id, magazine.name as name, magazine.title as title, magazine.img as img, " +
                                     "language.code as code_lng, " +
                                     "publication.code as code_pub, publication._id as cur_pub, date, " +
                                     "files.id_type as id_type_files, files.file as file_files " +
@@ -101,7 +103,7 @@ public class jornals extends ListFragment implements LoaderManager.LoaderCallbac
                                     "left join language on magazine.id_lang=language._id " +
                                     "left join publication on magazine.id_pub=publication._id " +
                                     "left join (select id_magazine, GROUP_CONCAT(id_type) as id_type, GROUP_CONCAT(file) as file from files group by id_magazine) as files on magazine._id=files.id_magazine " +
-                                    "where magazine.id_lang='" + main.get_funct().get_id_lng() + "' and magazine.id_pub BETWEEN '1' and '3' order by date desc, magazine.id_pub asc;",
+                                    "where magazine.id_lang='" + main.get_funct().get_id_lng() + "' and magazine.id_pub='5' order by magazine.date desc, magazine._id asc",
                             null
                     );
             return cursor;

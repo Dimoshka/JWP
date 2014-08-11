@@ -37,6 +37,7 @@ import ua.pp.dimoshka.classes.class_open_or_download;
 import ua.pp.dimoshka.classes.class_rss_jornals;
 import ua.pp.dimoshka.classes.class_rss_news;
 import ua.pp.dimoshka.classes.class_sqlite;
+import ua.pp.dimoshka.classes.class_video;
 import ua.pp.dimoshka.classes.service_downloads_files;
 
 public class main extends ActionBarActivity implements ActionBar.TabListener {
@@ -49,6 +50,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
     private class_open_or_download open_or_download = null;
     private class_rss_jornals rss_jornals = null;
     private class_rss_news rss_news = null;
+    private class_video video = null;
     private class_books_brochures books_brochures = null;
 
     private SharedPreferences prefs = null;
@@ -91,6 +93,24 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
 
     @SuppressLint("HandlerLeak")
     private final Handler handler_news = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 1:
+                    if (refresh_all.booleanValue()) {
+                        video.verify_all();
+                    } else {
+                        Log.d("JWP", "refrashe afte load");
+                        refresh();
+                    }
+                    break;
+            }
+        }
+
+    };
+
+    @SuppressLint("HandlerLeak")
+    private final Handler handler_video = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
@@ -185,6 +205,8 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
             fragment_list.add(new jornals());
             rss_news = new class_rss_news(this, database, funct);
             fragment_list.add(new news());
+            video = new class_video(this, handler_video, database, funct);
+            fragment_list.add(new video());
             books_brochures = new class_books_brochures(this, handler_books_brochures, database, funct);
             fragment_list.add(new books_brochures());
             pagerAdapter.notifyDataSetChanged();
@@ -202,7 +224,9 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
             ActionBar.Tab news_Tab = actionBar.newTab().setText(R.string.news)
                     .setTabListener(this);
             actionBar.addTab(news_Tab);
-            Log.d("LANG3", "tabs");
+            ActionBar.Tab video_Tab = actionBar.newTab().setText(R.string.video)
+                    .setTabListener(this);
+            actionBar.addTab(video_Tab);
             ActionBar.Tab publication_Tab = actionBar.newTab().setText(R.string.books_brochures)
                     .setTabListener(this);
             actionBar.addTab(publication_Tab);
@@ -326,6 +350,9 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
                             rss_news.get_all_feeds_activity(handler_news);
                             break;
                         case 2:
+                            video.verify_all();
+                            break;
+                        case 3:
                             books_brochures.verify_all();
                             break;
                         default:

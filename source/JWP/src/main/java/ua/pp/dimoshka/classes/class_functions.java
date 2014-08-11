@@ -36,7 +36,8 @@ public class class_functions {
     private Context context;
     private Integer id_lng = Integer.valueOf(1);
     private String news_prefix = "en/news";
-    private String books_brochures_prefix = "en/publications";
+    private String books_brochures_prefix = "en/publications/";
+    private String video_prefix = "en/videos/";
     private String code_lng = "E";
 
     public Integer get_id_lng() {
@@ -49,6 +50,10 @@ public class class_functions {
 
     public String get_books_brochures_prefix() {
         return books_brochures_prefix;
+    }
+
+    public String get_video_prefix() {
+        return video_prefix;
     }
 
     public String get_code_lng() {
@@ -174,11 +179,13 @@ public class class_functions {
                     news_prefix = cursor.getString(cursor.getColumnIndex("news_rss"));
                     code_lng = cursor.getString(cursor.getColumnIndex("code"));
                     books_brochures_prefix = cursor.getString(cursor.getColumnIndex("books_brochures_link"));
+                    video_prefix = cursor.getString(cursor.getColumnIndex("video_link"));
 
                 } else {
                     id_lng = Integer.valueOf(1);
                     news_prefix = "en/news";
-                    books_brochures_prefix = "en/publications";
+                    books_brochures_prefix = "en/publications/";
+                    video_prefix = "en/videos/";
                     code_lng = "E";
                 }
             } else {
@@ -189,10 +196,12 @@ public class class_functions {
                     news_prefix = cursor.getString(cursor.getColumnIndex("news_rss"));
                     code_lng = cursor.getString(cursor.getColumnIndex("code"));
                     books_brochures_prefix = cursor.getString(cursor.getColumnIndex("books_brochures_link"));
+                    video_prefix = cursor.getString(cursor.getColumnIndex("video_link"));
                 } else {
                     id_lng = Integer.valueOf(1);
                     news_prefix = "en/news";
                     books_brochures_prefix = "en/publications";
+                    video_prefix = "en/videos/";
                     code_lng = "E";
                 }
             }

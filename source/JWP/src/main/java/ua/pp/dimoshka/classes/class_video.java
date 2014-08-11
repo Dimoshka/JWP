@@ -28,7 +28,7 @@ import java.util.Date;
 
 import ua.pp.dimoshka.jwp.R;
 
-public class class_books_brochures {
+public class class_video {
     private SQLiteDatabase database;
     private class_functions funct;
     private Context context;
@@ -39,11 +39,12 @@ public class class_books_brochures {
 
     private ArrayList<Integer> id_type = new ArrayList<Integer>();
     private ArrayList<String> code_type = new ArrayList<String>();
+    private ArrayList<String> sub_code_type = new ArrayList<String>();
     private ArrayList<String> name_type = new ArrayList<String>();
     private static final String URL_SITE = "http://www.jw.org/";
 
-    public class_books_brochures(Context context, Handler handler,
-                                 SQLiteDatabase database, class_functions funct) {
+    public class_video(Context context, Handler handler,
+                       SQLiteDatabase database, class_functions funct) {
         this.context = context;
         this.handler = handler;
         this.database = database;
@@ -59,7 +60,7 @@ public class class_books_brochures {
     final void get_publication() {
         try {
             Cursor cursor_type = database.query("type", new String[]{"_id",
-                    "name", "code"}, "_id BETWEEN '1' and '10'", null, null, null, "_id");
+                    "name", "code", "sub_code"}, "_id>10", null, null, null, "_id");
             cursor_type.moveToFirst();
 
             for (int i = 0; i < cursor_type.getCount(); i++) {
@@ -69,6 +70,8 @@ public class class_books_brochures {
                         .getColumnIndex("name")));
                 code_type.add(cursor_type.getString(cursor_type
                         .getColumnIndex("code")));
+                sub_code_type.add(cursor_type.getString(cursor_type
+                        .getColumnIndex("sub_code")));
                 cursor_type.moveToNext();
             }
         } catch (Exception e) {
@@ -89,16 +92,16 @@ public class class_books_brochures {
                 Date date_now = new Date();
 
                 if (funct.ExternalStorageState()) {
-                    Document doc = Jsoup.connect(URL_SITE + funct.get_books_brochures_prefix() + "?sortBy=1").get();
+                    Document doc = Jsoup.connect(URL_SITE + funct.get_video_prefix() + "?sortBy=1").get();
                     Elements pages = doc.getElementsByClass("pageNum");
 
                     //Elements pages_a = pages.get(0).getElementsByTag("a");
                     ArrayList<String> pages_list = new ArrayList<String>();
-                    pages_list.add(URL_SITE + funct.get_books_brochures_prefix());
+                    pages_list.add(URL_SITE + funct.get_video_prefix());
 
                     for (Element link : pages) {
                         pages_list.add(URL_SITE + link.attr("href"));
-                        //Log.e("BOOKS", link.attr("href") + " " + link.text());
+                        //Log.e("VIDEO", link.attr("href") + " " + link.text());
                     }
 
 
@@ -108,7 +111,7 @@ public class class_books_brochures {
                         //        R.string.dialog_loaing_site) + " " + i + 1);
 
                         if (isCancelled()) {
-                            int currentapiVersion = android.os.Build.VERSION.SDK_INT;
+                            int currentapiVersion = Build.VERSION.SDK_INT;
                             if (currentapiVersion >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
                                 Log.d("JWP", "isCancelled+");
                                 if (dialog != null)
@@ -130,21 +133,29 @@ public class class_books_brochures {
 
                             String img_link = null;
                             String title = null;
+                            String descript = null;
                             String name = null;
 
-                            Elements img_el = publ.getElementsByClass("hideObj");
+                            Elements img_el = publ.getElementsByClass("jsRespImg");
                             if (img_el.size() > 0) {
-                                img_link = URL_SITE + img_el.get(0).attr("data-src");
+                                img_link = img_el.get(0).attr("data-img-size-xs").trim();
+                                Log.e("Video", img_link);
                                 String[] a = img_link.split("/");
-                                name = a[a.length - 1].replace("_xs.jpg", "").toString();
-
+                                name = a[a.length - 1].replace("_xs.jpg", "").toString() + "_" + funct.get_code_lng();
                             } else continue;
-                            Elements publicationDesc = publ.getElementsByClass("publicationDesc");
+                            Elements publicationDesc = publ.getElementsByClass("syn-body");
                             if (publicationDesc.size() > 0) {
                                 Elements h3 = publicationDesc.get(0).getElementsByTag("h3");
                                 if (h3.size() > 0) {
                                     title = funct.stripHtml(h3.text());
                                 } else continue;
+
+
+                                Elements desc = publicationDesc.get(0).getElementsByClass("desc");
+                                if (desc.size() > 0) {
+                                    descript = funct.stripHtml(desc.text());
+                                }
+
                             } else continue;
 
 
@@ -170,7 +181,7 @@ public class class_books_brochures {
                                 ContentValues init1 = new ContentValues();
                                 init1.put("name", name);
                                 init1.put("title", title);
-                                init1.put("id_pub", 4);
+                                init1.put("id_pub", 5);
                                 init1.put("id_lang", funct.get_id_lng());
                                 init1.put("img", img);
                                 init1.put("date", dat_format.format(date_now));
@@ -180,7 +191,7 @@ public class class_books_brochures {
 
                             }
 
-
+/*
                             Elements downloadLinks = publ.getElementsByClass("downloadLinks");
                             if (downloadLinks.size() > 0) {
                                 Elements jsToolTip = downloadLinks.get(0).getElementsByClass("jsToolTip").addClass("fileLinks");
@@ -192,7 +203,7 @@ public class class_books_brochures {
                                                 //Log.e("Pub", id_magazine + " - " + ahref.get(b).text().trim() + " " + (URL_SITE + ahref.get(b).attr("href")).replace("//apps", "/apps"));
                                                 int id = name_type.indexOf(ahref.get(b).text().trim());
                                                 if (id > -1) {
-                                                    if (id_type.get(id) != 6 && id_magazine > -1) {
+                                                    if (id_type.get(id) != 3 && id_magazine > -1) {
                                                         ContentValues init = new ContentValues();
                                                         init.put("id_magazine", id_magazine);
                                                         init.put("id_type", id_type.get(id));
@@ -210,6 +221,9 @@ public class class_books_brochures {
                                     }
                                 }
                             }
+                           */
+
+
                         }
                     }
                 }
@@ -228,7 +242,7 @@ public class class_books_brochures {
             int img = 0;
             if (prefs.getBoolean("downloads_img", true)) {
                 if (funct.ExternalStorageState()) {
-                    File dir = new File(funct.get_dir_app() + "/img/books_brochures/");
+                    File dir = new File(funct.get_dir_app() + "/img/video/");
                     if (!dir.isDirectory()) {
                         dir.mkdirs();
                     }
@@ -278,7 +292,7 @@ public class class_books_brochures {
             this.dialog = ProgressDialog
                     .show(context,
                             context.getResources().getString(
-                                    R.string.books_brochures),
+                                    R.string.video),
                             context.getResources().getString(
                                     R.string.dialog_loaing_site), true, true, new DialogInterface.OnCancelListener() {
                                 public void onCancel(DialogInterface pd) {

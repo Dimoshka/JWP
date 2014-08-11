@@ -31,9 +31,9 @@ import com.google.analytics.tracking.android.EasyTracker;
 
 import java.io.File;
 
+import ua.pp.dimoshka.adapter.player_adapter;
 import ua.pp.dimoshka.classes.class_functions;
 import ua.pp.dimoshka.classes.class_mediaplayer;
-import ua.pp.dimoshka.classes.class_player_adapter;
 import ua.pp.dimoshka.classes.class_sqlite;
 import ua.pp.dimoshka.classes.service_downloads_files;
 
@@ -54,7 +54,7 @@ public class player extends ActionBarActivity implements LoaderManager.LoaderCal
     AFListener afListenerMusic = null;
     MediaPlayer mpMusic = null;
 
-    private class_player_adapter mAdapter = null;
+    private player_adapter mAdapter = null;
 
     private final Handler handler_completion = new Handler() {
         @Override
@@ -84,7 +84,7 @@ public class player extends ActionBarActivity implements LoaderManager.LoaderCal
         AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         initViews();
 
-        mAdapter = new class_player_adapter(this,
+        mAdapter = new player_adapter(this,
                 new String[]{"title"}, new int[]{android.R.id.text1});
         listView.setAdapter(mAdapter);
         getSupportLoaderManager().initLoader(0, null, this);
@@ -149,7 +149,7 @@ public class player extends ActionBarActivity implements LoaderManager.LoaderCal
 
     private void play(Integer position) {
         buttonPlayStop.setEnabled(false);
-        Cursor cursor = ((class_player_adapter) listView.getAdapter()).getCursor();
+        Cursor cursor = ((player_adapter) listView.getAdapter()).getCursor();
         cursor.moveToPosition(position.intValue());
 
         String name = cursor.getString(cursor
@@ -306,7 +306,7 @@ public class player extends ActionBarActivity implements LoaderManager.LoaderCal
 
 
     private void load_all_file() {
-        Cursor cursor = ((class_player_adapter) listView.getAdapter()).getCursor();
+        Cursor cursor = ((player_adapter) listView.getAdapter()).getCursor();
         cursor.moveToFirst();
         for (int i = 0; i < cursor.getCount(); i++) {
             String name = cursor.getString(cursor

@@ -47,7 +47,7 @@ public class class_open_or_download {
                         String name;
 
                         if (cursor.getInt(cursor
-                                .getColumnIndex("id_type")) != 3) {
+                                .getColumnIndex("id_type")) != 6) {
                             if (cursor.getInt(cursor
                                     .getColumnIndex("file")) == 1) {
                                 name = context.getString(R.string.open)
@@ -131,8 +131,9 @@ public class class_open_or_download {
         Boolean file_enable1 = file_enable;
         try {
             String dir_path_pub;
-            if (id_pub.intValue() != 4) dir_path_pub = "/jornals/";
-            else dir_path_pub = "/books_brochures/";
+            if (id_pub.intValue() < 4) dir_path_pub = "/jornals/";
+            else if (id_pub.intValue() == 4) dir_path_pub = "/books_brochures/";
+            else dir_path_pub = "/video/";
 
             File file = new File(funct.get_dir_app() + "/downloads" + dir_path_pub + name);
             if (!file.exists()) {

@@ -15,11 +15,11 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.view.View;
 import android.widget.ListView;
 
-import ua.pp.dimoshka.classes.class_books_brochures_adapter;
+import ua.pp.dimoshka.adapter.books_brochures_adapter;
 
 public class books_brochures extends ListFragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    private class_books_brochures_adapter mAdapter = null;
+    private books_brochures_adapter mAdapter = null;
     private static main main = null;
 
     private final BroadcastReceiver receiver = new BroadcastReceiver() {
@@ -39,7 +39,7 @@ public class books_brochures extends ListFragment implements LoaderManager.Loade
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         main = (main) getActivity();
-        mAdapter = new class_books_brochures_adapter(
+        mAdapter = new books_brochures_adapter(
                 getActivity(),
                 new String[]{"_id"}, new int[]{R.id.title},
                 main.get_database(), main.get_funct());

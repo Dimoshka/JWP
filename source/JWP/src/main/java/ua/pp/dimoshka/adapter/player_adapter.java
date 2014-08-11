@@ -1,4 +1,4 @@
-package ua.pp.dimoshka.classes;
+package ua.pp.dimoshka.adapter;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -10,13 +10,13 @@ import android.widget.TextView;
 
 import ua.pp.dimoshka.jwp.R;
 
-public class class_player_adapter extends SimpleCursorAdapter {
+public class player_adapter extends SimpleCursorAdapter {
 	private int layout;
 	private String[] from;
 	private int[] to;
 
-	public class_player_adapter(Context context,
-                                String[] from, int[] to) {
+	public player_adapter(Context context,
+                          String[] from, int[] to) {
 		super(context, android.R.layout.simple_list_item_single_choice, null, from, to, 0);
 		this.layout = android.R.layout.simple_list_item_single_choice;
 		this.from = from;
