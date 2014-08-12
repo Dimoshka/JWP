@@ -133,8 +133,7 @@ public class class_rss_provider {
                     List<XmlDom> entries = xml.tags(ITEM);
                     //List<class_rss_item> list = new ArrayList<class_rss_item>();
                     class_rss_item item;
-                    for (Iterator<XmlDom> iterator = entries.iterator(); iterator.hasNext(); ) {
-                        XmlDom entry = iterator.next();
+                    for (XmlDom entry : entries) {
                         item = new class_rss_item();
 
                         Log.d("RSS Attribute", LINK);

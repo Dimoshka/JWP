@@ -114,7 +114,7 @@ public class class_rss_jornals {
                         break;
                     }
 
-                    if (id_pub.get(a) != 1 && id_pub.get(a) != 2 && id_pub.get(a) != 3) continue;
+                    if (id_pub.get(a).intValue() != 1 && id_pub.get(a).intValue() != 2 && id_pub.get(a).intValue() != 3) continue;
 
 
                     for (int b = 0; b < id_type.size(); b++) {
@@ -146,9 +146,7 @@ public class class_rss_jornals {
 
                             this.rss_list = rssfeedprovider.parse(feed);
 
-                            for (Iterator<class_rss_item> iterator = rss_list.iterator(); iterator.hasNext(); ) {
-                                class_rss_item rss_item = iterator.next();
-
+                            for (class_rss_item rss_item : rss_list) {
                                 String name = rss_item.getguid();
                                 name = name.replace(
                                         "." + code_type.get(cur_type.intValue()), "");

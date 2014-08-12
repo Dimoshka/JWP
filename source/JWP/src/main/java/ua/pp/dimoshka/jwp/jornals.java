@@ -24,8 +24,8 @@ public class jornals extends ListFragment implements LoaderManager.LoaderCallbac
     private jornals_adapter mAdapter = null;
     private static main main = null;
 
-    private int currentVisibleItemCount;
-    private int currentScrollState;
+    private int currentVisibleItemCount = 0;
+    private int currentScrollState = 0;
     private final int load_items = 10;
     private int curent_load_items = 0;
     private boolean isLoading = false;

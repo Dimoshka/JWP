@@ -75,6 +75,24 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
     }
 
     @SuppressLint("HandlerLeak")
+    private final Handler handler_news = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 1:
+                    if (refresh_all.booleanValue()) {
+                        rss_jornals.get_all_feeds();
+                    } else {
+                        Log.d("JWP", "refrashe afte load");
+                        refresh();
+                    }
+                    break;
+            }
+        }
+
+    };
+
+    @SuppressLint("HandlerLeak")
     private final Handler handler_jornals = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -91,23 +109,6 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
         }
     };
 
-    @SuppressLint("HandlerLeak")
-    private final Handler handler_news = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case 1:
-                    if (refresh_all.booleanValue()) {
-                        rss_news.get_all_feeds_activity(handler_news);
-                    } else {
-                        Log.d("JWP", "refrashe afte load");
-                        refresh();
-                    }
-                    break;
-            }
-        }
-
-    };
 
     @SuppressLint("HandlerLeak")
     private final Handler handler_video = new Handler() {
@@ -340,7 +341,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
             if (funct.isNetworkAvailable()) {
                 if (prefs.getBoolean("update_all_at_once", true)) {
                     refresh_all = Boolean.TRUE;
-                    rss_jornals.get_all_feeds();
+                    rss_news.get_all_feeds_activity(handler_news);
                 } else {
                     switch (curent_tab) {
                         case 0:

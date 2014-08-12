@@ -102,10 +102,7 @@ public class class_rss_news {
                 this.rss_list = rssfeedprovider.parse(feed);
                 ArrayList<ArrayList> items_news = new ArrayList<ArrayList>();
 
-                for (Iterator<class_rss_item> iterator = rss_list.iterator(); iterator.hasNext(); ) {
-                    class_rss_item aRss_list = iterator.next();
-
-
+                for (class_rss_item aRss_list : rss_list) {
                     if (isCancelled()) {
                         int currentapiVersion = Build.VERSION.SDK_INT;
                         if (currentapiVersion >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
@@ -168,7 +165,7 @@ public class class_rss_news {
                 }
 
                 for (int i = items_news.size(); i > 0; i--) {
-                    ArrayList<String> items = (ArrayList<String>) items_news.get(i - 1);
+                    ArrayList<String> items = items_news.get(i - 1);
                     long id_news;
                     ContentValues init = new ContentValues();
                     init.put("id_lang", items.get(0));

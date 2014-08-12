@@ -25,6 +25,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 
 import ua.pp.dimoshka.jwp.R;
 
@@ -96,14 +97,15 @@ public class class_books_brochures {
                     ArrayList<String> pages_list = new ArrayList<String>();
                     pages_list.add(URL_SITE + funct.get_books_brochures_prefix());
 
-                    for (Element link : pages) {
+                    for (Iterator<Element> iterator = pages.iterator(); iterator.hasNext(); ) {
+                        Element link = iterator.next();
                         pages_list.add(URL_SITE + link.attr("href"));
                         //Log.e("BOOKS", link.attr("href") + " " + link.text());
                     }
 
 
                     for (int i = 0; i < pages_list.size(); i++) {
-                        publishProgress(pages_list.size() - i);
+                        publishProgress(Integer.valueOf(pages_list.size() - i));
                         if (isCancelled()) {
                             int currentapiVersion = android.os.Build.VERSION.SDK_INT;
                             if (currentapiVersion >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
@@ -123,7 +125,8 @@ public class class_books_brochures {
                         Elements publications = doc.getElementsByClass("synopsis");
 
 
-                        for (Element publ : publications) {
+                        for (Iterator<Element> iterator = publications.iterator(); iterator.hasNext(); ) {
+                            Element publ = iterator.next();
 
                             String img_link = null;
                             String name = null;
@@ -139,7 +142,7 @@ public class class_books_brochures {
                             Cursor cur = database.rawQuery(
                                     "select _id, img from magazine where `name` = '" + name + "'", null);
                             long id_magazine = -1;
-                            Integer img = img(name, img_link);
+                            Integer img = Integer.valueOf(img(name, img_link));
 
                             if (cur.getCount() > 0) {
                                 cur.moveToFirst();
@@ -168,7 +171,7 @@ public class class_books_brochures {
                                 ContentValues init1 = new ContentValues();
                                 init1.put("name", name);
                                 init1.put("title", title);
-                                init1.put("id_pub", 4);
+                                init1.put("id_pub", Integer.valueOf(4));
                                 init1.put("id_lang", funct.get_id_lng());
                                 init1.put("img", img);
                                 init1.put("date", dat_format.format(date_now));
@@ -188,15 +191,15 @@ public class class_books_brochures {
                                                     //Log.e("Pub", id_magazine + " - " + ahref.get(b).text().trim() + " " + (URL_SITE + ahref.get(b).attr("href")).replace("//apps", "/apps"));
                                                     int id = name_type.indexOf(ahref.get(b).text().trim());
                                                     if (id > -1) {
-                                                        if (id_type.get(id) != 6 && id_magazine > -1) {
+                                                        if (id_type.get(id).intValue() != 6 && id_magazine > -1) {
                                                             ContentValues init = new ContentValues();
-                                                            init.put("id_magazine", id_magazine);
+                                                            init.put("id_magazine", Long.valueOf(id_magazine));
                                                             init.put("id_type", id_type.get(id));
                                                             init.put("name", name + "." + code_type.get(id));
                                                             init.put("link", (URL_SITE + ahref.get(b).attr("href")).replace("//apps", "/apps"));
                                                             init.put("pubdate", dat_format.format(date_now));
                                                             init.put("title", "");
-                                                            init.put("file", 0);
+                                                            init.put("file", Integer.valueOf(0));
                                                             database.insertWithOnConflict("files", null, init, SQLiteDatabase.CONFLICT_IGNORE);
                                                             //Log.e("Pub", init.toString());
                                                         }
@@ -250,7 +253,7 @@ public class class_books_brochures {
 
         @Override
         protected void onProgressUpdate(Integer[] progUpdate) {
-            if (progUpdate[0] >= 0) {  // change the 10000 to whatever
+            if (progUpdate[0].intValue() >= 0) {  // change the 10000 to whatever
                 dialog.setMessage(context.getResources().getString(
                         R.string.dialog_loaing_site) + " " + progUpdate[0]);
             }
