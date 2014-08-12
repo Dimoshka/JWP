@@ -10204,17 +10204,17 @@ ua.pp.dimoshka.classes.class_books_brochures -> ua.pp.dimoshka.classes.a:
 ua.pp.dimoshka.classes.class_books_brochures$load_from_site -> ua.pp.dimoshka.classes.b:
     android.app.ProgressDialog dialog -> b
     ua.pp.dimoshka.classes.class_books_brochures this$0 -> a
-    89:223:java.lang.Void doInBackground(java.lang.Void[]) -> a
-    228:251:int img(java.lang.String,java.lang.String) -> a
-    256:260:void onProgressUpdate(java.lang.Integer[]) -> a
-    265:281:void onPostExecute(java.lang.Void) -> a
-    285:296:void onPreExecute() -> onPreExecute
+    89:226:java.lang.Void doInBackground(java.lang.Void[]) -> a
+    231:254:int img(java.lang.String,java.lang.String) -> a
+    259:263:void onProgressUpdate(java.lang.Integer[]) -> a
+    268:284:void onPostExecute(java.lang.Void) -> a
+    288:299:void onPreExecute() -> onPreExecute
     80:80:void onProgressUpdate(java.lang.Object[]) -> onProgressUpdate
     80:80:void onPostExecute(java.lang.Object) -> onPostExecute
     80:80:java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
 ua.pp.dimoshka.classes.class_books_brochures$load_from_site$1 -> ua.pp.dimoshka.classes.c:
     ua.pp.dimoshka.classes.class_books_brochures$load_from_site this$1 -> a
-    292:293:void onCancel(android.content.DialogInterface) -> onCancel
+    295:296:void onCancel(android.content.DialogInterface) -> onCancel
 ua.pp.dimoshka.classes.class_functions -> ua.pp.dimoshka.classes.d:
     android.content.Context context -> a
     java.lang.Integer id_lng -> b
@@ -10436,17 +10436,17 @@ ua.pp.dimoshka.classes.class_video -> ua.pp.dimoshka.classes.y:
 ua.pp.dimoshka.classes.class_video$load_from_site -> ua.pp.dimoshka.classes.z:
     android.app.ProgressDialog dialog -> b
     ua.pp.dimoshka.classes.class_video this$0 -> a
-    94:237:java.lang.Void doInBackground(java.lang.Void[]) -> a
-    242:265:int img(java.lang.String,java.lang.String) -> a
-    270:274:void onProgressUpdate(java.lang.Integer[]) -> a
-    279:295:void onPostExecute(java.lang.Void) -> a
-    299:310:void onPreExecute() -> onPreExecute
+    94:243:java.lang.Void doInBackground(java.lang.Void[]) -> a
+    248:271:int img(java.lang.String,java.lang.String) -> a
+    276:280:void onProgressUpdate(java.lang.Integer[]) -> a
+    285:301:void onPostExecute(java.lang.Void) -> a
+    305:316:void onPreExecute() -> onPreExecute
     85:85:void onProgressUpdate(java.lang.Object[]) -> onProgressUpdate
     85:85:void onPostExecute(java.lang.Object) -> onPostExecute
     85:85:java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
 ua.pp.dimoshka.classes.class_video$load_from_site$1 -> ua.pp.dimoshka.classes.aa:
     ua.pp.dimoshka.classes.class_video$load_from_site this$1 -> a
-    306:307:void onCancel(android.content.DialogInterface) -> onCancel
+    312:313:void onCancel(android.content.DialogInterface) -> onCancel
 ua.pp.dimoshka.classes.class_widget -> ua.pp.dimoshka.classes.class_widget:
     java.text.SimpleDateFormat sdf -> a
     39:43:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]) -> onUpdate

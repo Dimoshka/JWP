@@ -185,44 +185,50 @@ public class class_video {
                                 init1.put("link_img", img_link);
                                 id_magazine = database.insert("magazine", null, init1);
                                 //id_magazine = database.insertWithOnConflict("magazine", null, init1, SQLiteDatabase.CONFLICT_IGNORE);
+                            }
 
+                            //Добавление файлов
+                            try {
+                                Elements jsCoverDoc = publ.getElementsByClass("jsCoverDoc");
+                                if (jsCoverDoc.size() > 0) {
+                                    String json = Jsoup.connect((URL_SITE + jsCoverDoc.get(0).attr("data-jsonurl").trim()).replace("//apps", "/apps")).ignoreContentType(true).execute().body();
 
-                                try {
-                                    Elements jsCoverDoc = publ.getElementsByClass("jsCoverDoc");
-                                    if (jsCoverDoc.size() > 0) {
-                                        String json = Jsoup.connect((URL_SITE + jsCoverDoc.get(0).attr("data-jsonurl").trim()).replace("//apps", "/apps")).ignoreContentType(true).execute().body();
+                                    JSONObject jObj = new JSONObject(json);
+                                    JSONObject files = jObj.getJSONObject("files");
+                                    JSONObject lng = null;
 
-                                        JSONObject jObj = new JSONObject(json);
-                                        JSONObject files = jObj.getJSONObject("files");
-                                        JSONObject lng = files.getJSONObject(funct.get_code_lng());
-                                        JSONArray mp4 = lng.getJSONArray("MP4");
-
-                                        for (int f = 0; f < mp4.length(); f++) {
-                                            JSONObject file = mp4.getJSONObject(f);
-                                            //Log.e("JSON", file.getString("label"));
-                                            JSONObject urlobj = file.getJSONObject("file");
-                                            //Log.e("JSON", urlobj.getString("url"));
-
-                                            int id = sub_code_type.indexOf(file.getString("label").toString().toLowerCase().trim());
-                                            if (id > -1 && id_magazine > -1) {
-                                                ContentValues init = new ContentValues();
-                                                init.put("id_magazine", Long.valueOf(id_magazine));
-                                                init.put("id_type", id_type.get(id));
-                                                init.put("name", name + "_" + sub_code_type.get(id) + "." + code_type.get(id));
-                                                init.put("link", (urlobj.getString("url").toString()));
-                                                init.put("pubdate", dat_format.format(date_now));
-                                                init.put("title", "");
-                                                init.put("file", Integer.valueOf(0));
-                                                database.insertWithOnConflict("files", null, init, SQLiteDatabase.CONFLICT_IGNORE);
-                                                //Log.e("Pub", init.toString());
-                                            }
-
-
-                                        }
+                                    if (files.has(funct.get_code_lng())) {
+                                        lng = files.getJSONObject(funct.get_code_lng());
+                                    } else if (files.has("univ")) {
+                                        lng = files.getJSONObject("univ");
                                     } else continue;
-                                } catch (Exception ex) {
-                                    continue;
-                                }
+
+                                    JSONArray mp4 = lng.getJSONArray("MP4");
+
+                                    for (int f = 0; f < mp4.length(); f++) {
+                                        JSONObject file = mp4.getJSONObject(f);
+                                        //Log.e("JSON", file.getString("label"));
+                                        JSONObject urlobj = file.getJSONObject("file");
+                                        //Log.e("JSON", urlobj.getString("url"));
+
+                                        int id = sub_code_type.indexOf(file.getString("label").toString().toLowerCase().trim());
+                                        if (id > -1 && id_magazine > -1) {
+                                            ContentValues init = new ContentValues();
+                                            init.put("id_magazine", Long.valueOf(id_magazine));
+                                            init.put("id_type", id_type.get(id));
+                                            init.put("name", name + "_" + sub_code_type.get(id) + "." + code_type.get(id));
+                                            init.put("link", (urlobj.getString("url").toString()));
+                                            init.put("pubdate", dat_format.format(date_now));
+                                            init.put("title", "");
+                                            init.put("file", Integer.valueOf(0));
+                                            database.insertWithOnConflict("files", null, init, SQLiteDatabase.CONFLICT_IGNORE);
+                                            //Log.e("Pub", init.toString());
+                                        }
+                                    }
+                                } else continue;
+                            } catch (Exception ex) {
+                                funct.send_bug_report(ex);
+                                continue;
                             }
                         }
                     }

@@ -178,31 +178,32 @@ public class class_books_brochures {
                                 init1.put("link_img", img_link);
                                 id_magazine = database.insert("magazine", null, init1);
                                 //id_magazine = database.insertWithOnConflict("magazine", null, init1, SQLiteDatabase.CONFLICT_IGNORE);
+                            }
 
-                                //Добавление файлов
-                                Elements downloadLinks = publ.getElementsByClass("downloadLinks");
-                                if (downloadLinks.size() > 0) {
-                                    Elements jsToolTip = downloadLinks.get(0).getElementsByClass("jsToolTip").addClass("fileLinks");
-                                    if (jsToolTip.size() > 0) {
-                                        for (int a = 0; a < jsToolTip.size(); a++) {
-                                            Elements ahref = jsToolTip.get(a).getElementsByTag("a");
-                                            if (ahref.size() > 0) {
-                                                for (int b = 0; b < ahref.size(); b++) {
-                                                    //Log.e("Pub", id_magazine + " - " + ahref.get(b).text().trim() + " " + (URL_SITE + ahref.get(b).attr("href")).replace("//apps", "/apps"));
-                                                    int id = name_type.indexOf(ahref.get(b).text().trim());
-                                                    if (id > -1) {
-                                                        if (id_type.get(id).intValue() != 6 && id_magazine > -1) {
-                                                            ContentValues init = new ContentValues();
-                                                            init.put("id_magazine", Long.valueOf(id_magazine));
-                                                            init.put("id_type", id_type.get(id));
-                                                            init.put("name", name + "." + code_type.get(id));
-                                                            init.put("link", (URL_SITE + ahref.get(b).attr("href")).replace("//apps", "/apps"));
-                                                            init.put("pubdate", dat_format.format(date_now));
-                                                            init.put("title", "");
-                                                            init.put("file", Integer.valueOf(0));
-                                                            database.insertWithOnConflict("files", null, init, SQLiteDatabase.CONFLICT_IGNORE);
-                                                            //Log.e("Pub", init.toString());
-                                                        }
+
+                            //Добавление файлов
+                            Elements downloadLinks = publ.getElementsByClass("downloadLinks");
+                            if (downloadLinks.size() > 0) {
+                                Elements jsToolTip = downloadLinks.get(0).getElementsByClass("jsToolTip").addClass("fileLinks");
+                                if (jsToolTip.size() > 0) {
+                                    for (int a = 0; a < jsToolTip.size(); a++) {
+                                        Elements ahref = jsToolTip.get(a).getElementsByTag("a");
+                                        if (ahref.size() > 0) {
+                                            for (int b = 0; b < ahref.size(); b++) {
+                                                //Log.e("Pub", id_magazine + " - " + ahref.get(b).text().trim() + " " + (URL_SITE + ahref.get(b).attr("href")).replace("//apps", "/apps"));
+                                                int id = name_type.indexOf(ahref.get(b).text().trim());
+                                                if (id > -1) {
+                                                    if (id_type.get(id).intValue() != 6 && id_magazine > -1) {
+                                                        ContentValues init = new ContentValues();
+                                                        init.put("id_magazine", Long.valueOf(id_magazine));
+                                                        init.put("id_type", id_type.get(id));
+                                                        init.put("name", name + "." + code_type.get(id));
+                                                        init.put("link", (URL_SITE + ahref.get(b).attr("href")).replace("//apps", "/apps"));
+                                                        init.put("pubdate", dat_format.format(date_now));
+                                                        init.put("title", "");
+                                                        init.put("file", Integer.valueOf(0));
+                                                        database.insertWithOnConflict("files", null, init, SQLiteDatabase.CONFLICT_IGNORE);
+                                                        //Log.e("Pub", init.toString());
                                                     }
                                                 }
                                             }
@@ -210,6 +211,8 @@ public class class_books_brochures {
                                     }
                                 }
                             }
+
+
                         }
                     }
                 }
