@@ -12,15 +12,23 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.content.LocalBroadcastManager;
+import android.util.Log;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.ListView;
 
 import ua.pp.dimoshka.adapter.books_brochures_adapter;
 
-public class books_brochures extends ListFragment implements LoaderManager.LoaderCallbacks<Cursor> {
+public class books_brochures extends ListFragment implements LoaderManager.LoaderCallbacks<Cursor>, AbsListView.OnScrollListener {
 
     private books_brochures_adapter mAdapter = null;
     private static main main = null;
+
+    private int currentVisibleItemCount;
+    private int currentScrollState;
+    private final int load_items = 10;
+    private int curent_load_items = 0;
+    private boolean isLoading = false;
 
     private final BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
@@ -49,6 +57,7 @@ public class books_brochures extends ListFragment implements LoaderManager.Loade
         LocalBroadcastManager broadcastManager = LocalBroadcastManager.getInstance(getActivity());
         IntentFilter intentFilter = new IntentFilter("update");
         broadcastManager.registerReceiver(receiver, intentFilter);
+        getListView().setOnScrollListener(this);
     }
 
 
@@ -61,6 +70,7 @@ public class books_brochures extends ListFragment implements LoaderManager.Loade
     public void refresh() {
         try {
             if (isAdded()) {
+                isLoading = false;
                 getLoaderManager().restartLoader(0, null, this);
             }
         } catch (Exception e) {
@@ -70,13 +80,47 @@ public class books_brochures extends ListFragment implements LoaderManager.Loade
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return new MyCursorLoader(getActivity(), main.get_database());
+        return new MyCursorLoader(getActivity(), main.get_database(), (load_items + curent_load_items));
     }
 
     @Override
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
         mAdapter.swapCursor(cursor);
+        Log.d("Scroll", cursor.getCount() + " - " + curent_load_items);
+        if (cursor.getCount() > curent_load_items) {
+            isLoading = false;
+        }
     }
+
+
+    @Override
+    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+        currentVisibleItemCount = visibleItemCount;
+    }
+
+    @Override
+    public void onScrollStateChanged(AbsListView view, int scrollState) {
+        currentScrollState = scrollState;
+        isScrollCompleted();
+    }
+
+    private void isScrollCompleted() {
+        if (currentVisibleItemCount > 0 && currentScrollState == SCROLL_STATE_IDLE) {
+            if (!isLoading) {
+                isLoading = true;
+                try {
+                    if (isAdded()) {
+                        curent_load_items += load_items;
+                        Log.d("Scroll", "load more: " + (curent_load_items + load_items));
+                        getLoaderManager().restartLoader(0, null, this);
+                    }
+                } catch (Exception e) {
+                    main.get_funct().send_bug_report(e);
+                }
+            }
+        }
+    }
+
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
@@ -85,10 +129,12 @@ public class books_brochures extends ListFragment implements LoaderManager.Loade
 
     static class MyCursorLoader extends CursorLoader {
         final SQLiteDatabase database;
+        final int limit;
 
-        public MyCursorLoader(Context context, SQLiteDatabase database) {
+        public MyCursorLoader(Context context, SQLiteDatabase database, int limit) {
             super(context);
             this.database = database;
+            this.limit = limit;
         }
 
         @Override
@@ -103,7 +149,7 @@ public class books_brochures extends ListFragment implements LoaderManager.Loade
                                     "left join language on magazine.id_lang=language._id " +
                                     "left join publication on magazine.id_pub=publication._id " +
                                     "left join (select id_magazine, GROUP_CONCAT(id_type) as id_type, GROUP_CONCAT(file) as file from files group by id_magazine) as files on magazine._id=files.id_magazine " +
-                                    "where magazine.id_lang='" + main.get_funct().get_id_lng() + "' and magazine.id_pub='4' order by magazine.date desc, magazine._id asc",
+                                    "where magazine.id_lang='" + main.get_funct().get_id_lng() + "' and magazine.id_pub='4' order by magazine.date desc, magazine._id asc limit 0, " + limit,
                             null
                     );
             return cursor;

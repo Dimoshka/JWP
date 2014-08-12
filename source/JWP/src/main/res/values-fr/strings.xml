@@ -8,6 +8,7 @@ En utilisant ce programme, vous aurez toujours accès aux enjeux actuels des rev
 Vous devrez télécharger les publications en différentes langues et dans différents formats (pdf, epub, mp3, aac).
 Et aussi pour recevoir des nouvelles du www.jw.org site.
 Le programme fonctionne comme client RSS."</string>
+    <string name="video">"Vidéo"</string>
     <string name="update_all_at_once">"Mettre à jour à la fois"</string>
     <string name="update_all_at_once_summary">"Mettre à jour les journaux, des nouvelles, des livres et des brochures simultanément"</string>
     <string name="books_brochures">"Livres et brochures"</string>

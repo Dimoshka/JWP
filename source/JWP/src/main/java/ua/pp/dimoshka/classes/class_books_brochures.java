@@ -103,10 +103,7 @@ public class class_books_brochures {
 
 
                     for (int i = 0; i < pages_list.size(); i++) {
-
-                        //dialog.setMessage(context.getResources().getString(
-                        //        R.string.dialog_loaing_site) + " " + i + 1);
-
+                        publishProgress(pages_list.size() - i);
                         if (isCancelled()) {
                             int currentapiVersion = android.os.Build.VERSION.SDK_INT;
                             if (currentapiVersion >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
@@ -129,7 +126,6 @@ public class class_books_brochures {
                         for (Element publ : publications) {
 
                             String img_link = null;
-                            String title = null;
                             String name = null;
 
                             Elements img_el = publ.getElementsByClass("hideObj");
@@ -139,20 +135,11 @@ public class class_books_brochures {
                                 name = a[a.length - 1].replace("_xs.jpg", "").toString();
 
                             } else continue;
-                            Elements publicationDesc = publ.getElementsByClass("publicationDesc");
-                            if (publicationDesc.size() > 0) {
-                                Elements h3 = publicationDesc.get(0).getElementsByTag("h3");
-                                if (h3.size() > 0) {
-                                    title = funct.stripHtml(h3.text());
-                                } else continue;
-                            } else continue;
-
 
                             Cursor cur = database.rawQuery(
                                     "select _id, img from magazine where `name` = '" + name + "'", null);
                             long id_magazine = -1;
                             Integer img = img(name, img_link);
-
 
                             if (cur.getCount() > 0) {
                                 cur.moveToFirst();
@@ -167,6 +154,17 @@ public class class_books_brochures {
                                             new String[]{String.valueOf(id_magazine)});
                                 }
                             } else {
+
+                                String title = null;
+                                Elements publicationDesc = publ.getElementsByClass("publicationDesc");
+                                if (publicationDesc.size() > 0) {
+                                    Elements h3 = publicationDesc.get(0).getElementsByTag("h3");
+                                    if (h3.size() > 0) {
+                                        title = funct.stripHtml(h3.text());
+                                    } else continue;
+                                } else continue;
+
+
                                 ContentValues init1 = new ContentValues();
                                 init1.put("name", name);
                                 init1.put("title", title);
@@ -178,31 +176,30 @@ public class class_books_brochures {
                                 id_magazine = database.insert("magazine", null, init1);
                                 //id_magazine = database.insertWithOnConflict("magazine", null, init1, SQLiteDatabase.CONFLICT_IGNORE);
 
-                            }
-
-
-                            Elements downloadLinks = publ.getElementsByClass("downloadLinks");
-                            if (downloadLinks.size() > 0) {
-                                Elements jsToolTip = downloadLinks.get(0).getElementsByClass("jsToolTip").addClass("fileLinks");
-                                if (jsToolTip.size() > 0) {
-                                    for (int a = 0; a < jsToolTip.size(); a++) {
-                                        Elements ahref = jsToolTip.get(a).getElementsByTag("a");
-                                        if (ahref.size() > 0) {
-                                            for (int b = 0; b < ahref.size(); b++) {
-                                                //Log.e("Pub", id_magazine + " - " + ahref.get(b).text().trim() + " " + (URL_SITE + ahref.get(b).attr("href")).replace("//apps", "/apps"));
-                                                int id = name_type.indexOf(ahref.get(b).text().trim());
-                                                if (id > -1) {
-                                                    if (id_type.get(id) != 6 && id_magazine > -1) {
-                                                        ContentValues init = new ContentValues();
-                                                        init.put("id_magazine", id_magazine);
-                                                        init.put("id_type", id_type.get(id));
-                                                        init.put("name", name + "." + code_type.get(id));
-                                                        init.put("link", (URL_SITE + ahref.get(b).attr("href")).replace("//apps", "/apps"));
-                                                        init.put("pubdate", dat_format.format(date_now));
-                                                        init.put("title", "");
-                                                        init.put("file", 0);
-                                                        database.insertWithOnConflict("files", null, init, SQLiteDatabase.CONFLICT_IGNORE);
-                                                        //Log.e("Pub", init.toString());
+                                //Добавление файлов
+                                Elements downloadLinks = publ.getElementsByClass("downloadLinks");
+                                if (downloadLinks.size() > 0) {
+                                    Elements jsToolTip = downloadLinks.get(0).getElementsByClass("jsToolTip").addClass("fileLinks");
+                                    if (jsToolTip.size() > 0) {
+                                        for (int a = 0; a < jsToolTip.size(); a++) {
+                                            Elements ahref = jsToolTip.get(a).getElementsByTag("a");
+                                            if (ahref.size() > 0) {
+                                                for (int b = 0; b < ahref.size(); b++) {
+                                                    //Log.e("Pub", id_magazine + " - " + ahref.get(b).text().trim() + " " + (URL_SITE + ahref.get(b).attr("href")).replace("//apps", "/apps"));
+                                                    int id = name_type.indexOf(ahref.get(b).text().trim());
+                                                    if (id > -1) {
+                                                        if (id_type.get(id) != 6 && id_magazine > -1) {
+                                                            ContentValues init = new ContentValues();
+                                                            init.put("id_magazine", id_magazine);
+                                                            init.put("id_type", id_type.get(id));
+                                                            init.put("name", name + "." + code_type.get(id));
+                                                            init.put("link", (URL_SITE + ahref.get(b).attr("href")).replace("//apps", "/apps"));
+                                                            init.put("pubdate", dat_format.format(date_now));
+                                                            init.put("title", "");
+                                                            init.put("file", 0);
+                                                            database.insertWithOnConflict("files", null, init, SQLiteDatabase.CONFLICT_IGNORE);
+                                                            //Log.e("Pub", init.toString());
+                                                        }
                                                     }
                                                 }
                                             }
@@ -251,6 +248,13 @@ public class class_books_brochures {
             return img;
         }
 
+        @Override
+        protected void onProgressUpdate(Integer[] progUpdate) {
+            if (progUpdate[0] >= 0) {  // change the 10000 to whatever
+                dialog.setMessage(context.getResources().getString(
+                        R.string.dialog_loaing_site) + " " + progUpdate[0]);
+            }
+        }
 
         @Override
         protected void onPostExecute(Void result) {

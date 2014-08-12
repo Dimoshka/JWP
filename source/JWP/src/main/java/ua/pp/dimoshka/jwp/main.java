@@ -81,7 +81,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
             switch (msg.what) {
                 case 1:
                     if (refresh_all.booleanValue()) {
-                        rss_news.get_all_feeds_activity(handler_news);
+                        video.verify_all();
                     } else {
                         Log.d("JWP", "refrashe afte load");
                         refresh();
@@ -98,7 +98,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
             switch (msg.what) {
                 case 1:
                     if (refresh_all.booleanValue()) {
-                        video.verify_all();
+                        rss_news.get_all_feeds_activity(handler_news);
                     } else {
                         Log.d("JWP", "refrashe afte load");
                         refresh();
@@ -201,10 +201,10 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
     private void create_fragments() {
         try {
             fragment_list.clear();
-            rss_jornals = new class_rss_jornals(this, handler_jornals, database, funct);
-            fragment_list.add(new jornals());
             rss_news = new class_rss_news(this, database, funct);
             fragment_list.add(new news());
+            rss_jornals = new class_rss_jornals(this, handler_jornals, database, funct);
+            fragment_list.add(new jornals());
             video = new class_video(this, handler_video, database, funct);
             fragment_list.add(new video());
             books_brochures = new class_books_brochures(this, handler_books_brochures, database, funct);
@@ -218,12 +218,12 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
     private void create_tabs() {
         try {
             if (actionBar.getTabCount() > 0) actionBar.removeAllTabs();
-            ActionBar.Tab jornals_Tab = actionBar.newTab().setText(R.string.jornals)
-                    .setTabListener(this);
-            actionBar.addTab(jornals_Tab);
             ActionBar.Tab news_Tab = actionBar.newTab().setText(R.string.news)
                     .setTabListener(this);
             actionBar.addTab(news_Tab);
+            ActionBar.Tab jornals_Tab = actionBar.newTab().setText(R.string.jornals)
+                    .setTabListener(this);
+            actionBar.addTab(jornals_Tab);
             ActionBar.Tab video_Tab = actionBar.newTab().setText(R.string.video)
                     .setTabListener(this);
             actionBar.addTab(video_Tab);
@@ -344,10 +344,10 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
                 } else {
                     switch (curent_tab) {
                         case 0:
-                            rss_jornals.get_all_feeds();
+                            rss_news.get_all_feeds_activity(handler_news);
                             break;
                         case 1:
-                            rss_news.get_all_feeds_activity(handler_news);
+                            rss_jornals.get_all_feeds();
                             break;
                         case 2:
                             video.verify_all();

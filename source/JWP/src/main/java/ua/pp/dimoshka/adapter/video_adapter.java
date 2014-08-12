@@ -90,25 +90,25 @@ public class video_adapter extends SimpleCursorAdapter {
                 for (int i = 0; i < id_type_files.length; i++) {
                     Boolean file_isn = Boolean.valueOf(Integer.parseInt(file_files[i]) != 0);
                     switch (Integer.parseInt(id_type_files[i])) {
-                        case 1:
+                        case 11:
                             if (file_isn.booleanValue())
                                 aq.id(R.id.type1).image(R.drawable.ic_mp4_240_1);
                             else
                                 aq.id(R.id.type1).image(R.drawable.ic_mp4_240_0);
                             break;
-                        case 2:
+                        case 12:
                             if (file_isn.booleanValue())
                                 aq.id(R.id.type2).image(R.drawable.ic_mp4_360_1);
                             else
                                 aq.id(R.id.type2).image(R.drawable.ic_mp4_360_0);
                             break;
-                        case 3:
+                        case 13:
                             if (file_isn.booleanValue())
                                 aq.id(R.id.type3).image(R.drawable.ic_mp4_480_1);
                             else
                                 aq.id(R.id.type3).image(R.drawable.ic_mp4_480_0);
                             break;
-                        case 4:
+                        case 14:
                             if (file_isn.booleanValue())
                                 aq.id(R.id.type4).image(R.drawable.ic_mp4_720_1);
                             else

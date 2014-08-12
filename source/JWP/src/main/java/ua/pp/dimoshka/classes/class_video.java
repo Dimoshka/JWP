@@ -13,6 +13,8 @@ import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -60,7 +62,7 @@ public class class_video {
     final void get_publication() {
         try {
             Cursor cursor_type = database.query("type", new String[]{"_id",
-                    "name", "code", "sub_code"}, "_id>10", null, null, null, "_id");
+                    "name", "code", "sub_code"}, "_id BETWEEN '11' and '15'", null, null, null, "_id");
             cursor_type.moveToFirst();
 
             for (int i = 0; i < cursor_type.getCount(); i++) {
@@ -106,10 +108,7 @@ public class class_video {
 
 
                     for (int i = 0; i < pages_list.size(); i++) {
-
-                        //dialog.setMessage(context.getResources().getString(
-                        //        R.string.dialog_loaing_site) + " " + i + 1);
-
+                        publishProgress(pages_list.size() - i);
                         if (isCancelled()) {
                             int currentapiVersion = Build.VERSION.SDK_INT;
                             if (currentapiVersion >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
@@ -122,7 +121,6 @@ public class class_video {
                             break;
                         }
 
-
                         if (i != 0) {
                             doc = Jsoup.connect(pages_list.get(i)).get();
                         }
@@ -130,40 +128,20 @@ public class class_video {
 
 
                         for (Element publ : publications) {
-
                             String img_link = null;
-                            String title = null;
-                            String descript = null;
                             String name = null;
-
                             Elements img_el = publ.getElementsByClass("jsRespImg");
                             if (img_el.size() > 0) {
                                 img_link = img_el.get(0).attr("data-img-size-xs").trim();
-                                Log.e("Video", img_link);
+                                //Log.e("Video", img_link);
                                 String[] a = img_link.split("/");
                                 name = a[a.length - 1].replace("_xs.jpg", "").toString() + "_" + funct.get_code_lng();
                             } else continue;
-                            Elements publicationDesc = publ.getElementsByClass("syn-body");
-                            if (publicationDesc.size() > 0) {
-                                Elements h3 = publicationDesc.get(0).getElementsByTag("h3");
-                                if (h3.size() > 0) {
-                                    title = funct.stripHtml(h3.text());
-                                } else continue;
-
-
-                                Elements desc = publicationDesc.get(0).getElementsByClass("desc");
-                                if (desc.size() > 0) {
-                                    descript = funct.stripHtml(desc.text());
-                                }
-
-                            } else continue;
-
 
                             Cursor cur = database.rawQuery(
                                     "select _id, img from magazine where `name` = '" + name + "'", null);
                             long id_magazine = -1;
                             Integer img = img(name, img_link);
-
 
                             if (cur.getCount() > 0) {
                                 cur.moveToFirst();
@@ -174,10 +152,26 @@ public class class_video {
                                     ContentValues init = new ContentValues();
                                     init.put("img", img);
                                     Log.d("JWP_img", "update img to " + img.toString());
-                                    database.update("magazine", init, "_id=?",
-                                            new String[]{String.valueOf(id_magazine)});
+                                    //database.update("magazine", init, "_id=?",
+                                    //        new String[]{String.valueOf(id_magazine)});
                                 }
                             } else {
+                                String title = null;
+                                String descript = null;
+
+                                Elements publicationDesc = publ.getElementsByClass("syn-body");
+                                if (publicationDesc.size() > 0) {
+                                    Elements h3 = publicationDesc.get(0).getElementsByTag("h3");
+                                    if (h3.size() > 0) {
+                                        title = funct.stripHtml(h3.text());
+                                    } else continue;
+
+                                    Elements desc = publicationDesc.get(0).getElementsByClass("desc");
+                                    if (desc.size() > 0) {
+                                        descript = funct.stripHtml(desc.text());
+                                    }
+                                } else continue;
+
                                 ContentValues init1 = new ContentValues();
                                 init1.put("name", name);
                                 init1.put("title", title);
@@ -189,41 +183,44 @@ public class class_video {
                                 id_magazine = database.insert("magazine", null, init1);
                                 //id_magazine = database.insertWithOnConflict("magazine", null, init1, SQLiteDatabase.CONFLICT_IGNORE);
 
-                            }
 
-/*
-                            Elements downloadLinks = publ.getElementsByClass("downloadLinks");
-                            if (downloadLinks.size() > 0) {
-                                Elements jsToolTip = downloadLinks.get(0).getElementsByClass("jsToolTip").addClass("fileLinks");
-                                if (jsToolTip.size() > 0) {
-                                    for (int a = 0; a < jsToolTip.size(); a++) {
-                                        Elements ahref = jsToolTip.get(a).getElementsByTag("a");
-                                        if (ahref.size() > 0) {
-                                            for (int b = 0; b < ahref.size(); b++) {
-                                                //Log.e("Pub", id_magazine + " - " + ahref.get(b).text().trim() + " " + (URL_SITE + ahref.get(b).attr("href")).replace("//apps", "/apps"));
-                                                int id = name_type.indexOf(ahref.get(b).text().trim());
-                                                if (id > -1) {
-                                                    if (id_type.get(id) != 3 && id_magazine > -1) {
-                                                        ContentValues init = new ContentValues();
-                                                        init.put("id_magazine", id_magazine);
-                                                        init.put("id_type", id_type.get(id));
-                                                        init.put("name", name + "." + code_type.get(id));
-                                                        init.put("link", (URL_SITE + ahref.get(b).attr("href")).replace("//apps", "/apps"));
-                                                        init.put("pubdate", dat_format.format(date_now));
-                                                        init.put("title", "");
-                                                        init.put("file", 0);
-                                                        database.insertWithOnConflict("files", null, init, SQLiteDatabase.CONFLICT_IGNORE);
-                                                        //Log.e("Pub", init.toString());
-                                                    }
-                                                }
+                                try {
+                                    Elements jsCoverDoc = publ.getElementsByClass("jsCoverDoc");
+                                    if (jsCoverDoc.size() > 0) {
+                                        String json = Jsoup.connect((URL_SITE + jsCoverDoc.get(0).attr("data-jsonurl").trim()).replace("//apps", "/apps")).ignoreContentType(true).execute().body();
+
+                                        JSONObject jObj = new JSONObject(json);
+                                        JSONObject files = jObj.getJSONObject("files");
+                                        JSONObject lng = files.getJSONObject(funct.get_code_lng());
+                                        JSONArray mp4 = lng.getJSONArray("MP4");
+
+                                        for (int f = 0; f < mp4.length(); f++) {
+                                            JSONObject file = mp4.getJSONObject(f);
+                                            //Log.e("JSON", file.getString("label"));
+                                            JSONObject urlobj = file.getJSONObject("file");
+                                            //Log.e("JSON", urlobj.getString("url"));
+
+                                            int id = sub_code_type.indexOf(file.getString("label").toString().toLowerCase().trim());
+                                            if (id > -1 && id_magazine > -1) {
+                                                ContentValues init = new ContentValues();
+                                                init.put("id_magazine", id_magazine);
+                                                init.put("id_type", id_type.get(id));
+                                                init.put("name", name + "_" + sub_code_type.get(id) + "." + code_type.get(id));
+                                                init.put("link", (urlobj.getString("url").toString()));
+                                                init.put("pubdate", dat_format.format(date_now));
+                                                init.put("title", "");
+                                                init.put("file", 0);
+                                                database.insertWithOnConflict("files", null, init, SQLiteDatabase.CONFLICT_IGNORE);
+                                                //Log.e("Pub", init.toString());
                                             }
+
+
                                         }
-                                    }
+                                    } else continue;
+                                } catch (Exception ex) {
+                                    continue;
                                 }
                             }
-                           */
-
-
                         }
                     }
                 }
@@ -265,6 +262,13 @@ public class class_video {
             return img;
         }
 
+        @Override
+        protected void onProgressUpdate(Integer[] progUpdate) {
+            if (progUpdate[0] >= 0) {  // change the 10000 to whatever
+                dialog.setMessage(context.getResources().getString(
+                        R.string.dialog_loaing_site) + " " + progUpdate[0]);
+            }
+        }
 
         @Override
         protected void onPostExecute(Void result) {

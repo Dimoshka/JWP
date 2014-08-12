@@ -8,13 +8,14 @@
 У вас будет возможность скачивать публикации на различных языках и в различных форматах (pdf, epub, mp3, aac).
 А также возможность получать новости с сайта www.jw.org.
 Программа работает как RSS клиент."</string>
+    <string name="video">"Видео"</string>
     <string name="update_all_at_once">"Обновлять сразу все"</string>
     <string name="update_all_at_once_summary">"Обновлять журналы, новости, книги и брошюры одновременно"</string>
     <string name="books_brochures">"Книги и брошюры"</string>
     <string name="player">"MP3 player"</string>
     <string name="player_open">"Открыть в плеере"</string>
     <string name="play">"Воспроизвести"</string>
-     <string name="first_run_title">"Первый запуск программы"</string>
+    <string name="first_run_title">"Первый запуск программы"</string>
     <string name="first_run_text">"Это ваш первый запуск программы. Пожалуйста зайдите в настройки и выберите подходящие для вас параметры. После этого нажмите на кнопку - Загрузить RSS."</string>
     <string name="no_internet">"Нету подключения к интернету!"</string>
     <string name="no_sdcard">"SDCARD не подключена!"</string>

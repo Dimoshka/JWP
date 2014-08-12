@@ -8,6 +8,8 @@ El uso de este programa, usted siempre tendrá acceso a temas de actualidad de l
 Usted tendrá que descargar publicaciones en diferentes idiomas y en diferentes formatos (pdf, epub, mp3, aac).
 Y también para recibir noticias de la www.jw.org sitio.
 El programa funciona como cliente RSS."</string>
+
+    <string name="video">"Vídeo"</string>
     <string name="update_all_at_once">"Actualización de todos a la vez"</string>
     <string name="update_all_at_once_summary">"Actualizar registros, noticias, libros y folletos de forma simultánea"</string>
     <string name="books_brochures">"Libros y folletos"</string>
