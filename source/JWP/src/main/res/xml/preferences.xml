@@ -25,33 +25,42 @@
             android:summary="@string/download_on_start_summary"
             android:title="@string/download_on_start" />
     </PreferenceCategory>
-    <PreferenceCategory android:title="@string/rss_chanel_group">
+    <PreferenceCategory android:title="@string/journals_rss_chanel">
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="rss_pdf"
             android:summary="@string/rss_pdf_summary"
-            android:title="@string/rss_pdf" />
+            android:title="@string/pdf" />
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="rss_epub"
             android:summary="@string/rss_epub_summary"
-            android:title="@string/rss_epub" />
+            android:title="@string/epub" />
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="rss_mobi"
             android:summary="@string/rss_mobi_summary"
-            android:title="@string/rss_mobi" />
+            android:title="@string/mobi" />
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="rss_mp3"
             android:summary="@string/rss_mp3_summary"
-            android:title="@string/rss_mp3" />
+            android:title="@string/mp3" />
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="rss_m4b"
             android:summary="@string/rss_aac_summary"
-            android:title="@string/rss_aac" />
+            android:title="@string/aac" />
     </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/video_books_brochures">
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="site_html"
+            android:summary="@string/site_html_summary"
+            android:title="@string/site_html" />
+    </PreferenceCategory>
+
     <PreferenceCategory android:title="@string/management">
         <CheckBoxPreference
             android:defaultValue="true"

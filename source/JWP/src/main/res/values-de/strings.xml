@@ -9,9 +9,12 @@ Sie müssen Publikationen in verschiedenen Sprachen und in verschiedenen Formate
 Und auch über Neuigkeiten von der Website www.jw.org.
 Das Programm arbeitet als RSS-Client."</string>
 
+    <string name="site_html">"Von der Website heruntergeladen"</string>
+    <string name="site_html_summary">"Erhöhen Sie die Zeit und Verkehrslast"</string>
+    <string name="video_books_brochures">"Video, Bücher und Broschüren"</string>
     <string name="video">"Video"</string>
     <string name="update_all_at_once">"Aktualisieren Sie alle auf einmal"</string>
-    <string name="update_all_at_once_summary">"Update-Protokolle, Nachrichten, Bücher und Broschüren gleichzeitig"</string>
+    <string name="update_all_at_once_summary">"Veröffentlichen Sie News, Zeitschriften, Videos, Bücher und Broschüren - gleichzeitig"</string>
     <string name="books_brochures">"Bücher und Broschüren"</string>
     <string name="player">"MP3 player"</string>
     <string name="player_open">"Öffnen Sie im Player"</string>
@@ -33,7 +36,7 @@ Das Programm arbeitet als RSS-Client."</string>
     <string name="language">"Sprachen"</string>
     <string name="language_summary">"Wählen Sie eine Sprache Publikationen."</string>
     <string name="exit">"Ausgang"</string>
-    <string name="preference">"Einstellungen"</string>
+    <string name="settings">"Einstellungen"</string>
     <string name="update">"Aktualisieren"</string>
     <string name="interface_group">"Interface"</string>
     <string name="open">"Öffnen"</string>
@@ -46,18 +49,13 @@ Das Programm arbeitet als RSS-Client."</string>
     <string name="download_finished">"Download Complete!"</string>
     <string name="download_cancelled">"Laden abgesagt!"</string>
     <string name="download_task_added">"Datei hinzugefügt, um die Download-Warteschlange."</string>
-    <string name="rss_pdf">"RSS - PDF"</string>
     <string name="rss_pdf_summary">"Legen Sie RSS-Feed PDF-Format"</string>
-    <string name="rss_epub">"RSS - EPUB"</string>
     <string name="rss_epub_summary">"Legen Sie RSS-Feed EPUB-Format"</string>
-    <string name="rss_mobi">"RSS - MOBI"</string>
     <string name="rss_mobi_summary">"Legen Sie RSS-Feed MOBI-Format"</string>
-    <string name="rss_mp3">"RSS - MP3"</string>
     <string name="rss_mp3_summary">"RSS-Feed Upload MP3-Format"</string>
-    <string name="rss_aac">"RSS - AAC"</string>
     <string name="rss_aac_summary">"Legen Sie RSS-Feed AAC-Format"</string>
-    <string name="rss_chanel_group">"RSS-Feeds"</string>
-    <string name="jornals">"Zeitschriften"</string>
+    <string name="journals_rss_chanel">"Zeitschriften - RSS-Feeds"</string>
+    <string name="journals">"Zeitschriften"</string>
     <string name="news">"Neuigkeiten"</string>
 
 </resources>

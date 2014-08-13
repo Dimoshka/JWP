@@ -1,4 +1,4 @@
-package ua.pp.dimoshka.jwp;
+package ua.pp.dimoshka.classes;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -12,17 +12,22 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.content.LocalBroadcastManager;
+import android.support.v4.widget.SimpleCursorAdapter;
 import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ListView;
 
-import ua.pp.dimoshka.adapter.jornals_adapter;
+import ua.pp.dimoshka.jwp.main;
 
-public class jornals extends ListFragment implements LoaderManager.LoaderCallbacks<Cursor>, AbsListView.OnScrollListener {
+/**
+ * Created by designers on 13.08.2014.
+ */
+public class my_ListFragment extends ListFragment implements LoaderManager.LoaderCallbacks<Cursor>, AbsListView.OnScrollListener {
 
-    private jornals_adapter mAdapter = null;
-    private static main main = null;
+    public SimpleCursorAdapter mAdapter = null;
+    public static ua.pp.dimoshka.jwp.main main = null;
+    public String sqlite_rawQuery = "";
 
     private int currentVisibleItemCount = 0;
     private int currentScrollState = 0;
@@ -30,7 +35,8 @@ public class jornals extends ListFragment implements LoaderManager.LoaderCallbac
     private int curent_load_items = 0;
     private boolean isLoading = false;
 
-    private BroadcastReceiver receiver = new BroadcastReceiver() {
+
+    private final BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
@@ -40,15 +46,13 @@ public class jornals extends ListFragment implements LoaderManager.LoaderCallbac
         }
     };
 
-    public jornals() {
-    }
-
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         main = (main) getActivity();
-        mAdapter = new jornals_adapter(
-                getActivity(), new String[]{}, new int[]{}, main.get_database(), main.get_funct());
+
+
+        setadapter_list();
         setListAdapter(mAdapter);
         getLoaderManager().initLoader(0, null, this);
 
@@ -56,6 +60,10 @@ public class jornals extends ListFragment implements LoaderManager.LoaderCallbac
         IntentFilter intentFilter = new IntentFilter("update");
         broadcastManager.registerReceiver(receiver, intentFilter);
         getListView().setOnScrollListener(this);
+    }
+
+    public void setadapter_list() {
+
     }
 
     @Override
@@ -77,7 +85,7 @@ public class jornals extends ListFragment implements LoaderManager.LoaderCallbac
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return new MyCursorLoader(getActivity(), main.get_database(), (load_items + curent_load_items));
+        return new MyCursorLoader(getActivity(), main.get_database(), sqlite_rawQuery, (load_items + curent_load_items));
     }
 
     @Override
@@ -88,6 +96,7 @@ public class jornals extends ListFragment implements LoaderManager.LoaderCallbac
             isLoading = false;
         }
     }
+
 
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
@@ -117,6 +126,7 @@ public class jornals extends ListFragment implements LoaderManager.LoaderCallbac
         }
     }
 
+
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         mAdapter.swapCursor(null);
@@ -125,31 +135,22 @@ public class jornals extends ListFragment implements LoaderManager.LoaderCallbac
     static class MyCursorLoader extends CursorLoader {
         final SQLiteDatabase database;
         final int limit;
+        final String sqlite_rawQuery;
 
-        public MyCursorLoader(Context context, SQLiteDatabase database, int limit) {
+        public MyCursorLoader(Context context, SQLiteDatabase database, String sqlite_rawQuery, int limit) {
             super(context);
             this.database = database;
             this.limit = limit;
+            this.sqlite_rawQuery = sqlite_rawQuery;
         }
 
         @Override
         public Cursor loadInBackground() {
-            @SuppressWarnings("UnnecessaryLocalVariable") Cursor cursor = database
-                    .rawQuery(
-                            "select " +
-                                    "magazine._id as _id, magazine.name as name, magazine.img as img, " +
-                                    "language.code as code_lng, " +
-                                    "publication.code as code_pub, publication._id as cur_pub, date, " +
-                                    "files.id_type as id_type_files, files.file as file_files " +
-                                    "from magazine " +
-                                    "left join language on magazine.id_lang=language._id " +
-                                    "left join publication on magazine.id_pub=publication._id " +
-                                    "left join (select id_magazine, GROUP_CONCAT(id_type) as id_type, GROUP_CONCAT(file) as file from files group by id_magazine) as files on magazine._id=files.id_magazine " +
-                                    "where magazine.id_lang='" + main.get_funct().get_id_lng() + "' and magazine.id_pub BETWEEN '1' and '3' order by date desc, magazine.id_pub asc limit 0, " + limit,
-                            null
-                    );
+            Cursor cursor = null;
+            if (sqlite_rawQuery != null && sqlite_rawQuery.length() > 0) {
+                cursor = database.rawQuery(sqlite_rawQuery.replace(";", "") + " limit 0, " + limit + ";", null);
+            }
             return cursor;
         }
-
     }
 }

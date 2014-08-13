@@ -131,7 +131,7 @@ public class class_open_or_download {
         Boolean file_enable1 = file_enable;
         try {
             String dir_path_pub;
-            if (id_pub.intValue() < 4) dir_path_pub = "/jornals/";
+            if (id_pub.intValue() < 4) dir_path_pub = "/journals/";
             else if (id_pub.intValue() == 4) dir_path_pub = "/books_brochures/";
             else dir_path_pub = "/video/";
 

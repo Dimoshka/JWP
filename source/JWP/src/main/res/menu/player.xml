@@ -25,7 +25,7 @@
         android:id="@+id/item1"
         android:icon="@drawable/ic_action_action_settings"
         app:showAsAction="ifRoom"
-        android:title="@string/preference"
+        android:title="@string/settings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"></item>
     <item

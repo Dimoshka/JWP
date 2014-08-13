@@ -22,17 +22,17 @@ import java.util.Date;
 import ua.pp.dimoshka.classes.class_functions;
 import ua.pp.dimoshka.jwp.R;
 
-public class jornals_adapter extends SimpleCursorAdapter {
+public class journals_adapter extends SimpleCursorAdapter {
 
     private int layout;
     private class_functions funct;
     private SQLiteDatabase database;
 
-    public jornals_adapter(Context context,
-                           String[] from, int[] to,
-                           SQLiteDatabase database, class_functions funct) {
-        super(context, R.layout.list_items_jornals, null, from, to, 0);
-        this.layout = R.layout.list_items_jornals;
+    public journals_adapter(Context context,
+                            String[] from, int[] to,
+                            SQLiteDatabase database, class_functions funct) {
+        super(context, R.layout.list_items_journals, null, from, to, 0);
+        this.layout = R.layout.list_items_journals;
         this.database = database;
         this.funct = funct;
     }
@@ -56,7 +56,7 @@ public class jornals_adapter extends SimpleCursorAdapter {
 
             if (img.booleanValue()) {
                 if (funct.ExternalStorageState()) {
-                    File imgFile = new File(funct.get_dir_app() + "/img/jornals/"
+                    File imgFile = new File(funct.get_dir_app() + "/img/journals/"
                             + name + ".jpg");
 
                     if (imgFile.exists()) {

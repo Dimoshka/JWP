@@ -18,12 +18,11 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 import ua.pp.dimoshka.jwp.R;
 
-public class class_rss_jornals {
+public class class_rss_journals {
 
 
     private static final String URL_FEED = "http://www.jw.org/apps/%s_sFFZRQVNZNT?rln=%s&rmn=%s&rfm=%s&rpf=&rpe=";
@@ -43,8 +42,8 @@ public class class_rss_jornals {
     private AsyncTask task = null;
 
 
-    public class_rss_jornals(Context context, Handler handler,
-                             SQLiteDatabase database, class_functions funct) {
+    public class_rss_journals(Context context, Handler handler,
+                              SQLiteDatabase database, class_functions funct) {
         this.context = context;
         this.handler = handler;
         this.database = database;
@@ -155,7 +154,7 @@ public class class_rss_jornals {
                                         "yyyy-MM-dd");
                                 DateFormat dat_format = new SimpleDateFormat(
                                         "yyyy-MM-dd");
-                                Date date = funct.get_jwp_jornals_rss_date(
+                                Date date = funct.get_jwp_journals_rss_date(
                                         name, code_pub.get(cur_pub.intValue()), funct.get_code_lng());
                                 Log.d("JWP_rss", "date = " + date.toString());
                                 String date_str = name.replace(
@@ -223,7 +222,7 @@ public class class_rss_jornals {
             Integer img = Integer.valueOf(0);
             if (prefs.getBoolean("downloads_img", true)) {
                 if (funct.ExternalStorageState()) {
-                    File dir = new File(funct.get_dir_app() + "/img/jornals/");
+                    File dir = new File(funct.get_dir_app() + "/img/journals/");
                     if (!dir.isDirectory()) {
                         dir.mkdirs();
                     }
@@ -296,7 +295,7 @@ public class class_rss_jornals {
             this.dialog = ProgressDialog
                     .show(context,
                             context.getResources().getString(
-                                    R.string.jornals),
+                                    R.string.journals),
                             context.getResources().getString(
                                     R.string.dialog_loaing_rss), true, true, new DialogInterface.OnCancelListener() {
                                 public void onCancel(DialogInterface pd) {

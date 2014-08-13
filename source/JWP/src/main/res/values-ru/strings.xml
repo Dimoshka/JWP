@@ -4,15 +4,20 @@
     <string name="app_name">"Публикации Свидетелей Иеговы"</string>
     <string name="app_name_shot">"JWP"</string>
     <string name="description">"JWP - это программа для читателей публикаций Свидетелей Иеговы.
-Используя эту программу, вы всегда будете иметь доступ к актуальным выпускам журналов «Сторожевая Башня» и «Пробудитесь».
-У вас будет возможность скачивать публикации на различных языках и в различных форматах (pdf, epub, mp3, aac).
-А также возможность получать новости с сайта www.jw.org.
-Программа работает как RSS клиент."</string>
+        Используя эту программу, вы всегда будете иметь доступ к актуальным выпускам журналов "Сторожевая башня" и "Пробудитесь".
+        Вы сможете загрузить публикации на разных языках и в различных форматах (PDF, EPUB, MOBI, MP3, AAC). А также смотреть последние новости с сайта www.jw.org.
+        Программа работает как RSS клиент.
+        Также вы можете включить функцию скачивания видео материалов, книг и брошюр.
+        Напоминание: используя мобильный интернет - помните о трафике."</string>
+
+    <string name="site_html">"Скачивание с сайта"</string>
+    <string name="site_html_summary">"Увеличит время и размер трафика"</string>
+    <string name="video_books_brochures">"Видео, Книги и брошюры"</string>
     <string name="video">"Видео"</string>
     <string name="update_all_at_once">"Обновлять сразу все"</string>
-    <string name="update_all_at_once_summary">"Обновлять журналы, новости, книги и брошюры одновременно"</string>
+    <string name="update_all_at_once_summary">"Обновлять новости, журналы, видео, книги и брошюры одновременно"</string>
     <string name="books_brochures">"Книги и брошюры"</string>
-    <string name="player">"MP3 player"</string>
+    <string name="player">"MP3 плеер"</string>
     <string name="player_open">"Открыть в плеере"</string>
     <string name="play">"Воспроизвести"</string>
     <string name="first_run_title">"Первый запуск программы"</string>
@@ -32,7 +37,7 @@
     <string name="language">"Язык"</string>
     <string name="language_summary">"Выберите язык публикаций."</string>
     <string name="exit">"Выход"</string>
-    <string name="preference">"Настройки"</string>
+    <string name="settings">"Настройки"</string>
     <string name="update">"Обновить"</string>
     <string name="interface_group">"Интерфейс"</string>
     <string name="open">"Открыть"</string>
@@ -45,18 +50,13 @@
     <string name="download_finished">"Загрузка завершена!"</string>
     <string name="download_cancelled">"Загрузка отменена!"</string>
     <string name="download_task_added">"Файл добавлен в очередь загрузки."</string>
-    <string name="rss_pdf">"RSS - PDF"</string>
     <string name="rss_pdf_summary">"Загружать RSS ленту PDF формата"</string>
-    <string name="rss_epub">"RSS - EPUB"</string>
     <string name="rss_epub_summary">"Загружать RSS ленту EPUB формата"</string>
-    <string name="rss_mobi">"RSS - MOBI"</string>
     <string name="rss_mobi_summary">"Загружать RSS ленту MOBI формата"</string>
-    <string name="rss_mp3">"RSS - MP3"</string>
     <string name="rss_mp3_summary">"Загружать RSS ленту MP3 формата"</string>
-    <string name="rss_aac">"RSS - AAC"</string>
     <string name="rss_aac_summary">"Загружать RSS ленту AAC формата"</string>
-    <string name="rss_chanel_group">"RSS каналы"</string>
-    <string name="jornals">"Журналы"</string>
+    <string name="journals_rss_chanel">"Журналы - RSS каналы"</string>
+    <string name="journals">"Журналы"</string>
     <string name="news">"Новости"</string>
 
 </resources>

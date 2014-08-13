@@ -9,9 +9,12 @@ Usted tendrá que descargar publicaciones en diferentes idiomas y en diferentes 
 Y también para recibir noticias de la www.jw.org sitio.
 El programa funciona como cliente RSS."</string>
 
+    <string name="site_html">"Descargar de la página web"</string>
+    <string name="site_html_summary">"Aumente el tiempo y la carga de tráfico"</string>
+    <string name="video_books_brochures">"Vídeo, Libros y folletos"</string>
     <string name="video">"Vídeo"</string>
     <string name="update_all_at_once">"Actualización de todos a la vez"</string>
-    <string name="update_all_at_once_summary">"Actualizar registros, noticias, libros y folletos de forma simultánea"</string>
+    <string name="update_all_at_once_summary">"Actualización de noticias, revistas, videos, libros y folletos - de forma simultánea"</string>
     <string name="books_brochures">"Libros y folletos"</string>
     <string name="player">"MP3 player"</string>
     <string name="player_open">"Open in reproductor"</string>
@@ -33,7 +36,7 @@ El programa funciona como cliente RSS."</string>
     <string name="language">"Idioma"</string>
     <string name="language_summary">"Seleccione un idioma publicaciones."</string>
     <string name="exit">"Salida"</string>
-    <string name="preference">"Configuración"</string>
+    <string name="settings">"Configuración"</string>
     <string name="update">"Actualizar"</string>
     <string name="interface_group">"Interfaz"</string>
     <string name="open">"Abierto"</string>
@@ -46,18 +49,13 @@ El programa funciona como cliente RSS."</string>
     <string name="download_finished">"Descarga completa!"</string>
     <string name="download_cancelled">"Descarga cancelada!"</string>
     <string name="download_task_added">"Archivo añade a la cola de descarga."</string>
-    <string name="rss_pdf">"RSS - PDF"</string>
     <string name="rss_pdf_summary">"Cargar RSS feed formato PDF"</string>
-    <string name="rss_epub">"RSS - EPUB"</string>
     <string name="rss_epub_summary">"Cargar RSS feed formato EPUB"</string>
-    <string name="rss_mobi">"RSS - MOBI"</string>
     <string name="rss_mobi_summary">"Cargar RSS feed formato MOBI"</string>
-    <string name="rss_mp3">"RSS - MP3"</string>
     <string name="rss_mp3_summary">"RSS feed subida formato MP3"</string>
-    <string name="rss_aac">"RSS - AAC"</string>
     <string name="rss_aac_summary">"Cargar RSS feed formato AAC"</string>
-    <string name="rss_chanel_group">"RSS Feeds"</string>
-    <string name="jornals">"Revistas"</string>
+    <string name="journals_rss_chanel">"Revistas - RSS Feeds"</string>
+    <string name="journals">"Revistas"</string>
     <string name="news">"Noticias"</string>
 
 </resources>

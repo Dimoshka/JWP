@@ -14,7 +14,7 @@
         android:layout_alignTop="@+id/title"
         android:layout_marginLeft="11dp"
         android:layout_marginRight="2dp"
-        android:contentDescription="@string/jornals"
+        android:contentDescription="@string/journals"
         android:src="@drawable/ic_noimages" />
 
     <TextView
@@ -37,7 +37,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/digitalpub"
         android:layout_marginRight="11dp"
-        android:contentDescription="@string/rss_aac"
+        android:contentDescription="@string/aac"
         android:src="@drawable/ic_aac_0"
         android:layout_alignParentBottom="true" />
 
@@ -47,7 +47,7 @@
         android:layout_height="20dp"
         android:layout_alignTop="@+id/digitalpub"
         android:layout_toLeftOf="@+id/type5"
-        android:contentDescription="@string/rss_mp3"
+        android:contentDescription="@string/mp3"
         android:src="@drawable/ic_mp3_0"
         android:layout_alignParentBottom="true" />
 
@@ -57,7 +57,7 @@
         android:layout_height="20dp"
         android:layout_alignTop="@+id/digitalpub"
         android:layout_toLeftOf="@+id/type4"
-        android:contentDescription="@string/jornals"
+        android:contentDescription="@string/journals"
         android:src="@drawable/ic_icon_audio"
         android:layout_alignParentBottom="true" />
 
@@ -67,7 +67,7 @@
         android:layout_height="20dp"
         android:layout_alignTop="@+id/digitalpub"
         android:layout_toLeftOf="@+id/audio"
-        android:contentDescription="@string/rss_epub"
+        android:contentDescription="@string/epub"
         android:src="@drawable/ic_mobi_0"
         android:layout_alignParentBottom="true" />
 
@@ -77,7 +77,7 @@
         android:layout_height="20dp"
         android:layout_alignTop="@+id/digitalpub"
         android:layout_toLeftOf="@+id/type3"
-        android:contentDescription="@string/rss_epub"
+        android:contentDescription="@string/epub"
         android:src="@drawable/ic_epub_0"
         android:layout_alignParentBottom="true" />
 
@@ -87,7 +87,7 @@
         android:layout_height="20dp"
         android:layout_alignTop="@+id/digitalpub"
         android:layout_toLeftOf="@+id/type2"
-        android:contentDescription="@string/rss_pdf"
+        android:contentDescription="@string/pdf"
         android:src="@drawable/ic_pdf_0"
         android:layout_alignParentBottom="true" />
 
@@ -97,7 +97,7 @@
         android:layout_height="20dp"
         android:layout_alignBottom="@+id/img"
         android:layout_toLeftOf="@+id/type1"
-        android:contentDescription="@string/jornals"
+        android:contentDescription="@string/journals"
         android:src="@drawable/ic_icon_digitalpub"
         android:layout_alignParentBottom="true" />
 

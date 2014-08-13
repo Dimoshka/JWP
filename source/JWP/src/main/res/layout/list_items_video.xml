@@ -14,7 +14,7 @@
         android:layout_alignTop="@+id/title"
         android:layout_marginLeft="11dp"
         android:layout_marginRight="2dp"
-        android:contentDescription="@string/jornals"
+        android:contentDescription="@string/journals"
         android:src="@drawable/ic_noimages" />
 
     <TextView

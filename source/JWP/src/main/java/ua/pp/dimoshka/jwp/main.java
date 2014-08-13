@@ -34,7 +34,7 @@ import java.util.Vector;
 import ua.pp.dimoshka.classes.class_books_brochures;
 import ua.pp.dimoshka.classes.class_functions;
 import ua.pp.dimoshka.classes.class_open_or_download;
-import ua.pp.dimoshka.classes.class_rss_jornals;
+import ua.pp.dimoshka.classes.class_rss_journals;
 import ua.pp.dimoshka.classes.class_rss_news;
 import ua.pp.dimoshka.classes.class_sqlite;
 import ua.pp.dimoshka.classes.class_video;
@@ -48,7 +48,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
     private class_functions funct = null;
 
     private class_open_or_download open_or_download = null;
-    private class_rss_jornals rss_jornals = null;
+    private class_rss_journals rss_journals = null;
     private class_rss_news rss_news = null;
     private class_video video = null;
     private class_books_brochures books_brochures = null;
@@ -81,7 +81,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
             switch (msg.what) {
                 case 1:
                     if (refresh_all.booleanValue()) {
-                        rss_jornals.get_all_feeds();
+                        rss_journals.get_all_feeds();
                     } else {
                         Log.d("JWP", "refrashe afte load");
                         refresh();
@@ -93,12 +93,14 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
     };
 
     @SuppressLint("HandlerLeak")
-    private final Handler handler_jornals = new Handler() {
+    private final Handler handler_journals = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 1:
-                    if (refresh_all.booleanValue()) {
+                    if (!prefs.getBoolean("site_html", true)) {
+                        refresh();
+                    } else if (refresh_all.booleanValue()) {
                         video.verify_all();
                     } else {
                         Log.d("JWP", "refrashe afte load");
@@ -204,12 +206,14 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
             fragment_list.clear();
             rss_news = new class_rss_news(this, database, funct);
             fragment_list.add(new news());
-            rss_jornals = new class_rss_jornals(this, handler_jornals, database, funct);
-            fragment_list.add(new jornals());
-            video = new class_video(this, handler_video, database, funct);
-            fragment_list.add(new video());
-            books_brochures = new class_books_brochures(this, handler_books_brochures, database, funct);
-            fragment_list.add(new books_brochures());
+            rss_journals = new class_rss_journals(this, handler_journals, database, funct);
+            fragment_list.add(new journals());
+            if (prefs.getBoolean("site_html", true)) {
+                video = new class_video(this, handler_video, database, funct);
+                fragment_list.add(new video());
+                books_brochures = new class_books_brochures(this, handler_books_brochures, database, funct);
+                fragment_list.add(new books_brochures());
+            }
             pagerAdapter.notifyDataSetChanged();
         } catch (Exception e) {
             funct.send_bug_report(e);
@@ -222,15 +226,18 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
             ActionBar.Tab news_Tab = actionBar.newTab().setText(R.string.news)
                     .setTabListener(this);
             actionBar.addTab(news_Tab);
-            ActionBar.Tab jornals_Tab = actionBar.newTab().setText(R.string.jornals)
+            ActionBar.Tab journals_Tab = actionBar.newTab().setText(R.string.journals)
                     .setTabListener(this);
-            actionBar.addTab(jornals_Tab);
-            ActionBar.Tab video_Tab = actionBar.newTab().setText(R.string.video)
-                    .setTabListener(this);
-            actionBar.addTab(video_Tab);
-            ActionBar.Tab publication_Tab = actionBar.newTab().setText(R.string.books_brochures)
-                    .setTabListener(this);
-            actionBar.addTab(publication_Tab);
+            actionBar.addTab(journals_Tab);
+
+            if (prefs.getBoolean("site_html", true)) {
+                ActionBar.Tab video_Tab = actionBar.newTab().setText(R.string.video)
+                        .setTabListener(this);
+                actionBar.addTab(video_Tab);
+                ActionBar.Tab publication_Tab = actionBar.newTab().setText(R.string.books_brochures)
+                        .setTabListener(this);
+                actionBar.addTab(publication_Tab);
+            }
             curent_tab = 0;
         } catch (Exception e) {
             funct.send_bug_report(e);
@@ -348,7 +355,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
                             rss_news.get_all_feeds_activity(handler_news);
                             break;
                         case 1:
-                            rss_jornals.get_all_feeds();
+                            rss_journals.get_all_feeds();
                             break;
                         case 2:
                             video.verify_all();

@@ -95,8 +95,8 @@ public class class_functions {
     }
 
 
-    public Date get_jwp_jornals_rss_date(String name, String code_pub,
-                                         String code_lng) {
+    public Date get_jwp_journals_rss_date(String name, String code_pub,
+                                          String code_lng) {
         String date_str = name;
         date_str = date_str.replace(code_pub + "_", "");
         date_str = date_str.replace(code_lng + "_", "");

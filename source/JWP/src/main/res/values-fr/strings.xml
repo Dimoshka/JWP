@@ -8,9 +8,13 @@ En utilisant ce programme, vous aurez toujours accès aux enjeux actuels des rev
 Vous devrez télécharger les publications en différentes langues et dans différents formats (pdf, epub, mp3, aac).
 Et aussi pour recevoir des nouvelles du www.jw.org site.
 Le programme fonctionne comme client RSS."</string>
+
+    <string name="site_html">"Téléchargé à partir du site Web"</string>
+    <string name="site_html_summary">"Augmenter le temps et la charge de trafic"</string>
+    <string name="video_books_brochures">"Vidéo, Livres et brochures"</string>
     <string name="video">"Vidéo"</string>
     <string name="update_all_at_once">"Mettre à jour à la fois"</string>
-    <string name="update_all_at_once_summary">"Mettre à jour les journaux, des nouvelles, des livres et des brochures simultanément"</string>
+    <string name="update_all_at_once_summary">"Mettre à jour des nouvelles, des revues, des vidéos, des livres et des brochures - simultanément"</string>
     <string name="books_brochures">"Livres et brochures"</string>
     <string name="player">"MP3 player"</string>
     <string name="player_open">"Open in joueur"</string>
@@ -32,7 +36,7 @@ Le programme fonctionne comme client RSS."</string>
     <string name="language">"Langue"</string>
     <string name="language_summary">"Sélectionner un langage publications."</string>
     <string name="exit">"Sortie"</string>
-    <string name="preference">"Réglages"</string>
+    <string name="settings">"Réglages"</string>
     <string name="update">"Mettre à jour"</string>
     <string name="interface_group">"Interface"</string>
     <string name="open">"Ouvert"</string>
@@ -45,18 +49,13 @@ Le programme fonctionne comme client RSS."</string>
     <string name="download_finished">"Téléchargement terminé!"</string>
     <string name="download_cancelled">"Téléchargement annulé!"</string>
     <string name="download_task_added">"Fichier ajouté à la file d'attente de téléchargement."</string>
-    <string name="rss_pdf">"RSS - PDF"</string>
     <string name="rss_pdf_summary">"Chargez Flux RSS au format PDF"</string>
-    <string name="rss_epub">"RSS - EPUB"</string>
     <string name="rss_epub_summary">"Chargez le format EPUB Flux RSS"</string>
-    <string name="rss_mobi">"RSS - MOBI"</string>
     <string name="rss_mobi_summary">"Chargez le format MOBI Flux RSS"</string>
-    <string name="rss_mp3">"RSS - MP3"</string>
     <string name="rss_mp3_summary">"Flux RSS téléchargement format MP3"</string>
-    <string name="rss_aac">"RSS - AAC"</string>
     <string name="rss_aac_summary">"Chargez Flux RSS format AAC"</string>
-    <string name="rss_chanel_group">"Flux RSS"</string>
-    <string name="jornals">"Journaux"</string>
+    <string name="journals_rss_chanel">"Journaux - Flux RSS"</string>
+    <string name="journals">"Journaux"</string>
     <string name="news">"Nouvelles"</string>
 
 </resources>
