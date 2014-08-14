@@ -4,15 +4,12 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.androidquery.AQuery;
-import com.androidquery.callback.AjaxStatus;
 import com.androidquery.callback.BitmapAjaxCallback;
 
 import java.io.File;
@@ -53,6 +50,12 @@ public class video_adapter extends SimpleCursorAdapter {
                 file_files = c.getString(c.getColumnIndex("file_files")).split(",");
             }
 
+
+            if (Boolean.valueOf(c.getInt(c
+                    .getColumnIndex("favorite")) != 0))
+                aq.id(R.id.item).backgroundColor(v.getResources().getColor(R.color.main_lite));
+            else aq.id(R.id.item).backgroundColor(v.getResources().getColor(R.color.white));
+
             aq.id(R.id.title).text(title);
             //aq.id(R.id.text).text(name);
 
@@ -61,12 +64,21 @@ public class video_adapter extends SimpleCursorAdapter {
                     File imgFile = new File(funct.get_dir_app() + "/img/video/"
                             + name + ".jpg");
                     if (imgFile.exists()) {
-                        aq.id(R.id.img).image(imgFile, false, 78, new BitmapAjaxCallback() {
+
+
+                        /*
+                        aq.id(R.id.img).image(imgFile, false, 0, new BitmapAjaxCallback() {
                             @Override
                             public void callback(String url, ImageView iv, Bitmap bm, AjaxStatus status) {
                                 iv.setImageBitmap(bm);
                             }
                         });
+*/
+
+                        BitmapAjaxCallback cb = new BitmapAjaxCallback();
+                        cb.targetWidth(0).round(10);
+                        aq.id(R.id.img).image(imgFile, false, 0, cb);
+
                     } else {
                         aq.id(R.id.img).image(R.drawable.ic_noimages);
                         ContentValues initialValues = new ContentValues();

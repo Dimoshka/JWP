@@ -134,7 +134,7 @@ public class class_widget_factory implements RemoteViewsService.RemoteViewsFacto
             Intent clickIntent = new Intent();
             clickIntent.putExtra(class_widget.ITEM_POSITION, position);
             clickIntent.putExtra(class_widget.ITEM_LINK, cursor.getString(cursor.getColumnIndex("link")));
-            view.setOnClickFillInIntent(R.id.row_news, clickIntent);
+            view.setOnClickFillInIntent(R.id.item, clickIntent);
         } catch (Exception e) {
             funct.send_bug_report(e);
         }

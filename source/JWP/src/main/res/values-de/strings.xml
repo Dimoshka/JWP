@@ -9,6 +9,8 @@ Sie müssen Publikationen in verschiedenen Sprachen und in verschiedenen Formate
 Und auch über Neuigkeiten von der Website www.jw.org.
 Das Programm arbeitet als RSS-Client."</string>
 
+    <string name="favorite_add">"Zu den Favoriten hinzufügen"</string>
+    <string name="favorite_remove">"Aus den Favoriten entfernen"</string>
     <string name="site_html">"Von der Website heruntergeladen"</string>
     <string name="site_html_summary">"Erhöhen Sie die Zeit und Verkehrslast"</string>
     <string name="video_books_brochures">"Video, Bücher und Broschüren"</string>

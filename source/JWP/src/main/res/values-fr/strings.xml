@@ -9,6 +9,8 @@ Vous devrez télécharger les publications en différentes langues et dans diff�
 Et aussi pour recevoir des nouvelles du www.jw.org site.
 Le programme fonctionne comme client RSS."</string>
 
+    <string name="favorite_add">"Ajouter aux favoris"</string>
+    <string name="favorite_remove">"Retirer des favoris"</string>
     <string name="site_html">"Téléchargé à partir du site Web"</string>
     <string name="site_html_summary">"Augmenter le temps et la charge de trafic"</string>
     <string name="video_books_brochures">"Vidéo, Livres et brochures"</string>

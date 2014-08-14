@@ -1,12 +1,14 @@
 package ua.pp.dimoshka.classes;
 
 import android.app.AlertDialog;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
+import android.support.v4.content.LocalBroadcastManager;
 import android.webkit.MimeTypeMap;
 import android.widget.Toast;
 
@@ -38,13 +40,22 @@ public class class_open_or_download {
 
                 cursor = database
                         .rawQuery(
-                                "select files._id, id_type, file, type.name as name_type, files.name, link, files.id_magazine, magazine.id_pub, magazine.name as name_magazine from files left join magazine on files.id_magazine=magazine._id left join type on files.id_type=type._id where files.id_magazine='"
+                                "select files._id, id_type, file, type.name as name_type, files.name, link, files.id_magazine, magazine.id_pub, magazine.name as name_magazine, magazine.favorite from files left join magazine on files.id_magazine=magazine._id left join type on files.id_type=type._id where files.id_magazine='"
                                         + id + "' group by id_type order by files.id_type asc", null
                         );
                 if (cursor.getCount() > 0) {
                     cursor.moveToFirst();
                     for (int i = 0; i < cursor.getCount(); i++) {
                         String name;
+
+                        if (i == 0) {
+                            if (Boolean.valueOf(cursor.getInt(cursor
+                                    .getColumnIndex("favorite")) != 0)) {
+                                listItems.add(context.getString(R.string.favorite_remove));
+                            } else {
+                                listItems.add(context.getString(R.string.favorite_add));
+                            }
+                        }
 
                         if (cursor.getInt(cursor
                                 .getColumnIndex("id_type")) != 6) {
@@ -97,30 +108,51 @@ public class class_open_or_download {
 
     void open_or_download(int id) {
         try {
-            if (funct.ExternalStorageState()) {
-                if (cursor.getCount() > 0) {
-                    cursor.moveToPosition(id);
-                    if (cursor.getInt(cursor.getColumnIndex("id_type")) == 3) {
-                        Intent i = new Intent(context, player.class);
-                        i.setFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
-                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        i.putExtra("id_magazine", cursor.getInt(cursor
-                                .getColumnIndex("id_magazine")));
-                        context.startActivity(i);
+            if (cursor.getCount() > 0) {
+                if (id == 0) {
+                    cursor.moveToPosition(0);
+                    ContentValues initialValues = new ContentValues();
+                    if (Boolean.valueOf(cursor.getInt(cursor
+                            .getColumnIndex("favorite")) != 0)) {
+                        initialValues.put("favorite", "0");
                     } else {
-                        start_open_or_download(cursor.getString(cursor
-                                        .getColumnIndex("name")), cursor.getString(cursor.getColumnIndex("name_magazine")),
-                                Boolean.valueOf(cursor.getInt(cursor
-                                        .getColumnIndex("file")) != 0),
-                                cursor.getString(cursor
-                                        .getColumnIndex("link")), Integer.valueOf(cursor.getInt(cursor.getColumnIndex("id_pub")))
-                        );
+                        initialValues.put("favorite", "1");
                     }
+                    database.update("magazine", initialValues, "_id=?",
+                            new String[]{cursor.getString(cursor
+                                    .getColumnIndex("id_magazine"))}
+                    );
+
+                    Intent intent = new Intent("update");
+                    LocalBroadcastManager broadcastManager = LocalBroadcastManager.getInstance(context);
+                    broadcastManager.sendBroadcast(intent);
+
+                } else {
+                    cursor.moveToPosition(id - 1);
+                    if (funct.ExternalStorageState()) {
+                        if (cursor.getInt(cursor.getColumnIndex("id_type")) == 3) {
+                            Intent i = new Intent(context, player.class);
+                            i.setFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+                            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            i.putExtra("id_magazine", cursor.getInt(cursor
+                                    .getColumnIndex("id_magazine")));
+                            context.startActivity(i);
+                        } else {
+                            start_open_or_download(cursor.getString(cursor
+                                            .getColumnIndex("name")), cursor.getString(cursor.getColumnIndex("name_magazine")),
+                                    Boolean.valueOf(cursor.getInt(cursor
+                                            .getColumnIndex("file")) != 0),
+                                    cursor.getString(cursor
+                                            .getColumnIndex("link")), Integer.valueOf(cursor.getInt(cursor.getColumnIndex("id_pub")))
+                            );
+                        }
+
+                    } else
+                        Toast.makeText(context, R.string.no_sdcard,
+                                Toast.LENGTH_SHORT).show();
                 }
-            } else
-                Toast.makeText(context, R.string.no_sdcard,
-                        Toast.LENGTH_SHORT).show();
+            }
         } catch (Exception e) {
             funct.send_bug_report(e);
         }

@@ -2,7 +2,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <string name="db_name" tools:ignore="MissingTranslation">"jwp.sqlite3"</string>
-    <string name="db_version" tools:ignore="MissingTranslation">"6"</string>
+    <string name="db_version" tools:ignore="MissingTranslation">"7"</string>
     <string name="app_dir" tools:ignore="MissingTranslation">"JWP"</string>
     <string name="text_test" tools:ignore="MissingTranslation">"Text title"</string>
 
@@ -30,6 +30,9 @@
     <string name="mp3" tools:ignore="MissingTranslation">"MP3"</string>
     <string name="aac" tools:ignore="MissingTranslation">"AAC"</string>
 
+
+    <string name="favorite_add">"Add to favorites"</string>
+    <string name="favorite_remove">"Remove from favorites"</string>
     <string name="site_html">"Downloaded from the website"</string>
     <string name="site_html_summary">"Increase the time and traffic load"</string>
     <string name="video_books_brochures">"Video, Books and brochures"</string>

@@ -10,6 +10,8 @@
         Также вы можете включить функцию скачивания видео материалов, книг и брошюр.
         Напоминание: используя мобильный интернет - помните о трафике."</string>
 
+    <string name="favorite_add">"Добавить в избранное "</string>
+    <string name="favorite_remove">"Удалить из избранного"</string>
     <string name="site_html">"Скачивание с сайта"</string>
     <string name="site_html_summary">"Увеличит время и размер трафика"</string>
     <string name="video_books_brochures">"Видео, Книги и брошюры"</string>

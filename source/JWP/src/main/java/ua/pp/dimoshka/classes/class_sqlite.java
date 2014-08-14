@@ -14,7 +14,8 @@ public class class_sqlite extends SQLiteAssetHelper {
     public class_sqlite(Context context) {
         super(context, context.getString(R.string.db_name), null, Integer
                 .valueOf(context.getString(R.string.db_version)).intValue());
-        setForcedUpgrade(6);
+        setForcedUpgrade(Integer
+                .valueOf(context.getString(R.string.db_version)).intValue());
         database = this.getWritableDatabase();
     }
 
