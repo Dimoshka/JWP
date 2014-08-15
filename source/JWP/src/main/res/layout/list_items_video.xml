@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="5dp"
+        android:layout_marginLeft="11dp"
         android:layout_marginRight="11dp"
         android:layout_marginTop="2dp"
         android:textColor="@color/text_dark_blue"
@@ -45,7 +45,7 @@
         android:layout_alignParentBottom="true" />
 
     <ImageView
-        android:id="@+id/type4"
+        android:id="@+id/type1"
         android:layout_width="30dp"
         android:layout_height="20dp"
         android:layout_alignParentRight="true"
@@ -54,37 +54,5 @@
         android:contentDescription="@string/video_xl"
         android:src="@drawable/ic_mp4_720_0"
         android:layout_alignParentBottom="true" />
-
-    <ImageView
-        android:id="@+id/type3"
-        android:layout_width="30dp"
-        android:layout_height="20dp"
-        android:layout_alignTop="@+id/video"
-        android:layout_toLeftOf="@+id/type4"
-        android:contentDescription="@string/video_l"
-        android:src="@drawable/ic_mp4_480_0"
-        android:layout_alignParentBottom="true" />
-
-
-    <ImageView
-        android:id="@+id/type2"
-        android:layout_width="30dp"
-        android:layout_height="20dp"
-        android:layout_alignTop="@+id/video"
-        android:layout_toLeftOf="@+id/type3"
-        android:contentDescription="@string/video_m"
-        android:src="@drawable/ic_mp4_360_0"
-        android:layout_alignParentBottom="true" />
-
-    <ImageView
-        android:id="@+id/type1"
-        android:layout_width="30dp"
-        android:layout_height="20dp"
-        android:layout_alignTop="@+id/video"
-        android:layout_toLeftOf="@+id/type2"
-        android:contentDescription="@string/video_s"
-        android:src="@drawable/ic_mp4_240_0"
-        android:layout_alignParentBottom="true" />
-
 
 </RelativeLayout>

@@ -177,6 +177,8 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
                         .setMessage(getString(R.string.first_run_text))
                         .setNeutralButton("OK", null).show();
                 prefs.edit().putBoolean("first_run", false).apply();
+
+                funct.delete_dir_app();
             } else if (prefs.getBoolean("downloads_on_start", false)) {
                 load_rss();
             }
@@ -390,10 +392,10 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
 
     @Override
     public void onDestroy() {
-        stopService(
-                new Intent(this, service_downloads_files.class));
-        dbOpenHelper.close();
-        database.close();
+        //stopService(
+        //        new Intent(this, service_downloads_files.class));
+        //dbOpenHelper.close();
+        //database.close();
         super.onDestroy();
     }
 

@@ -43,8 +43,10 @@ public class video_adapter extends SimpleCursorAdapter {
             String name = c.getString(c.getColumnIndex("name"));
             String title = c.getString(c.getColumnIndex("title"));
 
+
             String[] id_type_files = null;
             String[] file_files = null;
+
             if (!c.isNull(c.getColumnIndex("id_type_files")) && !c.isNull(c.getColumnIndex("file_files"))) {
                 id_type_files = c.getString(c.getColumnIndex("id_type_files")).split(",");
                 file_files = c.getString(c.getColumnIndex("file_files")).split(",");
@@ -65,16 +67,6 @@ public class video_adapter extends SimpleCursorAdapter {
                             + name + ".jpg");
                     if (imgFile.exists()) {
 
-
-                        /*
-                        aq.id(R.id.img).image(imgFile, false, 0, new BitmapAjaxCallback() {
-                            @Override
-                            public void callback(String url, ImageView iv, Bitmap bm, AjaxStatus status) {
-                                iv.setImageBitmap(bm);
-                            }
-                        });
-*/
-
                         BitmapAjaxCallback cb = new BitmapAjaxCallback();
                         cb.targetWidth(0).round(10);
                         aq.id(R.id.img).image(imgFile, false, 0, cb);
@@ -94,43 +86,24 @@ public class video_adapter extends SimpleCursorAdapter {
             }
 
             aq.id(R.id.type1).image(R.drawable.ic_none_type);
-            aq.id(R.id.type2).image(R.drawable.ic_none_type);
-            aq.id(R.id.type3).image(R.drawable.ic_none_type);
-            aq.id(R.id.type4).image(R.drawable.ic_none_type);
 
             if (id_type_files != null) {
                 for (int i = 0; i < id_type_files.length; i++) {
                     Boolean file_isn = Boolean.valueOf(Integer.parseInt(file_files[i]) != 0);
+
                     switch (Integer.parseInt(id_type_files[i])) {
                         case 11:
                             if (file_isn.booleanValue())
-                                aq.id(R.id.type1).image(R.drawable.ic_mp4_240_1);
+                                aq.id(R.id.type1).image(R.drawable.ic_mp4_1);
                             else
-                                aq.id(R.id.type1).image(R.drawable.ic_mp4_240_0);
-                            break;
-                        case 12:
-                            if (file_isn.booleanValue())
-                                aq.id(R.id.type2).image(R.drawable.ic_mp4_360_1);
-                            else
-                                aq.id(R.id.type2).image(R.drawable.ic_mp4_360_0);
-                            break;
-                        case 13:
-                            if (file_isn.booleanValue())
-                                aq.id(R.id.type3).image(R.drawable.ic_mp4_480_1);
-                            else
-                                aq.id(R.id.type3).image(R.drawable.ic_mp4_480_0);
-                            break;
-                        case 14:
-                            if (file_isn.booleanValue())
-                                aq.id(R.id.type4).image(R.drawable.ic_mp4_720_1);
-                            else
-                                aq.id(R.id.type4).image(R.drawable.ic_mp4_720_0);
+                                aq.id(R.id.type1).image(R.drawable.ic_mp4_0);
                             break;
                         default:
                             break;
                     }
                 }
             }
+
         } catch (Exception e) {
             funct.send_bug_report(e);
         }

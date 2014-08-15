@@ -13,8 +13,6 @@ import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -28,6 +26,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.Map;
 
 import ua.pp.dimoshka.jwp.R;
 
@@ -42,7 +41,6 @@ public class class_video {
 
     private ArrayList<Integer> id_type = new ArrayList<Integer>();
     private ArrayList<String> code_type = new ArrayList<String>();
-    private ArrayList<String> sub_code_type = new ArrayList<String>();
     private ArrayList<String> name_type = new ArrayList<String>();
     private static final String URL_SITE = "http://www.jw.org/";
 
@@ -63,7 +61,7 @@ public class class_video {
     final void get_publication() {
         try {
             Cursor cursor_type = database.query("type", new String[]{"_id",
-                    "name", "code", "sub_code"}, "_id BETWEEN '11' and '15'", null, null, null, "_id");
+                    "name", "code"}, "_id BETWEEN '11' and '15'", null, null, null, "_id");
             cursor_type.moveToFirst();
 
             for (int i = 0; i < cursor_type.getCount(); i++) {
@@ -73,8 +71,6 @@ public class class_video {
                         .getColumnIndex("name")));
                 code_type.add(cursor_type.getString(cursor_type
                         .getColumnIndex("code")));
-                sub_code_type.add(cursor_type.getString(cursor_type
-                        .getColumnIndex("sub_code")));
                 cursor_type.moveToNext();
             }
         } catch (Exception e) {
@@ -191,38 +187,32 @@ public class class_video {
                             try {
                                 Elements jsCoverDoc = publ.getElementsByClass("jsCoverDoc");
                                 if (jsCoverDoc.size() > 0) {
-                                    String json = Jsoup.connect((URL_SITE + jsCoverDoc.get(0).attr("data-jsonurl").trim()).replace("//apps", "/apps")).ignoreContentType(true).execute().body();
+                                    for (int a = 0; a < jsCoverDoc.size(); a++) {
 
-                                    JSONObject jObj = new JSONObject(json);
-                                    JSONObject files = jObj.getJSONObject("files");
-                                    JSONObject lng = null;
 
-                                    if (files.has(funct.get_code_lng())) {
-                                        lng = files.getJSONObject(funct.get_code_lng());
-                                    } else if (files.has("univ")) {
-                                        lng = files.getJSONObject("univ");
-                                    } else continue;
-
-                                    JSONArray mp4 = lng.getJSONArray("MP4");
-
-                                    for (int f = 0; f < mp4.length(); f++) {
-                                        JSONObject file = mp4.getJSONObject(f);
-                                        //Log.e("JSON", file.getString("label"));
-                                        JSONObject urlobj = file.getJSONObject("file");
-                                        //Log.e("JSON", urlobj.getString("url"));
-
-                                        int id = sub_code_type.indexOf(file.getString("label").toString().toLowerCase().trim());
-                                        if (id > -1 && id_magazine > -1) {
-                                            ContentValues init = new ContentValues();
-                                            init.put("id_magazine", Long.valueOf(id_magazine));
-                                            init.put("id_type", id_type.get(id));
-                                            init.put("name", name + "_" + sub_code_type.get(id) + "." + code_type.get(id));
-                                            init.put("link", (urlobj.getString("url").toString()));
-                                            init.put("pubdate", dat_format.format(date_now));
-                                            init.put("title", "");
-                                            init.put("file", Integer.valueOf(0));
-                                            database.insertWithOnConflict("files", null, init, SQLiteDatabase.CONFLICT_IGNORE);
-                                            //Log.e("Pub", init.toString());
+                                        Map<String, ArrayList<Map<String, String>>> hm = funct.get_json_files((URL_SITE + jsCoverDoc.get(a).attr("data-jsonurl").trim()).replace("//apps", "/apps"));
+                                        if (hm.size() > 0) {
+                                            for (String key : hm.keySet()) {
+                                                ArrayList<Map<String, String>> hm_format_arr = hm.get(key);
+                                                for (int f = 0; f < hm_format_arr.size(); f++) {
+                                                    Map<String, String> hm_format = hm_format_arr.get(f);
+                                                    int id = name_type.indexOf(key);
+                                                    if (id > -1) {
+                                                        if (id_magazine > -1) {
+                                                            ContentValues init = new ContentValues();
+                                                            init.put("id_magazine", Long.valueOf(id_magazine));
+                                                            init.put("id_type", id_type.get(id));
+                                                            init.put("name", hm_format.get("name"));
+                                                            init.put("link", hm_format.get("url"));
+                                                            init.put("pubdate", dat_format.format(date_now));
+                                                            init.put("title", hm_format.get("title") + " " + hm_format.get("label"));
+                                                            init.put("file", Integer.valueOf(0));
+                                                            //Log.e("Pub", init.toString());
+                                                            database.insertWithOnConflict("files", null, init, SQLiteDatabase.CONFLICT_IGNORE);
+                                                        }
+                                                    }
+                                                }
+                                            }
                                         }
                                     }
                                 } else continue;

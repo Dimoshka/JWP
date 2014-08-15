@@ -365,7 +365,7 @@ public class player extends ActionBarActivity implements LoaderManager.LoaderCal
                     .rawQuery(
                             "select files._id, id_type, file, type.name as name_type, files.name, link, files.title from files left join magazine on files.id_magazine=magazine._id left join type on files.id_type=type._id where files.id_magazine='"
                                     + id_magazine
-                                    + "' and id_type='3' order by files.name asc",
+                                    + "' and id_type='6' order by files.name asc",
                             null
                     );
             return cursor;

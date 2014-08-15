@@ -26,6 +26,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.Map;
 
 import ua.pp.dimoshka.jwp.R;
 
@@ -181,38 +182,36 @@ public class class_books_brochures {
                             }
 
 
-                            //Добавление файлов
-                            Elements downloadLinks = publ.getElementsByClass("downloadLinks");
-                            if (downloadLinks.size() > 0) {
-                                Elements jsToolTip = downloadLinks.get(0).getElementsByClass("jsToolTip").addClass("fileLinks");
-                                if (jsToolTip.size() > 0) {
-                                    for (int a = 0; a < jsToolTip.size(); a++) {
-                                        Elements ahref = jsToolTip.get(a).getElementsByTag("a");
-                                        if (ahref.size() > 0) {
-                                            for (int b = 0; b < ahref.size(); b++) {
-                                                //Log.e("Pub", id_magazine + " - " + ahref.get(b).text().trim() + " " + (URL_SITE + ahref.get(b).attr("href")).replace("//apps", "/apps"));
-                                                int id = name_type.indexOf(ahref.get(b).text().trim());
+                            Elements jsCoverDoc = publ.getElementsByClass("jsToolTipTrigger");
+                            if (jsCoverDoc.size() > 0) {
+                                for (int a = 0; a < jsCoverDoc.size(); a++) {
+                                    Map<String, ArrayList<Map<String, String>>> hm = funct.get_json_files((URL_SITE + jsCoverDoc.get(a).attr("data-jsonurl").trim()).replace("//apps", "/apps"));
+                                    if (hm.size() > 0) {
+                                        for (String key : hm.keySet()) {
+                                            ArrayList<Map<String, String>> hm_format_arr = hm.get(key);
+                                            for (int f = 0; f < hm_format_arr.size(); f++) {
+                                                Map<String, String> hm_format = hm_format_arr.get(f);
+                                                int id = name_type.indexOf(key);
                                                 if (id > -1) {
-                                                    if (id_type.get(id).intValue() != 6 && id_magazine > -1) {
+                                                    if (id_magazine > -1) {
                                                         ContentValues init = new ContentValues();
                                                         init.put("id_magazine", Long.valueOf(id_magazine));
                                                         init.put("id_type", id_type.get(id));
-                                                        init.put("name", name + "." + code_type.get(id));
-                                                        init.put("link", (URL_SITE + ahref.get(b).attr("href")).replace("//apps", "/apps"));
+                                                        init.put("name", hm_format.get("name"));
+                                                        init.put("link", hm_format.get("url"));
                                                         init.put("pubdate", dat_format.format(date_now));
-                                                        init.put("title", "");
+                                                        init.put("title", hm_format.get("title"));
                                                         init.put("file", Integer.valueOf(0));
-                                                        database.insertWithOnConflict("files", null, init, SQLiteDatabase.CONFLICT_IGNORE);
                                                         //Log.e("Pub", init.toString());
+                                                        database.insertWithOnConflict("files", null, init, SQLiteDatabase.CONFLICT_IGNORE);
                                                     }
                                                 }
                                             }
                                         }
                                     }
                                 }
+
                             }
-
-
                         }
                     }
                 }

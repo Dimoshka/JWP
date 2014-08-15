@@ -14,6 +14,9 @@ import android.util.Log;
 import com.bugsense.trace.BugSenseHandler;
 
 import org.apache.http.util.ByteArrayBuffer;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.jsoup.Jsoup;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -25,9 +28,13 @@ import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Locale;
+import java.util.Map;
 
 import ua.pp.dimoshka.jwp.R;
 
@@ -130,6 +137,21 @@ public class class_functions {
                 + context.getResources().getString(R.string.app_dir);
     }
 
+    public void delete_dir_app() {
+        File file = new File(get_dir_app());
+        if (file.exists()) {
+            DeleteRecursive(file);
+        }
+    }
+
+    void DeleteRecursive(File fileOrDirectory) {
+        if (fileOrDirectory.isDirectory())
+            for (File child : fileOrDirectory.listFiles())
+                DeleteRecursive(child);
+
+        fileOrDirectory.delete();
+    }
+
     public String getMonth(int month) {
         SimpleDateFormat sdf = new SimpleDateFormat("MMMM", Locale.getDefault());
         Calendar localCalendar = Calendar.getInstance();
@@ -147,7 +169,7 @@ public class class_functions {
     }
 
     public String stripHtml(String html) {
-        return Html.fromHtml(html).toString();
+        return Html.fromHtml(html).toString().trim().replace("&quot;", "\"");
     }
 
     public void send_bug_report(Exception ex) {
@@ -256,6 +278,55 @@ public class class_functions {
                 return false;
             }
         } else return false;
+    }
+
+
+    public Map<String, ArrayList<Map<String, String>>> get_json_files(String json_url) {
+        Map<String, ArrayList<Map<String, String>>> hm = new HashMap<String, ArrayList<Map<String, String>>>();
+        try {
+            String json = Jsoup.connect(json_url).ignoreContentType(true).execute().body();
+            JSONObject jObj = new JSONObject(json);
+            JSONObject files = jObj.getJSONObject("files");
+            JSONObject lng = null;
+            if (files.has(get_code_lng())) {
+                lng = files.getJSONObject(get_code_lng());
+            } else if (files.has("univ")) {
+                lng = files.getJSONObject("univ");
+            } else return hm;
+
+            Iterator keys = lng.keys();
+            while (keys.hasNext()) {
+                String key = (String) keys.next();
+
+                Log.d("JSON", "NEW format - " + key);
+
+                JSONArray format = lng.getJSONArray(key);
+
+
+                ArrayList<Map<String, String>> hm_format_arr = new ArrayList<Map<String, String>>();
+
+                for (int f = 0; f < format.length(); f++) {
+                    Map<String, String> hm_format = new HashMap<String, String>();
+                    JSONObject file = format.getJSONObject(f);
+                    JSONObject urlobj = file.getJSONObject("file");
+                    if (!file.getString("mimetype").toString().trim().contains("/zip")) {
+                        String[] name_arr = urlobj.getString("url").toString().trim().split("/");
+                        if (name_arr.length > 0) {
+                            hm_format.put("title", stripHtml(file.getString("title").toString().trim()));
+                            hm_format.put("label", file.getString("label").toString().trim());
+                            hm_format.put("url", urlobj.getString("url").toString().trim());
+                            hm_format.put("name", name_arr[name_arr.length - 1]);
+                            Log.d("JSON", "NEW title - " + file.getString("title").toString().trim() + ", " + file.getString("label").toString().trim() + ", " + name_arr[name_arr.length - 1]);
+                            hm_format_arr.add(hm_format);
+                        } else continue;
+                    } else continue;
+                }
+                hm.put(key, hm_format_arr);
+            }
+        } catch (Exception e) {
+            send_bug_report(e);
+        }
+        return hm;
     }
 
 }

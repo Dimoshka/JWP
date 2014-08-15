@@ -23,6 +23,7 @@ public class class_open_or_download {
 
     private Context context;
     private Cursor cursor = null;
+    private Cursor cur = null;
     private SQLiteDatabase database;
     private class_functions funct;
 
@@ -40,7 +41,7 @@ public class class_open_or_download {
 
                 cursor = database
                         .rawQuery(
-                                "select files._id, id_type, file, type.name as name_type, files.name, link, files.id_magazine, magazine.id_pub, magazine.name as name_magazine, magazine.favorite from files left join magazine on files.id_magazine=magazine._id left join type on files.id_type=type._id where files.id_magazine='"
+                                "select id_type, type.name as name_type, file, files.id_magazine, magazine.id_pub, magazine.favorite from files left join magazine on files.id_magazine=magazine._id left join type on files.id_type=type._id where files.id_magazine='"
                                         + id + "' group by id_type order by files.id_type asc", null
                         );
                 if (cursor.getCount() > 0) {
@@ -118,11 +119,7 @@ public class class_open_or_download {
                     } else {
                         initialValues.put("favorite", "1");
                     }
-                    database.update("magazine", initialValues, "_id=?",
-                            new String[]{cursor.getString(cursor
-                                    .getColumnIndex("id_magazine"))}
-                    );
-
+                    database.update("magazine", initialValues, "_id=?", new String[]{cursor.getString(cursor.getColumnIndex("id_magazine"))});
                     Intent intent = new Intent("update");
                     LocalBroadcastManager broadcastManager = LocalBroadcastManager.getInstance(context);
                     broadcastManager.sendBroadcast(intent);
@@ -130,7 +127,7 @@ public class class_open_or_download {
                 } else {
                     cursor.moveToPosition(id - 1);
                     if (funct.ExternalStorageState()) {
-                        if (cursor.getInt(cursor.getColumnIndex("id_type")) == 3) {
+                        if (cursor.getInt(cursor.getColumnIndex("id_type")) == 6) {
                             Intent i = new Intent(context, player.class);
                             i.setFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
                             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -139,15 +136,8 @@ public class class_open_or_download {
                                     .getColumnIndex("id_magazine")));
                             context.startActivity(i);
                         } else {
-                            start_open_or_download(cursor.getString(cursor
-                                            .getColumnIndex("name")), cursor.getString(cursor.getColumnIndex("name_magazine")),
-                                    Boolean.valueOf(cursor.getInt(cursor
-                                            .getColumnIndex("file")) != 0),
-                                    cursor.getString(cursor
-                                            .getColumnIndex("link")), Integer.valueOf(cursor.getInt(cursor.getColumnIndex("id_pub")))
-                            );
+                            select_file();
                         }
-
                     } else
                         Toast.makeText(context, R.string.no_sdcard,
                                 Toast.LENGTH_SHORT).show();
@@ -155,6 +145,62 @@ public class class_open_or_download {
             }
         } catch (Exception e) {
             funct.send_bug_report(e);
+        }
+    }
+
+    void select_file() {
+        List<String> listItems = new ArrayList<String>();
+        CharSequence[] items;
+        cur = database
+                .rawQuery(
+                        "select files._id, files.name, magazine.name as name_magazine, files.file, files.link, magazine.id_pub, files.title from files left join magazine on files.id_magazine=magazine._id where files.id_magazine='"
+                                + cursor.getInt(cursor.getColumnIndex("id_magazine")) + "' and files.id_type='" + cursor.getInt(cursor.getColumnIndex("id_type")) + "' order by files.name asc", null
+                );
+
+        if (cur.getCount() == 1) {
+            cur.moveToFirst();
+            start_open_or_download(cur.getString(cur.getColumnIndex("name")), cur.getString(cur.getColumnIndex("name_magazine")),
+                    Boolean.valueOf(cur.getInt(cur.getColumnIndex("file")) != 0),
+                    cur.getString(cur.getColumnIndex("link")), Integer.valueOf(cur.getInt(cur.getColumnIndex("id_pub")))
+            );
+        } else if (cur.getCount() > 1) {
+            cur.moveToFirst();
+            for (int i = 0; i < cur.getCount(); i++) {
+                String name;
+
+                if (cur.getInt(cur
+                        .getColumnIndex("file")) == 1) {
+                    name = context.getString(R.string.open)
+                            + " - "
+                            + cur.getString(cur
+                            .getColumnIndex("title"));
+                } else {
+                    name = context.getString(R.string.download)
+                            + " - "
+                            + cur.getString(cur
+                            .getColumnIndex("title"));
+                }
+                listItems.add(name);
+                cur.moveToNext();
+            }
+
+            items = listItems.toArray(new CharSequence[listItems.size()]);
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setTitle(context.getString(R.string.choose_the_action));
+            builder.setItems(items,
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog,
+                                            int item) {
+                            cur.moveToPosition(item);
+                            start_open_or_download(cur.getString(cur.getColumnIndex("name")), cur.getString(cur.getColumnIndex("name_magazine")),
+                                    Boolean.valueOf(cur.getInt(cur.getColumnIndex("file")) != 0),
+                                    cur.getString(cur.getColumnIndex("link")), Integer.valueOf(cur.getInt(cur.getColumnIndex("id_pub")))
+                            );
+                        }
+                    }
+            );
+            AlertDialog alert = builder.create();
+            alert.show();
         }
     }
 

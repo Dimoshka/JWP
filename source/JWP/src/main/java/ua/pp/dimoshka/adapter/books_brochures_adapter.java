@@ -63,16 +63,6 @@ public class books_brochures_adapter extends SimpleCursorAdapter {
                     File imgFile = new File(funct.get_dir_app() + "/img/books_brochures/"
                             + name + ".jpg");
                     if (imgFile.exists()) {
-
-                        /*
-                        aq.id(R.id.img).image(imgFile, false, 0, new BitmapAjaxCallback() {
-                            @Override
-                            public void callback(String url, ImageView iv, Bitmap bm, AjaxStatus status) {
-                                iv.setImageBitmap(bm);
-                            }
-                        });
-*/
-
                         BitmapAjaxCallback cb = new BitmapAjaxCallback();
                         cb.targetWidth(0).round(10);
                         aq.id(R.id.img).image(imgFile, false, 0, cb);

@@ -32,7 +32,7 @@
         android:layout_toEndOf="@+id/img"
         android:paddingBottom="8dp"
         android:textSize="14sp"
-        android:layout_marginLeft="5dp" />
+        android:layout_marginLeft="11dp" />
 
     <TextView
         android:id="@+id/date"
