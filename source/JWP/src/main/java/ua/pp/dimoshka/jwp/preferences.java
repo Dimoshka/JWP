@@ -34,6 +34,7 @@ public class preferences extends PreferenceActivity {
         @Override
         public void onCreate(final Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
+            setRetainInstance(true);
             addPreferencesFromResource(R.xml.preferences);
 
             final ListPreference listPreference = (ListPreference) findPreference("language");

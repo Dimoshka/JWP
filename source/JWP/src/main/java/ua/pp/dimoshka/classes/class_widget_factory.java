@@ -16,6 +16,7 @@ import java.io.File;
 import java.util.Locale;
 
 import ua.pp.dimoshka.jwp.R;
+import ua.pp.dimoshka.jwp.widget;
 
 @SuppressWarnings("AutoUnboxing")
 public class class_widget_factory implements RemoteViewsService.RemoteViewsFactory {
@@ -132,8 +133,8 @@ public class class_widget_factory implements RemoteViewsService.RemoteViewsFacto
             }
 
             Intent clickIntent = new Intent();
-            clickIntent.putExtra(class_widget.ITEM_POSITION, position);
-            clickIntent.putExtra(class_widget.ITEM_LINK, cursor.getString(cursor.getColumnIndex("link")));
+            clickIntent.putExtra(widget.ITEM_POSITION, position);
+            clickIntent.putExtra(widget.ITEM_LINK, cursor.getString(cursor.getColumnIndex("link")));
             view.setOnClickFillInIntent(R.id.item, clickIntent);
         } catch (Exception e) {
             funct.send_bug_report(e);

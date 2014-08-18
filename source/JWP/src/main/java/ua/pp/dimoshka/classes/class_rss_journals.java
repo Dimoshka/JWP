@@ -3,7 +3,6 @@ package ua.pp.dimoshka.classes;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -12,6 +11,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.File;
 import java.text.DateFormat;
@@ -113,7 +113,8 @@ public class class_rss_journals {
                         break;
                     }
 
-                    if (id_pub.get(a).intValue() != 1 && id_pub.get(a).intValue() != 2 && id_pub.get(a).intValue() != 3) continue;
+                    if (id_pub.get(a).intValue() != 1 && id_pub.get(a).intValue() != 2 && id_pub.get(a).intValue() != 3)
+                        continue;
 
 
                     for (int b = 0; b < id_type.size(); b++) {
@@ -292,6 +293,14 @@ public class class_rss_journals {
 
         @Override
         protected void onPreExecute() {
+
+            handler.sendEmptyMessage(2);
+            Toast.makeText(context, context.getResources().getString(
+                            R.string.journals) + " - " + context.getResources().getString(
+                            R.string.dialog_loaing_rss), Toast.LENGTH_SHORT
+            ).show();
+
+           /*
             this.dialog = ProgressDialog
                     .show(context,
                             context.getResources().getString(
@@ -303,6 +312,7 @@ public class class_rss_journals {
                                 }
                             }
                     );
+                    */
         }
 
     }

@@ -1,4 +1,4 @@
-package ua.pp.dimoshka.classes;
+package ua.pp.dimoshka.jwp;
 
 import android.annotation.TargetApi;
 import android.app.PendingIntent;
@@ -15,10 +15,12 @@ import android.widget.RemoteViews;
 
 import java.text.SimpleDateFormat;
 
-import ua.pp.dimoshka.jwp.R;
-import ua.pp.dimoshka.jwp.main;
+import ua.pp.dimoshka.classes.class_functions;
+import ua.pp.dimoshka.classes.class_rss_news;
+import ua.pp.dimoshka.classes.class_sqlite;
+import ua.pp.dimoshka.classes.class_widget_service;
 
-public class class_widget extends AppWidgetProvider {
+public class widget extends AppWidgetProvider {
 
     SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
     private static final String ACTION_ON_LISTCLICK = "ua.pp.dimoshka.jwp.widget_listitemonclick";
@@ -26,10 +28,10 @@ public class class_widget extends AppWidgetProvider {
     public static final String IDWIDGET = "idwidget";
 
 
-    final static String ITEM_POSITION = "item_position";
-    final static String ITEM_LINK = "item_link";
+    public final static String ITEM_POSITION = "item_position";
+    public final static String ITEM_LINK = "item_link";
 
-    public class_widget() {
+    public widget() {
     }
 
 
@@ -58,7 +60,7 @@ public class class_widget extends AppWidgetProvider {
     void setUpdateTV(RemoteViews view, Context context, int appWidgetId) {
         //view.setTextViewText(R.id.tvUpdate, context.getString(R.string.download_rss));
         update_rss_news(context, appWidgetId);
-        Intent updIntent = new Intent(context, class_widget.class);
+        Intent updIntent = new Intent(context, widget.class);
         updIntent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
         updIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, new int[]{appWidgetId});
         PendingIntent updPIntent = PendingIntent.getBroadcast(context,
@@ -79,7 +81,7 @@ public class class_widget extends AppWidgetProvider {
     }
 
     void setListClick(RemoteViews rv, Context context, int appWidgetId) {
-        Intent listClickIntent = new Intent(context, class_widget.class);
+        Intent listClickIntent = new Intent(context, widget.class);
         listClickIntent.setAction(ACTION_ON_LISTCLICK);
         PendingIntent listClickPIntent = PendingIntent.getBroadcast(context, appWidgetId,
                 listClickIntent, 0);
@@ -101,7 +103,7 @@ public class class_widget extends AppWidgetProvider {
             Log.d("WIDGET", "updated afte load rss");
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
             int appWidgetIds[] = appWidgetManager.getAppWidgetIds(
-                    new ComponentName(context, class_widget.class));
+                    new ComponentName(context, widget.class));
             appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.list);
         } else if (intent.getAction().equalsIgnoreCase(ACTION_ON_LISTCLICK)) {
             int itemPos = intent.getIntExtra(ITEM_POSITION, -1);

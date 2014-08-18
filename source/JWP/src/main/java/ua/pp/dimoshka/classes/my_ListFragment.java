@@ -49,8 +49,8 @@ public class my_ListFragment extends ListFragment implements LoaderManager.Loade
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        setRetainInstance(true);
         main = (main) getActivity();
-
 
         setadapter_list();
         setListAdapter(mAdapter);
@@ -136,12 +136,14 @@ public class my_ListFragment extends ListFragment implements LoaderManager.Loade
         final SQLiteDatabase database;
         final int limit;
         final String sqlite_rawQuery;
+        final Context context;
 
         public MyCursorLoader(Context context, SQLiteDatabase database, String sqlite_rawQuery, int limit) {
             super(context);
             this.database = database;
             this.limit = limit;
             this.sqlite_rawQuery = sqlite_rawQuery;
+            this.context = context;
         }
 
         @Override

@@ -4,7 +4,6 @@ import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
@@ -13,19 +12,20 @@ import android.os.Build;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import ua.pp.dimoshka.jwp.R;
+import ua.pp.dimoshka.jwp.widget;
 
 public class class_rss_news {
     static final String URL_FEED_NEWS = "http://www.jw.org/%s/rss/LatestNewsList/feed.xml";
@@ -74,9 +74,9 @@ public class class_rss_news {
     private void update_widget() {
         try {
             Log.d("WIDGET", "start update afte load rss");
-            Intent updIntent = new Intent(context, class_widget.class);
-            updIntent.setAction(class_widget.ACTION_ON_UPDATEOK);
-            updIntent.putExtra(class_widget.IDWIDGET, appWidgetId);
+            Intent updIntent = new Intent(context, widget.class);
+            updIntent.setAction(widget.ACTION_ON_UPDATEOK);
+            updIntent.putExtra(widget.IDWIDGET, appWidgetId);
             PendingIntent updPIntent = PendingIntent.getBroadcast(context,
                     appWidgetId, updIntent, 0);
             updPIntent.send(context, 0, updIntent);
@@ -244,6 +244,13 @@ public class class_rss_news {
         @Override
         protected void onPreExecute() {
             if (is_activity) {
+                handler.sendEmptyMessage(2);
+                Toast.makeText(context, context.getResources().getString(
+                                R.string.news) + " - " + context.getResources().getString(
+                                R.string.dialog_loaing_rss), Toast.LENGTH_SHORT
+                ).show();
+
+                /*
                 this.dialog = ProgressDialog
                         .show(context,
                                 context.getResources().getString(
@@ -255,6 +262,7 @@ public class class_rss_news {
                                     }
                                 }
                         );
+                        */
             }
         }
     }

@@ -22,6 +22,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
 import android.widget.Toast;
 
 import com.androidquery.AQuery;
@@ -38,7 +39,6 @@ import ua.pp.dimoshka.classes.class_rss_journals;
 import ua.pp.dimoshka.classes.class_rss_news;
 import ua.pp.dimoshka.classes.class_sqlite;
 import ua.pp.dimoshka.classes.class_video;
-import ua.pp.dimoshka.classes.service_downloads_files;
 
 public class main extends ActionBarActivity implements ActionBar.TabListener {
 
@@ -86,6 +86,13 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
                         Log.d("JWP", "refrashe afte load");
                         refresh();
                     }
+                    setSupportProgressBarIndeterminateVisibility(false);
+                    break;
+                case 2:
+                    setSupportProgressBarIndeterminateVisibility(true);
+                    break;
+                default:
+                    setSupportProgressBarIndeterminateVisibility(false);
                     break;
             }
         }
@@ -106,6 +113,13 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
                         Log.d("JWP", "refrashe afte load");
                         refresh();
                     }
+                    setSupportProgressBarIndeterminateVisibility(false);
+                    break;
+                case 2:
+                    setSupportProgressBarIndeterminateVisibility(true);
+                    break;
+                default:
+                    setSupportProgressBarIndeterminateVisibility(false);
                     break;
             }
         }
@@ -124,6 +138,13 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
                         Log.d("JWP", "refrashe afte load");
                         refresh();
                     }
+                    setSupportProgressBarIndeterminateVisibility(false);
+                    break;
+                case 2:
+                    setSupportProgressBarIndeterminateVisibility(true);
+                    break;
+                default:
+                    setSupportProgressBarIndeterminateVisibility(false);
                     break;
             }
         }
@@ -139,6 +160,13 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
                 case 1:
                     Log.d("JWP", "refrashe afte load");
                     refresh();
+                    setSupportProgressBarIndeterminateVisibility(false);
+                    break;
+                case 2:
+                    setSupportProgressBarIndeterminateVisibility(true);
+                    break;
+                default:
+                    setSupportProgressBarIndeterminateVisibility(false);
                     break;
             }
         }
@@ -149,6 +177,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
     public void onCreate(Bundle savedInstanceState) {
         try {
             super.onCreate(savedInstanceState);
+            requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
             BugSenseHandler.initAndStartSession(this, "63148966");
             setContentView(R.layout.main);
 
@@ -184,12 +213,11 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
             }
             prefs.registerOnSharedPreferenceChangeListener(PreferenceChangeListener);
             pager.setOnPageChangeListener(PageChangeListener);
-
-
         } catch (Exception e) {
             funct.send_bug_report(e);
         }
     }
+
 
     private void load_first() {
         try {
@@ -389,6 +417,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
             funct.send_bug_report(e);
         }
     }
+
 
     @Override
     public void onDestroy() {

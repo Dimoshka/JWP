@@ -3,7 +3,6 @@ package ua.pp.dimoshka.classes;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -12,6 +11,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.widget.Toast;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -264,8 +264,14 @@ public class class_video {
         @Override
         protected void onProgressUpdate(Integer[] progUpdate) {
             if (progUpdate[0].intValue() >= 0) {  // change the 10000 to whatever
-                dialog.setMessage(context.getResources().getString(
-                        R.string.dialog_loaing_site) + " " + progUpdate[0]);
+                // dialog.setMessage(context.getResources().getString(
+                //         R.string.dialog_loaing_site) + " " + progUpdate[0]);
+
+
+                Toast.makeText(context, context.getResources().getString(
+                                R.string.video) + " - " + context.getResources().getString(
+                                R.string.dialog_loaing_site) + " " + progUpdate[0], Toast.LENGTH_SHORT
+                ).show();
             }
         }
 
@@ -292,17 +298,24 @@ public class class_video {
 
         @Override
         protected void onPreExecute() {
-            this.dialog = ProgressDialog
-                    .show(context,
-                            context.getResources().getString(
-                                    R.string.video),
-                            context.getResources().getString(
-                                    R.string.dialog_loaing_site), true, true, new DialogInterface.OnCancelListener() {
-                                public void onCancel(DialogInterface pd) {
-                                    task.cancel(true);
-                                }
-                            }
-                    );
+            //this.dialog = ProgressDialog
+            //       .show(context,
+            //                context.getResources().getString(
+            //                       R.string.video),
+            //               context.getResources().getString(
+            //                       R.string.dialog_loaing_site), true, true, new DialogInterface.OnCancelListener() {
+            //                   public void onCancel(DialogInterface pd) {
+            //                       task.cancel(true);
+            //                   }
+            //              }
+            //       );
+
+            handler.sendEmptyMessage(2);
+            Toast.makeText(context, context.getResources().getString(
+                            R.string.video) + " - " + context.getResources().getString(
+                            R.string.dialog_loaing_site), Toast.LENGTH_SHORT
+            ).show();
+
         }
     }
 }

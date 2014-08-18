@@ -124,7 +124,7 @@ public class service_downloads_files extends Service {
                 if (localFile.exists()) {
                     Log.d("JWP" + getClass().getName(), "Update to 1 - "
                             + localFile.getName());
-                    class_sqlite dbOpenHelper = new class_sqlite(this);
+                    class_sqlite dbOpenHelper = new class_sqlite(getBaseContext());
                     SQLiteDatabase database = dbOpenHelper.openDataBase();
                     funct.update_file_isn(database, localFile.getName(), Integer.valueOf(1));
                     dbOpenHelper.close();
