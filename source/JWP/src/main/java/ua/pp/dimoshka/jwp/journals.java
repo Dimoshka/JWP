@@ -1,5 +1,8 @@
 package ua.pp.dimoshka.jwp;
 
+import android.view.View;
+import android.widget.ListView;
+
 import ua.pp.dimoshka.adapter.journals_adapter;
 import ua.pp.dimoshka.classes.my_ListFragment;
 
@@ -19,4 +22,11 @@ public class journals extends my_ListFragment {
                 "left join (select id_magazine, GROUP_CONCAT(id_type) as id_type, GROUP_CONCAT(file) as file from files group by id_magazine) as files on magazine._id=files.id_magazine " +
                 "where magazine.id_lang='" + main.get_funct().get_id_lng() + "' and magazine.id_pub BETWEEN '1' and '3' order by magazine.favorite desc, date desc, magazine.id_pub asc;";
     }
+
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+        main.get_open_or_download().dialog_show(id);
+    }
+
 }

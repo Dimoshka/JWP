@@ -14,9 +14,7 @@ import android.support.v4.content.Loader;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.util.Log;
-import android.view.View;
 import android.widget.AbsListView;
-import android.widget.ListView;
 
 import ua.pp.dimoshka.jwp.main;
 
@@ -30,7 +28,7 @@ public class my_ListFragment extends ListFragment implements LoaderManager.Loade
     public String sqlite_rawQuery = "";
 
     private int currentVisibleItemCount = 0;
-    private int currentScrollState = 0;
+    private int currentScrollState = 10;
     private final int load_items = 10;
     private int curent_load_items = 0;
     private boolean isLoading = false;
@@ -66,11 +64,6 @@ public class my_ListFragment extends ListFragment implements LoaderManager.Loade
 
     }
 
-    @Override
-    public void onListItemClick(ListView l, View v, int position, long id) {
-        super.onListItemClick(l, v, position, id);
-        main.get_open_or_download().dialog_show(id);
-    }
 
     public void refresh() {
         try {

@@ -56,7 +56,25 @@
       <sourceFolder url="file://$MODULE_DIR$/JWP/src/androidTest/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/JWP/src/androidTest/jni" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/JWP/src/androidTest/rs" isTestSource="true" />
-      <excludeFolder url="file://$MODULE_DIR$/JWP/build/intermediates" />
+      <excludeFolder url="file://$MODULE_DIR$/JWP/build/intermediates/assets" />
+      <excludeFolder url="file://$MODULE_DIR$/JWP/build/intermediates/bundles" />
+      <excludeFolder url="file://$MODULE_DIR$/JWP/build/intermediates/classes" />
+      <excludeFolder url="file://$MODULE_DIR$/JWP/build/intermediates/coverage-instrumented-classes" />
+      <excludeFolder url="file://$MODULE_DIR$/JWP/build/intermediates/dependency-cache" />
+      <excludeFolder url="file://$MODULE_DIR$/JWP/build/intermediates/dex" />
+      <excludeFolder url="file://$MODULE_DIR$/JWP/build/intermediates/dex-cache" />
+      <excludeFolder url="file://$MODULE_DIR$/JWP/build/intermediates/incremental" />
+      <excludeFolder url="file://$MODULE_DIR$/JWP/build/intermediates/jacoco" />
+      <excludeFolder url="file://$MODULE_DIR$/JWP/build/intermediates/javaResources" />
+      <excludeFolder url="file://$MODULE_DIR$/JWP/build/intermediates/libs" />
+      <excludeFolder url="file://$MODULE_DIR$/JWP/build/intermediates/lint" />
+      <excludeFolder url="file://$MODULE_DIR$/JWP/build/intermediates/manifests" />
+      <excludeFolder url="file://$MODULE_DIR$/JWP/build/intermediates/ndk" />
+      <excludeFolder url="file://$MODULE_DIR$/JWP/build/intermediates/pre-dexed" />
+      <excludeFolder url="file://$MODULE_DIR$/JWP/build/intermediates/proguard" />
+      <excludeFolder url="file://$MODULE_DIR$/JWP/build/intermediates/res" />
+      <excludeFolder url="file://$MODULE_DIR$/JWP/build/intermediates/rs" />
+      <excludeFolder url="file://$MODULE_DIR$/JWP/build/intermediates/symbols" />
       <excludeFolder url="file://$MODULE_DIR$/JWP/build/outputs" />
     </content>
     <orderEntry type="jdk" jdkName="Android API 19 Platform" jdkType="Android SDK" />

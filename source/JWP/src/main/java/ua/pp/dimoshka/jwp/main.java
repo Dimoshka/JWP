@@ -197,7 +197,6 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
             FragmentManager frafment_mn = getSupportFragmentManager();
             pagerAdapter = new MyPagerAdapter(frafment_mn, fragment_list);
             pager.setAdapter(pagerAdapter);
-
             load_first();
 
             if (prefs.getBoolean("first_run", true)) {

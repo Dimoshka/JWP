@@ -21,8 +21,8 @@ android {
         release {
             keyAlias 'jwp'
             keyPassword 'Dimoshka9101'
-            storeFile file('H:/Work/Android/Keystore/dimoshka.jks')
-            //storeFile file('/media/dimoshka/DIMOSHKA/Work/Android/Keystore/dimoshka.jks')
+            //storeFile file('H:/Work/Android/Keystore/dimoshka.jks')
+            storeFile file('/media/dimoshka/DIMOSHKA/Work/Android/Keystore/dimoshka.jks')
             storePassword 'Dimoshka9101'
         }
         debug {
