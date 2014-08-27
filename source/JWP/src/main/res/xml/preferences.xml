@@ -55,7 +55,7 @@
 
     <PreferenceCategory android:title="@string/video_books_brochures">
         <CheckBoxPreference
-            android:defaultValue="true"
+            android:defaultValue="false"
             android:key="site_html"
             android:summary="@string/site_html_summary"
             android:title="@string/site_html" />

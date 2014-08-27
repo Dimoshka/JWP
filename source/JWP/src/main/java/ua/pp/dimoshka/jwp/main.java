@@ -105,7 +105,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 1:
-                    if (!prefs.getBoolean("site_html", true)) {
+                    if (!prefs.getBoolean("site_html", false)) {
                         refresh();
                     } else if (refresh_all.booleanValue()) {
                         video.verify_all();
@@ -206,7 +206,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
                         .setNeutralButton("OK", null).show();
                 prefs.edit().putBoolean("first_run", false).apply();
 
-                funct.delete_dir_app();
+                //funct.delete_dir_app();
             } else if (prefs.getBoolean("downloads_on_start", false)) {
                 load_rss();
             }
@@ -237,7 +237,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
             fragment_list.add(new news());
             rss_journals = new class_rss_journals(this, handler_journals, database, funct);
             fragment_list.add(new journals());
-            if (prefs.getBoolean("site_html", true)) {
+            if (prefs.getBoolean("site_html", false)) {
                 video = new class_video(this, handler_video, database, funct);
                 fragment_list.add(new video());
                 books_brochures = new class_books_brochures(this, handler_books_brochures, database, funct);
@@ -259,7 +259,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
                     .setTabListener(this);
             actionBar.addTab(journals_Tab);
 
-            if (prefs.getBoolean("site_html", true)) {
+            if (prefs.getBoolean("site_html", false)) {
                 ActionBar.Tab video_Tab = actionBar.newTab().setText(R.string.video)
                         .setTabListener(this);
                 actionBar.addTab(video_Tab);

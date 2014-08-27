@@ -1,8 +1,10 @@
 package ua.pp.dimoshka.jwp;
 
 import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -15,6 +17,7 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -67,6 +70,16 @@ public class player extends ActionBarActivity implements LoaderManager.LoaderCal
         }
     };
 
+    private final BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action != null && action.equals("update")) {
+                refresh();
+            }
+        }
+    };
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,6 +96,10 @@ public class player extends ActionBarActivity implements LoaderManager.LoaderCal
         database = dbOpenHelper.openDataBase();
         AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         initViews();
+
+        LocalBroadcastManager broadcastManager = LocalBroadcastManager.getInstance(this);
+        IntentFilter intentFilter = new IntentFilter("update");
+        broadcastManager.registerReceiver(receiver, intentFilter);
 
         mAdapter = new player_adapter(this,
                 new String[]{"title"}, new int[]{android.R.id.text1});
