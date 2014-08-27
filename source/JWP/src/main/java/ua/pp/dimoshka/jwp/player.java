@@ -43,7 +43,7 @@ public class player extends ActionBarActivity implements LoaderManager.LoaderCal
     private SeekBar seekBar = null;
     private final Handler handler = new Handler();
     private ListView listView = null;
-    private Integer id_magazine = null;
+    private long id_magazine = 0;
 
     private class_mediaplayer mediaplayer_class = null;
     private SharedPreferences prefs = null;
@@ -76,7 +76,7 @@ public class player extends ActionBarActivity implements LoaderManager.LoaderCal
         actionBar.setSubtitle(R.string.player);
 
         Bundle extras = getIntent().getExtras();
-        id_magazine = Integer.valueOf(extras.getInt("id_magazine"));
+        id_magazine = Long.valueOf(extras.getLong("id_magazine"));
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
         funct = new class_functions(this);
         class_sqlite dbOpenHelper = new class_sqlite(this);
@@ -335,7 +335,7 @@ public class player extends ActionBarActivity implements LoaderManager.LoaderCal
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return new MyCursorLoader(this, database, id_magazine.intValue());
+        return new MyCursorLoader(this, database, id_magazine);
     }
 
     @Override
@@ -351,9 +351,9 @@ public class player extends ActionBarActivity implements LoaderManager.LoaderCal
 
     static class MyCursorLoader extends CursorLoader {
         SQLiteDatabase database;
-        int id_magazine;
+        long id_magazine;
 
-        public MyCursorLoader(Context context, SQLiteDatabase database, int id_magazine) {
+        public MyCursorLoader(Context context, SQLiteDatabase database, long id_magazine) {
             super(context);
             this.database = database;
             this.id_magazine = id_magazine;
