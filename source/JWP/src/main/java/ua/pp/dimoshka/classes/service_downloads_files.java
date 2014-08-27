@@ -13,6 +13,7 @@ import android.os.AsyncTask;
 import android.os.Binder;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.widget.RemoteViews;
 
@@ -128,6 +129,10 @@ public class service_downloads_files extends Service {
                     SQLiteDatabase database = dbOpenHelper.openDataBase();
                     funct.update_file_isn(database, localFile.getName(), Integer.valueOf(1));
                     dbOpenHelper.close();
+
+                    Intent intent = new Intent("update");
+                    LocalBroadcastManager broadcastManager = LocalBroadcastManager.getInstance(getApplicationContext());
+                    broadcastManager.sendBroadcast(intent);
                 }
             }
         } catch (Exception e) {
