@@ -9,7 +9,6 @@ import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
@@ -19,6 +18,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Matcher;
@@ -35,7 +35,6 @@ public class class_rss_news {
 
     private class_functions funct;
     private Context context;
-    private Handler handler = null;
     private boolean is_activity = false;
     private SharedPreferences prefs;
     private AsyncTask task = null;
@@ -49,10 +48,9 @@ public class class_rss_news {
     }
 
 
-    public void get_all_feeds_activity(Handler handler) {
+    public void get_all_feeds_activity() {
         try {
             Log.d("JWP", "get_all_feeds_activity");
-            this.handler = handler;
             is_activity = true;
             task = new ReadFeedTask().execute();
         } catch (Exception ex) {
@@ -111,7 +109,13 @@ public class class_rss_news {
                                 dialog.dismiss();
                             Log.d("JWP", "onPostExecute+");
                             if (is_activity) {
-                                handler.sendEmptyMessage(0);
+                                //handler.sendEmptyMessage(0);
+                                funct.send_to_local_brodcast("loading", new HashMap<String, Integer>() {{
+                                    put("page", 1);
+                                    put("status", 0);
+                                }});
+
+
                             }
                         }
                         break;
@@ -234,7 +238,13 @@ public class class_rss_news {
                 //dialog = null;
                 Log.d("JWP", "onPostExecute+");
                 if (is_activity) {
-                    handler.sendEmptyMessage(1);
+                    //handler.sendEmptyMessage(1);
+
+                    funct.send_to_local_brodcast("loading", new HashMap<String, Integer>() {{
+                        put("page", 1);
+                        put("status", 1);
+                    }});
+
                 } else {
                     update_widget();
                 }
@@ -244,7 +254,14 @@ public class class_rss_news {
         @Override
         protected void onPreExecute() {
             if (is_activity) {
-                handler.sendEmptyMessage(2);
+                //handler.sendEmptyMessage(2);
+
+                funct.send_to_local_brodcast("loading", new HashMap<String, Integer>() {{
+                    put("page", 1);
+                    put("status", 2);
+                }});
+
+
                 Toast.makeText(context, context.getResources().getString(
                                 R.string.news) + " - " + context.getResources().getString(
                                 R.string.dialog_loaing_rss), Toast.LENGTH_SHORT

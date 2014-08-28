@@ -148,4 +148,10 @@ public class my_ListFragment extends ListFragment implements LoaderManager.Loade
             return cursor;
         }
     }
+
+    @Override
+    public void onDestroy() {
+        LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(receiver);
+        super.onDestroy();
+    }
 }

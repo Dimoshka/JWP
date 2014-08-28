@@ -1,14 +1,14 @@
 package ua.pp.dimoshka.jwp;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -29,6 +29,7 @@ import com.androidquery.AQuery;
 import com.bugsense.trace.BugSenseHandler;
 import com.google.analytics.tracking.android.EasyTracker;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
 
@@ -61,6 +62,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
     private List<Fragment> fragment_list = new Vector<Fragment>();
     private MyPagerAdapter pagerAdapter = null;
     private Boolean change_prefference = Boolean.FALSE;
+    private Boolean progressbar = false;
 
     public SQLiteDatabase get_database() {
         return database;
@@ -74,104 +76,61 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
         return open_or_download;
     }
 
-    @SuppressLint("HandlerLeak")
-    private final Handler handler_news = new Handler() {
+    private final BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case 1:
-                    if (refresh_all.booleanValue()) {
-                        rss_journals.get_all_feeds();
-                    } else {
-                        Log.d("JWP", "refrashe afte load");
-                        refresh();
-                    }
-                    setSupportProgressBarIndeterminateVisibility(false);
-                    break;
-                case 2:
-                    setSupportProgressBarIndeterminateVisibility(true);
-                    break;
-                default:
-                    setSupportProgressBarIndeterminateVisibility(false);
-                    break;
-            }
-        }
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action != null && action.equals("loading")) {
+                int page = intent.getIntExtra("page", 0);
+                int status = intent.getIntExtra("status", 0);
 
-    };
-
-    @SuppressLint("HandlerLeak")
-    private final Handler handler_journals = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case 1:
-                    if (!prefs.getBoolean("site_html", false)) {
-                        refresh();
-                    } else if (refresh_all.booleanValue()) {
-                        video.verify_all();
-                    } else {
-                        Log.d("JWP", "refrashe afte load");
-                        refresh();
-                    }
-                    setSupportProgressBarIndeterminateVisibility(false);
-                    break;
-                case 2:
-                    setSupportProgressBarIndeterminateVisibility(true);
-                    break;
-                default:
-                    setSupportProgressBarIndeterminateVisibility(false);
-                    break;
-            }
-        }
-    };
-
-
-    @SuppressLint("HandlerLeak")
-    private final Handler handler_video = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case 1:
-                    if (refresh_all.booleanValue()) {
-                        books_brochures.verify_all();
-                    } else {
-                        Log.d("JWP", "refrashe afte load");
-                        refresh();
-                    }
-                    setSupportProgressBarIndeterminateVisibility(false);
-                    break;
-                case 2:
-                    setSupportProgressBarIndeterminateVisibility(true);
-                    break;
-                default:
-                    setSupportProgressBarIndeterminateVisibility(false);
-                    break;
-            }
-        }
-
-    };
-
-
-    @SuppressLint("HandlerLeak")
-    private final Handler handler_books_brochures = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case 1:
-                    Log.d("JWP", "refrashe afte load");
-                    refresh();
-                    setSupportProgressBarIndeterminateVisibility(false);
-                    break;
-                case 2:
-                    setSupportProgressBarIndeterminateVisibility(true);
-                    break;
-                default:
-                    setSupportProgressBarIndeterminateVisibility(false);
-                    break;
+                switch (status) {
+                    case 1:
+                        switch (page) {
+                            case 1:
+                                if (refresh_all.booleanValue()) {
+                                    rss_journals.get_all_feeds();
+                                } else {
+                                    Log.d("JWP", "refrashe afte load");
+                                    refresh();
+                                }
+                                break;
+                            case 2:
+                                if (!prefs.getBoolean("site_html", false)) {
+                                    refresh();
+                                } else if (refresh_all.booleanValue()) {
+                                    video.verify_all();
+                                } else {
+                                    Log.d("JWP", "refrashe afte load");
+                                    refresh();
+                                }
+                                break;
+                            case 3:
+                                if (refresh_all.booleanValue()) {
+                                    books_brochures.verify_all();
+                                } else {
+                                    Log.d("JWP", "refrashe afte load");
+                                    refresh();
+                                }
+                                break;
+                            case 4:
+                                Log.d("JWP", "refrashe afte load");
+                                refresh();
+                                break;
+                        }
+                        progressbar = false;
+                        break;
+                    case 2:
+                        progressbar = true;
+                        break;
+                    default:
+                        progressbar = false;
+                        break;
+                }
+                setSupportProgressBarIndeterminateVisibility(progressbar);
             }
         }
     };
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -210,11 +169,29 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
             } else if (prefs.getBoolean("downloads_on_start", false)) {
                 load_rss();
             }
+
+            LocalBroadcastManager broadcastManager = LocalBroadcastManager.getInstance(this);
+            IntentFilter intentFilter = new IntentFilter("loading");
+            broadcastManager.registerReceiver(receiver, intentFilter);
+
             prefs.registerOnSharedPreferenceChangeListener(PreferenceChangeListener);
             pager.setOnPageChangeListener(PageChangeListener);
         } catch (Exception e) {
             funct.send_bug_report(e);
         }
+    }
+
+
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        progressbar = savedInstanceState.getBoolean("progressbar");
+        setSupportProgressBarIndeterminateVisibility(progressbar);
+    }
+
+
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean("progressbar", progressbar);
     }
 
 
@@ -235,12 +212,12 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
             fragment_list.clear();
             rss_news = new class_rss_news(this, database, funct);
             fragment_list.add(new news());
-            rss_journals = new class_rss_journals(this, handler_journals, database, funct);
+            rss_journals = new class_rss_journals(this, database, funct);
             fragment_list.add(new journals());
             if (prefs.getBoolean("site_html", false)) {
-                video = new class_video(this, handler_video, database, funct);
+                video = new class_video(this, database, funct);
                 fragment_list.add(new video());
-                books_brochures = new class_books_brochures(this, handler_books_brochures, database, funct);
+                books_brochures = new class_books_brochures(this, database, funct);
                 fragment_list.add(new books_brochures());
             }
             pagerAdapter.notifyDataSetChanged();
@@ -377,11 +354,11 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
             if (funct.isNetworkAvailable()) {
                 if (prefs.getBoolean("update_all_at_once", true)) {
                     refresh_all = Boolean.TRUE;
-                    rss_news.get_all_feeds_activity(handler_news);
+                    rss_news.get_all_feeds_activity();
                 } else {
                     switch (curent_tab) {
                         case 0:
-                            rss_news.get_all_feeds_activity(handler_news);
+                            rss_news.get_all_feeds_activity();
                             break;
                         case 1:
                             rss_journals.get_all_feeds();
@@ -406,9 +383,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
 
     private void refresh() {
         try {
-            Intent intent = new Intent("update");
-            LocalBroadcastManager broadcastManager = LocalBroadcastManager.getInstance(this);
-            broadcastManager.sendBroadcast(intent);
+            funct.send_to_local_brodcast("update", new HashMap<String, Integer>());
             Log.d("FRAGMENT", "start_refresh");
             refresh_all = Boolean.FALSE;
             pagerAdapter.notifyDataSetChanged();
@@ -423,6 +398,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
         //stopService(
         //        new Intent(this, service_downloads_files.class));
         //dbOpenHelper.close();
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver);
         //database.close();
         super.onDestroy();
     }

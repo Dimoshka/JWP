@@ -17,8 +17,7 @@
 
         <activity
             android:name="ua.pp.dimoshka.jwp.main"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait">
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -27,12 +26,10 @@
 
         <activity
             android:name="ua.pp.dimoshka.jwp.preferences"
-            android:label="@string/settings"
-            android:screenOrientation="portrait" />
+            android:label="@string/settings" />
         <activity
             android:name="ua.pp.dimoshka.jwp.player"
-            android:label="@string/player"
-            android:screenOrientation="portrait" />
+            android:label="@string/player" />
 
         <service android:name="ua.pp.dimoshka.classes.service_downloads_files"></service>
         <service

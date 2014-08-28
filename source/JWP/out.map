@@ -128,9 +128,11 @@ android.support.v4.app.Fragment -> android.support.v4.app.Fragment:
     696:696:boolean isDetached() -> e
     745:745:boolean isHidden() -> f
     766:766:void onHiddenChanged(boolean) -> a
-    820:826:void setMenuVisibility(boolean) -> b
-    842:847:void setUserVisibleHint(boolean) -> c
+    783:788:void setRetainInstance(boolean) -> b
+    820:826:void setMenuVisibility(boolean) -> c
+    842:847:void setUserVisibleHint(boolean) -> d
     861:869:android.support.v4.app.LoaderManager getLoaderManager() -> g
+    877:881:void startActivity(android.content.Intent) -> a
     909:909:void onActivityResult(int,int,android.content.Intent) -> a
     917:917:android.view.LayoutInflater getLayoutInflater(android.os.Bundle) -> b
     963:964:void onInflate(android.app.Activity,android.util.AttributeSet,android.os.Bundle) -> a
@@ -240,6 +242,7 @@ android.support.v4.app.FragmentActivity -> android.support.v4.app.FragmentActivi
     821:821:void onAttachFragment(android.support.v4.app.Fragment) -> a
     828:828:android.support.v4.app.FragmentManager getSupportFragmentManager() -> e
     837:841:void startActivityForResult(android.content.Intent,int) -> startActivityForResult
+    848:856:void startActivityFromFragment(android.support.v4.app.Fragment,android.content.Intent,int) -> a
     860:867:void invalidateSupportFragment(java.lang.String) -> a
     877:882:android.support.v4.app.LoaderManager getSupportLoaderManager() -> f
     886:898:android.support.v4.app.LoaderManagerImpl getLoaderManager(java.lang.String,boolean,boolean) -> a
@@ -897,6 +900,7 @@ android.support.v4.content.LocalBroadcastManager -> android.support.v4.content.r
     android.support.v4.content.LocalBroadcastManager mInstance -> g
     100:105:android.support.v4.content.LocalBroadcastManager getInstance(android.content.Context) -> a
     134:152:void registerReceiver(android.content.BroadcastReceiver,android.content.IntentFilter) -> a
+    164:188:void unregisterReceiver(android.content.BroadcastReceiver) -> a
     201:268:boolean sendBroadcast(android.content.Intent) -> a
     284:300:void executePendingBroadcasts() -> a
     46:46:void access$000(android.support.v4.content.LocalBroadcastManager) -> a
@@ -2926,6 +2930,7 @@ android.support.v7.app.ActionBarActivity -> android.support.v7.app.ActionBarActi
     241:241:boolean superOnPrepareOptionsPanel(android.view.View,android.view.Menu) -> b
     245:245:boolean superOnMenuItemSelected(int,android.view.MenuItem) -> a
     250:253:void onBackPressed() -> onBackPressed
+    280:281:void setSupportProgressBarIndeterminateVisibility(boolean) -> b
     338:339:void onCreateSupportNavigateUpTaskStack(android.support.v4.app.TaskStackBuilder) -> a
     357:357:void onPrepareSupportNavigateUpTaskStack(android.support.v4.app.TaskStackBuilder) -> b
     383:406:boolean onSupportNavigateUp() -> h
@@ -2961,6 +2966,7 @@ android.support.v7.app.ActionBarActivityDelegate -> android.support.v7.app.e:
     boolean onCreatePanelMenu(int,android.view.Menu) -> a
     boolean onMenuItemSelected(int,android.view.MenuItem) -> a
     boolean onBackPressed() -> g
+    void setSupportProgressBarIndeterminateVisibility(boolean) -> a
     void onContentChanged() -> h
     188:200:java.lang.String getUiOptionsFromMetadata() -> i
     205:212:android.content.Context getActionBarThemedContext() -> j
@@ -3006,8 +3012,14 @@ android.support.v7.app.ActionBarActivityDelegateBase -> android.support.v7.app.h
     426:438:void reopenMenu(android.support.v7.internal.view.menu.MenuBuilder,boolean) -> b
     441:461:android.support.v7.internal.view.menu.MenuView getListMenuView(android.content.Context,android.support.v7.internal.view.menu.MenuPresenter$Callback) -> a
     467:478:boolean onBackPressed() -> g
-    589:591:boolean initializePanelMenu() -> m
-    596:659:boolean preparePanel() -> n
+    489:491:void setSupportProgressBarIndeterminateVisibility(boolean) -> a
+    513:549:void updateProgressBars(int) -> c
+    553:560:void showProgressBars(android.support.v7.internal.widget.ProgressBarICS,android.support.v7.internal.widget.ProgressBarICS) -> a
+    564:570:void hideProgressBars(android.support.v7.internal.widget.ProgressBarICS,android.support.v7.internal.widget.ProgressBarICS) -> b
+    573:577:android.support.v7.internal.widget.ProgressBarICS getCircularProgressBar() -> m
+    581:585:android.support.v7.internal.widget.ProgressBarICS getHorizontalProgressBar() -> n
+    589:591:boolean initializePanelMenu() -> o
+    596:659:boolean preparePanel() -> p
 android.support.v7.app.ActionBarActivityDelegateBase$1 -> android.support.v7.app.i:
     android.support.v7.app.ActionBarActivityDelegateBase this$0 -> a
     230:231:void run() -> run
@@ -3032,6 +3044,7 @@ android.support.v7.app.ActionBarActivityDelegateICS -> android.support.v7.app.k:
     161:164:boolean onMenuItemSelected(int,android.view.MenuItem) -> a
     170:170:void onTitleChanged(java.lang.CharSequence) -> a
     195:197:void onActionModeStarted(android.view.ActionMode) -> a
+    206:207:void setSupportProgressBarIndeterminateVisibility(boolean) -> a
     220:222:void onActionModeFinished(android.view.ActionMode) -> b
     226:227:void supportInvalidateOptionsMenu() -> f
     231:231:boolean onBackPressed() -> g
@@ -5204,7 +5217,8 @@ android.support.v7.internal.widget.ProgressBarICS -> android.support.v7.internal
     163:198:android.graphics.drawable.Drawable tileify(android.graphics.drawable.Drawable,boolean) -> a
     202:203:android.graphics.drawable.shapes.Shape getDrawableShape() -> getDrawableShape
     212:226:android.graphics.drawable.Drawable tileifyIndeterminate(android.graphics.drawable.Drawable) -> a
-    242:253:void initProgressBar() -> c
+    242:253:void initProgressBar() -> d
+    261:261:boolean isIndeterminate() -> a
     275:287:void setIndeterminate(boolean) -> setIndeterminate
     299:299:android.graphics.drawable.Drawable getIndeterminateDrawable() -> getIndeterminateDrawable
     312:320:void setIndeterminateDrawable(android.graphics.drawable.Drawable) -> setIndeterminateDrawable
@@ -5221,8 +5235,8 @@ android.support.v7.internal.widget.ProgressBarICS -> android.support.v7.internal
     547:547:int getSecondaryProgress() -> getSecondaryProgress
     560:560:int getMax() -> getMax
     573:585:void setMax(int) -> setMax
-    613:634:void startAnimation() -> a
-    640:647:void stopAnimation() -> b
+    613:634:void startAnimation() -> b
+    640:647:void stopAnimation() -> c
     657:658:void setInterpolator(android.content.Context,int) -> a
     667:668:void setInterpolator(android.view.animation.Interpolator) -> setInterpolator
     676:676:android.view.animation.Interpolator getInterpolator() -> getInterpolator
@@ -5234,7 +5248,7 @@ android.support.v7.internal.widget.ProgressBarICS -> android.support.v7.internal
     770:800:void onDraw(android.graphics.Canvas) -> onDraw
     804:818:void onMeasure(int,int) -> onMeasure
     822:824:void drawableStateChanged() -> drawableStateChanged
-    827:836:void updateDrawableState() -> d
+    827:836:void updateDrawableState() -> e
     880:886:android.os.Parcelable onSaveInstanceState() -> onSaveInstanceState
     891:896:void onRestoreInstanceState(android.os.Parcelable) -> onRestoreInstanceState
     900:904:void onAttachedToWindow() -> onAttachedToWindow
@@ -10181,63 +10195,62 @@ ua.pp.dimoshka.classes.class_books_brochures -> ua.pp.dimoshka.classes.a:
     ua.pp.dimoshka.classes.class_functions funct -> b
     android.content.Context context -> c
     android.database.Cursor cursor -> d
-    android.os.Handler handler -> e
-    android.os.AsyncTask task -> f
-    android.content.SharedPreferences prefs -> g
-    java.util.ArrayList id_type -> h
-    java.util.ArrayList code_type -> i
-    java.util.ArrayList name_type -> j
-    58:59:void verify_all() -> a
-    63:79:void get_publication() -> b
+    android.os.AsyncTask task -> e
+    android.content.SharedPreferences prefs -> f
+    java.util.ArrayList id_type -> g
+    java.util.ArrayList code_type -> h
+    java.util.ArrayList name_type -> i
+    55:56:void verify_all() -> a
+    60:76:void get_publication() -> b
     33:33:ua.pp.dimoshka.classes.class_functions access$000(ua.pp.dimoshka.classes.class_books_brochures) -> a
-    33:33:android.os.Handler access$100(ua.pp.dimoshka.classes.class_books_brochures) -> b
-    33:33:android.database.sqlite.SQLiteDatabase access$200(ua.pp.dimoshka.classes.class_books_brochures) -> c
+    33:33:android.database.sqlite.SQLiteDatabase access$100(ua.pp.dimoshka.classes.class_books_brochures) -> b
+    33:33:java.util.ArrayList access$200(ua.pp.dimoshka.classes.class_books_brochures) -> c
     33:33:java.util.ArrayList access$300(ua.pp.dimoshka.classes.class_books_brochures) -> d
-    33:33:java.util.ArrayList access$400(ua.pp.dimoshka.classes.class_books_brochures) -> e
-    33:33:android.content.SharedPreferences access$500(ua.pp.dimoshka.classes.class_books_brochures) -> f
-    33:33:android.content.Context access$600(ua.pp.dimoshka.classes.class_books_brochures) -> g
-    33:33:android.database.Cursor access$700(ua.pp.dimoshka.classes.class_books_brochures) -> h
-    33:33:android.os.AsyncTask access$800(ua.pp.dimoshka.classes.class_books_brochures) -> i
+    33:33:android.content.SharedPreferences access$400(ua.pp.dimoshka.classes.class_books_brochures) -> e
+    33:33:android.content.Context access$500(ua.pp.dimoshka.classes.class_books_brochures) -> f
+    33:33:android.database.Cursor access$600(ua.pp.dimoshka.classes.class_books_brochures) -> g
 ua.pp.dimoshka.classes.class_books_brochures$load_from_site -> ua.pp.dimoshka.classes.b:
     android.app.ProgressDialog dialog -> b
     ua.pp.dimoshka.classes.class_books_brochures this$0 -> a
-    90:225:java.lang.Void doInBackground(java.lang.Void[]) -> a
-    230:253:int img(java.lang.String,java.lang.String) -> a
-    258:262:void onProgressUpdate(java.lang.Integer[]) -> a
-    267:283:void onPostExecute(java.lang.Void) -> a
-    287:298:void onPreExecute() -> onPreExecute
-    81:81:void onProgressUpdate(java.lang.Object[]) -> onProgressUpdate
-    81:81:void onPostExecute(java.lang.Object) -> onPostExecute
-    81:81:java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
+    87:226:java.lang.Void doInBackground(java.lang.Void[]) -> a
+    231:254:int img(java.lang.String,java.lang.String) -> a
+    259:271:void onProgressUpdate(java.lang.Integer[]) -> a
+    276:296:void onPostExecute(java.lang.Void) -> a
+    303:327:void onPreExecute() -> onPreExecute
+    78:78:void onProgressUpdate(java.lang.Object[]) -> onProgressUpdate
+    78:78:void onPostExecute(java.lang.Object) -> onPostExecute
+    78:78:java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
 ua.pp.dimoshka.classes.class_books_brochures$load_from_site$1 -> ua.pp.dimoshka.classes.c:
     ua.pp.dimoshka.classes.class_books_brochures$load_from_site this$1 -> a
-    294:295:void onCancel(android.content.DialogInterface) -> onCancel
-ua.pp.dimoshka.classes.class_functions -> ua.pp.dimoshka.classes.d:
+ua.pp.dimoshka.classes.class_books_brochures$load_from_site$2 -> ua.pp.dimoshka.classes.d:
+    ua.pp.dimoshka.classes.class_books_brochures$load_from_site this$1 -> a
+ua.pp.dimoshka.classes.class_books_brochures$load_from_site$3 -> ua.pp.dimoshka.classes.e:
+    ua.pp.dimoshka.classes.class_books_brochures$load_from_site this$1 -> a
+ua.pp.dimoshka.classes.class_functions -> ua.pp.dimoshka.classes.f:
     android.content.Context context -> a
     java.lang.Integer id_lng -> b
     java.lang.String news_prefix -> c
     java.lang.String books_brochures_prefix -> d
     java.lang.String video_prefix -> e
     java.lang.String code_lng -> f
-    51:51:java.lang.Integer get_id_lng() -> a
-    55:55:java.lang.String get_news_prefix() -> b
-    59:59:java.lang.String get_books_brochures_prefix() -> c
-    63:63:java.lang.String get_video_prefix() -> d
-    67:67:java.lang.String get_code_lng() -> e
-    77:86:boolean isNetworkAvailable() -> f
-    91:100:boolean ExternalStorageState() -> g
-    107:118:java.util.Date get_jwp_journals_rss_date(java.lang.String,java.lang.String,java.lang.String) -> a
-    123:132:java.util.Date get_string_to_date(java.lang.String,java.lang.String) -> a
-    136:136:java.lang.String get_dir_app() -> h
-    141:145:void delete_dir_app() -> i
-    148:153:void DeleteRecursive(java.io.File) -> a
-    166:169:void update_file_isn(android.database.sqlite.SQLiteDatabase,java.lang.String,java.lang.Integer) -> a
-    172:172:java.lang.String stripHtml(java.lang.String) -> a
-    177:184:void send_bug_report(java.lang.Exception) -> a
-    189:233:void get_language(android.database.sqlite.SQLiteDatabase,android.content.SharedPreferences) -> a
-    237:280:boolean load_img(java.lang.String,java.lang.String,java.lang.String) -> b
-    285:329:java.util.Map get_json_files(java.lang.String) -> b
-ua.pp.dimoshka.classes.class_mediaplayer -> ua.pp.dimoshka.classes.e:
+    53:53:java.lang.Integer get_id_lng() -> a
+    57:57:java.lang.String get_news_prefix() -> b
+    61:61:java.lang.String get_books_brochures_prefix() -> c
+    65:65:java.lang.String get_video_prefix() -> d
+    69:69:java.lang.String get_code_lng() -> e
+    79:88:boolean isNetworkAvailable() -> f
+    93:102:boolean ExternalStorageState() -> g
+    109:120:java.util.Date get_jwp_journals_rss_date(java.lang.String,java.lang.String,java.lang.String) -> a
+    125:134:java.util.Date get_string_to_date(java.lang.String,java.lang.String) -> a
+    138:138:java.lang.String get_dir_app() -> h
+    168:171:void update_file_isn(android.database.sqlite.SQLiteDatabase,java.lang.String,java.lang.Integer) -> a
+    174:174:java.lang.String stripHtml(java.lang.String) -> a
+    179:186:void send_bug_report(java.lang.Exception) -> a
+    191:235:void get_language(android.database.sqlite.SQLiteDatabase,android.content.SharedPreferences) -> a
+    239:282:boolean load_img(java.lang.String,java.lang.String,java.lang.String) -> b
+    287:331:java.util.Map get_json_files(java.lang.String) -> b
+    337:348:void send_to_local_brodcast(java.lang.String,java.util.Map) -> a
+ua.pp.dimoshka.classes.class_mediaplayer -> ua.pp.dimoshka.classes.g:
     java.lang.String tag -> a
     android.media.MediaPlayer mPlayer -> b
     ua.pp.dimoshka.classes.class_mediaplayer$State currentState -> c
@@ -10263,25 +10276,25 @@ ua.pp.dimoshka.classes.class_mediaplayer -> ua.pp.dimoshka.classes.e:
     19:19:ua.pp.dimoshka.classes.class_mediaplayer$State access$102(ua.pp.dimoshka.classes.class_mediaplayer,ua.pp.dimoshka.classes.class_mediaplayer$State) -> a
     19:19:ua.pp.dimoshka.classes.class_mediaplayer access$200(ua.pp.dimoshka.classes.class_mediaplayer) -> a
     19:19:android.media.MediaPlayer access$300(ua.pp.dimoshka.classes.class_mediaplayer) -> b
-ua.pp.dimoshka.classes.class_mediaplayer$1 -> ua.pp.dimoshka.classes.f:
+ua.pp.dimoshka.classes.class_mediaplayer$1 -> ua.pp.dimoshka.classes.h:
     android.widget.ImageButton val$buttonPlayStop -> a
     android.widget.SeekBar val$seekBar -> b
     ua.pp.dimoshka.classes.class_mediaplayer this$0 -> c
     35:43:void onPrepared(android.media.MediaPlayer) -> onPrepared
-ua.pp.dimoshka.classes.class_mediaplayer$2 -> ua.pp.dimoshka.classes.g:
+ua.pp.dimoshka.classes.class_mediaplayer$2 -> ua.pp.dimoshka.classes.i:
     ua.pp.dimoshka.classes.class_mediaplayer this$0 -> a
     50:53:void onCompletion(android.media.MediaPlayer) -> onCompletion
-ua.pp.dimoshka.classes.class_mediaplayer$3 -> ua.pp.dimoshka.classes.h:
+ua.pp.dimoshka.classes.class_mediaplayer$3 -> ua.pp.dimoshka.classes.j:
     ua.pp.dimoshka.classes.class_mediaplayer this$0 -> a
     60:62:void onBufferingUpdate(android.media.MediaPlayer,int) -> onBufferingUpdate
-ua.pp.dimoshka.classes.class_mediaplayer$4 -> ua.pp.dimoshka.classes.i:
+ua.pp.dimoshka.classes.class_mediaplayer$4 -> ua.pp.dimoshka.classes.k:
     android.widget.ImageButton val$buttonPlayStop -> a
     ua.pp.dimoshka.classes.class_mediaplayer this$0 -> b
     69:73:boolean onError(android.media.MediaPlayer,int,int) -> onError
-ua.pp.dimoshka.classes.class_mediaplayer$5 -> ua.pp.dimoshka.classes.j:
+ua.pp.dimoshka.classes.class_mediaplayer$5 -> ua.pp.dimoshka.classes.l:
     ua.pp.dimoshka.classes.class_mediaplayer this$0 -> a
     81:83:boolean onInfo(android.media.MediaPlayer,int,int) -> onInfo
-ua.pp.dimoshka.classes.class_mediaplayer$State -> ua.pp.dimoshka.classes.k:
+ua.pp.dimoshka.classes.class_mediaplayer$State -> ua.pp.dimoshka.classes.m:
     ua.pp.dimoshka.classes.class_mediaplayer$State IDLE -> a
     ua.pp.dimoshka.classes.class_mediaplayer$State ERROR -> b
     ua.pp.dimoshka.classes.class_mediaplayer$State INITIALIZED -> c
@@ -10294,24 +10307,30 @@ ua.pp.dimoshka.classes.class_mediaplayer$State -> ua.pp.dimoshka.classes.k:
     ua.pp.dimoshka.classes.class_mediaplayer$State[] $VALUES -> j
     93:93:ua.pp.dimoshka.classes.class_mediaplayer$State[] values() -> values
     93:93:ua.pp.dimoshka.classes.class_mediaplayer$State valueOf(java.lang.String) -> valueOf
-ua.pp.dimoshka.classes.class_open_or_download -> ua.pp.dimoshka.classes.l:
+ua.pp.dimoshka.classes.class_open_or_download -> ua.pp.dimoshka.classes.n:
     android.content.Context context -> a
-    android.database.Cursor cursor -> b
-    android.database.Cursor cur -> c
-    android.database.sqlite.SQLiteDatabase database -> d
-    ua.pp.dimoshka.classes.class_functions funct -> e
-    38:108:void dialog_show(long) -> a
-    112:149:void open_or_download(int) -> a
-    152:205:void select_file() -> a
-    209:264:void start_open_or_download(java.lang.String,java.lang.String,java.lang.Boolean,java.lang.String,java.lang.Integer) -> a
-    22:22:android.database.Cursor access$000(ua.pp.dimoshka.classes.class_open_or_download) -> a
-ua.pp.dimoshka.classes.class_open_or_download$1 -> ua.pp.dimoshka.classes.m:
+    android.database.Cursor cursor_download -> b
+    android.database.Cursor cursor_open -> c
+    android.database.Cursor cur -> d
+    android.database.sqlite.SQLiteDatabase database -> e
+    ua.pp.dimoshka.classes.class_functions funct -> f
+    int start_id_open -> g
+    int start_id_download -> h
+    int start_id_player -> i
+    42:132:void dialog_show(long) -> a
+    136:170:void open_or_download(int,long,java.lang.Boolean) -> a
+    173:219:void select_file(long,int) -> a
+    225:277:void start_open_or_download(java.lang.String,java.lang.String,java.lang.Boolean,java.lang.String,java.lang.Integer) -> a
+    21:21:android.database.Cursor access$000(ua.pp.dimoshka.classes.class_open_or_download) -> a
+ua.pp.dimoshka.classes.class_open_or_download$1 -> ua.pp.dimoshka.classes.o:
+    long val$id -> a
+    java.lang.Boolean val$favorite -> b
+    ua.pp.dimoshka.classes.class_open_or_download this$0 -> c
+    117:118:void onClick(android.content.DialogInterface,int) -> onClick
+ua.pp.dimoshka.classes.class_open_or_download$2 -> ua.pp.dimoshka.classes.p:
     ua.pp.dimoshka.classes.class_open_or_download this$0 -> a
-    95:96:void onClick(android.content.DialogInterface,int) -> onClick
-ua.pp.dimoshka.classes.class_open_or_download$2 -> ua.pp.dimoshka.classes.n:
-    ua.pp.dimoshka.classes.class_open_or_download this$0 -> a
-    194:199:void onClick(android.content.DialogInterface,int) -> onClick
-ua.pp.dimoshka.classes.class_rss_item -> ua.pp.dimoshka.classes.o:
+    206:211:void onClick(android.content.DialogInterface,int) -> onClick
+ua.pp.dimoshka.classes.class_rss_item -> ua.pp.dimoshka.classes.q:
     java.lang.String pubDate -> a
     java.lang.String description -> b
     java.lang.String link -> c
@@ -10328,150 +10347,141 @@ ua.pp.dimoshka.classes.class_rss_item -> ua.pp.dimoshka.classes.o:
     51:51:java.lang.String getguid() -> e
     55:56:void setguid(java.lang.String) -> e
     60:60:java.lang.String toString() -> toString
-ua.pp.dimoshka.classes.class_rss_journals -> ua.pp.dimoshka.classes.p:
+ua.pp.dimoshka.classes.class_rss_journals -> ua.pp.dimoshka.classes.r:
     android.database.sqlite.SQLiteDatabase database -> a
     ua.pp.dimoshka.classes.class_functions funct -> b
     android.content.Context context -> c
-    android.os.Handler handler -> d
-    java.util.ArrayList id_pub -> e
-    java.util.ArrayList code_pub -> f
-    java.lang.Integer cur_pub -> g
-    java.util.ArrayList id_type -> h
-    java.util.ArrayList code_type -> i
-    android.content.SharedPreferences prefs -> j
-    android.os.AsyncTask task -> k
-    57:61:void get_all_feeds() -> a
-    66:90:void get_publication() -> b
+    java.util.ArrayList id_pub -> d
+    java.util.ArrayList code_pub -> e
+    java.lang.Integer cur_pub -> f
+    java.util.ArrayList id_type -> g
+    java.util.ArrayList code_type -> h
+    android.content.SharedPreferences prefs -> i
+    android.os.AsyncTask task -> j
+    54:58:void get_all_feeds() -> a
+    63:87:void get_publication() -> b
     25:25:java.util.ArrayList access$000(ua.pp.dimoshka.classes.class_rss_journals) -> a
-    25:25:android.os.Handler access$100(ua.pp.dimoshka.classes.class_rss_journals) -> b
+    25:25:ua.pp.dimoshka.classes.class_functions access$100(ua.pp.dimoshka.classes.class_rss_journals) -> b
     25:25:java.util.ArrayList access$200(ua.pp.dimoshka.classes.class_rss_journals) -> c
     25:25:java.util.ArrayList access$300(ua.pp.dimoshka.classes.class_rss_journals) -> d
     25:25:android.content.SharedPreferences access$400(ua.pp.dimoshka.classes.class_rss_journals) -> e
     25:25:java.lang.Integer access$502(ua.pp.dimoshka.classes.class_rss_journals,java.lang.Integer) -> a
     25:25:android.content.Context access$600(ua.pp.dimoshka.classes.class_rss_journals) -> f
-    25:25:ua.pp.dimoshka.classes.class_functions access$700(ua.pp.dimoshka.classes.class_rss_journals) -> g
-    25:25:java.lang.Integer access$500(ua.pp.dimoshka.classes.class_rss_journals) -> h
-    25:25:java.util.ArrayList access$800(ua.pp.dimoshka.classes.class_rss_journals) -> i
-    25:25:android.database.sqlite.SQLiteDatabase access$900(ua.pp.dimoshka.classes.class_rss_journals) -> j
-    25:25:android.os.AsyncTask access$1000(ua.pp.dimoshka.classes.class_rss_journals) -> k
-ua.pp.dimoshka.classes.class_rss_journals$ReadFeedTask -> ua.pp.dimoshka.classes.q:
+    25:25:java.lang.Integer access$500(ua.pp.dimoshka.classes.class_rss_journals) -> g
+    25:25:java.util.ArrayList access$700(ua.pp.dimoshka.classes.class_rss_journals) -> h
+    25:25:android.database.sqlite.SQLiteDatabase access$800(ua.pp.dimoshka.classes.class_rss_journals) -> i
+ua.pp.dimoshka.classes.class_rss_journals$ReadFeedTask -> ua.pp.dimoshka.classes.s:
     android.app.ProgressDialog dialog -> c
     java.util.List rss_list -> a
     ua.pp.dimoshka.classes.class_rss_journals this$0 -> b
-    103:218:java.lang.Void doInBackground(java.lang.Void[]) -> a
-    222:273:java.lang.Integer img(java.lang.String,java.text.SimpleDateFormat,java.util.Date) -> a
-    279:291:void onPostExecute(java.lang.Void) -> a
-    295:306:void onPreExecute() -> onPreExecute
-    92:92:void onPostExecute(java.lang.Object) -> onPostExecute
-    92:92:java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
-ua.pp.dimoshka.classes.class_rss_journals$ReadFeedTask$1 -> ua.pp.dimoshka.classes.r:
+    100:220:java.lang.Void doInBackground(java.lang.Void[]) -> a
+    224:275:java.lang.Integer img(java.lang.String,java.text.SimpleDateFormat,java.util.Date) -> a
+    281:300:void onPostExecute(java.lang.Void) -> a
+    307:330:void onPreExecute() -> onPreExecute
+    89:89:void onPostExecute(java.lang.Object) -> onPostExecute
+    89:89:java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
+ua.pp.dimoshka.classes.class_rss_journals$ReadFeedTask$1 -> ua.pp.dimoshka.classes.t:
     ua.pp.dimoshka.classes.class_rss_journals$ReadFeedTask this$1 -> a
-    302:303:void onCancel(android.content.DialogInterface) -> onCancel
-ua.pp.dimoshka.classes.class_rss_news -> ua.pp.dimoshka.classes.s:
+ua.pp.dimoshka.classes.class_rss_journals$ReadFeedTask$2 -> ua.pp.dimoshka.classes.u:
+    ua.pp.dimoshka.classes.class_rss_journals$ReadFeedTask this$1 -> a
+ua.pp.dimoshka.classes.class_rss_journals$ReadFeedTask$3 -> ua.pp.dimoshka.classes.v:
+    ua.pp.dimoshka.classes.class_rss_journals$ReadFeedTask this$1 -> a
+ua.pp.dimoshka.classes.class_rss_news -> ua.pp.dimoshka.classes.w:
     android.database.sqlite.SQLiteDatabase database -> a
     ua.pp.dimoshka.classes.class_functions funct -> b
     android.content.Context context -> c
-    android.os.Handler handler -> d
-    boolean is_activity -> e
-    android.content.SharedPreferences prefs -> f
-    android.os.AsyncTask task -> g
-    int appWidgetId -> h
-    54:61:void get_all_feeds_activity(android.os.Handler) -> a
-    65:72:void get_all_feeds_widget(int) -> a
-    76:87:void update_widget() -> a
-    30:30:android.content.Context access$000(ua.pp.dimoshka.classes.class_rss_news) -> a
-    30:30:ua.pp.dimoshka.classes.class_functions access$100(ua.pp.dimoshka.classes.class_rss_news) -> b
-    30:30:boolean access$200(ua.pp.dimoshka.classes.class_rss_news) -> c
-    30:30:android.os.Handler access$300(ua.pp.dimoshka.classes.class_rss_news) -> d
-    30:30:android.database.sqlite.SQLiteDatabase access$400(ua.pp.dimoshka.classes.class_rss_news) -> e
-    30:30:android.content.SharedPreferences access$500(ua.pp.dimoshka.classes.class_rss_news) -> f
-    30:30:void access$600(ua.pp.dimoshka.classes.class_rss_news) -> g
-    30:30:android.os.AsyncTask access$700(ua.pp.dimoshka.classes.class_rss_news) -> h
-ua.pp.dimoshka.classes.class_rss_news$ReadFeedTask -> ua.pp.dimoshka.classes.t:
+    boolean is_activity -> d
+    android.content.SharedPreferences prefs -> e
+    android.os.AsyncTask task -> f
+    int appWidgetId -> g
+    54:60:void get_all_feeds_activity() -> a
+    64:71:void get_all_feeds_widget(int) -> a
+    75:86:void update_widget() -> b
+    31:31:android.content.Context access$000(ua.pp.dimoshka.classes.class_rss_news) -> a
+    31:31:ua.pp.dimoshka.classes.class_functions access$100(ua.pp.dimoshka.classes.class_rss_news) -> b
+    31:31:boolean access$200(ua.pp.dimoshka.classes.class_rss_news) -> c
+    31:31:android.database.sqlite.SQLiteDatabase access$300(ua.pp.dimoshka.classes.class_rss_news) -> d
+    31:31:android.content.SharedPreferences access$400(ua.pp.dimoshka.classes.class_rss_news) -> e
+    31:31:void access$500(ua.pp.dimoshka.classes.class_rss_news) -> f
+ua.pp.dimoshka.classes.class_rss_news$ReadFeedTask -> ua.pp.dimoshka.classes.x:
     android.app.ProgressDialog dialog -> c
     java.util.List rss_list -> a
     ua.pp.dimoshka.classes.class_rss_news this$0 -> b
-    99:192:java.lang.Void doInBackground(java.lang.Void[]) -> a
-    196:220:int img(long,java.lang.String) -> a
-    226:242:void onPostExecute(java.lang.Void) -> a
-    246:259:void onPreExecute() -> onPreExecute
-    89:89:void onPostExecute(java.lang.Object) -> onPostExecute
-    89:89:java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
-ua.pp.dimoshka.classes.class_rss_news$ReadFeedTask$1 -> ua.pp.dimoshka.classes.u:
+    98:197:java.lang.Void doInBackground(java.lang.Void[]) -> a
+    201:225:int img(long,java.lang.String) -> a
+    231:253:void onPostExecute(java.lang.Void) -> a
+    257:285:void onPreExecute() -> onPreExecute
+    88:88:void onPostExecute(java.lang.Object) -> onPostExecute
+    88:88:java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
+ua.pp.dimoshka.classes.class_rss_news$ReadFeedTask$1 -> ua.pp.dimoshka.classes.y:
     ua.pp.dimoshka.classes.class_rss_news$ReadFeedTask this$1 -> a
-    254:255:void onCancel(android.content.DialogInterface) -> onCancel
-ua.pp.dimoshka.classes.class_rss_provider -> ua.pp.dimoshka.classes.v:
+ua.pp.dimoshka.classes.class_rss_news$ReadFeedTask$2 -> ua.pp.dimoshka.classes.z:
+    ua.pp.dimoshka.classes.class_rss_news$ReadFeedTask this$1 -> a
+ua.pp.dimoshka.classes.class_rss_news$ReadFeedTask$3 -> ua.pp.dimoshka.classes.aa:
+    ua.pp.dimoshka.classes.class_rss_news$ReadFeedTask this$1 -> a
+ua.pp.dimoshka.classes.class_rss_provider -> ua.pp.dimoshka.classes.ab:
     ua.pp.dimoshka.classes.class_functions funct -> a
     com.androidquery.AQuery aq -> b
     41:123:java.util.List parse(java.lang.String) -> a
-ua.pp.dimoshka.classes.class_sqlite -> ua.pp.dimoshka.classes.w:
+ua.pp.dimoshka.classes.class_sqlite -> ua.pp.dimoshka.classes.ac:
     android.database.sqlite.SQLiteDatabase database -> a
     23:23:android.database.sqlite.SQLiteDatabase openDataBase() -> a
-ua.pp.dimoshka.classes.class_video -> ua.pp.dimoshka.classes.x:
+ua.pp.dimoshka.classes.class_video -> ua.pp.dimoshka.classes.ad:
     android.database.sqlite.SQLiteDatabase database -> a
     ua.pp.dimoshka.classes.class_functions funct -> b
     android.content.Context context -> c
     android.database.Cursor cursor -> d
-    android.os.Handler handler -> e
-    android.os.AsyncTask task -> f
-    android.content.SharedPreferences prefs -> g
-    java.util.ArrayList id_type -> h
-    java.util.ArrayList code_type -> i
-    java.util.ArrayList name_type -> j
-    58:59:void verify_all() -> a
-    63:79:void get_publication() -> b
-    33:33:ua.pp.dimoshka.classes.class_functions access$000(ua.pp.dimoshka.classes.class_video) -> a
-    33:33:android.os.Handler access$100(ua.pp.dimoshka.classes.class_video) -> b
-    33:33:android.database.sqlite.SQLiteDatabase access$200(ua.pp.dimoshka.classes.class_video) -> c
-    33:33:java.util.ArrayList access$300(ua.pp.dimoshka.classes.class_video) -> d
-    33:33:java.util.ArrayList access$400(ua.pp.dimoshka.classes.class_video) -> e
-    33:33:android.content.SharedPreferences access$500(ua.pp.dimoshka.classes.class_video) -> f
-    33:33:android.content.Context access$600(ua.pp.dimoshka.classes.class_video) -> g
-    33:33:android.database.Cursor access$700(ua.pp.dimoshka.classes.class_video) -> h
-    33:33:android.os.AsyncTask access$800(ua.pp.dimoshka.classes.class_video) -> i
-ua.pp.dimoshka.classes.class_video$load_from_site -> ua.pp.dimoshka.classes.y:
+    android.os.AsyncTask task -> e
+    android.content.SharedPreferences prefs -> f
+    java.util.ArrayList id_type -> g
+    java.util.ArrayList code_type -> h
+    java.util.ArrayList name_type -> i
+    56:57:void verify_all() -> a
+    61:77:void get_publication() -> b
+    34:34:ua.pp.dimoshka.classes.class_functions access$000(ua.pp.dimoshka.classes.class_video) -> a
+    34:34:android.database.sqlite.SQLiteDatabase access$100(ua.pp.dimoshka.classes.class_video) -> b
+    34:34:java.util.ArrayList access$200(ua.pp.dimoshka.classes.class_video) -> c
+    34:34:java.util.ArrayList access$300(ua.pp.dimoshka.classes.class_video) -> d
+    34:34:android.content.SharedPreferences access$400(ua.pp.dimoshka.classes.class_video) -> e
+    34:34:android.content.Context access$500(ua.pp.dimoshka.classes.class_video) -> f
+    34:34:android.database.Cursor access$600(ua.pp.dimoshka.classes.class_video) -> g
+ua.pp.dimoshka.classes.class_video$load_from_site -> ua.pp.dimoshka.classes.ae:
     android.app.ProgressDialog dialog -> b
     ua.pp.dimoshka.classes.class_video this$0 -> a
-    90:233:java.lang.Void doInBackground(java.lang.Void[]) -> a
-    238:261:int img(java.lang.String,java.lang.String) -> a
-    266:270:void onProgressUpdate(java.lang.Integer[]) -> a
-    275:291:void onPostExecute(java.lang.Void) -> a
-    295:306:void onPreExecute() -> onPreExecute
-    81:81:void onProgressUpdate(java.lang.Object[]) -> onProgressUpdate
-    81:81:void onPostExecute(java.lang.Object) -> onPostExecute
-    81:81:java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
-ua.pp.dimoshka.classes.class_video$load_from_site$1 -> ua.pp.dimoshka.classes.z:
+    88:238:java.lang.Void doInBackground(java.lang.Void[]) -> a
+    243:266:int img(java.lang.String,java.lang.String) -> a
+    271:281:void onProgressUpdate(java.lang.Integer[]) -> a
+    286:308:void onPostExecute(java.lang.Void) -> a
+    326:336:void onPreExecute() -> onPreExecute
+    79:79:void onProgressUpdate(java.lang.Object[]) -> onProgressUpdate
+    79:79:void onPostExecute(java.lang.Object) -> onPostExecute
+    79:79:java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
+ua.pp.dimoshka.classes.class_video$load_from_site$1 -> ua.pp.dimoshka.classes.af:
     ua.pp.dimoshka.classes.class_video$load_from_site this$1 -> a
-    302:303:void onCancel(android.content.DialogInterface) -> onCancel
-ua.pp.dimoshka.classes.class_widget -> ua.pp.dimoshka.classes.class_widget:
-    java.text.SimpleDateFormat sdf -> a
-    39:43:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]) -> onUpdate
-    47:56:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int) -> a
-    60:70:void setUpdateTV(android.widget.RemoteViews,android.content.Context,int) -> a
-    74:79:void setList(android.widget.RemoteViews,android.content.Context,int) -> b
-    82:87:void setListClick(android.widget.RemoteViews,android.content.Context,int) -> c
-    90:95:void update_rss_news(android.content.Context,int) -> a
-    99:118:void onReceive(android.content.Context,android.content.Intent) -> onReceive
-ua.pp.dimoshka.classes.class_widget_factory -> ua.pp.dimoshka.classes.aa:
+ua.pp.dimoshka.classes.class_video$load_from_site$2 -> ua.pp.dimoshka.classes.ag:
+    ua.pp.dimoshka.classes.class_video$load_from_site this$1 -> a
+ua.pp.dimoshka.classes.class_video$load_from_site$3 -> ua.pp.dimoshka.classes.ah:
+    ua.pp.dimoshka.classes.class_video$load_from_site this$1 -> a
+ua.pp.dimoshka.classes.class_widget_factory -> ua.pp.dimoshka.classes.ai:
     android.content.Context context -> b
     java.lang.Integer id_lng -> a
     android.database.sqlite.SQLiteDatabase database -> c
     ua.pp.dimoshka.classes.class_functions funct -> d
     android.content.SharedPreferences prefs -> e
     android.database.Cursor cursor -> f
-    37:42:void onCreate() -> onCreate
-    47:72:void get_language(int) -> a
-    76:76:int getCount() -> getCount
-    81:81:long getItemId(int) -> getItemId
-    86:86:android.widget.RemoteViews getLoadingView() -> getLoadingView
-    91:141:android.widget.RemoteViews getViewAt(int) -> getViewAt
-    146:146:int getViewTypeCount() -> getViewTypeCount
-    151:151:boolean hasStableIds() -> hasStableIds
-    156:157:void onDataSetChanged() -> onDataSetChanged
-    161:162:void onDestroy() -> onDestroy
+    38:43:void onCreate() -> onCreate
+    48:73:void get_language(int) -> a
+    77:77:int getCount() -> getCount
+    82:82:long getItemId(int) -> getItemId
+    87:87:android.widget.RemoteViews getLoadingView() -> getLoadingView
+    92:142:android.widget.RemoteViews getViewAt(int) -> getViewAt
+    147:147:int getViewTypeCount() -> getViewTypeCount
+    152:152:boolean hasStableIds() -> hasStableIds
+    157:158:void onDataSetChanged() -> onDataSetChanged
+    162:163:void onDestroy() -> onDestroy
 ua.pp.dimoshka.classes.class_widget_service -> ua.pp.dimoshka.classes.class_widget_service:
     13:13:android.widget.RemoteViewsService$RemoteViewsFactory onGetViewFactory(android.content.Intent) -> onGetViewFactory
-ua.pp.dimoshka.classes.my_ListFragment -> ua.pp.dimoshka.classes.ab:
+ua.pp.dimoshka.classes.my_ListFragment -> ua.pp.dimoshka.classes.aj:
     android.support.v4.widget.SimpleCursorAdapter mAdapter -> X
     ua.pp.dimoshka.jwp.main main -> Y
     java.lang.String sqlite_rawQuery -> Z
@@ -10481,26 +10491,27 @@ ua.pp.dimoshka.classes.my_ListFragment -> ua.pp.dimoshka.classes.ab:
     int curent_load_items -> ad
     boolean isLoading -> ae
     android.content.BroadcastReceiver receiver -> af
-    51:63:void onActivityCreated(android.os.Bundle) -> d
-    67:67:void setadapter_list() -> B
-    71:73:void onListItemClick(android.widget.ListView,android.view.View,int,long) -> a
-    77:84:void refresh() -> C
-    88:88:android.support.v4.content.Loader onCreateLoader(int,android.os.Bundle) -> a
-    93:98:void onLoadFinished(android.support.v4.content.Loader,android.database.Cursor) -> a
-    103:104:void onScroll(android.widget.AbsListView,int,int,int) -> onScroll
-    108:110:void onScrollStateChanged(android.widget.AbsListView,int) -> onScrollStateChanged
-    113:127:void isScrollCompleted() -> D
-    132:133:void onLoaderReset(android.support.v4.content.Loader) -> a
-    26:26:void onLoadFinished(android.support.v4.content.Loader,java.lang.Object) -> a
-ua.pp.dimoshka.classes.my_ListFragment$1 -> ua.pp.dimoshka.classes.ac:
+    49:61:void onActivityCreated(android.os.Bundle) -> d
+    65:65:void setadapter_list() -> B
+    70:77:void refresh() -> C
+    81:81:android.support.v4.content.Loader onCreateLoader(int,android.os.Bundle) -> a
+    86:91:void onLoadFinished(android.support.v4.content.Loader,android.database.Cursor) -> a
+    96:97:void onScroll(android.widget.AbsListView,int,int,int) -> onScroll
+    101:103:void onScrollStateChanged(android.widget.AbsListView,int) -> onScrollStateChanged
+    106:120:void isScrollCompleted() -> D
+    125:126:void onLoaderReset(android.support.v4.content.Loader) -> a
+    154:156:void onDestroy() -> n
+    24:24:void onLoadFinished(android.support.v4.content.Loader,java.lang.Object) -> a
+ua.pp.dimoshka.classes.my_ListFragment$1 -> ua.pp.dimoshka.classes.ak:
     ua.pp.dimoshka.classes.my_ListFragment this$0 -> a
-    42:46:void onReceive(android.content.Context,android.content.Intent) -> onReceive
-ua.pp.dimoshka.classes.my_ListFragment$MyCursorLoader -> ua.pp.dimoshka.classes.ad:
+    40:44:void onReceive(android.content.Context,android.content.Intent) -> onReceive
+ua.pp.dimoshka.classes.my_ListFragment$MyCursorLoader -> ua.pp.dimoshka.classes.al:
     android.database.sqlite.SQLiteDatabase database -> u
     int limit -> v
     java.lang.String sqlite_rawQuery -> w
-    149:153:android.database.Cursor loadInBackground() -> f
-    135:135:java.lang.Object loadInBackground() -> d
+    android.content.Context context -> x
+    144:148:android.database.Cursor loadInBackground() -> f
+    128:128:java.lang.Object loadInBackground() -> d
 ua.pp.dimoshka.classes.service_downloads_files -> ua.pp.dimoshka.classes.service_downloads_files:
     ua.pp.dimoshka.classes.class_functions funct -> a
     android.app.NotificationManager notificationManager -> b
@@ -10509,39 +10520,41 @@ ua.pp.dimoshka.classes.service_downloads_files -> ua.pp.dimoshka.classes.service
     boolean isRunning -> e
     java.util.ArrayList targetFiles -> f
     int now_targetFile -> g
-    52:60:void onCreate() -> onCreate
-    65:86:int onStartCommand(android.content.Intent,int,int) -> onStartCommand
-    90:90:java.util.ArrayList get_targetFiles() -> a
-    94:94:int get_targetFiles_num() -> b
-    99:106:void onDestroy() -> onDestroy
-    110:110:android.os.IBinder onBind(android.content.Intent) -> onBind
-    121:136:void onFinishDownload(int) -> a
-    139:139:int getNotificationIcon() -> c
-    145:165:android.widget.RemoteViews getProgressView(int,int,int,int,java.lang.String,java.lang.String) -> a
-    170:181:void showNotification_popup(java.lang.String,java.lang.String,java.lang.String,android.content.Context) -> a
-    185:195:void showNotification(android.widget.RemoteViews,java.lang.String,android.content.Context) -> a
-    414:421:java.lang.String getStringByteSize(int) -> b
-    32:32:int access$200(ua.pp.dimoshka.classes.service_downloads_files) -> a
-    32:32:ua.pp.dimoshka.classes.class_functions access$300(ua.pp.dimoshka.classes.service_downloads_files) -> b
-    32:32:int access$208(ua.pp.dimoshka.classes.service_downloads_files) -> c
-ua.pp.dimoshka.classes.service_downloads_files$1 -> ua.pp.dimoshka.classes.ae:
-ua.pp.dimoshka.classes.service_downloads_files$AsyncDownloadTask -> ua.pp.dimoshka.classes.af:
+    53:61:void onCreate() -> onCreate
+    66:87:int onStartCommand(android.content.Intent,int,int) -> onStartCommand
+    91:91:java.util.ArrayList get_targetFiles() -> a
+    95:95:int get_targetFiles_num() -> b
+    100:107:void onDestroy() -> onDestroy
+    111:111:android.os.IBinder onBind(android.content.Intent) -> onBind
+    122:138:void onFinishDownload(int) -> a
+    141:141:int getNotificationIcon() -> c
+    147:167:android.widget.RemoteViews getProgressView(int,int,int,int,java.lang.String,java.lang.String) -> a
+    172:183:void showNotification_popup(java.lang.String,java.lang.String,java.lang.String,android.content.Context) -> a
+    187:197:void showNotification(android.widget.RemoteViews,java.lang.String,android.content.Context) -> a
+    416:423:java.lang.String getStringByteSize(int) -> b
+    33:33:int access$200(ua.pp.dimoshka.classes.service_downloads_files) -> a
+    33:33:ua.pp.dimoshka.classes.class_functions access$300(ua.pp.dimoshka.classes.service_downloads_files) -> b
+    33:33:int access$208(ua.pp.dimoshka.classes.service_downloads_files) -> c
+ua.pp.dimoshka.classes.service_downloads_files$1 -> ua.pp.dimoshka.classes.am:
+ua.pp.dimoshka.classes.service_downloads_files$AsyncDownloadTask -> ua.pp.dimoshka.classes.an:
     java.util.ArrayList targetFiles -> b
     int total_file -> c
     int success -> d
     ua.pp.dimoshka.classes.service_downloads_files this$0 -> a
-    212:215:void onPreExecute() -> onPreExecute
-    222:385:java.lang.Void doInBackground(java.lang.Void[]) -> a
-    390:396:void onCancelled() -> onCancelled
-    400:410:void onPostExecute(java.lang.Void) -> a
-    205:205:void onPostExecute(java.lang.Object) -> onPostExecute
-    205:205:java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
-ua.pp.dimoshka.classes.service_downloads_files$FileDownloadBinder -> ua.pp.dimoshka.classes.ag:
+    214:217:void onPreExecute() -> onPreExecute
+    224:387:java.lang.Void doInBackground(java.lang.Void[]) -> a
+    392:398:void onCancelled() -> onCancelled
+    402:412:void onPostExecute(java.lang.Void) -> a
+    207:207:void onPostExecute(java.lang.Object) -> onPostExecute
+    207:207:java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
+ua.pp.dimoshka.classes.service_downloads_files$FileDownloadBinder -> ua.pp.dimoshka.classes.ao:
     ua.pp.dimoshka.classes.service_downloads_files this$0 -> a
 ua.pp.dimoshka.jwp.books_brochures -> ua.pp.dimoshka.jwp.a:
-    9:22:void setadapter_list() -> B
+    12:25:void setadapter_list() -> B
+    29:31:void onListItemClick(android.widget.ListView,android.view.View,int,long) -> a
 ua.pp.dimoshka.jwp.journals -> ua.pp.dimoshka.jwp.b:
-    9:21:void setadapter_list() -> B
+    12:24:void setadapter_list() -> B
+    28:30:void onListItemClick(android.widget.ListView,android.view.View,int,long) -> a
 ua.pp.dimoshka.jwp.main -> ua.pp.dimoshka.jwp.main:
     int curent_tab -> o
     android.database.sqlite.SQLiteDatabase database -> p
@@ -10559,69 +10572,63 @@ ua.pp.dimoshka.jwp.main -> ua.pp.dimoshka.jwp.main:
     java.util.List fragment_list -> B
     ua.pp.dimoshka.jwp.main$MyPagerAdapter pagerAdapter -> C
     java.lang.Boolean change_prefference -> D
-    android.os.Handler handler_news -> E
-    android.os.Handler handler_journals -> F
-    android.os.Handler handler_video -> G
-    android.os.Handler handler_books_brochures -> H
-    android.content.SharedPreferences$OnSharedPreferenceChangeListener PreferenceChangeListener -> I
-    android.support.v4.view.ViewPager$SimpleOnPageChangeListener PageChangeListener -> J
-    66:66:android.database.sqlite.SQLiteDatabase get_database() -> j
-    70:70:ua.pp.dimoshka.classes.class_functions get_funct() -> k
-    74:74:ua.pp.dimoshka.classes.class_open_or_download get_open_or_download() -> l
-    151:192:void onCreate(android.os.Bundle) -> onCreate
-    196:204:void load_first() -> m
-    208:223:void create_fragments() -> n
-    227:247:void create_tabs() -> o
-    252:254:void onTabSelected(android.support.v7.app.ActionBar$Tab,android.support.v4.app.FragmentTransaction) -> a
-    259:259:void onTabUnselected(android.support.v7.app.ActionBar$Tab,android.support.v4.app.FragmentTransaction) -> b
-    264:264:void onTabReselected(android.support.v7.app.ActionBar$Tab,android.support.v4.app.FragmentTransaction) -> c
-    289:293:void onStart() -> onStart
-    297:301:void onStop() -> onStop
-    321:322:boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
-    327:345:boolean onOptionsItemSelected(android.view.MenuItem) -> onOptionsItemSelected
-    350:378:void load_rss() -> p
-    382:391:void refresh() -> q
-    399:400:void onDestroy() -> onDestroy
-    43:43:java.lang.Boolean access$000(ua.pp.dimoshka.jwp.main) -> a
-    43:43:ua.pp.dimoshka.classes.class_rss_journals access$100(ua.pp.dimoshka.jwp.main) -> b
-    43:43:void access$200(ua.pp.dimoshka.jwp.main) -> c
-    43:43:android.content.SharedPreferences access$300(ua.pp.dimoshka.jwp.main) -> d
-    43:43:ua.pp.dimoshka.classes.class_video access$400(ua.pp.dimoshka.jwp.main) -> e
-    43:43:ua.pp.dimoshka.classes.class_books_brochures access$500(ua.pp.dimoshka.jwp.main) -> f
-    43:43:java.lang.Boolean access$602(ua.pp.dimoshka.jwp.main,java.lang.Boolean) -> a
-    43:43:void access$700(ua.pp.dimoshka.jwp.main) -> g
-    43:43:android.support.v7.app.ActionBar access$800(ua.pp.dimoshka.jwp.main) -> h
+    java.lang.Boolean progressbar -> E
+    android.content.BroadcastReceiver receiver -> F
+    android.content.SharedPreferences$OnSharedPreferenceChangeListener PreferenceChangeListener -> G
+    android.support.v4.view.ViewPager$SimpleOnPageChangeListener PageChangeListener -> H
+    68:68:android.database.sqlite.SQLiteDatabase get_database() -> j
+    72:72:ua.pp.dimoshka.classes.class_functions get_funct() -> k
+    76:76:ua.pp.dimoshka.classes.class_open_or_download get_open_or_download() -> l
+    138:182:void onCreate(android.os.Bundle) -> onCreate
+    186:189:void onRestoreInstanceState(android.os.Bundle) -> onRestoreInstanceState
+    193:195:void onSaveInstanceState(android.os.Bundle) -> onSaveInstanceState
+    200:208:void load_first() -> m
+    212:227:void create_fragments() -> n
+    231:251:void create_tabs() -> o
+    256:258:void onTabSelected(android.support.v7.app.ActionBar$Tab,android.support.v4.app.FragmentTransaction) -> a
+    263:263:void onTabUnselected(android.support.v7.app.ActionBar$Tab,android.support.v4.app.FragmentTransaction) -> b
+    268:268:void onTabReselected(android.support.v7.app.ActionBar$Tab,android.support.v4.app.FragmentTransaction) -> c
+    293:297:void onStart() -> onStart
+    301:305:void onStop() -> onStop
+    325:326:boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
+    331:349:boolean onOptionsItemSelected(android.view.MenuItem) -> onOptionsItemSelected
+    354:382:void load_rss() -> p
+    386:393:void refresh() -> q
+    401:404:void onDestroy() -> onDestroy
+    44:44:java.lang.Boolean access$000(ua.pp.dimoshka.jwp.main) -> a
+    44:44:ua.pp.dimoshka.classes.class_rss_journals access$100(ua.pp.dimoshka.jwp.main) -> b
+    44:44:void access$200(ua.pp.dimoshka.jwp.main) -> c
+    44:44:android.content.SharedPreferences access$300(ua.pp.dimoshka.jwp.main) -> d
+    44:44:ua.pp.dimoshka.classes.class_video access$400(ua.pp.dimoshka.jwp.main) -> e
+    44:44:ua.pp.dimoshka.classes.class_books_brochures access$500(ua.pp.dimoshka.jwp.main) -> f
+    44:44:java.lang.Boolean access$602(ua.pp.dimoshka.jwp.main,java.lang.Boolean) -> a
+    44:44:java.lang.Boolean access$600(ua.pp.dimoshka.jwp.main) -> g
+    44:44:java.lang.Boolean access$702(ua.pp.dimoshka.jwp.main,java.lang.Boolean) -> b
+    44:44:void access$800(ua.pp.dimoshka.jwp.main) -> h
+    44:44:android.support.v7.app.ActionBar access$900(ua.pp.dimoshka.jwp.main) -> i
 ua.pp.dimoshka.jwp.main$1 -> ua.pp.dimoshka.jwp.c:
     ua.pp.dimoshka.jwp.main this$0 -> a
-    81:91:void handleMessage(android.os.Message) -> handleMessage
+    82:132:void onReceive(android.content.Context,android.content.Intent) -> onReceive
 ua.pp.dimoshka.jwp.main$2 -> ua.pp.dimoshka.jwp.d:
     ua.pp.dimoshka.jwp.main this$0 -> a
-    99:111:void handleMessage(android.os.Message) -> handleMessage
+    310:313:void onSharedPreferenceChanged(android.content.SharedPreferences,java.lang.String) -> onSharedPreferenceChanged
 ua.pp.dimoshka.jwp.main$3 -> ua.pp.dimoshka.jwp.e:
     ua.pp.dimoshka.jwp.main this$0 -> a
-    119:129:void handleMessage(android.os.Message) -> handleMessage
-ua.pp.dimoshka.jwp.main$4 -> ua.pp.dimoshka.jwp.f:
-    ua.pp.dimoshka.jwp.main this$0 -> a
-    138:144:void handleMessage(android.os.Message) -> handleMessage
-ua.pp.dimoshka.jwp.main$5 -> ua.pp.dimoshka.jwp.g:
-    ua.pp.dimoshka.jwp.main this$0 -> a
-    306:309:void onSharedPreferenceChanged(android.content.SharedPreferences,java.lang.String) -> onSharedPreferenceChanged
-ua.pp.dimoshka.jwp.main$6 -> ua.pp.dimoshka.jwp.h:
-    ua.pp.dimoshka.jwp.main this$0 -> a
-    315:316:void onPageSelected(int) -> a
-ua.pp.dimoshka.jwp.main$MyPagerAdapter -> ua.pp.dimoshka.jwp.i:
+    319:320:void onPageSelected(int) -> a
+ua.pp.dimoshka.jwp.main$MyPagerAdapter -> ua.pp.dimoshka.jwp.f:
     java.util.List fragments -> b
     ua.pp.dimoshka.jwp.main this$0 -> a
-    277:277:android.support.v4.app.Fragment getItem(int) -> a
-    282:282:int getCount() -> b
-ua.pp.dimoshka.jwp.news -> ua.pp.dimoshka.jwp.j:
-    9:12:void setadapter_list() -> B
+    281:281:android.support.v4.app.Fragment getItem(int) -> a
+    286:286:int getCount() -> b
+ua.pp.dimoshka.jwp.news -> ua.pp.dimoshka.jwp.g:
+    15:18:void setadapter_list() -> B
+    22:30:void onListItemClick(android.widget.ListView,android.view.View,int,long) -> a
 ua.pp.dimoshka.jwp.player -> ua.pp.dimoshka.jwp.player:
     android.widget.ImageButton buttonPlayStop -> q
     android.widget.SeekBar seekBar -> r
     android.os.Handler handler -> s
     android.widget.ListView listView -> t
-    java.lang.Integer id_magazine -> u
+    long id_magazine -> u
     ua.pp.dimoshka.classes.class_mediaplayer mediaplayer_class -> v
     android.content.SharedPreferences prefs -> w
     android.database.sqlite.SQLiteDatabase database -> x
@@ -10631,73 +10638,88 @@ ua.pp.dimoshka.jwp.player -> ua.pp.dimoshka.jwp.player:
     android.media.MediaPlayer mpMusic -> p
     ua.pp.dimoshka.adapter.player_adapter mAdapter -> A
     android.os.Handler handler_completion -> B
-    72:92:void onCreate(android.os.Bundle) -> onCreate
-    96:148:void initViews() -> k
-    151:179:void play(java.lang.Integer) -> a
-    184:188:void onStart() -> onStart
-    192:196:void onStop() -> onStop
-    199:200:void refresh() -> l
-    204:212:void madia_player(java.io.File) -> a
-    215:221:void start_download(java.lang.String,java.io.File) -> a
-    225:242:void startPlayProgressUpdater() -> j
-    245:249:void seekChange(android.view.View) -> b
-    252:261:void buttonClick_Play() -> m
-    264:269:void buttonClick_Next() -> n
-    272:277:void buttonClick_Back() -> o
-    281:282:boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
-    287:304:boolean onOptionsItemSelected(android.view.MenuItem) -> onOptionsItemSelected
-    309:327:void load_all_file() -> p
-    331:333:void onDestroy() -> onDestroy
-    338:338:android.support.v4.content.Loader onCreateLoader(int,android.os.Bundle) -> a
-    343:344:void onLoadFinished(android.support.v4.content.Loader,android.database.Cursor) -> a
-    348:349:void onLoaderReset(android.support.v4.content.Loader) -> a
-    40:40:void onLoadFinished(android.support.v4.content.Loader,java.lang.Object) -> a
-    40:40:android.widget.ListView access$000(ua.pp.dimoshka.jwp.player) -> a
-    40:40:void access$100(ua.pp.dimoshka.jwp.player,java.lang.Integer) -> a
-    40:40:void access$200(ua.pp.dimoshka.jwp.player) -> b
-    40:40:void access$300(ua.pp.dimoshka.jwp.player) -> c
-    40:40:void access$400(ua.pp.dimoshka.jwp.player) -> d
-    40:40:void access$500(ua.pp.dimoshka.jwp.player,android.view.View) -> a
-ua.pp.dimoshka.jwp.player$1 -> ua.pp.dimoshka.jwp.k:
+    android.content.BroadcastReceiver receiver -> C
+    85:109:void onCreate(android.os.Bundle) -> onCreate
+    113:165:void initViews() -> k
+    168:196:void play(java.lang.Integer) -> a
+    201:205:void onStart() -> onStart
+    209:213:void onStop() -> onStop
+    216:217:void refresh() -> l
+    221:229:void madia_player(java.io.File) -> a
+    232:238:void start_download(java.lang.String,java.io.File) -> a
+    242:259:void startPlayProgressUpdater() -> j
+    262:266:void seekChange(android.view.View) -> b
+    269:278:void buttonClick_Play() -> m
+    281:286:void buttonClick_Next() -> n
+    289:294:void buttonClick_Back() -> o
+    298:299:boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
+    304:321:boolean onOptionsItemSelected(android.view.MenuItem) -> onOptionsItemSelected
+    326:344:void load_all_file() -> p
+    348:350:void onDestroy() -> onDestroy
+    355:355:android.support.v4.content.Loader onCreateLoader(int,android.os.Bundle) -> a
+    360:361:void onLoadFinished(android.support.v4.content.Loader,android.database.Cursor) -> a
+    365:366:void onLoaderReset(android.support.v4.content.Loader) -> a
+    43:43:void onLoadFinished(android.support.v4.content.Loader,java.lang.Object) -> a
+    43:43:android.widget.ListView access$000(ua.pp.dimoshka.jwp.player) -> a
+    43:43:void access$100(ua.pp.dimoshka.jwp.player,java.lang.Integer) -> a
+    43:43:void access$200(ua.pp.dimoshka.jwp.player) -> b
+    43:43:void access$300(ua.pp.dimoshka.jwp.player) -> c
+    43:43:void access$400(ua.pp.dimoshka.jwp.player) -> d
+    43:43:void access$500(ua.pp.dimoshka.jwp.player) -> e
+    43:43:void access$600(ua.pp.dimoshka.jwp.player,android.view.View) -> a
+ua.pp.dimoshka.jwp.player$1 -> ua.pp.dimoshka.jwp.h:
     ua.pp.dimoshka.jwp.player this$0 -> a
-    62:67:void handleMessage(android.os.Message) -> handleMessage
-ua.pp.dimoshka.jwp.player$2 -> ua.pp.dimoshka.jwp.l:
+    65:70:void handleMessage(android.os.Message) -> handleMessage
+ua.pp.dimoshka.jwp.player$2 -> ua.pp.dimoshka.jwp.i:
     ua.pp.dimoshka.jwp.player this$0 -> a
-    109:110:void onClick(android.view.View) -> onClick
-ua.pp.dimoshka.jwp.player$3 -> ua.pp.dimoshka.jwp.m:
+    76:80:void onReceive(android.content.Context,android.content.Intent) -> onReceive
+ua.pp.dimoshka.jwp.player$3 -> ua.pp.dimoshka.jwp.j:
     ua.pp.dimoshka.jwp.player this$0 -> a
-    116:117:void onClick(android.view.View) -> onClick
-ua.pp.dimoshka.jwp.player$4 -> ua.pp.dimoshka.jwp.n:
+    126:127:void onClick(android.view.View) -> onClick
+ua.pp.dimoshka.jwp.player$4 -> ua.pp.dimoshka.jwp.k:
     ua.pp.dimoshka.jwp.player this$0 -> a
-    123:124:void onClick(android.view.View) -> onClick
-ua.pp.dimoshka.jwp.player$5 -> ua.pp.dimoshka.jwp.o:
+    133:134:void onClick(android.view.View) -> onClick
+ua.pp.dimoshka.jwp.player$5 -> ua.pp.dimoshka.jwp.l:
     ua.pp.dimoshka.jwp.player this$0 -> a
-    132:133:boolean onTouch(android.view.View,android.view.MotionEvent) -> onTouch
-ua.pp.dimoshka.jwp.player$6 -> ua.pp.dimoshka.jwp.p:
+    140:141:void onClick(android.view.View) -> onClick
+ua.pp.dimoshka.jwp.player$6 -> ua.pp.dimoshka.jwp.m:
     ua.pp.dimoshka.jwp.player this$0 -> a
-    141:142:void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-ua.pp.dimoshka.jwp.player$7 -> ua.pp.dimoshka.jwp.q:
+    149:150:boolean onTouch(android.view.View,android.view.MotionEvent) -> onTouch
+ua.pp.dimoshka.jwp.player$7 -> ua.pp.dimoshka.jwp.n:
     ua.pp.dimoshka.jwp.player this$0 -> a
-    234:235:void run() -> run
-ua.pp.dimoshka.jwp.player$AFListener -> ua.pp.dimoshka.jwp.r:
-    388:403:void onAudioFocusChange(int) -> onAudioFocusChange
-ua.pp.dimoshka.jwp.player$MyCursorLoader -> ua.pp.dimoshka.jwp.s:
+    158:159:void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
+ua.pp.dimoshka.jwp.player$8 -> ua.pp.dimoshka.jwp.o:
+    ua.pp.dimoshka.jwp.player this$0 -> a
+    251:252:void run() -> run
+ua.pp.dimoshka.jwp.player$AFListener -> ua.pp.dimoshka.jwp.p:
+    405:420:void onAudioFocusChange(int) -> onAudioFocusChange
+ua.pp.dimoshka.jwp.player$MyCursorLoader -> ua.pp.dimoshka.jwp.q:
     android.database.sqlite.SQLiteDatabase database -> u
-    int id_magazine -> v
-    364:371:android.database.Cursor loadInBackground() -> f
-    352:352:java.lang.Object loadInBackground() -> d
+    long id_magazine -> v
+    381:388:android.database.Cursor loadInBackground() -> f
+    369:369:java.lang.Object loadInBackground() -> d
 ua.pp.dimoshka.jwp.preferences -> ua.pp.dimoshka.jwp.preferences:
     android.content.SharedPreferences prefs -> a
     android.database.sqlite.SQLiteDatabase database -> b
     26:31:void onCreate(android.os.Bundle) -> onCreate
-    53:74:void setListPreferenceData(android.preference.ListPreference) -> a
-    78:82:void onStart() -> onStart
-    86:90:void onStop() -> onStop
-ua.pp.dimoshka.jwp.preferences$MyPreferenceFragment -> ua.pp.dimoshka.jwp.t:
-    36:49:void onCreate(android.os.Bundle) -> onCreate
-ua.pp.dimoshka.jwp.preferences$MyPreferenceFragment$1 -> ua.pp.dimoshka.jwp.u:
+    54:75:void setListPreferenceData(android.preference.ListPreference) -> a
+    79:83:void onStart() -> onStart
+    87:91:void onStop() -> onStop
+ua.pp.dimoshka.jwp.preferences$MyPreferenceFragment -> ua.pp.dimoshka.jwp.r:
+    36:50:void onCreate(android.os.Bundle) -> onCreate
+ua.pp.dimoshka.jwp.preferences$MyPreferenceFragment$1 -> ua.pp.dimoshka.jwp.s:
     android.preference.ListPreference val$listPreference -> a
     ua.pp.dimoshka.jwp.preferences$MyPreferenceFragment this$0 -> b
-    45:46:boolean onPreferenceClick(android.preference.Preference) -> onPreferenceClick
-ua.pp.dimoshka.jwp.video -> ua.pp.dimoshka.jwp.v:
-    9:22:void setadapter_list() -> B
+    46:47:boolean onPreferenceClick(android.preference.Preference) -> onPreferenceClick
+ua.pp.dimoshka.jwp.video -> ua.pp.dimoshka.jwp.t:
+    12:25:void setadapter_list() -> B
+    29:31:void onListItemClick(android.widget.ListView,android.view.View,int,long) -> a
+ua.pp.dimoshka.jwp.widget -> ua.pp.dimoshka.jwp.widget:
+    java.text.SimpleDateFormat sdf -> a
+    41:45:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]) -> onUpdate
+    49:58:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int) -> a
+    62:72:void setUpdateTV(android.widget.RemoteViews,android.content.Context,int) -> a
+    76:81:void setList(android.widget.RemoteViews,android.content.Context,int) -> b
+    84:89:void setListClick(android.widget.RemoteViews,android.content.Context,int) -> c
+    92:97:void update_rss_news(android.content.Context,int) -> a
+    101:120:void onReceive(android.content.Context,android.content.Intent) -> onReceive

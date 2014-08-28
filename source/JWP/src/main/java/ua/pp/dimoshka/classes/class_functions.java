@@ -2,12 +2,14 @@ package ua.pp.dimoshka.classes;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Environment;
+import android.support.v4.content.LocalBroadcastManager;
 import android.text.Html;
 import android.util.Log;
 
@@ -328,5 +330,22 @@ public class class_functions {
         }
         return hm;
     }
+
+
+    public void send_to_local_brodcast(String int_filtr, Map<String, Integer> extra) {
+        try {
+            Intent intent = new Intent(int_filtr);
+            if (extra.size() > 0) {
+                for (String key : extra.keySet()) {
+                    intent.putExtra(key, extra.get(key));
+                }
+            }
+            LocalBroadcastManager broadcastManager = LocalBroadcastManager.getInstance(context);
+            broadcastManager.sendBroadcast(intent);
+        } catch (Exception e) {
+            send_bug_report(e);
+        }
+    }
+
 
 }

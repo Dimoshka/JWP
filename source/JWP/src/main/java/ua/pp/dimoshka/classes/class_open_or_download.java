@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
-import android.support.v4.content.LocalBroadcastManager;
 import android.webkit.MimeTypeMap;
 import android.widget.Toast;
 
@@ -143,9 +142,8 @@ public class class_open_or_download {
                         initialValues.put("favorite", "1");
                     }
                     database.update("magazine", initialValues, "_id=?", new String[]{id + ""});
-                    Intent intent = new Intent("update");
-                    LocalBroadcastManager broadcastManager = LocalBroadcastManager.getInstance(context);
-                    broadcastManager.sendBroadcast(intent);
+                    funct.send_to_local_brodcast("update", null);
+
                 } else if (item == start_id_player && start_id_player > 0) {
                     Intent i = new Intent(context, player.class);
                     i.setFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);

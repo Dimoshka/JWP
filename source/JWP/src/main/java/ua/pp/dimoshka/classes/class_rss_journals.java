@@ -8,7 +8,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
@@ -18,6 +17,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import ua.pp.dimoshka.jwp.R;
@@ -32,7 +32,6 @@ public class class_rss_journals {
     private SQLiteDatabase database;
     private class_functions funct;
     private Context context;
-    private Handler handler;
     private ArrayList<Integer> id_pub = new ArrayList<Integer>();
     private ArrayList<String> code_pub = new ArrayList<String>();
     private Integer cur_pub = Integer.valueOf(0);
@@ -42,10 +41,8 @@ public class class_rss_journals {
     private AsyncTask task = null;
 
 
-    public class_rss_journals(Context context, Handler handler,
-                              SQLiteDatabase database, class_functions funct) {
+    public class_rss_journals(Context context, SQLiteDatabase database, class_functions funct) {
         this.context = context;
-        this.handler = handler;
         this.database = database;
         this.funct = funct;
         prefs = PreferenceManager.getDefaultSharedPreferences(context);
@@ -108,7 +105,11 @@ public class class_rss_journals {
                             if (dialog != null)
                                 dialog.dismiss();
                             Log.d("JWP", "onPostExecute+");
-                            handler.sendEmptyMessage(0);
+                            //handler.sendEmptyMessage(0);
+                            funct.send_to_local_brodcast("loading", new HashMap<String, Integer>() {{
+                                put("page", 2);
+                                put("status", 0);
+                            }});
                         }
                         break;
                     }
@@ -287,14 +288,27 @@ public class class_rss_journals {
             } finally {
                 //dialog = null;
                 Log.d("JWP", "onPostExecute+");
-                handler.sendEmptyMessage(1);
+                //handler.sendEmptyMessage(1);
+
+                funct.send_to_local_brodcast("loading", new HashMap<String, Integer>() {{
+                    put("page", 2);
+                    put("status", 1);
+                }});
+
+
             }
         }
 
         @Override
         protected void onPreExecute() {
 
-            handler.sendEmptyMessage(2);
+            //handler.sendEmptyMessage(2);
+
+            funct.send_to_local_brodcast("loading", new HashMap<String, Integer>() {{
+                put("page", 2);
+                put("status", 2);
+            }});
+
             Toast.makeText(context, context.getResources().getString(
                             R.string.journals) + " - " + context.getResources().getString(
                             R.string.dialog_loaing_rss), Toast.LENGTH_SHORT

@@ -53,7 +53,6 @@
         android:layout_height="80dp"
         android:contentDescription="@string/journals"
         android:src="@drawable/ic_noimages"
-        android:layout_toEndOf="@id/img"
         android:layout_below="@+id/title"
         android:layout_alignLeft="@+id/title"
         android:layout_alignStart="@+id/title" />
