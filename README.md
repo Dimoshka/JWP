@@ -10,9 +10,9 @@ JWP - это программа для читателей публикаций �
 Напоминание: используя мобильный интернет - помните о трафике.
 
 ![ScreenShot](screenshot/small/device-2014-08-13-114559.jpg)
-[ScreenShot](screenshot/small/device-2014-08-13-114903.jpg)
-[ScreenShot](screenshot/small/device-2014-08-13-114912.jpg)
-[ScreenShot](screenshot/small/device-2014-08-13-114920.jpg)
-[ScreenShot](screenshot/small/device-2014-08-13-114932.jpg)
-[ScreenShot](screenshot/small/device-2014-08-13-114943.jpg)
-[ScreenShot](screenshot/small/device-2014-08-13-114952.jpg)
+![ScreenShot](screenshot/small/device-2014-08-13-114903.jpg)
+![ScreenShot](screenshot/small/device-2014-08-13-114912.jpg)
+![ScreenShot](screenshot/small/device-2014-08-13-114920.jpg)
+![ScreenShot](screenshot/small/device-2014-08-13-114932.jpg)
+![ScreenShot](screenshot/small/device-2014-08-13-114943.jpg)
+![ScreenShot](screenshot/small/device-2014-08-13-114952.jpg)
