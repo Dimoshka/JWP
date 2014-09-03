@@ -151,10 +151,10 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
             actionBar.setTitle(R.string.app_name_shot);
             actionBar.setSubtitle(R.string.app_name);
 
+            load_first();
             FragmentManager frafment_mn = getSupportFragmentManager();
             pagerAdapter = new MyPagerAdapter(frafment_mn, fragment_list);
             pager.setAdapter(pagerAdapter);
-            load_first();
 
             if (prefs.getBoolean("first_run", true)) {
                 new AlertDialog.Builder(this)
@@ -218,7 +218,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
                 books_brochures = new class_books_brochures(this, database, funct);
                 fragment_list.add(new books_brochures());
             }
-            pagerAdapter.notifyDataSetChanged();
+            //pagerAdapter.notifyDataSetChanged();
         } catch (Exception e) {
             funct.send_bug_report(e);
         }
@@ -308,6 +308,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
             change_prefference = Boolean.TRUE;
             Log.d("PREFF_UPDATE", key);
             load_first();
+            pagerAdapter.notifyDataSetChanged();
         }
     };
 

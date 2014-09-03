@@ -67,10 +67,10 @@ public class my_ListFragment extends ListFragment implements LoaderManager.Loade
 
     public void refresh() {
         try {
-            if (isAdded()) {
-                isLoading = false;
-                getLoaderManager().restartLoader(0, null, this);
-            }
+            //if (isAdded()) {
+            isLoading = false;
+            getLoaderManager().restartLoader(0, null, this);
+            //}
         } catch (Exception e) {
             main.get_funct().send_bug_report(e);
         }
