@@ -11,6 +11,8 @@ El programa funciona como cliente RSS."</string>
 
     <string name="favorite_add">"Añadir a favoritos"</string>
     <string name="favorite_remove">"Eliminar de los favoritos"</string>
+    <string name="site_html_singly">"Descarga separado"</string>
+    <string name="site_html_singly_summary">"Independientemente de noticias y revistas"</string>
     <string name="site_html">"Descargar de la página web"</string>
     <string name="site_html_summary">"Aumente el tiempo y la carga de tráfico"</string>
     <string name="video_books_brochures">"Vídeo, Libros y folletos"</string>

@@ -96,9 +96,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
                                 }
                                 break;
                             case 2:
-                                if (!prefs.getBoolean("site_html", false)) {
-                                    refresh();
-                                } else if (refresh_all.booleanValue()) {
+                                if (refresh_all.booleanValue() && prefs.getBoolean("site_html", true) && !prefs.getBoolean("site_html_singly", true)) {
                                     video.verify_all();
                                 } else {
                                     Log.d("JWP", "refrashe afte load");
@@ -214,7 +212,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
             fragment_list.add(new news());
             rss_journals = new class_rss_journals(this, database, funct);
             fragment_list.add(new journals());
-            if (prefs.getBoolean("site_html", false)) {
+            if (prefs.getBoolean("site_html", true)) {
                 video = new class_video(this, database, funct);
                 fragment_list.add(new video());
                 books_brochures = new class_books_brochures(this, database, funct);
@@ -236,7 +234,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
                     .setTabListener(this);
             actionBar.addTab(journals_Tab);
 
-            if (prefs.getBoolean("site_html", false)) {
+            if (prefs.getBoolean("site_html", true)) {
                 ActionBar.Tab video_Tab = actionBar.newTab().setText(R.string.video)
                         .setTabListener(this);
                 actionBar.addTab(video_Tab);
@@ -354,7 +352,11 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
             if (funct.isNetworkAvailable()) {
                 if (prefs.getBoolean("update_all_at_once", true)) {
                     refresh_all = Boolean.TRUE;
-                    rss_news.get_all_feeds_activity();
+                    if (curent_tab > 1 && prefs.getBoolean("site_html", true) && prefs.getBoolean("site_html_singly", true)) {
+                        video.verify_all();
+                    } else {
+                        rss_news.get_all_feeds_activity();
+                    }
                 } else {
                     switch (curent_tab) {
                         case 0:
@@ -376,9 +378,14 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
             } else
                 Toast.makeText(this, R.string.no_internet, Toast.LENGTH_SHORT)
                         .show();
-        } catch (Exception e) {
+        } catch (
+                Exception e
+                )
+
+        {
             funct.send_bug_report(e);
         }
+
     }
 
     private void refresh() {

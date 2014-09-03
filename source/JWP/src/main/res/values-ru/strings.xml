@@ -12,6 +12,8 @@
 
     <string name="favorite_add">"Добавить в избранное "</string>
     <string name="favorite_remove">"Удалить из избранного"</string>
+    <string name="site_html_singly">"Скачать отдельно"</string>
+    <string name="site_html_singly_summary">"Отдельно от новостей и журналов"</string>
     <string name="site_html">"Скачивание с сайта"</string>
     <string name="site_html_summary">"Увеличит время и размер трафика"</string>
     <string name="video_books_brochures">"Видео, Книги и брошюры"</string>

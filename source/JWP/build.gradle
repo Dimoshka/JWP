@@ -59,6 +59,5 @@ dependencies {
     compile 'com.bugsense.trace:bugsense:3.6'
     compile 'org.jsoup:jsoup:1.7.3'
     compile 'com.googlecode.android-query:android-query:0.25.9'
-    compile 'com.squareup.picasso:picasso:2.3.4'
     compile 'com.readystatesoftware.sqliteasset:sqliteassethelper:+'
 }

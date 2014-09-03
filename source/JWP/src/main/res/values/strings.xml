@@ -30,9 +30,10 @@
     <string name="mp3" tools:ignore="MissingTranslation">"MP3"</string>
     <string name="aac" tools:ignore="MissingTranslation">"AAC"</string>
 
-
     <string name="favorite_add">"Add to favorites"</string>
     <string name="favorite_remove">"Remove from favorites"</string>
+    <string name="site_html_singly">"Download separately"</string>
+    <string name="site_html_singly_summary">"Separately from news and magazines"</string>
     <string name="site_html">"Downloaded from the website"</string>
     <string name="site_html_summary">"Increase the time and traffic load"</string>
     <string name="video_books_brochures">"Video, Books and brochures"</string>
