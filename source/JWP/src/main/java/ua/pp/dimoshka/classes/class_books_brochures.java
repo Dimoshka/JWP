@@ -103,7 +103,7 @@ public class class_books_brochures {
 
 
                     for (int i = 0; i < pages_list.size(); i++) {
-                        publishProgress(Integer.valueOf(pages_list.size() - i));
+
                         if (isCancelled()) {
                             int currentapiVersion = android.os.Build.VERSION.SDK_INT;
                             if (currentapiVersion >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
@@ -214,6 +214,7 @@ public class class_books_brochures {
 
                             }
                         }
+                        publishProgress(Integer.valueOf(((i + 1) * 100) / pages_list.size()));
                     }
                 }
             } catch (SocketTimeoutException e) {
@@ -263,7 +264,7 @@ public class class_books_brochures {
 
                 Toast.makeText(context, context.getResources().getString(
                                 R.string.books_brochures) + " - " + context.getResources().getString(
-                                R.string.dialog_loaing_site) + " " + progUpdate[0], Toast.LENGTH_SHORT
+                                R.string.dialog_loaing_site) + " " + progUpdate[0] + "%", Toast.LENGTH_SHORT
                 ).show();
 
 

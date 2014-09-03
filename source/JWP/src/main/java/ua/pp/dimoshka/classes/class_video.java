@@ -103,7 +103,6 @@ public class class_video {
 
 
                     for (int i = 0; i < pages_list.size(); i++) {
-                        publishProgress(Integer.valueOf(pages_list.size() - i));
                         if (isCancelled()) {
                             int currentapiVersion = Build.VERSION.SDK_INT;
                             if (currentapiVersion >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
@@ -225,6 +224,7 @@ public class class_video {
                                 continue;
                             }
                         }
+                        publishProgress(Integer.valueOf(((i + 1) * 100) / pages_list.size()));
                     }
                 }
             } catch (SocketTimeoutException e) {
@@ -270,11 +270,9 @@ public class class_video {
             if (progUpdate[0].intValue() >= 0) {  // change the 10000 to whatever
                 // dialog.setMessage(context.getResources().getString(
                 //         R.string.dialog_loaing_site) + " " + progUpdate[0]);
-
-
                 Toast.makeText(context, context.getResources().getString(
                                 R.string.video) + " - " + context.getResources().getString(
-                                R.string.dialog_loaing_site) + " " + progUpdate[0], Toast.LENGTH_SHORT
+                                R.string.dialog_loaing_site) + " " + progUpdate[0] + "%", Toast.LENGTH_SHORT
                 ).show();
             }
         }

@@ -25,7 +25,6 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.widget.Toast;
 
-import com.androidquery.AQuery;
 import com.bugsense.trace.BugSenseHandler;
 import com.google.analytics.tracking.android.EasyTracker;
 
@@ -96,7 +95,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
                                 }
                                 break;
                             case 2:
-                                if (refresh_all.booleanValue() && prefs.getBoolean("site_html", true) && !prefs.getBoolean("site_html_singly", true)) {
+                                if ((refresh_all.booleanValue() && prefs.getBoolean("site_html", true) && !prefs.getBoolean("site_html_singly", true)) || prefs.getBoolean("first_load", true)) {
                                     video.verify_all();
                                 } else {
                                     Log.d("JWP", "refrashe afte load");
@@ -138,7 +137,6 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
             BugSenseHandler.initAndStartSession(this, "63148966");
             setContentView(R.layout.main);
 
-            AQuery aq = new AQuery(this);
             funct = new class_functions(this);
             dbOpenHelper = new class_sqlite(this);
             database = dbOpenHelper.openDataBase();
@@ -162,7 +160,6 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
                         .setMessage(getString(R.string.first_run_text))
                         .setNeutralButton("OK", null).show();
                 prefs.edit().putBoolean("first_run", false).apply();
-
                 //funct.delete_dir_app();
             } else if (prefs.getBoolean("downloads_on_start", false)) {
                 load_rss();
@@ -353,7 +350,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
             if (funct.isNetworkAvailable()) {
                 if (prefs.getBoolean("update_all_at_once", true)) {
                     refresh_all = Boolean.TRUE;
-                    if (curent_tab > 1 && prefs.getBoolean("site_html", true) && prefs.getBoolean("site_html_singly", true)) {
+                    if (curent_tab > 1 && prefs.getBoolean("site_html", true) && prefs.getBoolean("site_html_singly", true) && !prefs.getBoolean("first_load", true)) {
                         video.verify_all();
                     } else {
                         rss_news.get_all_feeds_activity();
@@ -391,6 +388,10 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
 
     private void refresh() {
         try {
+            if (prefs.getBoolean("first_load", true)) {
+                funct.load_file_isn(database);
+                prefs.edit().putBoolean("first_load", false).apply();
+            }
             funct.send_to_local_brodcast("update", new HashMap<String, Integer>());
             Log.d("FRAGMENT", "start_refresh");
             refresh_all = Boolean.FALSE;

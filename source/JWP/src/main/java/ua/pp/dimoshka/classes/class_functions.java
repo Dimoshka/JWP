@@ -154,6 +154,20 @@ public class class_functions {
         fileOrDirectory.delete();
     }
 
+    public void load_file_isn(SQLiteDatabase database) {
+        update_file_isn(database, new File(get_dir_app() + "/downloads/journals/"));
+        update_file_isn(database, new File(get_dir_app() + "/downloads/books_brochures/"));
+        update_file_isn(database, new File(get_dir_app() + "/downloads/video/"));
+    }
+
+    void update_file_isn(SQLiteDatabase database, File file) {
+        if (file.isDirectory()) {
+            for (File child : file.listFiles()) {
+                update_file_isn(database, child.getName(), Integer.valueOf(1));
+            }
+        }
+    }
+
     public String getMonth(int month) {
         SimpleDateFormat sdf = new SimpleDateFormat("MMMM", Locale.getDefault());
         Calendar localCalendar = Calendar.getInstance();
