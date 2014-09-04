@@ -30,6 +30,7 @@
     <string name="mp3" tools:ignore="MissingTranslation">"MP3"</string>
     <string name="aac" tools:ignore="MissingTranslation">"AAC"</string>
 
+    <string name="error_open_file">"Does not have a program to open the file"</string>
     <string name="kingdom_ministry">"Kingdom Ministry"</string>
     <string name="favorite_add">"Add to favorites"</string>
     <string name="favorite_remove">"Remove from favorites"</string>

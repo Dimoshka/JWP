@@ -1,6 +1,7 @@
 package ua.pp.dimoshka.classes;
 
 import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -243,20 +244,25 @@ public class class_open_or_download {
             }
 
             if (file_enable.booleanValue()) {
-                Intent intent = new Intent();
-                intent.setAction(Intent.ACTION_VIEW);
 
-                MimeTypeMap map = MimeTypeMap.getSingleton();
-                String ext = MimeTypeMap
-                        .getFileExtensionFromUrl(file.getName());
-                String type = map.getMimeTypeFromExtension(ext);
+                try {
+                    Intent intent = new Intent();
+                    intent.setAction(Intent.ACTION_VIEW);
 
-                if (type == null)
-                    type = "*/*";
-                Uri data = Uri.fromFile(file);
-                intent.setDataAndType(data, type);
-                context.startActivity(intent);
-
+                    MimeTypeMap map = MimeTypeMap.getSingleton();
+                    String ext = MimeTypeMap
+                            .getFileExtensionFromUrl(file.getName());
+                    String type = map.getMimeTypeFromExtension(ext);
+                    if (type == null)
+                        type = "*/*";
+                    Uri data = Uri.fromFile(file);
+                    intent.setDataAndType(data, type);
+                    context.startActivity(intent);
+                } catch (ActivityNotFoundException e) {
+                    Toast.makeText(context,
+                            context.getString(R.string.error_open_file),
+                            Toast.LENGTH_SHORT).show();
+                }
             } else {
 
                 File dir = new File(funct.get_dir_app() + "/downloads" + dir_path_pub);

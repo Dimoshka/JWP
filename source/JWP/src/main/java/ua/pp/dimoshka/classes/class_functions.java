@@ -376,7 +376,7 @@ public class class_functions {
         if (id_type_files != null && file_files != null) {
             for (int i = 0; i < id_type_files.length; i++) {
                 Boolean file_isn = Boolean.valueOf(Integer.parseInt(file_files[i]) != 0);
-                Integer type = Integer.parseInt(id_type_files[i]);
+                Integer type = Integer.valueOf(Integer.parseInt(id_type_files[i]));
                 if (!tipe_files.containsKey(type)) {
                     tipe_files.put(type, file_isn);
                 } else {
