@@ -1,6 +1,5 @@
 package ua.pp.dimoshka.classes;
 
-import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -76,8 +75,6 @@ public class class_video {
     }
 
     class load_from_site extends AsyncTask<Void, Integer, Void> {
-        private ProgressDialog dialog = null;
-
         load_from_site() {
         }
 
@@ -107,11 +104,7 @@ public class class_video {
                             int currentapiVersion = Build.VERSION.SDK_INT;
                             if (currentapiVersion >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
                                 Log.d("JWP", "isCancelled+");
-                                if (dialog != null)
-                                    dialog.dismiss();
                                 Log.d("JWP", "onPostExecute+");
-                                //handler.sendEmptyMessage(0);
-
                                 funct.send_to_local_brodcast("loading", new HashMap<String, Integer>() {{
                                     put("page", 3);
                                     put("status", 0);
@@ -268,8 +261,6 @@ public class class_video {
         @Override
         protected void onProgressUpdate(Integer[] progUpdate) {
             if (progUpdate[0].intValue() >= 0) {  // change the 10000 to whatever
-                // dialog.setMessage(context.getResources().getString(
-                //         R.string.dialog_loaing_site) + " " + progUpdate[0]);
                 Toast.makeText(context, context.getResources().getString(
                                 R.string.video) + " - " + context.getResources().getString(
                                 R.string.dialog_loaing_site) + " " + progUpdate[0] + "%", Toast.LENGTH_SHORT
@@ -280,9 +271,6 @@ public class class_video {
         @Override
         protected void onPostExecute(Void result) {
             try {
-                if ((dialog != null) && dialog.isShowing()) {
-                    dialog.dismiss();
-                }
                 if (cursor != null && !cursor.isClosed()) {
                     cursor.close();
                 }
@@ -291,35 +279,16 @@ public class class_video {
             } catch (final Exception e) {
                 // Handle or log or ignore
             } finally {
-                //dialog = null;
-                //cursor = null;
                 Log.d("JWP", "onPostExecute+");
-                //handler.sendEmptyMessage(1);
-
                 funct.send_to_local_brodcast("loading", new HashMap<String, Integer>() {{
                     put("page", 3);
                     put("status", 1);
                 }});
-
             }
         }
 
         @Override
         protected void onPreExecute() {
-            //this.dialog = ProgressDialog
-            //       .show(context,
-            //                context.getResources().getString(
-            //                       R.string.video),
-            //               context.getResources().getString(
-            //                       R.string.dialog_loaing_site), true, true, new DialogInterface.OnCancelListener() {
-            //                   public void onCancel(DialogInterface pd) {
-            //                       task.cancel(true);
-            //                   }
-            //              }
-            //       );
-
-            //handler.sendEmptyMessage(2);
-
             funct.send_to_local_brodcast("loading", new HashMap<String, Integer>() {{
                 put("page", 3);
                 put("status", 2);

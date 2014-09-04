@@ -1,4 +1,4 @@
-package ua.pp.dimoshka.jwp;
+package ua.pp.dimoshka.fragment;
 
 import android.view.View;
 import android.widget.ListView;

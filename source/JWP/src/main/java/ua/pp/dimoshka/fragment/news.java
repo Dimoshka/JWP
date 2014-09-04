@@ -1,4 +1,4 @@
-package ua.pp.dimoshka.jwp;
+package ua.pp.dimoshka.fragment;
 
 import android.content.Intent;
 import android.database.Cursor;

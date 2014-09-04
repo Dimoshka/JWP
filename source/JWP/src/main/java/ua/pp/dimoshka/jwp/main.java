@@ -34,11 +34,14 @@ import java.util.Vector;
 
 import ua.pp.dimoshka.classes.class_books_brochures;
 import ua.pp.dimoshka.classes.class_functions;
+import ua.pp.dimoshka.classes.class_kingdom_ministry;
 import ua.pp.dimoshka.classes.class_open_or_download;
 import ua.pp.dimoshka.classes.class_rss_journals;
 import ua.pp.dimoshka.classes.class_rss_news;
 import ua.pp.dimoshka.classes.class_sqlite;
 import ua.pp.dimoshka.classes.class_video;
+import ua.pp.dimoshka.fragment.journals;
+import ua.pp.dimoshka.fragment.news;
 
 public class main extends ActionBarActivity implements ActionBar.TabListener {
 
@@ -51,6 +54,7 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
     private class_rss_journals rss_journals = null;
     private class_rss_news rss_news = null;
     private class_video video = null;
+    private class_kingdom_ministry kingdom_ministry = null;
     private class_books_brochures books_brochures = null;
 
     private SharedPreferences prefs = null;
@@ -104,13 +108,21 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
                                 break;
                             case 3:
                                 if (refresh_all.booleanValue()) {
-                                    books_brochures.verify_all();
+                                    kingdom_ministry.verify_all();
                                 } else {
                                     Log.d("JWP", "refrashe afte load");
                                     refresh();
                                 }
                                 break;
                             case 4:
+                                if (refresh_all.booleanValue()) {
+                                    books_brochures.verify_all();
+                                } else {
+                                    Log.d("JWP", "refrashe afte load");
+                                    refresh();
+                                }
+                                break;
+                            case 5:
                                 Log.d("JWP", "refrashe afte load");
                                 refresh();
                                 break;
@@ -211,9 +223,11 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
             fragment_list.add(new journals());
             if (prefs.getBoolean("site_html", true)) {
                 video = new class_video(this, database, funct);
-                fragment_list.add(new video());
+                fragment_list.add(new ua.pp.dimoshka.fragment.video());
+                kingdom_ministry = new class_kingdom_ministry(this, database, funct);
+                fragment_list.add(new ua.pp.dimoshka.fragment.kingdom_ministry());
                 books_brochures = new class_books_brochures(this, database, funct);
-                fragment_list.add(new books_brochures());
+                fragment_list.add(new ua.pp.dimoshka.fragment.books_brochures());
             }
             //pagerAdapter.notifyDataSetChanged();
         } catch (Exception e) {
@@ -230,11 +244,13 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
             ActionBar.Tab journals_Tab = actionBar.newTab().setText(R.string.journals)
                     .setTabListener(this);
             actionBar.addTab(journals_Tab);
-
             if (prefs.getBoolean("site_html", true)) {
                 ActionBar.Tab video_Tab = actionBar.newTab().setText(R.string.video)
                         .setTabListener(this);
                 actionBar.addTab(video_Tab);
+                ActionBar.Tab kingdom_ministry_Tab = actionBar.newTab().setText(R.string.kingdom_ministry)
+                        .setTabListener(this);
+                actionBar.addTab(kingdom_ministry_Tab);
                 ActionBar.Tab publication_Tab = actionBar.newTab().setText(R.string.books_brochures)
                         .setTabListener(this);
                 actionBar.addTab(publication_Tab);
@@ -367,6 +383,9 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
                             video.verify_all();
                             break;
                         case 3:
+                            kingdom_ministry.verify_all();
+                            break;
+                        case 4:
                             books_brochures.verify_all();
                             break;
                         default:

@@ -1,15 +1,16 @@
-package ua.pp.dimoshka.jwp;
+package ua.pp.dimoshka.fragment;
 
 import android.view.View;
 import android.widget.ListView;
 
-import ua.pp.dimoshka.adapter.books_brochures_adapter;
+import ua.pp.dimoshka.adapter.kingdom_ministry_adapter;
 import ua.pp.dimoshka.classes.my_ListFragment;
+import ua.pp.dimoshka.jwp.R;
 
-public class books_brochures extends my_ListFragment {
+public class kingdom_ministry extends my_ListFragment {
 
     public void setadapter_list() {
-        mAdapter = new books_brochures_adapter(
+        mAdapter = new kingdom_ministry_adapter(
                 getActivity(),
                 new String[]{"_id"}, new int[]{R.id.title},
                 main.get_database(), main.get_funct());
@@ -21,7 +22,7 @@ public class books_brochures extends my_ListFragment {
                 "left join language on magazine.id_lang=language._id " +
                 "left join publication on magazine.id_pub=publication._id " +
                 "left join (select id_magazine, GROUP_CONCAT(id_type) as id_type, GROUP_CONCAT(file) as file from files group by id_magazine) as files on magazine._id=files.id_magazine " +
-                "where magazine.id_lang='" + main.get_funct().get_id_lng() + "' and magazine.id_pub='4' order by magazine.favorite desc, magazine.date desc, magazine._id asc;";
+                "where magazine.id_lang='" + main.get_funct().get_id_lng() + "' and magazine.id_pub='6' order by magazine.favorite desc, magazine.date desc, magazine._id asc;";
     }
 
     @Override

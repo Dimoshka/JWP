@@ -221,10 +221,11 @@ public class class_open_or_download {
     void start_open_or_download(String name, String name_magazine, Boolean file_enable,
                                 String link, Integer id_pub) {
         try {
-            String dir_path_pub;
+            String dir_path_pub = "/journals/";
             if (id_pub.intValue() < 4) dir_path_pub = "/journals/";
             else if (id_pub.intValue() == 4) dir_path_pub = "/books_brochures/";
-            else dir_path_pub = "/video/";
+            else if (id_pub.intValue() == 5) dir_path_pub = "/video/";
+            else if (id_pub.intValue() == 6) dir_path_pub = "/kingdom_ministry/";
 
             File file = new File(funct.get_dir_app() + "/downloads" + dir_path_pub + name);
             if (!file.exists()) {

@@ -29,7 +29,7 @@ import java.util.Map;
 
 import ua.pp.dimoshka.jwp.R;
 
-public class class_books_brochures {
+public class class_kingdom_ministry {
     private SQLiteDatabase database;
     private class_functions funct;
     private Context context;
@@ -42,7 +42,7 @@ public class class_books_brochures {
     private ArrayList<String> name_type = new ArrayList<String>();
     private static final String URL_SITE = "http://www.jw.org/";
 
-    public class_books_brochures(Context context, SQLiteDatabase database, class_functions funct) {
+    public class_kingdom_ministry(Context context, SQLiteDatabase database, class_functions funct) {
         this.context = context;
         this.database = database;
         this.funct = funct;
@@ -83,27 +83,29 @@ public class class_books_brochures {
             try {
                 DateFormat dat_format = new SimpleDateFormat("yyyy-MM-dd");
                 Date date_now = new Date();
+
                 if (funct.ExternalStorageState()) {
-                    Document doc = Jsoup.connect(URL_SITE + funct.get_books_brochures_prefix() + "?sortBy=1").get();
+                    Document doc = Jsoup.connect(URL_SITE + funct.get_kingdom_ministry_prefix() + "?sortBy=1").get();
                     Elements pages = doc.getElementsByClass("pageNum");
+
                     //Elements pages_a = pages.get(0).getElementsByTag("a");
                     ArrayList<String> pages_list = new ArrayList<String>();
-                    pages_list.add(URL_SITE + funct.get_books_brochures_prefix());
+                    pages_list.add(URL_SITE + funct.get_kingdom_ministry_prefix());
 
                     for (Iterator<Element> iterator = pages.iterator(); iterator.hasNext(); ) {
                         Element link = iterator.next();
                         pages_list.add(URL_SITE + link.attr("href"));
-                        //Log.e("BOOKS", link.attr("href") + " " + link.text());
+                        //Log.e("Kingdom", link.attr("href") + " " + link.text());
                     }
 
                     for (int i = 0; i < pages_list.size(); i++) {
                         if (isCancelled()) {
-                            int currentapiVersion = android.os.Build.VERSION.SDK_INT;
+                            int currentapiVersion = Build.VERSION.SDK_INT;
                             if (currentapiVersion >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
                                 Log.d("JWP", "isCancelled+");
                                 Log.d("JWP", "onPostExecute+");
                                 funct.send_to_local_brodcast("loading", new HashMap<String, Integer>() {{
-                                    put("page", 5);
+                                    put("page", 4);
                                     put("status", 0);
                                 }});
                             }
@@ -163,7 +165,7 @@ public class class_books_brochures {
                                 ContentValues init1 = new ContentValues();
                                 init1.put("name", name);
                                 init1.put("title", title);
-                                init1.put("id_pub", Integer.valueOf(4));
+                                init1.put("id_pub", Integer.valueOf(6));
                                 init1.put("id_lang", funct.get_id_lng());
                                 init1.put("img", img);
                                 init1.put("date", dat_format.format(date_now));
@@ -222,7 +224,7 @@ public class class_books_brochures {
             int img = 0;
             if (prefs.getBoolean("downloads_img", true)) {
                 if (funct.ExternalStorageState()) {
-                    File dir = new File(funct.get_dir_app() + "/img/books_brochures/");
+                    File dir = new File(funct.get_dir_app() + "/img/kingdom_ministry/");
                     if (!dir.isDirectory()) {
                         dir.mkdirs();
                     }
@@ -249,11 +251,9 @@ public class class_books_brochures {
         protected void onProgressUpdate(Integer[] progUpdate) {
             if (progUpdate[0].intValue() >= 0) {  // change the 10000 to whatever
                 Toast.makeText(context, context.getResources().getString(
-                                R.string.books_brochures) + " - " + context.getResources().getString(
+                                R.string.kingdom_ministry) + " - " + context.getResources().getString(
                                 R.string.dialog_loaing_site) + " " + progUpdate[0] + "%", Toast.LENGTH_SHORT
                 ).show();
-
-
             }
         }
 
@@ -268,9 +268,10 @@ public class class_books_brochures {
             } catch (final Exception e) {
                 // Handle or log or ignore
             } finally {
+                //cursor = null;
                 Log.d("JWP", "onPostExecute+");
                 funct.send_to_local_brodcast("loading", new HashMap<String, Integer>() {{
-                    put("page", 5);
+                    put("page", 4);
                     put("status", 1);
                 }});
             }
@@ -279,11 +280,11 @@ public class class_books_brochures {
         @Override
         protected void onPreExecute() {
             funct.send_to_local_brodcast("loading", new HashMap<String, Integer>() {{
-                put("page", 5);
+                put("page", 4);
                 put("status", 2);
             }});
             Toast.makeText(context, context.getResources().getString(
-                            R.string.books_brochures) + " - " + context.getResources().getString(
+                            R.string.kingdom_ministry) + " - " + context.getResources().getString(
                             R.string.dialog_loaing_site), Toast.LENGTH_SHORT
             ).show();
         }

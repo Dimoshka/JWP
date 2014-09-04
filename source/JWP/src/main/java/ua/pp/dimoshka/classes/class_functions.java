@@ -45,7 +45,8 @@ public class class_functions {
     private Context context;
     private Integer id_lng = Integer.valueOf(1);
     private String news_prefix = "en/news";
-    private String books_brochures_prefix = "en/publications/";
+    private String books_brochures_prefix = "en/publications/books/";
+    private String kingdom_ministry_prefix = "en/publications/kingdom-ministry/";
     private String video_prefix = "en/videos/";
     private String code_lng = "E";
 
@@ -59,6 +60,10 @@ public class class_functions {
 
     public String get_books_brochures_prefix() {
         return books_brochures_prefix;
+    }
+
+    public String get_kingdom_ministry_prefix() {
+        return kingdom_ministry_prefix;
     }
 
     public String get_video_prefix() {
@@ -158,6 +163,7 @@ public class class_functions {
         update_file_isn(database, new File(get_dir_app() + "/downloads/journals/"));
         update_file_isn(database, new File(get_dir_app() + "/downloads/books_brochures/"));
         update_file_isn(database, new File(get_dir_app() + "/downloads/video/"));
+        update_file_isn(database, new File(get_dir_app() + "/downloads/kingdom-ministry/"));
     }
 
     void update_file_isn(SQLiteDatabase database, File file) {
@@ -217,12 +223,14 @@ public class class_functions {
                     news_prefix = cursor.getString(cursor.getColumnIndex("news_rss"));
                     code_lng = cursor.getString(cursor.getColumnIndex("code"));
                     books_brochures_prefix = cursor.getString(cursor.getColumnIndex("books_brochures_link"));
+                    kingdom_ministry_prefix = cursor.getString(cursor.getColumnIndex("kingdom_ministry_link"));
                     video_prefix = cursor.getString(cursor.getColumnIndex("video_link"));
 
                 } else {
                     id_lng = Integer.valueOf(1);
                     news_prefix = "en/news";
-                    books_brochures_prefix = "en/publications/";
+                    books_brochures_prefix = "en/publications/books/";
+                    kingdom_ministry_prefix = "en/publications/kingdom-ministry/";
                     video_prefix = "en/videos/";
                     code_lng = "E";
                 }
@@ -234,11 +242,13 @@ public class class_functions {
                     news_prefix = cursor.getString(cursor.getColumnIndex("news_rss"));
                     code_lng = cursor.getString(cursor.getColumnIndex("code"));
                     books_brochures_prefix = cursor.getString(cursor.getColumnIndex("books_brochures_link"));
+                    kingdom_ministry_prefix = cursor.getString(cursor.getColumnIndex("kingdom_ministry_link"));
                     video_prefix = cursor.getString(cursor.getColumnIndex("video_link"));
                 } else {
                     id_lng = Integer.valueOf(1);
                     news_prefix = "en/news";
-                    books_brochures_prefix = "en/publications";
+                    books_brochures_prefix = "en/publications/books/";
+                    kingdom_ministry_prefix = "en/publications/kingdom-ministry/";
                     video_prefix = "en/videos/";
                     code_lng = "E";
                 }

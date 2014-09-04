@@ -1,7 +1,6 @@
 package ua.pp.dimoshka.classes;
 
 import android.app.PendingIntent;
-import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -85,7 +84,6 @@ public class class_rss_news {
     }
 
     class ReadFeedTask extends AsyncTask<Void, Integer, Void> {
-        private ProgressDialog dialog = null;
         List<class_rss_item> rss_list = null;
 
         ReadFeedTask() {
@@ -105,11 +103,8 @@ public class class_rss_news {
                         int currentapiVersion = Build.VERSION.SDK_INT;
                         if (currentapiVersion >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
                             Log.d("JWP", "isCancelled+");
-                            if (dialog != null)
-                                dialog.dismiss();
                             Log.d("JWP", "onPostExecute+");
                             if (is_activity) {
-                                //handler.sendEmptyMessage(0);
                                 funct.send_to_local_brodcast("loading", new HashMap<String, Integer>() {{
                                     put("page", 1);
                                     put("status", 0);
@@ -227,19 +222,8 @@ public class class_rss_news {
         @Override
         protected void onPostExecute(Void result) {
             try {
-                if ((dialog != null) && dialog.isShowing()) {
-                    dialog.dismiss();
-                }
-            } catch (final IllegalArgumentException e) {
-                // Handle or log or ignore
-            } catch (final Exception e) {
-                // Handle or log or ignore
-            } finally {
-                //dialog = null;
                 Log.d("JWP", "onPostExecute+");
                 if (is_activity) {
-                    //handler.sendEmptyMessage(1);
-
                     funct.send_to_local_brodcast("loading", new HashMap<String, Integer>() {{
                         put("page", 1);
                         put("status", 1);
@@ -248,38 +232,24 @@ public class class_rss_news {
                 } else {
                     update_widget();
                 }
+            } catch (final IllegalArgumentException e) {
+                // Handle or log or ignore
+            } catch (final Exception e) {
+                // Handle or log or ignore
             }
         }
 
         @Override
         protected void onPreExecute() {
             if (is_activity) {
-                //handler.sendEmptyMessage(2);
-
                 funct.send_to_local_brodcast("loading", new HashMap<String, Integer>() {{
                     put("page", 1);
                     put("status", 2);
                 }});
-
-
                 Toast.makeText(context, context.getResources().getString(
                                 R.string.news) + " - " + context.getResources().getString(
                                 R.string.dialog_loaing_rss), Toast.LENGTH_SHORT
                 ).show();
-
-                /*
-                this.dialog = ProgressDialog
-                        .show(context,
-                                context.getResources().getString(
-                                        R.string.news),
-                                context.getResources().getString(
-                                        R.string.dialog_loaing_rss), true, true, new DialogInterface.OnCancelListener() {
-                                    public void onCancel(DialogInterface pd) {
-                                        task.cancel(true);
-                                    }
-                                }
-                        );
-                        */
             }
         }
     }

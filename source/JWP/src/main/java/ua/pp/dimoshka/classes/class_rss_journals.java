@@ -1,6 +1,5 @@
 package ua.pp.dimoshka.classes;
 
-import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -23,7 +22,6 @@ import java.util.List;
 import ua.pp.dimoshka.jwp.R;
 
 public class class_rss_journals {
-
 
     private static final String URL_FEED = "http://www.jw.org/apps/%s_sFFZRQVNZNT?rln=%s&rmn=%s&rfm=%s&rpf=&rpe=";
     private static final String URL_IMG = "http://assets.jw.org/assets/a/{code_pub_shot}{YY}/{YYYYMMDD}/{code_pub_shot}{YY}_{YYYYMMDD}_{code_lng}/{code_pub}_{code_lng}_{YYYYMMDD}_xs.jpg";
@@ -87,8 +85,6 @@ public class class_rss_journals {
     }
 
     class ReadFeedTask extends AsyncTask<Void, Integer, Void> {
-        private ProgressDialog dialog = null;
-
         List<class_rss_item> rss_list = null;
 
         ReadFeedTask() {
@@ -102,10 +98,7 @@ public class class_rss_journals {
                         int currentapiVersion = android.os.Build.VERSION.SDK_INT;
                         if (currentapiVersion >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
                             Log.d("JWP", "isCancelled+");
-                            if (dialog != null)
-                                dialog.dismiss();
                             Log.d("JWP", "onPostExecute+");
-                            //handler.sendEmptyMessage(0);
                             funct.send_to_local_brodcast("loading", new HashMap<String, Integer>() {{
                                 put("page", 2);
                                 put("status", 0);
@@ -136,15 +129,12 @@ public class class_rss_journals {
                         } else continue;
 
                         if (load_pub.booleanValue()) {
-
-
                             Integer cur_type = Integer.valueOf(b);
                             cur_pub = Integer.valueOf(a);
                             class_rss_provider rssfeedprovider = new class_rss_provider(context, funct);
                             String feed = String.format(URL_FEED, funct.get_code_lng(), funct.get_code_lng(),
                                     code_pub.get(cur_pub.intValue()),
                                     code_type.get(cur_type.intValue()));
-
                             this.rss_list = rssfeedprovider.parse(feed);
 
                             for (class_rss_item rss_item : rss_list) {
@@ -278,32 +268,20 @@ public class class_rss_journals {
         @Override
         protected void onPostExecute(Void result) {
             try {
-                if ((dialog != null) && dialog.isShowing()) {
-                    dialog.dismiss();
-                }
-            } catch (final IllegalArgumentException e) {
-                // Handle or log or ignore
-            } catch (final Exception e) {
-                // Handle or log or ignore
-            } finally {
-                //dialog = null;
                 Log.d("JWP", "onPostExecute+");
-                //handler.sendEmptyMessage(1);
-
                 funct.send_to_local_brodcast("loading", new HashMap<String, Integer>() {{
                     put("page", 2);
                     put("status", 1);
                 }});
-
-
+            } catch (final IllegalArgumentException e) {
+                // Handle or log or ignore
+            } catch (final Exception e) {
+                // Handle or log or ignore
             }
         }
 
         @Override
         protected void onPreExecute() {
-
-            //handler.sendEmptyMessage(2);
-
             funct.send_to_local_brodcast("loading", new HashMap<String, Integer>() {{
                 put("page", 2);
                 put("status", 2);
@@ -313,20 +291,6 @@ public class class_rss_journals {
                             R.string.journals) + " - " + context.getResources().getString(
                             R.string.dialog_loaing_rss), Toast.LENGTH_SHORT
             ).show();
-
-           /*
-            this.dialog = ProgressDialog
-                    .show(context,
-                            context.getResources().getString(
-                                    R.string.journals),
-                            context.getResources().getString(
-                                    R.string.dialog_loaing_rss), true, true, new DialogInterface.OnCancelListener() {
-                                public void onCancel(DialogInterface pd) {
-                                    task.cancel(true);
-                                }
-                            }
-                    );
-                    */
         }
 
     }
