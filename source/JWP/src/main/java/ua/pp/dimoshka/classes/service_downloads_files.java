@@ -128,7 +128,10 @@ public class service_downloads_files extends Service {
                     SQLiteDatabase database = dbOpenHelper.openDataBase();
                     funct.update_file_isn(database, localFile.getName(), Integer.valueOf(1));
                     dbOpenHelper.close();
-                    funct.send_to_local_brodcast("update", null);
+                    //funct.send_to_local_brodcast("update", null);
+                    funct.send_to_local_brodcast("loading", new HashMap<String, Integer>() {{
+                        put("status", 3);
+                    }});
                 }
             }
         } catch (Exception e) {

@@ -84,11 +84,10 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             if (action != null && action.equals("loading")) {
-                int page = intent.getIntExtra("page", 0);
                 int status = intent.getIntExtra("status", 0);
-
                 switch (status) {
                     case 1:
+                        int page = intent.getIntExtra("page", 0);
                         switch (page) {
                             case 1:
                                 if (refresh_all.booleanValue()) {
@@ -131,6 +130,10 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
                         break;
                     case 2:
                         progressbar = true;
+                        break;
+                    case 3:
+                        progressbar = false;
+                        refresh();
                         break;
                     default:
                         progressbar = false;

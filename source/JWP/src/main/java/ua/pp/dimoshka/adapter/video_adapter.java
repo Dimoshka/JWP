@@ -13,6 +13,7 @@ import com.androidquery.AQuery;
 import com.androidquery.callback.BitmapAjaxCallback;
 
 import java.io.File;
+import java.util.Map;
 
 import ua.pp.dimoshka.classes.class_functions;
 import ua.pp.dimoshka.jwp.R;
@@ -88,12 +89,11 @@ public class video_adapter extends SimpleCursorAdapter {
             aq.id(R.id.type1).image(R.drawable.ic_none_type);
 
             if (id_type_files != null) {
-                for (int i = 0; i < id_type_files.length; i++) {
-                    Boolean file_isn = Boolean.valueOf(Integer.parseInt(file_files[i]) != 0);
-
-                    switch (Integer.parseInt(id_type_files[i])) {
+                Map<Integer, Boolean> tipe_files = funct.get_map_files(id_type_files, file_files);
+                for (Integer key : tipe_files.keySet()) {
+                    switch (key) {
                         case 11:
-                            if (file_isn.booleanValue())
+                            if (tipe_files.get(key).booleanValue())
                                 aq.id(R.id.type1).image(R.drawable.ic_mp4_1);
                             else
                                 aq.id(R.id.type1).image(R.drawable.ic_mp4_0);

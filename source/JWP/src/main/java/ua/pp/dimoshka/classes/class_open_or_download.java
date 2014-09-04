@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import ua.pp.dimoshka.jwp.R;
@@ -142,7 +143,10 @@ public class class_open_or_download {
                         initialValues.put("favorite", "1");
                     }
                     database.update("magazine", initialValues, "_id=?", new String[]{id + ""});
-                    funct.send_to_local_brodcast("update", null);
+                    //funct.send_to_local_brodcast("update", null);
+                    funct.send_to_local_brodcast("loading", new HashMap<String, Integer>() {{
+                        put("status", 3);
+                    }});
 
                 } else if (item == start_id_player && start_id_player > 0) {
                     Intent i = new Intent(context, player.class);

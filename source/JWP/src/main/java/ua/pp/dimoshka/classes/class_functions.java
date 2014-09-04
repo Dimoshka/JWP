@@ -371,5 +371,22 @@ public class class_functions {
         }
     }
 
+    public Map<Integer, Boolean> get_map_files(String[] id_type_files, String[] file_files) {
+        Map<Integer, Boolean> tipe_files = new HashMap<Integer, Boolean>();
+        if (id_type_files != null && file_files != null) {
+            for (int i = 0; i < id_type_files.length; i++) {
+                Boolean file_isn = Boolean.valueOf(Integer.parseInt(file_files[i]) != 0);
+                Integer type = Integer.parseInt(id_type_files[i]);
+                if (!tipe_files.containsKey(type)) {
+                    tipe_files.put(type, file_isn);
+                } else {
+                    Boolean file = tipe_files.get(type);
+                    if (file_isn && !file) tipe_files.put(type, file_isn);
+                }
+            }
+        }
+        return tipe_files;
+    }
+
 
 }
