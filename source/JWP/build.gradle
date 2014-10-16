@@ -20,17 +20,17 @@ android {
     signingConfigs {
         release {
             keyAlias 'jwp'
-            keyPassword 'Dimoshka9101'
-            storeFile file('H:/Work/Android/Keystore/dimoshka.jks')
-            //storeFile file('/media/dimoshka/DIMOSHKA/Work/Android/Keystore/dimoshka.jks')
-            storePassword 'Dimoshka9101'
+            keyPassword 'Di26Moshka29'
+            storeFile file('H:/Workspace/android/keys/dimoshka.jks')
+            //storeFile file('/home/dimoshka/Workspace/android/keys/dimoshka.jks')
+            storePassword 'Di26Moshka29'
         }
         debug {
             keyAlias 'debug'
-            keyPassword '12345678'
-            storeFile file('H:/Work/Android/Keystore/debug.jks')
-            //storeFile file('/media/dimoshka/DIMOSHKA/Work/Android/Keystore/debug.jks')
-            storePassword '12345678'
+            keyPassword '1234567890'
+            storeFile file('H:/Workspace/android/keys/debug.jks')
+            //storeFile file('/home/dimoshka/Workspace/android/keys/debug.jks')
+            storePassword '1234567890'
         }
     }
 
