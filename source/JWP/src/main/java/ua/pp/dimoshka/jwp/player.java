@@ -30,7 +30,9 @@ import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
-import com.google.analytics.tracking.android.EasyTracker;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+import com.splunk.mint.Mint;
 
 import java.io.File;
 
@@ -42,23 +44,7 @@ import ua.pp.dimoshka.classes.service_downloads_files;
 
 public class player extends ActionBarActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    private ImageButton buttonPlayStop = null;
-    private SeekBar seekBar = null;
     private final Handler handler = new Handler();
-    private ListView listView = null;
-    private long id_magazine = 0;
-
-    private class_mediaplayer mediaplayer_class = null;
-    private SharedPreferences prefs = null;
-    private SQLiteDatabase database = null;
-    private class_functions funct = null;
-    private SharedPreferences.OnSharedPreferenceChangeListener listener_pref = null;
-
-    AFListener afListenerMusic = null;
-    MediaPlayer mpMusic = null;
-
-    private player_adapter mAdapter = null;
-
     private final Handler handler_completion = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -69,7 +55,6 @@ public class player extends ActionBarActivity implements LoaderManager.LoaderCal
             }
         }
     };
-
     private final BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -79,9 +64,29 @@ public class player extends ActionBarActivity implements LoaderManager.LoaderCal
             }
         }
     };
+    AFListener afListenerMusic = null;
+    MediaPlayer mpMusic = null;
+    private ImageButton buttonPlayStop = null;
+    private SeekBar seekBar = null;
+    private ListView listView = null;
+    private long id_magazine = 0;
+    private class_mediaplayer mediaplayer_class = null;
+    private SharedPreferences prefs = null;
+    private SQLiteDatabase database = null;
+    private class_functions funct = null;
+    private SharedPreferences.OnSharedPreferenceChangeListener listener_pref = null;
+    private player_adapter mAdapter = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        if (prefs.getBoolean("analytics", true)) {
+            Mint.initAndStartSession(player.this, "63148966");
+            Tracker t = ((AnalyticsSampleApp) this.getApplication()).getTracker(AnalyticsSampleApp.TrackerName.APP_TRACKER);
+            t.setScreenName("main");
+            t.send(new HitBuilders.AppViewBuilder().build());
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.player);
         ActionBar actionBar = getSupportActionBar();
@@ -90,7 +95,6 @@ public class player extends ActionBarActivity implements LoaderManager.LoaderCal
 
         Bundle extras = getIntent().getExtras();
         id_magazine = Long.valueOf(extras.getLong("id_magazine"));
-        prefs = PreferenceManager.getDefaultSharedPreferences(this);
         funct = new class_functions(this);
         class_sqlite dbOpenHelper = new class_sqlite(this);
         database = dbOpenHelper.openDataBase();
@@ -195,22 +199,6 @@ public class player extends ActionBarActivity implements LoaderManager.LoaderCal
         }
     }
 
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        if (prefs.getBoolean("analytics", true)) {
-            EasyTracker.getInstance(this).activityStart(this);
-        }
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        if (prefs.getBoolean("analytics", true)) {
-            EasyTracker.getInstance(this).activityStop(this);
-        }
-    }
 
     private void refresh() {
         getSupportLoaderManager().restartLoader(0, null, this);

@@ -21,9 +21,8 @@ import ua.pp.dimoshka.jwp.widget;
 @SuppressWarnings("AutoUnboxing")
 public class class_widget_factory implements RemoteViewsService.RemoteViewsFactory {
 
-    private Context context;
     public Integer id_lng = Integer.valueOf(1);
-
+    private Context context;
     private SQLiteDatabase database = null;
     private class_functions funct = null;
     private SharedPreferences prefs = null;

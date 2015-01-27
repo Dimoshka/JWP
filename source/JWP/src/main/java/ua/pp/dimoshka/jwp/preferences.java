@@ -10,7 +10,9 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 
-import com.google.analytics.tracking.android.EasyTracker;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+import com.splunk.mint.Mint;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,37 +20,8 @@ import java.util.List;
 import ua.pp.dimoshka.classes.class_sqlite;
 
 public class preferences extends PreferenceActivity {
-    private SharedPreferences prefs = null;
     private static SQLiteDatabase database = null;
-
-    @Override
-    protected void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        class_sqlite dbOpenHelper = new class_sqlite(this);
-        database = dbOpenHelper.openDataBase();
-        getFragmentManager().beginTransaction().replace(android.R.id.content, new MyPreferenceFragment()).commit();
-    }
-
-    public static class MyPreferenceFragment extends PreferenceFragment {
-        @Override
-        public void onCreate(final Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setRetainInstance(true);
-            addPreferencesFromResource(R.xml.preferences);
-
-            final ListPreference listPreference = (ListPreference) findPreference("language");
-            setListPreferenceData(listPreference);
-
-            listPreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-                @Override
-                public boolean onPreferenceClick(Preference preference) {
-                    setListPreferenceData(listPreference);
-                    return false;
-                }
-            });
-        }
-    }
+    private SharedPreferences prefs = null;
 
     protected static void setListPreferenceData(ListPreference listPreference) {
         Cursor cursor = database.rawQuery("SELECT * from language", null);
@@ -75,18 +48,39 @@ public class preferences extends PreferenceActivity {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
+    protected void onCreate(final Bundle savedInstanceState) {
+
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
         if (prefs.getBoolean("analytics", true)) {
-            EasyTracker.getInstance(this).activityStart(this);
+            Mint.initAndStartSession(preferences.this, "63148966");
+            Tracker t = ((AnalyticsSampleApp) this.getApplication()).getTracker(AnalyticsSampleApp.TrackerName.APP_TRACKER);
+            t.setScreenName("main");
+            t.send(new HitBuilders.AppViewBuilder().build());
+        }
+        super.onCreate(savedInstanceState);
+        class_sqlite dbOpenHelper = new class_sqlite(this);
+        database = dbOpenHelper.openDataBase();
+        getFragmentManager().beginTransaction().replace(android.R.id.content, new MyPreferenceFragment()).commit();
+    }
+
+    public static class MyPreferenceFragment extends PreferenceFragment {
+        @Override
+        public void onCreate(final Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setRetainInstance(true);
+            addPreferencesFromResource(R.xml.preferences);
+
+            final ListPreference listPreference = (ListPreference) findPreference("language");
+            setListPreferenceData(listPreference);
+
+            listPreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    setListPreferenceData(listPreference);
+                    return false;
+                }
+            });
         }
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        if (prefs.getBoolean("analytics", true)) {
-            EasyTracker.getInstance(this).activityStop(this);
-        }
-    }
 }

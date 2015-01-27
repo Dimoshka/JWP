@@ -25,8 +25,9 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.widget.Toast;
 
-import com.bugsense.trace.BugSenseHandler;
-import com.google.analytics.tracking.android.EasyTracker;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+import com.splunk.mint.Mint;
 
 import java.util.HashMap;
 import java.util.List;
@@ -65,20 +66,16 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
     private List<Fragment> fragment_list = new Vector<Fragment>();
     private MyPagerAdapter pagerAdapter = null;
     private Boolean change_prefference = Boolean.FALSE;
+    private OnSharedPreferenceChangeListener PreferenceChangeListener = new OnSharedPreferenceChangeListener() {
+        @Override
+        public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
+            change_prefference = Boolean.TRUE;
+            Log.d("PREFF_UPDATE", key);
+            load_first();
+            pagerAdapter.notifyDataSetChanged();
+        }
+    };
     private Boolean progressbar = false;
-
-    public SQLiteDatabase get_database() {
-        return database;
-    }
-
-    public class_functions get_funct() {
-        return funct;
-    }
-
-    public class_open_or_download get_open_or_download() {
-        return open_or_download;
-    }
-
     private final BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -143,19 +140,44 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
             }
         }
     };
+    private SimpleOnPageChangeListener PageChangeListener = new SimpleOnPageChangeListener() {
+        @Override
+        public void onPageSelected(int position) {
+            actionBar.setSelectedNavigationItem(position);
+        }
+    };
+
+    public SQLiteDatabase get_database() {
+        return database;
+    }
+
+    public class_functions get_funct() {
+        return funct;
+    }
+
+    public class_open_or_download get_open_or_download() {
+        return open_or_download;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         try {
+            funct = new class_functions(this);
+            prefs = PreferenceManager.getDefaultSharedPreferences(this);
+            if (prefs.getBoolean("analytics", true)) {
+                Mint.initAndStartSession(main.this, "63148966");
+                Tracker t = ((AnalyticsSampleApp) this.getApplication()).getTracker(AnalyticsSampleApp.TrackerName.APP_TRACKER);
+                t.setScreenName("main");
+                t.send(new HitBuilders.AppViewBuilder().build());
+            }
             super.onCreate(savedInstanceState);
             requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-            BugSenseHandler.initAndStartSession(this, "63148966");
             setContentView(R.layout.main);
 
-            funct = new class_functions(this);
+
             dbOpenHelper = new class_sqlite(this);
             database = dbOpenHelper.openDataBase();
-            prefs = PreferenceManager.getDefaultSharedPreferences(this);
+
             open_or_download = new class_open_or_download(this, database, funct);
             pager = (ViewPager) findViewById(R.id.pager);
 
@@ -191,19 +213,16 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
         }
     }
 
-
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         progressbar = savedInstanceState.getBoolean("progressbar");
         setSupportProgressBarIndeterminateVisibility(progressbar);
     }
 
-
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBoolean("progressbar", progressbar);
     }
-
 
     private void load_first() {
         try {
@@ -264,7 +283,6 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
         }
     }
 
-
     @Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
         curent_tab = tab.getPosition();
@@ -280,60 +298,6 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
 
     }
-
-    private class MyPagerAdapter extends FragmentPagerAdapter {
-        private List<Fragment> fragments;
-
-        public MyPagerAdapter(FragmentManager fragmentManager,
-                              List<Fragment> fragments) {
-            super(fragmentManager);
-            this.fragments = fragments;
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return fragments.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return fragments.size();
-        }
-
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        if (prefs.getBoolean("analytics", true)) {
-            EasyTracker.getInstance(this).activityStart(this);
-        }
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        if (prefs.getBoolean("analytics", true)) {
-            EasyTracker.getInstance(this).activityStop(this);
-        }
-    }
-
-    private OnSharedPreferenceChangeListener PreferenceChangeListener = new OnSharedPreferenceChangeListener() {
-        @Override
-        public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
-            change_prefference = Boolean.TRUE;
-            Log.d("PREFF_UPDATE", key);
-            load_first();
-            pagerAdapter.notifyDataSetChanged();
-        }
-    };
-
-    private SimpleOnPageChangeListener PageChangeListener = new SimpleOnPageChangeListener() {
-        @Override
-        public void onPageSelected(int position) {
-            actionBar.setSelectedNavigationItem(position);
-        }
-    };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -423,7 +387,6 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
         }
     }
 
-
     @Override
     public void onDestroy() {
         //stopService(
@@ -432,6 +395,27 @@ public class main extends ActionBarActivity implements ActionBar.TabListener {
         LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver);
         //database.close();
         super.onDestroy();
+    }
+
+    private class MyPagerAdapter extends FragmentPagerAdapter {
+        private List<Fragment> fragments;
+
+        public MyPagerAdapter(FragmentManager fragmentManager,
+                              List<Fragment> fragments) {
+            super(fragmentManager);
+            this.fragments = fragments;
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return fragments.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return fragments.size();
+        }
+
     }
 
 }

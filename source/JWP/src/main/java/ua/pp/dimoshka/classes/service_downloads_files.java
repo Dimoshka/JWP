@@ -33,19 +33,13 @@ public class service_downloads_files extends Service {
 
     private static final int SERVICE_ID = 0x101104;
     private static final int BYTES_BUFFER_SIZE = 2 * 1024;
+    private final IBinder binder = new FileDownloadBinder();
     private class_functions funct = null;
     private NotificationManager notificationManager = null;
-    private final IBinder binder = new FileDownloadBinder();
     private AsyncDownloadTask task = null;
     private boolean isRunning = false;
     private ArrayList<Map<String, String>> targetFiles = null;
     private int now_targetFile = 0;
-
-    private class FileDownloadBinder extends Binder {
-        service_downloads_files getService() {
-            return service_downloads_files.this;
-        }
-    }
 
     @Override
     public void onCreate() {
@@ -169,7 +163,6 @@ public class service_downloads_files extends Service {
         return contentView;
     }
 
-
     void showNotification_popup(String ticker, String title, String text, Context context) {
         NotificationCompat.Builder nb = new NotificationCompat.Builder(context)
                 .setSmallIcon(getNotificationIcon())
@@ -183,7 +176,6 @@ public class service_downloads_files extends Service {
         Notification notification = nb.build();
         notificationManager.notify(SERVICE_ID, notification);
     }
-
 
     void showNotification(RemoteViews remoteView, String ticker, Context context) {
         NotificationCompat.Builder nb = new NotificationCompat.Builder(context)
@@ -204,6 +196,24 @@ public class service_downloads_files extends Service {
 
     protected int getReadTimeout() {
         return 10000;
+    }
+
+    protected String getStringByteSize(int size) {
+        if (size > 1024 * 1024) // mega
+        {
+            return String.format("%.1f MB", Float.valueOf(size / (float) (1024 * 1024)));
+        } else if (size > 1024) // kilo
+        {
+            return String.format("%.1f KB", Float.valueOf(size / 1024.0f));
+        } else {
+            return String.format("%d B");
+        }
+    }
+
+    private class FileDownloadBinder extends Binder {
+        service_downloads_files getService() {
+            return service_downloads_files.this;
+        }
     }
 
     private class AsyncDownloadTask extends AsyncTask<Void, Void, Void> {
@@ -411,18 +421,6 @@ public class service_downloads_files extends Service {
             } catch (Exception e) {
                 funct.send_bug_report(e);
             }
-        }
-    }
-
-    protected String getStringByteSize(int size) {
-        if (size > 1024 * 1024) // mega
-        {
-            return String.format("%.1f MB", Float.valueOf(size / (float) (1024 * 1024)));
-        } else if (size > 1024) // kilo
-        {
-            return String.format("%.1f KB", Float.valueOf(size / 1024.0f));
-        } else {
-            return String.format("%d B");
         }
     }
 

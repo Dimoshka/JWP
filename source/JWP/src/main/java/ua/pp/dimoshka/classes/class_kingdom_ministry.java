@@ -30,17 +30,16 @@ import java.util.Map;
 import ua.pp.dimoshka.jwp.R;
 
 public class class_kingdom_ministry {
+    private static final String URL_SITE = "http://www.jw.org/";
     private SQLiteDatabase database;
     private class_functions funct;
     private Context context;
     private Cursor cursor = null;
     private AsyncTask task = null;
     private SharedPreferences prefs;
-
     private ArrayList<Integer> id_type = new ArrayList<Integer>();
     private ArrayList<String> code_type = new ArrayList<String>();
     private ArrayList<String> name_type = new ArrayList<String>();
-    private static final String URL_SITE = "http://www.jw.org/";
 
     public class_kingdom_ministry(Context context, SQLiteDatabase database, class_functions funct) {
         this.context = context;

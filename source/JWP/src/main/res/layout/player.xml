@@ -16,18 +16,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/app_name_shot"
-                android:text="@string/previous"
-                android:src="@drawable/ic_av_rewind" />
+                android:src="@drawable/ic_av_rewind"
+                android:text="@string/previous" />
 
 
             <ImageButton
                 android:id="@+id/ButtonPlayStop"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="4"
                 android:contentDescription="@string/app_name_shot"
-                android:text="@string/play"
                 android:src="@drawable/ic_av_play"
-                android:layout_weight="4" />
+                android:text="@string/play" />
 
 
             <ImageButton
@@ -35,8 +35,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/app_name_shot"
-                android:text="@string/next"
-                android:src="@drawable/ic_av_fast_forward" />
+                android:src="@drawable/ic_av_fast_forward"
+                android:text="@string/next" />
         </TableRow>
     </TableLayout>
 
@@ -51,8 +51,8 @@
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:choiceMode="singleChoice"
-        android:layout_below="@+id/SeekBar01" />
+        android:layout_below="@+id/SeekBar01"
+        android:choiceMode="singleChoice" />
 
 
 </RelativeLayout>

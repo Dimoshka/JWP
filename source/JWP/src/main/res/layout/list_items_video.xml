@@ -3,8 +3,8 @@
     android:id="@+id/item"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:padding="5dp"
-    android:background="#fff">
+    android:background="#fff"
+    android:padding="5dp">
 
     <ImageView
         android:id="@+id/img"
@@ -27,11 +27,11 @@
         android:layout_marginLeft="11dp"
         android:layout_marginRight="11dp"
         android:layout_marginTop="2dp"
-        android:textColor="@color/text_dark_blue"
-        android:textSize="16sp"
         android:layout_toRightOf="@+id/img"
         android:paddingBottom="25dp"
-        android:text="@string/text_test" />
+        android:text="@string/text_test"
+        android:textColor="@color/text_dark_blue"
+        android:textSize="16sp" />
 
 
     <ImageView
@@ -39,20 +39,20 @@
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_alignBottom="@+id/img"
+        android:layout_alignParentBottom="true"
         android:layout_toLeftOf="@+id/type1"
         android:contentDescription="@string/video"
-        android:src="@drawable/ic_icon_video"
-        android:layout_alignParentBottom="true" />
+        android:src="@drawable/ic_icon_video" />
 
     <ImageView
         android:id="@+id/type1"
         android:layout_width="30dp"
         android:layout_height="20dp"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/video"
         android:layout_marginRight="11dp"
         android:contentDescription="@string/video_xl"
-        android:src="@drawable/ic_mp4_720_0"
-        android:layout_alignParentBottom="true" />
+        android:src="@drawable/ic_mp4_720_0" />
 
 </RelativeLayout>

@@ -22,14 +22,12 @@ import ua.pp.dimoshka.classes.class_widget_service;
 
 public class widget extends AppWidgetProvider {
 
-    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-    private static final String ACTION_ON_LISTCLICK = "ua.pp.dimoshka.jwp.widget_listitemonclick";
     public static final String ACTION_ON_UPDATEOK = "ua.pp.dimoshka.jwp.widget_updateok";
     public static final String IDWIDGET = "idwidget";
-
-
     public final static String ITEM_POSITION = "item_position";
     public final static String ITEM_LINK = "item_link";
+    private static final String ACTION_ON_LISTCLICK = "ua.pp.dimoshka.jwp.widget_listitemonclick";
+    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 
     public widget() {
     }

@@ -89,11 +89,6 @@ public class class_mediaplayer {
         this.handler = handler_completion;
     }
 
-    /* METHOD WRAPPING FOR STATE CHANGES */
-    public static enum State {
-        IDLE, ERROR, INITIALIZED, PREPARING, PREPARED, STARTED, STOPPED, PLAYBACK_COMPLETE, PAUSED
-    }
-
     public void setDataSource(String path) {
         if (currentState == State.IDLE) {
             try {
@@ -184,11 +179,11 @@ public class class_mediaplayer {
         mPlayer.release();
     }
 
-	/* INTERNAL LISTENERS */
-
     /* EXTERNAL STUBS TO OVERRIDE */
     void onPrepared(MediaPlayer mp) {
     }
+
+	/* INTERNAL LISTENERS */
 
     void onCompletion(MediaPlayer mp) {
         handler.sendEmptyMessage(1);
@@ -222,5 +217,10 @@ public class class_mediaplayer {
         } else {
             return 100;
         }
+    }
+
+    /* METHOD WRAPPING FOR STATE CHANGES */
+    public static enum State {
+        IDLE, ERROR, INITIALIZED, PREPARING, PREPARED, STARTED, STOPPED, PLAYBACK_COMPLETE, PAUSED
     }
 }

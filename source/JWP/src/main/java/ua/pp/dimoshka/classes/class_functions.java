@@ -13,8 +13,6 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.text.Html;
 import android.util.Log;
 
-import com.bugsense.trace.BugSenseHandler;
-
 import org.apache.http.util.ByteArrayBuffer;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -50,6 +48,10 @@ public class class_functions {
     private String video_prefix = "en/videos/";
     private String code_lng = "E";
 
+    public class_functions(Context context) {
+        this.context = context;
+    }
+
     public Integer get_id_lng() {
         return id_lng;
     }
@@ -72,11 +74,6 @@ public class class_functions {
 
     public String get_code_lng() {
         return code_lng;
-    }
-
-
-    public class_functions(Context context) {
-        this.context = context;
     }
 
     public boolean isNetworkAvailable() {
@@ -197,9 +194,7 @@ public class class_functions {
     public void send_bug_report(Exception ex) {
         try {
             Log.e("EERROORR", "FN_class", ex);
-            //BugSenseHandler.addCrashExtraData("StackTrace", message);
-            BugSenseHandler.sendException(ex);
-            //BugSenseHandler.sendExceptionMessage("level", message, ex);
+            //Mint.logException(ex);
         } catch (Exception e) {
             ex.printStackTrace();
         }

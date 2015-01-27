@@ -23,17 +23,8 @@ import ua.pp.dimoshka.jwp.main;
  */
 public class my_ListFragment extends ListFragment implements LoaderManager.LoaderCallbacks<Cursor>, AbsListView.OnScrollListener {
 
-    public SimpleCursorAdapter mAdapter = null;
     public static ua.pp.dimoshka.jwp.main main = null;
-    public String sqlite_rawQuery = "";
-
-    private int currentVisibleItemCount = 0;
-    private int currentScrollState = 10;
     private final int load_items = 10;
-    private int curent_load_items = 0;
-    private boolean isLoading = false;
-
-
     private final BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -43,6 +34,12 @@ public class my_ListFragment extends ListFragment implements LoaderManager.Loade
             }
         }
     };
+    public SimpleCursorAdapter mAdapter = null;
+    public String sqlite_rawQuery = "";
+    private int currentVisibleItemCount = 0;
+    private int currentScrollState = 10;
+    private int curent_load_items = 0;
+    private boolean isLoading = false;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -125,6 +122,12 @@ public class my_ListFragment extends ListFragment implements LoaderManager.Loade
         mAdapter.swapCursor(null);
     }
 
+    @Override
+    public void onDestroy() {
+        LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(receiver);
+        super.onDestroy();
+    }
+
     static class MyCursorLoader extends CursorLoader {
         final SQLiteDatabase database;
         final int limit;
@@ -147,11 +150,5 @@ public class my_ListFragment extends ListFragment implements LoaderManager.Loade
             }
             return cursor;
         }
-    }
-
-    @Override
-    public void onDestroy() {
-        LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(receiver);
-        super.onDestroy();
     }
 }

@@ -2,38 +2,38 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="ua.pp.dimoshka.jwp.player"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    tools:context="ua.pp.dimoshka.jwp.player">
 
     <item
         android:id="@+id/item3"
-        android:icon="@drawable/ic_action_av_replay"
-        app:showAsAction="never"
-        android:title="@string/update"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"></item>
+        android:layout_height="wrap_content"
+        android:icon="@drawable/ic_action_av_replay"
+        android:title="@string/update"
+        app:showAsAction="never"></item>
     <item
         android:id="@+id/item2"
-        android:icon="@drawable/ic_action_navigation_refresh"
-        app:showAsAction="always"
-        android:title="@string/download"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"></item>
+        android:layout_height="wrap_content"
+        android:icon="@drawable/ic_action_navigation_refresh"
+        android:title="@string/download"
+        app:showAsAction="always"></item>
 
     <item
         android:id="@+id/item1"
-        android:icon="@drawable/ic_action_action_settings"
-        app:showAsAction="ifRoom"
-        android:title="@string/settings"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"></item>
+        android:layout_height="wrap_content"
+        android:icon="@drawable/ic_action_action_settings"
+        android:title="@string/settings"
+        app:showAsAction="ifRoom"></item>
     <item
         android:id="@+id/item0"
-        android:icon="@android:drawable/ic_lock_power_off"
-        app:showAsAction="never"
-        android:title="@string/exit"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"></item>
+        android:layout_height="wrap_content"
+        android:icon="@android:drawable/ic_lock_power_off"
+        android:title="@string/exit"
+        app:showAsAction="never"></item>
 
 </menu>

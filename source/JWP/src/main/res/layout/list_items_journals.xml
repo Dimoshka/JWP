@@ -3,8 +3,8 @@
     android:id="@+id/item"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:padding="5dp"
-    android:background="#fff">
+    android:background="#fff"
+    android:padding="5dp">
 
     <ImageView
         android:id="@+id/img"
@@ -27,92 +27,92 @@
         android:layout_marginLeft="11dp"
         android:layout_marginRight="11dp"
         android:layout_marginTop="2dp"
-        android:textColor="@color/text_dark_blue"
-        android:textSize="16sp"
         android:layout_toRightOf="@+id/img"
-        android:text="@string/text_test" />
+        android:text="@string/text_test"
+        android:textColor="@color/text_dark_blue"
+        android:textSize="16sp" />
 
     <ImageView
         android:id="@+id/type5"
         android:layout_width="30dp"
         android:layout_height="20dp"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/digitalpub"
         android:layout_marginRight="11dp"
         android:contentDescription="@string/aac"
-        android:src="@drawable/ic_aac_0"
-        android:layout_alignParentBottom="true" />
+        android:src="@drawable/ic_aac_0" />
 
     <ImageView
         android:id="@+id/type4"
         android:layout_width="30dp"
         android:layout_height="20dp"
+        android:layout_alignParentBottom="true"
         android:layout_alignTop="@+id/digitalpub"
         android:layout_toLeftOf="@+id/type5"
         android:contentDescription="@string/mp3"
-        android:src="@drawable/ic_mp3_0"
-        android:layout_alignParentBottom="true" />
+        android:src="@drawable/ic_mp3_0" />
 
     <ImageView
         android:id="@+id/audio"
         android:layout_width="20dp"
         android:layout_height="20dp"
+        android:layout_alignParentBottom="true"
         android:layout_alignTop="@+id/digitalpub"
         android:layout_toLeftOf="@+id/type4"
         android:contentDescription="@string/journals"
-        android:src="@drawable/ic_icon_audio"
-        android:layout_alignParentBottom="true" />
+        android:src="@drawable/ic_icon_audio" />
 
     <ImageView
         android:id="@+id/type3"
         android:layout_width="30dp"
         android:layout_height="20dp"
+        android:layout_alignParentBottom="true"
         android:layout_alignTop="@+id/digitalpub"
         android:layout_toLeftOf="@+id/audio"
         android:contentDescription="@string/epub"
-        android:src="@drawable/ic_mobi_0"
-        android:layout_alignParentBottom="true" />
+        android:src="@drawable/ic_mobi_0" />
 
     <ImageView
         android:id="@+id/type2"
         android:layout_width="30dp"
         android:layout_height="20dp"
+        android:layout_alignParentBottom="true"
         android:layout_alignTop="@+id/digitalpub"
         android:layout_toLeftOf="@+id/type3"
         android:contentDescription="@string/epub"
-        android:src="@drawable/ic_epub_0"
-        android:layout_alignParentBottom="true" />
+        android:src="@drawable/ic_epub_0" />
 
     <ImageView
         android:id="@+id/type1"
         android:layout_width="30dp"
         android:layout_height="20dp"
+        android:layout_alignParentBottom="true"
         android:layout_alignTop="@+id/digitalpub"
         android:layout_toLeftOf="@+id/type2"
         android:contentDescription="@string/pdf"
-        android:src="@drawable/ic_pdf_0"
-        android:layout_alignParentBottom="true" />
+        android:src="@drawable/ic_pdf_0" />
 
     <ImageView
         android:id="@+id/digitalpub"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_alignBottom="@+id/img"
+        android:layout_alignParentBottom="true"
         android:layout_toLeftOf="@+id/type1"
         android:contentDescription="@string/journals"
-        android:src="@drawable/ic_icon_digitalpub"
-        android:layout_alignParentBottom="true" />
+        android:src="@drawable/ic_icon_digitalpub" />
 
     <TextView
         android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/title"
+        android:layout_below="@+id/title"
         android:layout_marginRight="11dp"
         android:text="@string/text_test"
-        android:textSize="12sp"
         android:textColor="@color/text_dark_gray"
-        android:textStyle="italic"
-        android:layout_below="@+id/title" />
+        android:textSize="12sp"
+        android:textStyle="italic" />
 
 </RelativeLayout>

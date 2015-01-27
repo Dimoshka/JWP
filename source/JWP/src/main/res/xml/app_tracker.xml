@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="TypographyDashes">
+    <integer name="ga_sessionTimeout">300</integer>
+    <bool name="ga_autoActivityTracking">true</bool>
+    <screenName name="ua.pp.dimoshka.jw_stand_report.main">main</screenName>
+    <screenName name="ua.pp.dimoshka.jw_stand_report.preferences_new">preferences_new</screenName>
+    <screenName name="ua.pp.dimoshka.jw_stand_report.preferences_old">preferences_old</screenName>
+    <string name="ga_trackingId">UA-37534534-2</string>
+</resources>
